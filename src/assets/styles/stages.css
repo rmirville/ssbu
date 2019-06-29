@@ -1,0 +1,276 @@
+/* Stages */
+.boundary {
+  border: 0;
+}
+
+.boundary th, .boundary td {
+  padding: 0 5px;
+}
+
+.boundary th {
+  text-align: left;
+}
+
+.boundary div {
+  float: left;
+  margin: .5rem 0 0;
+  height: .3rem;
+}
+
+/**/
+.boundary .r1 {
+  background-color: hsl(0, 70%, 50%);
+}
+
+.boundary .r2 {
+  background-color: hsl(30, 70%, 50%);
+}
+
+.boundary .r3 {
+  background-color: hsl(60, 70%, 50%);
+}
+
+.boundary .r4 {
+  background-color: hsl(120, 50%, 50%);
+}
+
+.boundary .r5 {
+  background-color: hsl(240, 60%, 50%);
+}
+/**/
+
+/* Color-blind *//*
+.boundary .r1 {
+  background-color: hsl(0, 0%, 20%);
+}
+
+.boundary .r2 {
+  background-color: hsl(30, 0%, 40%);
+}
+
+.boundary .r3 {
+  background-color: hsl(60, 0%, 60%);
+}
+
+.boundary .r4 {
+  background-color: hsl(120, 0%, 80%);
+}
+
+.boundary .r5 {
+  background-color: hsl(240, 0%, 100%);
+}
+/**/
+
+
+.boundary .bf .blastzone {
+  width: 240px;
+}
+
+.boundary .bf .stage {
+  width: 80px;
+}
+
+.boundary .bf .off-stage {
+  width: 160px;
+}
+
+.boundary .bf .ceiling {
+  width: 192px;
+}
+
+
+
+.boundary .fd .blastzone {
+  width: 240px;
+}
+
+.boundary .fd .stage {
+  width: 80px;
+}
+
+.boundary .fd .off-stage {
+  width: 160px;
+}
+
+.boundary .fd .ceiling {
+  width: 180px;
+}
+
+
+
+.boundary .ps2 .blastzone {
+  width: 250px;
+}
+
+.boundary .ps2 .stage {
+  width: 94px;
+}
+
+.boundary .ps2 .off-stage {
+  width: 156px;
+}
+
+.boundary .ps2 .ceiling {
+  width: 180px;
+}
+
+
+
+.boundary .ps1 .blastzone {
+  width: 250px;
+}
+
+.boundary .ps1 .stage {
+  width: 88px;
+}
+
+.boundary .ps1 .off-stage {
+  width: 162px;
+}
+
+.boundary .ps1 .ceiling {
+  width: 180px;
+}
+
+
+
+.boundary .sv .blastzone {
+  width: 230px;
+}
+
+.boundary .sv .stage {
+  width: 70px;
+}
+
+.boundary .sv .off-stage {
+  width: 160px;
+}
+
+.boundary .sv .ceiling {
+  width: 190px;
+}
+
+
+
+.boundary .kpl .blastzone {
+  width: 245px;
+}
+
+.boundary .kpl .stage {
+  width: 80px;
+}
+
+.boundary .kpl .off-stage {
+  width: 165px;
+}
+
+.boundary .kpl .ceiling {
+  width: 192px;
+}
+
+
+.boundary .yib .blastzone {
+  width: 220px;
+}
+
+.boundary .yib .stage {
+  width: 70px;
+}
+
+.boundary .yib .off-stage {
+  width: 150px;
+}
+
+.boundary .yib .ceiling {
+  width: 185px;
+}
+
+
+
+.boundary .tc .blastzone {
+  width: 230px;
+}
+
+.boundary .tc .stage {
+  width: 82px;
+}
+
+.boundary .tc .off-stage {
+  width: 148px;
+}
+
+.boundary .tc .ceiling {
+  width: 195px;
+}
+
+
+
+.boundary .upl .blastzone {
+  width: 237px;
+}
+
+.boundary .upl .stage {
+  width: 82px;
+}
+
+.boundary .upl .off-stage {
+  width: 155px;
+}
+
+.boundary .upl .ceiling {
+  width: 190px;
+}
+
+
+
+.boundary .ys .blastzone {
+  width: 227px;
+}
+
+.boundary .ys .stage {
+  width: 68px;
+}
+
+.boundary .ys .off-stage {
+  width: 159px;
+}
+
+.boundary .ys .ceiling {
+  width: 184px;
+}
+
+
+
+.boundary .lc .blastzone {
+  width: 230px;
+}
+
+.boundary .lc .stage {
+  width: 80px;
+}
+
+.boundary .lc .off-stage {
+  width: 150px;
+}
+
+.boundary .lc .ceiling {
+  width: 188px;
+}
+
+
+
+.boundary .mm .blastzone {
+  width: 260px;
+}
+
+.boundary .mm .stage {
+  width: 100px;
+}
+
+.boundary .mm .off-stage {
+  width: 160px;
+}
+
+.boundary .mm .ceiling {
+  width: 190px;
+}

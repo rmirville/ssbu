@@ -1,0 +1,154 @@
+/* Fonts */
+
+@font-face {
+  font-family: 'FOT EB';
+  src: url('../fonts/FOT-RodinBokutohPro-EB.otf');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Regular.ttf');
+}
+
+
+
+/* Globals */
+
+p,
+li,
+td,
+th {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'FOT EB', sans-serif;
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 6rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  line-height: 4.5rem;
+}
+
+
+/* Navigation */
+
+.navbar {
+  padding: 0;
+  box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.8);
+}
+
+.brand {
+  height: 5rem;
+  background: url('../media/img/nav.png') repeat top left/auto;
+  background-image: url('../media/img/nav.png');
+  background-color: black;
+}
+
+.navbar-brand {
+  font-size: 2rem;
+  font-family: 'FOT EB', sans-serif;
+}
+
+.navbar-brand, .navbar-brand:hover {
+  color: white;
+}
+
+.nav-container {
+  background-color: hsl(0, 91%, 50%);
+}
+
+.nav {
+  padding: 0 3rem;
+}
+
+.nav-item {
+  list-style: none;
+}
+
+.nav-link {
+  height: 3rem;
+  padding: 1rem;
+  font-size: 1rem;
+  font-family: 'FOT EB', sans-serif;
+  line-height: 1rem;
+}
+
+.nav-link,
+.nav-item:hover .nav-link {
+  color: white;
+}
+
+.nav-link:hover {
+  background-color: hsl(47, 100%, 50%);
+  text-shadow:
+    /* base */
+    /**/
+    -1px -1px 1px black,
+    0px 0px 1px black,
+    1px 1px 1px black,
+    /* right offset */
+    /**/
+    1px -1px 1px black,
+    2px 0px 1px black,
+    3px 1px 1px black,
+    /* bottom offset */
+    /**/
+    -1px 1px 1px black,
+    0px 2px 1px black,
+    1px 3px 1px black,
+    /* round out the corners */
+    /**/
+    3px 3px 1px black
+}
+
+/* Page Content */
+.page-title {
+  color: white;
+  text-shadow:
+    /* base */
+    /**/
+    -2px -2px 1px black,
+    -1px -1px 1px black,
+    0px 0px 1px black,
+    1px 1px 1px black,
+    2px 2px 1px black,
+    3px 3px 1px black,
+    /* right offset */
+    /**/
+    0px -2px 1px black,
+    1px -1px 1px black,
+    2px 0px 1px black,
+    3px 1px 1px black,
+    4px 2px 1px black,
+    5px 3px 1px black,
+    /* right offset - correction */
+    1px -2px 1px black,
+    2px -1px 1px black,
+    3px 0px 1px black,
+    4px 1px 1px black,
+    5px 2px 1px black,
+    6px 3px 1px black,
+    /* bottom offset */
+    /**/
+    -2px 0px 1px black,
+    -1px 1px 1px black,
+    0px 2px 1px black,
+    1px 3px 1px black,
+    2px 4px 1px black,
+    3px 5px 1px black,
+    /* round out the corners */
+    /**/
+    6px 4px 1px black,
+    5px 5px 1px black,
+    7px 5px 1px black
+}

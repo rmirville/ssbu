@@ -56,40 +56,20 @@ describe('StageLoaderService', () => {
       for (let i = 0; i < stageListBad.length; i++) {
         httpClientSpy.get.and.returnValues(asyncData(stageListBad[i]), asyncData(stageDetails));
 
-        /**/console.log('SPEC - loading stages');
+        /**///console.log('SPEC - loading stages');
         actualStagesObsArr[i] = service.loadStages();
-        /**/console.log('SPEC - actualStagesObs: ' + actualStagesObsArr[i]);
+        /**///console.log('SPEC - actualStagesObs: ' + actualStagesObsArr[i]);
         actualStagesObsArr[i].subscribe({
           next: (actualStages) => {
-            /**/console.log('SPEC - got data somehow');
+            /**///console.log('SPEC - got data somehow');
             fail(`loadStages() did not encounter TypeError`);
           },
           error: (error) => {
-            /**/console.log('SPEC - Error: ' + error);
+            /**///console.log('SPEC - Error: ' + error);
             expect(error instanceof TypeError).toBeTruthy(`error instanceof TypeError`);
           }
         });
-        /**///console.log('SPEC - Begin tick');
-        //tick();
-        /**///console.log('SPEC - End tick');
       }
-      /*
-      httpClientSpy.get.and.returnValues(asyncData(stageListBad), asyncData(stageDetails));
-
-      //console.log('SPEC - loading stages');
-      let actualStagesObs = service.loadStages();
-      //console.log('SPEC - actualStagesObs: ' + actualStagesObs);
-      actualStagesObs.subscribe({
-        next: (actualStages) => {
-          //console.log('SPEC - got data somehow');
-          fail(`loadStages() did not encounter TypeError`);
-        },
-        error: (error) => {
-          //console.log('SPEC - Error: ' + error);
-          expect(error instanceof TypeError).toBeTruthy(`error instanceof TypeError`);
-        }
-      });
-      */
     }));
     
     it(`should reject stage details data that isn't of type StageDetails[]`);

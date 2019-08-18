@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 interface StageSummary {
   name: string;
@@ -16,11 +15,30 @@ interface Stage extends StageSummary {
 interface StageDetails {
   stage: string;
   name: string;
-  collisions: StageCollisions[];
+  collisions: StagePiece[];
+  platforms: StagePiece[];
+  blast_zones: number[];
+  camera: number[];
+  spawns: number[][];
+  respawns: number[][];
 }
 
-interface StageCollisions {
-  
+interface StagePiece {
+  name: string;
+  vertex: number[][];
+  materials: StageMaterial[];
+  boundingBox: number[][];
+}
+
+interface StageMaterial {
+  leftLedge: boolean;
+  rightLedge: boolean;
+  noWallJump: boolean;
+  passthroughAngle: number;
+  length: number;
+  ceiling: boolean;
+  wall: boolean;
+  material: string;
 }
 
 const API_URL: string = 'https://rubendal.github.io/ssbu/data/patch/3.1.0';
@@ -156,13 +174,169 @@ export class StageLoaderService {
   _isStageDetails(phase): phase is StageDetails {
     /**///console.log('  StageLoaderService::_isStageDetails()');
     /**///console.log(`    * details: ${JSON.stringify(phase)}`);
-    if (typeof phase.stage !== "string") {
-      return false;
-    }
+    if ( (typeof phase.stage !== "string")
+      || (typeof phase.name !== "string")
+      || (typeof phase.lvd !== "string")
+      || (!Array.isArray(phase.collisions))
+      ) return false;
+    /**///console.log(`    * phase.collisions type: ${typeof phase.collisions}`);
+    /**///console.log(`    * phase.collisions: ${JSON.stringify(phase.collisions)}`);
+    let isPiece = true;
+    phase.collisions.forEach((piece) => {
+      if (!this._isStagePiece(piece)) {
+        isPiece = false;
+      }
+    });
+    if (!isPiece) return false;
+
+    if ( (!Array.isArray(phase.platforms))
+      || (!phase.platforms.forEach)
+      ) return false;
+
+    phase.platforms.forEach((piece) => {
+      if (!this._isStagePiecePlatforms(piece)) {
+        isPiece = false;
+      }
+    });
+    if (!isPiece) return false;
+
+    if (!this._hasBoundaries(phase.blast_zones)) return false;
+
+    if (!this._hasBoundaries(phase.camera)) return false;
+
+    if (!this._isLocation(phase.center)) return false;
+
+    if (!this._hasLocations(phase.spawns)) return false;
+
+    if (!this._hasLocations(phase.respawns)) return false;
+
     return true;
   }
 
-  _isStageCollisions(collisions): collisions is StageCollisions {
+  _isStagePiece(piece): piece is StagePiece {
+    /**///console.log('  StageLoaderService::_isStagePiece()');
+    if (typeof piece.name !== "string") return false;
+
+    if (!this._hasLocations(piece.vertex)) return false;
+
+    if ( (!Array.isArray(piece.materials))
+      || (!piece.materials.forEach)
+    ) return false;
+    let hasMaterials = true;
+    piece.materials.forEach((material) => {
+      if (!this._isStageMaterial(material)) {
+        hasMaterials = false;
+      }
+    });
+    if (!hasMaterials) return false;
+
+    if (!this._hasLocations(piece.boundingBox)) return false;
+
     return true;
+  }
+
+  _isStagePiecePlatforms(piece): piece is StagePiece {
+    if (typeof piece.name !== "string") return false;
+
+    if (!this._hasLocations(piece.vertex)) return false;
+
+    if ( (!Array.isArray(piece.materials))
+      || (!piece.materials.forEach)
+    ) return false;
+    let hasMaterials = true;
+    piece.materials.forEach((material) => {
+      if (!this._isStageMaterial(material)) {
+        hasMaterials = false;
+      }
+    });
+    if (!hasMaterials) return false;
+
+    if (!this._hasLocations(piece.boundingBox)) return false;
+
+    return true;
+  }
+
+  _isStageMaterial(material): material is StageMaterial {
+    if ( (typeof material.leftLedge !== "boolean")
+      || (typeof material.rightLedge !== "boolean")
+      || (typeof material.noWallJump !== "boolean")
+      || (typeof material.passthroughAngle !== "number")
+      || (typeof material.length !== "number")
+      || (typeof material.ceiling !== "boolean")
+      || (typeof material.wall !== "boolean")
+      || (typeof material.material !== "string")
+      ) return false;
+    return true;
+  }
+
+  _hasLocations(locations): boolean {
+    if ((!Array.isArray(locations))
+      || (!locations.forEach)
+    ) return false;
+
+    let hasLocations = true;
+    locations.forEach((location) => {
+      if (!this._isLocation(location))
+        hasLocations = false;
+    });
+    return hasLocations;
+  }
+
+  _isLocation(location): boolean {
+    let isLocation = true;
+    if ((!Array.isArray(location))
+      || (!location.forEach)
+      || (location.length !== 2)
+    ) {
+      isLocation = false;
+      return;
+    }
+
+    location.forEach((coordinate) => {
+      /**///console.log(`    * coordinate: ${coordinate}`)
+      if (typeof coordinate !== "number") {
+        isLocation = false;
+        return;
+      }
+    });
+    return isLocation;
+  }
+
+  _hasBoundaries(dimensions): boolean {
+    if ((!Array.isArray(dimensions))
+      || (!dimensions.forEach)
+      || (dimensions.length !== 4)
+    ) return false;
+    let isBoundaries = true;
+    dimensions.forEach((dimension) => {
+      if (typeof dimension !== "number")
+        isBoundaries = false;
+    });
+    return isBoundaries;
+  }
+
+  _hasLocationsPlatforms(locations): boolean {
+    ////console.log(`StageLoaderService::_hasLocationsPlatforms()`);
+    let hasLocations = true;
+
+    locations.forEach((location) => {
+      ////console.log(`    * location: ${location}`);
+      
+      if ( (!Array.isArray(location))
+        || (!location.forEach)
+        || (location.length !== 2)
+      ) {
+        hasLocations = false;
+        return;
+      }
+      location.forEach((coordinate) => {
+        ////console.log(`    * coordinate: ${coordinate}`)
+        if (typeof coordinate !== "number") {
+          hasLocations = false;
+          return;
+        }
+      });
+    });
+    return hasLocations;
   }
 }

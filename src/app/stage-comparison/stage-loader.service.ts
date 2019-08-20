@@ -194,7 +194,7 @@ export class StageLoaderService {
       ) return false;
 
     phase.platforms.forEach((piece) => {
-      if (!this._isStagePiecePlatforms(piece)) {
+      if (!this._isStagePiece(piece)) {
         isPiece = false;
       }
     });
@@ -215,27 +215,6 @@ export class StageLoaderService {
 
   _isStagePiece(piece): piece is StagePiece {
     /**///console.log('  StageLoaderService::_isStagePiece()');
-    if (typeof piece.name !== "string") return false;
-
-    if (!this._hasLocations(piece.vertex)) return false;
-
-    if ( (!Array.isArray(piece.materials))
-      || (!piece.materials.forEach)
-    ) return false;
-    let hasMaterials = true;
-    piece.materials.forEach((material) => {
-      if (!this._isStageMaterial(material)) {
-        hasMaterials = false;
-      }
-    });
-    if (!hasMaterials) return false;
-
-    if (!this._hasLocations(piece.boundingBox)) return false;
-
-    return true;
-  }
-
-  _isStagePiecePlatforms(piece): piece is StagePiece {
     if (typeof piece.name !== "string") return false;
 
     if (!this._hasLocations(piece.vertex)) return false;
@@ -313,30 +292,5 @@ export class StageLoaderService {
         isBoundaries = false;
     });
     return isBoundaries;
-  }
-
-  _hasLocationsPlatforms(locations): boolean {
-    ////console.log(`StageLoaderService::_hasLocationsPlatforms()`);
-    let hasLocations = true;
-
-    locations.forEach((location) => {
-      ////console.log(`    * location: ${location}`);
-      
-      if ( (!Array.isArray(location))
-        || (!location.forEach)
-        || (location.length !== 2)
-      ) {
-        hasLocations = false;
-        return;
-      }
-      location.forEach((coordinate) => {
-        ////console.log(`    * coordinate: ${coordinate}`)
-        if (typeof coordinate !== "number") {
-          hasLocations = false;
-          return;
-        }
-      });
-    });
-    return hasLocations;
   }
 }

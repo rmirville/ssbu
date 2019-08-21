@@ -2,16 +2,32 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+/**
+ * Represents summary data describing a stage
+ *
+ * @interface StageSummary
+ */
 interface StageSummary {
   name: string;
   gameName: string;
   Type: number;
 }
 
+/**
+ * Represents complete data describing a stage
+ *
+ * @interface Stage
+ * @extends {StageSummary}
+ */
 interface Stage extends StageSummary {
   details: StageDetails[];
 }
 
+/**
+ * Represents detailed data about a stage's dimensions and properties
+ *
+ * @interface StageDetails
+ */
 interface StageDetails {
   stage: string;
   name: string;
@@ -23,6 +39,11 @@ interface StageDetails {
   respawns: number[][];
 }
 
+/**
+ * Represents a component of the stage
+ *
+ * @interface StagePiece
+ */
 interface StagePiece {
   name: string;
   vertex: number[][];
@@ -30,6 +51,11 @@ interface StagePiece {
   boundingBox: number[][];
 }
 
+/**
+ * Represents the material properties of a StagePiece
+ *
+ * @interface StageMaterial
+ */
 interface StageMaterial {
   leftLedge: boolean;
   rightLedge: boolean;
@@ -46,14 +72,32 @@ const API_STAGE_LIST_PATH: string = '/stages.json';
 const API_STAGE_DETAILS_PATH: string = '/data.json';
 const API_STAGE_DETAILS_PREFIX: string = '/stages/';
 
+/**
+ * Service class providing all Super Smash Bros. Ultimate stage data from Rubendal's API
+ *
+ * @export
+ * @class StageLoaderService
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class StageLoaderService {
 
+  /**
+   * Creates an instance of StageLoaderService.
+   *
+   * @param {HttpClient} _http the HTTP service used to fetch data
+   * @memberof StageLoaderService
+   */
   constructor( private _http: HttpClient ) {
   }
 
+  /**
+   * Fetch all stage data from the API
+   *
+   * @returns {Observable<Stage[]>}
+   * @memberof StageLoaderService
+   */
   loadStages(): Observable<Stage[]> {
     /**///console.log('  StageLoaderService::loadStages()');
     let stages$: Observable<Stage[]> = new Observable((observer) => {
@@ -97,6 +141,13 @@ export class StageLoaderService {
     return stages$;
   }
 
+  /**
+   * Fetches stage dimension data for provided stages
+   *
+   * @param {StageSummary[]} summaries the summary stage data
+   * @returns {Observable<Stage>}
+   * @memberof StageLoaderService
+   */
   _getStageDetails(summaries: StageSummary[]): Observable<Stage> {
     /**///console.log('  StageLoaderService::_getStageDetails()');
     /**///console.log(`    * summaries passed in: ${JSON.stringify(summaries)}`);
@@ -157,6 +208,13 @@ export class StageLoaderService {
     return details$;
   }
 
+  /**
+   * Type guard for the StageSummary interface
+   *
+   * @param {*} stage the variable to validate
+   * @returns {this is StageSummary}
+   * @memberof StageLoaderService
+   */
   _isStageSummary(stage): stage is StageSummary {
     /**///console.log('  StageLoaderService::_isStageSummary()');
     /**///console.log(`    * stage: ${JSON.stringify(stage)}`);
@@ -171,6 +229,13 @@ export class StageLoaderService {
     return true;
   }
 
+  /**
+   * Type guard for the StageDetails interface
+   *
+   * @param {*} phase the variable to validate
+   * @returns {this is StageDetails}
+   * @memberof StageLoaderService
+   */
   _isStageDetails(phase): phase is StageDetails {
     /**///console.log('  StageLoaderService::_isStageDetails()');
     /**///console.log(`    * details: ${JSON.stringify(phase)}`);
@@ -213,6 +278,13 @@ export class StageLoaderService {
     return true;
   }
 
+  /**
+   * Type guard for the StagePiece interface
+   *
+   * @param {*} piece the variable to validate
+   * @returns {this is StagePiece}
+   * @memberof StageLoaderService
+   */
   _isStagePiece(piece): piece is StagePiece {
     /**///console.log('  StageLoaderService::_isStagePiece()');
     if (typeof piece.name !== "string") return false;
@@ -235,6 +307,13 @@ export class StageLoaderService {
     return true;
   }
 
+  /**
+   * Type guard for the StageMaterial interface
+   *
+   * @param {*} material the variable to validate
+   * @returns {this is StageMaterial}
+   * @memberof StageLoaderService
+   */
   _isStageMaterial(material): material is StageMaterial {
     if ( (typeof material.leftLedge !== "boolean")
       || (typeof material.rightLedge !== "boolean")
@@ -248,6 +327,13 @@ export class StageLoaderService {
     return true;
   }
 
+  /**
+   * Checks that the parameter matches the format for an array of coordinates
+   *
+   * @param {*} locations the variable to validate
+   * @returns {boolean}
+   * @memberof StageLoaderService
+   */
   _hasLocations(locations): boolean {
     if ((!Array.isArray(locations))
       || (!locations.forEach)
@@ -261,6 +347,13 @@ export class StageLoaderService {
     return hasLocations;
   }
 
+  /**
+   * Checks that the parameter matches the format for a two-dimensional coordinate
+   *
+   * @param {*} location the variable to validate
+   * @returns {boolean}
+   * @memberof StageLoaderService
+   */
   _isLocation(location): boolean {
     let isLocation = true;
     if ((!Array.isArray(location))
@@ -281,6 +374,13 @@ export class StageLoaderService {
     return isLocation;
   }
 
+  /**
+   * Checks that the parameter matches the format for an array of boundary markers
+   *
+   * @param {*} dimensions the variable to validate
+   * @returns {boolean}
+   * @memberof StageLoaderService
+   */
   _hasBoundaries(dimensions): boolean {
     if ((!Array.isArray(dimensions))
       || (!dimensions.forEach)

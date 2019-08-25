@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 interface StageSummary {
   name: string;
@@ -54,7 +55,7 @@ export class StageLoaderService {
   constructor( private http: HttpClient ) {
   }
 
-  loadStages(): Observable<Stage[]> {
+  loadStages(exclude: string[] = []): Observable<Stage[]> {
     /**/
     // console.log('  StageLoaderService::loadStages()');
     const stages$: Observable<Stage[]> = new Observable((observer) => {
@@ -77,7 +78,7 @@ export class StageLoaderService {
         // console.log(`stages: ${JSON.stringify(stages)}`);
 
         // subscribe to _getStageDetails, providing summaries
-        const stage$: Observable<Stage> = this._getStageDetails(summaries);
+        const stage$: Observable<Stage> = this._getStageDetails(summaries, exclude);
         stage$.subscribe({
           next(stage) {
             /**/
@@ -108,7 +109,7 @@ export class StageLoaderService {
     return stages$;
   }
 
-  _getStageDetails(summaries: StageSummary[]): Observable<Stage> {
+  _getStageDetails(summaries: StageSummary[], exclude: string[]): Observable<Stage> {
     /**/
     // console.log('  StageLoaderService::_getStageDetails()');
     /**/
@@ -136,6 +137,11 @@ export class StageLoaderService {
           /**/
           // console.log('      = throwing TypeError');
           throw new TypeError('The stage summary data fetched was not of type StageSummary[]');
+        }
+        if (summaries[i].name === exclude[0]) {
+          summaries.splice(i, 1);
+          i--;
+          break;
         }
         const url = API_URL + API_STAGE_DETAILS_PREFIX + summaries[i].name + API_STAGE_DETAILS_PATH;
 

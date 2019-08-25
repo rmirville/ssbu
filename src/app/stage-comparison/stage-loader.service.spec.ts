@@ -5,6 +5,7 @@ import { StageLoaderService } from './stage-loader.service';
 
 import * as STAGE_LIST from './spec/stage-list';
 import * as STAGE_DETAILS from './spec/stage-details';
+import * as STAGE_EXCLUDE from './spec/stage-exclude';
 import * as STAGES from './spec/stages';
 
 describe('StageLoaderService', () => {
@@ -29,7 +30,7 @@ describe('StageLoaderService', () => {
       /**/
       // console.log('SPEC - stageList: ' + JSON.stringify(stageList));
       const stageDetails = STAGE_DETAILS.PRINCESS_PEACH_CASTLE;
-      const expectedStages = STAGES.PRINCESS_PEACH_CASTLE;
+      const expectedStages = STAGES.ONE_STAGE;
 
       httpClientSpy.get.and.returnValues(asyncData(stageList), asyncData(stageDetails));
       /**/
@@ -50,6 +51,36 @@ describe('StageLoaderService', () => {
       });
       /**/
       // console.log('SPEC - subscribed to service.loadStages()');
+    }));
+
+    it(`should omit data from a stage whose name is provided`, async(() => {
+      const stageList = STAGE_LIST.TWO_STAGES;
+      const stageDetails = STAGE_DETAILS.TWO_STAGES;
+      const stageExclude = STAGE_EXCLUDE.TWO_STAGES;
+      const expectedStages = STAGES.TWO_STAGES;
+
+      httpClientSpy.get.and.returnValues(asyncData(stageList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
+
+      const actualStages$ = service.loadStages(stageExclude);
+      actualStages$.subscribe((actualStages) => {
+        expect(actualStages.length).toEqual(1);
+        expect(actualStages).toEqual(expectedStages);
+      });
+    }));
+
+    xit(`should omit data from a list of stages whose names are provided`, async(() => {
+      const stageList = STAGE_LIST.FOUR_STAGES;
+      const stageDetails = STAGE_DETAILS.FOUR_STAGES;
+      const stageExclude = STAGE_EXCLUDE.FOUR_STAGES;
+      const expectedStages = STAGES.FOUR_STAGES;
+    }));
+
+    xit(`should reject a stage exclusion list that isn't an array`, async(() => {
+
+    }));
+
+    xit(`should reject a stage exclusion list whose items aren't strings`, async(() => {
+
     }));
 
     it(`should reject stage list data that isn't of type StageSummary[]`, async(() => {

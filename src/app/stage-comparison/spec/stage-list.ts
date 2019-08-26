@@ -70,3 +70,16 @@ export const FOUR_STAGES = [
     "Type": 0
   }
 ];
+
+export const BAD_STAGE_EXCLUDE = [
+  {
+    "name": "Great Plateau Tower",
+    "gameName": "zelda_tower",
+    "Type": 0
+  },
+  {
+    "name": "Yoshi's Story",
+    "gameName": "yoshi_cartboard_",
+    "Type": 0
+  }
+]

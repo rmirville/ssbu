@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 /**
  * Represents summary data describing a stage
@@ -103,6 +102,17 @@ export class StageLoaderService {
   loadStages(exclusions: string[] = []): Observable<Stage[]> {
     /**/
     // console.log('  StageLoaderService::loadStages()');
+
+    // validate exclusions
+    if ( (!Array.isArray(exclusions))
+      || (!exclusions.forEach)
+    ) { throw new TypeError('The excluded stages were not an array.'); }
+
+    exclusions.forEach((exclusion) => {
+      if (typeof exclusion !== 'string') {
+        throw new TypeError('The excluded stages were not strings.');
+      }
+    });
     const stages$: Observable<Stage[]> = new Observable((observer) => {
 
       const stages: Stage[] = [];

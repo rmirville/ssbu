@@ -56,17 +56,32 @@ describe('StageLoaderService', () => {
     });
 
     describe(`excluding stages`, () => {
+
+      function _testBadData(problem, message) {
+        /**/
+        console.log(`=== SPEC - CHECK STAGE EXCLUSIONS DATA TYPE (${problem}) ===`);
+        const stageList = STAGE_LIST.BAD_STAGE_EXCLUDE;
+        const stageDetails = STAGE_DETAILS.BAD_STAGE_EXCLUDE;
+        const stageExclusions = STAGE_EXCLUDE.BAD_DATA[problem];
+
+        httpClientSpy.get.and.returnValues(asyncData(stageList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
+
+        expect( () => {
+          const actualStages$ = service.loadStages(stageExclusions);
+        }).toThrow(new TypeError(message));
+      }
+
       it(`should omit data from a stage whose name is provided`, async(() => {
         /**/
         // console.log('=== SPEC - EXCLUDE ONE STAGE ===');
         const stageList = STAGE_LIST.TWO_STAGES;
         const stageDetails = STAGE_DETAILS.TWO_STAGES;
-        const stageExclude = STAGE_EXCLUDE.TWO_STAGES;
+        const stageExclusions = STAGE_EXCLUDE.TWO_STAGES;
         const expectedStages = STAGES.TWO_STAGES;
 
         httpClientSpy.get.and.returnValues(asyncData(stageList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
 
-        const actualStages$ = service.loadStages(stageExclude);
+        const actualStages$ = service.loadStages(stageExclusions);
         actualStages$.subscribe((actualStages) => {
           expect(actualStages.length).toEqual(1);
           expect(actualStages).toEqual(expectedStages);
@@ -78,12 +93,12 @@ describe('StageLoaderService', () => {
         // console.log('=== SPEC - EXCLUDE TWO STAGES ===');
         const stageList = STAGE_LIST.FOUR_STAGES;
         const stageDetails = STAGE_DETAILS.FOUR_STAGES;
-        const stageExclude = STAGE_EXCLUDE.FOUR_STAGES;
+        const stageExclusions = STAGE_EXCLUDE.FOUR_STAGES;
         const expectedStages = STAGES.FOUR_STAGES;
 
         httpClientSpy.get.and.returnValues(asyncData(stageList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
 
-        const actualStages$ = service.loadStages(stageExclude);
+        const actualStages$ = service.loadStages(stageExclusions);
         actualStages$.subscribe((actualStages) => {
           /**/
           // console.log(`SPEC - actualStages: ${JSON.stringify(actualStages)}`);
@@ -92,11 +107,12 @@ describe('StageLoaderService', () => {
         });
       }));
 
-      xit(`should reject a stage exclusion list that isn't an array`, async(() => {
-
+      it(`should reject a stage exclusion list that isn't an array`, async(() => {
+        _testBadData('notArray', 'The excluded stages were not an array.');
       }));
 
-      xit(`should reject a stage exclusion list whose items aren't strings`, async(() => {
+      it(`should reject a stage exclusion list whose items aren't strings`, async(() => {
+        _testBadData('itemsNotString', 'The excluded stages were not strings.');
 
       }));
     });

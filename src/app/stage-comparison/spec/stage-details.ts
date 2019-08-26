@@ -17,6 +17,8 @@ export const YOSHI_STORY = [
 export const TWO_STAGES = [PRINCESS_PEACH_CASTLE, MAGICANT];
 export const FOUR_STAGES = [MAGICANT, YOSHI_STORY];
 
+export const BAD_STAGE_EXCLUDE = [ZELDA_TOWER, YOSHI_STORY];
+
 export const BAD_DATA = {
   "notArray":
     {},

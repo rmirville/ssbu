@@ -94,12 +94,13 @@ export class StageLoaderService {
   }
 
   /**
-   * Fetch all stage data from the API
+   * Fetch stage data from the API
    *
+   * @param {string[]} exclusions the names of stages to omit from returned data
    * @returns {Observable<Stage[]>}
    * @memberof StageLoaderService
    */
-  loadStages(exclude: string[] = []): Observable<Stage[]> {
+  loadStages(exclusions: string[] = []): Observable<Stage[]> {
     /**/
     // console.log('  StageLoaderService::loadStages()');
     const stages$: Observable<Stage[]> = new Observable((observer) => {
@@ -122,7 +123,7 @@ export class StageLoaderService {
         // console.log(`stages: ${JSON.stringify(stages)}`);
 
         // subscribe to _getStageDetails, providing summaries
-        const stage$: Observable<Stage> = this._getStageDetails(summaries, exclude);
+        const stage$: Observable<Stage> = this._getStageDetails(summaries, exclusions);
         stage$.subscribe({
           next(stage) {
             /**/
@@ -160,7 +161,7 @@ export class StageLoaderService {
    * @returns {Observable<Stage>}
    * @memberof StageLoaderService
    */
-  _getStageDetails(summaries: StageSummary[], exclude: string[]): Observable<Stage> {
+  _getStageDetails(summaries: StageSummary[], exclusions: string[]): Observable<Stage> {
     /**/
     // console.log('  StageLoaderService::_getStageDetails()');
     /**/
@@ -180,57 +181,66 @@ export class StageLoaderService {
       // for each summary in summaries
       for (let i = 0; i < summaries.length; i++) {
         /**/
+        // console.log(`      + index [${i}]:`);
+        /**/
         // console.log(`      + details$ - summary: ${JSON.stringify(summaries[i])}`);
         /**/
         // console.log('      + checking summary type');
+        let exclude = false;
+
         if (!this._isStageSummary(summaries[i])) {
           /**/
-          // console.log('      = throwing TypeError');
+          // console.log('        = throwing TypeError');
           throw new TypeError('The stage summary data fetched was not of type StageSummary[]');
         }
-        if (summaries[i].name === exclude[0]) {
-          summaries.splice(i, 1);
-          i--;
-          break;
-        }
-        const url = API_URL + API_STAGE_DETAILS_PREFIX + summaries[i].name + API_STAGE_DETAILS_PATH;
-
-        /**/
-        // console.log(`      + retrieving details from url: ${url}`);
-        // retrieve json
-        const stageDetailsHttp$ = this.http.get<StageDetails[]>(url);
-        /**/
-        // console.log('      + stageDetailsHttp$: ' + stageDetailsHttp$);
-        stageDetailsHttp$.subscribe((details) => {
-          /**/
-          // console.log(`      + details$ - retrieved details: ${JSON.stringify(details)}`);
-          /**/
-          // console.log('      + details$ - retrieved details');
-          if (!Array.isArray(details)) {
-            /**/
-            // console.log('      + throwing array TypeError');
-            observer.error(new TypeError(`The ${summaries[i].name} stage details data fetched was not an array`));
-            return;
+        for (let j = 0; j < exclusions.length; j++) {
+          if (summaries[i].name === exclusions[j]) {
+            summaries.splice(i, 1);
+            i--;
+            exclude = true;
+            break;
           }
-          details.forEach((phase) => {
-            if (!this._isStageDetails(phase)) {
+        }
+        if (!exclude) {
+          const url = API_URL + API_STAGE_DETAILS_PREFIX + summaries[i].name + API_STAGE_DETAILS_PATH;
+
+          /**/
+          // console.log(`      + retrieving details from url: ${url}`);
+          // retrieve json
+          const stageDetailsHttp$ = this.http.get<StageDetails[]>(url);
+          /**/
+          // console.log('      + stageDetailsHttp$: ' + stageDetailsHttp$);
+          stageDetailsHttp$.subscribe((details) => {
+            /**/
+            // console.log(`      + details$ - retrieved details: ${JSON.stringify(details)}`);
+            /**/
+            // console.log('      + details$ - retrieved details');
+            if (!Array.isArray(details)) {
               /**/
-              // console.log('      + throwing property TypeError');
-              observer.error(new TypeError(`The ${summaries[i].name} stage details data fetched was not of type StageDetails[]`));
+              // console.log('      + throwing array TypeError');
+              observer.error(new TypeError(`The ${summaries[i].name} stage details data fetched was not an array`));
               return;
             }
+            details.forEach((phase) => {
+              if (!this._isStageDetails(phase)) {
+                /**/
+                // console.log('      + throwing property TypeError');
+                observer.error(new TypeError(`The ${summaries[i].name} stage details data fetched was not of type StageDetails[]`));
+                return;
+              }
+            });
+            stages[i] = {
+              name: summaries[i].name,
+              gameName: summaries[i].gameName,
+              Type: summaries[i].Type,
+              details
+            };
+            observer.next(stages[i]);
+            if (i === summaries.length - 1) {
+              observer.complete();
+            }
           });
-          stages[i] = {
-            name: summaries[i].name,
-            gameName: summaries[i].gameName,
-            Type: summaries[i].Type,
-            details
-          };
-          observer.next(stages[i]);
-          if (i === summaries.length - 1) {
-            observer.complete();
-          }
-        });
+        }
       }
 
     });

@@ -22,97 +22,117 @@ describe('StageLoaderService', () => {
       service = new StageLoaderService(httpClientSpy as any);
     });
 
-    it('should return data composed of stage list data and stage details data', async(() => {
-      /**/
-      console.log(`=== SPEC - LOADSTAGES() BASIC ===`);
-
-      const stageList = STAGE_LIST.PRINCESS_PEACH_CASTLE;
-      /**/
-      // console.log('SPEC - stageList: ' + JSON.stringify(stageList));
-      const stageDetails = STAGE_DETAILS.PRINCESS_PEACH_CASTLE;
-      const expectedStages = STAGES.ONE_STAGE;
-
-      httpClientSpy.get.and.returnValues(asyncData(stageList), asyncData(stageDetails));
-      /**/
-      console.log(`SPEC - stageDetails type: ${typeof stageDetails}`);
-      /**/
-      console.log(`SPEC - stageDetails length: ${stageDetails.length}`);
-
-      const actualStages$ = service.loadStages();
-      /**/
-      // console.log('SPEC - obtained observable from service.loadStages()');
-
-      actualStages$.subscribe((actualStages) => {
+    describe('basic functionality', () => {
+      it('should return data composed of stage list data and stage details data', async(() => {
         /**/
-        // console.log(`SPEC - actualStages: ${JSON.stringify(actualStages)}`);
-        expect(actualStages.length).toBe(1);
-        expect(actualStages).toEqual(expectedStages);
-        expect(httpClientSpy.get.calls.count()).toBe(2);
-      });
-      /**/
-      // console.log('SPEC - subscribed to service.loadStages()');
-    }));
+        // console.log(`=== SPEC - LOADSTAGES() BASIC ===`);
 
-    it(`should omit data from a stage whose name is provided`, async(() => {
-      const stageList = STAGE_LIST.TWO_STAGES;
-      const stageDetails = STAGE_DETAILS.TWO_STAGES;
-      const stageExclude = STAGE_EXCLUDE.TWO_STAGES;
-      const expectedStages = STAGES.TWO_STAGES;
-
-      httpClientSpy.get.and.returnValues(asyncData(stageList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
-
-      const actualStages$ = service.loadStages(stageExclude);
-      actualStages$.subscribe((actualStages) => {
-        expect(actualStages.length).toEqual(1);
-        expect(actualStages).toEqual(expectedStages);
-      });
-    }));
-
-    xit(`should omit data from a list of stages whose names are provided`, async(() => {
-      const stageList = STAGE_LIST.FOUR_STAGES;
-      const stageDetails = STAGE_DETAILS.FOUR_STAGES;
-      const stageExclude = STAGE_EXCLUDE.FOUR_STAGES;
-      const expectedStages = STAGES.FOUR_STAGES;
-    }));
-
-    xit(`should reject a stage exclusion list that isn't an array`, async(() => {
-
-    }));
-
-    xit(`should reject a stage exclusion list whose items aren't strings`, async(() => {
-
-    }));
-
-    it(`should reject stage list data that isn't of type StageSummary[]`, async(() => {
-      /**/
-      console.log(`=== SPEC - CHECK STAGE LIST DATA TYPE ===`);
-
-      const stageListBad = STAGE_LIST.BAD_DATA;
-      const stageDetails = STAGE_DETAILS.PRINCESS_PEACH_CASTLE;
-      const actualStages$Arr = [];
-
-      for (let i = 0; i < stageListBad.length; i++) {
-        httpClientSpy.get.and.returnValues(asyncData(stageListBad[i]), asyncData(stageDetails));
-
+        const stageList = STAGE_LIST.PRINCESS_PEACH_CASTLE;
         /**/
-        // console.log('SPEC - loading stages');
-        actualStages$Arr[i] = service.loadStages();
+        // console.log('SPEC - stageList: ' + JSON.stringify(stageList));
+        const stageDetails = STAGE_DETAILS.PRINCESS_PEACH_CASTLE;
+        const expectedStages = STAGES.ONE_STAGE;
+
+        httpClientSpy.get.and.returnValues(asyncData(stageList), asyncData(stageDetails));
         /**/
-        // console.log(`SPEC - actualStages$: ${actualStages$Arr[i]}`);
-        actualStages$Arr[i].subscribe({
-          next: () => {
-            /**/
-            // console.log('SPEC - got data somehow');
-            fail(`loadStages() did not encounter TypeError`);
-          },
-          error: (error) => {
-            /**/
-            // console.log(`SPEC - Error: ${error}`);
-            expect(error instanceof TypeError).toBeTruthy(`error instanceof TypeError`);
-          }
+        // console.log(`SPEC - stageDetails type: ${typeof stageDetails}`);
+        /**/
+        // console.log(`SPEC - stageDetails length: ${stageDetails.length}`);
+
+        const actualStages$ = service.loadStages();
+        /**/
+        // console.log('SPEC - obtained observable from service.loadStages()');
+
+        actualStages$.subscribe((actualStages) => {
+          /**/
+          // console.log(`SPEC - actualStages: ${JSON.stringify(actualStages)}`);
+          expect(actualStages.length).toBe(1);
+          expect(actualStages).toEqual(expectedStages);
+          expect(httpClientSpy.get.calls.count()).toBe(2);
         });
-      }
-    }));
+        /**/
+        // console.log('SPEC - subscribed to service.loadStages()');
+      }));
+    });
+
+    describe(`excluding stages`, () => {
+      it(`should omit data from a stage whose name is provided`, async(() => {
+        /**/
+        // console.log('=== SPEC - EXCLUDE ONE STAGE ===');
+        const stageList = STAGE_LIST.TWO_STAGES;
+        const stageDetails = STAGE_DETAILS.TWO_STAGES;
+        const stageExclude = STAGE_EXCLUDE.TWO_STAGES;
+        const expectedStages = STAGES.TWO_STAGES;
+
+        httpClientSpy.get.and.returnValues(asyncData(stageList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
+
+        const actualStages$ = service.loadStages(stageExclude);
+        actualStages$.subscribe((actualStages) => {
+          expect(actualStages.length).toEqual(1);
+          expect(actualStages).toEqual(expectedStages);
+        });
+      }));
+
+      it(`should omit data from a list of stages whose names are provided`, async(() => {
+        /**/
+        // console.log('=== SPEC - EXCLUDE TWO STAGES ===');
+        const stageList = STAGE_LIST.FOUR_STAGES;
+        const stageDetails = STAGE_DETAILS.FOUR_STAGES;
+        const stageExclude = STAGE_EXCLUDE.FOUR_STAGES;
+        const expectedStages = STAGES.FOUR_STAGES;
+
+        httpClientSpy.get.and.returnValues(asyncData(stageList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
+
+        const actualStages$ = service.loadStages(stageExclude);
+        actualStages$.subscribe((actualStages) => {
+          /**/
+          // console.log(`SPEC - actualStages: ${JSON.stringify(actualStages)}`);
+          expect(actualStages.length).toEqual(2);
+          expect(actualStages).toEqual(expectedStages);
+        });
+      }));
+
+      xit(`should reject a stage exclusion list that isn't an array`, async(() => {
+
+      }));
+
+      xit(`should reject a stage exclusion list whose items aren't strings`, async(() => {
+
+      }));
+    });
+
+    describe('stage list data validation', () => {
+      it(`should reject stage list data that isn't of type StageSummary[]`, async(() => {
+        /**/
+        // console.log(`=== SPEC - CHECK STAGE LIST DATA TYPE ===`);
+
+        const stageListBad = STAGE_LIST.BAD_DATA;
+        const stageDetails = STAGE_DETAILS.PRINCESS_PEACH_CASTLE;
+        const actualStages$Arr = [];
+
+        for (let i = 0; i < stageListBad.length; i++) {
+          httpClientSpy.get.and.returnValues(asyncData(stageListBad[i]), asyncData(stageDetails));
+
+          /**/
+          // console.log('SPEC - loading stages');
+          actualStages$Arr[i] = service.loadStages();
+          /**/
+          // console.log(`SPEC - actualStages$: ${actualStages$Arr[i]}`);
+          actualStages$Arr[i].subscribe({
+            next: () => {
+              /**/
+              // console.log('SPEC - got data somehow');
+              fail(`loadStages() did not encounter TypeError`);
+            },
+            error: (error) => {
+              /**/
+              // console.log(`SPEC - Error: ${error}`);
+              expect(error instanceof TypeError).toBeTruthy(`error instanceof TypeError`);
+            }
+          });
+        }
+      }));
+    });
 
     describe(`stage details data validation`, () => {
       let stageList;
@@ -121,7 +141,7 @@ describe('StageLoaderService', () => {
 
       function _testBadData(problem) {
         /**/
-        console.log(`=== SPEC - CHECK STAGE DETAILS DATA TYPE (${problem}) ===`);
+        // console.log(`=== SPEC - CHECK STAGE DETAILS DATA TYPE (${problem}) ===`);
         httpClientSpy.get.and.returnValues(asyncData(stageList), asyncData(stageDetailsBad[problem]));
 
         actualStages$ = service.loadStages();

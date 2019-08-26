@@ -63,5 +63,10 @@ export const FOUR_STAGES = [
     "name": "Great Plateau Tower",
     "gameName": "zelda_tower",
     "Type": 0
+  },
+  {
+    "name": "Yoshi's Story",
+    "gameName": "yoshi_cartboard_",
+    "Type": 0
   }
 ];

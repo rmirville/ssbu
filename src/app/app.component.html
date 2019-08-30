@@ -1,12 +1,31 @@
 <!-- Navigation -->
-<nav class="navbar">
+<nav class="navbar-desktop navbar navbar-dark">
   <div role="banner" class="container-fluid brand">
-    <div class="container">
+    <div class="brand-desktop container">
       <a class="navbar-brand" href="#">Super Smash Bros. Ultimate Tools</a>
     </div>
   </div>
-  <div class="container-fluid nav-container">
-    <ul role="navigation" class="container nav justify-content-around">
+  <div id="ssbu-header-nav" class="container-fluid nav-container nav-collapse collapse">
+    <ul role="navigation" class="container navbar-nav justify-content-around">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Stage Comparison</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">(More to come...eventually!)</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<nav class="navbar-mobile navbar navbar-dark justify-content-end">
+  <div role="banner" class="brand container-fluid d-flex flex-row justify-content-between">
+    <a class="navbar-brand" href="#">Super Smash Bros. Ultimate Tools</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ssbu-header-nav"
+      aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+  <div id="ssbu-header-nav" class="nav-container nav-collapse collapse">
+    <ul role="navigation" class="navbar-nav justify-content-around text-right">
       <li class="nav-item">
         <a class="nav-link" href="#">Stage Comparison</a>
       </li>

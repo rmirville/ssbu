@@ -1,10 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+
+import { StageComparatorComponent } from './stage-comparator.component';
+
+const stageComparatorRoutes: Routes = [{
+  path: '',
+  component: StageComparatorComponent
+}];
 
 @NgModule({
-  declarations: [],
+  declarations: [StageComparatorComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild(stageComparatorRoutes)
   ]
 })
 export class StageComparatorModule { }

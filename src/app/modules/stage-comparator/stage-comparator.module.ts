@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-import { StageComparatorComponent } from './stage-comparator.component';
+import { StageComparatorComponent } from './components/stage-comparator/stage-comparator.component';
 
 const stageComparatorRoutes: Routes = [{
   path: '',

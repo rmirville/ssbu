@@ -1,12 +1,12 @@
 import { async, fakeAsync, tick } from '@angular/core/testing';
-import { asyncData, asyncError } from '../testing/async-observable-helpers';
+import { asyncData, asyncError } from '../../../testing/async-observable-helpers';
 
 import { StageLoaderService } from './stage-loader.service';
 
-import * as STAGE_LIST from './spec/stage-list';
-import * as STAGE_DETAILS from './spec/stage-details';
-import * as STAGE_EXCLUDE from './spec/stage-exclude';
-import * as STAGES from './spec/stages';
+import * as STAGE_LIST from './mocks/stage-list';
+import * as STAGE_DETAILS from './mocks/stage-details';
+import * as STAGE_EXCLUDE from './mocks/stage-exclude';
+import * as STAGES from './mocks/stages';
 
 describe('StageLoaderService', () => {
   let service: StageLoaderService;

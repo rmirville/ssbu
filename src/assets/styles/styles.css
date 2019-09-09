@@ -93,9 +93,9 @@ h2 {
 .navbar-nav .nav-link {
   height: 3rem;
   padding: 1rem;
+  line-height: 1rem;
   font-size: 1rem;
   font-family: 'FOT EB', sans-serif;
-  line-height: 1rem;
 }
 
 .navbar-dark .navbar-nav .nav-link,
@@ -105,6 +105,10 @@ h2 {
 
 .nav-link:hover {
   background-color: hsl(47, 100%, 50%);
+}
+
+.navbar-dark .navbar-nav .nav-link:hover
+ {
   text-shadow:
     /* base */
     -1px -1px 1px black,
@@ -197,5 +201,54 @@ h2 {
     /* round out the corners */
     6px 4px 1px black,
     5px 5px 1px black,
-    7px 5px 1px black
+    7px 5px 1px black;
+}
+
+/* Content */
+.nav-pills .nav-link {
+  height: 2.5rem;
+  padding: .75rem;
+  line-height: 1rem;
+  background-color: hsl(196, 12%, 75%);
+  color: hsl(196, 12%, 35%);
+  font-family: 'FOT EB', sans-serif;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .nav-link.active:hover {
+  background-color: hsl(47, 100%, 50%);
+  color: hsl(196, 12%, 10%);
+  box-shadow:
+    /* base */
+    -2px -2px 1px hsl(196, 12%, 10%),
+    -1px -1px 1px hsl(196, 12%, 10%),
+    0px 0px 1px hsl(196, 12%, 10%),
+    1px 1px 1px hsl(196, 12%, 10%),
+    2px 2px 1px hsl(196, 12%, 10%),
+    3px 3px 1px hsl(196, 12%, 10%),
+    
+    /* right offset */
+    0px -2px 1px hsl(196, 12%, 10%),
+    1px -1px 1px hsl(196, 12%, 10%),
+    2px 0px 1px hsl(196, 12%, 10%),
+    3px 1px 1px hsl(196, 12%, 10%),
+    4px 2px 1px hsl(196, 12%, 10%),
+
+    /* right offset - correction */
+    1px -2px 1px hsl(196, 12%, 10%),
+    2px -1px 1px hsl(196, 12%, 10%),
+    3px 0px 1px hsl(196, 12%, 10%),
+    4px 1px 1px hsl(196, 12%, 10%),
+
+    /* bottom offset */
+    -2px 0px 1px hsl(196, 12%, 10%),
+    -1px 1px 1px hsl(196, 12%, 10%),
+    0px 2px 1px hsl(196, 12%, 10%),
+    1px 3px 1px hsl(196, 12%, 10%),
+    2px 4px 1px hsl(196, 12%, 10%);
+}
+
+.nav-pills .nav-link:hover {
+  background-color: hsl(196, 12%, 17%);
+  color: white;
 }

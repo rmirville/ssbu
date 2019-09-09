@@ -4,10 +4,16 @@
       <h1 class="page-title">Stage Comparison</h1>
     </div>
   </div>
-  <section class="row">
-    <div class="col-lg-4"><a routerLink="graph">Graph</a></div>
-    <div class="col-lg-4"><a routerLink="summary">Text Summary</a></div>
-    <div class="col-lg-4"><a routerLink="numbers">Numbers</a></div>
-  </section>
+  <ul class="row nav nav-justified nav-pills">
+    <li class="col-lg-4 nav-item">
+      <a class="nav-link" routerLinkActive="active" routerLink="graph">Graph</a>
+    </li>
+    <li class="col-lg-4 nav-item">
+      <a class="nav-link" routerLinkActive="active" routerLink="summary">Text Summary</a>
+    </li>
+    <li class="col-lg-4 nav-item">
+      <a class="nav-link" routerLinkActive="active" routerLink="numbers">Numbers</a>
+    </li>
+  </ul>
   <router-outlet></router-outlet>
 </div>

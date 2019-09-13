@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { StageSelectComponent } from '../../shared/components/stage-select/stage-select.component';
+
 import { StageComparatorComponent } from './components/stage-comparator/stage-comparator.component';
 import { StageComparatorNumberTableComponent } from './components/stage-comparator-number-table/stage-comparator-number-table.component';
 import { StageComparatorGraphComponent } from './components/stage-comparator-graph/stage-comparator-graph.component';
@@ -20,7 +24,7 @@ const stageComparatorRoutes: Routes = [{
       component: StageComparatorGraphComponent
     },
     {
-      path: 'summary',
+      path: 'text',
       component: StageComparatorTextTableComponent
     },
     {
@@ -31,10 +35,16 @@ const stageComparatorRoutes: Routes = [{
 }];
 
 @NgModule({
-  declarations: [StageComparatorComponent, StageComparatorNumberTableComponent, StageComparatorGraphComponent, StageComparatorTextTableComponent],
+  declarations: [
+    StageSelectComponent,
+    StageComparatorComponent,
+    StageComparatorNumberTableComponent,
+    StageComparatorGraphComponent, StageComparatorTextTableComponent
+  ],
   imports: [
     CommonModule,
-    RouterModule.forChild(stageComparatorRoutes)
+    RouterModule.forChild(stageComparatorRoutes),
+    ReactiveFormsModule
   ]
 })
 export class StageComparatorModule { }

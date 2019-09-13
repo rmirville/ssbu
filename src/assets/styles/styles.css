@@ -10,9 +10,15 @@
   src: url('../fonts/Roboto-Regular.ttf');
 }
 
+@font-face {
+  font-family: 'Roboto Bold';
+  src: url('../fonts/Roboto-Bold.ttf');
+}
+
 
 
 /* Globals */
+
 
 p,
 li,
@@ -22,11 +28,15 @@ th {
 }
 
 h1,
-h2,
+h2 {
+  font-family: 'FOT EB', sans-serif;
+}
+
 h3,
 h4,
 h5 {
-  font-family: 'FOT EB', sans-serif;
+  font-family: 'Roboto Bold', sans-serif;
+  font-weight: bold;
 }
 
 h1 {
@@ -37,6 +47,11 @@ h1 {
 h2 {
   font-size: 1.5rem;
   line-height: 4.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+  line-height: 3.75rem;
 }
 
 
@@ -107,8 +122,7 @@ h2 {
   background-color: hsl(47, 100%, 50%);
 }
 
-.navbar-dark .navbar-nav .nav-link:hover
- {
+.navbar-dark .navbar-nav .nav-link:hover {
   text-shadow:
     /* base */
     -1px -1px 1px black,
@@ -126,7 +140,7 @@ h2 {
     1px 3px 1px black,
 
     /* round out the corners */
-    3px 3px 1px black
+    3px 3px 1px black;
 }
 
 @media (min-width: 576px) {
@@ -206,18 +220,51 @@ h2 {
 
 /* Content */
 .nav-pills .nav-link {
-  height: 2.5rem;
+  min-height: 2.5rem;
   padding: .75rem;
   line-height: 1rem;
+  font-family: 'FOT EB', sans-serif;
+}
+
+.btn-primary {
+  height: 3rem;
+  padding: 1rem;
+  line-height: 1rem;
+  background-color: hsl(122, 83%, 35%);
+  font-family: 'FOT EB', sans-serif;
+  color: white;
+  transition: none;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus {
+  background-color: hsl(132, 6%, 15%);
+  color: white;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus {
+  border: none;
+  box-shadow: none;/* 2px 2px 3px hsl(0, 0%, 0%);*/
+}
+
+.nav-pills .nav-link {
   background-color: hsl(196, 12%, 75%);
   color: hsl(196, 12%, 35%);
-  font-family: 'FOT EB', sans-serif;
 }
 
 .nav-pills .nav-link.active,
 .nav-pills .nav-link.active:hover {
   background-color: hsl(47, 100%, 50%);
   color: hsl(196, 12%, 10%);
+  border: none;
   box-shadow:
     /* base */
     -2px -2px 1px hsl(196, 12%, 10%),

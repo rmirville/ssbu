@@ -5,16 +5,7 @@
   src: url('../fonts/FOT-RodinBokutohPro-EB.otf');
 }
 
-@font-face {
-  font-family: 'Roboto';
-  src: url('../fonts/Roboto-Regular.ttf');
-}
-
-@font-face {
-  font-family: 'Roboto Bold';
-  src: url('../fonts/Roboto-Bold.ttf');
-}
-
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap');
 
 
 /* Globals */
@@ -35,7 +26,7 @@ h2 {
 h3,
 h4,
 h5 {
-  font-family: 'Roboto Bold', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: bold;
 }
 

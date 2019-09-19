@@ -1,20 +1,27 @@
-<div class="container">
+<div class="container ssbu-module">
   <div class="row">
     <div class="col-lg-12">
       <h1 class="page-title">Stage Comparison</h1>
     </div>
   </div>
   <ssbu-stage-select></ssbu-stage-select>
-  <ul class="row nav nav-justified nav-pills">
-    <li class="nav-item col-lg-4">
-      <a class="nav-link h-100 align-middle" routerLinkActive="active" routerLink="graph">Graph</a>
-    </li>
-    <li class="nav-item col-lg-4">
-      <a class="nav-link h-100 align-middle" routerLinkActive="active" routerLink="text">Text</a>
-    </li>
-    <li class="nav-item col-lg-4">
-      <a class="nav-link h-100 align-middle" routerLinkActive="active" routerLink="numbers">Numbers</a>
-    </li>
-  </ul>
-  <router-outlet></router-outlet>
+  <div class="card">
+    <div class="card-header">
+      <h2>Stage Dimensions</h2>
+    </div>
+    <div class="card-body">
+      <ul class="row nav nav-justified nav-pills">
+        <li class="nav-item col-lg-4">
+          <a class="nav-link h-100 align-middle" routerLinkActive="active" routerLink="graph">Graph</a>
+        </li>
+        <li class="nav-item col-lg-4">
+          <a class="nav-link h-100 align-middle" routerLinkActive="active" routerLink="text">Text</a>
+        </li>
+        <li class="nav-item col-lg-4">
+          <a class="nav-link h-100 align-middle" routerLinkActive="active" routerLink="numbers">Numbers</a>
+        </li>
+      </ul>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>

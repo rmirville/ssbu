@@ -1,276 +1,317 @@
 /* Stages */
-.boundary {
+.stage-comparator-graph {
+  position: relative;
+}
+
+.stage-comparator-graph .table {
   border: 0;
 }
 
-.boundary th, .boundary td {
-  padding: 0 5px;
-}
-
-.boundary th {
+.stage-comparator-graph .table thead th {
+  padding: 1rem;
   text-align: left;
+  vertical-align: middle;
 }
 
-.boundary div {
+.stage-comparator-graph .stage-name {
+  position: sticky;
+  left: 0;
+  top: 0;
+  padding: .25rem 1rem;
+}
+
+.stage-comparator-graph td {
+  padding: 0 1rem;
+  vertical-align: middle;
+}
+
+.stage-comparator-graph tbody td {
+  background-color: white;
+}
+
+.stage-comparator-graph tbody tr {
+  height: 3rem;
+}
+
+.stage-comparator-graph .graph {
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent,
+    hsla(0, 0%, 0%, 50%) 1px,
+    transparent 0px,
+    transparent 20px);
+  background-position-x: 1rem;
+  box-shadow: inset 1rem 0 white, -.75rem 0 white;
+}
+
+.table-hover tbody tr:hover td {
+  background-color: hsl(0, 0%, 93%);
+}
+
+.table-hover tr:hover .graph {
+  box-shadow: inset 1rem 0 hsl(0, 0%, 93%), -.75rem 0 hsl(0, 0%, 93%);
+}
+
+.stage-comparator-graph .graph div {
   float: left;
-  margin: .5rem 0 0;
-  height: .3rem;
+  margin: 0;
+  height: .75rem;
 }
 
 /**/
-.boundary .r1 {
-  background-color: hsl(0, 70%, 50%);
+.stage-comparator-graph .r1 {
+  background-color: hsl(0, 75%, 55%);
 }
 
-.boundary .r2 {
-  background-color: hsl(30, 70%, 50%);
+.stage-comparator-graph .r2 {
+  background-color: hsl(30, 85%, 55%);
 }
 
-.boundary .r3 {
-  background-color: hsl(60, 70%, 50%);
+.stage-comparator-graph .r3 {
+  background-color: hsl(60, 80%, 50%);
 }
 
-.boundary .r4 {
-  background-color: hsl(120, 50%, 50%);
+.stage-comparator-graph .r4 {
+  background-color: hsl(100, 55%, 50%);
 }
 
-.boundary .r5 {
-  background-color: hsl(240, 60%, 50%);
+.stage-comparator-graph .r5 {
+  background-color: hsl(220, 75%, 55%);
 }
 /**/
 
 /* Color-blind *//*
-.boundary .r1 {
+.stage-comparator-graph .r1 {
   background-color: hsl(0, 0%, 20%);
 }
 
-.boundary .r2 {
+.stage-comparator-graph .r2 {
   background-color: hsl(30, 0%, 40%);
 }
 
-.boundary .r3 {
+.stage-comparator-graph .r3 {
   background-color: hsl(60, 0%, 60%);
 }
 
-.boundary .r4 {
+.stage-comparator-graph .r4 {
   background-color: hsl(120, 0%, 80%);
 }
 
-.boundary .r5 {
+.stage-comparator-graph .r5 {
   background-color: hsl(240, 0%, 100%);
 }
 /**/
 
 
-.boundary .bf .blastzone {
+.stage-comparator-graph .bf .blastzone {
   width: 240px;
 }
 
-.boundary .bf .stage {
+.stage-comparator-graph .bf .stage {
   width: 80px;
 }
 
-.boundary .bf .off-stage {
+.stage-comparator-graph .bf .off-stage {
   width: 160px;
 }
 
-.boundary .bf .ceiling {
+.stage-comparator-graph .bf .ceiling {
   width: 192px;
 }
 
 
 
-.boundary .fd .blastzone {
+.stage-comparator-graph .fd .blastzone {
   width: 240px;
 }
 
-.boundary .fd .stage {
+.stage-comparator-graph .fd .stage {
   width: 80px;
 }
 
-.boundary .fd .off-stage {
+.stage-comparator-graph .fd .off-stage {
   width: 160px;
 }
 
-.boundary .fd .ceiling {
+.stage-comparator-graph .fd .ceiling {
   width: 180px;
 }
 
 
 
-.boundary .ps2 .blastzone {
+.stage-comparator-graph .ps2 .blastzone {
   width: 250px;
 }
 
-.boundary .ps2 .stage {
+.stage-comparator-graph .ps2 .stage {
   width: 94px;
 }
 
-.boundary .ps2 .off-stage {
+.stage-comparator-graph .ps2 .off-stage {
   width: 156px;
 }
 
-.boundary .ps2 .ceiling {
+.stage-comparator-graph .ps2 .ceiling {
   width: 180px;
 }
 
 
 
-.boundary .ps1 .blastzone {
+.stage-comparator-graph .ps1 .blastzone {
   width: 250px;
 }
 
-.boundary .ps1 .stage {
+.stage-comparator-graph .ps1 .stage {
   width: 88px;
 }
 
-.boundary .ps1 .off-stage {
+.stage-comparator-graph .ps1 .off-stage {
   width: 162px;
 }
 
-.boundary .ps1 .ceiling {
+.stage-comparator-graph .ps1 .ceiling {
   width: 180px;
 }
 
 
 
-.boundary .sv .blastzone {
+.stage-comparator-graph .sv .blastzone {
   width: 230px;
 }
 
-.boundary .sv .stage {
+.stage-comparator-graph .sv .stage {
   width: 70px;
 }
 
-.boundary .sv .off-stage {
+.stage-comparator-graph .sv .off-stage {
   width: 160px;
 }
 
-.boundary .sv .ceiling {
+.stage-comparator-graph .sv .ceiling {
   width: 190px;
 }
 
 
 
-.boundary .kpl .blastzone {
+.stage-comparator-graph .kpl .blastzone {
   width: 245px;
 }
 
-.boundary .kpl .stage {
+.stage-comparator-graph .kpl .stage {
   width: 80px;
 }
 
-.boundary .kpl .off-stage {
+.stage-comparator-graph .kpl .off-stage {
   width: 165px;
 }
 
-.boundary .kpl .ceiling {
+.stage-comparator-graph .kpl .ceiling {
   width: 192px;
 }
 
 
-.boundary .yib .blastzone {
+.stage-comparator-graph .yib .blastzone {
   width: 220px;
 }
 
-.boundary .yib .stage {
+.stage-comparator-graph .yib .stage {
   width: 70px;
 }
 
-.boundary .yib .off-stage {
+.stage-comparator-graph .yib .off-stage {
   width: 150px;
 }
 
-.boundary .yib .ceiling {
+.stage-comparator-graph .yib .ceiling {
   width: 185px;
 }
 
 
 
-.boundary .tc .blastzone {
+.stage-comparator-graph .tc .blastzone {
   width: 230px;
 }
 
-.boundary .tc .stage {
+.stage-comparator-graph .tc .stage {
   width: 82px;
 }
 
-.boundary .tc .off-stage {
+.stage-comparator-graph .tc .off-stage {
   width: 148px;
 }
 
-.boundary .tc .ceiling {
+.stage-comparator-graph .tc .ceiling {
   width: 195px;
 }
 
 
 
-.boundary .upl .blastzone {
+.stage-comparator-graph .upl .blastzone {
   width: 237px;
 }
 
-.boundary .upl .stage {
+.stage-comparator-graph .upl .stage {
   width: 82px;
 }
 
-.boundary .upl .off-stage {
+.stage-comparator-graph .upl .off-stage {
   width: 155px;
 }
 
-.boundary .upl .ceiling {
+.stage-comparator-graph .upl .ceiling {
   width: 190px;
 }
 
 
 
-.boundary .ys .blastzone {
+.stage-comparator-graph .ys .blastzone {
   width: 227px;
 }
 
-.boundary .ys .stage {
+.stage-comparator-graph .ys .stage {
   width: 68px;
 }
 
-.boundary .ys .off-stage {
+.stage-comparator-graph .ys .off-stage {
   width: 159px;
 }
 
-.boundary .ys .ceiling {
+.stage-comparator-graph .ys .ceiling {
   width: 184px;
 }
 
 
 
-.boundary .lc .blastzone {
+.stage-comparator-graph .lc .blastzone {
   width: 230px;
 }
 
-.boundary .lc .stage {
+.stage-comparator-graph .lc .stage {
   width: 80px;
 }
 
-.boundary .lc .off-stage {
+.stage-comparator-graph .lc .off-stage {
   width: 150px;
 }
 
-.boundary .lc .ceiling {
+.stage-comparator-graph .lc .ceiling {
   width: 188px;
 }
 
 
 
-.boundary .mm .blastzone {
+.stage-comparator-graph .mm .blastzone {
   width: 260px;
 }
 
-.boundary .mm .stage {
+.stage-comparator-graph .mm .stage {
   width: 100px;
 }
 
-.boundary .mm .off-stage {
+.stage-comparator-graph .mm .off-stage {
   width: 160px;
 }
 
-.boundary .mm .ceiling {
+.stage-comparator-graph .mm .ceiling {
   width: 190px;
 }

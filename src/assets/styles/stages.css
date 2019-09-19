@@ -1,317 +1,279 @@
 /* Stages */
-.stage-comparator-graph {
-  position: relative;
-}
 
-.stage-comparator-graph .table {
-  border: 0;
-}
-
-.stage-comparator-graph .table thead th {
-  padding: 1rem;
-  text-align: left;
-  vertical-align: middle;
-}
-
-.stage-comparator-graph .stage-name {
-  position: sticky;
-  left: 0;
-  top: 0;
-  padding: .25rem 1rem;
-}
-
-.stage-comparator-graph td {
-  padding: 0 1rem;
-  vertical-align: middle;
-}
-
-.stage-comparator-graph tbody td {
-  background-color: white;
-}
-
-.stage-comparator-graph tbody tr {
-  height: 3rem;
-}
-
-.stage-comparator-graph .graph {
-  background-image: repeating-linear-gradient(
-    to right,
-    transparent,
-    hsla(0, 0%, 0%, 50%) 1px,
-    transparent 0px,
-    transparent 20px);
+.table-responsive .td-graph {
+  background-image: repeating-linear-gradient(to right,
+      transparent,
+      hsla(0, 0%, 0%, 50%) 1px,
+      transparent 0px,
+      transparent 20px);
   background-position-x: 1rem;
   box-shadow: inset 1rem 0 white, -.75rem 0 white;
 }
 
-.table-hover tbody tr:hover td {
-  background-color: hsl(0, 0%, 93%);
-}
-
-.table-hover tr:hover .graph {
+.table-hover tr:hover .td-graph {
   box-shadow: inset 1rem 0 hsl(0, 0%, 93%), -.75rem 0 hsl(0, 0%, 93%);
 }
 
-.stage-comparator-graph .graph div {
+.table-responsive .td-graph div {
   float: left;
   margin: 0;
   height: .75rem;
 }
 
 /**/
-.stage-comparator-graph .r1 {
+.table-responsive .r1 {
   background-color: hsl(0, 75%, 55%);
 }
 
-.stage-comparator-graph .r2 {
+.table-responsive .r2 {
   background-color: hsl(30, 85%, 55%);
 }
 
-.stage-comparator-graph .r3 {
+.table-responsive .r3 {
   background-color: hsl(60, 80%, 50%);
 }
 
-.stage-comparator-graph .r4 {
+.table-responsive .r4 {
   background-color: hsl(100, 55%, 50%);
 }
 
-.stage-comparator-graph .r5 {
+.table-responsive .r5 {
   background-color: hsl(220, 75%, 55%);
 }
 /**/
 
 /* Color-blind *//*
-.stage-comparator-graph .r1 {
+.table-responsive .r1 {
   background-color: hsl(0, 0%, 20%);
 }
 
-.stage-comparator-graph .r2 {
+.table-responsive .r2 {
   background-color: hsl(30, 0%, 40%);
 }
 
-.stage-comparator-graph .r3 {
+.table-responsive .r3 {
   background-color: hsl(60, 0%, 60%);
 }
 
-.stage-comparator-graph .r4 {
+.table-responsive .r4 {
   background-color: hsl(120, 0%, 80%);
 }
 
-.stage-comparator-graph .r5 {
+.table-responsive .r5 {
   background-color: hsl(240, 0%, 100%);
 }
 /**/
 
 
-.stage-comparator-graph .bf .blastzone {
+.table-responsive .bf .blastzone {
   width: 240px;
 }
 
-.stage-comparator-graph .bf .stage {
+.table-responsive .bf .stage {
   width: 80px;
 }
 
-.stage-comparator-graph .bf .off-stage {
+.table-responsive .bf .off-stage {
   width: 160px;
 }
 
-.stage-comparator-graph .bf .ceiling {
+.table-responsive .bf .ceiling {
   width: 192px;
 }
 
 
 
-.stage-comparator-graph .fd .blastzone {
+.table-responsive .fd .blastzone {
   width: 240px;
 }
 
-.stage-comparator-graph .fd .stage {
+.table-responsive .fd .stage {
   width: 80px;
 }
 
-.stage-comparator-graph .fd .off-stage {
+.table-responsive .fd .off-stage {
   width: 160px;
 }
 
-.stage-comparator-graph .fd .ceiling {
+.table-responsive .fd .ceiling {
   width: 180px;
 }
 
 
 
-.stage-comparator-graph .ps2 .blastzone {
+.table-responsive .ps2 .blastzone {
   width: 250px;
 }
 
-.stage-comparator-graph .ps2 .stage {
+.table-responsive .ps2 .stage {
   width: 94px;
 }
 
-.stage-comparator-graph .ps2 .off-stage {
+.table-responsive .ps2 .off-stage {
   width: 156px;
 }
 
-.stage-comparator-graph .ps2 .ceiling {
+.table-responsive .ps2 .ceiling {
   width: 180px;
 }
 
 
 
-.stage-comparator-graph .ps1 .blastzone {
+.table-responsive .ps1 .blastzone {
   width: 250px;
 }
 
-.stage-comparator-graph .ps1 .stage {
+.table-responsive .ps1 .stage {
   width: 88px;
 }
 
-.stage-comparator-graph .ps1 .off-stage {
+.table-responsive .ps1 .off-stage {
   width: 162px;
 }
 
-.stage-comparator-graph .ps1 .ceiling {
+.table-responsive .ps1 .ceiling {
   width: 180px;
 }
 
 
 
-.stage-comparator-graph .sv .blastzone {
+.table-responsive .sv .blastzone {
   width: 230px;
 }
 
-.stage-comparator-graph .sv .stage {
+.table-responsive .sv .stage {
   width: 70px;
 }
 
-.stage-comparator-graph .sv .off-stage {
+.table-responsive .sv .off-stage {
   width: 160px;
 }
 
-.stage-comparator-graph .sv .ceiling {
+.table-responsive .sv .ceiling {
   width: 190px;
 }
 
 
 
-.stage-comparator-graph .kpl .blastzone {
+.table-responsive .kpl .blastzone {
   width: 245px;
 }
 
-.stage-comparator-graph .kpl .stage {
+.table-responsive .kpl .stage {
   width: 80px;
 }
 
-.stage-comparator-graph .kpl .off-stage {
+.table-responsive .kpl .off-stage {
   width: 165px;
 }
 
-.stage-comparator-graph .kpl .ceiling {
+.table-responsive .kpl .ceiling {
   width: 192px;
 }
 
 
-.stage-comparator-graph .yib .blastzone {
+.table-responsive .yib .blastzone {
   width: 220px;
 }
 
-.stage-comparator-graph .yib .stage {
+.table-responsive .yib .stage {
   width: 70px;
 }
 
-.stage-comparator-graph .yib .off-stage {
+.table-responsive .yib .off-stage {
   width: 150px;
 }
 
-.stage-comparator-graph .yib .ceiling {
+.table-responsive .yib .ceiling {
   width: 185px;
 }
 
 
 
-.stage-comparator-graph .tc .blastzone {
+.table-responsive .tc .blastzone {
   width: 230px;
 }
 
-.stage-comparator-graph .tc .stage {
+.table-responsive .tc .stage {
   width: 82px;
 }
 
-.stage-comparator-graph .tc .off-stage {
+.table-responsive .tc .off-stage {
   width: 148px;
 }
 
-.stage-comparator-graph .tc .ceiling {
+.table-responsive .tc .ceiling {
   width: 195px;
 }
 
 
 
-.stage-comparator-graph .upl .blastzone {
+.table-responsive .upl .blastzone {
   width: 237px;
 }
 
-.stage-comparator-graph .upl .stage {
+.table-responsive .upl .stage {
   width: 82px;
 }
 
-.stage-comparator-graph .upl .off-stage {
+.table-responsive .upl .off-stage {
   width: 155px;
 }
 
-.stage-comparator-graph .upl .ceiling {
+.table-responsive .upl .ceiling {
   width: 190px;
 }
 
 
 
-.stage-comparator-graph .ys .blastzone {
+.table-responsive .ys .blastzone {
   width: 227px;
 }
 
-.stage-comparator-graph .ys .stage {
+.table-responsive .ys .stage {
   width: 68px;
 }
 
-.stage-comparator-graph .ys .off-stage {
+.table-responsive .ys .off-stage {
   width: 159px;
 }
 
-.stage-comparator-graph .ys .ceiling {
+.table-responsive .ys .ceiling {
   width: 184px;
 }
 
 
 
-.stage-comparator-graph .lc .blastzone {
+.table-responsive .lc .blastzone {
   width: 230px;
 }
 
-.stage-comparator-graph .lc .stage {
+.table-responsive .lc .stage {
   width: 80px;
 }
 
-.stage-comparator-graph .lc .off-stage {
+.table-responsive .lc .off-stage {
   width: 150px;
 }
 
-.stage-comparator-graph .lc .ceiling {
+.table-responsive .lc .ceiling {
   width: 188px;
 }
 
 
 
-.stage-comparator-graph .mm .blastzone {
+.table-responsive .mm .blastzone {
   width: 260px;
 }
 
-.stage-comparator-graph .mm .stage {
+.table-responsive .mm .stage {
   width: 100px;
 }
 
-.stage-comparator-graph .mm .off-stage {
+.table-responsive .mm .off-stage {
   width: 160px;
 }
 
-.stage-comparator-graph .mm .ceiling {
+.table-responsive .mm .ceiling {
   width: 190px;
 }

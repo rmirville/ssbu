@@ -122,7 +122,9 @@ h3 {
   background-color: hsl(50, 100%, 50%);
 }
 
-.navbar-dark .navbar-nav .nav-link:hover {
+.navbar-dark .navbar-nav .nav-link:hover,
+.nav-pills .nav-link.active,
+.nav-pills .nav-link.active:hover {
   text-shadow:
     /* base */
     -1px -1px 1px black,
@@ -233,19 +235,20 @@ h3 {
 .nav-pills .nav-link {
   min-height: 2.5rem;
   padding: .75rem;
+  border-radius: 6px;
   line-height: 1rem;
   font-family: 'FOT EB', sans-serif;
 }
 
 .nav-pills .nav-link {
   background-color: hsl(196, 12%, 75%);
-  color: hsl(196, 12%, 35%);
+  color: hsl(196, 12%, 45%);
 }
 
 .nav-pills .nav-link.active,
 .nav-pills .nav-link.active:hover {
   background-color: hsl(50, 100%, 50%);
-  color: hsl(196, 12%, 10%);
+  color: white;
   border: none;
   box-shadow:
     /* base */
@@ -278,11 +281,18 @@ h3 {
 }
 
 .nav-pills .nav-link:hover {
-  background-color: hsl(196, 12%, 17%);
-  color: white;
+  /*background-color: hsl(196, 12%, 17%);
+  color: white;*/
+  background-color: hsl(50, 100%, 50%);
+  color: hsl(196, 12%, 10%);
 }
 
 /* Content - Buttons */
+.btn {
+  border-radius: 6px;
+  transition: none;
+}
+
 .btn-primary {
   height: 3rem;
   padding: 1rem;
@@ -299,7 +309,9 @@ h3 {
 .btn-primary:not(:disabled):not(.disabled).active:focus,
 .btn-primary:not(:disabled):not(.disabled):active:focus {
   background-color: hsl(132, 6%, 15%);
+  background-color: hsl(50, 100%, 50%);
   color: white;
+  color: hsl(196, 12%, 10%);
 }
 
 .btn-primary,
@@ -394,9 +406,45 @@ h3 {
 .card-header h3 {
   margin-bottom: .25rem;
   padding: 1rem;
-  line-height: 1rem;
+  background-color: hsl(218, 75%, 55%);
   background-color: hsl(196, 12%, 17%);
+}
+
+.card-header h3 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  line-height: 1rem;
   color: white;
+}
+
+.card-header .btn-link {
+  width: 100%;
+  border-radius: 6px;
+  text-align: left;
+  cursor: pointer;
+  transition: none;
+}
+
+.card-header .btn-link:hover {
+  background-color: hsl(196, 12%, 17%);
+  background-color: hsl(50, 100%, 50%);
+  text-decoration: none;
+  color: white;
+  color: hsl(196, 12%, 10%);
+}
+
+.card-header .collapse-icon {
+  display: inline-block;
+  width: 1.3rem;
+  text-align: center;
+}
+
+.card-header .collapse-icon::before {
+  content: "–";
+}
+
+.card-header .collapsed .collapse-icon::before {
+  content: "+";
 }
 
 .card .card {

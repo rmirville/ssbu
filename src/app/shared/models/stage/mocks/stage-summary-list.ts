@@ -82,4 +82,4 @@ export const BAD_STAGE_EXCLUDE = [
     "gameName": "yoshi_cartboard_",
     "Type": 0
   }
-]
+];

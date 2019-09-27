@@ -3,7 +3,7 @@ import { asyncData, asyncError } from '../../../testing/async-observable-helpers
 
 import { StageLoaderService } from './stage-loader.service';
 
-import * as STAGE_LIST from '../../../shared/models/stage/mocks/stage-list';
+import * as STAGE_SUMMARY_LIST from '../../../shared/models/stage/mocks/stage-summary-list';
 import * as STAGE_DETAILS from '../../../shared/models/stage/mocks/stage-details';
 import * as STAGE_EXCLUDE from '../../../shared/models/stage/mocks/stage-exclude';
 import * as STAGES from '../../../shared/models/stage/mocks/stages';
@@ -27,13 +27,13 @@ describe('StageLoaderService', () => {
         /**/
         // console.log(`=== SPEC - LOADSTAGES() BASIC ===`);
 
-        const stageList = STAGE_LIST.PRINCESS_PEACH_CASTLE;
+        const stageSummaryList = STAGE_SUMMARY_LIST.PRINCESS_PEACH_CASTLE;
         /**/
-        // console.log('SPEC - stageList: ' + JSON.stringify(stageList));
+        // console.log('SPEC - stageSummaryList: ' + JSON.stringify(stageSummaryList));
         const stageDetails = STAGE_DETAILS.PRINCESS_PEACH_CASTLE;
         const expectedStages = STAGES.ONE_STAGE;
 
-        httpClientSpy.get.and.returnValues(asyncData(stageList), asyncData(stageDetails));
+        httpClientSpy.get.and.returnValues(asyncData(stageSummaryList), asyncData(stageDetails));
         /**/
         // console.log(`SPEC - stageDetails type: ${typeof stageDetails}`);
         /**/
@@ -60,11 +60,11 @@ describe('StageLoaderService', () => {
       function _testBadData(problem, message) {
         /**/
         console.log(`=== SPEC - CHECK STAGE EXCLUSIONS DATA TYPE (${problem}) ===`);
-        const stageList = STAGE_LIST.BAD_STAGE_EXCLUDE;
+        const stageSummaryList = STAGE_SUMMARY_LIST.BAD_STAGE_EXCLUDE;
         const stageDetails = STAGE_DETAILS.BAD_STAGE_EXCLUDE;
         const stageExclusions = STAGE_EXCLUDE.BAD_DATA[problem];
 
-        httpClientSpy.get.and.returnValues(asyncData(stageList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
+        httpClientSpy.get.and.returnValues(asyncData(stageSummaryList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
 
         expect( () => {
           const actualStages$ = service.loadStages(stageExclusions);
@@ -74,12 +74,12 @@ describe('StageLoaderService', () => {
       it(`should omit data from a stage whose name is provided`, async(() => {
         /**/
         // console.log('=== SPEC - EXCLUDE ONE STAGE ===');
-        const stageList = STAGE_LIST.TWO_STAGES;
+        const stageSummaryList = STAGE_SUMMARY_LIST.TWO_STAGES;
         const stageDetails = STAGE_DETAILS.TWO_STAGES;
         const stageExclusions = STAGE_EXCLUDE.TWO_STAGES;
         const expectedStages = STAGES.TWO_STAGES;
 
-        httpClientSpy.get.and.returnValues(asyncData(stageList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
+        httpClientSpy.get.and.returnValues(asyncData(stageSummaryList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
 
         const actualStages$ = service.loadStages(stageExclusions);
         actualStages$.subscribe((actualStages) => {
@@ -91,12 +91,12 @@ describe('StageLoaderService', () => {
       it(`should omit data from a list of stages whose names are provided`, async(() => {
         /**/
         // console.log('=== SPEC - EXCLUDE TWO STAGES ===');
-        const stageList = STAGE_LIST.FOUR_STAGES;
+        const stageSummaryList = STAGE_SUMMARY_LIST.FOUR_STAGES;
         const stageDetails = STAGE_DETAILS.FOUR_STAGES;
         const stageExclusions = STAGE_EXCLUDE.FOUR_STAGES;
         const expectedStages = STAGES.FOUR_STAGES;
 
-        httpClientSpy.get.and.returnValues(asyncData(stageList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
+        httpClientSpy.get.and.returnValues(asyncData(stageSummaryList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
 
         const actualStages$ = service.loadStages(stageExclusions);
         actualStages$.subscribe((actualStages) => {
@@ -122,12 +122,12 @@ describe('StageLoaderService', () => {
         /**/
         // console.log(`=== SPEC - CHECK STAGE LIST DATA TYPE ===`);
 
-        const stageListBad = STAGE_LIST.BAD_DATA;
+        const stageSummaryListBad = STAGE_SUMMARY_LIST.BAD_DATA;
         const stageDetails = STAGE_DETAILS.PRINCESS_PEACH_CASTLE;
         const actualStages$Arr = [];
 
-        for (let i = 0; i < stageListBad.length; i++) {
-          httpClientSpy.get.and.returnValues(asyncData(stageListBad[i]), asyncData(stageDetails));
+        for (let i = 0; i < stageSummaryListBad.length; i++) {
+          httpClientSpy.get.and.returnValues(asyncData(stageSummaryListBad[i]), asyncData(stageDetails));
 
           /**/
           // console.log('SPEC - loading stages');
@@ -151,14 +151,14 @@ describe('StageLoaderService', () => {
     });
 
     describe(`stage details data validation`, () => {
-      let stageList;
+      let stageSummaryList;
       let stageDetailsBad;
       let actualStages$;
 
       function _testBadData(problem) {
         /**/
         // console.log(`=== SPEC - CHECK STAGE DETAILS DATA TYPE (${problem}) ===`);
-        httpClientSpy.get.and.returnValues(asyncData(stageList), asyncData(stageDetailsBad[problem]));
+        httpClientSpy.get.and.returnValues(asyncData(stageSummaryList), asyncData(stageDetailsBad[problem]));
 
         actualStages$ = service.loadStages();
         /**/
@@ -178,7 +178,7 @@ describe('StageLoaderService', () => {
       }
 
       beforeEach(() => {
-        stageList = STAGE_LIST.PRINCESS_PEACH_CASTLE;
+        stageSummaryList = STAGE_SUMMARY_LIST.PRINCESS_PEACH_CASTLE;
         stageDetailsBad = STAGE_DETAILS.BAD_DATA;
       });
 

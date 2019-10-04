@@ -67,7 +67,7 @@ describe('StageLoaderService', () => {
         httpClientSpy.get.and.returnValues(asyncData(stageSummaryList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
 
         expect( () => {
-          const actualStages$ = service.loadStages(stageExclusions);
+          const actualStages$ = service.loadStages('exclude', stageExclusions);
         }).toThrow(new TypeError(message));
       }
 
@@ -81,7 +81,7 @@ describe('StageLoaderService', () => {
 
         httpClientSpy.get.and.returnValues(asyncData(stageSummaryList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
 
-        const actualStages$ = service.loadStages(stageExclusions);
+        const actualStages$ = service.loadStages('exclude', stageExclusions);
         actualStages$.subscribe((actualStages) => {
           expect(actualStages.length).toEqual(1);
           expect(actualStages).toEqual(expectedStages);
@@ -98,7 +98,7 @@ describe('StageLoaderService', () => {
 
         httpClientSpy.get.and.returnValues(asyncData(stageSummaryList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
 
-        const actualStages$ = service.loadStages(stageExclusions);
+        const actualStages$ = service.loadStages('exclude', stageExclusions);
         actualStages$.subscribe((actualStages) => {
           /**/
           // console.log(`SPEC - actualStages: ${JSON.stringify(actualStages)}`);

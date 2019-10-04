@@ -34,24 +34,28 @@ export class StageLoaderService {
   /**
    * Fetch stage data from the API
    *
-   * @param {string[]} exclusions the names of stages to omit from returned data
+   * @param {string} filter option for including or excluding stages
+   * @param {string[]} filterList list of stages to filter
    * @returns {Observable<Stage[]>}
    * @memberof StageLoaderService
    */
-  loadStages(exclusions: string[] = []): Observable<Stage[]> {
+  loadStages(filter?: string, filterList?: string[]): Observable<Stage[]> {
     /**/
     // console.log('  StageLoaderService::loadStages()');
-
+    let hasFilter: boolean = false;
     // validate exclusions
-    if ( (!Array.isArray(exclusions))
-      || (!exclusions.forEach)
-    ) { throw new TypeError('The excluded stages were not an array.'); }
+    if (filter == 'exclude') {
+      if ((!Array.isArray(filterList))
+        || (!filterList.forEach)
+      ) { throw new TypeError('The excluded stages were not an array.'); }
 
-    exclusions.forEach((exclusion) => {
-      if (typeof exclusion !== 'string') {
-        throw new TypeError('The excluded stages were not strings.');
-      }
-    });
+      filterList.forEach((filterItem) => {
+        if (typeof filterItem !== 'string') {
+          throw new TypeError('The excluded stages were not strings.');
+        }
+      });
+      hasFilter = true;
+    }
     const stages$: Observable<Stage[]> = new Observable((observer) => {
 
       const stages: Stage[] = [];
@@ -72,7 +76,12 @@ export class StageLoaderService {
         // console.log(`stages: ${JSON.stringify(stages)}`);
 
         // subscribe to _getStageDetails, providing summaries
-        const stage$: Observable<Stage> = this._getStageDetails(summaries, exclusions);
+        let stage$: Observable<Stage>;
+        if (hasFilter) {
+          stage$ = this._getStageDetails(summaries, filter, filterList);
+        } else {
+          stage$ = this._getStageDetails(summaries);
+        }
         stage$.subscribe({
           next(stage) {
             /**/
@@ -107,10 +116,12 @@ export class StageLoaderService {
    * Fetches stage dimension data for provided stages
    *
    * @param {StageSummary[]} summaries the summary stage data
+   * @param {string} filter the type of filter to use in fetching data
+   * @param {string[]} filterList the list of stages to filter
    * @returns {Observable<Stage>}
    * @memberof StageLoaderService
    */
-  _getStageDetails(summaries: StageSummary[], exclusions: string[]): Observable<Stage> {
+  _getStageDetails(summaries: StageSummary[], filter?: string, filterList?: string[]): Observable<Stage> {
     /**/
     // console.log('  StageLoaderService::_getStageDetails()');
     /**/
@@ -135,22 +146,24 @@ export class StageLoaderService {
         // console.log(`      + details$ - summary: ${JSON.stringify(summaries[i])}`);
         /**/
         // console.log('      + checking summary type');
-        let exclude = false;
+        let omit = false;
 
         if (!isStageSummary(summaries[i])) {
           /**/
           // console.log('        = throwing TypeError');
           throw new TypeError('The stage summary data fetched was not of type StageSummary[]');
         }
-        for (let j = 0; j < exclusions.length; j++) {
-          if (summaries[i].name === exclusions[j]) {
-            summaries.splice(i, 1);
-            i--;
-            exclude = true;
-            break;
+        if (filter == 'exclude') {
+          for (let j = 0; j < filterList.length; j++) {
+            if (summaries[i].name === filterList[j]) {
+              summaries.splice(i, 1);
+              i--;
+              omit = true;
+              break;
+            }
           }
         }
-        if (!exclude) {
+        if (!omit) {
           const url = API_URL + API_STAGE_DETAILS_PREFIX + summaries[i].name + API_STAGE_DETAILS_PATH;
 
           /**/

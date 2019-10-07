@@ -153,8 +153,8 @@ describe('StageLoaderService', () => {
 
         it(`should reject a stage exclusion list whose items aren't strings`, async(() => {
           _testBadData('itemsNotString', 'The list of stages to filter did not contain strings.');
-
         }));
+        
       });  
     });
 

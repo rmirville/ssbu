@@ -6,6 +6,7 @@ import { StageLoaderService } from './stage-loader.service';
 import * as STAGE_SUMMARY_LIST from '../../../shared/models/stage/mocks/stage-summary-list';
 import * as STAGE_DETAILS from '../../../shared/models/stage/mocks/stage-details';
 import * as STAGE_EXCLUDE from '../../../shared/models/stage/mocks/stage-exclude';
+import * as STAGE_INCLUDE from '../../../shared/models/stage/mocks/stage-include';
 import * as STAGES from '../../../shared/models/stage/mocks/stages';
 
 describe('StageLoaderService', () => {
@@ -55,7 +56,7 @@ describe('StageLoaderService', () => {
       }));
     });
 
-    describe(`excluding stages`, () => {
+    describe(`filtering stages`, () => {
 
       function _testBadData(problem, message) {
         /**/
@@ -71,50 +72,90 @@ describe('StageLoaderService', () => {
         }).toThrow(new TypeError(message));
       }
 
-      it(`should omit data from a stage whose name is provided`, async(() => {
-        /**/
-        // console.log('=== SPEC - EXCLUDE ONE STAGE ===');
-        const stageSummaryList = STAGE_SUMMARY_LIST.TWO_STAGES;
-        const stageDetails = STAGE_DETAILS.TWO_STAGES;
-        const stageExclusions = STAGE_EXCLUDE.TWO_STAGES;
-        const expectedStages = STAGES.TWO_STAGES;
+      describe(`including stages`, () => {
 
-        httpClientSpy.get.and.returnValues(asyncData(stageSummaryList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
-
-        const actualStages$ = service.loadStages('exclude', stageExclusions);
-        actualStages$.subscribe((actualStages) => {
-          expect(actualStages.length).toEqual(1);
-          expect(actualStages).toEqual(expectedStages);
-        });
-      }));
-
-      it(`should omit data from a list of stages whose names are provided`, async(() => {
-        /**/
-        // console.log('=== SPEC - EXCLUDE TWO STAGES ===');
-        const stageSummaryList = STAGE_SUMMARY_LIST.FOUR_STAGES;
-        const stageDetails = STAGE_DETAILS.FOUR_STAGES;
-        const stageExclusions = STAGE_EXCLUDE.FOUR_STAGES;
-        const expectedStages = STAGES.FOUR_STAGES;
-
-        httpClientSpy.get.and.returnValues(asyncData(stageSummaryList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
-
-        const actualStages$ = service.loadStages('exclude', stageExclusions);
-        actualStages$.subscribe((actualStages) => {
+        it(`should fetch only data from a stage whose name is provided when prompted`, async(() => {
           /**/
-          // console.log(`SPEC - actualStages: ${JSON.stringify(actualStages)}`);
-          expect(actualStages.length).toEqual(2);
-          expect(actualStages).toEqual(expectedStages);
-        });
-      }));
+          // console.log('=== SPEC - INCLUDE ONE STAGE ===');
+          const stageSummaryList = STAGE_SUMMARY_LIST.STAGE_INCLUDE;
+          const stageDetails = STAGE_DETAILS.ONE_STAGE_INCLUDE;
+          const stageRequests = STAGE_INCLUDE.ONE_STAGE;
+          const expectedStages = STAGES.ONE_STAGE_INCLUDE;
 
-      it(`should reject a stage exclusion list that isn't an array`, async(() => {
-        _testBadData('notArray', 'The excluded stages were not an array.');
-      }));
+          httpClientSpy.get.and.returnValues(asyncData(stageSummaryList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
 
-      it(`should reject a stage exclusion list whose items aren't strings`, async(() => {
-        _testBadData('itemsNotString', 'The excluded stages were not strings.');
+          const actualStages$ = service.loadStages('include', stageRequests);
+          actualStages$.subscribe((actualStages) => {
+            expect(actualStages.length).toEqual(1);
+            expect(actualStages).toEqual(expectedStages);
+          });
+        }));
 
-      }));
+        it(`should fetch only data from a list of provided stages when prompted`, async(() => {
+          /**/
+          // console.log('=== SPEC - INCLUDE TWO STAGES ===');
+          const stageSummaryList = STAGE_SUMMARY_LIST.STAGE_INCLUDE;
+          const stageDetails = STAGE_DETAILS.TWO_STAGES_INCLUDE;
+          const stageRequests = STAGE_INCLUDE.TWO_STAGES;
+          const expectedStages = STAGES.TWO_STAGES_INCLUDE;
+
+          httpClientSpy.get.and.returnValues(asyncData(stageSummaryList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
+
+          const actualStages$ = service.loadStages('include', stageRequests);
+          actualStages$.subscribe((actualStages) => {
+            expect(actualStages.length).toEqual(2);
+            expect(actualStages).toEqual(expectedStages);
+          });
+        }));
+
+      });
+
+      describe(`excluding stages`, () => {
+        it(`should omit data from a stage whose name is provided when prompted`, async(() => {
+          /**/
+          // console.log('=== SPEC - EXCLUDE ONE STAGE ===');
+          const stageSummaryList = STAGE_SUMMARY_LIST.TWO_STAGES_EXCLUDE;
+          const stageDetails = STAGE_DETAILS.TWO_STAGES_EXCLUDE;
+          const stageExclusions = STAGE_EXCLUDE.TWO_STAGES;
+          const expectedStages = STAGES.TWO_STAGES;
+
+          httpClientSpy.get.and.returnValues(asyncData(stageSummaryList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
+
+          const actualStages$ = service.loadStages('exclude', stageExclusions);
+          actualStages$.subscribe((actualStages) => {
+            expect(actualStages.length).toEqual(1);
+            expect(actualStages).toEqual(expectedStages);
+          });
+        }));
+
+        it(`should omit data from a list of stages whose names are provided`, async(() => {
+          /**/
+          // console.log('=== SPEC - EXCLUDE TWO STAGES ===');
+          const stageSummaryList = STAGE_SUMMARY_LIST.FOUR_STAGES_EXCLUDE;
+          const stageDetails = STAGE_DETAILS.FOUR_STAGES_EXCLUDE;
+          const stageExclusions = STAGE_EXCLUDE.FOUR_STAGES;
+          const expectedStages = STAGES.FOUR_STAGES;
+
+          httpClientSpy.get.and.returnValues(asyncData(stageSummaryList), asyncData(stageDetails[0]), asyncData(stageDetails[1]));
+
+          const actualStages$ = service.loadStages('exclude', stageExclusions);
+          actualStages$.subscribe((actualStages) => {
+            /**/
+            // console.log(`SPEC - actualStages: ${JSON.stringify(actualStages)}`);
+            expect(actualStages.length).toEqual(2);
+            expect(actualStages).toEqual(expectedStages);
+          });
+        }));
+
+        it(`should reject a stage exclusion list that isn't an array`, async(() => {
+          _testBadData('notArray', 'The list of stages to filter was not an array.');
+        }));
+
+        it(`should reject a stage exclusion list whose items aren't strings`, async(() => {
+          _testBadData('itemsNotString', 'The list of stages to filter did not contain strings.');
+
+        }));
+      });  
     });
 
     describe('stage list data validation', () => {

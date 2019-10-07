@@ -35,7 +35,7 @@ export const BAD_DATA = [
   }
 ];
 
-export const TWO_STAGES = [
+export const TWO_STAGES_EXCLUDE = [
   {
     "name": "Princess Peach's Castle",
     "gameName": "mario_castledx_",
@@ -48,7 +48,7 @@ export const TWO_STAGES = [
   }
 ];
 
-export const FOUR_STAGES = [
+export const FOUR_STAGES_EXCLUDE = [
   {
     "name": "Princess Peach's Castle",
     "gameName": "mario_castledx_",
@@ -75,6 +75,29 @@ export const BAD_STAGE_EXCLUDE = [
   {
     "name": "Great Plateau Tower",
     "gameName": "zelda_tower",
+    "Type": 0
+  },
+  {
+    "name": "Yoshi's Story",
+    "gameName": "yoshi_cartboard_",
+    "Type": 0
+  }
+];
+
+export const STAGE_INCLUDE = [
+  {
+    "name": "Princess Peach's Castle",
+    "gameName": "mario_castledx_",
+    "Type": 0
+  },
+  {
+    "name": "Great Plateau Tower",
+    "gameName": "zelda_tower",
+    "Type": 0
+  },
+  {
+    "name": "Magicant",
+    "gameName": "magicant_",
     "Type": 0
   },
   {

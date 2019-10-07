@@ -44,14 +44,14 @@ export class StageLoaderService {
     // console.log('  StageLoaderService::loadStages()');
     let hasFilter: boolean = false;
     // validate exclusions
-    if (filter == 'exclude') {
+    if (filter == 'exclude' || filter == 'include') {
       if ((!Array.isArray(filterList))
         || (!filterList.forEach)
-      ) { throw new TypeError('The excluded stages were not an array.'); }
+      ) { throw new TypeError('The list of stages to filter was not an array.'); }
 
       filterList.forEach((filterItem) => {
         if (typeof filterItem !== 'string') {
-          throw new TypeError('The excluded stages were not strings.');
+          throw new TypeError('The list of stages to filter did not contain strings.');
         }
       });
       hasFilter = true;
@@ -146,7 +146,7 @@ export class StageLoaderService {
         // console.log(`      + details$ - summary: ${JSON.stringify(summaries[i])}`);
         /**/
         // console.log('      + checking summary type');
-        let omit = false;
+        let includeStage = true;
 
         if (!isStageSummary(summaries[i])) {
           /**/
@@ -154,16 +154,17 @@ export class StageLoaderService {
           throw new TypeError('The stage summary data fetched was not of type StageSummary[]');
         }
         if (filter == 'exclude') {
-          for (let j = 0; j < filterList.length; j++) {
-            if (summaries[i].name === filterList[j]) {
-              summaries.splice(i, 1);
-              i--;
-              omit = true;
-              break;
-            }
+          if (   filterList.find( (filterItem) => filterItem == summaries[i].name )   ) {
+            summaries.splice(i, 1);
+            includeStage = false;
           }
         }
-        if (!omit) {
+        else if (filter == 'include') {
+          if (   !filterList.find( (filterItem) => filterItem == summaries[i].name )   ) {
+            includeStage = false;
+          }
+        }
+        if (includeStage) {
           const url = API_URL + API_STAGE_DETAILS_PREFIX + summaries[i].name + API_STAGE_DETAILS_PATH;
 
           /**/

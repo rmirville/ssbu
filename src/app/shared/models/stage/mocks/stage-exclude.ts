@@ -1,6 +1,6 @@
-export const TWO_STAGES = ['Magicant'];
+export const TWO_STAGES = ['magicant_'];
 
-export const FOUR_STAGES = ["Princess Peach's Castle", 'Great Plateau Tower'];
+export const FOUR_STAGES = ['mario_castledx_', 'zelda_tower'];
 
 export const BAD_DATA = {
   notArray: { foo: "bar" },

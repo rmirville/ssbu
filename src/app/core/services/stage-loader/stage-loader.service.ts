@@ -154,13 +154,13 @@ export class StageLoaderService {
           throw new TypeError('The stage summary data fetched was not of type StageSummary[]');
         }
         if (filter == 'exclude') {
-          if (   filterList.find( (filterItem) => filterItem == summaries[i].name )   ) {
+          if (   filterList.find( (filterItem) => filterItem == summaries[i].gameName )   ) {
             summaries.splice(i, 1);
             includeStage = false;
           }
         }
         else if (filter == 'include') {
-          if (   !filterList.find( (filterItem) => filterItem == summaries[i].name )   ) {
+          if (   !filterList.find( (filterItem) => filterItem == summaries[i].gameName )   ) {
             includeStage = false;
           }
         }

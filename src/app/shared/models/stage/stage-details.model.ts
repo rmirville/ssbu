@@ -33,14 +33,25 @@ export function isStageDetails(phase): phase is StageDetails {
     || (typeof phase.name !== 'string')
     || (typeof phase.lvd !== 'string')
     || (!Array.isArray(phase.collisions))
-  ) { return false; }
+  ) { 
+    /**/
+    // console.log(`    * phase.stage type: ${typeof phase.stage}`);
+    // console.log(`    * phase.stage: ${JSON.stringify(phase.stage)}`);
+    // console.log(`    * phase.name type: ${typeof phase.name}`);
+    // console.log(`    * phase.name: ${JSON.stringify(phase.name)}`);
+    // console.log(`    * phase.lvd type: ${typeof phase.lvd}`);
+    // console.log(`    * phase.lvd: ${JSON.stringify(phase.lvd)}`);
+    return false;
+  }
   /**/
   // console.log(`    * phase.collisions type: ${typeof phase.collisions}`);
-  /**/
   // console.log(`    * phase.collisions: ${JSON.stringify(phase.collisions)}`);
   let isPiece = true;
   phase.collisions.forEach((piece) => {
     if (!isStagePiece(piece)) {
+      /**/
+      // console.log(`    * piece type: ${typeof piece}`);
+      // console.log(`    * piece: ${JSON.stringify(piece)}`);
       isPiece = false;
     }
   });

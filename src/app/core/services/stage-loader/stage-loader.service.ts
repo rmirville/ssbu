@@ -6,10 +6,10 @@ import { StageSummary, isStageSummary } from '../../../shared/models/stage/stage
 import { StageDetails, isStageDetails } from '../../../shared/models/stage/stage-details.model';
 import { Stage } from '../../../shared/models/stage/stage.model';
 
-const API_URL = 'https://rubendal.github.io/ssbu/data/patch/3.1.0';
+const API_URL = 'https://rubendal.github.io/ssbu/data/patch/4.0.0';
 const API_STAGE_LIST_PATH = '/stages.json';
 const API_STAGE_DETAILS_PATH = '/data.json';
-const API_STAGE_DETAILS_PREFIX = '/stages/';
+const API_STAGE_DETAILS_PREFIX = '/stage/';
 
 /**
  * Service class providing all Super Smash Bros. Ultimate stage data from Rubendal's API
@@ -87,19 +87,20 @@ export class StageLoaderService {
             /**/
             // console.log(`      + stagesHttp$.subscribe - stage$ emitted: ${JSON.stringify(stage)}`);
             /**/
-            // console.log('      + stagesHttp$.subscribe - stage$ emitted');
+            console.log('      + stagesHttp$.subscribe - stage$ emitted');
             stages.push(stage);
           },
 
           error(e) {
             /**/
-            // console.log('      + stagesHttp$.subscribe - error occurred');
+            console.log('      + stagesHttp$.subscribe - error occurred');
             observer.error(e);
           },
           complete() {
             /**/
-            // console.log('      + stagesHttp$.subscribe - stage$ complete');
+            console.log('      + stagesHttp$.subscribe - stage$ complete');
             observer.next(stages);
+            observer.complete();
           }
         });
       });
@@ -141,7 +142,7 @@ export class StageLoaderService {
       // for each summary in summaries
       for (let i = 0; i < summaries.length; i++) {
         /**/
-        // console.log(`      + index [${i}]:`);
+        console.log(`      + index [${i}]:`);
         /**/
         // console.log(`      + details$ - summary: ${JSON.stringify(summaries[i])}`);
         /**/
@@ -168,7 +169,7 @@ export class StageLoaderService {
           const url = API_URL + API_STAGE_DETAILS_PREFIX + summaries[i].name + API_STAGE_DETAILS_PATH;
 
           /**/
-          // console.log(`      + retrieving details from url: ${url}`);
+          console.log(`      + retrieving details from url: ${url}`);
           // retrieve json
           const stageDetailsHttp$ = this.http.get<StageDetails[]>(url);
           /**/
@@ -199,12 +200,10 @@ export class StageLoaderService {
               details
             };
             observer.next(stages[i]);
-            if (i === summaries.length - 1) {
-              observer.complete();
-            }
           });
         }
       }
+      observer.complete();
 
     });
 

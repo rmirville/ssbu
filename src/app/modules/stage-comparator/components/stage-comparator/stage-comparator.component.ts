@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { Observable } from 'rxjs';
+
 import { Stage } from '../../../../shared/models/stage/stage.model';
 
 @Component({
@@ -22,11 +24,14 @@ export class StageComparatorComponent implements OnInit {
   ngOnInit() {
     /**/
     // console.log('StageComparatorComponent::ngOnInit()');
-    this.route.data
-    .subscribe((data: { stages: Stage[] }) => {
-      this.stages = data.stages;
+    this.route.data.subscribe((data: { stages: Stage[] }) => {
       /**/
-      // console.log(`stages: ${data.stages}`);
+      // console.log(`  * data: ${JSON.stringify(data)}`);
+      // console.log(`  * data.stages: ${JSON.stringify(data.stages)}`);
+      // console.log(`  * data.stages type: ${typeof data.stages}`);
+      this.stages = [...data.stages];
+      /**/
+      // console.log(`  * this.stages: ${JSON.stringify(this.stages)}`);
     });
   }
 

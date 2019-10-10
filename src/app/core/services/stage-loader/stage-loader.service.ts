@@ -87,18 +87,18 @@ export class StageLoaderService {
             /**/
             // console.log(`      + stagesHttp$.subscribe - stage$ emitted: ${JSON.stringify(stage)}`);
             /**/
-            console.log('      + stagesHttp$.subscribe - stage$ emitted');
+            // console.log('      + stagesHttp$.subscribe - stage$ emitted');
             stages.push(stage);
           },
 
           error(e) {
             /**/
-            console.log('      + stagesHttp$.subscribe - error occurred');
+            // console.log('      + stagesHttp$.subscribe - error occurred');
             observer.error(e);
           },
           complete() {
             /**/
-            console.log('      + stagesHttp$.subscribe - stage$ complete');
+            // console.log('      + stagesHttp$.subscribe - stage$ complete');
             observer.next(stages);
             observer.complete();
           }
@@ -131,79 +131,94 @@ export class StageLoaderService {
       /**/
       // console.log('    * details$ executing');
       const stages: Stage[] = [];
+      let filteredSummaries: StageSummary[];
 
       /**/
       // console.log(`    * summaries isArray: ${Array.isArray(summaries)}`);
       if (!Array.isArray(summaries)) {
         throw new TypeError('The stage summary data fetched was not an array');
       }
+
+      /**/
+      /*if (filter) {
+        // console.log(`    * unfiltered summaries: ${JSON.stringify(summaries)}`);
+        // console.log(`    * filterList: ${JSON.stringify(filterList)}`);
+        // console.log(`    * filter type: ${filter}`);
+      }*/
+
+      if (filter == 'exclude') {
+        filteredSummaries = summaries.filter( (summary) => {
+          return !filterList.find( (filterItem) => filterItem == summary.gameName );
+        });
+      }
+
+      else if (filter == 'include') {
+        filteredSummaries = summaries.filter( (summary) => {
+          return filterList.find( (filterItem) => filterItem == summary.gameName );
+        });
+      }
+
+      else {
+        filteredSummaries = summaries;
+      }
+      /**/
+      // console.log(`    * filtered summaries: ${JSON.stringify(filteredSummaries)}`);
+
       /**/
       // console.log(`      + summaries.length: ${summaries.length}`);
       // for each summary in summaries
-      for (let i = 0; i < summaries.length; i++) {
+      for (let i = 0; i < filteredSummaries.length; i++) {
         /**/
-        console.log(`      + index [${i}]:`);
+        // console.log(`      + index [${i}]:`);
         /**/
         // console.log(`      + details$ - summary: ${JSON.stringify(summaries[i])}`);
         /**/
         // console.log('      + checking summary type');
-        let includeStage = true;
 
-        if (!isStageSummary(summaries[i])) {
+        if (!isStageSummary(filteredSummaries[i])) {
           /**/
           // console.log('        = throwing TypeError');
           throw new TypeError('The stage summary data fetched was not of type StageSummary[]');
         }
-        if (filter == 'exclude') {
-          if (   filterList.find( (filterItem) => filterItem == summaries[i].gameName )   ) {
-            summaries.splice(i, 1);
-            includeStage = false;
-          }
-        }
-        else if (filter == 'include') {
-          if (   !filterList.find( (filterItem) => filterItem == summaries[i].gameName )   ) {
-            includeStage = false;
-          }
-        }
-        if (includeStage) {
-          const url = API_URL + API_STAGE_DETAILS_PREFIX + summaries[i].name + API_STAGE_DETAILS_PATH;
 
+        const url = API_URL + API_STAGE_DETAILS_PREFIX + filteredSummaries[i].name + API_STAGE_DETAILS_PATH;
+
+        /**/
+        // console.log(`      + retrieving details from url: ${url}`);
+        // retrieve json
+        const stageDetailsHttp$ = this.http.get<StageDetails[]>(url);
+        /**/
+        // console.log('      + stageDetailsHttp$: ' + stageDetailsHttp$);
+        stageDetailsHttp$.subscribe((details) => {
           /**/
-          console.log(`      + retrieving details from url: ${url}`);
-          // retrieve json
-          const stageDetailsHttp$ = this.http.get<StageDetails[]>(url);
+          // console.log(`      + details$ - retrieved details: ${JSON.stringify(details)}`);
           /**/
-          // console.log('      + stageDetailsHttp$: ' + stageDetailsHttp$);
-          stageDetailsHttp$.subscribe((details) => {
+          // console.log('      + details$ - retrieved details');
+          if (!Array.isArray(details)) {
             /**/
-            // console.log(`      + details$ - retrieved details: ${JSON.stringify(details)}`);
-            /**/
-            // console.log('      + details$ - retrieved details');
-            if (!Array.isArray(details)) {
+            // console.log('      + throwing array TypeError');
+            observer.error(new TypeError(`The ${filteredSummaries[i].name} stage details data fetched was not an array`));
+            return;
+          }
+          details.forEach((phase) => {
+            if (!isStageDetails(phase)) {
               /**/
-              // console.log('      + throwing array TypeError');
-              observer.error(new TypeError(`The ${summaries[i].name} stage details data fetched was not an array`));
+              // console.log('      + throwing property TypeError');
+              observer.error(new TypeError(`The ${filteredSummaries[i].name} stage details data fetched was not of type StageDetails[]`));
               return;
             }
-            details.forEach((phase) => {
-              if (!isStageDetails(phase)) {
-                /**/
-                // console.log('      + throwing property TypeError');
-                observer.error(new TypeError(`The ${summaries[i].name} stage details data fetched was not of type StageDetails[]`));
-                return;
-              }
-            });
-            stages[i] = {
-              name: summaries[i].name,
-              gameName: summaries[i].gameName,
-              Type: summaries[i].Type,
-              details
-            };
-            observer.next(stages[i]);
           });
-        }
+          stages[i] = {
+            name: filteredSummaries[i].name,
+            gameName: filteredSummaries[i].gameName,
+            Type: filteredSummaries[i].Type,
+            details
+          };
+          observer.next(stages[i]);
+          if (i == filteredSummaries.length - 1) { observer.complete(); }
+        });
       }
-      observer.complete();
+      //observer.complete();
 
     });
 

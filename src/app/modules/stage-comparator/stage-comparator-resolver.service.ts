@@ -5,7 +5,8 @@ import {
   ActivatedRouteSnapshot
 } from '@angular/router';
 
-import { Observable } from 'rxjs';
+import { Observable, of, pipe } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { StageLoaderService } from '../../core/services/stage-loader/stage-loader.service';
 import { Stage } from '../../shared/models/stage/stage.model';
@@ -75,7 +76,8 @@ export class StageComparatorResolverService implements Resolve<Stage[]> {
     // console.log('StageComparatorResolverService::resolve()');
     const stages$ = this.sls.loadStages('include', COMPARATOR_STAGES);
     /**/
-    // console.log('  * returning stages$');
+    // console.log(`  * stages$ type: ${typeof stages$}`);
+    // console.log(`  * stages$: ${JSON.stringify(stages$)}`);
     return stages$;
   }
 }

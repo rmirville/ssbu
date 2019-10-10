@@ -5,8 +5,7 @@ import {
   ActivatedRouteSnapshot
 } from '@angular/router';
 
-import { Observable, of, pipe } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 import { StageLoaderService } from '../../core/services/stage-loader/stage-loader.service';
 import { Stage } from '../../shared/models/stage/stage.model';

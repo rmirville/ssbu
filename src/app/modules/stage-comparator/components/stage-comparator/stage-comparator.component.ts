@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Observable } from 'rxjs';
-
 import { Stage } from '../../../../shared/models/stage/stage.model';
 
 @Component({
@@ -17,8 +15,6 @@ export class StageComparatorComponent implements OnInit {
   constructor(
     private route: ActivatedRoute
   ) {
-    /**/
-    // console.log('StageComparatorComponent::constructor()');
    }
 
   ngOnInit() {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Stage } from '../../../../shared/models/stage/stage.model';
+import { Stage } from '../../../../shared/stage/models/stage.model';
 
 @Component({
   selector: 'ssbu-stage-comparator',

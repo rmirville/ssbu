@@ -9,8 +9,8 @@ import {
 } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { isStage } from '../../shared/models/stage/stage.model';
-import { PRINCESS_PEACH_CASTLE, STAGES_ONE, STAGES_TWO } from '../../shared/models/stage/mocks/stages';
+import { isStage } from '../../shared/stage/models/stage.model';
+import { PRINCESS_PEACH_CASTLE, STAGES_ONE, STAGES_TWO } from '../../shared/stage/models/mocks/stages';
 import { DummyComponent } from '../../shared/mocks/dummy.component';
 import { StageComparatorResolverService } from './stage-comparator-resolver.service';
 

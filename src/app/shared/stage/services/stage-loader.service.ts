@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { StageSummary, isStageSummary } from '../../../shared/models/stage/stage-summary.model';
-import { StageDetails, isStageDetails } from '../../../shared/models/stage/stage-details.model';
-import { Stage } from '../../../shared/models/stage/stage.model';
+import { StageSummary, isStageSummary } from '../models/stage-summary.model';
+import { StageDetails, isStageDetails } from '../models/stage-details.model';
+import { Stage } from '../models/stage.model';
 
 const API_URL = 'https://rubendal.github.io/ssbu/data/patch/4.0.0';
 const API_STAGE_LIST_PATH = '/stages.json';

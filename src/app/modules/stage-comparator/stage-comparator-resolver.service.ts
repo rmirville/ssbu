@@ -7,8 +7,8 @@ import {
 
 import { Observable } from 'rxjs';
 
-import { StageLoaderService } from '../../core/services/stage-loader/stage-loader.service';
-import { Stage } from '../../shared/models/stage/stage.model';
+import { StageLoaderService } from '../../shared/stage/services/stage-loader.service';
+import { Stage } from '../../shared/stage/models/stage.model';
 
 const COMPARATOR_STAGES = [
   "village2_",
@@ -70,7 +70,7 @@ export class StageComparatorResolverService implements Resolve<Stage[]> {
 
   constructor(private sls: StageLoaderService, private router: Router) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Stage[]> | Observable<never> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Stage[]> {
     /**/
     // console.log('StageComparatorResolverService::resolve()');
     const stages$ = this.sls.loadStages('include', COMPARATOR_STAGES);

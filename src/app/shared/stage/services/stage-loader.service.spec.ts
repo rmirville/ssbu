@@ -3,11 +3,11 @@ import { asyncData, asyncError } from '../../../testing/async-observable-helpers
 
 import { StageLoaderService } from './stage-loader.service';
 
-import * as STAGE_SUMMARY_LIST from '../../../shared/models/stage/mocks/stage-summary-list';
-import * as STAGE_DETAILS from '../../../shared/models/stage/mocks/stage-details';
-import * as STAGE_EXCLUDE from '../../../shared/models/stage/mocks/stage-exclude';
-import * as STAGE_INCLUDE from '../../../shared/models/stage/mocks/stage-include';
-import * as STAGES from '../../../shared/models/stage/mocks/stages';
+import * as STAGE_SUMMARY_LIST from '../models/mocks/stage-summary-list';
+import * as STAGE_DETAILS from '../models/mocks/stage-details';
+import * as STAGE_EXCLUDE from '../models/mocks/stage-exclude';
+import * as STAGE_INCLUDE from '../models/mocks/stage-include';
+import * as STAGES from '../models/mocks/stages';
 
 describe('StageLoaderService', () => {
   let service: StageLoaderService;

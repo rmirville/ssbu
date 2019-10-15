@@ -10,6 +10,7 @@ import { StagePiece, isStagePiece } from './stage-piece.model';
 export interface StageDetails {
   stage: string;
   name: string;
+  lvd: string;
   collisions: StagePiece[];
   platforms: StagePiece[];
   blast_zones: number[];

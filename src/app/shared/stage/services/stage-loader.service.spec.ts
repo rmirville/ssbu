@@ -60,7 +60,7 @@ describe('StageLoaderService', () => {
 
       function _testBadData(problem, message) {
         /**/
-        console.log(`=== SPEC - CHECK STAGE EXCLUSIONS DATA TYPE (${problem}) ===`);
+        // console.log(`=== SPEC - CHECK STAGE EXCLUSIONS DATA TYPE (${problem}) ===`);
         const stageSummaryList = STAGE_SUMMARY_LIST.BAD_STAGE_EXCLUDE;
         const stageDetails = STAGE_DETAILS.BAD_STAGE_EXCLUDE;
         const stageExclusions = STAGE_EXCLUDE.BAD_DATA[problem];

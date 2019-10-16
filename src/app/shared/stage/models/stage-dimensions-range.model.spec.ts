@@ -31,7 +31,7 @@ describe('StageDimensionsRangeModel', () => {
 
       it('should reject a range with a negative range', () => {
         _testBadData('rangeNegative');
-      })
+      });
 
       it('should reject a range where the min is greater than the max', () => {
         _testBadData('minGreaterThanMax');

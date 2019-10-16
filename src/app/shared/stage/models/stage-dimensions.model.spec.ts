@@ -7,7 +7,7 @@ describe('StageDimensionsModel', () => {
 
     function _testBadData(problem) {
       /**/
-      // console.log(`=== SPEC - CHECK STAGE DETAILS DATA TYPE (${problem}) ===`);
+      // console.log(`=== SPEC - CHECK STAGE DIMENSIONS DATA TYPE (${problem}) ===`);
       // console.log(`BAD_DATA[${problem}]: ${JSON.stringify(STAGE_DIMENSIONS.BAD_DATA[problem])}`);
       expect(isStageDimensions(STAGE_DIMENSIONS.BAD_DATA[problem])).toBe(false);
     }

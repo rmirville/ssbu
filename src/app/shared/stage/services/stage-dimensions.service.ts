@@ -29,14 +29,19 @@ export class StageDimensionsService {
     let stageDimensions = stages.map((stage) => {
       let name = stage.name;
       let gameName = stage.gameName;
+      // most stages have hazardless lvd's ending in "00", but many also don't (e.g. battlefield_common),
+      // so we use index 0 instead
       let phase = stage.details[0];
-      let piece = phase.collisions.find((piece) => piece.name == 'COL_00_Floor01');
+
       let blastzones = phase.blast_zones;
       let blastzoneWidth = (blastzones[1] - blastzones[0]) / 2;
+
+      let piece = phase.collisions.find((piece) => piece.name == 'COL_00_Floor01');
       let leftIndex = piece.materials.findIndex((material) => material.leftLedge === true);
       let rightIndex = piece.materials.findIndex((material) => material.rightLedge === true) + 1;
       let leftLedgePosition = piece.vertex[leftIndex];
       let rightLedgePosition = piece.vertex[rightIndex];
+
       let stageLength = (rightLedgePosition[0] - leftLedgePosition[0]) / 2;
       let offStageDistance = blastzoneWidth - stageLength;
       let ceilingHeight = blastzones[2] - ((rightLedgePosition[1] + leftLedgePosition[1]) / 2);

@@ -31,5 +31,11 @@ describe('StageFormatterService', () => {
       });
     }));
 
+    // TODO: data validation
+
   });
+
+  // TODO: getDimensionsHalf(stages: Stage[])
+
+  // TODO: getDimensionsHalf(stages: Stage[], groups: number)
 });

@@ -25,6 +25,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_DEBUG,
     autoWatch: true,
+    usePolling: true,
     browsers: ['Chrome'],
     singleRun: false,
     restartOnFileChange: true,

@@ -25,6 +25,14 @@ describe('StageDimensionsRangeModel', () => {
         _testBadData('maxNotNumber');
       });
 
+      it('should reject a range with a non-numerical range', () => {
+        _testBadData('rangeNotNumber');
+      });
+
+      it('should reject a range with a negative range', () => {
+        _testBadData('rangeNegative');
+      })
+
       it('should reject a range where the min is greater than the max', () => {
         _testBadData('minGreaterThanMax');
       });

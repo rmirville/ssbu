@@ -7,6 +7,7 @@
 export interface StageDimensionsRange {
   min: number;
   max: number;
+  range: number;
 }
 
 /**
@@ -19,7 +20,10 @@ export interface StageDimensionsRange {
 export function isStageDimensionsRange(range): range is StageDimensionsRange {
   if ((typeof range.min !== 'number')
     || (typeof range.max !== 'number')
+    || (typeof range.range !== 'number')
   ) { return false; }
-  if (range.min > range.max) { return false; }
+  if ((range.min > range.max)
+    || (range.range < 0)
+  ) { return false; }
   return true;
 }

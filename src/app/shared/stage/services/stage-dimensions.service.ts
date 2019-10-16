@@ -23,9 +23,9 @@ export class StageDimensionsService {
   constructor() {
   }
 
-  formatFullNumber(stages: Stage[]): Observable<Object[]> {
+  getDimensionsFull(stages: Stage[]): Observable<Object[]> {
     /**/
-    console.log('StageDimensionsService::formatFullNumber()');
+    console.log('StageDimensionsService::getDimensionsFull()');
     let stageDimensions = stages.map((stage) => {
       let name = stage.name;
       let gameName = stage.gameName;

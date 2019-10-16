@@ -1,6 +1,6 @@
-import { TestBed, async, inject, fakeAsync, tick } from '@angular/core/testing';
+import { fakeAsync } from '@angular/core/testing';
 
-import { Stage, isStage } from './stage.model';
+import { isStage } from './stage.model';
 
 import { PRINCESS_PEACH_CASTLE, BAD_DATA } from './mocks/stages';
 

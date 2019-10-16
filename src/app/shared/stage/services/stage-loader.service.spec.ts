@@ -1,5 +1,5 @@
-import { async, fakeAsync, tick } from '@angular/core/testing';
-import { asyncData, asyncError } from '../../../testing/async-observable-helpers';
+import { async, fakeAsync } from '@angular/core/testing';
+import { asyncData } from '../../../testing/async-observable-helpers';
 
 import { StageLoaderService } from './stage-loader.service';
 

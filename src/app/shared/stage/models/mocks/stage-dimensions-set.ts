@@ -107,3 +107,29 @@ export const BAD_DATA = {
     }
   },
 };
+
+export const TWO_STAGE_SET = {
+  dimensions: [TOWN, SMASHVILLE],
+  ranges: {
+    blastzoneWidth: {
+      min: 229.5,
+      max: 230,
+      range: 0.5
+    },
+    stageLength: {
+      min: 69.6488304,
+      max: 82.5,
+      range: 12.8511696
+    },
+    offStageDistance: {
+      min: 147.5,
+      max: 159.8511696,
+      range: 12.3511696
+    },
+    ceilingHeight: {
+      min: 189.90001145,
+      max: 195,
+      range: 5.09998855
+    }
+  }
+};

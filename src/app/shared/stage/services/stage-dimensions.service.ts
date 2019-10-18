@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { Stage } from '../models/stage.model';
+import { StageDimensions } from '../models/stage-dimensions.model';
+import { StageDimensionsSet } from '../models/stage-dimensions-set.model';
+import { StageDimensionsRange } from '../models/stage-dimensions-range.model';
 
 
 /**
@@ -23,10 +26,10 @@ export class StageDimensionsService {
   constructor() {
   }
 
-  getDimensionsFull(stages: Stage[]): Observable<Object[]> {
+  getDimensionsFull(stages: Stage[]): Observable<StageDimensionsSet> {
     /**/
-    console.log('StageDimensionsService::getDimensionsFull()');
-    let stageDimensions = stages.map((stage) => {
+    // console.log('StageDimensionsService::getDimensionsFull()');
+    let stageDimensions: StageDimensions[] = stages.map((stage) => {
       let name = stage.name;
       let gameName = stage.gameName;
       // most stages have hazardless lvd's ending in "00", but many also don't (e.g. battlefield_common),
@@ -78,7 +81,36 @@ export class StageDimensionsService {
         ceilingHeight: ceilingHeight
       };
     });
-    return of(stageDimensions);
+    const stageDimensionsRanges = this._getRanges(stageDimensions);
+    /**/
+    // console.log(`  * ranges: ${stageDimensionsRanges}`);
+    return of({dimensions: stageDimensions, ranges: stageDimensionsRanges});
   }
 
+  _getRange(values: number[]): StageDimensionsRange {
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+    const range = max - min;
+    return {
+      min: min,
+      max: max,
+      range: range
+    };
+  }
+
+  _getRanges(dimensionsArr: StageDimensions[]) {
+    /**/
+    // console.log('StageDimensionsService::_getRanges()');
+    const blastzoneWidths = dimensionsArr.map((dimensionsArr) => dimensionsArr.blastzoneWidth);
+    const stageLengths = dimensionsArr.map((dimensionsArr) => dimensionsArr.stageLength);
+    const offStageDistances = dimensionsArr.map((dimensionsArr) => dimensionsArr.offStageDistance);
+    const ceilingHeights = dimensionsArr.map((dimensionsArr) => dimensionsArr.ceilingHeight);
+
+    return {
+      blastzoneWidth: this._getRange(blastzoneWidths),
+      stageLength: this._getRange(stageLengths),
+      offStageDistance: this._getRange(offStageDistances),
+      ceilingHeight: this._getRange(ceilingHeights)
+    };
+  }
 }

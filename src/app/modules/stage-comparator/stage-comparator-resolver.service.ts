@@ -8,7 +8,9 @@ import {
 import { Observable } from 'rxjs';
 
 import { StageLoaderService } from '../../shared/stage/services/stage-loader.service';
+import { StageDimensionsService } from '../../shared/stage/services/stage-dimensions.service';
 import { Stage } from '../../shared/stage/models/stage.model';
+import { StageDimensionsSet } from '../../shared/stage/models/stage-dimensions-set.model';
 
 const COMPARATOR_STAGES = [
   "village2_",
@@ -66,17 +68,51 @@ const COMPARATOR_STAGES = [
 @Injectable({
   providedIn: 'root'
 })
-export class StageComparatorResolverService implements Resolve<Stage[]> {
+export class StageComparatorResolverService implements Resolve<Object> {
 
-  constructor(private sls: StageLoaderService, private router: Router) { }
+  constructor(private sls: StageLoaderService, private sds: StageDimensionsService, private router: Router) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Stage[]> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Object> {
     /**/
-    // console.log('StageComparatorResolverService::resolve()');
-    const stages$ = this.sls.loadStages('include', COMPARATOR_STAGES);
+    // console..log('StageComparatorResolverService::resolve()');
+    const stageData$ = new Observable((observer) => {
+      /**/
+      // console..log(`  * observer at start: ${JSON.stringify(Object.keys(observer))}`);
+      let stageData: {
+        stages: Stage[],
+        dimensionsFull: StageDimensionsSet
+      } = {stages: null, dimensionsFull: null};
+
+      const stages$ = this.sls.loadStages('include', COMPARATOR_STAGES);
+      stages$.subscribe((stages) => {
+        /**/
+        // console.log('  * received stages');
+        // console..log(`  * stages.length: ${JSON.stringify(stages.length)}`);
+        // console.log(`  * stageData: ${JSON.stringify(stageData)}`);
+        stageData.stages = stages;
+        // console.log(`  * stageData: ${JSON.stringify(stageData)}`);
+
+        /**/
+        // console..log('  * calling getDimensionsFull()');
+        const dimensionsFull$ = this.sds.getDimensionsFull(stages);
+        dimensionsFull$.subscribe((dimensionsFull) => {
+          /**/
+          // console..log('  * received dimensionsFull');
+          // console..log(`  * dimensionsFull: ${JSON.stringify(dimensionsFull)}`);
+          stageData.dimensionsFull = dimensionsFull;
+          // console.log(`  * stageData before sending: ${JSON.stringify(stageData)}`);
+          // console.log(`  * observer right before sending: ${JSON.stringify(Object.keys(observer))}`);
+          observer.next(stageData);
+          observer.complete();
+        });
+      });
+    });
+
+    return stageData$;
+    // const stages$ = this.sls.loadStages('include', COMPARATOR_STAGES);
     /**/
     // console.log(`  * stages$ type: ${typeof stages$}`);
     // console.log(`  * stages$: ${JSON.stringify(stages$)}`);
-    return stages$;
+    // return stages$;
   }
 }

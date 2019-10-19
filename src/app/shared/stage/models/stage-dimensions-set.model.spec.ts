@@ -8,7 +8,7 @@ describe('StageDimensionsSetModel', () => {
       /**/
       // console.log(`=== SPEC - CHECK STAGE DIMENSIONS RANGE DATA TYPE (${problem}) ===`);
       // console.log(`BAD_DATA[${problem}]: ${JSON.stringify(STAGE_DIMENSIONS_SETS.BAD_DATA[problem])}`);
-      console.log(`BAD_DATA[${problem} ranges]: ${JSON.stringify(STAGE_DIMENSIONS_SETS.BAD_DATA[problem].ranges)}`);
+      // console.log(`BAD_DATA[${problem}].ranges: ${JSON.stringify(STAGE_DIMENSIONS_SETS.BAD_DATA[problem].ranges)}`);
       expect(isStageDimensionsSet(STAGE_DIMENSIONS_SETS.BAD_DATA[problem])).toBe(false);
     }
 

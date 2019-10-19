@@ -18,6 +18,8 @@ export interface StageDimensionsSet {
 }
 
 export function isStageDimensionsSet(set): set is StageDimensionsSet {
+  /**/
+  // console.log('StageDimensionsSetModel::isStageDimensionsSet()');
   if (( !Array.isArray(set.dimensions) )
     || (!set.dimensions.forEach)) {
       /**/
@@ -29,10 +31,13 @@ export function isStageDimensionsSet(set): set is StageDimensionsSet {
 
   let hasStageDimensions = true;
   set.dimensions.forEach((stageDimensions) => {
+    /**/
+    // console.log(`  * stageDimensions: ${JSON.stringify(stageDimensions)}`);
     if (!isStageDimensions(stageDimensions)) {
       /**/
       // console.log(`  * set.dimensions.stageDimensions is not stage dimensions`);
-      hasStageDimensions = false; }
+      hasStageDimensions = false;
+    }
   });
   if (!hasStageDimensions) { 
     /**/

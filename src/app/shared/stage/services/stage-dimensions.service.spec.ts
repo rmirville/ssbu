@@ -8,7 +8,7 @@ import { StageDimensionsRange } from '../models/stage-dimensions-range.model';
 import * as STAGES from '../models/mocks/stage-dimensions-raw';
 import * as STAGE_DIMENSIONS_SET from '../models/mocks/stage-dimensions-set';
 
-describe('StageFormatterService', () => {
+describe('StageDimensionsService', () => {
   let service: StageDimensionsService;
 
   describe('getDimensionsFull()', () => {
@@ -28,8 +28,8 @@ describe('StageFormatterService', () => {
       const expectedDimensionsSet = STAGE_DIMENSIONS_SET.TWO_STAGE_SET;
       const expectedDimensions = expectedDimensionsSet.dimensions;
       const expectedRanges = expectedDimensionsSet.ranges;
-      let formattedDimensions$ = service.getDimensionsFull(stages);
-      formattedDimensions$.subscribe((actualDimensionsSet) => {
+      let actualDimensionsSet$ = service.getDimensionsFull(stages);
+      actualDimensionsSet$.subscribe((actualDimensionsSet) => {
 
         expect(isStageDimensionsSet(actualDimensionsSet)).toBe(true);
         

@@ -9,12 +9,13 @@ import {
 } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { isStage } from '../../shared/stage/models/stage.model';
-import { isStageDimensionsSet } from '../../shared/stage/models/stage-dimensions-set.model';
+import { Stage, isStage } from '../../shared/stage/models/stage.model';
+import { StageDimensionsRange } from '../../shared/stage/models/stage-dimensions-range.model';
+import { StageDimensionsSet, isStageDimensionsSet } from '../../shared/stage/models/stage-dimensions-set.model';
 
 import { StageComparatorResolverService } from './stage-comparator-resolver.service';
 
-import { STAGES_TWO } from '../../shared/stage/models/mocks/stages';
+import { STAGES_ONE, STAGES_TWO, STAGES_THREE } from '../../shared/stage/models/mocks/stages';
 import * as STAGE_DIMENSIONS_SETS from '../../shared/stage/models/mocks/stage-dimensions-set';
 import { DummyComponent } from '../../shared/mocks/dummy.component';
 
@@ -63,10 +64,54 @@ describe('StageComparatorResolverService', () => {
       state = jasmine.createSpyObj('RouterStateSnapshot', ['']);
     });
 
+    function _testRange(actualRange: StageDimensionsRange, expectedRange: StageDimensionsRange) {
+      expect(actualRange['min']).toBeCloseTo(expectedRange['min'], 6);
+      expect(actualRange['max']).toBeCloseTo(expectedRange['max'], 6);
+      expect(actualRange['range']).toBeCloseTo(expectedRange['range'], 6);
+    }
+
+    function _compareStageData(expectedStages: Stage[], expectedDimensionsSet: StageDimensionsSet) {
+
+      const expectedDimensions = expectedDimensionsSet.dimensions;
+      const expectedRanges = expectedDimensionsSet.ranges;
+
+      stageLoaderSpy.loadStages.and.returnValue(asyncData(expectedStages));
+      stageDimensionsSpy.getDimensionsFull.and.returnValue(asyncData(expectedDimensionsSet));
+
+      const actualStageData$ = resolverService.resolve(route, state);
+      actualStageData$.subscribe((actualStageData) => {
+        const actualStages = actualStageData['stages'];
+        const actualDimensionsSet = actualStageData['dimensionsFull'];
+
+        expect(stageLoaderSpy.loadStages).toHaveBeenCalledTimes(1);
+        expect(stageDimensionsSpy.getDimensionsFull).toHaveBeenCalledTimes(1);
+        expect(actualStages['length']).toEqual(expectedStages.length);
+        expect(actualStages).toEqual(expectedStages);
+
+        const actualDimensions = actualDimensionsSet['dimensions'];
+        expect(actualDimensions.length).toEqual(expectedDimensions.length);
+        for (let i = 0; i < 2; i++) {
+          expect(actualDimensions[i]['name']).toEqual(expectedDimensions[i]['name']);
+          expect(actualDimensions[i]['gameName']).toEqual(expectedDimensions[i]['gameName']);
+          expect(actualDimensions[i]['blastzoneWidth']).toBeCloseTo(expectedDimensions[i]['blastzoneWidth'], 6);
+          expect(actualDimensions[i]['stageLength']).toBeCloseTo(expectedDimensions[i]['stageLength'], 6);
+          expect(actualDimensions[i]['offStageDistance']).toBeCloseTo(expectedDimensions[i]['offStageDistance'], 6);
+          expect(actualDimensions[i]['ceilingHeight']).toBeCloseTo(expectedDimensions[i]['ceilingHeight'], 6);
+        }
+
+        const actualRanges = actualDimensionsSet['ranges'];
+        _testRange(actualRanges['blastzoneWidth'], expectedRanges['blastzoneWidth']);
+        _testRange(actualRanges['stageLength'], expectedRanges['stageLength']);
+        _testRange(actualRanges['offStageDistance'], expectedRanges['offStageDistance']);
+        _testRange(actualRanges['ceilingHeight'], expectedRanges['ceilingHeight']);
+      });
+
+    }
+
     it('should return an Observable of an object with an array of Stages and a StageDimensionsSet', async(() => {
       /**/
       // console.log('=== SPEC - OUTPUT TYPE ===');Cz
-      stageLoaderSpy.loadStages.and.returnValue(asyncData(STAGES_TWO));
+      stageLoaderSpy.loadStages.and.returnValue(asyncData(STAGES_ONE));
       stageDimensionsSpy.getDimensionsFull.and.returnValue(asyncData(STAGE_DIMENSIONS_SETS.TWO_STAGE_SET));
 
       let actualStageData$ = resolverService.resolve(route, state);
@@ -94,30 +139,18 @@ describe('StageComparatorResolverService', () => {
 
     }));
 
-    xit('should return the stage data provided by StageLoaderService', async(() => {
-      /*const expectedStages = STAGES_ONE;
+    it('should return the data that StageLoaderService and StageDimensionsService provide', async(() => {
+      const expectedStages = STAGES_TWO;
+      const expectedDimensionsSet = STAGE_DIMENSIONS_SETS.DIMENSIONS_SET_TWO;
 
-      stageLoaderSpy.loadStages.and.returnValue(asyncData(expectedStages));
-
-      let actualStages$ = resolverService.resolve(route, state);
-      actualStages$.subscribe((actualStages) => {
-        expect(stageLoaderSpy.loadStages).toHaveBeenCalledTimes(1);
-        expect(actualStages['stages'].length).toEqual(2);
-        expect(actualStages['stages']).toEqual(expectedStages);
-      });*/
+      _compareStageData(expectedStages, expectedDimensionsSet);
     }));
 
-    xit('should return different stage data when StageLoaderService provides different data', async(() => {
-      /*const expectedStages = STAGES_TWO;
+    it('should return different data provided by StageLoaderService and StageDimensionsService', async(() => {
+      const expectedStages = STAGES_THREE;
+      const expectedDimensionsSet = STAGE_DIMENSIONS_SETS.DIMENSIONS_SET_THREE;
 
-      stageLoaderSpy.loadStages.and.returnValue(asyncData(expectedStages));
-
-      let actualStages$ = resolverService.resolve(route, state);
-      actualStages$.subscribe((actualStages) => {
-        expect(stageLoaderSpy.loadStages).toHaveBeenCalledTimes(1);
-        expect(actualStages.length).toEqual(3);
-        expect(actualStages).toEqual(expectedStages);
-      });*/
+      _compareStageData(expectedStages, expectedDimensionsSet);
     }));
 
   });

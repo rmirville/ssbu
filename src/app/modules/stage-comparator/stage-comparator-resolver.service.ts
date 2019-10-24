@@ -25,14 +25,10 @@ const COMPARATOR_STAGES = [
   "end_l_common",
   "64jungle_",
   "dk_waterfall_",
-  "dracula_castle_",
   "duckhunt_",
   "colloseum_",
   "xemblem",
-  "midgar_f",
-  "dxcormeia_",
   "xstarfox_",
-  "fox_venom_",
   "xfzero_",
   "xice_",
   "jack_mementoes_",
@@ -43,7 +39,6 @@ const COMPARATOR_STAGES = [
   "mario_rainbow_",
   "mariou_",
   "pictchat_",
-  "pilotwings_",
   "kalos_",
   "poke_stadium_",
   "xstadium_",
@@ -51,7 +46,6 @@ const COMPARATOR_STAGES = [
   "plasma_",
   "wily_",
   "windyhill_",
-  "spla_parking",
   "tomodachi_",
   "gamer_",
   "xmadein_",
@@ -109,10 +103,5 @@ export class StageComparatorResolverService implements Resolve<Object> {
     });
 
     return stageData$;
-    // const stages$ = this.sls.loadStages('include', COMPARATOR_STAGES);
-    /**/
-    // console.log(`  * stages$ type: ${typeof stages$}`);
-    // console.log(`  * stages$: ${JSON.stringify(stages$)}`);
-    // return stages$;
   }
 }

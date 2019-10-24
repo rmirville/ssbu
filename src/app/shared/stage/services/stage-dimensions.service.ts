@@ -29,6 +29,8 @@ export class StageDimensionsService {
   getDimensionsFull(stages: Stage[]): Observable<StageDimensionsSet> {
     /**/
     // console.log('StageDimensionsService::getDimensionsFull()');
+    // console.log(`  * number of stages: ${stages.length}`);
+    
     let stageDimensions: StageDimensions[] = stages.map((stage) => {
       let name = stage.name;
       let gameName = stage.gameName;
@@ -38,8 +40,47 @@ export class StageDimensionsService {
 
       let blastzones = phase.blast_zones;
       let blastzoneWidth = (blastzones[1] - blastzones[0]) / 2;
-
+      
       let piece = phase.collisions.find((piece) => piece.name == 'COL_00_Floor01');
+      if (!piece) {
+        piece = phase.collisions.find((piece) => piece.name == 'COL_00_Floor');
+        if (!piece) {
+          piece = phase.collisions.find((piece) => piece.name == 'COL_00_Ring01');
+          if (!piece) {
+            piece = phase.collisions.find((piece) => piece.name == 'COL_00_MainPlatform01');
+            if (!piece) {
+              piece = phase.collisions.find((piece) => piece.name == 'COL_curve1');
+              if (!piece) {
+                piece = phase.collisions.find((piece) => piece.name == 'COL_main');
+                if (!piece) {
+                  piece = phase.collisions.find((piece) => piece.name == 'COL_Ground');
+                  if (!piece) {
+                    piece = phase.collisions.find((piece) => piece.name == 'COL_ship_1');
+                    if (!piece) {
+                      piece = phase.collisions.find((piece) => piece.name == 'COL_00_GimmickFloor01A');
+                      if (!piece) {
+                        piece = phase.collisions.find((piece) => piece.name == 'COL_00_Hall_Floor01');
+                        if (!piece) {
+                          piece = phase.collisions.find((piece) => piece.name == 'COL_00_1F_Floor01');
+                          if (!piece) {
+                            piece = phase.collisions.find((piece) => piece.name == 'COL_00_Platform01');
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      /**/
+      // console.log(`  * stage: ${name}`);
+      // console.log(`  * gameName: ${gameName}`);
+      // console.log(`  * piece: ${piece.name}`);
+      // console.log(`---`);
       let leftIndex = piece.materials.findIndex((material) => material.leftLedge === true);
       let rightIndex = piece.materials.findIndex((material) => material.rightLedge === true) + 1;
       let leftLedgePosition = piece.vertex[leftIndex];

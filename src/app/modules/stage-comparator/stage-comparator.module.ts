@@ -15,26 +15,8 @@ import { StageComparatorResolverService } from './stage-comparator-resolver.serv
 const STAGE_COMPARATOR_ROUTES: Routes = [{
   path: '',
   component: StageComparatorComponent,
-  children: [
-    {
-      path: '',
-      redirectTo: 'graph'
-    },
-    {
-      path: 'graph',
-      component: StageComparatorGraphComponent
-    },
-    {
-      path: 'text',
-      component: StageComparatorTextTableComponent
-    },
-    {
-      path: 'numbers',
-      component: StageComparatorNumberTableComponent
-    }
-  ],
   resolve: {
-    stages: StageComparatorResolverService
+    stageData: StageComparatorResolverService
   }
 }];
 

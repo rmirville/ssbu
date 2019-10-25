@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-stage-comparator-graph',
+  selector: 'ssbu-stage-comparator-graph',
   templateUrl: './stage-comparator-graph.component.html',
   styleUrls: ['./stage-comparator-graph.component.css']
 })

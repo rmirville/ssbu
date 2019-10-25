@@ -238,11 +238,9 @@ h3 {
   border-radius: 6px;
   line-height: 1rem;
   font-family: 'FOT EB', sans-serif;
-}
-
-.nav-pills .nav-link {
   background-color: hsl(196, 12%, 75%);
   color: hsl(196, 12%, 45%);
+  cursor: pointer;
 }
 
 .nav-pills .nav-link.active,

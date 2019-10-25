@@ -12,16 +12,24 @@
     <div class="card-body">
       <ul class="row nav nav-justified nav-pills">
         <li class="nav-item col-lg-4">
-          <a class="nav-link h-100 align-middle" routerLinkActive="active" routerLink="graph">Graph</a>
+          <a class="nav-link h-100 align-middle" [class.active]="view == 'graph'" (click)="setView('graph')">Graph</a>
         </li>
         <li class="nav-item col-lg-4">
-          <a class="nav-link h-100 align-middle" routerLinkActive="active" routerLink="text">Text</a>
+          <a class="nav-link h-100 align-middle" [class.active]="view == 'text'" (click)="setView('text')">Text</a>
         </li>
         <li class="nav-item col-lg-4">
-          <a class="nav-link h-100 align-middle" routerLinkActive="active" routerLink="numbers">Numbers</a>
+          <a class="nav-link h-100 align-middle" [class.active]="view == 'number'" (click)="setView('number')">Numbers</a>
         </li>
       </ul>
-      <router-outlet></router-outlet>
+      <ng-container *ngIf="view == 'graph'">
+        <ssbu-stage-comparator-graph></ssbu-stage-comparator-graph>
+      </ng-container>
+      <ng-container *ngIf="view == 'text'">
+        <ssbu-stage-comparator-text-table></ssbu-stage-comparator-text-table>
+      </ng-container>
+      <ng-container *ngIf="view == 'number'">
+        <ssbu-stage-comparator-number-table></ssbu-stage-comparator-number-table>
+      </ng-container>
     </div>
   </div>
 </div>

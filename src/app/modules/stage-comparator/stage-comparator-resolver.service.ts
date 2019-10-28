@@ -11,52 +11,185 @@ import { StageLoaderService } from '../../shared/stage/services/stage-loader.ser
 import { StageDimensionsService } from '../../shared/stage/services/stage-dimensions.service';
 import { Stage } from '../../shared/stage/models/stage.model';
 import { StageDimensionsSet } from '../../shared/stage/models/stage-dimensions-set.model';
+import { StagePieceMap } from '../../shared/stage/models/stage-piece-map.model';
 
-const COMPARATOR_STAGES = [
-  "village2_",
-  "xvillage",
-  "battlefield_",
-  "battlefield_l_",
-  "umbra_f",
-  "bossstage_final1_",
-  "bossstage_final2_",
-  "bossstage_final3_",
-  "battle_common",
-  "end_l_common",
-  "64jungle_",
-  "dk_waterfall_",
-  "duckhunt_",
-  "colloseum_",
-  "xemblem",
-  "xstarfox_",
-  "xfzero_",
-  "xice_",
-  "jack_mementoes_",
-  "kirby_fountain_",
-  "pupupuland64_f",
-  "xmansion_",
-  "mario_castledx_",
-  "mario_rainbow_",
-  "mariou_",
-  "pictchat_",
-  "kalos_",
-  "poke_stadium_",
-  "xstadium_",
-  "poke_tengam_",
-  "plasma_",
-  "wily_",
-  "windyhill_",
-  "tomodachi_",
-  "gamer_",
-  "xmadein_",
-  "wrecking_",
-  "wufu_",
-  "yoshi_cartboard_",
-  "xcrayon_",
-  "yoshi_story_",
-  "hyrule64_f",
-  "skyward",
-  "zelda_tower"
+const COMPARATOR_STAGES: StagePieceMap[] = [
+  {
+    lvd: "village2_00",
+    pieceName: "COL_00_Floor01"
+  },
+  {
+    lvd: "xvillage00",
+    pieceName: "COL_00_Floor01"
+  },
+  {
+    lvd: "battlefield_00",
+    pieceName: "COL_00_Floor01"
+  },
+  {
+    lvd: "battlefield_l_00",
+    pieceName: "COL_00_Floor01"
+  },
+  {
+    lvd: "umbra_f00",
+    pieceName: "COL_00_Floor01"
+  },
+  {
+    lvd: "bossstage_final1_00",
+    pieceName: "COL_00_Floor"
+  },
+  {
+    lvd: "bossstage_final2_00",
+    pieceName: "COL_00_Floor"
+  },
+  {
+    lvd: "bossstage_final3_00",
+    pieceName: "COL_00_Floor"
+  },
+  {
+    lvd: "battle_common",
+    pieceName: "COL_00_Ring01"
+  },
+  {
+    lvd: "end_l_common",
+    pieceName: "COL_00_Floor"
+  },
+  {
+    lvd: "64jungle_00",
+    pieceName: "COL_00_Floor01"
+  },
+  {
+    lvd: "dk_waterfall_00",
+    pieceName: "COL_curve1"
+  },
+  {
+    lvd: "duckhunt_00",
+    pieceName: "COL_00_Floor01"
+  },
+  {
+    lvd: "colloseum_00",
+    pieceName: "COL_00_Floor01"
+  },
+  {
+    lvd: "xemblem00",
+    pieceName: "COL_00_Floor01"
+  },
+  {
+    lvd: "xstarfox_00",
+    pieceName: "COL_00_Floor01"
+  },
+  {
+    lvd: "xfzero_00",
+    pieceName: "COL_00_MainPlatform01"
+  },
+  {
+    lvd: "xice_00",
+    pieceName: "COL_00_Floor01"
+  },
+  {
+    lvd: "jack_mementoes_00",
+    pieceName: "COL_main"
+  },
+  {
+    lvd: "kirby_fountain_00",
+    pieceName: "COL_curve1"
+  },
+  {
+    lvd: "pupupuland64_f00",
+    pieceName: "COL_curve1"
+  },
+  {
+    lvd: "xmansion_00",
+    pieceName: "COL_00_Floor01"
+  },
+  {
+    lvd: "mario_castledx_00",
+    pieceName: "COL_Ground"
+  },
+  {
+    lvd: "mario_rainbow_00",
+    pieceName: "COL_ship_1"
+  },
+  {
+    lvd: "mariou_00",
+    pieceName: "COL_00_GimmickFloor01A"
+  },
+  {
+    lvd: "pictchat_00",
+    pieceName: "COL_00_Floor"
+  },
+  {
+    lvd: "kalos_00",
+    pieceName: "COL_00_Hall_Floor01"
+  },
+  {
+    lvd: "poke_stadium_00",
+    pieceName: "COL_curve1"
+  },
+  {
+    lvd: "xstadium_00",
+    pieceName: "COL_00_Floor01"
+  },
+  {
+    lvd: "poke_tengam_00",
+    pieceName: "COL_curve1"
+  },
+  {
+    lvd: "plasma_00",
+    pieceName: "COL_00_Floor01"
+  },
+  {
+    lvd: "wily_00",
+    pieceName: "COL_00_Floor01"
+  },
+  {
+    lvd: "windyhill_00",
+    pieceName: "COL_00_Floor01"
+  },
+  {
+    lvd: "tomodachi_00",
+    pieceName: "COL_00_Floor01"
+  },
+  {
+    lvd: "gamer_00",
+    pieceName: "COL_00_Floor01"
+  },
+  {
+    lvd: "xmadein_00",
+    pieceName: "COL_00_Floor01"
+  },
+  {
+    lvd: "wrecking_00",
+    pieceName: "COL_00_1F_Floor01"
+  },
+  {
+    lvd: "wufu_00",
+    pieceName: "COL_00_Platform01"
+  },
+  {
+    lvd: "yoshi_cartboard_00",
+    pieceName: "COL_curve1"
+  },
+  {
+    lvd: "xcrayon_00",
+    pieceName: "COL_00_Floor01"
+  },
+  {
+    lvd: "yoshi_story_00",
+    pieceName: "COL_Ground"
+  },
+  {
+    lvd: "hyrule64_f00",
+    pieceName: "COL_curve1"
+  },
+  {
+    lvd: "skyward00",
+    pieceName: "COL_00_Floor01"
+  },
+  {
+    lvd: "zelda_tower",
+    pieceName: "COL_curve1"
+  }
 ];
 
 @Injectable({
@@ -77,7 +210,7 @@ export class StageComparatorResolverService implements Resolve<Object> {
         dimensionsFull: StageDimensionsSet
       } = {stages: null, dimensionsFull: null};
 
-      const stages$ = this.sls.loadStages('include', COMPARATOR_STAGES);
+      const stages$ = this.sls.loadStages('include', COMPARATOR_STAGES.map((stage) => stage.lvd));
       stages$.subscribe((stages) => {
         /**/
         // console.log('  * received stages');
@@ -88,7 +221,7 @@ export class StageComparatorResolverService implements Resolve<Object> {
 
         /**/
         // console..log('  * calling getDimensionsFull()');
-        const dimensionsFull$ = this.sds.getDimensionsFull(stages);
+        const dimensionsFull$ = this.sds.getDimensionsFull(stages, COMPARATOR_STAGES);
         dimensionsFull$.subscribe((dimensionsFull) => {
           /**/
           // console..log('  * received dimensionsFull');

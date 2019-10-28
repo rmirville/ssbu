@@ -54,6 +54,8 @@ describe('StageDimensionsService', () => {
 
     // TODO: data validation
 
+    // TODO: StagePieceMap parameter
+
   });
 
   // TODO: getDimensionsHalf(stages: Stage[])

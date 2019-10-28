@@ -15,7 +15,7 @@ import { StageComparatorNumberTableMockComponent } from '../../../../shared/stag
 import { STAGES_ONE } from '../../../../shared/stage/models/mocks/stages';
 import { DIMENSIONS_SET_ONE } from '../../../../shared/stage/models/mocks/stage-dimensions-set';
 
-fdescribe('StageComparatorComponent', () => {
+describe('StageComparatorComponent', () => {
   let comparator: StageComparatorComponent;
   let fixture: ComponentFixture<StageComparatorComponent>;
   let fixtureMock: {

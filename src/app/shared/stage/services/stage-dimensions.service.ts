@@ -5,7 +5,8 @@ import { Stage } from '../models/stage.model';
 import { StageDimensions } from '../models/stage-dimensions.model';
 import { StageDimensionsSet } from '../models/stage-dimensions-set.model';
 import { StageDimensionsRange } from '../models/stage-dimensions-range.model';
-
+import { StagePiece } from '../models/stage-piece.model';
+import { StagePieceMap } from '../models/stage-piece-map.model';
 
 /**
  * Service class providing summary dimensions stage data
@@ -26,10 +27,11 @@ export class StageDimensionsService {
   constructor() {
   }
 
-  getDimensionsFull(stages: Stage[]): Observable<StageDimensionsSet> {
+  getDimensionsFull(stages: Stage[], pieceMaps?: StagePieceMap[]): Observable<StageDimensionsSet> {
     /**/
     // console.log('StageDimensionsService::getDimensionsFull()');
     // console.log(`  * number of stages: ${stages.length}`);
+    // console.log(`  * pieceMaps: ${JSON.stringify(pieceMaps)}`);
     
     let stageDimensions: StageDimensions[] = stages.map((stage) => {
       let name = stage.name;
@@ -40,40 +42,21 @@ export class StageDimensionsService {
 
       let blastzones = phase.blast_zones;
       let blastzoneWidth = (blastzones[1] - blastzones[0]) / 2;
-      
-      let piece = phase.collisions.find((piece) => piece.name == 'COL_00_Floor01');
-      if (!piece) {
-        piece = phase.collisions.find((piece) => piece.name == 'COL_00_Floor');
-        if (!piece) {
-          piece = phase.collisions.find((piece) => piece.name == 'COL_00_Ring01');
-          if (!piece) {
-            piece = phase.collisions.find((piece) => piece.name == 'COL_00_MainPlatform01');
-            if (!piece) {
-              piece = phase.collisions.find((piece) => piece.name == 'COL_curve1');
-              if (!piece) {
-                piece = phase.collisions.find((piece) => piece.name == 'COL_main');
-                if (!piece) {
-                  piece = phase.collisions.find((piece) => piece.name == 'COL_Ground');
-                  if (!piece) {
-                    piece = phase.collisions.find((piece) => piece.name == 'COL_ship_1');
-                    if (!piece) {
-                      piece = phase.collisions.find((piece) => piece.name == 'COL_00_GimmickFloor01A');
-                      if (!piece) {
-                        piece = phase.collisions.find((piece) => piece.name == 'COL_00_Hall_Floor01');
-                        if (!piece) {
-                          piece = phase.collisions.find((piece) => piece.name == 'COL_00_1F_Floor01');
-                          if (!piece) {
-                            piece = phase.collisions.find((piece) => piece.name == 'COL_00_Platform01');
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
+      let piece: StagePiece = null;
+      let pieceMap: StagePieceMap = null;
+
+      if (pieceMaps) {
+        pieceMap = pieceMaps.find((map) => map.lvd == phase.lvd);
+        /**/
+        // console.log(`  * pieceMap: ${JSON.stringify(pieceMap)}`);
+        // console.log(`  * phaseLvd: ${phase.lvd}`);
+        if (pieceMap) {
+          piece = phase.collisions.find((piece) => piece.name == pieceMap.pieceName);
         }
+      }
+
+      if (!piece) {
+        piece = phase.collisions[0];
       }
 
       /**/

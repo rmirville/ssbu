@@ -1,12 +1,12 @@
 import { isStageClassifications } from './stage-classifications.model';
 import * as STAGE_CLASSES from './mocks/stage-classifications';
 
-fdescribe('StageClassificationsModel', () => {
+describe('StageClassificationsModel', () => {
 
   function _testBadData(problem) {
     /**/
-    // console.log(`=== SPEC - CHECK STAGE DIMENSIONS RANGE DATA TYPE (${problem}) ===`);
-    // console.log(`BAD_DATA[${problem}]: ${JSON.stringify(STAGE_DIMENSIONS_RANGE.BAD_DATA[problem])}`);
+    // console.log(`=== SPEC - CHECK CLASSIFICATIONS DATA TYPE (${problem}) ===`);
+    // console.log(`BAD_DATA[${problem}]: ${JSON.stringify(STAGE_CLASSES.BAD_DATA[problem])}`);
     expect(isStageClassifications(STAGE_CLASSES.BAD_DATA[problem])).toBe(false);
   }
   describe('isStageClassifications()', () => {

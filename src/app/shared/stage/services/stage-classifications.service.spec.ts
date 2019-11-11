@@ -2,6 +2,8 @@ import { TestBed, async } from '@angular/core/testing';
 
 import { StageClassificationsService } from './stage-classifications.service';
 
+import { NotFoundError } from '../../error/errors/not-found-error.model';
+
 import { isStageClassifications } from '../models/stage-classifications.model';
 import { isStageSelectInfo } from '../models/stage-select-info.model';
 
@@ -80,15 +82,40 @@ fdescribe('StageClassificationsService', () => {
 
       }));
 
+      xit('should add null values to stages not in the db', async(() => {
+
+      }));
+
     });
     
     describe('data validation', () => {
 
-      xit('should reject parameters that are not arrays');
-      xit('should reject parameters that are not arrays of objects');
-      xit('should reject arrays of objects that have no gameName attribute');
-      xit(`should reject arrays of objects with gameNames not in the service's datastore`);
-      xit('should reject arrays of objects with non-string gameNames');
+      function _testBadData(problem, message) {
+        /**/
+        // console.log(`=== SPEC - CHECK PARAMETER DATA TYPE (${problem}) ===`);
+        const invalidStages = STAGE_CLASSES_INPUT.BAD_DATA[problem];
+        /**/
+        // console.log(`  * invalid stages: ${JSON.stringify(invalidStages)}`);
+        expect(() => {
+          const actualClassifiedStages$ = service.classifyStages(invalidStages);
+        }).toThrow(new TypeError(message));
+      }
+
+      it('should reject parameters that are not arrays', () => {
+        _testBadData('notArray', 'The list of stages to classify was not an array.');
+      });
+      
+      it('should reject parameters that are not arrays of objects', () => {
+        _testBadData('itemsNotObjects', 'The list of stages to classify did not contain objects.');
+      });
+
+      it('should reject arrays of objects that have no gameName attribute', () => {
+        _testBadData('noGameName', 'The list of stages to classify did not contain a gameName property.');
+      });
+
+      it('should reject arrays of objects with non-string gameNames', () => {
+        _testBadData('gameNameNotString', 'The list of stages to classify contained a non-string gameName.');
+      });
 
     });
   });

@@ -32,3 +32,35 @@ export const MATCH_GAME_NAME = [
     gameName: "wufu_"
   }
 ];
+
+export const BAD_DATA = {
+  notArray: {
+    name: "Pokemon Stadium",
+    gameName: "xstadium_"
+  },
+  itemsNotObjects: [3, 7, 9],
+  noGameName: [
+    {
+      name: "Placeville"
+    },
+    {
+      name: "Attributeland"
+    }
+  ],
+  nonexistentGameName: [
+    {
+      gameName: "whatanoun"
+    },
+    {
+      gameName: "extraordinary"
+    }
+  ],
+  gameNameNotString: [
+    {
+      gameName: true
+    },
+    {
+      gameName: false
+    }
+  ]
+};

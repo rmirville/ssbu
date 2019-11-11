@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
+import { NotFoundError } from '../../error/errors/not-found-error.model';
+
 import { StageClassifications } from '../models/stage-classifications.model';
 
 /**
@@ -232,8 +234,49 @@ export class StageClassificationsService {
    * @returns {Observable<any[]>}
    * @memberof StageClassificationsService
    */
-  classifyStages(stages: any[]): Observable<any[]> {
+  classifyStages(stages: {gameName: string, [property: string]: any}[]): Observable<any[]> {
+    /**/
+    // console.log('StageClassificationsService::classifyStages()')
+    // console.log(`  * stages: ${JSON.stringify(stages)}`);
 
+    if ( !Array.isArray(stages) ) {
+      throw new TypeError('The list of stages to classify was not an array.');
+    }
+
+    let containsObjects: boolean = true;
+    let containsGameName: boolean = true;
+    let stringGameName: boolean = true;
+
+    for (const stage of stages) {
+      if (!(stage instanceof Object)) {
+        containsObjects = false;
+        break;
+      }
+      else if (!stage.hasOwnProperty('gameName')) {
+        containsGameName = false;
+        break;
+      }
+
+      else if (typeof stage.gameName !== 'string') {
+        /**/
+        // console.log(`  * typeof stage.gameName: ${typeof stage.gameName} - ${JSON.stringify(stage.gameName)}`);
+        stringGameName = false;
+        break;
+      }
+    }
+
+    if (!containsObjects) {
+      throw new TypeError('The list of stages to classify did not contain objects.');
+    }
+
+    if (!containsGameName) {
+      throw new TypeError('The list of stages to classify did not contain a gameName property.');
+    }
+
+    if (!stringGameName) {
+      throw new TypeError('The list of stages to classify contained a non-string gameName.');
+    }
+    
     const stages$ = new Observable<any[]>((observer) => {
 
       let classifiedStages = [];
@@ -241,6 +284,10 @@ export class StageClassificationsService {
 
         let classifiedStage = stage;
         let attributes = this.classificationsStore.find(classifications => classifications.gameName === stage.gameName);
+
+        if (attributes === undefined) {
+          observer.error(new NotFoundError(''));
+        }
         
         classifiedStage.series = attributes.series;
         classifiedStage.tourneyPresence = attributes.tourneyPresence;

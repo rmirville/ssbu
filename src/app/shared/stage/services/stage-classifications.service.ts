@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { NotFoundError } from '../../error/errors/not-found-error.model';
-
 import { StageClassifications } from '../models/stage-classifications.model';
 
 /**

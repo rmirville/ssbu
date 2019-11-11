@@ -47,27 +47,16 @@ export function isStageDetails(phase): phase is StageDetails {
   /**/
   // console.log(`    * phase.collisions type: ${typeof phase.collisions}`);
   // console.log(`    * phase.collisions: ${JSON.stringify(phase.collisions)}`);
-  let isPiece = true;
-  phase.collisions.forEach((piece) => {
-    if (!isStagePiece(piece)) {
-      /**/
-      // console.log(`    * piece type: ${typeof piece}`);
-      // console.log(`    * piece: ${JSON.stringify(piece)}`);
-      isPiece = false;
-    }
-  });
-  if (!isPiece) { return false; }
 
-  if ((!Array.isArray(phase.platforms))
-    || (!phase.platforms.forEach)
-  ) { return false; }
+  for (const piece of phase.collisions) {
+    if (!isStagePiece(piece)) { return false; }
+  }
 
-  phase.platforms.forEach((piece) => {
-    if (!isStagePiece(piece)) {
-      isPiece = false;
-    }
-  });
-  if (!isPiece) { return false; }
+  if (!Array.isArray(phase.platforms)) { return false; }
+
+  for (const piece of phase.platforms) {
+    if (!isStagePiece(piece)) { return false; }
+  }
 
   if (!isStageBoundaries(phase.blast_zones)) { return false; }
 

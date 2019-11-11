@@ -10,24 +10,15 @@ export type StagePosition = [number, number];
  * @returns {this is StagePosition}
  */
 export function isStagePosition(position): position is StagePosition {
-  let isStagePosition = true;
   if ((!Array.isArray(position))
-    || (!position.forEach)
     || (position.length !== 2)
-  ) {
-    isStagePosition = false;
-    return;
+  ) { return false; }
+
+  for (const coordinate of position) {
+    if (typeof coordinate !== 'number') { return false; }
   }
 
-  position.forEach((coordinate) => {
-    /**/
-    // console.log(`    * coordinate: ${coordinate}`)
-    if (typeof coordinate !== 'number') {
-      isStagePosition = false;
-      return;
-    }
-  });
-  return isStagePosition;
+  return true;
 }
 
 /**
@@ -37,15 +28,11 @@ export function isStagePosition(position): position is StagePosition {
  * @returns {boolean}
  */
 export function hasStagePositions(positions): boolean {
-  if ((!Array.isArray(positions))
-    || (!positions.forEach)
-  ) { return false; }
+  if (!Array.isArray(positions)) { return false; }
 
-  let hasStagePositions = true;
-  positions.forEach((position) => {
-    if (!isStagePosition(position)) {
-      hasStagePositions = false;
-    }
-  });
-  return hasStagePositions;
+  for (const position of positions) {
+    if (!isStagePosition(position)) { return false; }
+  }
+
+  return true;
 }

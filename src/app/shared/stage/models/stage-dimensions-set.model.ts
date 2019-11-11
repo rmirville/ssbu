@@ -20,29 +20,14 @@ export interface StageDimensionsSet {
 export function isStageDimensionsSet(set): set is StageDimensionsSet {
   /**/
   // console.log('StageDimensionsSetModel::isStageDimensionsSet()');
-  if (( !Array.isArray(set.dimensions) )
-    || (!set.dimensions.forEach)) {
+  if (!Array.isArray(set.dimensions)) {
       /**/
       // console.log(`  * set.dimensions is not array`);
-      // console.log(`  * isArray: ${Array.isArray(set.dimensions)}`);
-      // console.log(`  * forEach: ${typeof set.dimensions.forEach}`);
       return false;
     }
 
-  let hasStageDimensions = true;
-  set.dimensions.forEach((stageDimensions) => {
-    /**/
-    // console.log(`  * stageDimensions: ${JSON.stringify(stageDimensions)}`);
-    if (!isStageDimensions(stageDimensions)) {
-      /**/
-      // console.log(`  * set.dimensions.stageDimensions is not stage dimensions`);
-      hasStageDimensions = false;
-    }
-  });
-  if (!hasStageDimensions) { 
-    /**/
-    // console.log('  * set.dimensions does not have stage dimensions');
-    return false;
+  for (const stageDimensions of set.dimensions) {
+    if (!isStageDimensions(stageDimensions)) { return false; }
   }
 
   if (( !isStageDimensionsRange(set.ranges.blastzoneWidth) )

@@ -11,7 +11,7 @@ import * as STAGE_CLASSES from '../models/mocks/stage-classifications';
 import * as STAGE_CLASSES_INPUT from '../models/mocks/stage-classifications-input';
 import * as STAGE_CLASSES_OUTPUT from '../models/mocks/stage-classifications-output';
 
-fdescribe('StageClassificationsService', () => {
+describe('StageClassificationsService', () => {
 
   let service: StageClassificationsService;
 

@@ -11,14 +11,12 @@ export type StageBoundaries = [number, number, number, number];
  */
 export function isStageBoundaries(dimensions): dimensions is StageBoundaries {
   if ((!Array.isArray(dimensions))
-    || (!dimensions.forEach)
     || (dimensions.length !== 4)
   ) { return false; }
-  let isStageBoundaries = true;
-  dimensions.forEach((dimension) => {
-    if (typeof dimension !== 'number') {
-      isStageBoundaries = false;
-    }
-  });
-  return isStageBoundaries;
+
+  for (const dimension of dimensions) {
+    if (typeof dimension !== 'number') { return false; }
+  }
+
+  return true;
 }

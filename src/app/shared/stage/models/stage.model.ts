@@ -21,16 +21,11 @@ export function isStage(stage): stage is Stage {
   let tempStage = stage;
   if (!isStageSummary(tempStage)) { return false; }
 
+  if (!Array.isArray(stage.details)) { return false; }
 
-  if ((!Array.isArray(stage.details))
-    || (!stage.details.forEach)
-  ) { return false; }
-
-  let hasStageDetails = true;
-  stage.details.forEach((detail) => {
-    if (!isStageDetails(detail)) { hasStageDetails = false; }
-  });
-  if (!hasStageDetails) { return false; }
+  for (const detail of stage.details) {
+    if (!isStageDetails(detail)) { return false; }
+  }
   
   return true;
 }

@@ -36,14 +36,11 @@ export function isStagePiece(piece): piece is StagePiece {
     return false;
   }
 
-  if ((!Array.isArray(piece.materials))
-    || (!piece.materials.forEach)
-  ) { return false; }
-  let hasMaterials = true;
-  piece.materials.forEach((material) => {
-    if (!isStageMaterial(material)) { hasMaterials = false; }
-  });
-  if (!hasMaterials) { return false; }
+  if (!Array.isArray(piece.materials)) { return false; }
+
+  for (const material of piece.materials) {
+    if (!isStageMaterial(material)) { return false; }
+  }
 
   if (!hasStagePositions(piece.boundingBox)) { return false; }
 

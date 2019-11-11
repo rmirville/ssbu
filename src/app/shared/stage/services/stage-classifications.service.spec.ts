@@ -11,7 +11,7 @@ import * as STAGE_CLASSES from '../models/mocks/stage-classifications';
 import * as STAGE_CLASSES_INPUT from '../models/mocks/stage-classifications-input';
 import * as STAGE_CLASSES_OUTPUT from '../models/mocks/stage-classifications-output';
 
-describe('StageClassificationsService', () => {
+fdescribe('StageClassificationsService', () => {
 
   let service: StageClassificationsService;
 
@@ -82,7 +82,22 @@ describe('StageClassificationsService', () => {
 
       }));
 
-      xit('should add null values to stages not in the db', async(() => {
+      it('should add null values to stages not in the db', async(() => {
+        const input = STAGE_CLASSES_INPUT.UNKNOWN_GAME_NAMES;
+        const expectedClassifiedStages = STAGE_CLASSES_OUTPUT.UNKNOWN_GAME_NAMES;
+
+        const actualClassifiedStages$ = service.classifyStages(input);
+
+        actualClassifiedStages$.subscribe(actualClassifiedStages => {
+          expect(actualClassifiedStages.length).withContext('The number of items should match the input array length').toEqual(expectedClassifiedStages.length);
+
+          for (let i = 0; i < expectedClassifiedStages.length; i++) {
+
+            expect(actualClassifiedStages[i]).withContext(`actualClassifiedStages[${i}] should match expectedClassifiedStages[${i}]`).toEqual(expectedClassifiedStages[i]);
+
+          }
+
+        });
 
       }));
 

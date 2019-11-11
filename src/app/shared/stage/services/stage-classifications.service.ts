@@ -286,14 +286,15 @@ export class StageClassificationsService {
         let attributes = this.classificationsStore.find(classifications => classifications.gameName === stage.gameName);
 
         if (attributes === undefined) {
-          observer.error(new NotFoundError(''));
+          classifiedStage.series = null;
+          classifiedStage.tourneyPresence = null;
+        }
+        else {
+          classifiedStage.series = attributes.series;
+          classifiedStage.tourneyPresence = attributes.tourneyPresence;
         }
         
-        classifiedStage.series = attributes.series;
-        classifiedStage.tourneyPresence = attributes.tourneyPresence;
-        
         classifiedStages.push(classifiedStage);
-
       });
 
       observer.next(classifiedStages);

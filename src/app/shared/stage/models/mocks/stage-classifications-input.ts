@@ -47,14 +47,6 @@ export const BAD_DATA = {
       name: "Attributeland"
     }
   ],
-  nonexistentGameName: [
-    {
-      gameName: "whatanoun"
-    },
-    {
-      gameName: "extraordinary"
-    }
-  ],
   gameNameNotString: [
     {
       gameName: true
@@ -64,3 +56,22 @@ export const BAD_DATA = {
     }
   ]
 };
+
+export const UNKNOWN_GAME_NAMES = [
+  {
+    name: "What a Noun",
+    gameName: "whatanoun"
+  },
+  {
+    name: "Extraordinary",
+    gameName: "extraordinary"
+  },
+  {
+    name: "Duck Hunt",
+    gameName: "duckhunt_",
+  },
+  {
+    name: "summit",
+    gameName: "xice_",
+  },
+];

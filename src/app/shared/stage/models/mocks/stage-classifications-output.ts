@@ -18,3 +18,30 @@ export const MATCH_GAME_NAME = [
     tourneyPresence: -1
   }
 ];
+
+export const UNKNOWN_GAME_NAMES = [
+  {
+    name: "What a Noun",
+    gameName: "whatanoun",
+    series: null,
+    tourneyPresence: null
+  },
+  {
+    name: "Extraordinary",
+    gameName: "extraordinary",
+    series: null,
+    tourneyPresence: null
+  },
+  {
+    name: "Duck Hunt",
+    gameName: "duckhunt_",
+    series: "Duck Hunt",
+    tourneyPresence: -1
+  },
+  {
+    name: "summit",
+    gameName: "xice_",
+    series: "Ice Climber",
+    tourneyPresence: -1
+  }
+];

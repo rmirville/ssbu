@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Stage } from '../../../../shared/stage/models/stage.model';
 import { StageDimensionsSet } from '../../../../shared/stage/models/stage-dimensions-set.model';
+import { StageSelectInfo } from '../../../../shared/stage/models/stage-select-info.model';
 
 @Component({
   selector: 'ssbu-stage-comparator',
@@ -12,6 +13,7 @@ import { StageDimensionsSet } from '../../../../shared/stage/models/stage-dimens
 export class StageComparatorComponent implements OnInit {
 
   stages: Stage[];
+  stageSelections: StageSelectInfo[];
   stageDimensionsSet: StageDimensionsSet;
   view: string;
 
@@ -23,13 +25,14 @@ export class StageComparatorComponent implements OnInit {
   ngOnInit() {
     /**/
     // console.log('StageComparatorComponent::ngOnInit()');
-    this.route.data.subscribe((data: { stageData: {stages: Stage[], dimensionsFull: StageDimensionsSet} }) => {
+    this.route.data.subscribe((data: { stageData: {stages: Stage[], dimensionsFull: StageDimensionsSet, stageSelections: StageSelectInfo[]} }) => {
       /**/
       // console.log(`  * data: ${JSON.stringify(data)}`);
       // console.log(`  * data.stages: ${JSON.stringify(data.stageData)}`);
       // console.log(`  * data.stages type: ${typeof data.stages}`);
       this.stages = [...data.stageData.stages];
       this.stageDimensionsSet = data.stageData.dimensionsFull;
+      this.stageSelections = [...data.stageData.stageSelections];
       /**/
       // console.log(`  * this.stages: ${JSON.stringify(this.stages)}`);
     });

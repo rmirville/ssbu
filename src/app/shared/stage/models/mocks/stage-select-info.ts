@@ -34,3 +34,24 @@ export const BAD_DATA = {
     tourneyPresence: "It's a trap"
   }
 };
+
+export const STAGE_SELECTION_ONE = [
+  {
+    name: "Princess Peach's Castle",
+    gameName: "mario_castledx_",
+    series: "Super Mario",
+    tourneyPresence: -1
+  },
+  {
+    name: "Yoshi's Story",
+    gameName: "yoshi_cartboard_",
+    series: "Yoshi",
+    tourneyPresence: 0
+  },
+  {
+    name: "Great Plateau Tower",
+    gameName: "zelda_tower",
+    series: "The Legend of Zelda",
+    tourneyPresence: -1
+  }
+];

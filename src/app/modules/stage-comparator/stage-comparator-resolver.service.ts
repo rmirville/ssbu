@@ -5,13 +5,22 @@ import {
   ActivatedRouteSnapshot
 } from '@angular/router';
 
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { StageLoaderService } from '../../shared/stage/services/stage-loader.service';
+import { StageClassificationsService } from '../../shared/stage/services/stage-classifications.service';
 import { StageDimensionsService } from '../../shared/stage/services/stage-dimensions.service';
 import { Stage } from '../../shared/stage/models/stage.model';
 import { StageDimensionsSet } from '../../shared/stage/models/stage-dimensions-set.model';
 import { StagePieceMap } from '../../shared/stage/models/stage-piece-map.model';
+import { StageSelectInfo } from '../../shared/stage/models/stage-select-info.model';
+
+interface StageComparatorRouteData {
+  stages: Stage[],
+  dimensionsFull: StageDimensionsSet,
+  stageSelections: StageSelectInfo[]
+};
 
 const COMPARATOR_STAGES: StagePieceMap[] = [
   {
@@ -195,23 +204,20 @@ const COMPARATOR_STAGES: StagePieceMap[] = [
 @Injectable({
   providedIn: 'root'
 })
-export class StageComparatorResolverService implements Resolve<Object> {
+export class StageComparatorResolverService implements Resolve<StageComparatorRouteData> {
 
-  constructor(private sls: StageLoaderService, private sds: StageDimensionsService, private router: Router) { }
+  constructor(private sls: StageLoaderService, private sds: StageDimensionsService, private scs: StageClassificationsService, private router: Router) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Object> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<StageComparatorRouteData> {
     /**/
     // console..log('StageComparatorResolverService::resolve()');
-    const stageData$ = new Observable((observer) => {
+    const stageData$ = new Observable<StageComparatorRouteData>(observer => {
       /**/
       // console..log(`  * observer at start: ${JSON.stringify(Object.keys(observer))}`);
-      let stageData: {
-        stages: Stage[],
-        dimensionsFull: StageDimensionsSet
-      } = {stages: null, dimensionsFull: null};
+      let stageData: StageComparatorRouteData = {stages: null, dimensionsFull: null, stageSelections: null};
 
-      const stages$ = this.sls.loadStages('include', COMPARATOR_STAGES.map((stage) => stage.lvd));
-      stages$.subscribe((stages) => {
+      const stages$ = this.sls.loadStages('include', COMPARATOR_STAGES.map(stage => stage.lvd));
+      stages$.subscribe(stages => {
         /**/
         // console.log('  * received stages');
         // console..log(`  * stages.length: ${JSON.stringify(stages.length)}`);
@@ -221,17 +227,32 @@ export class StageComparatorResolverService implements Resolve<Object> {
 
         /**/
         // console..log('  * calling getDimensionsFull()');
-        const dimensionsFull$ = this.sds.getDimensionsFull(stages, COMPARATOR_STAGES);
-        dimensionsFull$.subscribe((dimensionsFull) => {
-          /**/
-          // console..log('  * received dimensionsFull');
-          // console..log(`  * dimensionsFull: ${JSON.stringify(dimensionsFull)}`);
-          stageData.dimensionsFull = dimensionsFull;
-          // console.log(`  * stageData before sending: ${JSON.stringify(stageData)}`);
-          // console.log(`  * observer right before sending: ${JSON.stringify(Object.keys(observer))}`);
+        const stagesBasic = stages.map( stage => { return {name: stage.name, gameName: stage.gameName}; } );
+        const stageCalculations$ = forkJoin(
+          this.sds.getDimensionsFull(stages, COMPARATOR_STAGES),
+          this.scs.classifyStages(stagesBasic)
+        ).pipe(
+          map( ([dimensionsFull, stageSelections]) => {
+            return { dimensionsFull, stageSelections };
+          })
+        );
+        stageCalculations$.subscribe(stageCalculations => {
+          stageData.dimensionsFull = stageCalculations.dimensionsFull;
+          stageData.stageSelections = stageCalculations.stageSelections;
           observer.next(stageData);
           observer.complete();
         });
+        //// const dimensionsFull$ = this.sds.getDimensionsFull(stages, COMPARATOR_STAGES);
+        //// dimensionsFull$.subscribe((dimensionsFull) => {
+          /**/
+          // console..log('  * received dimensionsFull');
+          // console..log(`  * dimensionsFull: ${JSON.stringify(dimensionsFull)}`);
+        ////   stageData.dimensionsFull = dimensionsFull;
+          // console.log(`  * stageData before sending: ${JSON.stringify(stageData)}`);
+          // console.log(`  * observer right before sending: ${JSON.stringify(Object.keys(observer))}`);
+        ///   observer.next(stageData);
+        ///   observer.complete();
+        /// });
       });
     });
 

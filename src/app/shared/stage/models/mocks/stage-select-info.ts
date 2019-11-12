@@ -35,7 +35,7 @@ export const BAD_DATA = {
   }
 };
 
-export const STAGE_SELECTION_ONE = [
+export const STAGE_SELECTIONS_ONE = [
   {
     name: "Princess Peach's Castle",
     gameName: "mario_castledx_",
@@ -52,6 +52,48 @@ export const STAGE_SELECTION_ONE = [
     name: "Great Plateau Tower",
     gameName: "zelda_tower",
     series: "The Legend of Zelda",
+    tourneyPresence: -1
+  }
+];
+
+export const STAGE_SELECTIONS_TWO = [
+  {
+    name: "Arena Ferox",
+    gameName: "colloseum_",
+    series: "Fire Emblem",
+    tourneyPresence: -1
+  },
+  {
+    gameName: "duckhunt_",
+    name: "Duck Hunt",
+    series: "Duck Hunt",
+    tourneyPresence: -1
+  },
+  {
+    name: "Pokémon Stadium",
+    gameName: "poke_stadium_",
+    series: "Pokémon",
+    tourneyPresence: 2
+  }
+];
+
+export const STAGE_SELECTIONS_THREE = [
+  {
+    name: "Wily Castle",
+    gameName: "wily_",
+    series: "Mega Man",
+    tourneyPresence: -1
+  },
+  {
+    name: "Gamer",
+    gameName: "gamer_",
+    series: "Wario Ware",
+    tourneyPresence: -1
+  },
+  {
+    name: "PictoChat 2",
+    gameName: "pictchat_",
+    series: "Miscellaneous",
     tourneyPresence: -1
   }
 ];

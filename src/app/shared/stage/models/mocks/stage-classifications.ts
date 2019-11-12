@@ -143,27 +143,27 @@ export const SIMPLE_LIST = [
   },
   {
     gameName: "kalos_",
-    series: "Pokemon",
+    series: "Pokémon",
     tourneyPresence: 0
   },
   {
     gameName: "poke_stadium_",
-    series: "Pokemon",
+    series: "Pokémon",
     tourneyPresence: 2
   },
   {
     gameName: "xstadium_",
-    series: "Pokemon",
+    series: "Pokémon",
     tourneyPresence: 0
   },
   {
     gameName: "poke_tengam_",
-    series: "Pokemon",
+    series: "Pokémon",
     tourneyPresence: -1
   },
   {
     gameName: "plasma_",
-    series: "Pokemon",
+    series: "Pokémon",
     tourneyPresence: 2
   },
   {

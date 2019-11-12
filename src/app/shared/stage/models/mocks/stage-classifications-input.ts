@@ -9,7 +9,7 @@ export const GAME_NAME_ONLY = [
 
 export const GAME_NAME_NAME = [
   {
-    name: "Pokemon Stadium 2",
+    name: "Pokémon Stadium 2",
     gameName: "xstadium_",
   },
   {
@@ -20,7 +20,7 @@ export const GAME_NAME_NAME = [
 
 export const MATCH_GAME_NAME = [
   {
-    name: "Pokemon Stadium",
+    name: "Pokémon Stadium",
     gameName: "xstadium_"
   },
   {
@@ -35,7 +35,7 @@ export const MATCH_GAME_NAME = [
 
 export const BAD_DATA = {
   notArray: {
-    name: "Pokemon Stadium",
+    name: "Pokémon Stadium",
     gameName: "xstadium_"
   },
   itemsNotObjects: [3, 7, 9],

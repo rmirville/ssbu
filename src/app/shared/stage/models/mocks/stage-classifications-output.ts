@@ -1,8 +1,8 @@
 export const MATCH_GAME_NAME = [
   {
-    name: "Pokemon Stadium",
+    name: "Pokémon Stadium",
     gameName: "xstadium_",
-    series: "Pokemon",
+    series: "Pokémon",
     tourneyPresence: 0
   },
   {

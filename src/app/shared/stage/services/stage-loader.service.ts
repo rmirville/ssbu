@@ -85,7 +85,7 @@ export class StageLoaderService {
         stage$.subscribe({
           next(stage) {
             /**/
-            // console.log(`      + stagesHttp$.subscribe - stage$ emitted: ${JSON.stringify(stage)}`);
+            console.log(`      + stagesHttp$.subscribe - stage$ emitted: ${JSON.stringify(stage)}`);
             /**/
             // console.log('      + stagesHttp$.subscribe - stage$ emitted');
             stages.push(stage);
@@ -140,21 +140,21 @@ export class StageLoaderService {
       }
 
       /**/
-      /*if (filter) {
-        // console.log(`    * unfiltered summaries: ${JSON.stringify(summaries)}`);
-        // console.log(`    * filterList: ${JSON.stringify(filterList)}`);
-        // console.log(`    * filter type: ${filter}`);
-      }*/
+      if (filter) {
+        console.log(`    * unfiltered summaries: ${JSON.stringify(summaries)}`);
+        console.log(`    * filterList: ${JSON.stringify(filterList)}`);
+        console.log(`    * filter type: ${filter}`);
+      }
 
       if (filter == 'exclude') {
         filteredSummaries = summaries.filter( (summary) => {
-          return !filterList.find( (filterItem) => filterItem == summary.gameName );
+          return !filterList.find((filterItem) => filterItem.split('00')[0] == summary.gameName );
         });
       }
 
       else if (filter == 'include') {
         filteredSummaries = summaries.filter( (summary) => {
-          return filterList.find( (filterItem) => filterItem == summary.gameName );
+          return filterList.find((filterItem) => filterItem.split('00')[0] == summary.gameName );
         });
       }
 

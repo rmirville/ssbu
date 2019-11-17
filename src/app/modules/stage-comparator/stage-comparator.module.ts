@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { StageSelectComponent } from '../../shared/components/stage-select/stage-select.component';
-
 import { StageComparatorComponent } from './components/stage-comparator/stage-comparator.component';
 import { StageComparatorGraphComponent } from './components/stage-comparator-graph/stage-comparator-graph.component';
 import { StageComparatorNumberTableComponent } from './components/stage-comparator-number-table/stage-comparator-number-table.component';

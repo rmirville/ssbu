@@ -210,23 +210,23 @@ export class StageComparatorResolverService implements Resolve<StageComparatorRo
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<StageComparatorRouteData> {
     /**/
-    // console..log('StageComparatorResolverService::resolve()');
+    console.log('StageComparatorResolverService::resolve()');
     const stageData$ = new Observable<StageComparatorRouteData>(observer => {
       /**/
-      // console..log(`  * observer at start: ${JSON.stringify(Object.keys(observer))}`);
+      // console.log(`  * observer at start: ${JSON.stringify(Object.keys(observer))}`);
       let stageData: StageComparatorRouteData = {stages: null, dimensionsFull: null, stageSelections: null};
 
       const stages$ = this.sls.loadStages('include', COMPARATOR_STAGES.map(stage => stage.lvd));
       stages$.subscribe(stages => {
         /**/
-        // console.log('  * received stages');
-        // console..log(`  * stages.length: ${JSON.stringify(stages.length)}`);
+        console.log('  * received stages');
+        console.log(`  * stages.length: ${JSON.stringify(stages.length)}`);
         // console.log(`  * stageData: ${JSON.stringify(stageData)}`);
         stageData.stages = stages;
         // console.log(`  * stageData: ${JSON.stringify(stageData)}`);
 
         /**/
-        // console..log('  * calling getDimensionsFull()');
+        // console.log('  * calling getDimensionsFull()');
         const stagesBasic = stages.map( stage => { return {name: stage.name, gameName: stage.gameName}; } );
         const stageCalculations$ = forkJoin(
           this.sds.getDimensionsFull(stages, COMPARATOR_STAGES),
@@ -245,8 +245,8 @@ export class StageComparatorResolverService implements Resolve<StageComparatorRo
         //// const dimensionsFull$ = this.sds.getDimensionsFull(stages, COMPARATOR_STAGES);
         //// dimensionsFull$.subscribe((dimensionsFull) => {
           /**/
-          // console..log('  * received dimensionsFull');
-          // console..log(`  * dimensionsFull: ${JSON.stringify(dimensionsFull)}`);
+          // console.log('  * received dimensionsFull');
+          // console.log(`  * dimensionsFull: ${JSON.stringify(dimensionsFull)}`);
         ////   stageData.dimensionsFull = dimensionsFull;
           // console.log(`  * stageData before sending: ${JSON.stringify(stageData)}`);
           // console.log(`  * observer right before sending: ${JSON.stringify(Object.keys(observer))}`);

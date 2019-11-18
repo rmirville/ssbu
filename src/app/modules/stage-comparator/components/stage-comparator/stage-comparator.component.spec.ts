@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { StageComparatorComponent } from './stage-comparator.component';
+import { StageSelectInfo } from '../../../../shared/stage/models/stage-select-info.model';
 
 import { StageSelectMockComponent } from '../../../../shared/stage/components/mocks/stage-select.mock.component';
 import { StageComparatorGraphMockComponent } from '../../../../shared/stage/components/mocks/stage-comparator-graph.mock.component';
@@ -136,6 +137,14 @@ describe('StageComparatorComponent', () => {
       let selectDElem: DebugElement = dElem.query(By.css('ssbu-stage-select'));
       let actualContent: string = selectDElem.nativeElement.textContent;
       expect(actualContent).toEqual(expectedContent);
+    });
+
+    it('should provide the stage selection from the ActivatedRoute to the stage select component', () => {
+      let selectDElem: DebugElement = fixture.debugElement.query(By.css('ssbu-stage-select'));
+      let selectComp: StageSelectMockComponent = selectDElem.componentInstance;
+      let actualStages: StageSelectInfo[] = selectComp.stages;
+      // TODO: wait for changes?
+      expect(actualStages).toEqual(STAGE_SELECTIONS_ONE);
     });
     
     describe('default view', () => {

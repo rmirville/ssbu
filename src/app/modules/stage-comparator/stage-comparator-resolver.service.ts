@@ -48,14 +48,6 @@ const COMPARATOR_STAGES: StagePieceMap[] = [
     pieceName: "COL_00_Floor"
   },
   {
-    lvd: "bossstage_final2_00",
-    pieceName: "COL_00_Floor"
-  },
-  {
-    lvd: "bossstage_final3_00",
-    pieceName: "COL_00_Floor"
-  },
-  {
     lvd: "battle_common",
     pieceName: "COL_00_Ring01"
   },
@@ -210,7 +202,7 @@ export class StageComparatorResolverService implements Resolve<StageComparatorRo
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<StageComparatorRouteData> {
     /**/
-    console.log('StageComparatorResolverService::resolve()');
+    // console.log('StageComparatorResolverService::resolve()');
     const stageData$ = new Observable<StageComparatorRouteData>(observer => {
       /**/
       // console.log(`  * observer at start: ${JSON.stringify(Object.keys(observer))}`);
@@ -219,8 +211,8 @@ export class StageComparatorResolverService implements Resolve<StageComparatorRo
       const stages$ = this.sls.loadStages('include', COMPARATOR_STAGES.map(stage => stage.lvd));
       stages$.subscribe(stages => {
         /**/
-        console.log('  * received stages');
-        console.log(`  * stages.length: ${JSON.stringify(stages.length)}`);
+        // console.log('  * received stages');
+        // console.log(`  * stages.length: ${JSON.stringify(stages.length)}`);
         // console.log(`  * stageData: ${JSON.stringify(stageData)}`);
         stageData.stages = stages;
         // console.log(`  * stageData: ${JSON.stringify(stageData)}`);

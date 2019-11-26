@@ -5,40 +5,106 @@
   <div class="card-body">
     <form [formGroup]="stageGroup">
       <div class="form-group">
-        <div class="card">
-          <div id="stage-select-common-starter-header" class="card-header">
-            <h3 class="btn btn-link" data-toggle="collapse" data-target="#stage-select-common-starter-collapse"
-              aria-expanded="true" aria-controls="stage-select-common-starter-collapse">
-                <span class="collapse-icon"></span> Common Starters
-            </h3>
-          </div>
-          <div id="stage-select-common-starter-collapse" class="collapse show" aria-labelledby="stage-select-common-starter-header">
-            <div class="card-body">
-              <div class="form-group form-inline mx-n3 mb-0">
-                <ng-container *ngFor="let stage of stages">
-                  <div class="form-check px-3 pb-3">
-                    <input class="form-check-input" id="{{stage.gameName}}" type="checkbox" />
-                    <label class="form-check-label" for="{{stage.gameName}}">{{stage.name}}</label>
-                  </div>
-                </ng-container>
+        <h3>By Tournament Legality</h3>
+        <ng-container *ngIf="tourneyPresence.legalCommon">
+          <div class="card tourney-legal-common">
+            <div class="card-header">
+              <h4 class="btn btn-link" data-toggle="collapse" data-target="#stage-select-legal-common-collapse"
+                aria-expanded="true" aria-controls="stage-select-legal-common-collapse">
+                  <span class="collapse-icon"></span> Commonly Legal
+              </h4>
+            </div>
+            <div id="stage-select-legal-common-collapse" class="collapse show" aria-labelledby="stage-select-legal-common-header">
+              <div class="card-body row">
+                <div class="form-group form-inline">
+                  <ng-container *ngFor="let stage of classifiedStages.tourneyPresence.legalCommon">
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                      <div class="form-check">
+                        <input class="form-check-input" id="{{stage.gameName}}" type="checkbox" />
+                        <label class="form-check-label" for="{{stage.gameName}}">{{stage.name}}</label>
+                      </div>
+                    </div>
+                  </ng-container>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="card">
-          <div id="stage-select-common-counter-header" class="card-header">
-            <h3 class="btn btn-link collapsed" data-toggle="collapse" data-target="#stage-select-common-counter-collapse"
-              aria-expanded="false" aria-controls="stage-select-common-counter-collapse">
-                <span class="collapse-icon"></span> Common Counterpicks
-            </h3>
-          </div>
-          <div id="stage-select-common-counter-collapse" class="collapse" aria-labelledby="stage-select-common-counter-header" >
-            <div class="card-body">
-              <div class="form-group form-inline mx-n3 mb-0">
+        </ng-container>
+        <ng-container *ngIf="tourneyPresence.legalUncommon">
+          <div class="card tourney-legal-uncommon">
+            <div class="card-header">
+              <h4 class="btn btn-link collapsed" data-toggle="collapse" data-target="#stage-select-legal-uncommon-collapse"
+                aria-expanded="false" aria-controls="stage-select-legal-uncommon-collapse">
+                <span class="collapse-icon"></span> Uncommonly Legal
+              </h4>
+            </div>
+            <div id="stage-select-legal-uncommon-collapse" class="collapse"
+              aria-labelledby="stage-select-legal-uncommon-header">
+              <div class="card-body row">
+                <div class="form-group form-inline">
+                  <ng-container *ngFor="let stage of classifiedStages.tourneyPresence.legalUncommon">
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                      <div class="form-check">
+                        <input class="form-check-input" id="{{stage.gameName}}" type="checkbox" />
+                        <label class="form-check-label" for="{{stage.gameName}}">{{stage.name}}</label>
+                      </div>
+                    </div>
+                  </ng-container>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </ng-container>
+        <ng-container *ngIf="tourneyPresence.legalRare">
+          <div class="card tourney-legal-rare">
+            <div class="card-header">
+              <h4 class="btn btn-link collapsed" data-toggle="collapse" data-target="#stage-select-legal-rare-collapse"
+                aria-expanded="false" aria-controls="stage-select-legal-rare-collapse">
+                <span class="collapse-icon"></span> Rarely Legal
+              </h4>
+            </div>
+            <div id="stage-select-legal-rare-collapse" class="collapse"
+              aria-labelledby="stage-select-legal-rare-header">
+              <div class="card-body row">
+                <div class="form-group form-inline">
+                  <ng-container *ngFor="let stage of classifiedStages.tourneyPresence.legalRare">
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                      <div class="form-check">
+                        <input class="form-check-input" id="{{stage.gameName}}" type="checkbox" />
+                        <label class="form-check-label" for="{{stage.gameName}}">{{stage.name}}</label>
+                      </div>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="form-group">
+        <h3>By Series</h3>
+          <div class="card">
+            <div id="stage-select-common-counter-header" class="card-header">
+              <h4 class="btn btn-link collapsed" data-toggle="collapse" data-target="#stage-select-common-counter-collapse"
+                aria-expanded="false" aria-controls="stage-select-common-counter-collapse">
+                <span class="collapse-icon"></span> All Stages
+              </h4>
+            </div>
+            <div id="stage-select-common-counter-collapse" class="collapse" aria-labelledby="stage-select-common-counter-header">
+              <div class="card-body row">
+                <div class="form-group form-inline">
+                  <ng-container *ngFor="let stage of stages">
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                      <div class="form-check">
+                        <input class="form-check-input" id="{{stage.gameName}}" type="checkbox" />
+                        <label class="form-check-label" for="{{stage.gameName}}">{{stage.name}}</label>
+                      </div>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary mb-2">Update</button>

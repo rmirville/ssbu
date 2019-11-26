@@ -26,11 +26,11 @@ hr {
 }
 
 h1,
-h2 {
+h2,
+h3 {
   font-family: 'FOT EB', sans-serif;
 }
 
-h3,
 h4,
 h5 {
   font-family: 'Roboto', sans-serif;
@@ -391,7 +391,7 @@ h3 {
 }
 
 .card-header h2 {
-  margin-bottom:.75rem;
+  margin-bottom: 0;
   padding: 1rem;
   border: none;
   font-family: 'FOT EB', sans-serif;
@@ -401,14 +401,14 @@ h3 {
   color: white;
 }
 
-.card-header h3 {
+.card-header h4 {
   margin-bottom: .25rem;
   padding: 1rem;
   background-color: hsl(218, 75%, 55%);
   background-color: hsl(196, 12%, 17%);
 }
 
-.card-header h3 {
+.card-header h4 {
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
   line-height: 1rem;
@@ -433,8 +433,7 @@ h3 {
 
 .card-header .collapse-icon {
   display: inline-block;
-  width: 1.3rem;
-  text-align: center;
+  width: 1rem;
 }
 
 .card-header .collapse-icon::before {
@@ -452,4 +451,16 @@ h3 {
 
 .card-body {
   padding: 1rem;
+}
+
+/* Content - Cards - Forms */
+.card .row .form-inline {
+  width: 100%;
+  margin: 0 -1rem;
+  padding: 0 1rem;
+}
+
+.card .form-inline .form-check {
+  margin-bottom: 1rem;
+  justify-content: start;
 }

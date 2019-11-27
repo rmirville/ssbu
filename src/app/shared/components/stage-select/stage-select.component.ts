@@ -29,10 +29,12 @@ export class StageSelectComponent implements OnInit {
     series: {}
   };
   tourneyPresence: {
+    show: boolean;
     legalCommon: boolean;
     legalUncommon: boolean;
     legalRare: boolean;
   } = {
+    show: false,
     legalCommon: false,
     legalUncommon: false,
     legalRare: false
@@ -76,6 +78,7 @@ export class StageSelectComponent implements OnInit {
     this.tourneyPresence.legalCommon = (this.classifiedStages.tourneyPresence.legalCommon.length > 0);
     this.tourneyPresence.legalUncommon = (this.classifiedStages.tourneyPresence.legalUncommon.length > 0);
     this.tourneyPresence.legalRare = (this.classifiedStages.tourneyPresence.legalRare.length > 0);
+    this.tourneyPresence.show = (this.tourneyPresence.legalCommon || this.tourneyPresence.legalUncommon || this.tourneyPresence.legalRare);
   }
 
 }

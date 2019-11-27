@@ -856,3 +856,349 @@ export const STAGE_SELECTIONS_TOURNEY = {
     ]
   }
 };
+
+export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON = [
+  {
+    name: "Murky Swamp",
+    gameName: "farswamp_",
+    series: "Farawayland",
+    tourneyPresence: 0
+  },
+  {
+    name: "Abandoned Castle",
+    gameName: "explorercastle_",
+    series: "Explorer",
+    tourneyPresence: 0
+  },
+  {
+    name: "Fairless Mills",
+    gameName: "farmmills_",
+    series: "Fantasy Farmer",
+    tourneyPresence: 0
+  }
+];
+
+export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_BANNED = [
+  {
+    name: "Turkey Factory",
+    gameName: "farmturkey_",
+    series: "Fantasy Farmer",
+    tourneyPresence: -1
+  },
+  {
+    name: "Mound of Ashes",
+    gameName: "fireashes_",
+    series: "World of Fire",
+    tourneyPresence: -1
+  },
+  {
+    name: "Aphid Farms",
+    gameName: "farmaphid_",
+    series: "Fantasy Farmer",
+    tourneyPresence: 0
+  }
+];
+
+
+export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_UNCOMMON = [
+  {
+    name: "Atrophy Island",
+    gameName: "moroseatrophy_",
+    series: "Morose Man",
+    tourneyPresence: 1
+  },
+  {
+    name: "Tutor Palace",
+    gameName: "schooltutor_",
+    series: "School",
+    tourneyPresence: 1
+  },
+  {
+    name: "Forgiveness Forest",
+    gameName: "virtueforest",
+    series: "Virtue Reality",
+    tourneyPresence: 1
+  }
+];
+
+export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_UNCOMMON_BANNED = [
+  {
+    name: "Entropical Island",
+    gameName: "thermoisland_",
+    series: "The Thermodynamic Duo",
+    tourneyPresence: 1
+  },
+  {
+    name: "Interrogation Room",
+    gameName: "policequestion_",
+    series: "Police Force Prime",
+    tourneyPresence: 1
+  },
+  {
+    name: "Ginormous Jenga Jungle",
+    gameName: "fairlyjenga_",
+    series: "A Fairly Large Adventure Game",
+    tourneyPresence: -1
+  }
+];
+
+export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_RARE = [
+  {
+    name: "Break Room",
+    gameName: "janitorbreak_",
+    series: "Super Janitor",
+    tourneyPresence: 2
+  },
+  {
+    name: "Hotel Lobby",
+    gameName: "managehotel_",
+    series: "Ultra Manager",
+    tourneyPresence: 2
+  }
+];
+
+export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_RARE_BANNED = [
+  {
+    name: "Bully Beach",
+    gameName: "racebeach_",
+    series: "Raceway Inferno",
+    tourneyPresence: 2
+  },
+  {
+    name: "Federal Alliance Headquarters",
+    gameName: "superhq_",
+    series: "Super Group Alpha",
+    tourneyPresence: -1
+  },
+  {
+    name: "Easter Bunny's Hideout",
+    gameName: "holidayeaster_",
+    series: "World of Holidays",
+    tourneyPresence: 2
+  }
+];
+
+export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_UNCOMMON = [
+  {
+    name: "Ferretable Wasteland",
+    gameName: "animalferret_",
+    series: "Animalice",
+    tourneyPresence: 0
+  },
+  {
+    name: "Frantic Freezer",
+    gameName: "cookfreezer_",
+    series: "Chaos Cook",
+    tourneyPresence: 0
+  },
+  {
+    name: "Acrid Acid Antfarm",
+    gameName: "petsacrid_",
+    series: "Pets: The Musical",
+    tourneyPresence: 1
+  },
+  {
+    name: "Acorn Tree of Actual Treasure",
+    gameName: "flantasytree_",
+    series: "Flantastic Flantasy",
+    tourneyPresence: 0
+  },
+  {
+    name: "Shia Shire",
+    gameName: "celebrityshire_",
+    series: "Celebrity Fighters",
+    tourneyPresence: 1
+  }
+];
+
+export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_UNCOMMON_BANNED = [
+  {
+    name: "Chris's Christening Cruise",
+    gameName: "fortuneboat_",
+    series: "Fortune Universe",
+    tourneyPresence: 1
+  },
+  {
+    name: "Goldland",
+    gameName: "periodicgold_",
+    series: "The Periodic Table That Could",
+    tourneyPresence: -1
+  },
+  {
+    name: "Foul Fowl Farm",
+    gameName: "animalfarm_",
+    series: "Animalice",
+    tourneyPresence: 0
+  },
+  {
+    name: "Fancy Fortune Frontier",
+    gameName: "fortunefrontier_",
+    series: "Fortune Universe",
+    tourneyPresence: 0
+  },
+  {
+    name: "Inflatable Interdimensional Portal",
+    gameName: "inventorportal_",
+    series: "Inventor Adventures",
+    tourneyPresence: 1
+  }
+];
+
+export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_RARE = [
+  {
+    name: "Fantasy Flan Land",
+    gameName: "courageflan_",
+    series: "Courage the Cowardly Game",
+    tourneyPresence: 2
+  },
+  {
+    name: "French Fry Temple",
+    gameName: "megasfry_",
+    series: "Megas Deluxe",
+    tourneyPresence: 2
+  },
+  {
+    name: "Dog Tower",
+    gameName: "petsdog_",
+    series: "Pets",
+    tourneyPresence: 0
+  },
+  {
+    name: "Ferris Windmill",
+    gameName: "moviemill_",
+    series: "Movie Mash",
+    tourneyPresence: 2
+  },
+  {
+    name: "Introspective Pizza Oven",
+    gameName: "furnitureoven_",
+    series: "Absurd Furniture",
+    tourneyPresence: 0
+  },
+  {
+    name: "Widened Barricade",
+    gameName: "armybarricade_",
+    series: "Army Time Zero",
+    tourneyPresence: 2
+  }
+];
+
+export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_RARE_BANNED = [
+  {
+    name: "Frere Praire",
+    gameName: "folkfrere_",
+    series: "Folk Fair",
+    tourneyPresence: -1
+  },
+  {
+    name: "Tremendously Towering Tom's Pizza",
+    gameName: "judytom_",
+    series: "The EJudycator",
+    tourneyPresence: -1
+  },
+  {
+    name: "Flower World",
+    gameName: "johnflower_",
+    series: "Super John Time",
+    tourneyPresence: 2
+  },
+  {
+    name: "Destructible Dance Party",
+    gameName: "destroyparty_",
+    series: "Destroy Things Now",
+    tourneyPresence: 0
+  },
+  {
+    name: "Actual Archetype Archway",
+    gameName: "literacerarch_",
+    series: "Literacers",
+    tourneyPresence: 2
+  }
+];
+
+export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_UNCOMMON_RARE = [
+  {
+    name: "Howdy-Doody Howie Land",
+    gameName: "greethowdy_",
+    series: "Greetinator Beta",
+    tourneyPresence: 1
+  },
+  {
+    name: "Fair Enough Fairy Town",
+    gameName: "johnfairy_",
+    series: "Super John Time",
+    tourneyPresence: 2
+  },
+  {
+    name: "Manger Manager's Office",
+    gameName: "historymanager_",
+    series: "History Team",
+    tourneyPresence: 2
+  },
+  {
+    name: "Picnic",
+    gameName: "foodpicnic_",
+    series: "Food Fighters",
+    tourneyPresence: 2
+  },
+  {
+    name: "The Unquestionable Quentin's Quarry",
+    gameName: "alliteratequentin_",
+    series: "Alliteration Island",
+    tourneyPresence: 1
+  }
+];
+
+export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_UNCOMMON_RARE_BANNED = [
+  {
+    name: "Forcefield Fence",
+    gameName: "alliteratefence_",
+    series: "Alliteration Island",
+    tourneyPresence: 2
+  },
+  {
+    name: "Creator's Crater",
+    gameName: "buildercrater_",
+    series: "Builder Squad",
+    tourneyPresence: -1
+  },
+  {
+    name: "Fort 49",
+    gameName: "armyfort_",
+    series: "Army Team Squad",
+    tourneyPresence: 1
+  },
+  {
+    name: "Trevor Town",
+    gameName: "alliteratetrevor_",
+    series: "Alliteration Island",
+    tourneyPresence: 1
+  },
+  {
+    name: "Picture Perfect Patio",
+    gameName: "paintpatio_",
+    series: "It's Painting Time!",
+    tourneyPresence: -1
+  }
+];
+
+export const STAGE_SELECTIONS_TOURNEY_HIDE_LEGAL_BANNED = [
+  {
+    name: "True Love Island",
+    gameName: "romanceisland_",
+    series: "Romance Journey",
+    tourneyPresence: -1
+  },
+  {
+    name: "Board Room",
+    gameName: "workboard_",
+    series: "Workplace Adventure",
+    tourneyPresence: -1
+  },
+  {
+    name: "Fordy River",
+    gameName: "passengerfordy_",
+    series: "Passenger Road",
+    tourneyPresence: -1
+  }
+];

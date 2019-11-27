@@ -322,6 +322,8 @@ describe('StageSelectComponent', () => {
     });
 
     it('should put a mix of tourney-legal stages in the appropriate tourney categories', () => {
+        /**/
+        // console.log('=== SPEC - Group stages by tourney category');
       const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY.input;
       const expectedStages = {
         legalCommon: STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY.output.legalCommon,
@@ -348,31 +350,150 @@ describe('StageSelectComponent', () => {
       }
     });
 
-    xit('should appear if there are commonly legal stages present', () => {
+    describe('section visibility', () => {
 
-    });
+      it('should not appear if there are only banned stages present', () => {
+        /**/
+        // console.log('=== SPEC - Hide tourney section when there are no legal stages');
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_HIDE_LEGAL_BANNED;
+        selectHostComp.stages = [...providedStages];
+        selectHostFixture.detectChanges();
 
-    xit('should appear if there are uncommonly legal stages present', () => {
+        const sectionDElem: DebugElement = selectDElem.query(By.css('form .by-tourney'));
+        expect(sectionDElem).toBeNull();
+      });
 
-    });
+      it('should appear if there are commonly legal stages present', () => {
+        /**/
+        // console.log('=== SPEC - Show tourney section with common legal stages');
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON;
+        selectHostComp.stages = [...providedStages];
+        selectHostFixture.detectChanges();
 
-    xit('should appear if there are rarely legal stages present', () => {
+        const sectionDElem: DebugElement = selectDElem.query(By.css('form .by-tourney'));
+        expect(sectionDElem).toBeDefined();
+      });
 
-    });
+      it('should appear if there are commonly legal and banned stages present', () => {
+        /**/
+        // console.log('=== SPEC - Show tourney section with commonly legal and banned stages');
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_BANNED;
+        selectHostComp.stages = [...providedStages];
+        selectHostFixture.detectChanges();
 
-    xit('should appear if there are commonly and uncommonly legal stages present', () => {
+        const sectionDElem: DebugElement = selectDElem.query(By.css('form .by-tourney'));
+        expect(sectionDElem).toBeDefined();
+      });
 
-    });
+      it('should appear if there are uncommonly legal stages present', () => {
+        /**/
+        // console.log('=== SPEC - Show tourney section with uncommonly legal stages');
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_UNCOMMON;
+        selectHostComp.stages = [...providedStages];
+        selectHostFixture.detectChanges();
 
-    xit('should appear if there are commonly and rarely legal stages present', () => {
+        const sectionDElem: DebugElement = selectDElem.query(By.css('form .by-tourney'));
+        expect(sectionDElem).toBeDefined();
+      });
 
-    });
+      it('should appear if there are uncommonly legal and banned stages present', () => {
+        /**/
+        // console.log('=== SPEC - Show tourney section with uncommonly legal and banned stages');
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_UNCOMMON_BANNED;
+        selectHostComp.stages = [...providedStages];
+        selectHostFixture.detectChanges();
 
-    xit('should appear if there are uncommonly and rarely legal stages present', () => {
+        const sectionDElem: DebugElement = selectDElem.query(By.css('form .by-tourney'));
+        expect(sectionDElem).toBeDefined();
+      });
 
-    });
+      xit('should appear if there are rarely legal stages present', () => {
+        /**/
+        // console.log('=== SPEC - Show tourney section with rarely legal stages');
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_RARE;
+        selectHostComp.stages = [...providedStages];
+        selectHostFixture.detectChanges();
 
-    xit('should not appear if there are no legal stages present', () => {
+        const sectionDElem: DebugElement = selectDElem.query(By.css('form .by-tourney'));
+        expect(sectionDElem).toBeDefined();
+      });
+
+      it('should appear if there are rarely legal and banned stages present', () => {
+        /**/
+        // console.log('=== SPEC - Show tourney section with rarely legal and banned stages');
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_RARE_BANNED;
+        selectHostComp.stages = [...providedStages];
+        selectHostFixture.detectChanges();
+
+        const sectionDElem: DebugElement = selectDElem.query(By.css('form .by-tourney'));
+        expect(sectionDElem).toBeDefined();
+      });
+
+      it('should appear if there are commonly and uncommonly legal stages present', () => {
+        /**/
+        // console.log('=== SPEC - Show tourney section with commonly and uncommonly legal stages');
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_UNCOMMON;
+        selectHostComp.stages = [...providedStages];
+        selectHostFixture.detectChanges();
+
+        const sectionDElem: DebugElement = selectDElem.query(By.css('form .by-tourney'));
+        expect(sectionDElem).toBeDefined();
+      });
+
+      it('should appear if there are commonly legal, uncommonly legal, and banned stages present', () => {
+        /**/
+        // console.log('=== SPEC - Show tourney section with commonly legal, uncommonly legal, and banned stages');
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_UNCOMMON_BANNED;
+        selectHostComp.stages = [...providedStages];
+        selectHostFixture.detectChanges();
+
+        const sectionDElem: DebugElement = selectDElem.query(By.css('form .by-tourney'));
+        expect(sectionDElem).toBeDefined();
+      });
+
+      it('should appear if there are commonly and rarely legal stages present', () => {
+        /**/
+        // console.log('=== SPEC - Show tourney section with commonly and rarely legal stages');
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_RARE;
+        selectHostComp.stages = [...providedStages];
+        selectHostFixture.detectChanges();
+
+        const sectionDElem: DebugElement = selectDElem.query(By.css('form .by-tourney'));
+        expect(sectionDElem).toBeDefined();
+      });
+
+      it('should appear if there are commonly legal, rarely legal, and banned stages present', () => {
+        /**/
+        // console.log('=== SPEC - Show tourney section with commonly legal, rarely legal, and banned stages');
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_RARE_BANNED;
+        selectHostComp.stages = [...providedStages];
+        selectHostFixture.detectChanges();
+
+        const sectionDElem: DebugElement = selectDElem.query(By.css('form .by-tourney'));
+        expect(sectionDElem).toBeDefined();
+      });
+
+      it('should appear if there are uncommonly and rarely legal stages present', () => {
+        /**/
+        // console.log('=== SPEC - Show tourney section with uncommonly and rarely legal stages');
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_UNCOMMON_RARE;
+        selectHostComp.stages = [...providedStages];
+        selectHostFixture.detectChanges();
+
+        const sectionDElem: DebugElement = selectDElem.query(By.css('form .by-tourney'));
+        expect(sectionDElem).toBeDefined();
+      });
+
+      it('should appear if there are uncommonly legal, rarely legal, and banned stages present', () => {
+        /**/
+        // console.log('=== SPEC - Show tourney section with uncommonly legal, rarely legal, and banned stages');
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_UNCOMMON_RARE_BANNED;
+        selectHostComp.stages = [...providedStages];
+        selectHostFixture.detectChanges();
+
+        const sectionDElem: DebugElement = selectDElem.query(By.css('form .by-tourney'));
+        expect(sectionDElem).toBeDefined();
+      });
 
     });
 

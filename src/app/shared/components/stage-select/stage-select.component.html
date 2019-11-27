@@ -4,7 +4,7 @@
   </div>
   <div class="card-body">
     <form [formGroup]="stageGroup">
-      <div class="form-group">
+      <div *ngIf="tourneyPresence.show" class="form-group by-tourney">
         <h3>By Tournament Legality</h3>
         <ng-container *ngIf="tourneyPresence.legalCommon">
           <div class="card tourney-legal-common">

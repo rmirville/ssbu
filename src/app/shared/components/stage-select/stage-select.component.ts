@@ -3,6 +3,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { StageSelectInfo } from '../../stage/models/stage-select-info.model';
 
+interface StageSelectSection {
+  id: string;
+  title: string;
+  attribute: string;
+  show: boolean;
+  expand?: boolean;
+  sections?: StageSelectSection[];
+};
+
 @Component({
   selector: 'ssbu-stage-select',
   templateUrl: './stage-select.component.html',
@@ -28,16 +37,32 @@ export class StageSelectComponent implements OnInit {
     },
     series: {}
   };
-  tourneyPresence: {
-    show: boolean;
-    legalCommon: boolean;
-    legalUncommon: boolean;
-    legalRare: boolean;
-  } = {
+  tourneyPresence: StageSelectSection = {
+    id: 'tourneyPresence',
+    title: 'By Tournament Legality',
+    attribute: 'by-tourney',
     show: false,
-    legalCommon: false,
-    legalUncommon: false,
-    legalRare: false
+    expand: true,
+    sections: [
+      {
+        id: 'legalCommon',
+        title: 'Commonly Legal',
+        attribute: 'legal-common',
+        show: false
+      },
+      {
+        id: 'legalUncommon',
+        title: 'Uncommonly Legal',
+        attribute: 'legal-uncommon',
+        show: false
+      },
+      {
+        id: 'legalRare',
+        title: 'Rarely Legal',
+        attribute: 'legal-rare',
+        show: false
+      }
+    ]
   };
 
   constructor(private fb: FormBuilder) {
@@ -75,10 +100,10 @@ export class StageSelectComponent implements OnInit {
 
     /**/
     // console.log(`* classifiedStages.legalCommon: ${JSON.stringify(this.classifiedStages.tourneyPresence.legalCommon)}`);
-    this.tourneyPresence.legalCommon = (this.classifiedStages.tourneyPresence.legalCommon.length > 0);
-    this.tourneyPresence.legalUncommon = (this.classifiedStages.tourneyPresence.legalUncommon.length > 0);
-    this.tourneyPresence.legalRare = (this.classifiedStages.tourneyPresence.legalRare.length > 0);
-    this.tourneyPresence.show = (this.tourneyPresence.legalCommon || this.tourneyPresence.legalUncommon || this.tourneyPresence.legalRare);
+    this.tourneyPresence.sections[0].show = (this.classifiedStages.tourneyPresence.legalCommon.length > 0);
+    this.tourneyPresence.sections[1].show = (this.classifiedStages.tourneyPresence.legalUncommon.length > 0);
+    this.tourneyPresence.sections[2].show = (this.classifiedStages.tourneyPresence.legalRare.length > 0);
+    this.tourneyPresence.show = (this.tourneyPresence.sections[0].show || this.tourneyPresence.sections[1].show || this.tourneyPresence.sections[2].show);
   }
 
 }

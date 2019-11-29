@@ -407,7 +407,7 @@ describe('StageSelectComponent', () => {
         expect(sectionDElem).toBeDefined();
       });
 
-      xit('should appear if there are rarely legal stages present', () => {
+      it('should appear if there are rarely legal stages present', () => {
         /**/
         // console.log('=== SPEC - Show tourney section with rarely legal stages');
         const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_RARE;

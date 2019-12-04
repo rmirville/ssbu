@@ -1,4 +1,6 @@
-export const VALID = {
+import { StageSelectInfo } from '../stage-select-info.model';
+
+export const VALID: StageSelectInfo = {
   name: "Princess Peach's Castle",
   gameName: "foodfighterz",
   series: "Super Mario",
@@ -35,7 +37,7 @@ export const BAD_DATA = {
   }
 };
 
-export const STAGE_SELECTIONS_ONE = [
+export const ONE: StageSelectInfo[] = [
   {
     name: "Princess Peach's Castle",
     gameName: "mario_castledx_",
@@ -56,7 +58,7 @@ export const STAGE_SELECTIONS_ONE = [
   }
 ];
 
-export const STAGE_SELECTIONS_TWO = [
+export const TWO: StageSelectInfo[] = [
   {
     name: "Arena Ferox",
     gameName: "colloseum_",
@@ -77,7 +79,7 @@ export const STAGE_SELECTIONS_TWO = [
   }
 ];
 
-export const STAGE_SELECTIONS_THREE = [
+export const THREE: StageSelectInfo[] = [
   {
     name: "Wily Castle",
     gameName: "wily_",
@@ -98,7 +100,7 @@ export const STAGE_SELECTIONS_THREE = [
   }
 ];
 
-export const STAGE_SELECTIONS_LEGAL_COMMON_PRESENT = [
+export const LEGAL_COMMON_PRESENT: StageSelectInfo[] = [
   {
     name: "Extreme Place",
     gameName: "extremeplace_",
@@ -137,7 +139,7 @@ export const STAGE_SELECTIONS_LEGAL_COMMON_PRESENT = [
   }
 ];
 
-export const STAGE_SELECTIONS_LEGAL_COMMON_ABSENT = [
+export const LEGAL_COMMON_ABSENT: StageSelectInfo[] = [
   {
     name: "Whereabouts",
     gameName: "whereabouts_",
@@ -164,7 +166,7 @@ export const STAGE_SELECTIONS_LEGAL_COMMON_ABSENT = [
   }
 ];
 
-export const STAGE_SELECTIONS_LEGAL_COMMON_INCLUDE = {
+export const LEGAL_COMMON_INCLUDE: { [property: string]: StageSelectInfo[] } = {
   allStages: [
     {
       name: "Place of Destiny",
@@ -244,7 +246,7 @@ export const STAGE_SELECTIONS_LEGAL_COMMON_INCLUDE = {
   ]
 };
 
-export const STAGE_SELECTIONS_LEGAL_COMMON_EXCLUDE = {
+export const LEGAL_COMMON_EXCLUDE: { [property: string]: StageSelectInfo[] } = {
   allStages: [
     {
       name: "Haystack",
@@ -342,7 +344,7 @@ export const STAGE_SELECTIONS_LEGAL_COMMON_EXCLUDE = {
   ]
 };
 
-export const STAGE_SELECTIONS_LEGAL_UNCOMMON_PRESENT = [
+export const LEGAL_UNCOMMON_PRESENT: StageSelectInfo[] = [
   {
     name: "World of Light",
     gameName: "smashultlight_",
@@ -381,7 +383,7 @@ export const STAGE_SELECTIONS_LEGAL_UNCOMMON_PRESENT = [
   }
 ];
 
-export const STAGE_SELECTIONS_LEGAL_UNCOMMON_ABSENT = [
+export const LEGAL_UNCOMMON_ABSENT: StageSelectInfo[] = [
   {
     name: "UN Embassy",
     gameName: "historyembassy_",
@@ -408,7 +410,7 @@ export const STAGE_SELECTIONS_LEGAL_UNCOMMON_ABSENT = [
   }
 ];
 
-export const STAGE_SELECTIONS_LEGAL_UNCOMMON_INCLUDE = {
+export const LEGAL_UNCOMMON_INCLUDE: { [property: string]: StageSelectInfo[] } = {
   allStages: [
     {
       name: "Cafeteria",
@@ -469,7 +471,7 @@ export const STAGE_SELECTIONS_LEGAL_UNCOMMON_INCLUDE = {
   ]
 };
 
-export const STAGE_SELECTIONS_LEGAL_UNCOMMON_EXCLUDE = {
+export const LEGAL_UNCOMMON_EXCLUDE: { [property: string]: StageSelectInfo[] } = {
   allStages: [
     {
       name: "Ancient Pyramid",
@@ -530,7 +532,7 @@ export const STAGE_SELECTIONS_LEGAL_UNCOMMON_EXCLUDE = {
   ]
 };
 
-export const STAGE_SELECTIONS_LEGAL_RARE_PRESENT = [
+export const LEGAL_RARE_PRESENT = [
   {
     name: "Ancient Forest",
     gameName: "monsterwforest_",
@@ -575,7 +577,7 @@ export const STAGE_SELECTIONS_LEGAL_RARE_PRESENT = [
   }
 ];
 
-export const STAGE_SELECTIONS_LEGAL_RARE_ABSENT = [
+export const LEGAL_RARE_ABSENT = [
   {
     name: "Metropolis",
     gameName: "supermanmetro_",
@@ -602,7 +604,7 @@ export const STAGE_SELECTIONS_LEGAL_RARE_ABSENT = [
   }
 ];
 
-export const STAGE_SELECTIONS_LEGAL_RARE_INCLUDE = {
+export const LEGAL_RARE_INCLUDE: { [property: string]: StageSelectInfo[] } = {
   allStages: [
     {
       name: "Pizza Time Palace",
@@ -663,7 +665,7 @@ export const STAGE_SELECTIONS_LEGAL_RARE_INCLUDE = {
   ]
 };
 
-export const STAGE_SELECTIONS_LEGAL_RARE_EXCLUDE = {
+export const LEGAL_RARE_EXCLUDE: { [property: string]: StageSelectInfo[] } = {
   allStages: [
     {
       name: "Goodshop Laboratory",
@@ -760,7 +762,7 @@ export const STAGE_SELECTIONS_LEGAL_RARE_EXCLUDE = {
   ]
 };
 
-export const STAGE_SELECTIONS_TOURNEY = {
+export const TOURNEY = {
   input: [
     {
       name: "Battle Screen",
@@ -857,7 +859,7 @@ export const STAGE_SELECTIONS_TOURNEY = {
   }
 };
 
-export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON = [
+export const TOURNEY_SHOW_LEGAL_COMMON = [
   {
     name: "Murky Swamp",
     gameName: "farswamp_",
@@ -878,7 +880,7 @@ export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON = [
   }
 ];
 
-export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_BANNED = [
+export const TOURNEY_SHOW_LEGAL_COMMON_BANNED = [
   {
     name: "Turkey Factory",
     gameName: "farmturkey_",
@@ -900,7 +902,7 @@ export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_BANNED = [
 ];
 
 
-export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_UNCOMMON = [
+export const TOURNEY_SHOW_LEGAL_UNCOMMON = [
   {
     name: "Atrophy Island",
     gameName: "moroseatrophy_",
@@ -921,7 +923,7 @@ export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_UNCOMMON = [
   }
 ];
 
-export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_UNCOMMON_BANNED = [
+export const TOURNEY_SHOW_LEGAL_UNCOMMON_BANNED = [
   {
     name: "Entropical Island",
     gameName: "thermoisland_",
@@ -942,7 +944,7 @@ export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_UNCOMMON_BANNED = [
   }
 ];
 
-export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_RARE = [
+export const TOURNEY_SHOW_LEGAL_RARE = [
   {
     name: "Break Room",
     gameName: "janitorbreak_",
@@ -957,7 +959,7 @@ export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_RARE = [
   }
 ];
 
-export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_RARE_BANNED = [
+export const TOURNEY_SHOW_LEGAL_RARE_BANNED = [
   {
     name: "Bully Beach",
     gameName: "racebeach_",
@@ -978,7 +980,7 @@ export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_RARE_BANNED = [
   }
 ];
 
-export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_UNCOMMON = [
+export const TOURNEY_SHOW_LEGAL_COMMON_UNCOMMON = [
   {
     name: "Ferretable Wasteland",
     gameName: "animalferret_",
@@ -1011,7 +1013,7 @@ export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_UNCOMMON = [
   }
 ];
 
-export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_UNCOMMON_BANNED = [
+export const TOURNEY_SHOW_LEGAL_COMMON_UNCOMMON_BANNED = [
   {
     name: "Chris's Christening Cruise",
     gameName: "fortuneboat_",
@@ -1044,7 +1046,7 @@ export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_UNCOMMON_BANNED = [
   }
 ];
 
-export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_RARE = [
+export const TOURNEY_SHOW_LEGAL_COMMON_RARE = [
   {
     name: "Fantasy Flan Land",
     gameName: "courageflan_",
@@ -1083,7 +1085,7 @@ export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_RARE = [
   }
 ];
 
-export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_RARE_BANNED = [
+export const TOURNEY_SHOW_LEGAL_COMMON_RARE_BANNED = [
   {
     name: "Frere Praire",
     gameName: "folkfrere_",
@@ -1116,7 +1118,7 @@ export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_RARE_BANNED = [
   }
 ];
 
-export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_UNCOMMON_RARE = [
+export const TOURNEY_SHOW_LEGAL_UNCOMMON_RARE = [
   {
     name: "Howdy-Doody Howie Land",
     gameName: "greethowdy_",
@@ -1149,7 +1151,7 @@ export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_UNCOMMON_RARE = [
   }
 ];
 
-export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_UNCOMMON_RARE_BANNED = [
+export const TOURNEY_SHOW_LEGAL_UNCOMMON_RARE_BANNED = [
   {
     name: "Forcefield Fence",
     gameName: "alliteratefence_",
@@ -1182,7 +1184,7 @@ export const STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_UNCOMMON_RARE_BANNED = [
   }
 ];
 
-export const STAGE_SELECTIONS_TOURNEY_HIDE_LEGAL_BANNED = [
+export const TOURNEY_HIDE_LEGAL_BANNED = [
   {
     name: "True Love Island",
     gameName: "romanceisland_",

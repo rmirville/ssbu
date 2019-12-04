@@ -18,7 +18,7 @@ import { StageComparatorResolverService } from './stage-comparator-resolver.serv
 
 import { STAGES_ONE, STAGES_TWO, STAGES_THREE } from '../../shared/stage/models/mocks/stages';
 import * as STAGE_DIMENSIONS_SETS from '../../shared/stage/models/mocks/stage-dimensions-set';
-import { STAGE_SELECTIONS_ONE, STAGE_SELECTIONS_TWO, STAGE_SELECTIONS_THREE } from '../../shared/stage/models/mocks/stage-select-info';
+import * as STAGE_SELECTIONS from '../../shared/stage/models/mocks/stage-select-info';
 import { DummyComponent } from '../../shared/mocks/dummy.component';
 
 describe('StageComparatorResolverService', () => {
@@ -122,7 +122,7 @@ describe('StageComparatorResolverService', () => {
       // console.log('=== SPEC - OUTPUT TYPE ===');Cz
       stageLoaderSpy.loadStages.and.returnValue(asyncData(STAGES_ONE));
       stageDimensionsSpy.getDimensionsFull.and.returnValue(asyncData(STAGE_DIMENSIONS_SETS.TWO_STAGE_SET));
-      stageClassificationsSpy.classifyStages.and.returnValue(asyncData(STAGE_SELECTIONS_ONE));
+      stageClassificationsSpy.classifyStages.and.returnValue(asyncData(STAGE_SELECTIONS.ONE));
 
       let actualStageData$ = resolverService.resolve(route, state);
       actualStageData$.subscribe({
@@ -160,7 +160,7 @@ describe('StageComparatorResolverService', () => {
     it('should return the data that StageLoaderService and StageDimensionsService provide', async(() => {
       const expectedStages = STAGES_TWO;
       const expectedDimensionsSet = STAGE_DIMENSIONS_SETS.DIMENSIONS_SET_TWO;
-      const expectedSelections = STAGE_SELECTIONS_TWO;
+      const expectedSelections = STAGE_SELECTIONS.TWO;
 
       _compareStageData(expectedStages, expectedDimensionsSet, expectedSelections);
     }));
@@ -168,7 +168,7 @@ describe('StageComparatorResolverService', () => {
     it('should return different data provided by StageLoaderService and StageDimensionsService', async(() => {
       const expectedStages = STAGES_THREE;
       const expectedDimensionsSet = STAGE_DIMENSIONS_SETS.DIMENSIONS_SET_THREE;
-      const expectedSelections = STAGE_SELECTIONS_THREE;
+      const expectedSelections = STAGE_SELECTIONS.THREE;
 
       _compareStageData(expectedStages, expectedDimensionsSet, expectedSelections);
     }));

@@ -14,7 +14,7 @@ import { StageComparatorTextTableMockComponent } from '../../../../shared/stage/
 import { StageComparatorNumberTableMockComponent } from '../../../../shared/stage/components/mocks/stage-comparator-number-table.mock.component';
 
 import { STAGES_ONE } from '../../../../shared/stage/models/mocks/stages';
-import { STAGE_SELECTIONS_ONE } from '../../../../shared/stage/models/mocks/stage-select-info';
+import * as STAGE_SELECTIONS from '../../../../shared/stage/models/mocks/stage-select-info';
 import { DIMENSIONS_SET_ONE } from '../../../../shared/stage/models/mocks/stage-dimensions-set';
 
 describe('StageComparatorComponent', () => {
@@ -35,7 +35,7 @@ describe('StageComparatorComponent', () => {
         observer.next({stageData: {
           stages: STAGES_ONE,
           dimensionsFull: DIMENSIONS_SET_ONE,
-          stageSelections: STAGE_SELECTIONS_ONE
+          stageSelections: STAGE_SELECTIONS.ONE
         }});
         observer.complete();
       })
@@ -85,7 +85,7 @@ describe('StageComparatorComponent', () => {
   });
 
   it('should have a stageSelections property set to the classified stages provided by the ActivatedRoute on init', () => {
-    expect(comparator.stageSelections).toEqual(STAGE_SELECTIONS_ONE);
+    expect(comparator.stageSelections).toEqual(STAGE_SELECTIONS.ONE);
   });
 
   it('should have a fullDimensionsSet property set to the DimensionsSet provided by the ActivatedRoute on init', () => {
@@ -144,7 +144,7 @@ describe('StageComparatorComponent', () => {
       let selectComp: StageSelectMockComponent = selectDElem.componentInstance;
       let actualStages: StageSelectInfo[] = selectComp.stages;
       // TODO: wait for changes?
-      expect(actualStages).toEqual(STAGE_SELECTIONS_ONE);
+      expect(actualStages).toEqual(STAGE_SELECTIONS.ONE);
     });
     
     describe('default view', () => {

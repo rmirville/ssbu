@@ -43,7 +43,7 @@ describe('StageSelectComponent', () => {
   });
 
   it('sanity: host component should have provided stages property', () => {
-    let expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_ONE;
+    let expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.ONE;
     selectHostComp.stages = [...expectedStages];
     expect(selectHostComp.stages.length).withContext('the number of stages should be the same').toEqual(expectedStages.length);
     expect(selectHostComp.stages).toEqual(expectedStages);
@@ -51,7 +51,7 @@ describe('StageSelectComponent', () => {
   })
   
   it('should have a stages property set to a provided value on init', () => {
-    let expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_ONE;
+    let expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.ONE;
     selectHostComp.stages = [...expectedStages];
     /**/
     // console.log(`SPEC - hostComponent stages set`);
@@ -70,7 +70,7 @@ describe('StageSelectComponent', () => {
   });
 
   it('should show a list of checkbox inputs', () => {
-    const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_ONE;
+    const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.ONE;
 
     selectHostComp.stages = [...expectedStages];
     selectHostFixture.detectChanges();
@@ -81,7 +81,7 @@ describe('StageSelectComponent', () => {
   });
 
   it('should show a list of checkbox labels', () => {
-    const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_ONE;
+    const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.ONE;
 
     selectHostComp.stages = [...expectedStages];
     selectHostFixture.detectChanges();
@@ -92,7 +92,7 @@ describe('StageSelectComponent', () => {
   });
 
   it(`should show a list of checkbox inputs with id's that match the provided stages' gameNames`, () => {
-    const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_ONE;
+    const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.ONE;
 
     selectHostComp.stages = [...expectedStages];
     selectHostFixture.detectChanges();
@@ -106,7 +106,7 @@ describe('StageSelectComponent', () => {
   });
 
   it(`should show a list of checkbox labels with for attributes that match the provided stages' gameNames`, () => {
-    const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_ONE;
+    const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.ONE;
 
     selectHostComp.stages = [...expectedStages];
     selectHostFixture.detectChanges();
@@ -120,7 +120,7 @@ describe('StageSelectComponent', () => {
   });
 
   it(`should show a list of checkbox labels with texts that match the provided stages' names`, () => {
-    const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_ONE;
+    const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.ONE;
 
     selectHostComp.stages = [...expectedStages];
     selectHostFixture.detectChanges();
@@ -140,7 +140,7 @@ describe('StageSelectComponent', () => {
       it('should show a common legal stages category if there are commonly legal stages', () => {
         /**/
         // console.log('=== SPEC - Show common legal category ===');
-        const stages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_LEGAL_COMMON_PRESENT;
+        const stages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_COMMON_PRESENT;
         selectHostComp.stages = [...stages];
         selectHostFixture.detectChanges();
 
@@ -150,7 +150,7 @@ describe('StageSelectComponent', () => {
       it('should not show a common legal stages category if there are no commonly legal stages', () => {
         /**/
         // console.log('=== SPEC - Hide common legal category ===');
-        const stages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_LEGAL_COMMON_ABSENT;
+        const stages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_COMMON_ABSENT;
         selectHostComp.stages = [...stages];
         selectHostFixture.detectChanges();
         
@@ -161,8 +161,8 @@ describe('StageSelectComponent', () => {
       it('should show all common legal stages in the common legal stages category', () => {
         /**/
         // console.log('=== SPEC - Show all common legal stages in common legal category ===');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_LEGAL_COMMON_INCLUDE.allStages;
-        const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_LEGAL_COMMON_INCLUDE.includedStages;
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_COMMON_INCLUDE.allStages;
+        const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_COMMON_INCLUDE.includedStages;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
         
@@ -179,8 +179,8 @@ describe('StageSelectComponent', () => {
       it('should not show other stages in the common legal stages category', () => {
         /**/
         // console.log('=== SPEC - Hide other stages from common legal category');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_LEGAL_COMMON_EXCLUDE.allStages;
-        const excludedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_LEGAL_COMMON_EXCLUDE.excludedStages;
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_COMMON_EXCLUDE.allStages;
+        const excludedStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_COMMON_EXCLUDE.excludedStages;
 
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
@@ -202,7 +202,7 @@ describe('StageSelectComponent', () => {
       it('should show an uncommonly legal stages category if there are uncommonly legal stages', () => {
         /**/
         // console.log('=== SPEC - Show uncommon legal category ===');
-        const stages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_LEGAL_UNCOMMON_PRESENT;
+        const stages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_PRESENT;
         selectHostComp.stages = [...stages];
         selectHostFixture.detectChanges();
 
@@ -212,7 +212,7 @@ describe('StageSelectComponent', () => {
       it('should not show an uncommon legal stages category if there are no uncommonly legal stages', () => {
         /**/
         // console.log('=== SPEC - Hide uncommon legal category ===');
-        const stages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_LEGAL_UNCOMMON_ABSENT;
+        const stages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_ABSENT;
         selectHostComp.stages = [...stages];
         selectHostFixture.detectChanges();
 
@@ -223,8 +223,8 @@ describe('StageSelectComponent', () => {
       it('should show all uncommon legal stages in the uncommon legal stages category', () => {
         /**/
         // console.log('=== SPEC - Show all uncommon legal stages in uncommon legal category ===');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_LEGAL_UNCOMMON_INCLUDE.allStages;
-        const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_LEGAL_UNCOMMON_INCLUDE.includedStages;
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_INCLUDE.allStages;
+        const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_INCLUDE.includedStages;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -241,8 +241,8 @@ describe('StageSelectComponent', () => {
       it('should not show other stages in the uncommon legal stages category', () => {
         /**/
         // console.log('=== SPEC - Hide other stages from uncommon legal category');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_LEGAL_UNCOMMON_EXCLUDE.allStages;
-        const excludedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_LEGAL_UNCOMMON_EXCLUDE.excludedStages;
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_EXCLUDE.allStages;
+        const excludedStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_EXCLUDE.excludedStages;
 
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
@@ -264,7 +264,7 @@ describe('StageSelectComponent', () => {
       it('should show a rarely legal stages category if there are rarely legal stages', () => {
         /**/
         // console.log('=== SPEC - Show rare legal category ===');
-        const stages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_LEGAL_RARE_PRESENT;
+        const stages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_RARE_PRESENT;
         selectHostComp.stages = [...stages];
         selectHostFixture.detectChanges();
 
@@ -274,7 +274,7 @@ describe('StageSelectComponent', () => {
       it('should not show a rare legal stages category if there are no rarely legal stages', () => {
         /**/
         // console.log('=== SPEC - Hide rare legal category ===');
-        const stages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_LEGAL_RARE_ABSENT;
+        const stages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_RARE_ABSENT;
         selectHostComp.stages = [...stages];
         selectHostFixture.detectChanges();
 
@@ -285,8 +285,8 @@ describe('StageSelectComponent', () => {
       it('should show all rarely legal stages in the rarely legal stages category', () => {
         /**/
         // console.log('=== SPEC - Show all rare legal stages in rare legal category ===');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_LEGAL_RARE_INCLUDE.allStages;
-        const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_LEGAL_RARE_INCLUDE.includedStages;
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_RARE_INCLUDE.allStages;
+        const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_RARE_INCLUDE.includedStages;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -303,8 +303,8 @@ describe('StageSelectComponent', () => {
       it('should not show other stages in the rarely legal stages category', () => {
         /**/
         // console.log('=== SPEC - Hide other stages from rare legal category');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_LEGAL_RARE_EXCLUDE.allStages;
-        const excludedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_LEGAL_RARE_EXCLUDE.excludedStages;
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_RARE_EXCLUDE.allStages;
+        const excludedStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_RARE_EXCLUDE.excludedStages;
 
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
@@ -324,11 +324,11 @@ describe('StageSelectComponent', () => {
     it('should put a mix of tourney-legal stages in the appropriate tourney categories', () => {
         /**/
         // console.log('=== SPEC - Group stages by tourney category');
-      const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY.input;
+      const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY.input;
       const expectedStages = {
-        legalCommon: STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY.output.legalCommon,
-        legalUncommon: STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY.output.legalUncommon,
-        legalRare: STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY.output.legalRare
+        legalCommon: STAGE_SELECTIONS.TOURNEY.output.legalCommon,
+        legalUncommon: STAGE_SELECTIONS.TOURNEY.output.legalUncommon,
+        legalRare: STAGE_SELECTIONS.TOURNEY.output.legalRare
       };
 
       selectHostComp.stages = [...providedStages];
@@ -355,7 +355,7 @@ describe('StageSelectComponent', () => {
       it('should not appear if there are only banned stages present', () => {
         /**/
         // console.log('=== SPEC - Hide tourney section when there are no legal stages');
-        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_HIDE_LEGAL_BANNED;
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_HIDE_LEGAL_BANNED;
         selectHostComp.stages = [...providedStages];
         selectHostFixture.detectChanges();
 
@@ -366,7 +366,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are commonly legal stages present', () => {
         /**/
         // console.log('=== SPEC - Show tourney section with common legal stages');
-        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON;
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON;
         selectHostComp.stages = [...providedStages];
         selectHostFixture.detectChanges();
 
@@ -377,7 +377,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are commonly legal and banned stages present', () => {
         /**/
         // console.log('=== SPEC - Show tourney section with commonly legal and banned stages');
-        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_BANNED;
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON_BANNED;
         selectHostComp.stages = [...providedStages];
         selectHostFixture.detectChanges();
 
@@ -388,7 +388,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are uncommonly legal stages present', () => {
         /**/
         // console.log('=== SPEC - Show tourney section with uncommonly legal stages');
-        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_UNCOMMON;
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_UNCOMMON;
         selectHostComp.stages = [...providedStages];
         selectHostFixture.detectChanges();
 
@@ -399,7 +399,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are uncommonly legal and banned stages present', () => {
         /**/
         // console.log('=== SPEC - Show tourney section with uncommonly legal and banned stages');
-        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_UNCOMMON_BANNED;
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_UNCOMMON_BANNED;
         selectHostComp.stages = [...providedStages];
         selectHostFixture.detectChanges();
 
@@ -410,7 +410,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are rarely legal stages present', () => {
         /**/
         // console.log('=== SPEC - Show tourney section with rarely legal stages');
-        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_RARE;
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_RARE;
         selectHostComp.stages = [...providedStages];
         selectHostFixture.detectChanges();
 
@@ -421,7 +421,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are rarely legal and banned stages present', () => {
         /**/
         // console.log('=== SPEC - Show tourney section with rarely legal and banned stages');
-        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_RARE_BANNED;
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_RARE_BANNED;
         selectHostComp.stages = [...providedStages];
         selectHostFixture.detectChanges();
 
@@ -432,7 +432,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are commonly and uncommonly legal stages present', () => {
         /**/
         // console.log('=== SPEC - Show tourney section with commonly and uncommonly legal stages');
-        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_UNCOMMON;
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON_UNCOMMON;
         selectHostComp.stages = [...providedStages];
         selectHostFixture.detectChanges();
 
@@ -443,7 +443,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are commonly legal, uncommonly legal, and banned stages present', () => {
         /**/
         // console.log('=== SPEC - Show tourney section with commonly legal, uncommonly legal, and banned stages');
-        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_UNCOMMON_BANNED;
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON_UNCOMMON_BANNED;
         selectHostComp.stages = [...providedStages];
         selectHostFixture.detectChanges();
 
@@ -454,7 +454,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are commonly and rarely legal stages present', () => {
         /**/
         // console.log('=== SPEC - Show tourney section with commonly and rarely legal stages');
-        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_RARE;
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON_RARE;
         selectHostComp.stages = [...providedStages];
         selectHostFixture.detectChanges();
 
@@ -465,7 +465,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are commonly legal, rarely legal, and banned stages present', () => {
         /**/
         // console.log('=== SPEC - Show tourney section with commonly legal, rarely legal, and banned stages');
-        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_COMMON_RARE_BANNED;
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON_RARE_BANNED;
         selectHostComp.stages = [...providedStages];
         selectHostFixture.detectChanges();
 
@@ -476,7 +476,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are uncommonly and rarely legal stages present', () => {
         /**/
         // console.log('=== SPEC - Show tourney section with uncommonly and rarely legal stages');
-        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_UNCOMMON_RARE;
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_UNCOMMON_RARE;
         selectHostComp.stages = [...providedStages];
         selectHostFixture.detectChanges();
 
@@ -487,7 +487,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are uncommonly legal, rarely legal, and banned stages present', () => {
         /**/
         // console.log('=== SPEC - Show tourney section with uncommonly legal, rarely legal, and banned stages');
-        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.STAGE_SELECTIONS_TOURNEY_SHOW_LEGAL_UNCOMMON_RARE_BANNED;
+        const providedStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_UNCOMMON_RARE_BANNED;
         selectHostComp.stages = [...providedStages];
         selectHostFixture.detectChanges();
 

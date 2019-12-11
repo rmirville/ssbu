@@ -119,7 +119,7 @@ describe('StageComparatorResolverService', () => {
 
     it('should return an Observable of an object with an array of Stages, an array of StageSelectInfo, and a StageDimensionsSet', async(() => {
       /**/
-      // console.log('=== SPEC - OUTPUT TYPE ===');Cz
+      // console.log('=== SPEC - OUTPUT TYPE ===');
       stageLoaderSpy.loadStages.and.returnValue(asyncData(STAGES_ONE));
       stageDimensionsSpy.getDimensionsFull.and.returnValue(asyncData(STAGE_DIMENSIONS_SETS.TWO_STAGE_SET));
       stageClassificationsSpy.classifyStages.and.returnValue(asyncData(STAGE_SELECTIONS.ONE));

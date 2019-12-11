@@ -1204,3 +1204,276 @@ export const TOURNEY_HIDE_LEGAL_BANNED = [
     tourneyPresence: -1
   }
 ];
+
+export const SERIES_SHOW: StageSelectInfo[] = [
+  {
+    name: "Affordable Mortgage Land",
+    gameName: "financemorgage_",
+    series: "Finance Fanatic",
+    tourneyPresence: 2
+  },
+  {
+    name: "Power Palace",
+    gameName: "johnpalace_",
+    series: "Super John Time",
+    tourneyPresence: 5
+  }
+];
+
+export const SERIES_INDIVIDUAL_SHOW: { series: string, selections: StageSelectInfo[] } = {
+  series: "Fun Physics Fair",
+  selections: [
+    {
+      name: "Apple Tree",
+      gameName: "physicsapple_",
+      series: "Fun Physics Fair",
+      tourneyPresence: 2
+    },
+    {
+      name: "Tall Tower",
+      gameName: "physicstower_",
+      series: "Fun Physics Fair",
+      tourneyPresence: 8
+    }
+  ]
+};
+
+export const SERIES_INDIVIDUAL_HIDE: { series: string, selections: StageSelectInfo[] } = {
+  series: "Fenton Barrenceno",
+  selections: [
+    {
+      name: "Barren Beach",
+      gameName: "incrediblebarren_",
+      series: "Incredible Islands",
+      tourneyPresence: 8
+    },
+    {
+      name: "Land of Several Snakes",
+      gameName: "johnsnakes_",
+      series: "Super John Time",
+      tourneyPresence: -1
+    },
+    {
+      name: "Italian Restaurant",
+      gameName: "fooditalian_",
+      series: "Food Fighters",
+      tourneyPresence: 2
+    },
+    {
+      name: "Aptitude Island",
+      gameName: "brainsaptitude_",
+      series: "Adventures in Brains",
+      tourneyPresence: 1
+    }
+  ]
+};
+
+export const SERIES_INDIVIDUAL_INCLUDE: { series: string, allStages: StageSelectInfo[], includedStages: StageSelectInfo[] } = {
+  series: "Super John Time",
+  allStages: [
+    {
+      name: "Tall Tall Tower",
+      gameName: "johntower_",
+      series: "Super John Time",
+      tourneyPresence: 3
+    },
+    {
+      name: "Treble Tower",
+      gameName: "minstreltreble_",
+      series: "Magical Minstrel",
+      tourneyPresence: 1
+    },
+    {
+      name: "FanciFeast Diner",
+      gameName: "foodfancifeast_",
+      series: "Food Fighters",
+      tourneyPresence: 1
+    },
+    {
+      name: "Average Orange Orchid",
+      gameName: "johnorchid_",
+      series: "Super John Time",
+      tourneyPresence: 5
+    },
+    {
+      name: "Beat's Beet Beer Pub",
+      gameName: "foodbeet_",
+      series: "Food Fighters",
+      tourneyPresence: 8
+    },
+    {
+      name: "Powerful Purple Platter Place",
+      gameName: "johnplatter_",
+      series: "Super John Time",
+      tourneyPresence: -1
+    },
+    {
+      name: "Masterful Matriarch's Museum",
+      gameName: "johnmuseum_",
+      series: "Super John Time",
+      tourneyPresence: 2
+    }
+  ],
+  includedStages: [
+    {
+      name: "Tall Tall Tower",
+      gameName: "johntower_",
+      series: "Super John Time",
+      tourneyPresence: 3
+    },
+    {
+      name: "Average Orange Orchid",
+      gameName: "johnorchid_",
+      series: "Super John Time",
+      tourneyPresence: 5
+    },
+    {
+      name: "Powerful Purple Platter Place",
+      gameName: "johnplatter_",
+      series: "Super John Time",
+      tourneyPresence: -1
+    },
+    {
+      name: "Masterful Matriarch's Museum",
+      gameName: "johnmuseum_",
+      series: "Super John Time",
+      tourneyPresence: 2
+    }
+  ]
+};
+
+export const SERIES_INDIVIDUAL_EXCLUDE: { series: string, allStages: StageSelectInfo[], excludedStages: StageSelectInfo[] } = {
+  series: "Fate of Fairies",
+  allStages: [
+    {
+      name: "Root of Yggdrasil",
+      gameName: "fairiesroot_",
+      series: "Fate of Fairies",
+      tourneyPresence: 9
+    },
+    {
+      name: "Back Room",
+      gameName: "workback_",
+      series: "Workplace",
+      tourneyPresence: -2
+    },
+    {
+      name: "Ferret Fountain",
+      gameName: "fairiesroot_",
+      series: "Fate of Fairies",
+      tourneyPresence: 11
+    },
+    {
+      name: "Trash Town",
+      gameName: "johntrash_",
+      series: "Super John Time",
+      tourneyPresence: 2
+    },
+    {
+      name: "An Abysmal Palace",
+      gameName: "moodpalace_",
+      series: "Mood Master",
+      tourneyPresence: 3
+    }
+  ],
+  excludedStages: [
+    {
+      name: "Back Room",
+      gameName: "workback_",
+      series: "Workplace",
+      tourneyPresence: -2
+    },
+    {
+      name: "Trash Town",
+      gameName: "johntrash_",
+      series: "Super John Time",
+      tourneyPresence: 2
+    },
+    {
+      name: "An Abysmal Palace",
+      gameName: "moodpalace_",
+      series: "Mood Master",
+      tourneyPresence: 3
+    }
+  ]
+};
+
+export const SERIES_INDIVIDUAL_EXCLUDE_BLANK: { series: string, allStages: StageSelectInfo[], excludedStages: StageSelectInfo[] } = {
+  series: "",
+  allStages: [
+    {
+      name: "Back at the Ranch",
+      gameName: "cowranch_",
+      series: "Cowllege Credit Man",
+      tourneyPresence: 3
+    },
+    {
+      name: "Unknown World",
+      gameName: "unknown_",
+      series: "",
+      tourneyPresence: -1
+    },
+    {
+      name: "Fearsome Fighters Headquarters",
+      gameName: "heroffhq_",
+      series: "Hero Squad Alpha",
+      tourneyPresence: 2
+    },
+    {
+      name: "Troubador's Chamber",
+      gameName: "misctroubador_",
+      series: "",
+      tourneyPresence: 5
+    },
+    {
+      name: "South Dakota Marketplace",
+      gameName: "sdmarket_",
+      series: "",
+      tourneyPresence: 29
+    },
+    {
+      name: "Whiteout Wednesday Watchtower",
+      gameName: "alliteratewhiteout_",
+      series: "Alliteration Island",
+      tourneyPresence: -5
+    },
+    {
+      name: "Phantom Foodbasket",
+      gameName: "alliteratephantom_",
+      series: "Alliteration Island",
+      tourneyPresence: 3
+    },
+    {
+      name: "Trash Compactor",
+      gameName: "trash_",
+      series: "",
+      tourneyPresence: 4
+    }
+  ],
+  excludedStages: [
+    {
+      name: "Unknown World",
+      gameName: "unknown_",
+      series: "",
+      tourneyPresence: -1
+    },
+    {
+      name: "Troubador's Chamber",
+      gameName: "misctroubador_",
+      series: "",
+      tourneyPresence: 5
+    },
+    {
+      name: "South Dakota Marketplace",
+      gameName: "sdmarket_",
+      series: "",
+      tourneyPresence: 29
+    },
+    {
+      name: "Trash Compactor",
+      gameName: "trash_",
+      series: "",
+      tourneyPresence: 4
+    }
+  ]
+};

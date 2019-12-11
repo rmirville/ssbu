@@ -64,6 +64,14 @@ export class StageSelectComponent implements OnInit {
       }
     ]
   };
+  series: StageSelectSection = {
+    id: 'series',
+    title: 'By Series',
+    attribute: 'by-series',
+    show: false,
+    expand: false,
+    sections: []
+  };
 
   constructor(private fb: FormBuilder) {
   }
@@ -75,14 +83,25 @@ export class StageSelectComponent implements OnInit {
     let legalCommonStages: StageSelectInfo[] = [];
     let legalUncommonStages: StageSelectInfo[] = [];
     let legalRareStages: StageSelectInfo[] = [];
+    let seriesStages: { [seriesName: string]: StageSelectInfo[] } = {};
     
-    this.stages.forEach(stage => {
+    for (const stage of this.stages) {
       /**/
-      // console.log(`* checking stage ${stage.gameName}`);
+      // console.log(`  * checking stage: ${stage.name} (${stage.series})`);
+      
+      // group stages by series
+      if (!(stage.series in seriesStages)) {
+        seriesStages[stage.series] = [];
+      }
+      /**/
+      // console.log(`  * seriesStages so far: ${JSON.stringify(Object.keys(seriesStages))}`);
+      seriesStages[stage.series].push(stage);
+
+      /**/
+      // console.log(`  * seriesStages[${stage.series}]: ${JSON.stringify(seriesStages[stage.series])}`);
+
       switch (stage.tourneyPresence) {
         case 0:
-          /**/
-          // console.log(`* stage ${stage.gameName} is legalCommon`);
           legalCommonStages.push(stage);
           break;
         case 1:
@@ -92,7 +111,24 @@ export class StageSelectComponent implements OnInit {
           legalRareStages.push(stage);
           break;
       }
-    });
+    }
+
+    // create section for each series
+    for (const stageList in seriesStages) {
+      const title: string = stageList;
+      const attribute: string = stageList.replace(/ /g, '-').replace(/[^a-zA-Z\-]/g, '').toLowerCase();
+      const id: string = attribute.replace(/\-/g, '');
+      this.series.sections.push({
+        id: id,
+        title: title,
+        attribute: attribute,
+        show: true,
+        expand: false
+      });
+      this.classifiedStages.series[id] = [...seriesStages[stageList]];
+    }
+    /**/
+    // console.log(`  * classified.series: ${JSON.stringify(this.classifiedStages.series)}`);
 
     this.classifiedStages.tourneyPresence.legalCommon = [...legalCommonStages];
     this.classifiedStages.tourneyPresence.legalUncommon = [...legalUncommonStages];
@@ -100,6 +136,7 @@ export class StageSelectComponent implements OnInit {
 
     /**/
     // console.log(`* classifiedStages.legalCommon: ${JSON.stringify(this.classifiedStages.tourneyPresence.legalCommon)}`);
+    this.series.show = (this.stages.length > 0);
     this.tourneyPresence.sections[0].show = (this.classifiedStages.tourneyPresence.legalCommon.length > 0);
     this.tourneyPresence.sections[1].show = (this.classifiedStages.tourneyPresence.legalUncommon.length > 0);
     this.tourneyPresence.sections[2].show = (this.classifiedStages.tourneyPresence.legalRare.length > 0);

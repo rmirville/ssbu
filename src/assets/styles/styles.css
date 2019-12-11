@@ -55,6 +55,11 @@ h3 {
   line-height: 3.75rem;
 }
 
+h4 {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
 /* Navigation */
 
 .navbar {
@@ -393,26 +398,30 @@ h3 {
 .card-header h2 {
   margin-bottom: 0;
   padding: 1rem;
+  background-color: hsl(277, 40%, 50%);
   border: none;
   font-family: 'FOT EB', sans-serif;
   font-size: 1.5rem;
   line-height: 1.5rem;
-  background-color: hsl(277, 40%, 50%);
   color: white;
 }
 
+.card-header h3,
 .card-header h4 {
   margin-bottom: .25rem;
   padding: 1rem;
-  background-color: hsl(218, 75%, 55%);
   background-color: hsl(196, 12%, 17%);
+  line-height: 1;
+  font-weight: bold;
+  color: white;
+}
+
+.card-header h3 {
+  font-family: 'FOT EB', sans-serif;
 }
 
 .card-header h4 {
   font-family: 'Roboto', sans-serif;
-  font-weight: bold;
-  line-height: 1rem;
-  color: white;
 }
 
 .card-header .btn-link {
@@ -450,7 +459,7 @@ h3 {
 }
 
 .card-body {
-  padding: 1rem;
+  padding: 1rem 1rem 0 1rem;
 }
 
 /* Content - Cards - Forms */
@@ -463,4 +472,8 @@ h3 {
 .card .form-inline .form-check {
   margin-bottom: 1rem;
   justify-content: start;
+}
+
+.form-group > .card > .collapse > .card-body {
+  padding: 0 1rem;
 }

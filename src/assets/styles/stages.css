@@ -1,3 +1,13 @@
+/* Stage Select */
+ssbu-stage-select .classification {
+  padding-top: 1rem;
+  border-bottom: 1px dotted lightgrey;
+}
+
+ssbu-stage-select form > .form-group {
+  margin-bottom: 1.5rem;
+}
+
 /* Stages */
 
 .table-responsive .td-graph {

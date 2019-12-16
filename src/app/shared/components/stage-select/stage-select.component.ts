@@ -113,7 +113,7 @@ export class StageSelectComponent implements OnInit {
       }
     }
 
-    // create section for each series
+    // create and sort series section
     for (const stageList in seriesStages) {
       const title: string = stageList;
       const attribute: string = stageList.replace(/ /g, '-').replace(/[^a-zA-Z\-]/g, '').toLowerCase();
@@ -125,14 +125,16 @@ export class StageSelectComponent implements OnInit {
         show: true,
         expand: false
       });
-      this.classifiedStages.series[id] = [...seriesStages[stageList]];
+      this.classifiedStages.series[id] = [...seriesStages[stageList].sort(this._compareInfo.bind(this))];
+      this.series.sections.sort(this._compareSection.bind(this));
     }
     /**/
     // console.log(`  * classified.series: ${JSON.stringify(this.classifiedStages.series)}`);
 
-    this.classifiedStages.tourneyPresence.legalCommon = [...legalCommonStages];
-    this.classifiedStages.tourneyPresence.legalUncommon = [...legalUncommonStages];
-    this.classifiedStages.tourneyPresence.legalRare = [...legalRareStages];
+    // create and sort tournament presence section
+    this.classifiedStages.tourneyPresence.legalCommon = [...legalCommonStages.sort(this._compareInfo.bind(this))];
+    this.classifiedStages.tourneyPresence.legalUncommon = [...legalUncommonStages.sort(this._compareInfo.bind(this))];
+    this.classifiedStages.tourneyPresence.legalRare = [...legalRareStages.sort(this._compareInfo.bind(this))];
 
     /**/
     // console.log(`* classifiedStages.legalCommon: ${JSON.stringify(this.classifiedStages.tourneyPresence.legalCommon)}`);
@@ -143,4 +145,19 @@ export class StageSelectComponent implements OnInit {
     this.tourneyPresence.show = (this.tourneyPresence.sections[0].show || this.tourneyPresence.sections[1].show || this.tourneyPresence.sections[2].show);
   }
 
+  _compareText(a: string, b: string): number {
+    const aString = a.toLowerCase();
+    const bString = b.toLowerCase();
+    if (aString > bString) { return 1; }
+    if (aString < bString) { return -1; }
+    return 0;
+  }
+
+  _compareSection(a: StageSelectSection, b: StageSelectSection): number {
+    return this._compareText(a.title, b.title);
+  }
+
+  _compareInfo(a: StageSelectInfo, b: StageSelectInfo): number {
+    return this._compareText(a.name, b.name);
+  }
 }

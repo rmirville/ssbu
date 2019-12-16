@@ -1205,6 +1205,204 @@ export const TOURNEY_HIDE_LEGAL_BANNED = [
   }
 ];
 
+export const TOURNEY_STAGE_SORT: {
+  inputStages: StageSelectInfo[],
+  sortedStages: { [property: string]: StageSelectInfo[] }
+} = {
+
+  inputStages: [
+    {
+      name: "Extra Credit Round",
+      gameName: "schoolextra_",
+      series: "School-Time Hustle",
+      tourneyPresence: 2
+    },
+    {
+      name: "Dunes of Nurfesque",
+      gameName: "johndunes_",
+      series: "Super John Time",
+      tourneyPresence: 0
+    },
+    {
+      name: "Questionable Workshop",
+      gameName: "ceramicquestionable_",
+      series: "Ceramic Maker",
+      tourneyPresence: 1
+    },
+    {
+      name: "House of Horrors",
+      gameName: "jeffhorror_",
+      series: "Jeffrey's Revenge",
+      tourneyPresence: 1
+    },
+    {
+      name: "Roadway",
+      gameName: "condescendroad_",
+      series: "Condescension Man",
+      tourneyPresence: 1
+    },
+    {
+      name: "Igloo",
+      gameName: "quailigloo_",
+      series: "Quailentino",
+      tourneyPresence: 0
+    },
+    {
+      name: "Sentinel Station",
+      gameName: "olveriasentinel_",
+      series: "Acts of Olveria",
+      tourneyPresence: 1
+    },
+    {
+      name: "Cargo Hold",
+      gameName: "prodigycargo_",
+      series: "Prodigy",
+      tourneyPresence: 1
+    },
+    {
+      name: "Island Port",
+      gameName: "antelopeport_",
+      series: "Antelope Escape",
+      tourneyPresence: 2
+    },
+    {
+      name: "Graph Paper",
+      gameName: "leveragegraph_",
+      series: "Leverage",
+      tourneyPresence: 2
+    },
+    {
+      name: "Friendship City",
+      gameName: "friendcity_",
+      series: "King of Friendship",
+      tourneyPresence: 2
+    },
+    {
+      name: "Neverwind Castle",
+      gameName: "duskcastle_",
+      series: "Until Dusk",
+      tourneyPresence: 1
+    },
+    {
+      name: "Gerald's Bar",
+      gameName: "youngbar_",
+      series: "Young Jimmy",
+      tourneyPresence: 2
+    },
+    {
+      name: "Nigel's Cabin",
+      gameName: "evercabin_",
+      series: "Everwilds",
+      tourneyPresence: 0
+    },
+    {
+      name: "Investigation Desk",
+      gameName: "probabledesk_",
+      series: "Probable Cause",
+      tourneyPresence: 2
+    }
+  ],
+
+  sortedStages: {
+    legalCommon: [
+      {
+        name: "Dunes of Nurfesque",
+        gameName: "johndunes_",
+        series: "Super John Time",
+        tourneyPresence: 0
+      },
+      {
+        name: "Igloo",
+        gameName: "quailigloo_",
+        series: "Quailentino",
+        tourneyPresence: 0
+      },
+      {
+        name: "Nigel's Cabin",
+        gameName: "evercabin_",
+        series: "Everwilds",
+        tourneyPresence: 0
+      }
+    ],
+    legalUncommon: [
+      {
+        name: "Cargo Hold",
+        gameName: "prodigycargo_",
+        series: "Prodigy",
+        tourneyPresence: 1
+      },
+      {
+        name: "House of Horrors",
+        gameName: "jeffhorror_",
+        series: "Jeffrey's Revenge",
+        tourneyPresence: 1
+      },
+      {
+        name: "Neverwind Castle",
+        gameName: "duskcastle_",
+        series: "Until Dusk",
+        tourneyPresence: 1
+      },
+      {
+        name: "Questionable Workshop",
+        gameName: "ceramicquestionable_",
+        series: "Ceramic Maker",
+        tourneyPresence: 1
+      },
+      {
+        name: "Roadway",
+        gameName: "condescendroad_",
+        series: "Condescension Man",
+        tourneyPresence: 1
+      },
+      {
+        name: "Sentinel Station",
+        gameName: "olveriasentinel_",
+        series: "Acts of Olveria",
+        tourneyPresence: 1
+      }
+    ],
+    legalRare: [
+      {
+        name: "Extra Credit Round",
+        gameName: "schoolextra_",
+        series: "School-Time Hustle",
+        tourneyPresence: 2
+      },
+      {
+        name: "Friendship City",
+        gameName: "friendcity_",
+        series: "King of Friendship",
+        tourneyPresence: 2
+      },
+      {
+        name: "Gerald's Bar",
+        gameName: "youngbar_",
+        series: "Young Jimmy",
+        tourneyPresence: 2
+      },
+      {
+        name: "Graph Paper",
+        gameName: "leveragegraph_",
+        series: "Leverage",
+        tourneyPresence: 2
+      },
+      {
+        name: "Investigation Desk",
+        gameName: "probabledesk_",
+        series: "Probable Cause",
+        tourneyPresence: 2
+      },
+      {
+        name: "Island Port",
+        gameName: "antelopeport_",
+        series: "Antelope Escape",
+        tourneyPresence: 2
+      }
+    ]
+  }
+};
+
 export const SERIES_SHOW: StageSelectInfo[] = [
   {
     name: "Affordable Mortgage Land",
@@ -1219,6 +1417,373 @@ export const SERIES_SHOW: StageSelectInfo[] = [
     tourneyPresence: 5
   }
 ];
+
+export const SERIES_SORT: { [property: string]: StageSelectInfo[] } = {
+  inputStages: [
+    {
+      name: "Feral Food Forest",
+      gameName: "johnferal_",
+      series: "Super John Time",
+      tourneyPresence: 3
+    },
+    {
+      name: "Contestant's Chamber",
+      gameName: "questionchamber_",
+      series: "Question Quest",
+      tourneyPresence: 13
+    },
+    {
+      name: "Marie's Massage Parlor",
+      gameName: "gentlemarie_",
+      series: "Gentle Fighter",
+      tourneyPresence: 25
+    },
+    {
+      name: "Old Man's Cabin",
+      gameName: "wherecabin_",
+      series: "Wherewood",
+      tourneyPresence: 0
+    },
+    {
+      name: "Fandost Court",
+      gameName: "judgefandost_",
+      series: "Judgementron",
+      tourneyPresence: 65
+    },
+    {
+      name: "Axle Ottle's Castle",
+      gameName: "ifritaxle_",
+      series: "Ifrit",
+      tourneyPresence: 81
+    },
+    {
+      name: "Ludwig's Living Room",
+      gameName: "nickludwig_",
+      series: "Next Door Nick",
+      tourneyPresence: -1
+    },
+    {
+      name: "Trentshop Cave",
+      gameName: "lesaolamoscave_",
+      series: "Light of Lesolamos",
+      tourneyPresence: 97
+    },
+    {
+      name: "Very Berry Barry's Banana Boat Tour",
+      gameName: "berryboat_",
+      series: "Berry Barry",
+      tourneyPresence: 84
+    },
+    {
+      name: "Fairless Fareway",
+      gameName: "olliefairless_",
+      series: "Ollie Alden",
+      tourneyPresence: 20
+    },
+    {
+      name: "Hypotenuse Hippo's Lagoon",
+      gameName: "abacuslagoon_",
+      series: "Abigail Abacus",
+      tourneyPresence: -2
+    },
+    {
+      name: "Farm",
+      gameName: "hunterfarm_",
+      series: "Hunter's Lagoon",
+      tourneyPresence: 85
+    },
+    {
+      name: "Sue's Bar",
+      gameName: "detrimentalsue_",
+      series: "Detrimental DJ",
+      tourneyPresence: 14
+    },
+    {
+      name: "Pop Shop",
+      gameName: "citizenshop_",
+      series: "Citizen O'Brian",
+      tourneyPresence: -35
+    },
+    {
+      name: "Miyamoto Temple",
+      gameName: "zenjamiyamoto_",
+      series: "Zenja",
+      tourneyPresence: 24
+    },
+    {
+      name: "Potato Sack",
+      gameName: "vealpotato_",
+      series: "Veal of Legends",
+      tourneyPresence: 59
+    },
+    {
+      name: "Mariana's House",
+      gameName: "trenchmariana_",
+      series: "Trenchville",
+      tourneyPresence: 2
+    },
+    {
+      name: "Union Office",
+      gameName: "unionsoffice_",
+      series: "Unions of the Laboretum",
+      tourneyPresence: 1
+    },
+    {
+      name: "Museum",
+      gameName: "krossmuseum_",
+      series: "Krosspharoah's Grave",
+      tourneyPresence: 57
+    },
+    {
+      name: "Dream Tapestry Estate",
+      gameName: "dphangestate_",
+      series: "D'Phang Schwanheiser",
+      tourneyPresence: 30
+    },
+    {
+      name: "Barnyard Bananza",
+      gameName: "roosterbananza_",
+      series: "Radical Rooster",
+      tourneyPresence: 17
+    },
+    {
+      name: "Moonside Theater",
+      gameName: "yoinkstheater_",
+      series: "Yoinks McGee",
+      tourneyPresence: 34
+    },
+    {
+      name: "Phinderbust Leaf Cafe",
+      gameName: "acorncafe_",
+      series: "Exit the Acorn",
+      tourneyPresence: 97
+    },
+    {
+      name: "Letterby Cron's Oasis",
+      gameName: "onyaoasis_",
+      series: "I. F. Onya",
+      tourneyPresence: 61
+    },
+    {
+      name: "Planet Matroon",
+      gameName: "xcelmatroon_",
+      series: "Xcel Squad",
+      tourneyPresence: 29
+    },
+    {
+      name: "Police Academy",
+      gameName: "pheasantpol_",
+      series: "Federal Pheasant Brigade",
+      tourneyPresence: 0
+    },
+    {
+      name: "Temporalamew High School",
+      gameName: "philschool_",
+      series: "Phil of the Present",
+      tourneyPresence: 31
+    },
+    {
+      name: "Vessel of Untrusted Fentelsaunds",
+      gameName: "windsvessel_",
+      series: "Nestled Winds",
+      tourneyPresence: 34
+    },
+    {
+      name: "Front Yard",
+      gameName: "garageyard_",
+      series: "Secrets of the Garage Sale",
+      tourneyPresence: 17
+    },
+    {
+      name: "Yggdrasil's Chamber",
+      gameName: "templeyggdrasil_",
+      series: "Temple Spirits",
+      tourneyPresence: 32
+    }
+  ],
+  sortedStages: [
+    {
+      name: "Hypotenuse Hippo's Lagoon",
+      gameName: "abacuslagoon_",
+      series: "Abigail Abacus",
+      tourneyPresence: -2
+    },
+    {
+      name: "Very Berry Barry's Banana Boat Tour",
+      gameName: "berryboat_",
+      series: "Berry Barry",
+      tourneyPresence: 84
+    },
+    {
+      name: "Pop Shop",
+      gameName: "citizenshop_",
+      series: "Citizen O'Brian",
+      tourneyPresence: -35
+    },
+    {
+      name: "Dream Tapestry Estate",
+      gameName: "dphangestate_",
+      series: "D'Phang Schwanheiser",
+      tourneyPresence: 30
+    },
+    {
+      name: "Sue's Bar",
+      gameName: "detrimentalsue_",
+      series: "Detrimental DJ",
+      tourneyPresence: 14
+    },
+    {
+      name: "Phinderbust Leaf Cafe",
+      gameName: "acorncafe_",
+      series: "Exit the Acorn",
+      tourneyPresence: 97
+    },
+    {
+      name: "Police Academy",
+      gameName: "pheasantpol_",
+      series: "Federal Pheasant Brigade",
+      tourneyPresence: 0
+    },
+    {
+      name: "Marie's Massage Parlor",
+      gameName: "gentlemarie_",
+      series: "Gentle Fighter",
+      tourneyPresence: 25
+    },
+    {
+      name: "Farm",
+      gameName: "hunterfarm_",
+      series: "Hunter's Lagoon",
+      tourneyPresence: 85
+    },
+    {
+      name: "Letterby Cron's Oasis",
+      gameName: "onyaoasis_",
+      series: "I. F. Onya",
+      tourneyPresence: 61
+    },
+    {
+      name: "Axle Ottle's Castle",
+      gameName: "ifritaxle_",
+      series: "Ifrit",
+      tourneyPresence: 81
+    },
+    {
+      name: "Fandost Court",
+      gameName: "judgefandost_",
+      series: "Judgementron",
+      tourneyPresence: 65
+    },
+    {
+      name: "Museum",
+      gameName: "krossmuseum_",
+      series: "Krosspharoah's Grave",
+      tourneyPresence: 57
+    },
+    {
+      name: "Trentshop Cave",
+      gameName: "lesaolamoscave_",
+      series: "Light of Lesolamos",
+      tourneyPresence: 97
+    },
+    {
+      name: "Vessel of Untrusted Fentelsaunds",
+      gameName: "windsvessel_",
+      series: "Nestled Winds",
+      tourneyPresence: 34
+    },
+    {
+      name: "Ludwig's Living Room",
+      gameName: "nickludwig_",
+      series: "Next Door Nick",
+      tourneyPresence: -1
+    },
+    {
+      name: "Fairless Fareway",
+      gameName: "olliefairless_",
+      series: "Ollie Alden",
+      tourneyPresence: 20
+    },
+    {
+      name: "Temporalamew High School",
+      gameName: "philschool_",
+      series: "Phil of the Present",
+      tourneyPresence: 31
+    },
+    {
+      name: "Contestant's Chamber",
+      gameName: "questionchamber_",
+      series: "Question Quest",
+      tourneyPresence: 13
+    },
+    {
+      name: "Barnyard Bananza",
+      gameName: "roosterbananza_",
+      series: "Radical Rooster",
+      tourneyPresence: 17
+    },
+    {
+      name: "Front Yard",
+      gameName: "garageyard_",
+      series: "Secrets of the Garage Sale",
+      tourneyPresence: 17
+    },
+    {
+      name: "Feral Food Forest",
+      gameName: "johnferal_",
+      series: "Super John Time",
+      tourneyPresence: 3
+    },
+    {
+      name: "Yggdrasil's Chamber",
+      gameName: "templeyggdrasil_",
+      series: "Temple Spirits",
+      tourneyPresence: 32
+    },
+    {
+      name: "Mariana's House",
+      gameName: "trenchmariana_",
+      series: "Trenchville",
+      tourneyPresence: 2
+    },
+    {
+      name: "Union Office",
+      gameName: "unionsoffice_",
+      series: "Unions of the Laboretum",
+      tourneyPresence: 1
+    },
+    {
+      name: "Potato Sack",
+      gameName: "vealpotato_",
+      series: "Veal of Legends",
+      tourneyPresence: 59
+    },
+    {
+      name: "Old Man's Cabin",
+      gameName: "wherecabin_",
+      series: "Wherewood",
+      tourneyPresence: 0
+    },
+    {
+      name: "Planet Matroon",
+      gameName: "xcelmatroon_",
+      series: "Xcel Squad",
+      tourneyPresence: 29
+    },
+    {
+      name: "Moonside Theater",
+      gameName: "yoinkstheater_",
+      series: "Yoinks McGee",
+      tourneyPresence: 34
+    },
+    {
+      name: "Miyamoto Temple",
+      gameName: "zenjamiyamoto_",
+      series: "Zenja",
+      tourneyPresence: 24
+    }
+  ]
+};
 
 export const SERIES_INDIVIDUAL_SHOW: { series: string, selections: StageSelectInfo[] } = {
   series: "Fun Physics Fair",
@@ -1476,4 +2041,312 @@ export const SERIES_INDIVIDUAL_EXCLUDE_BLANK: { series: string, allStages: Stage
       tourneyPresence: 4
     }
   ]
+};
+
+export const SERIES_STAGE_SORT: {
+    inputStages: StageSelectInfo[],
+    sortedStages: { series: string, stages: StageSelectInfo[] }[]
+  } = {
+  inputStages: [
+    {
+      name: "Canyon of Sorrows",
+      gameName: "journeysorrow_",
+      series: "The Grand Journey",
+      tourneyPresence: 51
+    },
+    {
+      name: "Geralt Boutique",
+      gameName: "metrogeralt_",
+      series: "Metro Mash",
+      tourneyPresence: 24
+    },
+    {
+      name: "Rascal Rathouse",
+      gameName: "paulorats_",
+      series: "Paulo",
+      tourneyPresence: 33
+    },
+    {
+      name: "Zedd Terminal",
+      gameName: "metrozedd_",
+      series: "Metro Mash",
+      tourneyPresence: 69
+    },
+    {
+      name: "International Airport",
+      gameName: "pauloairport_",
+      series: "Paulo",
+      tourneyPresence: 74
+    },
+    {
+      name: "Lucy's Legume Land",
+      gameName: "paulolucy_",
+      series: "Paulo",
+      tourneyPresence: 9
+    },
+    {
+      name: "Sogtown",
+      gameName: "metrosog_",
+      series: "Metro Mash",
+      tourneyPresence: 75
+    },
+    {
+      name: "Weepright Tomatoes",
+      gameName: "metroweep_",
+      series: "Metro Mash",
+      tourneyPresence: 84
+    },
+    {
+      name: "Uthulura",
+      gameName: "journeyuthu_",
+      series: "The Grand Journey",
+      tourneyPresence: 17
+    },
+    {
+      name: "Bento Bakery",
+      gameName: "paulobake_",
+      series: "Paulo",
+      tourneyPresence: 81
+    },
+    {
+      name: "Leraldo Mansion",
+      gameName: "journeymansion_",
+      series: "The Grand Journey",
+      tourneyPresence: 46
+    },
+    {
+      name: "National Nesters, LLC",
+      gameName: "metronesters_",
+      series: "Metro Mash",
+      tourneyPresence: 12
+    },
+    {
+      name: "Quad Burgers",
+      gameName: "metroquad_",
+      series: "Metro Mash",
+      tourneyPresence: 59
+    },
+    {
+      name: "Kurifico",
+      gameName: "metrokur_",
+      series: "Metro Mash",
+      tourneyPresence: 56
+    },
+    {
+      name: "Yuci Plains",
+      gameName: "journeyyuci_",
+      series: "The Grand Journey",
+      tourneyPresence: 55
+    }
+  ],
+
+  sortedStages: [
+    {
+      series: "The Grand Journey",
+      stages: [
+        {
+          name: "Canyon of Sorrows",
+          gameName: "journeysorrow_",
+          series: "The Grand Journey",
+          tourneyPresence: 51
+        },
+        {
+          name: "Leraldo Mansion",
+          gameName: "journeymansion_",
+          series: "The Grand Journey",
+          tourneyPresence: 46
+        },
+        {
+          name: "Uthulura",
+          gameName: "journeyuthu_",
+          series: "The Grand Journey",
+          tourneyPresence: 17
+        },
+        {
+          name: "Yuci Plains",
+          gameName: "journeyyuci_",
+          series: "The Grand Journey",
+          tourneyPresence: 55
+        }
+      ]
+    },
+    {
+      series: "Paulo",
+      stages: [
+        {
+          name: "Bento Bakery",
+          gameName: "paulobake_",
+          series: "Paulo",
+          tourneyPresence: 81
+        },
+        {
+          name: "International Airport",
+          gameName: "pauloairport_",
+          series: "Paulo",
+          tourneyPresence: 74
+        },
+        {
+          name: "Lucy's Legume Land",
+          gameName: "paulolucy_",
+          series: "Paulo",
+          tourneyPresence: 9
+        },
+        {
+          name: "Rascal Rathouse",
+          gameName: "paulorats_",
+          series: "Paulo",
+          tourneyPresence: 33
+        }
+      ]
+    },
+    {
+      series: "Metro Mash",
+      stages: [
+        {
+          name: "Geralt Boutique",
+          gameName: "metrogeralt_",
+          series: "Metro Mash",
+          tourneyPresence: 24
+        },
+        {
+          name: "Kurifico",
+          gameName: "metrokur_",
+          series: "Metro Mash",
+          tourneyPresence: 56
+        },
+        {
+          name: "National Nesters, LLC",
+          gameName: "metronesters_",
+          series: "Metro Mash",
+          tourneyPresence: 12
+        },
+        {
+          name: "Quad Burgers",
+          gameName: "metroquad_",
+          series: "Metro Mash",
+          tourneyPresence: 59
+        },
+        {
+          name: "Sogtown",
+          gameName: "metrosog_",
+          series: "Metro Mash",
+          tourneyPresence: 75
+        },
+        {
+          name: "Weepright Tomatoes",
+          gameName: "metroweep_",
+          series: "Metro Mash",
+          tourneyPresence: 84
+        },
+        {
+          name: "Zedd Terminal",
+          gameName: "metrozedd_",
+          series: "Metro Mash",
+          tourneyPresence: 69
+        }
+      ]
+    }
+  ]
+};
+
+export const MISC_STAGE_SORT: {
+  inputStages: StageSelectInfo[],
+  sortedStages: { [property: string]: StageSelectInfo[] }
+} = {
+  inputStages: [
+    {
+      name: "Weather World Tower",
+      gameName: "weather_",
+      series: "Miscellaneous",
+      tourneyPresence: 0
+    },
+    {
+      name: "Quiet Room",
+      gameName: "meditationquiet_",
+      series: "",
+      tourneyPresence: 20
+    },
+    {
+      name: "Awkward Alex's Alley",
+      gameName: "cityalex_",
+      series: "",
+      tourneyPresence: 55
+    },
+    {
+      name: "Derrick Desert",
+      gameName: "derrick_",
+      series: "",
+      tourneyPresence: 28
+    },
+    {
+      name: "Veritable Wasteland",
+      gameName: "veritable_",
+      series: "Miscellaneous",
+      tourneyPresence: 56
+    },
+    {
+      name: "Rooster Roost",
+      gameName: "roost_",
+      series: "Miscellaneous",
+      tourneyPresence: 91
+    },
+    {
+      name: "Unaugmented Argyle",
+      gameName: "argyledx_",
+      series: "",
+      tourneyPresence: 19
+    },
+    {
+      name: "Xeno Pizza",
+      gameName: "foodxeno_",
+      series: "Miscellaneous",
+      tourneyPresence: 83
+    },
+    {
+      name: "Proverbial Prophet's Shrine",
+      gameName: "fantasyshrine_",
+      series: "",
+      tourneyPresence: 16
+    },
+    {
+      name: "Kissinger Lobby",
+      gameName: "businesslobby_",
+      series: "Miscellaneous",
+      tourneyPresence: 80
+    },
+    {
+      name: "Edward's Elemental Enchantments",
+      gameName: "fantasyedward_",
+      series: "",
+      tourneyPresence: 11
+    },
+    {
+      name: "Illustrious Isaac's Interstellar Interchange",
+      gameName: "spaceisaac_",
+      series: "Miscellaneous",
+      tourneyPresence: 61
+    },
+    {
+      name: "Medical Room",
+      gameName: "doctormed_",
+      series: "Miscellaneous",
+      tourneyPresence: 61
+    },
+    {
+      name: "Soup Server Station",
+      gameName: "foodsoup_",
+      series: "",
+      tourneyPresence: 88
+    },
+    {
+      name: "Luxury Land",
+      gameName: "jewelluxury_",
+      series: "Miscellaneous",
+      tourneyPresence: 66
+    }
+  ],
+
+  sortedStages: {
+
+  }
 };

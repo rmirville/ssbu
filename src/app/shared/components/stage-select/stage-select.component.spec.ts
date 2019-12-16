@@ -360,6 +360,48 @@ describe('StageSelectComponent', () => {
       }
     });
 
+    it('should sort stages within each section alphabetically', () => {
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_STAGE_SORT.inputStages;
+      const expectedStages: { [property: string]: StageSelectInfo[] } = STAGE_SELECTIONS.TOURNEY_STAGE_SORT.sortedStages;
+      const expectedStageNames: { [property: string]: string[] } = {
+        legalCommon: expectedStages.legalCommon.map(stage => stage.name),
+        legalUncommon: expectedStages.legalUncommon.map(stage => stage.name),
+        legalRare: expectedStages.legalRare.map(stage => stage.name)
+      }
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const actualStageNames: { [property: string]: string[] } = {
+        legalCommon: selectDElem.queryAll(By.css('form .tourney-legal-common .form-check-label')).map(elem => elem.nativeElement.textContent.trim()),
+
+        legalUncommon: selectDElem.queryAll(By.css('form .tourney-legal-uncommon .form-check-label')).map(elem => elem.nativeElement.textContent.trim()),
+
+        legalRare: selectDElem.queryAll(By.css('form .tourney-legal-rare .form-check-label')).map(elem => elem.nativeElement.textContent.trim())
+      };
+
+      /**/
+      // console.log(`legalCommon Expected: ${JSON.stringify(expectedStageNames.legalCommon)}`);
+      // console.log(`legalCommon Actual: ${JSON.stringify(actualStageNames.legalCommon)}`);
+      for (let i: number = 0; i < expectedStageNames.legalCommon.length; i++) {
+        expect(actualStageNames.legalCommon[i]).withContext(`legalCommon[${i}]`).toEqual(expectedStageNames.legalCommon[i]);
+      }
+
+      /**/
+      // console.log(`legalUncommon Expected: ${JSON.stringify(expectedStageNames.legalUncommon)}`);
+      // console.log(`legalUncommon Actual: ${JSON.stringify(actualStageNames.legalUncommon)}`);
+      for (let i: number = 0; i < expectedStageNames.legalUncommon.length; i++) {
+        expect(actualStageNames.legalUncommon[i]).withContext(`legalUncommon[${i}]`).toEqual(expectedStageNames.legalUncommon[i]);
+      }
+
+      /**/
+      // console.log(`legalRare Expected: ${JSON.stringify(expectedStageNames.legalRare)}`);
+      // console.log(`legalRare Actual: ${JSON.stringify(actualStageNames.legalRare)}`);
+      for (let i: number = 0; i < expectedStageNames.legalRare.length; i++) {
+        expect(actualStageNames.legalRare[i]).withContext(`legalRare[${i}]`).toEqual(expectedStageNames.legalRare[i]);
+      }
+
+    });
+
     describe('section visibility', () => {
 
       it('should not appear if there are only banned stages present', () => {
@@ -534,8 +576,20 @@ describe('StageSelectComponent', () => {
       expect(sectionDElem).toBeNull();
     });
 
-    xit('should list defined series in alphabetical order', () => {
+    it('should list defined series in alphabetical order', () => {
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_SORT.inputStages;
+      const sortedStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_SORT.sortedStages;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
 
+      const seriesDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-series .classification h4'));
+
+      expect(seriesDElems.length).toEqual(sortedStages.length, `There should be ${sortedStages.length} series, but found ${seriesDElems.length}`);
+      for (let i = 0; i < sortedStages.length; i++) {
+        const expectedSeries = sortedStages[i].series;
+        const actualSeries = seriesDElems[i].nativeElement.textContent.trim();
+        expect(actualSeries).withContext(`index ${i}`).toEqual(expectedSeries);
+      }
     });
 
     describe('series subsection', () => {
@@ -652,8 +706,35 @@ describe('StageSelectComponent', () => {
         }
       });
 
-      xit('should list stages in alphabetical order', () => {
+      it('should list stages in alphabetical order', () => {
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_STAGE_SORT.inputStages;
+        const sortedStages: {
+          series: string,
+          stages: StageSelectInfo[]
+        }[] = STAGE_SELECTIONS.SERIES_STAGE_SORT.sortedStages;
 
+        let expectedStages: { [series: string]: StageSelectInfo[] } = {};
+        for (const stageList of sortedStages) {
+          expectedStages[stageList.series] = [...stageList.stages];
+        }
+
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const actualSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-series .classification'));
+        let actualStages: { [stageList: string]: string[] } = {};
+
+        for (const actualDElem of actualSeriesDElems) {
+          let series: string = actualDElem.query(By.css('h4')).nativeElement.textContent.trim();
+          let stageNames: string[] = actualDElem.queryAll(By.css('.form-check-label')).map(elem => elem.nativeElement.textContent.trim());
+          actualStages[series] = stageNames;
+        }
+
+        for (const stageList in expectedStages) {
+          for (let i: number = 0; i < expectedStages[stageList].length; i++) {
+            expect(actualStages[stageList][i]).withContext(`${stageList}[${i}]`).toEqual(expectedStages[stageList][i].name);
+          }
+        }
       });
     });
     describe('miscellaneous category', () => {

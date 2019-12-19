@@ -2249,6 +2249,378 @@ export const SERIES_STAGE_SORT: {
   ]
 };
 
+export const MISC_SHOW_MISC: StageSelectInfo[] = [
+  {
+    name: "Howdy House",
+    gameName: "howdy_",
+    series: "Miscellaneous",
+    tourneyPresence: 1
+  },
+  {
+    name: "What in the Sam Hill",
+    gameName: "hill_",
+    series: "Sayings Forever",
+    tourneyPresence: -1
+  },
+  {
+    name: "Foreign Forest",
+    gameName: "forest_",
+    series: "Miscellaneous",
+    tourneyPresence: 2
+  }
+];
+
+export const MISC_SHOW_BLANK: StageSelectInfo[] = [
+  {
+    name: "Doctor's Office",
+    gameName: "office_",
+    series: "The Land of the Mundane",
+    tourneyPresence: -1
+  },
+  {
+    name: "Blue Cheese Ranch",
+    gameName: "ranch_",
+    series: "",
+    tourneyPresence: 0
+  },
+  {
+    name: "Hotel Oklahoma",
+    gameName: "musicok_",
+    series: "Kind of Music",
+    tourneyPresence: 2
+  },
+  {
+    name: "The Forty-Five Paper Trail",
+    gameName: "punpaper_",
+    series: "Pun Amuk",
+    tourneyPresence: 3
+  }
+];
+
+export const MISC_HIDE: StageSelectInfo[] = [
+  {
+    name: "Western Spaghetti",
+    gameName: "neverwestern_",
+    series: "Never Forgetti",
+    tourneyPresence: 5
+  },
+  {
+    name: "Under the C",
+    gameName: "punc_",
+    series: "Pun Amuk",
+    tourneyPresence: -1
+  },
+  {
+    name: "Foundation",
+    gameName: "constructfound_",
+    series: "Construction",
+    tourneyPresence: 45
+  },
+  {
+    name: "Actual Land",
+    gameName: "millenland_",
+    series: "Millienal Slang",
+    tourneyPresence: 3
+  }
+];
+
+export const MISC_STAGE_INCLUDE_BLANK: { [property: string]: StageSelectInfo[] } = {
+  inputStages: [
+    {
+      name: "Input Island",
+      gameName: "boxinput_",
+      series: "Black Box",
+      tourneyPresence: 7
+    },
+    {
+      name: "Somewhere",
+      gameName: "somewhere_",
+      series: "",
+      tourneyPresence: 5
+    },
+    {
+      name: "Out there",
+      gameName: "out_",
+      series: " ",
+      tourneyPresence: 7
+    },
+    {
+      name: "Under the Witch Wood",
+      gameName: "fantasywitch_",
+      series: "Fantasy Land",
+      tourneyPresence: -3
+    },
+    {
+      name: "Skill Plateau",
+      gameName: "abstractplateau_",
+      series: "Abstract Equivocation",
+      tourneyPresence: 4
+    },
+    {
+      name: "Water",
+      gameName: "water_",
+      series: "   ",
+      tourneyPresence: 2
+    }
+  ],
+
+  includedStages: [
+    {
+      name: "Somewhere",
+      gameName: "somewhere_",
+      series: "",
+      tourneyPresence: 5
+    },
+    {
+      name: "Out there",
+      gameName: "out_",
+      series: " ",
+      tourneyPresence: 7
+    },
+    {
+      name: "Water",
+      gameName: "water_",
+      series: "   ",
+      tourneyPresence: 2
+    }
+  ]
+};
+
+export const MISC_STAGE_INCLUDE_MISC: { [property: string]: StageSelectInfo[] } = {
+  inputStages: [
+    {
+      name: "Dairy Isle",
+      gameName: "marketdairy_",
+      series: "Marketopia",
+      tourneyPresence: -5
+    },
+    {
+      name: "Canterbury Parkway",
+      gameName: "boardparkway_",
+      series: "Board Games Collection",
+      tourneyPresence: 4
+    },
+    {
+      name: "Tower",
+      gameName: "tower_",
+      series: "Miscellaneous",
+      tourneyPresence: 3
+    },
+    {
+      name: "Frankfurt Hotel",
+      gameName: "travelfrank_",
+      series: "Travelogue Rogue",
+      tourneyPresence: 29
+    },
+    {
+      name: "Absolute Destruction Island",
+      gameName: "breakisland_",
+      series: "Break Freak",
+      tourneyPresence: 17
+    },
+    {
+      name: "Haven",
+      gameName: "haven_",
+      series: "Miscellaneous",
+      tourneyPresence: 30
+    },
+    {
+      name: "Countryside Road",
+      gameName: "travelcountry_",
+      series: "Travelogue Rogue",
+      tourneyPresence: 1
+    },
+    {
+      name: "Shop",
+      gameName: "shop_",
+      series: "Miscellaneous",
+      tourneyPresence: 22
+    },
+    {
+      name: "Studio",
+      gameName: "studio_",
+      series: "Miscellaneous",
+      tourneyPresence: 5
+    }
+  ],
+  includedStages: [
+    {
+      name: "Tower",
+      gameName: "tower_",
+      series: "Miscellaneous",
+      tourneyPresence: 3
+    },
+    {
+      name: "Haven",
+      gameName: "haven_",
+      series: "Miscellaneous",
+      tourneyPresence: 30
+    },
+    {
+      name: "Shop",
+      gameName: "shop_",
+      series: "Miscellaneous",
+      tourneyPresence: 22
+    },
+    {
+      name: "Studio",
+      gameName: "studio_",
+      series: "Miscellaneous",
+      tourneyPresence: 5
+    }
+  ]
+};
+
+export const MISC_STAGE_EXCLUDE: { [property: string]: StageSelectInfo[] } = {
+  inputStages: [
+    {
+      name: "Obstacle Course",
+      gameName: "obstacle_",
+      series: "Miscellaneous",
+      tourneyPresence: 11
+    },
+    {
+      name: "Outer Space Station",
+      gameName: "space_",
+      series: "Miscellaneous",
+      tourneyPresence: 1
+    },
+    {
+      name: "Introvert Paradise",
+      gameName: "socialintrovert_",
+      series: "Socializing",
+      tourneyPresence: 2
+    },
+    {
+      name: "Canvas Campus",
+      gameName: "johncanvas_",
+      series: "Super John Time",
+      tourneyPresence: 3
+    },
+    {
+      name: "Snowglobe",
+      gameName: "snowglobe_",
+      series: "Miscellaneous",
+      tourneyPresence: -9
+    },
+    {
+      name: "Minewoss Mountain",
+      gameName: "johnminewoss_",
+      series: "Super John Timme",
+      tourneyPresence: 8
+    },
+    {
+      name: "Cantakerous Tank",
+      gameName: "wartank_",
+      series: "War of Words",
+      tourneyPresence: 7
+    }
+  ],
+  excludedStages: [
+    {
+      name: "Introvert Paradise",
+      gameName: "socialintrovert_",
+      series: "Socializing",
+      tourneyPresence: 2
+    },
+    {
+      name: "Canvas Campus",
+      gameName: "johncanvas_",
+      series: "Super John Time",
+      tourneyPresence: 3
+    },
+    {
+      name: "Minewoss Mountain",
+      gameName: "johnminewoss_",
+      series: "Super John Timme",
+      tourneyPresence: 8
+    },
+    {
+      name: "Cantakerous Tank",
+      gameName: "wartank_",
+      series: "War of Words",
+      tourneyPresence: 7
+    }
+  ]
+};
+
+export const MISC_SORT: { [property: string]: StageSelectInfo[] } = {
+  inputStages: [
+    {
+      name: "Western Town",
+      gameName: "western_",
+      series: "Miscellaneous",
+      tourneyPresence: 52
+    },
+    {
+      name: "New World City",
+      gameName: "city_",
+      series: "Miscellaneous",
+      tourneyPresence: 1
+    },
+    {
+      name: "Painting",
+      gameName: "paint_",
+      series: "Miscellaneous",
+      tourneyPresence: 35
+    },
+    {
+      name: "French Village",
+      gameName: "french_",
+      series: "Miscellaneous",
+      tourneyPresence: 35
+    },
+    {
+      name: "Kaleidoscopic Realm",
+      gameName: "kaleidoscope_",
+      series: "Miscellaneous",
+      tourneyPresence: 52
+    },
+    {
+      name: "Hill",
+      gameName: "hill_",
+      series: "Miscellaneous",
+      tourneyPresence: 96
+    },
+    {
+      name: "Vintage Car Dealership",
+      gameName: "salecarshop_",
+      series: "Super Sale Sisters",
+      tourneyPresence: 37
+    },
+    {
+      name: "Crate Factory",
+      gameName: "factory_",
+      series: "",
+      tourneyPresence: 40
+    },
+    {
+      name: "Medical School",
+      gameName: "phdschool_",
+      series: "PhD Land",
+      tourneyPresence: 80
+    },
+    {
+      name: "Twisting Tower",
+      gameName: "johntwists_",
+      series: "Super John Time",
+      tourneyPresence: 80
+    },
+    {
+      name: "Jade Caves",
+      gameName: "monkeycave_",
+      series: "Monkey Donk County",
+      tourneyPresence: 99
+    },
+    {
+      name: "United Negotiation Room",
+      gameName: "politicsunr_",
+      series: "Politics World",
+      tourneyPresence: 68
+    }
+  ]
+};
+
 export const MISC_STAGE_SORT: {
   inputStages: StageSelectInfo[],
   sortedStages: { [property: string]: StageSelectInfo[] }

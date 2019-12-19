@@ -738,15 +738,96 @@ describe('StageSelectComponent', () => {
       });
     });
     describe('miscellaneous category', () => {
-      xit('should show up if there are stages with a blank series');
-      xit('should not appear if there are no stages with a blank series');
-      xit('should show all stages with a blank series');
-      xit('should not show stages from a defined series');
-      xit('should show up last');
+      it('should show up if there are stages with a miscellaneous series', () => {
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.MISC_SHOW_MISC;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const actualSeries: string[] = selectDElem.queryAll(By.css('.by-series .classification h4')).map(elem => elem.nativeElement.textContent);
+        
+        expect(actualSeries).toContain('Miscellaneous');
+      });
+      
+      it('should show up if there are stages with a blank series', () => {
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.MISC_SHOW_BLANK;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const actualSeries: string[] = selectDElem.queryAll(By.css('.by-series .classification h4')).map(elem => elem.nativeElement.textContent);
+
+        expect(actualSeries).toContain('Miscellaneous');
+      });
+      
+      it('should not appear if there are no stages with a blank or miscellaneous series', () => {
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.MISC_HIDE;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const actualSeries: string[] = selectDElem.queryAll(By.css('.by-series .classification h4')).map(elem => elem.nativeElement.textContent);
+
+        expect(actualSeries.includes('Miscellaneous')).toBe(false);
+      });
+
+      it('should show all stages with a blank series', () => {
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.MISC_STAGE_INCLUDE_BLANK.inputStages;
+        const expectedStageIDs: string[] = STAGE_SELECTIONS.MISC_STAGE_INCLUDE_BLANK.includedStages.map(stage => stage.gameName);
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const miscDElem: DebugElement = selectDElem.queryAll(By.css('.by-series .classification')).filter(elem => elem.query(By.css('h4')).nativeElement.textContent.trim() === 'Miscellaneous')[0];
+
+        const actualStageIDs: string[] = miscDElem.queryAll(By.css('.form-check-input')).map(elem => elem.nativeElement.id);
+
+        for (const expectedStageID of expectedStageIDs) {
+          expect(actualStageIDs).toContain(expectedStageID);
+        }
+      });
+      it('should show all stages with a miscellaneous series', () => {
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.MISC_STAGE_INCLUDE_MISC.inputStages;
+        const expectedStageIDs: string[] = STAGE_SELECTIONS.MISC_STAGE_INCLUDE_MISC.includedStages.map(stage => stage.gameName);
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const miscDElem: DebugElement = selectDElem.queryAll(By.css('.by-series .classification')).filter(elem => elem.query(By.css('h4')).nativeElement.textContent.trim() === 'Miscellaneous')[0];
+
+        const actualStageIDs: string[] = miscDElem.queryAll(By.css('.form-check-input')).map(elem => elem.nativeElement.id);
+
+        for (const expectedStageID of expectedStageIDs) {
+          expect(actualStageIDs).toContain(expectedStageID);
+        }
+      });
+      
+      it('should not show stages from a defined series', () => {
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.MISC_STAGE_EXCLUDE.inputStages;
+        const targetStageIDs: string[] = STAGE_SELECTIONS.MISC_STAGE_EXCLUDE.excludedStages.map(stage => stage.gameName);
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const miscDElem: DebugElement = selectDElem.queryAll(By.css('.by-series .classification')).filter(elem => elem.query(By.css('h4')).nativeElement.textContent.trim() === 'Miscellaneous')[0];
+
+        const miscStageIDs: string[] = miscDElem.queryAll(By.css('.form-check-input')).map(elem => elem.nativeElement.id);
+
+        for (const targetStageID of targetStageIDs) {
+          expect(miscStageIDs.includes(targetStageID)).withContext(`Stage ${targetStageID}`).toBe(false);
+        }
+      });
+      
+      it('should show up last, even after series that follow it alphabetically', () => {
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.MISC_STAGE_EXCLUDE.inputStages;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const seriesDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-series .classification'));
+        const expectedIndex: number = seriesDElems.length - 1;
+
+        const actualIndex: number = seriesDElems.findIndex(elem => {
+          return (elem.query(By.css('h4')).nativeElement.textContent.trim() === 'Miscellaneous');
+        });
+
+        expect(actualIndex).toEqual(expectedIndex);
+      });
     });
   });
-
-  // TODO: Sorted by Name Alphabet
 
   // TODO: Handle no stages loaded error
 });

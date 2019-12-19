@@ -12,6 +12,8 @@ interface StageSelectSection {
   sections?: StageSelectSection[];
 };
 
+const BLANK_SERIES: string = 'Miscellaneous';
+
 @Component({
   selector: 'ssbu-stage-select',
   templateUrl: './stage-select.component.html',
@@ -85,10 +87,12 @@ export class StageSelectComponent implements OnInit {
     let legalRareStages: StageSelectInfo[] = [];
     let seriesStages: { [seriesName: string]: StageSelectInfo[] } = {};
     
-    for (const stage of this.stages) {
+    for (let stage of this.stages) {
       /**/
       // console.log(`  * checking stage: ${stage.name} (${stage.series})`);
-      
+      if ( !(stage.series) || stage.series.trim().length === 0 ) {
+        stage.series = BLANK_SERIES;
+      }
       // group stages by series
       if (!(stage.series in seriesStages)) {
         seriesStages[stage.series] = [];
@@ -126,7 +130,14 @@ export class StageSelectComponent implements OnInit {
         expand: false
       });
       this.classifiedStages.series[id] = [...seriesStages[stageList].sort(this._compareInfo.bind(this))];
-      this.series.sections.sort(this._compareSection.bind(this));
+    }
+    
+    this.series.sections.sort(this._compareSection.bind(this));
+
+    // put miscellaneous section last
+    const miscSectionIndex: number = this.series.sections.findIndex(section => section.title === BLANK_SERIES);
+    if (miscSectionIndex !== -1) {
+      this.series.sections.push(this.series.sections.splice(miscSectionIndex, 1)[0]);
     }
     /**/
     // console.log(`  * classified.series: ${JSON.stringify(this.classifiedStages.series)}`);

@@ -829,5 +829,29 @@ describe('StageSelectComponent', () => {
     });
   });
 
-  // TODO: Handle no stages loaded error
+  xdescribe('cross-category interaction', () => {
+    it(`should check a stage in the series section if it's checked in the tourney section`, () => {
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_TOURNEY_SERIES.stages;
+      const targetID: string = STAGE_SELECTIONS.CROSS_TOURNEY_SERIES.targetID;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageTourneyDElem: DebugElement = selectDElem.query(By.css(`.by-tourney .form-check-input[id='${targetID}']`));
+      expect(stageTourneyDElem.nativeElement.id).withContext('sanity check - should find tourney checkmark').toEqual(targetID);
+      stageTourneyDElem.triggerEventHandler('click', { category: 'tourneyPresence', id: targetID });
+      const stageSeriesDElem: DebugElement = selectDElem.query(By.css(`.by-series .form-check-input[id='${targetID}']`));
+
+      expect(stageSeriesDElem.nativeElement.checked).toBe(true);
+    });
+  });
+
+  // TODO:
+    // Check stages in one section that have been added in the other section
+      // and vice versa
+    // Uncheck stages in one section that have been added in the other section
+      // and vice versa
+    // Emit an event when the update button's pressed
+    // Send data on what stages were selected when the update button's pressed
+
+    // Handle no stages loaded error
 });

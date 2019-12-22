@@ -2722,3 +2722,21 @@ export const MISC_STAGE_SORT: {
 
   }
 };
+
+export const CROSS_TOURNEY_SERIES: { stages: StageSelectInfo[], targetID: string } = {
+  stages: [
+    {
+      name: "Tower of Babbling Brooks",
+      gameName: "mixedtower_",
+      series: "World of Mixed Metaphors",
+      tourneyPresence: 1
+    },
+    {
+      name: "Effervescent Paradise",
+      gameName: "fantasyeffer_",
+      series: "Fantasy Land",
+      tourneyPresence: -1
+    }
+  ],
+  targetID: 'mixedtower_'
+};

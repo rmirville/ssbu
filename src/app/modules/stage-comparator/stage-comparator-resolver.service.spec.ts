@@ -19,7 +19,7 @@ import { StageComparatorResolverService } from './stage-comparator-resolver.serv
 import { STAGES_ONE, STAGES_TWO, STAGES_THREE } from '../../shared/stage/models/mocks/stages';
 import * as STAGE_DIMENSIONS_SETS from '../../shared/stage/models/mocks/stage-dimensions-set';
 import * as STAGE_SELECTIONS from '../../shared/stage/models/mocks/stage-select-info';
-import { DummyComponent } from '../../shared/mocks/dummy.component';
+import { EmptyMockComponent } from '../../shared/mocks/empty.mock.component';
 
 describe('StageComparatorResolverService', () => {
   let resolverService: StageComparatorResolverService;
@@ -30,12 +30,12 @@ describe('StageComparatorResolverService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DummyComponent],
+      declarations: [EmptyMockComponent],
       imports: [
         RouterTestingModule.withRoutes([
           {
             path: '',
-            component: DummyComponent,
+            component: EmptyMockComponent,
             resolve: {
               stages: StageComparatorResolverService
             }

@@ -1,276 +1,289 @@
+/* Stage Select */
+ssbu-stage-select .classification {
+  padding-top: 1rem;
+  border-bottom: 1px dotted lightgrey;
+}
+
+ssbu-stage-select form > .form-group {
+  margin-bottom: 1.5rem;
+}
+
 /* Stages */
-.boundary {
-  border: 0;
+
+.table-responsive .td-graph {
+  background-image: repeating-linear-gradient(to right,
+      transparent,
+      hsla(0, 0%, 0%, 50%) 1px,
+      transparent 0px,
+      transparent 20px);
+  background-position-x: 1rem;
+  box-shadow: inset 1rem 0 white, -.75rem 0 white;
 }
 
-.boundary th, .boundary td {
-  padding: 0 5px;
+.table-hover tr:hover .td-graph {
+  box-shadow: inset 1rem 0 hsl(0, 0%, 93%), -.75rem 0 hsl(0, 0%, 93%);
 }
 
-.boundary th {
-  text-align: left;
-}
-
-.boundary div {
+.table-responsive .td-graph div {
   float: left;
-  margin: .5rem 0 0;
-  height: .3rem;
+  margin: 0;
+  height: .75rem;
 }
 
 /**/
-.boundary .r1 {
-  background-color: hsl(0, 70%, 50%);
+.table-responsive .r1 {
+  background-color: hsl(0, 75%, 55%);
 }
 
-.boundary .r2 {
-  background-color: hsl(30, 70%, 50%);
+.table-responsive .r2 {
+  background-color: hsl(30, 85%, 55%);
 }
 
-.boundary .r3 {
-  background-color: hsl(60, 70%, 50%);
+.table-responsive .r3 {
+  background-color: hsl(60, 80%, 50%);
 }
 
-.boundary .r4 {
-  background-color: hsl(120, 50%, 50%);
+.table-responsive .r4 {
+  background-color: hsl(100, 55%, 50%);
 }
 
-.boundary .r5 {
-  background-color: hsl(240, 60%, 50%);
+.table-responsive .r5 {
+  background-color: hsl(220, 75%, 55%);
 }
 /**/
 
 /* Color-blind *//*
-.boundary .r1 {
+.table-responsive .r1 {
   background-color: hsl(0, 0%, 20%);
 }
 
-.boundary .r2 {
+.table-responsive .r2 {
   background-color: hsl(30, 0%, 40%);
 }
 
-.boundary .r3 {
+.table-responsive .r3 {
   background-color: hsl(60, 0%, 60%);
 }
 
-.boundary .r4 {
+.table-responsive .r4 {
   background-color: hsl(120, 0%, 80%);
 }
 
-.boundary .r5 {
+.table-responsive .r5 {
   background-color: hsl(240, 0%, 100%);
 }
 /**/
 
 
-.boundary .bf .blastzone {
+.table-responsive .bf .blastzone {
   width: 240px;
 }
 
-.boundary .bf .stage {
+.table-responsive .bf .stage {
   width: 80px;
 }
 
-.boundary .bf .off-stage {
+.table-responsive .bf .off-stage {
   width: 160px;
 }
 
-.boundary .bf .ceiling {
+.table-responsive .bf .ceiling {
   width: 192px;
 }
 
 
 
-.boundary .fd .blastzone {
+.table-responsive .fd .blastzone {
   width: 240px;
 }
 
-.boundary .fd .stage {
+.table-responsive .fd .stage {
   width: 80px;
 }
 
-.boundary .fd .off-stage {
+.table-responsive .fd .off-stage {
   width: 160px;
 }
 
-.boundary .fd .ceiling {
+.table-responsive .fd .ceiling {
   width: 180px;
 }
 
 
 
-.boundary .ps2 .blastzone {
+.table-responsive .ps2 .blastzone {
   width: 250px;
 }
 
-.boundary .ps2 .stage {
+.table-responsive .ps2 .stage {
   width: 94px;
 }
 
-.boundary .ps2 .off-stage {
+.table-responsive .ps2 .off-stage {
   width: 156px;
 }
 
-.boundary .ps2 .ceiling {
+.table-responsive .ps2 .ceiling {
   width: 180px;
 }
 
 
 
-.boundary .ps1 .blastzone {
+.table-responsive .ps1 .blastzone {
   width: 250px;
 }
 
-.boundary .ps1 .stage {
+.table-responsive .ps1 .stage {
   width: 88px;
 }
 
-.boundary .ps1 .off-stage {
+.table-responsive .ps1 .off-stage {
   width: 162px;
 }
 
-.boundary .ps1 .ceiling {
+.table-responsive .ps1 .ceiling {
   width: 180px;
 }
 
 
 
-.boundary .sv .blastzone {
+.table-responsive .sv .blastzone {
   width: 230px;
 }
 
-.boundary .sv .stage {
+.table-responsive .sv .stage {
   width: 70px;
 }
 
-.boundary .sv .off-stage {
+.table-responsive .sv .off-stage {
   width: 160px;
 }
 
-.boundary .sv .ceiling {
+.table-responsive .sv .ceiling {
   width: 190px;
 }
 
 
 
-.boundary .kpl .blastzone {
+.table-responsive .kpl .blastzone {
   width: 245px;
 }
 
-.boundary .kpl .stage {
+.table-responsive .kpl .stage {
   width: 80px;
 }
 
-.boundary .kpl .off-stage {
+.table-responsive .kpl .off-stage {
   width: 165px;
 }
 
-.boundary .kpl .ceiling {
+.table-responsive .kpl .ceiling {
   width: 192px;
 }
 
 
-.boundary .yib .blastzone {
+.table-responsive .yib .blastzone {
   width: 220px;
 }
 
-.boundary .yib .stage {
+.table-responsive .yib .stage {
   width: 70px;
 }
 
-.boundary .yib .off-stage {
+.table-responsive .yib .off-stage {
   width: 150px;
 }
 
-.boundary .yib .ceiling {
+.table-responsive .yib .ceiling {
   width: 185px;
 }
 
 
 
-.boundary .tc .blastzone {
+.table-responsive .tc .blastzone {
   width: 230px;
 }
 
-.boundary .tc .stage {
+.table-responsive .tc .stage {
   width: 82px;
 }
 
-.boundary .tc .off-stage {
+.table-responsive .tc .off-stage {
   width: 148px;
 }
 
-.boundary .tc .ceiling {
+.table-responsive .tc .ceiling {
   width: 195px;
 }
 
 
 
-.boundary .upl .blastzone {
+.table-responsive .upl .blastzone {
   width: 237px;
 }
 
-.boundary .upl .stage {
+.table-responsive .upl .stage {
   width: 82px;
 }
 
-.boundary .upl .off-stage {
+.table-responsive .upl .off-stage {
   width: 155px;
 }
 
-.boundary .upl .ceiling {
+.table-responsive .upl .ceiling {
   width: 190px;
 }
 
 
 
-.boundary .ys .blastzone {
+.table-responsive .ys .blastzone {
   width: 227px;
 }
 
-.boundary .ys .stage {
+.table-responsive .ys .stage {
   width: 68px;
 }
 
-.boundary .ys .off-stage {
+.table-responsive .ys .off-stage {
   width: 159px;
 }
 
-.boundary .ys .ceiling {
+.table-responsive .ys .ceiling {
   width: 184px;
 }
 
 
 
-.boundary .lc .blastzone {
+.table-responsive .lc .blastzone {
   width: 230px;
 }
 
-.boundary .lc .stage {
+.table-responsive .lc .stage {
   width: 80px;
 }
 
-.boundary .lc .off-stage {
+.table-responsive .lc .off-stage {
   width: 150px;
 }
 
-.boundary .lc .ceiling {
+.table-responsive .lc .ceiling {
   width: 188px;
 }
 
 
 
-.boundary .mm .blastzone {
+.table-responsive .mm .blastzone {
   width: 260px;
 }
 
-.boundary .mm .stage {
+.table-responsive .mm .stage {
   width: 100px;
 }
 
-.boundary .mm .off-stage {
+.table-responsive .mm .off-stage {
   width: 160px;
 }
 
-.boundary .mm .ceiling {
+.table-responsive .mm .ceiling {
   width: 190px;
 }

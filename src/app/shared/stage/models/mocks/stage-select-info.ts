@@ -859,7 +859,109 @@ export const TOURNEY = {
   }
 };
 
-export const TOURNEY_SHOW_LEGAL_COMMON = [
+export const TOURNEY_STAGE_ID: StageSelectInfo[] = [
+  {
+    name: "Vale of Vacuums",
+    gameName: "dirtyvacuum_",
+    series: "Dirtymancing",
+    tourneyPresence: 1
+  },
+  {
+    name: "Ashley Farm",
+    gameName: "baconashley_",
+    series: "Iterative Bacon Hero",
+    tourneyPresence: 1
+  },
+  {
+    name: "Double-Door Foyer",
+    gameName: "homefoyer_",
+    series: "Welcome Home",
+    tourneyPresence: 0
+  },
+  {
+    name: "Galactic Microscope Lab",
+    gameName: "lessonmicro_",
+    series: "Lesson Learned",
+    tourneyPresence: 1
+  },
+  {
+    name: "Jerry Arctic's Life Insurance Office",
+    gameName: "unimaginablejerry_",
+    series: "Quest of the Unimaginable",
+    tourneyPresence: 1
+  },
+  {
+    name: "Karl's Place",
+    gameName: "neverkarl_",
+    series: "Neverwhere",
+    tourneyPresence: 1
+  },
+  {
+    name: "HRT Bank",
+    gameName: "opulencebank_",
+    series: "Opulence",
+    tourneyPresence: 2
+  },
+  {
+    name: "Questionland",
+    gameName: "truthquestion_",
+    series: "Truthfinder",
+    tourneyPresence: 2
+  }
+];
+
+export const TOURNEY_STAGE_LABEL_FOR: StageSelectInfo[] = [
+  {
+    name: "Iciclipse Dungeon",
+    gameName: "ventureice_",
+    series: "Venture World",
+    tourneyPresence: 0
+  },
+  {
+    name: "Verdent Pyramid",
+    gameName: "zealpyramid_",
+    series: "Zeal",
+    tourneyPresence: 2
+  },
+  {
+    name: "Oddball Temple",
+    gameName: "presenceodd_",
+    series: "Presence",
+    tourneyPresence: 1
+  },
+  {
+    name: "Basketball Court",
+    gameName: "youthcourt_",
+    series: "Youth of the Ancients",
+    tourneyPresence: 2
+  },
+  {
+    name: "Pepper's Playground",
+    gameName: "edpepper_",
+    series: "Edward Island",
+    tourneyPresence: 1
+  },
+  {
+    name: "Zedd Dredd's Canopy",
+    gameName: "deathcanopy_",
+    series: "Deathfarm",
+    tourneyPresence: 0
+  },
+  {
+    name: "Zephyr Ring Drawer",
+    gameName: "dearestdrawer_",
+    series: "Hello Dearest",
+    tourneyPresence: 1
+  },
+  {
+    name: "Frank's Discussion Table",
+    gameName: "jefffrank_",
+    series: "Jeff Jameson",
+    tourneyPresence: 0
+  }
+];
+
+export const TOURNEY_SHOW_LEGAL_COMMON: StageSelectInfo[] = [
   {
     name: "Murky Swamp",
     gameName: "farswamp_",
@@ -880,7 +982,7 @@ export const TOURNEY_SHOW_LEGAL_COMMON = [
   }
 ];
 
-export const TOURNEY_SHOW_LEGAL_COMMON_BANNED = [
+export const TOURNEY_SHOW_LEGAL_COMMON_BANNED: StageSelectInfo[] = [
   {
     name: "Turkey Factory",
     gameName: "farmturkey_",
@@ -1402,6 +1504,108 @@ export const TOURNEY_STAGE_SORT: {
     ]
   }
 };
+
+export const SERIES_STAGE_ID: StageSelectInfo[] = [
+  {
+    name: "Scenterfuge",
+    gameName: "umscent_",
+    series: "Um What",
+    tourneyPresence: 0
+  },
+  {
+    name: "Meritable Wasteland",
+    gameName: "confusingmerit_",
+    series: "Very Confusing Game",
+    tourneyPresence: 2
+  },
+  {
+    name: "Snack Den",
+    gameName: "flavorden_",
+    series: "Fancy Flavor Forest",
+    tourneyPresence: 0
+  },
+  {
+    name: "Zen Center",
+    gameName: "nextzen_",
+    series: "Next Time",
+    tourneyPresence: 2
+  },
+  {
+    name: "Laurel Theater",
+    gameName: "noxitheater_",
+    series: "Noxiomometer",
+    tourneyPresence: 2
+  },
+  {
+    name: "Trobble's Trench",
+    gameName: "ferrettrench_",
+    series: "Ferret Kingdom",
+    tourneyPresence: 1
+  },
+  {
+    name: "Enterprise Office",
+    gameName: "interestenterprise_",
+    series: "Interest",
+    tourneyPresence: 0
+  },
+  {
+    name: "West Wing Section A",
+    gameName: "owwwa_",
+    series: "Ow",
+    tourneyPresence: 1
+  }
+];
+
+export const SERIES_STAGE_LABEL_FOR: StageSelectInfo[] = [
+  {
+    name: "Separation Station",
+    gameName: "arggghstation_",
+    series: "Argggh!",
+    tourneyPresence: 1
+  },
+  {
+    name: "Z. Ablo's Tent",
+    gameName: "devilablo_",
+    series: "Devil's Plateau",
+    tourneyPresence: 0
+  },
+  {
+    name: "Uptown",
+    gameName: "trackup_",
+    series: "Track Record",
+    tourneyPresence: 1
+  },
+  {
+    name: "Beto's Revenge Land",
+    gameName: "yuibeto_",
+    series: "Yui Monosuke",
+    tourneyPresence: 1
+  },
+  {
+    name: "Arid Arrowland",
+    gameName: "possiblearid_",
+    series: "Possible Squad",
+    tourneyPresence: 1
+  },
+  {
+    name: "Barry's Basement",
+    gameName: "awrybasement_",
+    series: "Ronald Awry",
+    tourneyPresence: 1
+  },
+  {
+    name: "Roger's Disco",
+    gameName: "jrdisco_",
+    series: "Jr. Jukebox",
+    tourneyPresence: 2
+  },
+  {
+    name: "Orange Bananaland",
+    gameName: "orangeorange_",
+    series: "Orange You Glad",
+    tourneyPresence: 0
+  }
+];
 
 export const SERIES_SHOW: StageSelectInfo[] = [
   {

@@ -20,6 +20,7 @@ const BLANK_SERIES: string = 'Miscellaneous';
   styleUrls: ['./stage-select.component.css']
 })
 export class StageSelectComponent implements OnInit {
+  separator: string = '_';
   stageGroup: FormGroup = this.fb.group({});
   @Input() stages: StageSelectInfo[];
   classifiedStages: {

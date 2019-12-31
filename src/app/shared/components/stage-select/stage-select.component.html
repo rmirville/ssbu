@@ -26,8 +26,8 @@
                       <ng-container *ngFor="let stage of classifiedStages.tourneyPresence[section.id]">
                         <div class="col-md-6 col-lg-4 col-xl-3">
                           <div class="form-check">
-                            <input class="form-check-input" id="{{stage.gameName}}" type="checkbox" />
-                            <label class="form-check-label" for="{{stage.gameName}}">{{stage.name}}</label>
+                            <input class="form-check-input" id="{{tourneyPresence.id + separator + stage.gameName}}" name="{{stage.gameName}}" type="checkbox" />
+                            <label class="form-check-label" for="{{tourneyPresence.id + separator + stage.gameName}}">{{stage.name}}</label>
                           </div>
                         </div>
                       </ng-container>
@@ -62,8 +62,8 @@
                       <ng-container *ngFor="let stage of classifiedStages.series[section.id]">
                         <div class="col-md-6 col-lg-4 col-xl-3">
                           <div class="form-check">
-                            <input class="form-check-input" id="{{stage.gameName}}" type="checkbox" />
-                            <label class="form-check-label" for="{{stage.gameName}}">{{stage.name}}</label>
+                            <input class="form-check-input" id="{{series.id + separator + stage.gameName}}" name="{{stage.gameName}}" type="checkbox" (click)="'syncSelection({sortMethod: \'' + series.id + '\', id: \'' + stage.gameName + '\'})'" />
+                            <label class="form-check-label" for="{{series.id + separator + stage.gameName}}">{{stage.name}}</label>
                           </div>
                         </div>
                       </ng-container>

@@ -95,35 +95,19 @@ describe('StageSelectComponent', () => {
     expect(checkLabelDElems.length).toBeGreaterThan(0);
   });
 
-  it(`should show a list of checkbox inputs with id's that match the provided stages' gameNames`, () => {
+  it(`should show a list of checkbox inputs with names that match the provided stages' gameNames`, () => {
     /**/
-    // console.log('=== SPEC - Match checkboxes ===');
+    // console.log('=== SPEC - Match checkbox name ===');
     const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.ONE;
 
     selectHostComp.stages = [...expectedStages];
     selectHostFixture.detectChanges();
 
     const checkDElems: DebugElement[] = selectDElem.queryAll(By.css('form .form-check'));
-    const actualIDs = checkDElems.map(checkDElem => checkDElem.query(By.css('.form-check-input')).nativeElement.id);
+    const actualGameNames = checkDElems.map(checkDElem => checkDElem.query(By.css('.form-check-input')).nativeElement.getAttribute('name'));
 
     for (const expectedStage of expectedStages) {
-      expect(actualIDs).toContain(expectedStage.gameName, `no input with id '${expectedStage.gameName}'`);
-    }
-  });
-
-  it(`should show a list of checkbox labels with for attributes that match the provided stages' gameNames`, () => {
-    /**/
-    // console.log('=== SPEC - Match label attributes ===');
-    const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.ONE;
-
-    selectHostComp.stages = [...expectedStages];
-    selectHostFixture.detectChanges();
-
-    const checkDElems: DebugElement[] = selectDElem.queryAll(By.css('form .form-check'));
-    const actualLabelFors = checkDElems.map(checkDElem => checkDElem.query(By.css('.form-check-label')).nativeElement.getAttribute('for'));
-
-    for (const expectedStage of expectedStages) {
-      expect(actualLabelFors).toContain(expectedStage.gameName, `no label for attribute with value '${expectedStage.gameName}`);
+      expect(actualGameNames).toContain(expectedStage.gameName, `no input with name '${expectedStage.gameName}'`);
     }
   });
 
@@ -144,6 +128,40 @@ describe('StageSelectComponent', () => {
   });
 
   describe('tournament legality section', () => {
+
+    it(`should show a list of checkbox inputs with id's of the section id and the provided stages' gameNames`, () => {
+      /**/
+      // console.log('=== SPEC - Tourney - Match checkbox id ===');
+      const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_STAGE_ID;
+      const expectedPrefix: string = 'tourneyPresence_'
+
+      selectHostComp.stages = [...expectedStages];
+      selectHostFixture.detectChanges();
+
+      const checkDElems: DebugElement[] = selectDElem.queryAll(By.css('form .by-tourney .form-check'));
+      const actualIDs = checkDElems.map(checkDElem => checkDElem.query(By.css('.form-check-input')).nativeElement.id);
+
+      for (const expectedStage of expectedStages) {
+        expect(actualIDs).toContain(expectedPrefix + expectedStage.gameName, `no input with name '${expectedPrefix}${expectedStage.gameName}'`);
+      }
+    });
+
+    it(`should show a list of checkbox labels with for attributes of the section id and the provided stages' gameNames`, () => {
+      /**/
+      // console.log('=== SPEC - Tourney - Match label attributes ===');
+      const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_STAGE_LABEL_FOR;
+      const expectedPrefix: string = 'tourneyPresence_';
+
+      selectHostComp.stages = [...expectedStages];
+      selectHostFixture.detectChanges();
+
+      const checkDElems: DebugElement[] = selectDElem.queryAll(By.css('form .form-check'));
+      const actualLabelFors = checkDElems.map(checkDElem => checkDElem.query(By.css('.form-check-label')).nativeElement.getAttribute('for'));
+
+      for (const expectedStage of expectedStages) {
+        expect(actualLabelFors).toContain(expectedPrefix + expectedStage.gameName, `no label for attribute with value '${expectedPrefix}${expectedStage.gameName}`);
+      }
+    });
 
     describe('commonly legal stages', () => {
 
@@ -180,7 +198,7 @@ describe('StageSelectComponent', () => {
 
         for (const expectedStage of expectedStages) {
           const index = actualStageDElems.findIndex(actualStageDElem => {
-            return (actualStageDElem.nativeElement.id === expectedStage.gameName);
+            return (actualStageDElem.nativeElement.getAttribute('name') === expectedStage.gameName);
           });
           expect(index).toBeGreaterThan(-1, `Could not find ${expectedStage.gameName}`);
         }
@@ -199,7 +217,7 @@ describe('StageSelectComponent', () => {
         
         for (const excludedStage of excludedStages) {
           const index = actualStageDElems.findIndex(actualStageDElem => {
-            return (actualStageDElem.nativeElement.id === excludedStage.gameName);
+            return (actualStageDElem.nativeElement.getAttribute('name') === excludedStage.gameName);
           });
           expect(index).toEqual(-1, `${excludedStage.gameName} should not be in common legal stages`);
         }
@@ -242,7 +260,7 @@ describe('StageSelectComponent', () => {
 
         for (const expectedStage of expectedStages) {
           const index = actualStageDElems.findIndex(actualStageDElem => {
-            return (actualStageDElem.nativeElement.id === expectedStage.gameName);
+            return (actualStageDElem.nativeElement.getAttribute('name') === expectedStage.gameName);
           });
           expect(index).toBeGreaterThan(-1, `Could not find ${expectedStage.gameName}`);
         }
@@ -261,7 +279,7 @@ describe('StageSelectComponent', () => {
 
         for (const excludedStage of excludedStages) {
           const index = actualStageDElems.findIndex(actualStageDElem => {
-            return (actualStageDElem.nativeElement.id === excludedStage.gameName);
+            return (actualStageDElem.nativeElement.getAttribute('name') === excludedStage.gameName);
           });
           expect(index).toEqual(-1, `${excludedStage.gameName} should not be in uncommon legal stages`);
         }
@@ -304,7 +322,7 @@ describe('StageSelectComponent', () => {
 
         for (const expectedStage of expectedStages) {
           const index = actualStageDElems.findIndex(actualStageDElem => {
-            return (actualStageDElem.nativeElement.id === expectedStage.gameName);
+            return (actualStageDElem.nativeElement.getAttribute('name') === expectedStage.gameName);
           });
           expect(index).toBeGreaterThan(-1, `Could not find ${expectedStage.gameName}`);
         }
@@ -323,7 +341,7 @@ describe('StageSelectComponent', () => {
 
         for (const excludedStage of excludedStages) {
           const index = actualStageDElems.findIndex(actualStageDElem => {
-            return (actualStageDElem.nativeElement.id === excludedStage.gameName);
+            return (actualStageDElem.nativeElement.getAttribute('name') === excludedStage.gameName);
           });
           expect(index).toEqual(-1, `${excludedStage.gameName} should not be in rare legal stages`);
         }
@@ -352,7 +370,7 @@ describe('StageSelectComponent', () => {
       for (const legalType in expectedStages) {
         expectedStages[legalType].forEach(expectedStage => {
           const index = actualStageDElems[legalType].findIndex(actualStageDElem => {
-            return (actualStageDElem.nativeElement.id === expectedStage.gameName);
+            return (actualStageDElem.nativeElement.getAttribute('name') === expectedStage.gameName);
           });
           
           expect(index).toBeGreaterThan(-1, `Could not find ${expectedStage.gameName} in ${legalType} section`);
@@ -555,6 +573,40 @@ describe('StageSelectComponent', () => {
     /**/
     // console.log('=== SPEC - SUITE - SERIES SECTION ===');
 
+    it(`should show a list of checkbox inputs with id's of the section id and the provided stages' gameNames`, () => {
+      /**/
+      // console.log('=== SPEC - Series - Match checkbox id ===');
+      const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_STAGE_ID;
+      const expectedPrefix: string = 'series_'
+
+      selectHostComp.stages = [...expectedStages];
+      selectHostFixture.detectChanges();
+
+      const checkDElems: DebugElement[] = selectDElem.queryAll(By.css('form .by-series .form-check'));
+      const actualIDs = checkDElems.map(checkDElem => checkDElem.query(By.css('.form-check-input')).nativeElement.id);
+
+      for (const expectedStage of expectedStages) {
+        expect(actualIDs).toContain(expectedPrefix + expectedStage.gameName, `no input with name '${expectedPrefix}${expectedStage.gameName}'`);
+      }
+    });
+
+    it(`should show a list of checkbox labels with for attributes of the section id and the provided stages' gameNames`, () => {
+      /**/
+      // console.log('=== SPEC - Series - Match label attributes ===');
+      const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_STAGE_LABEL_FOR;
+      const expectedPrefix: string = 'series_';
+
+      selectHostComp.stages = [...expectedStages];
+      selectHostFixture.detectChanges();
+
+      const checkDElems: DebugElement[] = selectDElem.queryAll(By.css('form .by-series .form-check'));
+      const actualLabelFors = checkDElems.map(checkDElem => checkDElem.query(By.css('.form-check-label')).nativeElement.getAttribute('for'));
+
+      for (const expectedStage of expectedStages) {
+        expect(actualLabelFors).toContain(expectedPrefix + expectedStage.gameName, `no label for attribute with value '${expectedPrefix}${expectedStage.gameName}`);
+      }
+    });
+
     it('should appear if there are stages', () => {
       /**/
       // console.log('=== SPEC - Show series section ===');
@@ -646,10 +698,10 @@ describe('StageSelectComponent', () => {
         
         const seriesDElem: DebugElement = selectDElem.queryAll(By.css('form .by-series > .card .classification'))[seriesIndex];
         const checkDElems: DebugElement[] = seriesDElem.queryAll(By.css('.form-check-input'));
-        const actualIDs: string[] = checkDElems.map(elem => elem.nativeElement.id);
+        const actualGameNames: string[] = checkDElems.map(elem => elem.nativeElement.getAttribute('name'));
 
         for (const expectedStage of expectedStages) {
-          expect(actualIDs).toContain(expectedStage.gameName, `Stage "${expectedStage.gameName}" was not found in series "${targetSeries}."`);
+          expect(actualGameNames).toContain(expectedStage.gameName, `Stage "${expectedStage.gameName}" was not found in series "${targetSeries}."`);
         }
       });
 
@@ -670,17 +722,17 @@ describe('StageSelectComponent', () => {
 
         const seriesDElem: DebugElement = selectDElem.queryAll(By.css('form .by-series > .card .classification'))[seriesIndex];
         const checkDElems: DebugElement[] = seriesDElem.queryAll(By.css('.form-check-input'));
-        const actualIDs: string[] = checkDElems.map(elem => elem.nativeElement.id);
+        const actualGameNames: string[] = checkDElems.map(elem => elem.nativeElement.getAttribute('name'));
 
         for (const targetStage of targetStages) {
-          expect(actualIDs.includes(targetStage.gameName)).toBe(false, `Stage "${targetStage.gameName}" should not be in series "${targetSeries}."`);
+          expect(actualGameNames.includes(targetStage.gameName)).toBe(false, `Stage "${targetStage.gameName}" should not be in series "${targetSeries}."`);
         }
       });
 
       xit('should not show any stages with a blank series', () => {
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_INDIVIDUAL_EXCLUDE_BLANK.allStages;
         const targetStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_INDIVIDUAL_EXCLUDE_BLANK.excludedStages;
-        const targetIDs: string[] = targetStages.map(targetStage => targetStage.gameName);
+        const targetGameNames: string[] = targetStages.map(targetStage => targetStage.gameName);
         const miscSeries: string = "Miscellaneous";
 
         selectHostComp.stages = [...inputStages];
@@ -695,14 +747,14 @@ describe('StageSelectComponent', () => {
         if (miscIndex >= 0) {
           seriesDElems.splice(miscIndex);
         }
-        let actualIDs: string[] = [];
+        let actualGameNames: string[] = [];
         for (const seriesDElem of seriesDElems) {
           const stageDElems: DebugElement[] = seriesDElem.queryAll(By.css('.form-check-input'));
-          const actualSeriesIDs: string[] = stageDElems.map(stageDElem => stageDElem.nativeElement.id);
-          actualIDs = actualIDs.concat(actualSeriesIDs);
+          const actualSeriesGameNames: string[] = stageDElems.map(stageDElem => stageDElem.nativeElement.getAttribute('name'));
+          actualGameNames = actualGameNames.concat(actualSeriesGameNames);
         }
-        for (const targetID of targetIDs) {
-          expect(actualIDs.includes(targetID)).toBe(false, `Defined series should not include stage "${targetID}"`);
+        for (const targetGameName of targetGameNames) {
+          expect(actualGameNames.includes(targetGameName)).toBe(false, `Defined series should not include stage "${targetGameName}"`);
         }
       });
 
@@ -770,45 +822,45 @@ describe('StageSelectComponent', () => {
 
       it('should show all stages with a blank series', () => {
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.MISC_STAGE_INCLUDE_BLANK.inputStages;
-        const expectedStageIDs: string[] = STAGE_SELECTIONS.MISC_STAGE_INCLUDE_BLANK.includedStages.map(stage => stage.gameName);
+        const expectedGameNames: string[] = STAGE_SELECTIONS.MISC_STAGE_INCLUDE_BLANK.includedStages.map(stage => stage.gameName);
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
         const miscDElem: DebugElement = selectDElem.queryAll(By.css('.by-series .classification')).filter(elem => elem.query(By.css('h4')).nativeElement.textContent.trim() === 'Miscellaneous')[0];
 
-        const actualStageIDs: string[] = miscDElem.queryAll(By.css('.form-check-input')).map(elem => elem.nativeElement.id);
+        const actualGameNames: string[] = miscDElem.queryAll(By.css('.form-check-input')).map(elem => elem.nativeElement.getAttribute('name'));
 
-        for (const expectedStageID of expectedStageIDs) {
-          expect(actualStageIDs).toContain(expectedStageID);
+        for (const expectedGameName of expectedGameNames) {
+          expect(actualGameNames).toContain(expectedGameName);
         }
       });
       it('should show all stages with a miscellaneous series', () => {
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.MISC_STAGE_INCLUDE_MISC.inputStages;
-        const expectedStageIDs: string[] = STAGE_SELECTIONS.MISC_STAGE_INCLUDE_MISC.includedStages.map(stage => stage.gameName);
+        const expectedGameNames: string[] = STAGE_SELECTIONS.MISC_STAGE_INCLUDE_MISC.includedStages.map(stage => stage.gameName);
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
         const miscDElem: DebugElement = selectDElem.queryAll(By.css('.by-series .classification')).filter(elem => elem.query(By.css('h4')).nativeElement.textContent.trim() === 'Miscellaneous')[0];
 
-        const actualStageIDs: string[] = miscDElem.queryAll(By.css('.form-check-input')).map(elem => elem.nativeElement.id);
+        const actualGameNames: string[] = miscDElem.queryAll(By.css('.form-check-input')).map(elem => elem.nativeElement.getAttribute('name'));
 
-        for (const expectedStageID of expectedStageIDs) {
-          expect(actualStageIDs).toContain(expectedStageID);
+        for (const expectedGameName of expectedGameNames) {
+          expect(actualGameNames).toContain(expectedGameName);
         }
       });
       
       it('should not show stages from a defined series', () => {
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.MISC_STAGE_EXCLUDE.inputStages;
-        const targetStageIDs: string[] = STAGE_SELECTIONS.MISC_STAGE_EXCLUDE.excludedStages.map(stage => stage.gameName);
+        const targetGameNames: string[] = STAGE_SELECTIONS.MISC_STAGE_EXCLUDE.excludedStages.map(stage => stage.gameName);
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
         const miscDElem: DebugElement = selectDElem.queryAll(By.css('.by-series .classification')).filter(elem => elem.query(By.css('h4')).nativeElement.textContent.trim() === 'Miscellaneous')[0];
 
-        const miscStageIDs: string[] = miscDElem.queryAll(By.css('.form-check-input')).map(elem => elem.nativeElement.id);
+        const miscStageIDs: string[] = miscDElem.queryAll(By.css('.form-check-input')).map(elem => elem.nativeElement.getAttribute('name'));
 
-        for (const targetStageID of targetStageIDs) {
-          expect(miscStageIDs.includes(targetStageID)).withContext(`Stage ${targetStageID}`).toBe(false);
+        for (const targetGameName of targetGameNames) {
+          expect(miscStageIDs.includes(targetGameName)).withContext(`Stage ${targetGameName}`).toBe(false);
         }
       });
       
@@ -832,14 +884,14 @@ describe('StageSelectComponent', () => {
   xdescribe('cross-category interaction', () => {
     it(`should check a stage in the series section if it's checked in the tourney section`, () => {
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_TOURNEY_SERIES.stages;
-      const targetID: string = STAGE_SELECTIONS.CROSS_TOURNEY_SERIES.targetID;
+      const targetGameName: string = STAGE_SELECTIONS.CROSS_TOURNEY_SERIES.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const stageTourneyDElem: DebugElement = selectDElem.query(By.css(`.by-tourney .form-check-input[id='${targetID}']`));
-      expect(stageTourneyDElem.nativeElement.id).withContext('sanity check - should find tourney checkmark').toEqual(targetID);
-      stageTourneyDElem.triggerEventHandler('click', { category: 'tourneyPresence', id: targetID });
-      const stageSeriesDElem: DebugElement = selectDElem.query(By.css(`.by-series .form-check-input[id='${targetID}']`));
+      const stageTourneyDElem: DebugElement = selectDElem.query(By.css(`.by-tourney .form-check-input[name='${targetGameName}']`));
+      expect(stageTourneyDElem.nativeElement.getAttribute('name')).withContext('sanity check - should find tourney checkmark').toEqual(targetGameName);
+      stageTourneyDElem.triggerEventHandler('click', { category: 'tourneyPresence', name: targetGameName });
+      const stageSeriesDElem: DebugElement = selectDElem.query(By.css(`.by-series .form-check-input[name='${targetGameName}']`));
 
       expect(stageSeriesDElem.nativeElement.checked).toBe(true);
     });

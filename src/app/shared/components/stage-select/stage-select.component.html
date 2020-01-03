@@ -4,77 +4,45 @@
   </div>
   <div class="card-body">
     <form [formGroup]="stageGroup">
-      <div *ngIf="tourneyPresence.show" class="form-group by-tourney">
-        <div class="card">
-          <div class="card-header">
-            <h3 class="btn btn-link" [class.collapsed]="!tourneyPresence.expand" data-toggle="collapse"
-            [attr.data-target]="'#stage-select-' + tourneyPresence.attribute + '-collapse'" [attr.aria-expanded]="tourneyPresence.expand"
-            [attr.aria-controls]="'stage-select-' + tourneyPresence.attribute + '-collapse'">
-              <span class="collapse-icon"></span> {{tourneyPresence.title}}
-            </h3>
-          </div>
-          <div id="stage-select-{{tourneyPresence.attribute}}-collapse" class="collapse" [class.show]="tourneyPresence.expand"
-            [attr.aria-labelledby]="'stage-select-' + tourneyPresence.attribute + '-header'">
-            <div class="card-body">
-              <ng-container *ngFor="let section of tourneyPresence.sections">
-                <ng-container *ngIf="section.show">
-                  <div class="row classification tourney-{{section.attribute}}">
-                    <div class="col-sm-12">
-                      <h4>{{section.title}}</h4>
-                    </div>
-                    <div class="form-group form-inline">
-                      <ng-container *ngFor="let stage of classifiedStages.tourneyPresence[section.id]">
-                        <div class="col-md-6 col-lg-4 col-xl-3">
-                          <div class="form-check">
-                            <input class="form-check-input" id="{{tourneyPresence.id + separator + stage.gameName}}" name="{{stage.gameName}}" type="checkbox" />
-                            <label class="form-check-label" for="{{tourneyPresence.id + separator + stage.gameName}}">{{stage.name}}</label>
+      <ng-container *ngFor="let rootSection of rootSections">
+        <div *ngIf="rootSection.show" class="form-group {{rootSection.attribute}}">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="btn btn-link" [class.collapsed]="!rootSection.expand" data-toggle="collapse"
+                [attr.data-target]="'#stage-select-' + rootSection.attribute + '-collapse'"
+                [attr.aria-expanded]="rootSection.expand"
+                [attr.aria-controls]="'stage-select-' + rootSection.attribute + '-collapse'">
+                <span class="collapse-icon"></span> {{rootSection.title}}
+              </h3>
+            </div>
+            <div id="stage-select-{{rootSection.attribute}}-collapse" class="collapse" [class.show]="rootSection.expand"
+              [attr.aria-labelledby]="'stage-select-' + rootSection.attribute + '-header'">
+              <div class="card-body">
+                <ng-container *ngFor="let childSection of rootSection.sections">
+                  <ng-container *ngIf="childSection.show">
+                    <div class="row classification {{childSection.attribute}}">
+                      <div class="col-sm-12">
+                        <h4>{{childSection.title}}</h4>
+                      </div>
+                      <div class="form-group form-inline">
+                        <ng-container *ngFor="let stage of classifiedStages[rootSection.id][childSection.id]">
+                          <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="form-check">
+                              <input class="form-check-input" id="{{rootSection.id + separator + stage.gameName}}"
+                                name="{{stage.gameName}}" type="checkbox" (click)="'syncSelection({sortMethod: \'' + rootSection.id + '\', id: \'' + stage.gameName + '\'})'" />
+                              <label class="form-check-label" for="{{rootSection.id + separator + stage.gameName}}">{{stage.name}}</label>
+                            </div>
                           </div>
-                        </div>
-                      </ng-container>
+                        </ng-container>
+                      </div>
                     </div>
-                  </div>
+                  </ng-container>
                 </ng-container>
-              </ng-container>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div *ngIf="series.show" class="form-group by-series">
-        <div class="card">
-          <div class="card-header">
-            <h3 class="btn btn-link" [class.collapsed]="!series.expand" data-toggle="collapse"
-              [attr.data-target]="'#stage-select-' + series.attribute + '-collapse'"
-              [attr.aria-expanded]="series.expand"
-              [attr.aria-controls]="'stage-select-' + series.attribute + '-collapse'">
-              <span class="collapse-icon"></span> {{series.title}}
-            </h3>
-          </div>
-          <div id="stage-select-{{series.attribute}}-collapse" class="collapse" [class.show]="series.expand"
-            [attr.aria-labelledby]="'stage-select-' + series.attribute + '-header'">
-            <div class="card-body">
-              <ng-container *ngFor="let section of series.sections">
-                <ng-container *ngIf="section.show">
-                  <div class="row classification series-{{section.attribute}}">
-                    <div class="col-sm-12">
-                      <h4>{{section.title}}</h4>
-                    </div>
-                    <div class="form-group form-inline">
-                      <ng-container *ngFor="let stage of classifiedStages.series[section.id]">
-                        <div class="col-md-6 col-lg-4 col-xl-3">
-                          <div class="form-check">
-                            <input class="form-check-input" id="{{series.id + separator + stage.gameName}}" name="{{stage.gameName}}" type="checkbox" (click)="'syncSelection({sortMethod: \'' + series.id + '\', id: \'' + stage.gameName + '\'})'" />
-                            <label class="form-check-label" for="{{series.id + separator + stage.gameName}}">{{stage.name}}</label>
-                          </div>
-                        </div>
-                      </ng-container>
-                    </div>
-                  </div>
-                </ng-container>
-              </ng-container>
-            </div>
-          </div>
-        </div>
-      </div>
+      </ng-container>
       <div class="form-group">
         <button type="submit" class="btn btn-primary mb-2">Update</button>
       </div>

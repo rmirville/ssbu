@@ -40,6 +40,7 @@ export class StageSelectComponent implements OnInit {
     },
     series: {}
   };
+  rootSections: StageSelectSection[] = [];
   tourneyPresence: StageSelectSection = {
     id: 'tourneyPresence',
     title: 'By Tournament Legality',
@@ -50,19 +51,19 @@ export class StageSelectComponent implements OnInit {
       {
         id: 'legalCommon',
         title: 'Commonly Legal',
-        attribute: 'legal-common',
+        attribute: 'tourney-legal-common',
         show: false
       },
       {
         id: 'legalUncommon',
         title: 'Uncommonly Legal',
-        attribute: 'legal-uncommon',
+        attribute: 'tourney-legal-uncommon',
         show: false
       },
       {
         id: 'legalRare',
         title: 'Rarely Legal',
-        attribute: 'legal-rare',
+        attribute: 'tourney-legal-rare',
         show: false
       }
     ]
@@ -155,6 +156,9 @@ export class StageSelectComponent implements OnInit {
     this.tourneyPresence.sections[1].show = (this.classifiedStages.tourneyPresence.legalUncommon.length > 0);
     this.tourneyPresence.sections[2].show = (this.classifiedStages.tourneyPresence.legalRare.length > 0);
     this.tourneyPresence.show = (this.tourneyPresence.sections[0].show || this.tourneyPresence.sections[1].show || this.tourneyPresence.sections[2].show);
+
+    this.rootSections.push(this.tourneyPresence);
+    this.rootSections.push(this.series);
   }
 
   _compareText(a: string, b: string): number {

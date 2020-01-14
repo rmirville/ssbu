@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { StageSelectInfo } from '../../stage/models/stage-select-info.model';
 
+/**
+ * Represents the UI configuration of a section of stages
+ */
 interface StageSelectSection {
   id: string;
   title: string;
@@ -10,6 +13,15 @@ interface StageSelectSection {
   show: boolean;
   expand?: boolean;
   sections?: StageSelectSection[];
+};
+
+/**
+ * Represents the selected status of a collection of stages
+ * 
+ * @interface StageSelectStatus
+ */
+interface StageSelectStatus {
+  [gameName: string]: boolean;
 };
 
 const BLANK_SERIES: string = 'Miscellaneous';
@@ -23,6 +35,7 @@ export class StageSelectComponent implements OnInit {
   separator: string = '_';
   stageGroup: FormGroup = this.fb.group({});
   @Input() stages: StageSelectInfo[];
+  isSelected: StageSelectStatus = {};
   classifiedStages: {
     tourneyPresence: {
       legalCommon: StageSelectInfo[],
@@ -90,6 +103,8 @@ export class StageSelectComponent implements OnInit {
     let seriesStages: { [seriesName: string]: StageSelectInfo[] } = {};
     
     for (let stage of this.stages) {
+      this.isSelected[stage.gameName] = false;
+
       /**/
       // console.log(`  * checking stage: ${stage.name} (${stage.series})`);
       if ( !(stage.series) || stage.series.trim().length === 0 ) {
@@ -159,6 +174,13 @@ export class StageSelectComponent implements OnInit {
 
     this.rootSections.push(this.tourneyPresence);
     this.rootSections.push(this.series);
+  }
+
+  syncSelection(gameName: string) {
+    /**/
+    // console.log(`StageSelectComponent::syncSelection()`);
+    // console.log(`  * gameName: ${JSON.stringify(gameName)}`);
+    this.isSelected[gameName] = !this.isSelected[gameName];
   }
 
   _compareText(a: string, b: string): number {

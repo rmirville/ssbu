@@ -29,7 +29,7 @@
                           <div class="col-md-6 col-lg-4 col-xl-3">
                             <div class="form-check">
                               <input class="form-check-input" id="{{rootSection.id + separator + stage.gameName}}"
-                                name="{{stage.gameName}}" type="checkbox" (click)="'syncSelection({sortMethod: \'' + rootSection.id + '\', id: \'' + stage.gameName + '\'})'" />
+                                name="{{stage.gameName}}" type="checkbox" [checked]="isSelected[stage.gameName]" (click)="syncSelection(stage.gameName)" />
                               <label class="form-check-label" for="{{rootSection.id + separator + stage.gameName}}">{{stage.name}}</label>
                             </div>
                           </div>

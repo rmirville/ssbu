@@ -9,7 +9,7 @@ import { StageSelectHostMockComponent } from '../../stage/components/mocks/stage
 import { StageSelectInfo } from '../../stage/models/stage-select-info.model';
 import * as STAGE_SELECTIONS from '../../stage/models/mocks/stage-select-info';
 
-describe('StageSelectComponent', () => {
+fdescribe('StageSelectComponent', () => {
   let selectComp: StageSelectComponent;
   let selectDElem: DebugElement;
   let selectHostComp: StageSelectHostMockComponent;
@@ -127,7 +127,7 @@ describe('StageSelectComponent', () => {
     }
   });
 
-  describe('tournament legality section', () => {
+  xdescribe('tournament legality section', () => {
 
     it(`should show a list of checkbox inputs with id's of the section id and the provided stages' gameNames`, () => {
       /**/
@@ -569,7 +569,7 @@ describe('StageSelectComponent', () => {
 
   });
 
-  describe('series section', () => {
+  xdescribe('series section', () => {
     /**/
     // console.log('=== SPEC - SUITE - SERIES SECTION ===');
 
@@ -881,29 +881,399 @@ describe('StageSelectComponent', () => {
     });
   });
 
-  xdescribe('cross-category interaction', () => {
+  fdescribe('cross-category interaction', () => {
     it(`should check a stage in the series section if it's checked in the tourney section`, () => {
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_TOURNEY_SERIES.stages;
-      const targetGameName: string = STAGE_SELECTIONS.CROSS_TOURNEY_SERIES.targetID;
+      /**/
+      // console.log('=== SPEC - check series stage from tourney stage selection ===');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_TOURNEY_SERIES.stages;
+      const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_TOURNEY_SERIES.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
       const stageTourneyDElem: DebugElement = selectDElem.query(By.css(`.by-tourney .form-check-input[name='${targetGameName}']`));
-      expect(stageTourneyDElem.nativeElement.getAttribute('name')).withContext('sanity check - should find tourney checkmark').toEqual(targetGameName);
-      stageTourneyDElem.triggerEventHandler('click', { category: 'tourneyPresence', name: targetGameName });
       const stageSeriesDElem: DebugElement = selectDElem.query(By.css(`.by-series .form-check-input[name='${targetGameName}']`));
 
+      expect(stageTourneyDElem.nativeElement.getAttribute('name')).withContext('sanity check - should find tourney checkmark').toEqual(targetGameName);
+      stageTourneyDElem.nativeElement.click();
+      selectHostFixture.detectChanges();
+
       expect(stageSeriesDElem.nativeElement.checked).toBe(true);
+    });
+
+    it(`should check a stage in the tourney section if it's checked in the series section`, () => {
+      /**/
+      // console.log('=== SPEC - check tourney stage from series stage selection ===');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_SERIES_TOURNEY.stages;
+      const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_SERIES_TOURNEY.targetID;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageSeriesDElem: DebugElement = selectDElem.query(By.css(`.by-series .form-check-input[name='${targetGameName}']`));
+      const stageTourneyDElem: DebugElement = selectDElem.query(By.css(`.by-tourney .form-check-input[name='${targetGameName}']`));
+
+      expect(stageSeriesDElem.nativeElement.getAttribute('name')).withContext('sanity check - should find series checkmark').toEqual(targetGameName);
+      stageSeriesDElem.nativeElement.click();
+      selectHostFixture.detectChanges();
+
+      expect(stageTourneyDElem.nativeElement.checked).toBe(true);
+    });
+
+    it(`should uncheck a checked stage in the series section if it's unchecked in the tourney section`, () => {
+      /**/
+      // console.log('=== SPEC - uncheck series stage from tourney stage selection ===');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_TOURNEY_SERIES.stages;
+      const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_TOURNEY_SERIES.targetID;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageSeriesDElem: DebugElement = selectDElem.query(By.css(`.by-series .form-check-input[name='${targetGameName}']`));
+      const stageTourneyDElem: DebugElement = selectDElem.query(By.css(`.by-tourney .form-check-input[name='${targetGameName}']`));
+
+      expect(stageSeriesDElem.nativeElement.getAttribute('name')).withContext('sanity check - should find series checkbox').toEqual(targetGameName);
+      expect(stageTourneyDElem.nativeElement.getAttribute('name')).withContext('sanity check - should find tourney checkbox').toEqual(targetGameName);
+
+      stageTourneyDElem.nativeElement.click();
+      stageTourneyDElem.nativeElement.click();
+      selectHostFixture.detectChanges();
+
+      expect(stageSeriesDElem.nativeElement.checked).toBe(false);
+    });
+
+    it(`should uncheck a checked stage in the tourney section if it's unchecked in the series section`, () => {
+      /**/
+      // console.log('=== SPEC - uncheck tourney stage from series stage selection ===');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_SERIES_TOURNEY.stages;
+      const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_SERIES_TOURNEY.targetID;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageSeriesDElem: DebugElement = selectDElem.query(By.css(`.by-series .form-check-input[name='${targetGameName}']`));
+      const stageTourneyDElem: DebugElement = selectDElem.query(By.css(`.by-tourney .form-check-input[name='${targetGameName}']`));
+
+      expect(stageSeriesDElem.nativeElement.getAttribute('name')).withContext('sanity check - should find series checkbox').toEqual(targetGameName);
+      expect(stageTourneyDElem.nativeElement.getAttribute('name')).withContext('sanity check - should find tourney checkbox').toEqual(targetGameName);
+
+      stageSeriesDElem.nativeElement.click();
+      stageSeriesDElem.nativeElement.click();
+      selectHostFixture.detectChanges();
+
+      expect(stageTourneyDElem.nativeElement.checked).toBe(false);
+    });
+
+    it(`should not check any stage other than the one matching the clicked series stage`, () => {
+      /**/
+      // console.log('=== SPEC - don't check any stage other than the clicked series stage ===');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_SERIES_TOURNEY_ISOLATE.stages;
+      const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_SERIES_TOURNEY_ISOLATE.targetID;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageSeriesTargetDElem: DebugElement = selectDElem.query(By.css(`.by-series .form-check-input[name='${targetGameName}']`));
+      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input:not([name='${targetGameName}'])`));
+      expect(stageNonTargetDElems.length).withContext('sanity check - should find non-target checkmarks').toBeGreaterThanOrEqual((inputStages.length + inputStages.filter(stage => stage.tourneyPresence > -1).length) - 2);
+
+      stageSeriesTargetDElem.nativeElement.click();
+      selectHostFixture.detectChanges();
+
+      for (const stageNonTargetDElem of stageNonTargetDElems) {
+        expect(stageNonTargetDElem.nativeElement.checked)
+          .withContext(stageNonTargetDElem.nativeElement.getAttribute('name'))
+          .toBe(false);
+      }
+    });
+
+    it(`should not check any stage other than the one matching the clicked tourney stage`, () => {
+      /**/
+      // console.log('=== SPEC - don't check any stage other than the clicked tourney stage ===');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_TOURNEY_SERIES_ISOLATE.stages;
+      const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_TOURNEY_SERIES_ISOLATE.targetID;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageTourneyTargetDElem: DebugElement = selectDElem.query(By.css(`.by-tourney .form-check-input[name='${targetGameName}']`));
+      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input:not([name='${targetGameName}'])`));
+      expect(stageNonTargetDElems.length).withContext('sanity check - should find non-target checkmarks').toBeGreaterThanOrEqual((inputStages.length + inputStages.filter(stage => stage.tourneyPresence > -1).length) - 2);
+
+      stageTourneyTargetDElem.nativeElement.click();
+      selectHostFixture.detectChanges();
+
+      for (const stageNonTargetDElem of stageNonTargetDElems) {
+        expect(stageNonTargetDElem.nativeElement.checked)
+          .withContext(stageNonTargetDElem.nativeElement.getAttribute('name'))
+          .toBe(false);
+      }
+    });
+
+    it(`should not uncheck any stages other than the one matching the clicked tourney stage`, () => {
+      /**/
+      // console.log('=== SPEC - don't uncheck any stage other than the clicked tourney stage ===');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_TOURNEY_SERIES_ISOLATE.stages;
+      const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_TOURNEY_SERIES_ISOLATE.targetID;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageTourneyDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`));
+      const stageTourneyTargetDElem: DebugElement = selectDElem.query(By.css(`.by-tourney .form-check-input[name='${targetGameName}']`));
+      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input:not([name='${targetGameName}'])`));
+      expect(stageNonTargetDElems.length).withContext('sanity check - should find non-target checkmarks').toBeGreaterThanOrEqual((inputStages.length + inputStages.filter(stage => stage.tourneyPresence > -1).length) - 2);
+
+      for (const stageTourneyDElem of stageTourneyDElems) {
+        stageTourneyDElem.nativeElement.click();
+      }
+
+      stageTourneyTargetDElem.nativeElement.click();
+      selectHostFixture.detectChanges();
+
+      for (const stageNonTargetDElem of stageNonTargetDElems) {
+        expect(stageNonTargetDElem.nativeElement.checked)
+          .withContext(stageNonTargetDElem.nativeElement.getAttribute('name'))
+          .toBe(true);
+      }
+    });
+
+    it(`should not uncheck any stages other than the one matching the clicked series stage`, () => {
+      /**/
+      // console.log('=== SPEC - don't uncheck any stage other than the clicked series stage ===');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_SERIES_TOURNEY_ISOLATE.stages;
+      const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_SERIES_TOURNEY_ISOLATE.targetID;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .form-check-input`));
+      const stageSeriesTargetDElem: DebugElement = selectDElem.query(By.css(`.by-series .form-check-input[name='${targetGameName}']`));
+      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input:not([name='${targetGameName}'])`));
+      expect(stageNonTargetDElems.length).withContext('sanity check - should find non-target checkmarks').toBeGreaterThanOrEqual((inputStages.length + inputStages.filter(stage => stage.tourneyPresence > -1).length) - 2);
+
+      for (const stageSeriesDElem of stageSeriesDElems) {
+        stageSeriesDElem.nativeElement.click();
+      }
+
+      stageSeriesTargetDElem.nativeElement.click();
+      selectHostFixture.detectChanges();
+
+      for (const stageNonTargetDElem of stageNonTargetDElems) {
+        expect(stageNonTargetDElem.nativeElement.checked)
+          .withContext(stageNonTargetDElem.nativeElement.getAttribute('name'))
+          .toBe(true);
+      }
+    });
+    
+    it(`should check multiple stages in the series section if they are checked in the tourney section`, () => {
+      /**/
+      // console.log('=== SPEC - check multiple series stages from tourney stage selection ===');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_TOURNEY_SERIES.stages;
+      const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_TOURNEY_SERIES.targetIDs;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageTourneyTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
+      const stageSeriesTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
+
+      expect(stageSeriesTargetDElems.length).withContext('sanity check - should find series checkmarks').toEqual(targetGameNames.length);
+      for (const stageTourneyTargetDElem of stageTourneyTargetDElems) {
+        stageTourneyTargetDElem.nativeElement.click();
+      }
+      selectHostFixture.detectChanges();
+
+      for (const stageSeriesTargetDElem of stageSeriesTargetDElems) {
+        expect(stageSeriesTargetDElem.nativeElement.checked)
+          .withContext(stageSeriesTargetDElem.nativeElement.getAttribute('name'))
+          .toBe(true);
+      }
+    });
+    
+    it(`should check multiple stages in the tourney section if they are checked in the series section`, () => {
+      /**/
+      // console.log('=== SPEC - check multiple tourney stages from series stage selection ===');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_SERIES_TOURNEY.stages;
+      const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_SERIES_TOURNEY.targetIDs;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageSeriesTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
+      const stageTourneyTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
+
+      expect(stageTourneyTargetDElems.length).withContext('sanity check - should find tourney checkmarks').toEqual(targetGameNames.length);
+      for (const stageSeriesTargetDElem of stageSeriesTargetDElems) {
+        stageSeriesTargetDElem.nativeElement.click();
+      }
+      selectHostFixture.detectChanges();
+
+      for (const stageTourneyTargetDElem of stageTourneyTargetDElems) {
+        expect(stageTourneyTargetDElem.nativeElement.checked)
+          .withContext(stageTourneyTargetDElem.nativeElement.getAttribute('name'))
+          .toBe(true);
+      }
+    });
+    
+    it(`should uncheck multiple stages in the series section if they are unchecked in the tourney section`, () => {
+      /**/
+      // console.log('=== SPEC - uncheck multiple series stages from tourney stage selection ===');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_TOURNEY_SERIES.stages;
+      const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_TOURNEY_SERIES.targetIDs;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+      
+      const stageTourneyDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`));
+      const stageTourneyTargetDElems: DebugElement[] = stageTourneyDElems.filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
+      const stageSeriesTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
+
+      expect(stageSeriesTargetDElems.length).withContext('sanity check - should find series checkmarks').toEqual(targetGameNames.length);
+      for (const stageTourneyDElem of stageTourneyDElems) {
+        stageTourneyDElem.nativeElement.click();
+      }
+      for (const stageTourneyTargetDElem of stageTourneyTargetDElems) {
+        stageTourneyTargetDElem.nativeElement.click();
+      }
+      selectHostFixture.detectChanges();
+
+      for (const stageSeriesTargetDElem of stageSeriesTargetDElems) {
+        expect(stageSeriesTargetDElem.nativeElement.checked)
+          .withContext(stageSeriesTargetDElem.nativeElement.getAttribute('name'))
+          .toBe(false);
+      }
+    });
+
+    it(`should uncheck multiple stages in the tourney section if they are unchecked in the series section`, () => {
+      /**/
+      // console.log('=== SPEC - uncheck multiple tourney stages from series stage selection ===');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_SERIES_TOURNEY.stages;
+      const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_SERIES_TOURNEY.targetIDs;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`));
+      const stageSeriesTargetDElems: DebugElement[] = stageSeriesDElems.filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
+      const stageTourneyTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
+
+      expect(stageTourneyTargetDElems.length).withContext('sanity check - should find tourney checkmarks').toEqual(targetGameNames.length);
+      for (const stageSeriesDElem of stageSeriesDElems) {
+        stageSeriesDElem.nativeElement.click();
+      }
+      for (const stageSeriesTargetDElem of stageSeriesTargetDElems) {
+        stageSeriesTargetDElem.nativeElement.click();
+      }
+      selectHostFixture.detectChanges();
+
+      for (const stageTourneyTargetDElem of stageTourneyTargetDElems) {
+        expect(stageTourneyTargetDElem.nativeElement.checked)
+          .withContext(stageTourneyTargetDElem.nativeElement.getAttribute('name'))
+          .toBe(false);
+      }
+    });
+    
+    it(`should not check any stages other than matches for the checked tourney stages`, () => {
+      // console.log('=== SPEC - don't check any stage other than the clicked tourney stages ===');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_TOURNEY_SERIES_ISOLATE.stages;
+      const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_TOURNEY_SERIES_ISOLATE.targetIDs;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageTourneyDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`));
+      const stageTourneyTargetDElems: DebugElement[] = stageTourneyDElems.filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
+      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`)).filter(dElem => !targetGameNames.includes(dElem.nativeElement.getAttribute('name')))
+      expect(stageNonTargetDElems.length).withContext('sanity check - should find non-target checkmarks').toBeGreaterThanOrEqual((inputStages.length + inputStages.filter(stage => stage.tourneyPresence > -1).length) - (targetGameNames.length * 2));
+
+      for (const stageTourneyTargetDElem of stageTourneyTargetDElems) {
+        stageTourneyTargetDElem.nativeElement.click();
+      }
+      selectHostFixture.detectChanges();
+
+      for (const stageNonTargetDElem of stageNonTargetDElems) {
+        expect(stageNonTargetDElem.nativeElement.checked)
+          .withContext(stageNonTargetDElem.nativeElement.getAttribute('name'))
+          .toBe(false);
+      }
+    });
+
+    it(`should not check any stages other than matches for the checked series stages`, () => {
+      // console.log('=== SPEC - don't check any stage other than the clicked series stages ===');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_SERIES_TOURNEY_ISOLATE.stages;
+      const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_SERIES_TOURNEY_ISOLATE.targetIDs;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`));
+      const stageSeriesTargetDElems: DebugElement[] = stageSeriesDElems.filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
+      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`)).filter(dElem => !targetGameNames.includes(dElem.nativeElement.getAttribute('name')))
+      expect(stageNonTargetDElems.length).withContext('sanity check - should find non-target checkmarks').toBeGreaterThanOrEqual((inputStages.length + inputStages.filter(stage => stage.tourneyPresence > -1).length) - (targetGameNames.length * 2));
+
+      for (const stageSeriesTargetDElem of stageSeriesTargetDElems) {
+        stageSeriesTargetDElem.nativeElement.click();
+      }
+      selectHostFixture.detectChanges();
+
+      for (const stageNonTargetDElem of stageNonTargetDElems) {
+        expect(stageNonTargetDElem.nativeElement.checked)
+          .withContext(stageNonTargetDElem.nativeElement.getAttribute('name'))
+          .toBe(false);
+      }
+    });
+
+    it(`should not uncheck any stages other than matches for the checked tourney stages`, () => {
+      // console.log('=== SPEC - don't check any stage other than the clicked tourney stages ===');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_TOURNEY_SERIES_ISOLATE.stages;
+      const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_TOURNEY_SERIES_ISOLATE.targetIDs;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .form-check-input`));
+      const stageTourneyTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
+      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`)).filter(dElem => {
+        return (targetGameNames.includes(dElem.nativeElement.getAttribute('name')) === false);
+      });
+      expect(stageNonTargetDElems.length)
+        .withContext('sanity check - should find non-target checkmarks')
+        .toBeGreaterThanOrEqual((inputStages.length + inputStages.filter(stage => stage.tourneyPresence > -1).length) - (targetGameNames.length * 2));
+
+      for (const stageSeriesDElem of stageSeriesDElems) {
+        stageSeriesDElem.nativeElement.click();
+      }
+      for (const stageTourneyTargetDElem of stageTourneyTargetDElems) {
+        stageTourneyTargetDElem.nativeElement.click();
+      }
+      selectHostFixture.detectChanges();
+
+      for (const stageNonTargetDElem of stageNonTargetDElems) {
+        expect(stageNonTargetDElem.nativeElement.checked)
+          .withContext(stageNonTargetDElem.nativeElement.getAttribute('name'))
+          .toBe(true);
+      }
+    });
+
+    it(`should not uncheck any stages other than matches for the checked series stages`, () => {
+      // console.log('=== SPEC - don't check any stage other than the clicked series stages ===');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_SERIES_TOURNEY_ISOLATE.stages;
+      const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_SERIES_TOURNEY_ISOLATE.targetIDs;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .form-check-input`));
+      const stageSeriesTargetDElems: DebugElement[] = stageSeriesDElems.filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
+      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`)).filter(dElem => {
+        return (targetGameNames.includes(dElem.nativeElement.getAttribute('name')) === false); });
+      expect(stageNonTargetDElems.length)
+        .withContext('sanity check - should find non-target checkmarks')
+        .toBeGreaterThanOrEqual((inputStages.length + inputStages.filter(stage => stage.tourneyPresence > -1).length) - (targetGameNames.length * 2));
+
+      for (const stageSeriesDElem of stageSeriesDElems) {
+        stageSeriesDElem.nativeElement.click();
+      }
+      for (const stageSeriesTargetDElem of stageSeriesTargetDElems) {
+        stageSeriesTargetDElem.nativeElement.click();
+      }
+      selectHostFixture.detectChanges();
+
+      for (const stageNonTargetDElem of stageNonTargetDElems) {
+        expect(stageNonTargetDElem.nativeElement.checked)
+          .withContext(stageNonTargetDElem.nativeElement.getAttribute('name'))
+          .toBe(true);
+      }
     });
   });
 
   // TODO:
-    // Check stages in one section that have been added in the other section
-      // and vice versa
-    // Uncheck stages in one section that have been added in the other section
-      // and vice versa
     // Emit an event when the update button's pressed
     // Send data on what stages were selected when the update button's pressed
-
     // Handle no stages loaded error
 });

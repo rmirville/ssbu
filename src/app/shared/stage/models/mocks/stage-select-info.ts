@@ -2825,9 +2825,10 @@ export const MISC_SORT: { [property: string]: StageSelectInfo[] } = {
   ]
 };
 
+// TODO: Finish MISC_STAGE_SORT data
 export const MISC_STAGE_SORT: {
   inputStages: StageSelectInfo[],
-  sortedStages: { [property: string]: StageSelectInfo[] }
+  sortedStages: StageSelectInfo[]
 } = {
   inputStages: [
     {
@@ -2922,12 +2923,10 @@ export const MISC_STAGE_SORT: {
     }
   ],
 
-  sortedStages: {
-
-  }
+  sortedStages: []
 };
 
-export const CROSS_TOURNEY_SERIES: { stages: StageSelectInfo[], targetID: string } = {
+export const CROSS_SINGLE_CHECK_TOURNEY_SERIES: { stages: StageSelectInfo[], targetID: string } = {
   stages: [
     {
       name: "Tower of Babbling Brooks",
@@ -2942,5 +2941,587 @@ export const CROSS_TOURNEY_SERIES: { stages: StageSelectInfo[], targetID: string
       tourneyPresence: -1
     }
   ],
-  targetID: 'mixedtower_'
+  targetID: "mixedtower_"
+};
+
+export const CROSS_SINGLE_CHECK_SERIES_TOURNEY: { stages: StageSelectInfo[], targetID: string } = {
+  stages: [
+    {
+      name: "Portland Post Office Headquarters",
+      gameName: "oregonportlandhq_",
+      series: "Oregon Mail",
+      tourneyPresence: 2
+    },
+    {
+      name: "Lucy Goose's Loose Moose Caboose",
+      gameName: "elegantlucy_",
+      series: "Elegent Lad",
+      tourneyPresence: 0
+    }
+  ],
+  targetID: "elegantlucy_"
+};
+
+export const CROSS_SINGLE_UNCHECK_TOURNEY_SERIES: { stages: StageSelectInfo[], targetID: string } = {
+  stages: [
+    {
+      name: "Dawn Meadow Zone",
+      gameName: "wistmeadow",
+      series: "Wistwalker",
+      tourneyPresence: 1
+    },
+    {
+      name: "Dodo Shop Tower",
+      gameName: "questdodo",
+      series: "Questrunner",
+      tourneyPresence: -1
+    }
+  ],
+  targetID: "wistmeadow"
+};
+
+export const CROSS_SINGLE_UNCHECK_SERIES_TOURNEY: { stages: StageSelectInfo[], targetID: string } = {
+  stages: [
+    {
+      name: "Fontaine Fountain",
+      gameName: "stellarfountain_",
+      series: "Super Secret Stellar Squad",
+      tourneyPresence: 0
+    },
+    {
+      name: "Olive Branch",
+      gameName: "zenolive_",
+      series: "Zentlemen",
+      tourneyPresence: 1
+    }
+  ],
+  targetID: "zenolive_"
+};
+
+export const CROSS_SINGLE_CHECK_SERIES_TOURNEY_ISOLATE: { stages: StageSelectInfo[], targetID: string } = {
+  stages: [
+    {
+      name: "Zone of French Horns",
+      gameName: "baritonfrench_",
+      series: "Baritone Hero",
+      tourneyPresence: 2
+    },
+    {
+      name: "Neutral Paradise",
+      gameName: "xtremeneutral_",
+      series: "Xtreme Moderation",
+      tourneyPresence: 0
+    },
+    {
+      name: "Organ Room",
+      gameName: "proctorgan_",
+      series: "Proctologists United",
+      tourneyPresence: 1
+    },
+    {
+      name: "Mesopotamia",
+      gameName: "garretmeso_",
+      series: "Garrett Wise",
+      tourneyPresence: 1
+    },
+    {
+      name: "Uncertain Tea Shop",
+      gameName: "juicytea_",
+      series: "Juicy's Revenge",
+      tourneyPresence: 1
+    }
+  ],
+  targetID: "proctorgan_"
+};
+
+export const CROSS_SINGLE_CHECK_TOURNEY_SERIES_ISOLATE: { stages: StageSelectInfo[], targetID: string } = {
+  stages: [
+    {
+      name: "Xephyr Bookstore",
+      gameName: "unclexephyr",
+      series: "Uncle Standing",
+      tourneyPresence: 0
+    },
+    {
+      name: "Quentin's Smithy",
+      gameName: "whencequent_",
+      series: "Whence It Came",
+      tourneyPresence: 2
+    },
+    {
+      name: "Daffodil Studio",
+      gameName: "silverstudio",
+      series: "Silverfish",
+      tourneyPresence: 1
+    },
+    {
+      name: "Canine Millenium Tower",
+      gameName: "ondogtower_",
+      series: "On Dog?",
+      tourneyPresence: 0
+    },
+    {
+      name: "Venice's Abuela",
+      gameName: "noodlevenice_",
+      series: "The Noodler",
+      tourneyPresence: 0
+    }
+  ],
+  targetID: "unclexephyr"
+};
+
+export const CROSS_SINGLE_UNCHECK_SERIES_TOURNEY_ISOLATE: { stages: StageSelectInfo[], targetID: string } = {
+  stages: [
+    {
+      name: "Damning Teeth Mountain",
+      gameName: "dentaldamn_",
+      series: "Dental Doom",
+      tourneyPresence: 1
+    },
+    {
+      name: "Abandoned Town",
+      gameName: "xenoghosttown_",
+      series: "Xenoghost",
+      tourneyPresence: 0
+    },
+    {
+      name: "Nassel Falls",
+      gameName: "odiumfalls_",
+      series: "Odium",
+      tourneyPresence: 2
+    },
+    {
+      name: "Roddle Hillside",
+      gameName: "blunderhills_",
+      series: "Alex in Blunderland",
+      tourneyPresence: 1
+    },
+    {
+      name: "Producer's Office",
+      gameName: "frankoffice_",
+      series: "Frank's in Opera",
+      tourneyPresence: 1
+    }
+  ],
+  targetID: "dentaldamn_"
+};
+
+export const CROSS_SINGLE_UNCHECK_TOURNEY_SERIES_ISOLATE: { stages: StageSelectInfo[], targetID: string } = {
+  stages: [
+    {
+      name: "On-site",
+      gameName: "entouragesite_",
+      series: "Internet Entourage",
+      tourneyPresence: 2
+    },
+    {
+      name: "Caesar's Saladworks",
+      gameName: "scenturiansalad_",
+      series: "Scenturian",
+      tourneyPresence: 1
+    },
+    {
+      name: "Venture Capital Island",
+      gameName: "riddlingventure_",
+      series: "Riddling",
+      tourneyPresence: 1
+    },
+    {
+      name: "Nesting Area",
+      gameName: "awkwardnesting_",
+      series: "Awkwardity",
+      tourneyPresence: 0
+    },
+    {
+      name: "Faux Swine Pen",
+      gameName: "temporaripen_",
+      series: "Temporarium",
+      tourneyPresence: 1
+    }
+  ],
+  targetID: "riddlingventure_"
+};
+
+export const CROSS_MULTIPLE_CHECK_TOURNEY_SERIES: { stages: StageSelectInfo[], targetIDs: string[] } = {
+  stages: [
+    {
+      name: "Tasteful Prose",
+      gameName: "earlyprose_",
+      series: "Early Name",
+      tourneyPresence: 0
+    },
+    {
+      name: "Rampant Truth",
+      gameName: "spelltruth_",
+      series: "Spell Park",
+      tourneyPresence: 1
+    },
+    {
+      name: "Offer Jail",
+      gameName: "wealthyjail_",
+      series: "The Wealthy Stick",
+      tourneyPresence: 0
+    },
+    {
+      name: "Damaged Mine",
+      gameName: "supplymine_",
+      series: "Restful Supply",
+      tourneyPresence: -1
+    },
+    {
+      name: "Nifty Waggish",
+      gameName: "warmwag_",
+      series: "Warm Scarecrow",
+      tourneyPresence: 1
+    },
+    {
+      name: "Lip Unlock",
+      gameName: "meatunlock_",
+      series: "Meat Famous",
+      tourneyPresence: 1
+    },
+    {
+      name: "Scrawny Slope",
+      gameName: "dryslope_",
+      series: "Dry, Unwritten",
+      tourneyPresence: 1
+    }
+  ],
+  targetIDs: ["wealthyjail_", "warmwag_", "meatunlock_"]
+};
+
+export const CROSS_MULTIPLE_CHECK_SERIES_TOURNEY: { stages: StageSelectInfo[], targetIDs: string[] } = {
+  stages: [
+    {
+      name: "Redundant Move",
+      gameName: "damagemove_",
+      series: "Damage Harbor",
+      tourneyPresence: 0
+    },
+    {
+      name: "Apathetic Mystery",
+      gameName: "trademystery_",
+      series: "The Marriage Trade",
+      tourneyPresence: 1
+    },
+    {
+      name: "Wait Coach",
+      gameName: "vastwait_",
+      series: "Vast Money",
+      tourneyPresence: 2
+    },
+    {
+      name: "Pointless Growth",
+      gameName: "stretchpointless_",
+      series: "Stretch of Fog",
+      tourneyPresence: -1
+    },
+    {
+      name: "Subtract Shelf",
+      gameName: "tiresomeshelf_",
+      series: "Tiresome Enthusiasm",
+      tourneyPresence: -1
+    },
+    {
+      name: "Dreary Cheat",
+      gameName: "elfincheat_",
+      series: "Elfin Stitch",
+      tourneyPresence: 0
+    },
+    {
+      name: "Guttural Separation",
+      gameName: "pourseparation_",
+      series: "Pour Vigorously",
+      tourneyPresence: -1
+    }
+  ],
+  targetIDs: ["elfincheat_", "vastwait_", "trademystery_"]
+};
+
+export const CROSS_MULTIPLE_UNCHECK_TOURNEY_SERIES: { stages: StageSelectInfo[], targetIDs: string[] } = {
+  stages: [
+    {
+      name: "Meat War",
+      gameName: "wingrakemeat_",
+      series: "WingRake",
+      tourneyPresence: 0
+    },
+    {
+      name: "Sincere Workplace",
+      gameName: "cleardogwork_",
+      series: "Clear Dog",
+      tourneyPresence: 0
+    },
+    {
+      name: "Bashful Twig",
+      gameName: "impresstwig_",
+      series: "ImpressMan",
+      tourneyPresence: 1
+    },
+    {
+      name: "Encouraging Reaction",
+      gameName: "dirtfitreact_",
+      series: "Dirtfit",
+      tourneyPresence: 0
+    },
+    {
+      name: "Confused Piquant",
+      gameName: "pokepiquant_",
+      series: "Poke Account",
+      tourneyPresence: 1
+    },
+    {
+      name: "Ashamed Root",
+      gameName: "grotesqueroot_",
+      series: "Grotesque Confusion",
+      tourneyPresence: 2
+    },
+    {
+      name: "Growth Heat",
+      gameName: "oldheat_",
+      series: "Festivities of Old",
+      tourneyPresence: 0
+    }
+  ],
+  targetIDs: ["wingrakemeat_", "dirtfitreact_", "grotesqueroot_"]
+};
+
+export const CROSS_MULTIPLE_UNCHECK_SERIES_TOURNEY: { stages: StageSelectInfo[], targetIDs: string[] } = {
+  stages: [
+    {
+      name: "Tedious Tickle",
+      gameName: "tensetickle_",
+      series: "Tense Temper",
+      tourneyPresence: -1
+    },
+    {
+      name: "Grip Itch",
+      gameName: "shelfitch_",
+      series: "Juvenile Shelf",
+      tourneyPresence: 0
+    },
+    {
+      name: "Numberless Group",
+      gameName: "crabgroup_",
+      series: "Poised Crab",
+      tourneyPresence: 1
+    },
+    {
+      name: "Choc o' Brain",
+      gameName: "observerchoc_",
+      series: "Nimble Observer",
+      tourneyPresence: 2
+    },
+    {
+      name: "Late Preservatives",
+      gameName: "bikelate_",
+      series: "Imaginary Bike",
+      tourneyPresence: 0
+    },
+    {
+      name: "Open Attachment",
+      gameName: "twistopen_",
+      series: "Poor Twist",
+      tourneyPresence: -1
+    },
+    {
+      name: "Rural",
+      gameName: "timesnewrural_",
+      series: "New Time",
+      tourneyPresence: 0
+    }
+  ],
+  targetIDs: ["shelfitch_", "observerchoc_", "bikelate_"]
+};
+
+export const CROSS_MULTIPLE_CHECK_SERIES_TOURNEY_ISOLATE: { stages: StageSelectInfo[], targetIDs: string[] } = {
+  stages: [
+    {
+      name: "Waste Spray",
+      gameName: "daughterspray_",
+      series: "Daughter of Pourage",
+      tourneyPresence: 0
+    },
+    {
+      name: "Spectacular Sin",
+      gameName: "petsin_",
+      series: "Slip Pets",
+      tourneyPresence: 0
+    },
+    {
+      name: "Care Weather",
+      gameName: "boundlesscare_",
+      series: "Boundless Direction",
+      tourneyPresence: 1
+    },
+    {
+      name: "Second-Hand Life",
+      gameName: "direlife_",
+      series: "Dire Glory",
+      tourneyPresence: 2
+    },
+    {
+      name: "Kettlespace",
+      gameName: "brakekettle_",
+      series: "Overrated Brake",
+      tourneyPresence: 2
+    },
+    {
+      name: "Judge Queen",
+      gameName: "clamjudge_",
+      series: "Puny Clam",
+      tourneyPresence: -1
+    },
+    {
+      name: "Aloof Mix",
+      gameName: "handsomemix_",
+      series: "Handsome Appreciation",
+      tourneyPresence: 2
+    }
+  ],
+  targetIDs: ["daughterspray_", "petsin_", "boundlesscare_", "direlife_"]
+};
+
+export const CROSS_MULTIPLE_CHECK_TOURNEY_SERIES_ISOLATE: { stages: StageSelectInfo[], targetIDs: string[] } = {
+  stages: [
+    {
+      name: "Lyrical Wonder",
+      gameName: "joiniverselyric_",
+      series: "Joiniverse",
+      tourneyPresence: 0
+    },
+    {
+      name: "Possible Discovery",
+      gameName: "tenuouspossible_",
+      series: "Tenuous Collar",
+      tourneyPresence: 0
+    },
+    {
+      name: "Damaging Breath",
+      gameName: "sackdamage_",
+      series: "Sack Sisters",
+      tourneyPresence: 2
+    },
+    {
+      name: "Front Things",
+      gameName: "impulsefront_",
+      series: "Lovely Impulse",
+      tourneyPresence: 1
+    },
+    {
+      name: "Sigh Match",
+      gameName: "quirkysigh_",
+      series: "Quirky Balance",
+      tourneyPresence: -1
+    },
+    {
+      name: "Malicious Authority",
+      gameName: "snakeauthority_",
+      series: "Unwritten Snake",
+      tourneyPresence: 2
+    },
+    {
+      name: "Dust Plane",
+      gameName: "crowddust_",
+      series: "Domineering Crowd",
+      tourneyPresence: 0
+    }
+  ],
+  targetIDs: ["joiniverselyric_", "sackdamage_", "snakeauthority_"]
+};
+
+export const CROSS_MULTIPLE_UNCHECK_SERIES_TOURNEY_ISOLATE: { stages: StageSelectInfo[], targetIDs: string[] } = {
+  stages: [
+    {
+      name: "Magic Rhyme",
+      gameName: "bearmagic_",
+      series: "Vivacious Bear",
+      tourneyPresence: 2
+    },
+    {
+      name: "Certain Magic",
+      gameName: "ordinarymagic_",
+      series: "Ordinary Value",
+      tourneyPresence: 0
+    },
+    {
+      name: "Righteous Passenger",
+      gameName: "legalpassenger_",
+      series: "Legal Grieving",
+      tourneyPresence: 0
+    },
+    {
+      name: "Mystery Rate",
+      gameName: "greasyrate_",
+      series: "Greasy Quirk",
+      tourneyPresence: 0
+    },
+    {
+      name: "Awakened Preserve",
+      gameName: "visitorpreserve_",
+      series: "Highfalutin Visitor",
+      tourneyPresence: 0
+    },
+    {
+      name: "Chivalrous Hollow",
+      gameName: "cloudhollow_",
+      series: "Cloud Nasty",
+      tourneyPresence: -1
+    },
+    {
+      name: "Useful Grass",
+      gameName: "signalgrass_",
+      series: "Wiry Signal",
+      tourneyPresence: 2
+    }
+  ],
+  targetIDs: ["ordinarymagic_", "legalpassenger_", "signalgrass_"]
+};
+
+export const CROSS_MULTIPLE_UNCHECK_TOURNEY_SERIES_ISOLATE: { stages: StageSelectInfo[], targetIDs: string[] } = {
+  stages: [
+    {
+      name: "Rhyme Bear",
+      gameName: "clumsybear_",
+      series: "Foregoing Clumsiness",
+      tourneyPresence: 2
+    },
+    {
+      name: "Waste Substance",
+      gameName: "pansubstance_",
+      series: "Righteous Pan",
+      tourneyPresence: 0
+    },
+    {
+      name: "Join Sound",
+      gameName: "earningsjoin_",
+      series: "Fearful Earnings",
+      tourneyPresence: -1
+    },
+    {
+      name: "Magically Jobless",
+      gameName: "unsuitablemagic_",
+      series: "Unsuitable Imperfections",
+      tourneyPresence: 2
+    },
+    {
+      name: "Erratic Support",
+      gameName: "kneesupport_",
+      series: "Enchanted Knee",
+      tourneyPresence: 0
+    },
+    {
+      name: "Dog Pot",
+      gameName: "hollowdog_",
+      series: "Untidy Hollow",
+      tourneyPresence: 0
+    },
+    {
+      name: "Shade Curtain",
+      gameName: "increaseablecurtain_",
+      series: "Increaseable",
+      tourneyPresence: 1
+    }
+  ],
+  targetIDs: ["clumsybear_", "pansubstance_", "kneesupport_", "hollowdog_"]
 };

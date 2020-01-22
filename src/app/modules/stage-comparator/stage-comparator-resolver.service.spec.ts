@@ -74,28 +74,28 @@ describe('StageComparatorResolverService', () => {
       expect(actualRange['range']).toBeCloseTo(expectedRange['range'], 6);
     }
 
-    function _compareStageData(expectedStages: Stage[], expectedDimensionsSet: StageDimensionsSet, expectedSelections: StageSelectInfo[]) {
+    function _compareStageData(expectedStages: Stage[], expectedDimensionsSet: StageDimensionsSet, expectedSelectInfo: StageSelectInfo[]) {
 
       const expectedDimensions = expectedDimensionsSet.dimensions;
       const expectedRanges = expectedDimensionsSet.ranges;
 
       stageLoaderSpy.loadStages.and.returnValue(asyncData(expectedStages));
       stageDimensionsSpy.getDimensionsFull.and.returnValue(asyncData(expectedDimensionsSet));
-      stageClassificationsSpy.classifyStages.and.returnValue(asyncData(expectedSelections))
+      stageClassificationsSpy.classifyStages.and.returnValue(asyncData(expectedSelectInfo))
 
       const actualStageData$ = resolverService.resolve(route, state);
       actualStageData$.subscribe((actualStageData) => {
         const actualStages = actualStageData['stages'];
         const actualDimensionsSet = actualStageData['dimensionsFull'];
-        const actualSelections = actualStageData['stageSelections'];
+        const actualSelectInfo = actualStageData['stageSelectInfo'];
 
         expect(stageLoaderSpy.loadStages).toHaveBeenCalledTimes(1);
         expect(stageDimensionsSpy.getDimensionsFull).toHaveBeenCalledTimes(1);
         expect(stageClassificationsSpy.classifyStages).toHaveBeenCalledTimes(1);
         expect(actualStages['length']).toEqual(expectedStages.length);
         expect(actualStages).toEqual(expectedStages);
-        expect(actualSelections['length']).toEqual(expectedSelections.length);
-        expect(actualSelections).toEqual(expectedSelections);
+        expect(actualSelectInfo['length']).toEqual(expectedSelectInfo.length);
+        expect(actualSelectInfo).toEqual(expectedSelectInfo);
 
         const actualDimensions = actualDimensionsSet['dimensions'];
         expect(actualDimensions.length).toEqual(expectedDimensions.length);
@@ -140,10 +140,10 @@ describe('StageComparatorResolverService', () => {
             expect(isStage(stage)).withContext(`SPEC FAILURE - ${stage.name} is not a stage`).toEqual(true);
           });
 
-          if ( (!actualStageData['stageSelections'].forEach)
+          if ( (!actualStageData['stageSelectInfo'].forEach)
               || (!Array.isArray(actualStageData['stages']))
-          ) { fail('the returned stageSelections data is not an array'); }
-          actualStageData['stageSelections'].forEach(selection => {
+          ) { fail('the returned stageSelectInfo data is not an array'); }
+          actualStageData['stageSelectInfo'].forEach(selection => {
             expect(isStageSelectInfo(selection)).withContext(`SPEC FAILURE - ${JSON.stringify(selection)} is not a stage`).toEqual(true);
           });
 
@@ -160,17 +160,17 @@ describe('StageComparatorResolverService', () => {
     it('should return the data that StageLoaderService and StageDimensionsService provide', async(() => {
       const expectedStages = STAGES_TWO;
       const expectedDimensionsSet = STAGE_DIMENSIONS_SETS.DIMENSIONS_SET_TWO;
-      const expectedSelections = STAGE_SELECTIONS.TWO;
+      const expectedSelectInfo = STAGE_SELECTIONS.TWO;
 
-      _compareStageData(expectedStages, expectedDimensionsSet, expectedSelections);
+      _compareStageData(expectedStages, expectedDimensionsSet, expectedSelectInfo);
     }));
 
     it('should return different data provided by StageLoaderService and StageDimensionsService', async(() => {
       const expectedStages = STAGES_THREE;
       const expectedDimensionsSet = STAGE_DIMENSIONS_SETS.DIMENSIONS_SET_THREE;
-      const expectedSelections = STAGE_SELECTIONS.THREE;
+      const expectedSelectInfo = STAGE_SELECTIONS.THREE;
 
-      _compareStageData(expectedStages, expectedDimensionsSet, expectedSelections);
+      _compareStageData(expectedStages, expectedDimensionsSet, expectedSelectInfo);
     }));
 
   });

@@ -9,7 +9,7 @@ import { StageSelectHostMockComponent } from '../../stage/components/mocks/stage
 import { StageSelectInfo } from '../../stage/models/stage-select-info.model';
 import * as STAGE_SELECTIONS from '../../stage/models/mocks/stage-select-info';
 
-fdescribe('StageSelectComponent', () => {
+describe('StageSelectComponent', () => {
   let selectComp: StageSelectComponent;
   let selectDElem: DebugElement;
   let selectHostComp: StageSelectHostMockComponent;
@@ -127,7 +127,7 @@ fdescribe('StageSelectComponent', () => {
     }
   });
 
-  xdescribe('tournament legality section', () => {
+  describe('tournament legality section', () => {
 
     it(`should show a list of checkbox inputs with id's of the section id and the provided stages' gameNames`, () => {
       /**/
@@ -569,7 +569,7 @@ fdescribe('StageSelectComponent', () => {
 
   });
 
-  xdescribe('series section', () => {
+  describe('series section', () => {
     /**/
     // console.log('=== SPEC - SUITE - SERIES SECTION ===');
 
@@ -881,7 +881,7 @@ fdescribe('StageSelectComponent', () => {
     });
   });
 
-  fdescribe('cross-category interaction', () => {
+  describe('cross-category interaction', () => {
     it(`should check a stage in the series section if it's checked in the tourney section`, () => {
       /**/
       // console.log('=== SPEC - check series stage from tourney stage selection ===');

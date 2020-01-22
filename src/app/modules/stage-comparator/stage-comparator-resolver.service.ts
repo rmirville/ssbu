@@ -19,7 +19,7 @@ import { StageSelectInfo } from '../../shared/stage/models/stage-select-info.mod
 interface StageComparatorRouteData {
   stages: Stage[],
   dimensionsFull: StageDimensionsSet,
-  stageSelections: StageSelectInfo[]
+  stageSelectInfo: StageSelectInfo[]
 };
 
 const COMPARATOR_STAGES: StagePieceMap[] = [
@@ -206,7 +206,7 @@ export class StageComparatorResolverService implements Resolve<StageComparatorRo
     const stageData$ = new Observable<StageComparatorRouteData>(observer => {
       /**/
       // console.log(`  * observer at start: ${JSON.stringify(Object.keys(observer))}`);
-      let stageData: StageComparatorRouteData = {stages: null, dimensionsFull: null, stageSelections: null};
+      let stageData: StageComparatorRouteData = {stages: null, dimensionsFull: null, stageSelectInfo: null};
 
       const stages$ = this.sls.loadStages('include', COMPARATOR_STAGES.map(stage => stage.lvd));
       stages$.subscribe(stages => {
@@ -224,13 +224,13 @@ export class StageComparatorResolverService implements Resolve<StageComparatorRo
           this.sds.getDimensionsFull(stages, COMPARATOR_STAGES),
           this.scs.classifyStages(stagesBasic)
         ).pipe(
-          map( ([dimensionsFull, stageSelections]) => {
-            return { dimensionsFull, stageSelections };
+          map( ([dimensionsFull, stageSelectInfo]) => {
+            return { dimensionsFull, stageSelectInfo };
           })
         );
         stageCalculations$.subscribe(stageCalculations => {
           stageData.dimensionsFull = stageCalculations.dimensionsFull;
-          stageData.stageSelections = stageCalculations.stageSelections;
+          stageData.stageSelectInfo = stageCalculations.stageSelectInfo;
           observer.next(stageData);
           observer.complete();
         });

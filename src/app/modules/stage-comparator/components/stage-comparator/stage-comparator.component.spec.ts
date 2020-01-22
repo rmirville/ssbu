@@ -35,7 +35,7 @@ describe('StageComparatorComponent', () => {
         observer.next({stageData: {
           stages: STAGES_ONE,
           dimensionsFull: DIMENSIONS_SET_ONE,
-          stageSelections: STAGE_SELECTIONS.ONE
+          stageSelectInfo: STAGE_SELECTIONS.ONE
         }});
         observer.complete();
       })
@@ -84,8 +84,8 @@ describe('StageComparatorComponent', () => {
     expect(comparator.stages).toEqual(STAGES_ONE);
   });
 
-  it('should have a stageSelections property set to the classified stages provided by the ActivatedRoute on init', () => {
-    expect(comparator.stageSelections).toEqual(STAGE_SELECTIONS.ONE);
+  it('should have a stageSelectInfo property set to the classified stages provided by the ActivatedRoute on init', () => {
+    expect(comparator.stageSelectInfo).toEqual(STAGE_SELECTIONS.ONE);
   });
 
   it('should have a fullDimensionsSet property set to the DimensionsSet provided by the ActivatedRoute on init', () => {
@@ -133,18 +133,38 @@ describe('StageComparatorComponent', () => {
     });
 
     it(`should show the stage select component`, () => {
+      /**/
+      // console.group('SPEC - Show StageSelectComponent');
       let expectedContent: string = fixtureMock.select.nativeElement.textContent;
+      /**/
+      // console.log(`expectedContent: ${expectedContent}`);
       let selectDElem: DebugElement = dElem.query(By.css('ssbu-stage-select'));
+      /**/
+      // console.log(`selectDElem: ${JSON.stringify(selectDElem.nativeElement)}`);
       let actualContent: string = selectDElem.nativeElement.textContent;
+      /**/
+      // console.log(`selectDElem.textContent: ${JSON.stringify(selectDElem.nativeElement.textContent)}`);
+      // console.log(`actualContent: ${actualContent}`);
       expect(actualContent).toEqual(expectedContent);
+      /**/
+      // console.groupEnd();
     });
 
     it('should provide the stage selection from the ActivatedRoute to the stage select component', () => {
-      let selectDElem: DebugElement = fixture.debugElement.query(By.css('ssbu-stage-select'));
+      /**/
+      // console.group('SPEC - Send stage select info to StageSelectComponent');
+      let selectDElem: DebugElement = dElem.query(By.css('ssbu-stage-select'));
+      /**/
+      // console.log(`selectDElem: ${JSON.stringify(selectDElem.nativeElement)}`);
       let selectComp: StageSelectMockComponent = selectDElem.componentInstance;
+      /**/
+      // console.log(`selectComp: ${JSON.stringify(selectComp)}`);
+      // console.log(`selectComp.stages: ${JSON.stringify(Object.keys(selectComp))}`);
       let actualStages: StageSelectInfo[] = selectComp.stages;
-      // TODO: wait for changes?
+
       expect(actualStages).toEqual(STAGE_SELECTIONS.ONE);
+      /**/
+      // console.groupEnd();
     });
     
     describe('default view', () => {

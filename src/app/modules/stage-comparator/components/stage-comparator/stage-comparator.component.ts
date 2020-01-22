@@ -13,7 +13,7 @@ import { StageSelectInfo } from '../../../../shared/stage/models/stage-select-in
 export class StageComparatorComponent implements OnInit {
 
   stages: Stage[];
-  stageSelections: StageSelectInfo[];
+  stageSelectInfo: StageSelectInfo[];
   stageDimensionsSet: StageDimensionsSet;
   view: string;
 
@@ -24,19 +24,21 @@ export class StageComparatorComponent implements OnInit {
 
   ngOnInit() {
     /**/
-    // console.log('StageComparatorComponent::ngOnInit()');
-    this.route.data.subscribe((data: { stageData: {stages: Stage[], dimensionsFull: StageDimensionsSet, stageSelections: StageSelectInfo[]} }) => {
+    // console.group('StageComparatorComponent::ngOnInit()');
+    this.route.data.subscribe((data: { stageData: {stages: Stage[], dimensionsFull: StageDimensionsSet, stageSelectInfo: StageSelectInfo[]} }) => {
       /**/
-      // console.log(`  * data: ${JSON.stringify(data)}`);
-      // console.log(`  * data.stages: ${JSON.stringify(data.stageData)}`);
-      // console.log(`  * data.stages type: ${typeof data.stages}`);
+      // console.log(`data: ${JSON.stringify(data)}`);
+      // console.log(`data.stages: ${JSON.stringify(data.stageData)}`);
+      // console.log(`data.stages type: ${typeof data.stages}`);
       this.stages = [...data.stageData.stages];
       this.stageDimensionsSet = data.stageData.dimensionsFull;
-      this.stageSelections = [...data.stageData.stageSelections];
+      this.stageSelectInfo = [...data.stageData.stageSelectInfo];
       /**/
-      // console.log(`  * this.stages: ${JSON.stringify(this.stages)}`);
+      // console.log(`this.stageSelectInfo: ${JSON.stringify(this.stageSelectInfo)}`);
     });
     this.view = 'graph';
+    /**/
+    // console.groupEnd();
   }
 
   setView(view: string) {

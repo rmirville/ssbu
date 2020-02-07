@@ -3525,3 +3525,358 @@ export const CROSS_MULTIPLE_UNCHECK_TOURNEY_SERIES_ISOLATE: { stages: StageSelec
   ],
   targetIDs: ["clumsybear_", "pansubstance_", "kneesupport_", "hollowdog_"]
 };
+
+export const UPDATE_EXISTS: StageSelectInfo[] = [
+  {
+    name: "Wilderness",
+    gameName: "foulwilds_",
+    series: "Foul Beast",
+    tourneyPresence: 5
+  }
+];
+
+export const UPDATE_ENABLED: { inputStages: StageSelectInfo[], selectedStages: string[] } = {
+  inputStages: [
+    {
+      name: "Unarmed Degree",
+      gameName: "castdegree_",
+      series: "Roomy Cast",
+      tourneyPresence: 0
+    },
+    {
+      name: "Ambiguous Eggs",
+      gameName: "ticketeggs_",
+      series: "Panoramic Ticket",
+      tourneyPresence: 0
+    },
+    {
+      name: "Fearful Order",
+      gameName: "spicyorder_",
+      series: "Spicy Action",
+      tourneyPresence: 0
+    },
+    {
+      name: "Brief Grandfather",
+      gameName: "moneygrandfather_",
+      series: "Capricious Money",
+      tourneyPresence: -1
+    },
+    {
+      name: "Brave History",
+      gameName: "scissorshistory_",
+      series: "Painful Scissors",
+      tourneyPresence: 2
+    },
+    {
+      name: "Open Sneeze",
+      gameName: "grandmothersneeze_",
+      series: "Assorted Grandmother",
+      tourneyPresence: 1
+    },
+    {
+      name: "Modern Tail",
+      gameName: "designtail_",
+      series: "Defective Design",
+      tourneyPresence: 2
+    },
+    {
+      name: "Lethal Health",
+      gameName: "expansionhealth_",
+      series: "Well-Made Expansion",
+      tourneyPresence: -1
+    }
+  ],
+  selectedStages: [
+    "castdegree_",
+    "spicyorder_",
+    "scissorshistory_"
+  ]
+};
+
+export const UPDATE_DISABLED: StageSelectInfo[] = [
+  {
+    name: "Comfortable Motion",
+    gameName: "quicksandmotion_",
+    series: "Heavy Quicksand",
+    tourneyPresence: 1
+  },
+  {
+    name: "Easy Distance",
+    gameName: "signdistance_",
+    series: "Clammy Sign",
+    tourneyPresence: 0
+  },
+  {
+    name: "Swift Back",
+    gameName: "pencilback_",
+    series: "Real Pencil",
+    tourneyPresence: -1
+  },
+  {
+    name: "Gleaming Screw",
+    gameName: "knotscres_",
+    series: "Unwieldy Knot",
+    tourneyPresence: 1
+  },
+  {
+    name: "Stingy Color",
+    gameName: "stomachcolor_",
+    series: "Parsimonious Stomach",
+    tourneyPresence: 2
+  },
+  {
+    name: "Forgetful Cup",
+    gameName: "crowdcup_",
+    series: "Available Crowd",
+    tourneyPresence: 2
+  },
+  {
+    name: "Hard-to-Find Cake",
+    gameName: "representativecake_",
+    series: "Relieved Representative",
+    tourneyPresence: 2
+  },
+  {
+    name: "Dull Beds",
+    gameName: "booksbeds_",
+    series: "Astonishing Books",
+    tourneyPresence: 2
+  }
+];
+
+export const UPDATE_SELECTED: { inputStages: StageSelectInfo[], selectedStages: string[] } = {
+  inputStages: [
+    {
+      name: "Chief Grain",
+      gameName: "classgrain_",
+      series: "Remarkable Class",
+      tourneyPresence: -1
+    },
+    {
+      name: "Waiting Silk",
+      gameName: "questionsilk_",
+      series: "Calm Question",
+      tourneyPresence: -1
+    },
+    {
+      name: "Nutritious Home",
+      gameName: "cookhome_",
+      series: "Average Cook",
+      tourneyPresence: -1
+    },
+    {
+      name: "Tense Rain",
+      gameName: "temporaryrain_",
+      series: "Temporary",
+      tourneyPresence: -1
+    },
+    {
+      name: "Flimsy Shelf",
+      gameName: "nearshelf_",
+      series: "Near Tendency",
+      tourneyPresence: -1
+    },
+    {
+      name: "Gentle Can",
+      gameName: "giantscan_",
+      series: "Crowded Giants",
+      tourneyPresence: -1
+    },
+    {
+      name: "Lacking Salt",
+      gameName: "yamsalt_",
+      series: "Righteous Yam",
+      tourneyPresence: -1
+    },
+    {
+      name: "Arrogant Grandfather",
+      gameName: "sinkgrandfather_",
+      series: "Colorful Sink",
+      tourneyPresence: -1
+    }
+  ],
+  selectedStages: [
+    "classgrain_",
+    "giantscan_",
+    "yamsalt_",
+    "nearshelf_",
+  ]
+};
+
+export const UPDATE_UNSELECTED: {
+  inputStages: StageSelectInfo[],
+  selectedStages: string[],
+  targetStages: string[]
+} = {
+  inputStages: [
+    {
+      name: "Tense Knife",
+      gameName: "kettleknife_",
+      series: "Glamorous Kettle",
+      tourneyPresence: 0
+    },
+    {
+      name: "Frequent Rabbits",
+      gameName: "stingyrabbits_",
+      series: "Stingy Dinosaurs",
+      tourneyPresence: -1
+    },
+    {
+      name: "Abusive Crown",
+      gameName: "educationcrown_",
+      series: "Calm Education",
+      tourneyPresence: 1
+    },
+    {
+      name: "Harmonious Face",
+      gameName: "capharmony_",
+      series: "Malicious Cap",
+      tourneyPresence: 1
+    },
+    {
+      name: "Normal Wind",
+      gameName: "linenwind_",
+      series: "Workable Linen",
+      tourneyPresence: 2
+    },
+    {
+      name: "Roomy Cave",
+      gameName: "bitecave_",
+      series: "Crooked Bite",
+      tourneyPresence: 2
+    },
+    {
+      name: "Aback Aunt",
+      gameName: "rangeaunt_",
+      series: "Thoughtless Range",
+      tourneyPresence: 2
+    },
+    {
+      name: "Ad Hoc Meeting",
+      gameName: "jewelmeeting_",
+      series: "Towering Jewel",
+      tourneyPresence: 1
+    }
+  ],
+  selectedStages: [
+    "kettleknife_",
+    "linenwind_",
+    "jewelmeeting_"
+  ],
+  targetStages: [
+    "stingyrabbits_",
+    "educationcrown_",
+    "capharmony_",
+    "bitecave_",
+    "rangeaunt_"
+  ]
+};
+
+export const UPDATE_NO_STAGES: StageSelectInfo[] = [
+  {
+    name: "Invincible Dress",
+    gameName: "cavedress_",
+    series: "Grateful Cave",
+    tourneyPresence: -1
+  },
+  {
+    name: "Plastic Camp",
+    gameName: "iciclecamp_",
+    series: "Glossy Icicle",
+    tourneyPresence: 1
+  },
+  {
+    name: "Spiffy Pen",
+    gameName: "dinopen_",
+    series: "Jumpy Dinosaurs",
+    tourneyPresence: 2
+  },
+  {
+    name: "Used Trousers",
+    gameName: "horsetrousers_",
+    series: "Disastrous Horse",
+    tourneyPresence: -1
+  },
+  {
+    name: "Puny Line",
+    gameName: "bearline_",
+    series: "Detailed Bear",
+    tourneyPresence: 1
+  },
+  {
+    name: "Ragged Flame",
+    gameName: "birthflame_",
+    series: "Tall Birth",
+    tourneyPresence: 2
+  },
+  {
+    name: "Callous Moon",
+    gameName: "readingmoon_",
+    series: "Thoughtless Reading",
+    tourneyPresence: -1
+  },
+  {
+    name: "Fluttering Slip",
+    gameName: "zipperslip_",
+    series: "Nebulous Zipper",
+    tourneyPresence: 1
+  }
+];
+
+export const UPDATE_NO_ERROR: { inputStages: StageSelectInfo[], targetStages: string[] } = {
+  inputStages: [
+    {
+      name: "Waiting Smile",
+      gameName: "bordersmile_",
+      series: "Productive Border",
+      tourneyPresence: -1
+    },
+    {
+      name: "Quixotic Coast",
+      gameName: "trainscoast_",
+      series: "Enthusiastic Trains",
+      tourneyPresence: -1
+    },
+    {
+      name: "Glorious Day",
+      gameName: "whipday_",
+      series: "Mundane Whip",
+      tourneyPresence: 1
+    },
+    {
+      name: "Voiceless Bat",
+      gameName: "drawerbat_",
+      series: "Abaft Drawer",
+      tourneyPresence: 0
+    },
+    {
+      name: "Puffy Suit",
+      gameName: "wristsuit_",
+      series: "Exotic Wrist",
+      tourneyPresence: -1
+    },
+    {
+      name: "Numberless Aftermath",
+      gameName: "troublenumberless_",
+      series: "Ripe Trouble",
+      tourneyPresence: 0
+    },
+    {
+      name: "Next Army",
+      gameName: "potarmy_",
+      series: "Silly Pot",
+      tourneyPresence: 1
+    },
+    {
+      name: "Upset Ants",
+      gameName: "circleants_",
+      series: "Faded Circle",
+      tourneyPresence: 2
+    }
+  ],
+  targetStages: [
+    "bordersmile_",
+    "trainscoast_",
+    "drawerbat_"
+  ]
+};

@@ -306,26 +306,29 @@ h4 {
   transition: none;
 }
 
-.btn-primary:hover,
+.btn-primary:not(:disabled):not(.disabled):hover,
 .btn-primary:focus,
 .btn-primary:active,
 .btn-primary:not(:disabled):not(.disabled).active:focus,
 .btn-primary:not(:disabled):not(.disabled):active:focus {
-  background-color: hsl(132, 6%, 15%);
   background-color: hsl(50, 100%, 50%);
-  color: white;
   color: hsl(196, 12%, 10%);
 }
 
 .btn-primary,
 .btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary:not(:disabled):not(.disabled).active:focus,
-.btn-primary:not(:disabled):not(.disabled):active:focus {
+.btn-primary:active {
   border: none;
   box-shadow: none;
   /* 2px 2px 3px hsl(0, 0%, 0%);*/
+}
+
+.btn-primary:disabled,
+.btn-primary.disabled,
+.btn-primary:disabled:hover,
+.btn-primary.disabled:hover {
+  background-color: hsl(196, 12%, 75%);
+  color: white;
 }
 
 /* Content - Tables */

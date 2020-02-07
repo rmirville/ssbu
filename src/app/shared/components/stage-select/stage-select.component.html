@@ -3,7 +3,7 @@
     <h2>Stage Selection</h2>
   </div>
   <div class="card-body">
-    <form [formGroup]="stageGroup">
+    <form [formGroup]="selectionForm" (ngSubmit)="submitSelected()">
       <ng-container *ngFor="let rootSection of rootSections">
         <div *ngIf="rootSection.show" class="form-group {{rootSection.attribute}}">
           <div class="card">
@@ -28,8 +28,7 @@
                         <ng-container *ngFor="let stage of classifiedStages[rootSection.id][childSection.id]">
                           <div class="col-md-6 col-lg-4 col-xl-3">
                             <div class="form-check">
-                              <input class="form-check-input" id="{{rootSection.id + separator + stage.gameName}}"
-                                name="{{stage.gameName}}" type="checkbox" [checked]="isSelected[stage.gameName]" (change)="syncSelection(stage.gameName)" />
+                              <input class="form-check-input" id="{{rootSection.id + separator + stage.gameName}}" formControlName="{{stage.gameName}}" name="{{stage.gameName}}" type="checkbox" [checked]="selectionForm.value[stage.gameName]" />
                               <label class="form-check-label" for="{{rootSection.id + separator + stage.gameName}}">{{stage.name}}</label>
                             </div>
                           </div>
@@ -43,8 +42,13 @@
           </div>
         </div>
       </ng-container>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary mb-2">Update</button>
+      <div class="form-group stage-select-submit">
+        <div *ngIf="!selectionForm.valid" class="row">
+          <div class="col-sm-12">
+            <p class="error">Please select at least one stage.</p>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary mb-2" [disabled]="!selectionForm.valid">Update</button>
       </div>
     </form>
   </div>

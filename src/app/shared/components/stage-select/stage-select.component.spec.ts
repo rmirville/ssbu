@@ -729,35 +729,6 @@ describe('StageSelectComponent', () => {
         }
       });
 
-      xit('should not show any stages with a blank series', () => {
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_INDIVIDUAL_EXCLUDE_BLANK.allStages;
-        const targetStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_INDIVIDUAL_EXCLUDE_BLANK.excludedStages;
-        const targetGameNames: string[] = targetStages.map(targetStage => targetStage.gameName);
-        const miscSeries: string = "Miscellaneous";
-
-        selectHostComp.stages = [...inputStages];
-        selectHostFixture.detectChanges();
-
-        const seriesHeaderDElems: DebugElement[] = selectDElem.queryAll(By.css('form .by-series > .card .card-body h4'));
-        const miscIndex: number = seriesHeaderDElems.findIndex(elem => {
-          return (elem.nativeElement.textContent === miscSeries);
-        });
-        
-        const seriesDElems: DebugElement[] = selectDElem.queryAll(By.css('form .by-series > .card'));
-        if (miscIndex >= 0) {
-          seriesDElems.splice(miscIndex);
-        }
-        let actualGameNames: string[] = [];
-        for (const seriesDElem of seriesDElems) {
-          const stageDElems: DebugElement[] = seriesDElem.queryAll(By.css('.form-check-input'));
-          const actualSeriesGameNames: string[] = stageDElems.map(stageDElem => stageDElem.nativeElement.getAttribute('name'));
-          actualGameNames = actualGameNames.concat(actualSeriesGameNames);
-        }
-        for (const targetGameName of targetGameNames) {
-          expect(actualGameNames.includes(targetGameName)).toBe(false, `Defined series should not include stage "${targetGameName}"`);
-        }
-      });
-
       it('should list stages in alphabetical order', () => {
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_STAGE_SORT.inputStages;
         const sortedStages: {
@@ -884,11 +855,16 @@ describe('StageSelectComponent', () => {
   describe('cross-category interaction', () => {
     it(`should check a stage in the series section if it's checked in the tourney section`, () => {
       /**/
-      // console.log('=== SPEC - check series stage from tourney stage selection ===');
+      // console.group('=== SPEC - check series stage from tourney stage selection ===');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_TOURNEY_SERIES.stages;
       const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_TOURNEY_SERIES.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
+
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
 
       const stageTourneyDElem: DebugElement = selectDElem.query(By.css(`.by-tourney .form-check-input[name='${targetGameName}']`));
       const stageSeriesDElem: DebugElement = selectDElem.query(By.css(`.by-series .form-check-input[name='${targetGameName}']`));
@@ -898,6 +874,8 @@ describe('StageSelectComponent', () => {
       selectHostFixture.detectChanges();
 
       expect(stageSeriesDElem.nativeElement.checked).toBe(true);
+      /**/
+      // console.groupEnd();
     });
 
     it(`should check a stage in the tourney section if it's checked in the series section`, () => {
@@ -907,6 +885,11 @@ describe('StageSelectComponent', () => {
       const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_SERIES_TOURNEY.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
+
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
 
       const stageSeriesDElem: DebugElement = selectDElem.query(By.css(`.by-series .form-check-input[name='${targetGameName}']`));
       const stageTourneyDElem: DebugElement = selectDElem.query(By.css(`.by-tourney .form-check-input[name='${targetGameName}']`));
@@ -925,6 +908,11 @@ describe('StageSelectComponent', () => {
       const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_TOURNEY_SERIES.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
+
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
 
       const stageSeriesDElem: DebugElement = selectDElem.query(By.css(`.by-series .form-check-input[name='${targetGameName}']`));
       const stageTourneyDElem: DebugElement = selectDElem.query(By.css(`.by-tourney .form-check-input[name='${targetGameName}']`));
@@ -947,6 +935,11 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+
       const stageSeriesDElem: DebugElement = selectDElem.query(By.css(`.by-series .form-check-input[name='${targetGameName}']`));
       const stageTourneyDElem: DebugElement = selectDElem.query(By.css(`.by-tourney .form-check-input[name='${targetGameName}']`));
 
@@ -967,6 +960,11 @@ describe('StageSelectComponent', () => {
       const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_SERIES_TOURNEY_ISOLATE.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
+
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
 
       const stageSeriesTargetDElem: DebugElement = selectDElem.query(By.css(`.by-series .form-check-input[name='${targetGameName}']`));
       const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input:not([name='${targetGameName}'])`));
@@ -990,6 +988,11 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+
       const stageTourneyTargetDElem: DebugElement = selectDElem.query(By.css(`.by-tourney .form-check-input[name='${targetGameName}']`));
       const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input:not([name='${targetGameName}'])`));
       expect(stageNonTargetDElems.length).withContext('sanity check - should find non-target checkmarks').toBeGreaterThanOrEqual((inputStages.length + inputStages.filter(stage => stage.tourneyPresence > -1).length) - 2);
@@ -1011,6 +1014,11 @@ describe('StageSelectComponent', () => {
       const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_TOURNEY_SERIES_ISOLATE.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
+
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
 
       const stageTourneyDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`));
       const stageTourneyTargetDElem: DebugElement = selectDElem.query(By.css(`.by-tourney .form-check-input[name='${targetGameName}']`));
@@ -1039,6 +1047,11 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+
       const stageSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .form-check-input`));
       const stageSeriesTargetDElem: DebugElement = selectDElem.query(By.css(`.by-series .form-check-input[name='${targetGameName}']`));
       const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input:not([name='${targetGameName}'])`));
@@ -1066,6 +1079,11 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+
       const stageTourneyTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
       const stageSeriesTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
 
@@ -1090,6 +1108,11 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+
       const stageSeriesTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
       const stageTourneyTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
 
@@ -1113,6 +1136,11 @@ describe('StageSelectComponent', () => {
       const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_TOURNEY_SERIES.targetIDs;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
+
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
       
       const stageTourneyDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`));
       const stageTourneyTargetDElems: DebugElement[] = stageTourneyDElems.filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
@@ -1142,6 +1170,11 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+
       const stageSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`));
       const stageSeriesTargetDElems: DebugElement[] = stageSeriesDElems.filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
       const stageTourneyTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
@@ -1169,6 +1202,11 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+
       const stageTourneyDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`));
       const stageTourneyTargetDElems: DebugElement[] = stageTourneyDElems.filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
       const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`)).filter(dElem => !targetGameNames.includes(dElem.nativeElement.getAttribute('name')))
@@ -1193,6 +1231,11 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+
       const stageSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`));
       const stageSeriesTargetDElems: DebugElement[] = stageSeriesDElems.filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
       const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`)).filter(dElem => !targetGameNames.includes(dElem.nativeElement.getAttribute('name')))
@@ -1216,6 +1259,11 @@ describe('StageSelectComponent', () => {
       const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_TOURNEY_SERIES_ISOLATE.targetIDs;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
+
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
 
       const stageSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .form-check-input`));
       const stageTourneyTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
@@ -1248,6 +1296,11 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+
       const stageSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .form-check-input`));
       const stageSeriesTargetDElems: DebugElement[] = stageSeriesDElems.filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
       const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`)).filter(dElem => {
@@ -1272,8 +1325,190 @@ describe('StageSelectComponent', () => {
     });
   });
 
+  describe('update button', () => {
+    it('should exist', () => {
+      /**/
+      // console.group(`=== SPEC - update button exists ===`);
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_EXISTS;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+      
+      const buttonDElem: DebugElement = selectDElem.query(By.css(`button[type="submit"]`));
+      expect(buttonDElem.nativeElement.textContent.trim()).toEqual('Update');
+      /**/
+      // console.groupEnd();
+    });
+
+    it('should be disabled when no stages are selected', () => {
+      /**/
+      // console.group('=== SPEC - disable button when no stages are selected ===');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_DISABLED;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+      selectHostFixture.detectChanges();
+
+      const submitDElem: DebugElement = selectDElem.query(By.css(`button[type="submit"]`));
+      expect(submitDElem.nativeElement.disabled).toBe(true);
+      selectHostFixture.detectChanges();
+
+      /**/
+      // console.groupEnd();
+    });
+
+    it('should be enabled when there are stages selected', () => {
+      /**/
+      // console.group("=== SPEC - enable button when stages are selected ===");
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_ENABLED.inputStages;
+      const selectedGameNames: string[] = STAGE_SELECTIONS.UPDATE_ENABLED.selectedStages;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+
+      for (const selectedGameName of selectedGameNames) {
+        const selectedStageDElem: DebugElement = selectDElem.query(By.css(`.form-check-input[name="${selectedGameName}"]`));
+        selectedStageDElem.nativeElement.click();
+      }
+      selectHostFixture.detectChanges();
+
+      const submitDElem: DebugElement = selectDElem.query(By.css(`button[type="submit"]`));
+      expect(submitDElem.nativeElement.disabled).toBe(false);
+
+      /**/
+      // console.groupEnd();
+    });
+
+    it('should send the selected gameNames', () => {
+      /**/
+      // console.group(`=== SPEC - send selected stages ===`);
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_SELECTED.inputStages;
+      const expectedSelected: string[] = STAGE_SELECTIONS.UPDATE_SELECTED.selectedStages;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+
+      const selectedDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .form-check-input`))
+        .filter(   dElem => {   return expectedSelected.includes( dElem.nativeElement.getAttribute('name') );   }   );
+
+      for (const selectedDElem of selectedDElems) {
+        selectedDElem.nativeElement.click();
+      }
+      selectHostFixture.detectChanges();
+
+      const submitDElem: DebugElement = selectDElem.query(By.css('button[type="submit"]'));
+      submitDElem.nativeElement.click();
+      selectHostFixture.detectChanges();
+      
+      const actualSelected: string[] = [...selectHostComp.selectedStages];
+      for (const expectedStage of expectedSelected) {
+        expect(actualSelected).toContain(expectedStage);
+      }
+      /**/
+      // console.groupEnd();
+    });
+
+    it('should not send any unselected gameNames', () => {
+      /**/
+      // console.group(`=== SPEC - don't send unselected gameNames ===`);
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_UNSELECTED.inputStages;
+      const selectedGameNames: string[] = STAGE_SELECTIONS.UPDATE_UNSELECTED.selectedStages;
+      const targetGameNames: string[] = STAGE_SELECTIONS.UPDATE_UNSELECTED.targetStages;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+
+      for (const selectedGameName of selectedGameNames) {
+        const selectedDElem: DebugElement = selectDElem.query(By.css(`.form-check-input[name="${selectedGameName}"]`));
+        expect(selectDElem).withContext(`sanity - should find ${selectedGameName} checkbox`).toBeTruthy();
+        selectedDElem.nativeElement.click();
+        /**/expect(selectedDElem.nativeElement.checked).withContext(`sanity - should select ${selectedGameName} checkbox`).toBe(true);
+      }
+      selectHostFixture.detectChanges();
+
+      const updateDElem: DebugElement = selectDElem.query(By.css('button[type="submit"]'));
+      /**/expect(updateDElem.nativeElement.disabled).withContext('sanity - update button should be enabled').toBe(false);
+      updateDElem.nativeElement.click();
+      selectHostFixture.detectChanges();
+
+      const actualSelected: string[] = [...selectHostComp.selectedStages];
+      for (const targetGameName of targetGameNames) {
+        expect(actualSelected.includes(targetGameName)).withContext(targetGameName).toBe(false);
+      }
+      /**/
+      // console.groupEnd();
+    });
+
+    it('should show an error message when no stages are selected', () => {
+      /**/
+      // console.group('=== SPEC - show error when no stages are selected ===');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_NO_STAGES;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+
+      const submitDElem: DebugElement = selectDElem.query(By.css(`button[type="submit"]`));
+      submitDElem.nativeElement.click();
+      selectHostFixture.detectChanges();
+
+      const errorDElem: DebugElement = selectDElem.query(By.css(`.stage-select-submit .error`));
+      expect(errorDElem).withContext('find error message element').toBeTruthy();
+
+      expect(errorDElem.nativeElement.textContent.trim()).withContext('match error message').toEqual('Please select at least one stage.');
+
+      /**/
+      // console.groupEnd();
+    });
+
+    it('should not show an error message if there is a stage in the series section selected', () => {
+      /**/
+      // console.group("=== SPEC - don't show error when stages are selected ===");
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_NO_ERROR.inputStages;
+      const targetGameNames: string[] = STAGE_SELECTIONS.UPDATE_NO_ERROR.targetStages;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      for (const checkDElem of allCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+
+      for (const targetGameName of targetGameNames) {
+        const targetStageDElem: DebugElement = selectDElem.query(By.css(`.form-check-input[name="${targetGameName}"]`));
+        targetStageDElem.nativeElement.click();
+      }
+
+      const submitDElem: DebugElement = selectDElem.query(By.css(`button[type="submit"]`));
+      submitDElem.nativeElement.click();
+      selectHostFixture.detectChanges();
+
+      const errorDElem: DebugElement = selectDElem.query(By.css(`.stage-select-submit .error`));
+      expect(errorDElem).toBeNull();
+
+      /**/
+      // console.groupEnd();
+    });
+  });
   // TODO:
-    // Emit an event when the update button's pressed
-    // Send data on what stages were selected when the update button's pressed
+    // Make common legal stages selected and submitted to host component on init
     // Handle no stages loaded error
 });

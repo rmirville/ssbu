@@ -1,5 +1,5 @@
-import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { FormBuilder, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 import { StageSelectInfo } from '../../stage/models/stage-select-info.model';
 
@@ -32,9 +32,12 @@ const BLANK_SERIES: string = 'Miscellaneous';
   styleUrls: ['./stage-select.component.css']
 })
 export class StageSelectComponent implements OnInit {
+  selectionForm: FormGroup = this.fb.group({}, {validators: this._checkboxSelected()});
   separator: string = '_';
-  stageGroup: FormGroup = this.fb.group({});
+
   @Input() stages: StageSelectInfo[];
+  @Output() submitSelection = new EventEmitter<string[]>();
+  
   isSelected: StageSelectStatus = {};
   classifiedStages: {
     tourneyPresence: {
@@ -103,6 +106,7 @@ export class StageSelectComponent implements OnInit {
     let seriesStages: { [seriesName: string]: StageSelectInfo[] } = {};
     
     for (let stage of this.stages) {
+      this.selectionForm.addControl( stage.gameName, this.fb.control(false) );
       this.isSelected[stage.gameName] = false;
 
       /**/
@@ -120,15 +124,19 @@ export class StageSelectComponent implements OnInit {
 
       /**/
       // console.log(`  * seriesStages[${stage.series}]: ${JSON.stringify(seriesStages[stage.series])}`);
+      let hasTourneyPresence: boolean = false;
 
       switch (stage.tourneyPresence) {
         case 0:
+          hasTourneyPresence = true;
           legalCommonStages.push(stage);
           break;
         case 1:
+          hasTourneyPresence = true;
           legalUncommonStages.push(stage);
           break;
         case 2:
+          hasTourneyPresence = true;
           legalRareStages.push(stage);
           break;
       }
@@ -176,11 +184,25 @@ export class StageSelectComponent implements OnInit {
     this.rootSections.push(this.series);
   }
 
-  syncSelection(gameName: string) {
+  submitSelected() {
     /**/
-    // console.log(`StageSelectComponent::syncSelection()`);
-    // console.log(`  * gameName: ${JSON.stringify(gameName)}`);
-    this.isSelected[gameName] = !this.isSelected[gameName];
+    // console.group('StageSelectComponent::submitSelected()');
+    // console.log(`selectionForm.value: ${JSON.stringify(this.selectionForm.value)}`);
+    let stageSelection: string[] = [];
+    for (const stageName in this.selectionForm.value) {
+      /**/
+      // console.group(`selectionForm.value[${stageName}]:`);
+      if (this.selectionForm.value[stageName] === true) {
+        /**/
+        // console.log(`${stageName} added`);
+        stageSelection.push(stageName);
+      }
+      /**/
+      // console.groupEnd();
+    }
+    this.submitSelection.emit(stageSelection);
+    /**/
+    // console.groupEnd();
   }
 
   _compareText(a: string, b: string): number {
@@ -198,4 +220,20 @@ export class StageSelectComponent implements OnInit {
   _compareInfo(a: StageSelectInfo, b: StageSelectInfo): number {
     return this._compareText(a.name, b.name);
   }
+
+  _checkboxSelected(): ValidatorFn {
+    const validator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+      /**/
+      // console.group('StageSelectComponent::checkboxSelected()');
+      // console.log(`control.value: ${JSON.stringify(control.value)}`);
+      let selected = Object.values(control.value).includes(true);
+      /**/
+      // console.log(`selected: ${selected}`);
+      // console.groupEnd();
+
+      return selected ? null : { 'required': true };
+    };
+    return validator;
+  }
+
 }

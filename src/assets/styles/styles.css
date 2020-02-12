@@ -477,6 +477,7 @@ h4 {
   justify-content: start;
 }
 
-.form-group > .card > .collapse > .card-body {
+.form-group > .card > .collapse > .card-body,
+.form-group > .card > .collapsing > .card-body {
   padding: 0 1rem;
 }

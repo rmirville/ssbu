@@ -1,5 +1,6 @@
 /* Stage Select */
-ssbu-stage-select .classification {
+ssbu-stage-select .classification,
+ssbu-stage-select .shortcuts {
   padding-top: 1rem;
   border-bottom: 1px dotted lightgrey;
 }

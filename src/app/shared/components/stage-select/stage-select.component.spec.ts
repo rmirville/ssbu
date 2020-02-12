@@ -861,7 +861,7 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
@@ -886,7 +886,7 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
@@ -909,7 +909,7 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
@@ -935,7 +935,7 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
@@ -961,13 +961,13 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
-      const stageSeriesTargetDElem: DebugElement = selectDElem.query(By.css(`.by-series .form-check-input[name='${targetGameName}']`));
-      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input:not([name='${targetGameName}'])`));
+      const stageSeriesTargetDElem: DebugElement = selectDElem.query(By.css(`.by-series .classification .form-check-input[name='${targetGameName}']`));
+      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input:not([name='${targetGameName}'])`));
       expect(stageNonTargetDElems.length).withContext('sanity check - should find non-target checkmarks').toBeGreaterThanOrEqual((inputStages.length + inputStages.filter(stage => stage.tourneyPresence > -1).length) - 2);
 
       stageSeriesTargetDElem.nativeElement.click();
@@ -988,13 +988,13 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
       const stageTourneyTargetDElem: DebugElement = selectDElem.query(By.css(`.by-tourney .form-check-input[name='${targetGameName}']`));
-      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input:not([name='${targetGameName}'])`));
+      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input:not([name='${targetGameName}'])`));
       expect(stageNonTargetDElems.length).withContext('sanity check - should find non-target checkmarks').toBeGreaterThanOrEqual((inputStages.length + inputStages.filter(stage => stage.tourneyPresence > -1).length) - 2);
 
       stageTourneyTargetDElem.nativeElement.click();
@@ -1015,14 +1015,14 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
-      const stageTourneyDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`));
+      const stageTourneyDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .classification .form-check-input`));
       const stageTourneyTargetDElem: DebugElement = selectDElem.query(By.css(`.by-tourney .form-check-input[name='${targetGameName}']`));
-      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input:not([name='${targetGameName}'])`));
+      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input:not([name='${targetGameName}'])`));
       expect(stageNonTargetDElems.length).withContext('sanity check - should find non-target checkmarks').toBeGreaterThanOrEqual((inputStages.length + inputStages.filter(stage => stage.tourneyPresence > -1).length) - 2);
 
       for (const stageTourneyDElem of stageTourneyDElems) {
@@ -1047,14 +1047,14 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
-      const stageSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .form-check-input`));
+      const stageSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .classification .form-check-input`));
       const stageSeriesTargetDElem: DebugElement = selectDElem.query(By.css(`.by-series .form-check-input[name='${targetGameName}']`));
-      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input:not([name='${targetGameName}'])`));
+      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input:not([name='${targetGameName}'])`));
       expect(stageNonTargetDElems.length).withContext('sanity check - should find non-target checkmarks').toBeGreaterThanOrEqual((inputStages.length + inputStages.filter(stage => stage.tourneyPresence > -1).length) - 2);
 
       for (const stageSeriesDElem of stageSeriesDElems) {
@@ -1079,13 +1079,13 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
-      const stageTourneyTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
-      const stageSeriesTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
+      const stageTourneyTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .classification .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
+      const stageSeriesTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .classification .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
 
       expect(stageSeriesTargetDElems.length).withContext('sanity check - should find series checkmarks').toEqual(targetGameNames.length);
       for (const stageTourneyTargetDElem of stageTourneyTargetDElems) {
@@ -1108,13 +1108,13 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
-      const stageSeriesTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
-      const stageTourneyTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
+      const stageSeriesTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .classification .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
+      const stageTourneyTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .classification .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
 
       expect(stageTourneyTargetDElems.length).withContext('sanity check - should find tourney checkmarks').toEqual(targetGameNames.length);
       for (const stageSeriesTargetDElem of stageSeriesTargetDElems) {
@@ -1137,14 +1137,14 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
       
-      const stageTourneyDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`));
+      const stageTourneyDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .classification .form-check-input`));
       const stageTourneyTargetDElems: DebugElement[] = stageTourneyDElems.filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
-      const stageSeriesTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
+      const stageSeriesTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .classification .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
 
       expect(stageSeriesTargetDElems.length).withContext('sanity check - should find series checkmarks').toEqual(targetGameNames.length);
       for (const stageTourneyDElem of stageTourneyDElems) {
@@ -1170,14 +1170,14 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
-      const stageSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`));
+      const stageSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .classification .form-check-input`));
       const stageSeriesTargetDElems: DebugElement[] = stageSeriesDElems.filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
-      const stageTourneyTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
+      const stageTourneyTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .classification .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
 
       expect(stageTourneyTargetDElems.length).withContext('sanity check - should find tourney checkmarks').toEqual(targetGameNames.length);
       for (const stageSeriesDElem of stageSeriesDElems) {
@@ -1202,14 +1202,14 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
-      const stageTourneyDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`));
+      const stageTourneyDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .classification .form-check-input`));
       const stageTourneyTargetDElems: DebugElement[] = stageTourneyDElems.filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
-      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`)).filter(dElem => !targetGameNames.includes(dElem.nativeElement.getAttribute('name')))
+      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`)).filter(dElem => !targetGameNames.includes(dElem.nativeElement.getAttribute('name')))
       expect(stageNonTargetDElems.length).withContext('sanity check - should find non-target checkmarks').toBeGreaterThanOrEqual((inputStages.length + inputStages.filter(stage => stage.tourneyPresence > -1).length) - (targetGameNames.length * 2));
 
       for (const stageTourneyTargetDElem of stageTourneyTargetDElems) {
@@ -1231,14 +1231,14 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
-      const stageSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`));
+      const stageSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .classification .form-check-input`));
       const stageSeriesTargetDElems: DebugElement[] = stageSeriesDElems.filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
-      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`)).filter(dElem => !targetGameNames.includes(dElem.nativeElement.getAttribute('name')))
+      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`)).filter(dElem => !targetGameNames.includes(dElem.nativeElement.getAttribute('name')))
       expect(stageNonTargetDElems.length).withContext('sanity check - should find non-target checkmarks').toBeGreaterThanOrEqual((inputStages.length + inputStages.filter(stage => stage.tourneyPresence > -1).length) - (targetGameNames.length * 2));
 
       for (const stageSeriesTargetDElem of stageSeriesTargetDElems) {
@@ -1260,14 +1260,14 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
-      const stageSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .form-check-input`));
-      const stageTourneyTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
-      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`)).filter(dElem => {
+      const stageSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .classification .form-check-input`));
+      const stageTourneyTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-tourney .classification .form-check-input`)).filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
+      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`)).filter(dElem => {
         return (targetGameNames.includes(dElem.nativeElement.getAttribute('name')) === false);
       });
       expect(stageNonTargetDElems.length)
@@ -1296,14 +1296,14 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
-      const stageSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .form-check-input`));
+      const stageSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .classification .form-check-input`));
       const stageSeriesTargetDElems: DebugElement[] = stageSeriesDElems.filter(dElem => targetGameNames.includes(dElem.nativeElement.getAttribute('name')));
-      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`)).filter(dElem => {
+      const stageNonTargetDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`)).filter(dElem => {
         return (targetGameNames.includes(dElem.nativeElement.getAttribute('name')) === false); });
       expect(stageNonTargetDElems.length)
         .withContext('sanity check - should find non-target checkmarks')
@@ -1346,7 +1346,7 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
@@ -1368,13 +1368,13 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
       for (const selectedGameName of selectedGameNames) {
-        const selectedStageDElem: DebugElement = selectDElem.query(By.css(`.form-check-input[name="${selectedGameName}"]`));
+        const selectedStageDElem: DebugElement = selectDElem.query(By.css(`.classification .form-check-input[name="${selectedGameName}"]`));
         selectedStageDElem.nativeElement.click();
       }
       selectHostFixture.detectChanges();
@@ -1394,12 +1394,12 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
-      const selectedDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .form-check-input`))
+      const selectedDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .classification .form-check-input`))
         .filter(   dElem => {   return expectedSelected.includes( dElem.nativeElement.getAttribute('name') );   }   );
 
       for (const selectedDElem of selectedDElems) {
@@ -1428,13 +1428,13 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
       for (const selectedGameName of selectedGameNames) {
-        const selectedDElem: DebugElement = selectDElem.query(By.css(`.form-check-input[name="${selectedGameName}"]`));
+        const selectedDElem: DebugElement = selectDElem.query(By.css(`.classification .form-check-input[name="${selectedGameName}"]`));
         expect(selectDElem).withContext(`sanity - should find ${selectedGameName} checkbox`).toBeTruthy();
         selectedDElem.nativeElement.click();
         /**/expect(selectedDElem.nativeElement.checked).withContext(`sanity - should select ${selectedGameName} checkbox`).toBe(true);
@@ -1461,7 +1461,7 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
@@ -1487,13 +1487,13 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.form-check-input`));
+      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
       for (const checkDElem of allCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
       for (const targetGameName of targetGameNames) {
-        const targetStageDElem: DebugElement = selectDElem.query(By.css(`.form-check-input[name="${targetGameName}"]`));
+        const targetStageDElem: DebugElement = selectDElem.query(By.css(`.classification .form-check-input[name="${targetGameName}"]`));
         targetStageDElem.nativeElement.click();
       }
 
@@ -1506,6 +1506,215 @@ describe('StageSelectComponent', () => {
 
       /**/
       // console.groupEnd();
+    });
+  });
+
+  describe('select all / none checkboxes', () => {
+    describe('select all', () => {
+
+      it('should appear in each root section', () => {
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_EXISTS;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('.by-tourney #tourneyPresence_all.form-check-input[name="all"]'));
+        const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('.by-series #series_all.form-check-input[name="all"]'));
+        expect(selectAllTourneyDElem).withContext('select all - tourney').toBeTruthy();
+        expect(selectAllSeriesDElem).withContext('select all - series').toBeTruthy();
+      });
+
+      it('should have the label "All"', () => {
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_LABEL;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('.by-tourney .form-check-label[for="tourneyPresence_all"]'));
+        const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('.by-series .form-check-label[for="series_all"]'));
+        expect(selectAllTourneyDElem.nativeElement.textContent.trim()).toEqual("All");
+        expect(selectAllSeriesDElem.nativeElement.textContent.trim()).toEqual("All");
+      });
+
+      it('should be in the first subsection', () => {
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_FIRST_SECTION;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('.by-tourney .row')).query(By.css('#tourneyPresence_all'));
+        const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('.by-series .row')).query(By.css('#series_all'));
+        expect(selectAllTourneyDElem).withContext('select all - tourney').toBeTruthy();
+        expect(selectAllSeriesDElem).withContext('select all - series').toBeTruthy();
+      });
+
+      it('should check all stages in its root section (tourney)', () => {
+        /**/
+        // console.group("=== SPEC - check all stages - tourney ===");
+        let inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_CHECK_POSITIVE_TOURNEY;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+        const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('#tourneyPresence_all'));
+        const allTourneyDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-tourney .classification .form-check-input'));
+
+        for (const checkDElem of allCheckDElems) {
+          checkDElem.nativeElement.checked = false;
+        }
+        selectHostFixture.detectChanges();
+
+        selectAllTourneyDElem.nativeElement.click();
+        selectHostFixture.detectChanges();
+
+        for (const tourneyDElem of allTourneyDElems) {
+          let stageName = tourneyDElem.nativeElement.getAttribute('name');
+          expect(tourneyDElem.nativeElement.checked).withContext(stageName).toBe(true);
+        }
+        /**/
+        // console.groupEnd();
+      });
+
+      it('should check all stages in its root section (series)', () => {
+        let inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_CHECK_POSITIVE_SERIES;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
+        const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('#series_all'));
+        const allSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-series .classification .form-check-input'));
+
+        for (const checkDElem of allCheckDElems) {
+          checkDElem.nativeElement.checked = false;
+        }
+        selectHostFixture.detectChanges();
+
+        selectAllSeriesDElem.nativeElement.click();
+        selectHostFixture.detectChanges();
+
+        for (const seriesDElem of allSeriesDElems) {
+          let stageName = seriesDElem.nativeElement.getAttribute('name');
+          expect(seriesDElem.nativeElement.checked).withContext(stageName).toBe(true);
+        }
+      });
+
+      it('should not check all stages in other sections (tourney > series)', () => {
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_CHECK_NEGATIVE_TOURNEY.inputStages;
+        const targetGameNames: string[] = STAGE_SELECTIONS.ALL_CHECK_NEGATIVE_TOURNEY.targetStages;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
+        const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('#tourneyPresence_all'));
+
+        for (const checkDElem of allCheckDElems) {
+          checkDElem.nativeElement.checked = false;
+        }
+        selectHostFixture.detectChanges();
+
+        selectAllTourneyDElem.nativeElement.click();
+        selectHostFixture.detectChanges();
+
+        for (const targetGameName of targetGameNames) {
+          const targetCheckDElem: DebugElement = selectDElem.query(By.css(`.by-series .form-check-input[name='${targetGameName}']`));
+          expect(targetCheckDElem.nativeElement.checked).withContext(targetGameName).toBe(false);
+        }
+      });
+
+      it('should be checked when all stages in its root section are checked - series', () => {
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_CHECKED_SERIES;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
+        const seriesDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-series .classification .form-check-input'));
+        const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('#series_all'));
+
+        for (const checkDElem of allCheckDElems) {
+          checkDElem.nativeElement.checked = false;
+        }
+        selectHostFixture.detectChanges();
+
+        for (const seriesDElem of seriesDElems) {
+          seriesDElem.nativeElement.click();
+        }
+        selectHostFixture.detectChanges();
+
+        expect(selectAllSeriesDElem.nativeElement.checked).toBe(true);
+      });
+
+      it('should not be checked when not all stages in its root section are checked - series', () => {
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_UNCHECKED_SERIES.inputStages;
+        const targetGameNames: string[] = STAGE_SELECTIONS.ALL_UNCHECKED_SERIES.targetStages;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
+        const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('#series_all'));
+
+        for (const checkDElem of allCheckDElems) {
+          checkDElem.nativeElement.checked = false;
+        }
+        selectHostFixture.detectChanges();
+
+        for (const targetGameName of targetGameNames) {
+          const targetDElem: DebugElement = selectDElem.query(By.css(`.by-series .classification .form-check-input[name='${targetGameName}']`));
+          targetDElem.nativeElement.click();
+        }
+        selectHostFixture.detectChanges();
+
+        expect(selectAllSeriesDElem.nativeElement.checked).toBe(false);
+      });
+
+      it('should be checked when all stages in its root section are checked - tourney', () => {
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_CHECKED_TOURNEY;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
+        const tourneyDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-tourney .classification .form-check-input'));
+        const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('#tourneyPresence_all'));
+
+        for (const checkDElem of allCheckDElems) {
+          checkDElem.nativeElement.checked = false;
+        }
+        selectHostFixture.detectChanges();
+
+        for (const tourneyDElem of tourneyDElems) {
+          tourneyDElem.nativeElement.click();
+        }
+        selectHostFixture.detectChanges();
+
+        expect(selectAllTourneyDElem.nativeElement.checked).toBe(true);
+      });
+
+      it('should not be checked when not all stages in its root section are checked - tourney', () => {
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_UNCHECKED_TOURNEY.inputStages;
+        const targetGameNames: string[] = STAGE_SELECTIONS.ALL_UNCHECKED_TOURNEY.targetStages;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
+        const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('#tourneyPresence_all'));
+
+        for (const checkDElem of allCheckDElems) {
+          checkDElem.nativeElement.checked = false;
+        }
+        selectHostFixture.detectChanges();
+
+        for (const targetGameName of targetGameNames) {
+          const targetDElem: DebugElement = selectDElem.query(By.css(`.by-tourney .classification .form-check-input[name='${targetGameName}']`));
+          targetDElem.nativeElement.click();
+        }
+        selectHostFixture.detectChanges();
+
+        expect(selectAllTourneyDElem.nativeElement.checked).toBe(false);
+      });
+    });
+    describe('select none', () => {
+      it('should appear in each root section');
+      it('should be in the first subsection');
+      it('should uncheck all stages in its root section');
+      it('should not uncheck all stages in other sections (tourney > series');
+      it('should be checked when no stages in its root section are checked');
+      it('should not be checked when stages in its root section are checked');
     });
   });
   // TODO:

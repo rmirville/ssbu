@@ -3880,3 +3880,534 @@ export const UPDATE_NO_ERROR: { inputStages: StageSelectInfo[], targetStages: st
     "drawerbat_"
   ]
 };
+
+export const ALL_EXISTS: StageSelectInfo[] = [
+  {
+    name: "Level Women",
+    gameName: "carriagewomen_",
+    series: "Disgusting Carriage",
+    tourneyPresence: 2
+  },
+  {
+    name: "Superficial Hands",
+    gameName: "salthands_",
+    series: "Axiomatic Salt",
+    tourneyPresence: 2
+  },
+  {
+    name: "Slim Nest",
+    gameName: "maidnest_",
+    series: "Panicky Maid",
+    tourneyPresence: 0
+  },
+  {
+    name: "Ashamed Food",
+    gameName: "discussionfood_",
+    series: "Confused Discussion",
+    tourneyPresence: 1
+  },
+  {
+    name: "Enchanted Crayon",
+    gameName: "pollutioncrayon_",
+    series: "Snotty Pollution",
+    tourneyPresence: 1
+  },
+  {
+    name: "Silent Can",
+    gameName: "partycan_",
+    series: "Irritating Party",
+    tourneyPresence: 0
+  },
+  {
+    name: "Glossy Sofa",
+    gameName: "fleshsofa_",
+    series: "Volatile Flesh",
+    tourneyPresence: 1
+  },
+  {
+    name: "Unarmed Back",
+    gameName: "firemanback_",
+    series: "Old Fireman",
+    tourneyPresence: -1
+  }
+];
+
+export const ALL_LABEL: StageSelectInfo[] = [
+  {
+    name: "Separate Bell",
+    gameName: "structurebell_",
+    series: "Efficient Structure",
+    tourneyPresence: 1
+  },
+  {
+    name: "Wholesale Curtain",
+    gameName: "effectcurtain_",
+    series: "Tranquil Effect",
+    tourneyPresence: -1
+  },
+  {
+    name: "Plucky Church",
+    gameName: "liquidchurch_",
+    series: "Kindly Liquid",
+    tourneyPresence: -1
+  },
+  {
+    name: "Hungry Dog",
+    gameName: "wavedog_",
+    series: "Uncovered Wave",
+    tourneyPresence: 1
+  },
+  {
+    name: "Glistening Point",
+    gameName: "discoverypoint_",
+    series: "Toothsome Discovery",
+    tourneyPresence: 0
+  },
+  {
+    name: "Tenuous Sink",
+    gameName: "crowdsink_",
+    series: "Violent Crowd",
+    tourneyPresence: 0
+  },
+  {
+    name: "Plant Drawer",
+    gameName: "cherriesdrawer_",
+    series: "Second-hand Cherries",
+    tourneyPresence: 0
+  },
+  {
+    name: "Careless Jump",
+    gameName: "rodjump_",
+    series: "Auspicious Rod",
+    tourneyPresence: 2
+  }
+];
+
+export const ALL_FIRST_SECTION: StageSelectInfo[] = [
+  {
+    name: "Delightful Dogs",
+    gameName: "geesedogs_",
+    series: "Accidental Geese",
+    tourneyPresence: 0
+  },
+  {
+    name: "Used Throne",
+    gameName: "shoethrone_",
+    series: "Reminiscent Shoe",
+    tourneyPresence: -1
+  },
+  {
+    name: "Simplistic Oven",
+    gameName: "offeroven_",
+    series: "Honorable Offer",
+    tourneyPresence: 0
+  },
+  {
+    name: "Tasteful Spark",
+    gameName: "mouthspark_",
+    series: "Square Mouth",
+    tourneyPresence: 0
+  },
+  {
+    name: "Ethereal Bait",
+    gameName: "spotbait_",
+    series: "Precious Spot",
+    tourneyPresence: 2
+  },
+  {
+    name: "Boundless Glove",
+    gameName: "trousersglove_",
+    series: "Orange Trousers",
+    tourneyPresence: 2
+  },
+  {
+    name: "Round Mountain",
+    gameName: "airplanemountain_",
+    series: "Cooing Airplane",
+    tourneyPresence: 0
+  },
+  {
+    name: "Volatile Coal",
+    gameName: "crimecoal_",
+    series: "Well-off Crime",
+    tourneyPresence: 0
+  }
+];
+
+export const ALL_CHECK_POSITIVE_TOURNEY: StageSelectInfo[] = [
+  {
+    name: "Heavenly Growth",
+    gameName: "bikesgrowth_",
+    series: "Spectacular Bikes",
+    tourneyPresence: 1
+  },
+  {
+    name: "Wakeful Metal",
+    gameName: "dogmetal_",
+    series: "Guttural Dog",
+    tourneyPresence: 0
+  },
+  {
+    name: "Aggressive Rainstorm",
+    gameName: "degreerain_",
+    series: "Pushy Degree",
+    tourneyPresence: 2
+  },
+  {
+    name: "Tightfisted Sugar",
+    gameName: "lavishsugar_",
+    series: "Lavish Use",
+    tourneyPresence: 2
+  },
+  {
+    name: "Intelligent Hat",
+    gameName: "gunhat_",
+    series: "Rapid Gun",
+    tourneyPresence: 0
+  },
+  {
+    name: "Workable Grape",
+    gameName: "earwork_",
+    series: "Nasty Ear",
+    tourneyPresence: -1
+  },
+  {
+    name: "Bawdy Science",
+    gameName: "ironscience_",
+    series: "Helpful Iron",
+    tourneyPresence: -1
+  },
+  {
+    name: "Wrathful Discussion",
+    gameName: "platediscussion_",
+    series: "Next Plate",
+    tourneyPresence: -1
+  }
+];
+
+export const ALL_CHECK_POSITIVE_SERIES: StageSelectInfo[] = [
+  {
+    name: "Incandescent Point",
+    gameName: "businesspoint_",
+    series: "Pumped Business",
+    tourneyPresence: 2
+  },
+  {
+    name: "Majestic Zebra",
+    gameName: "furniturezebra_",
+    series: "Languid Furniture",
+    tourneyPresence: -1
+  },
+  {
+    name: "Charming Carpenter",
+    gameName: "spooncarpenter_",
+    series: "Bad Spoon",
+    tourneyPresence: 1
+  },
+  {
+    name: "Longing Crayon",
+    gameName: "horsecrayon_",
+    series: "Three Horses",
+    tourneyPresence: 1
+  },
+  {
+    name: "Subdued Edge",
+    gameName: "rolledge_",
+    series: "Pointless Roll",
+    tourneyPresence: 1
+  },
+  {
+    name: "Exultant Coil",
+    gameName: "treecoil_",
+    series: "Sick Trees",
+    tourneyPresence: 1
+  },
+  {
+    name: "Madly Tiger",
+    gameName: "texturetiger_",
+    series: "Succinct Texture",
+    tourneyPresence: 2
+  },
+  {
+    name: "Rustic Move",
+    gameName: "baitmove_",
+    series: "Plain Bait",
+    tourneyPresence: -1
+  }
+];
+
+export const ALL_CHECK_NEGATIVE_TOURNEY: {inputStages: StageSelectInfo[], targetStages: string[]} = {
+  inputStages: [
+    {
+      name: "Disgusting Prose",
+      gameName: "vestprose_",
+      series: "Hilarious Vest",
+      tourneyPresence: -1
+    },
+    {
+      name: "Level Beef",
+      gameName: "spoonbeef_",
+      series: "Tangible Spoon",
+      tourneyPresence: 0
+    },
+    {
+      name: "Military Hand",
+      gameName: "scenthand_",
+      series: "Rampant Scent",
+      tourneyPresence: 2
+    },
+    {
+      name: "Merciful Arm",
+      gameName: "luncharm_",
+      series: "Far Lunchroom",
+      tourneyPresence: 1
+    },
+    {
+      name: "Opposite Arithmetic",
+      gameName: "songmath_",
+      series: "Mature Song",
+      tourneyPresence: 1
+    },
+    {
+      name: "Tearful Judge",
+      gameName: "borderjudge_",
+      series: "Bumpy Border",
+      tourneyPresence: -1
+    },
+    {
+      name: "Dreary Power",
+      gameName: "amountpower_",
+      series: "Delicious Amount",
+      tourneyPresence: -1
+    },
+    {
+      name: "Futuristic Cook",
+      gameName: "seedcook_",
+      series: "Ceaseless Seed",
+      tourneyPresence: 0
+    }
+  ],
+  targetStages: [
+    "vestprose_",
+    "borderjudge_",
+    "amountpower_"
+  ]
+};
+
+export const ALL_CHECKED_SERIES: StageSelectInfo[] = [
+  {
+    name: "Cautious Maid",
+    gameName: "titlemaid_",
+    series: "Ripe Title",
+    tourneyPresence: 1
+  },
+  {
+    name: "Clear Chicken",
+    gameName: "wallchicken_",
+    series: "Selfish Wall",
+    tourneyPresence: 0
+  },
+  {
+    name: "Discreet Zephyr",
+    gameName: "marblezephyr_",
+    series: "Parsimonious Marble",
+    tourneyPresence: 1
+  },
+  {
+    name: "Stimulating Pancake",
+    gameName: "cribpancake_",
+    series: "Questionable Crib",
+    tourneyPresence: 0
+  },
+  {
+    name: "Spooky Recess",
+    gameName: "actorrecess_",
+    series: "Neat Actor",
+    tourneyPresence: 2
+  },
+  {
+    name: "Future Wind",
+    gameName: "feelingwind_",
+    series: "Spicy Feeling",
+    tourneyPresence: -1
+  },
+  {
+    name: "Psychotic Throne",
+    gameName: "duckthrone_",
+    series: "Impartial Duck",
+    tourneyPresence: 2
+  },
+  {
+    name: "Common Tray",
+    gameName: "startray_",
+    series: "Cuddly Star",
+    tourneyPresence: 2
+  }
+];
+
+export const ALL_CHECKED_TOURNEY: StageSelectInfo[] = [
+  {
+    name: "Roasted Field",
+    gameName: "rollfield_",
+    series: "Tame Roll",
+    tourneyPresence: 2
+  },
+  {
+    name: "Redundant Swim",
+    gameName: "backswim_",
+    series: "Tense Back",
+    tourneyPresence: -1
+  },
+  {
+    name: "Grotesque Order",
+    gameName: "donkeyorder_",
+    series: "Scared Donkey",
+    tourneyPresence: 0
+  },
+  {
+    name: "Wet Reading",
+    gameName: "gradereading_",
+    series: "Fertile Grade",
+    tourneyPresence: 1
+  },
+  {
+    name: "Bumpy Value",
+    gameName: "flowervalue_",
+    series: "Military Flower",
+    tourneyPresence: -1
+  },
+  {
+    name: "Graceful Pets",
+    gameName: "nervepets_",
+    series: "Magnificent Nerve",
+    tourneyPresence: 2
+  },
+  {
+    name: "Icky Bat",
+    gameName: "legsbat_",
+    series: "Lamentable Legs",
+    tourneyPresence: 1
+  },
+  {
+    name: "Boorish Addition",
+    gameName: "cableaddition_",
+    series: "Spiteful Cable",
+    tourneyPresence: 0
+  }
+];
+
+export const ALL_UNCHECKED_SERIES: {inputStages: StageSelectInfo[], targetStages: string[]} = {
+  inputStages: [
+    {
+      name: "Helpless Burst",
+      gameName: "tigerburst_",
+      series: "Synonymous Tiger",
+      tourneyPresence: 1
+    },
+    {
+      name: "Maniacal Adjustment",
+      gameName: "rockadj_",
+      series: "Tangy Rock",
+      tourneyPresence: 1
+    },
+    {
+      name: "Uppity Ants",
+      gameName: "believeants_",
+      series: "Venomous Believe",
+      tourneyPresence: -1
+    },
+    {
+      name: "Trite Approval",
+      gameName: "churchapproval_",
+      series: "Wasteful Church",
+      tourneyPresence: 1
+    },
+    {
+      name: "Unique Crate",
+      gameName: "attackcrate_",
+      series: "Jaded Attack",
+      tourneyPresence: 2
+    },
+    {
+      name: "Unnatural Oranges",
+      gameName: "sticksoranges_",
+      series: "Fair Sticks",
+      tourneyPresence: -1
+    },
+    {
+      name: "Alluring Plant",
+      gameName: "receiptplant_",
+      series: "Pink Receipt",
+      tourneyPresence: -1
+    },
+    {
+      name: "Sordid Straw",
+      gameName: "brotherstraw_",
+      series: "Naughty Brother",
+      tourneyPresence: 0
+    }
+  ],
+  targetStages: [
+    "tigerburst_",
+    "churchapproval_"
+  ]
+};
+
+export const ALL_UNCHECKED_TOURNEY: {inputStages: StageSelectInfo[], targetStages: string[]} = {
+  inputStages: [
+    {
+      name: "Premium Grass",
+      gameName: "bonegrass_",
+      series: "Sticky Bone",
+      tourneyPresence: 1
+    },
+    {
+      name: "Flashy Camp",
+      gameName: "dirtcamp_",
+      series: "Moaning Dirt",
+      tourneyPresence: -1
+    },
+    {
+      name: "Ossified Calculator",
+      gameName: "crowdcalc_",
+      series: "Charming Crowd",
+      tourneyPresence: 1
+    },
+    {
+      name: "Rustic Rain",
+      gameName: "instrumentrain_",
+      series: "Detailed Instrument",
+      tourneyPresence: -1
+    },
+    {
+      name: "Smooth Sidewalk",
+      gameName: "attacksidewalk_",
+      series: "Utopian Attack",
+      tourneyPresence: 0
+    },
+    {
+      name: "Sable Wound",
+      gameName: "yokewound_",
+      series: "Astonishing Yoke",
+      tourneyPresence: 2
+    },
+    {
+      name: "Near Hydrant",
+      gameName: "quiethydrant_",
+      series: "Taboo Quiet",
+      tourneyPresence: 1
+    },
+    {
+      name: "Melodic Shock",
+      gameName: "armyshock_",
+      series: "Frequent Army",
+      tourneyPresence: 0
+    }
+  ],
+  targetStages: [
+    "crowdcalc_",
+    "attacksidewalk_",
+    "quiethydrant_",
+    "armyshock_"
+  ]
+};

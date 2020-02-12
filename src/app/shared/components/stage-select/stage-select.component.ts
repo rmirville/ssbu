@@ -18,10 +18,13 @@ interface StageSelectSection {
 /**
  * Represents the selected status of a collection of stages
  * 
- * @interface StageSelectStatus
+ * @interface StageSelectShortcuts
  */
-interface StageSelectStatus {
-  [gameName: string]: boolean;
+interface StageSelectShortcuts {
+  [section: string]: {
+    all: boolean;
+    none: boolean;
+  }
 };
 
 const BLANK_SERIES: string = 'Miscellaneous';
@@ -38,7 +41,16 @@ export class StageSelectComponent implements OnInit {
   @Input() stages: StageSelectInfo[];
   @Output() submitSelection = new EventEmitter<string[]>();
   
-  isSelected: StageSelectStatus = {};
+  selectShortcuts: StageSelectShortcuts = {
+    series: {
+      all: false,
+      none: true
+    },
+    tourneyPresence: {
+      all: false,
+      none: true
+    }
+  };
   classifiedStages: {
     tourneyPresence: {
       legalCommon: StageSelectInfo[],
@@ -107,7 +119,6 @@ export class StageSelectComponent implements OnInit {
     
     for (let stage of this.stages) {
       this.selectionForm.addControl( stage.gameName, this.fb.control(false) );
-      this.isSelected[stage.gameName] = false;
 
       /**/
       // console.log(`  * checking stage: ${stage.name} (${stage.series})`);
@@ -203,6 +214,45 @@ export class StageSelectComponent implements OnInit {
     this.submitSelection.emit(stageSelection);
     /**/
     // console.groupEnd();
+  }
+
+  selectAll(section: string) {
+    if (section === 'tourneyPresence') {
+      for (const stage of this.stages) {
+        if (stage.tourneyPresence >= 0) {
+          this.selectionForm.controls[stage.gameName].patchValue(true);
+        }
+      }
+    }
+    else {
+      for (const stage of this.stages) {
+        this.selectionForm.controls[stage.gameName].patchValue(true);
+      }
+    }
+
+    this.updateShortcuts();
+  }
+
+  updateShortcuts() {
+    const isUnselected = (checked => {
+      return (checked === false);
+    });
+    const isSelected = (checked => {
+      return (checked === true);
+    });
+    const seriesStages: boolean[] = this.stages
+      .map<boolean>(stage => {
+        return this.selectionForm.value[stage.gameName]
+    });
+    const legalStages: boolean[] = this.stages
+      .filter(stage => { return (stage.tourneyPresence >= 0) })
+      .map<boolean>(stage => {
+        return this.selectionForm.value[stage.gameName]
+    });
+    
+    this.selectShortcuts.series.all = seriesStages.every(isSelected) ? true : false;
+
+    this.selectShortcuts.tourneyPresence.all = legalStages.every(isSelected) ? true : false;
   }
 
   _compareText(a: string, b: string): number {

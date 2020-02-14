@@ -4411,3 +4411,163 @@ export const ALL_UNCHECKED_TOURNEY: {inputStages: StageSelectInfo[], targetStage
     "armyshock_"
   ]
 };
+
+export const ALL_UNCHECK_POSITIVE_TOURNEY: StageSelectInfo[] = [
+  {
+    name: "Pathetic Basket",
+    gameName: "taxbasket_",
+    series: "Superficial Tax",
+    tourneyPresence: 0
+  },
+  {
+    name: "Volatile Ocean",
+    gameName: "mintocean_",
+    series: "Unarmed Mint",
+    tourneyPresence: -1
+  },
+  {
+    name: "Illegal Spade",
+    gameName: "feelingspade_",
+    series: "Obsolete Feeling",
+    tourneyPresence: 1
+  },
+  {
+    name: "Conscious Payment",
+    gameName: "songspayment_",
+    series: "Sour Songs",
+    tourneyPresence: -1
+  },
+  {
+    name: "Closed Ray",
+    gameName: "animalclosed_",
+    series: "Lackadaisical Animal",
+    tourneyPresence: 1
+  },
+  {
+    name: "Unnatural Swing",
+    gameName: "holidayswing_",
+    series: "Testy Holiday",
+    tourneyPresence: 0
+  },
+  {
+    name: "Materialistic Power",
+    gameName: "governorpower_",
+    series: "Obedient Governor",
+    tourneyPresence: 2
+  },
+  {
+    name: "Dashing Size",
+    gameName: "exchangesize_",
+    series: "Imaginary Exchange",
+    tourneyPresence: -1
+  }
+];
+
+export const ALL_UNCHECK_POSITIVE_SERIES: StageSelectInfo[] = [
+  {
+    name: "Honorable Recess",
+    gameName: "doctorrecess_",
+    series: "Bawdy Doctor",
+    tourneyPresence: -1
+  },
+  {
+    name: "Ambitious Airplane",
+    gameName: "biteairplane_",
+    series: "Daffy Bite",
+    tourneyPresence: 1
+  },
+  {
+    name: "Upset Crown",
+    gameName: "businesscrown_",
+    series: "Picayune Business",
+    tourneyPresence: 0
+  },
+  {
+    name: "Three Hobbies",
+    gameName: "achieverhobbies_",
+    series: "Uptight Achiever",
+    tourneyPresence: 2
+  },
+  {
+    name: "Small Cause",
+    gameName: "capcause_",
+    series: "Zany Cap",
+    tourneyPresence: 1
+  },
+  {
+    name: "Highfalutin Jeans",
+    gameName: "anglejeans_",
+    series: "Lopsided Angle",
+    tourneyPresence: 0
+  },
+  {
+    name: "Lean Ghost",
+    gameName: "sweaterghost_",
+    series: "Ugliest Sweater",
+    tourneyPresence: -1
+  },
+  {
+    name: "Nondescript Market",
+    gameName: "lunchroommarket_",
+    series: "Yielding Lunchroom",
+    tourneyPresence: 2
+  }
+];
+
+export const ALL_UNCHECK_NEGATIVE_TOURNEY: {inputStages: StageSelectInfo[], targetStages: string[]} = {
+  inputStages: [
+    {
+      name: "Uttermost Slope",
+      gameName: "guitarslope_",
+      series: "Fascinated Guitar",
+      tourneyPresence: 2
+    },
+    {
+      name: "Acrid Aftermath",
+      gameName: "smokeaftermath_",
+      series: "Breezy Smoke",
+      tourneyPresence: -1
+    },
+    {
+      name: "Astonishing Interest",
+      gameName: "marbleinterest_",
+      series: "Interesting Marble",
+      tourneyPresence: -1
+    },
+    {
+      name: "Jazzy Circle",
+      gameName: "capcircle_",
+      series: "Ashamed Cap",
+      tourneyPresence: 2
+    },
+    {
+      name: "Curved Roll",
+      gameName: "observationroll_",
+      series: "Jaded Observation",
+      tourneyPresence: 2
+    },
+    {
+      name: "Poised Earthquake",
+      gameName: "deerearthquake_",
+      series: "Joyous Deer",
+      tourneyPresence: 0
+    },
+    {
+      name: "Great Haircut",
+      gameName: "accounthaircut_",
+      series: "Entertaining Account",
+      tourneyPresence: 2
+    },
+    {
+      name: "Wise Dime",
+      gameName: "pendime_",
+      series: "Splendid Pen",
+      tourneyPresence: -1
+    }
+  ],
+  targetStages: [
+    "smokeaftermath_",
+    "marbleinterest_",
+    "pendime_"
+  ]
+};

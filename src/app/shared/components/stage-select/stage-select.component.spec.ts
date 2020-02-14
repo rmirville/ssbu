@@ -71,7 +71,7 @@ describe('StageSelectComponent', () => {
 
   it('should show a list of checkbox inputs', () => {
     /**/
-    // console.log('=== SPEC - Show checkboxes ===');
+    // console.log('=== SPEC - Show checkboxes');
     const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.ONE;
 
     selectHostComp.stages = [...expectedStages];
@@ -84,7 +84,7 @@ describe('StageSelectComponent', () => {
 
   it('should show a list of checkbox labels', () => {
     /**/
-    // console.log('=== SPEC - Show labels ===');
+    // console.groupCollapsed('=== SPEC - Show labels');
     const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.ONE;
 
     selectHostComp.stages = [...expectedStages];
@@ -93,11 +93,13 @@ describe('StageSelectComponent', () => {
     const checkLabelDElems: DebugElement[] = selectDElem.queryAll(By.css('form .form-check .form-check-label'));
 
     expect(checkLabelDElems.length).toBeGreaterThan(0);
+    /**/
+    // console.groupEnd();
   });
 
   it(`should show a list of checkbox inputs with names that match the provided stages' gameNames`, () => {
     /**/
-    // console.log('=== SPEC - Match checkbox name ===');
+    // console.groupCollapsed('=== SPEC - Match checkbox name');
     const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.ONE;
 
     selectHostComp.stages = [...expectedStages];
@@ -109,11 +111,13 @@ describe('StageSelectComponent', () => {
     for (const expectedStage of expectedStages) {
       expect(actualGameNames).toContain(expectedStage.gameName, `no input with name '${expectedStage.gameName}'`);
     }
+    /**/
+    // console.groupEnd();
   });
 
   it(`should show a list of checkbox labels with texts that match the provided stages' names`, () => {
     /**/
-    // console.log('=== SPEC - Match label text ===');
+    // console.groupCollapsed('=== SPEC - Match label text');
     const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.ONE;
 
     selectHostComp.stages = [...expectedStages];
@@ -125,13 +129,15 @@ describe('StageSelectComponent', () => {
     for (const expectedStage of expectedStages) {
       expect(actualLabels).toContain(expectedStage.name, `no label with text '${expectedStage.name}'`);
     }
+    /**/
+    // console.groupEnd();
   });
 
   describe('tournament legality section', () => {
 
     it(`should show a list of checkbox inputs with id's of the section id and the provided stages' gameNames`, () => {
       /**/
-      // console.log('=== SPEC - Tourney - Match checkbox id ===');
+      // console.groupCollapsed('=== SPEC - Tourney - Match checkbox id');
       const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_STAGE_ID;
       const expectedPrefix: string = 'tourneyPresence_'
 
@@ -144,11 +150,13 @@ describe('StageSelectComponent', () => {
       for (const expectedStage of expectedStages) {
         expect(actualIDs).toContain(expectedPrefix + expectedStage.gameName, `no input with name '${expectedPrefix}${expectedStage.gameName}'`);
       }
+      /**/
+      // console.groupEnd();
     });
 
     it(`should show a list of checkbox labels with for attributes of the section id and the provided stages' gameNames`, () => {
       /**/
-      // console.log('=== SPEC - Tourney - Match label attributes ===');
+      // console.groupCollapsed('=== SPEC - Tourney - Match label attributes');
       const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_STAGE_LABEL_FOR;
       const expectedPrefix: string = 'tourneyPresence_';
 
@@ -161,34 +169,40 @@ describe('StageSelectComponent', () => {
       for (const expectedStage of expectedStages) {
         expect(actualLabelFors).toContain(expectedPrefix + expectedStage.gameName, `no label for attribute with value '${expectedPrefix}${expectedStage.gameName}`);
       }
+      /**/
+      // console.groupEnd();
     });
 
     describe('commonly legal stages', () => {
 
       it('should show a common legal stages category if there are commonly legal stages', () => {
         /**/
-        // console.log('=== SPEC - Show common legal category ===');
+        // console.groupCollapsed('=== SPEC - Show common legal category');
         const stages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_COMMON_PRESENT;
         selectHostComp.stages = [...stages];
         selectHostFixture.detectChanges();
 
         expect(selectDElem.queryAll(By.css('form .tourney-legal-common')).length).toEqual(1);
+        /**/
+        // console.groupEnd();
       });
 
       it('should not show a common legal stages category if there are no commonly legal stages', () => {
         /**/
-        // console.log('=== SPEC - Hide common legal category ===');
+        // console.groupCollapsed('=== SPEC - Hide common legal category');
         const stages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_COMMON_ABSENT;
         selectHostComp.stages = [...stages];
         selectHostFixture.detectChanges();
         
         const actualStagesDElems: DebugElement[] = selectDElem.queryAll(By.css('form .tourney-legal-common'));
         expect(actualStagesDElems.length).toEqual(0);
+        /**/
+        // console.groupEnd();
       });
 
       it('should show all common legal stages in the common legal stages category', () => {
         /**/
-        // console.log('=== SPEC - Show all common legal stages in common legal category ===');
+        // console.groupCollapsed('=== SPEC - Show all common legal stages in common legal category');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_COMMON_INCLUDE.allStages;
         const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_COMMON_INCLUDE.includedStages;
         selectHostComp.stages = [...inputStages];
@@ -202,11 +216,13 @@ describe('StageSelectComponent', () => {
           });
           expect(index).toBeGreaterThan(-1, `Could not find ${expectedStage.gameName}`);
         }
+        /**/
+        // console.groupEnd();
       });
 
       it('should not show other stages in the common legal stages category', () => {
         /**/
-        // console.log('=== SPEC - Hide other stages from common legal category');
+        // console.groupCollapsed('=== SPEC - Hide other stages from common legal category');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_COMMON_EXCLUDE.allStages;
         const excludedStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_COMMON_EXCLUDE.excludedStages;
 
@@ -221,6 +237,8 @@ describe('StageSelectComponent', () => {
           });
           expect(index).toEqual(-1, `${excludedStage.gameName} should not be in common legal stages`);
         }
+        /**/
+        // console.groupEnd();
       });
 
     });
@@ -229,28 +247,32 @@ describe('StageSelectComponent', () => {
 
       it('should show an uncommonly legal stages category if there are uncommonly legal stages', () => {
         /**/
-        // console.log('=== SPEC - Show uncommon legal category ===');
+        // console.groupCollapsed('=== SPEC - Show uncommon legal category');
         const stages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_PRESENT;
         selectHostComp.stages = [...stages];
         selectHostFixture.detectChanges();
 
         expect(selectDElem.queryAll(By.css('form .tourney-legal-uncommon')).length).toEqual(1);
+        /**/
+        // console.groupEnd();
       });
       
       it('should not show an uncommon legal stages category if there are no uncommonly legal stages', () => {
         /**/
-        // console.log('=== SPEC - Hide uncommon legal category ===');
+        // console.groupCollapsed('=== SPEC - Hide uncommon legal category');
         const stages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_ABSENT;
         selectHostComp.stages = [...stages];
         selectHostFixture.detectChanges();
 
         const actualStagesDElems: DebugElement[] = selectDElem.queryAll(By.css('form .tourney-legal-uncommon'));
         expect(actualStagesDElems.length).toEqual(0);
+        /**/
+        // console.groupEnd();
       });
 
       it('should show all uncommon legal stages in the uncommon legal stages category', () => {
         /**/
-        // console.log('=== SPEC - Show all uncommon legal stages in uncommon legal category ===');
+        // console.groupCollapsed('=== SPEC - Show all uncommon legal stages in uncommon legal category');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_INCLUDE.allStages;
         const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_INCLUDE.includedStages;
         selectHostComp.stages = [...inputStages];
@@ -264,11 +286,13 @@ describe('StageSelectComponent', () => {
           });
           expect(index).toBeGreaterThan(-1, `Could not find ${expectedStage.gameName}`);
         }
+        /**/
+        // console.groupEnd();
       });
 
       it('should not show other stages in the uncommon legal stages category', () => {
         /**/
-        // console.log('=== SPEC - Hide other stages from uncommon legal category');
+        // console.groupCollapsed('=== SPEC - Hide other stages from uncommon legal category');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_EXCLUDE.allStages;
         const excludedStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_EXCLUDE.excludedStages;
 
@@ -283,6 +307,8 @@ describe('StageSelectComponent', () => {
           });
           expect(index).toEqual(-1, `${excludedStage.gameName} should not be in uncommon legal stages`);
         }
+        /**/
+        // console.groupEnd();
       });
 
     });
@@ -291,28 +317,32 @@ describe('StageSelectComponent', () => {
 
       it('should show a rarely legal stages category if there are rarely legal stages', () => {
         /**/
-        // console.log('=== SPEC - Show rare legal category ===');
+        // console.groupCollapsed('=== SPEC - Show rare legal category');
         const stages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_RARE_PRESENT;
         selectHostComp.stages = [...stages];
         selectHostFixture.detectChanges();
 
         expect(selectDElem.queryAll(By.css('form .tourney-legal-rare')).length).toEqual(1);
+        /**/
+        // console.groupEnd();
       });
 
       it('should not show a rare legal stages category if there are no rarely legal stages', () => {
         /**/
-        // console.log('=== SPEC - Hide rare legal category ===');
+        // console.groupCollapsed('=== SPEC - Hide rare legal category');
         const stages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_RARE_ABSENT;
         selectHostComp.stages = [...stages];
         selectHostFixture.detectChanges();
 
         const actualStagesDElems: DebugElement[] = selectDElem.queryAll(By.css('form .tourney-legal-rare'));
         expect(actualStagesDElems.length).toEqual(0);
+        /**/
+        // console.groupEnd();
       });
 
       it('should show all rarely legal stages in the rarely legal stages category', () => {
         /**/
-        // console.log('=== SPEC - Show all rare legal stages in rare legal category ===');
+        // console.groupCollapsed('=== SPEC - Show all rare legal stages in rare legal category');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_RARE_INCLUDE.allStages;
         const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_RARE_INCLUDE.includedStages;
         selectHostComp.stages = [...inputStages];
@@ -326,11 +356,13 @@ describe('StageSelectComponent', () => {
           });
           expect(index).toBeGreaterThan(-1, `Could not find ${expectedStage.gameName}`);
         }
+        /**/
+        // console.groupEnd();
       });
 
       it('should not show other stages in the rarely legal stages category', () => {
         /**/
-        // console.log('=== SPEC - Hide other stages from rare legal category');
+        // console.groupCollapsed('=== SPEC - Hide other stages from rare legal category');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_RARE_EXCLUDE.allStages;
         const excludedStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_RARE_EXCLUDE.excludedStages;
 
@@ -345,13 +377,14 @@ describe('StageSelectComponent', () => {
           });
           expect(index).toEqual(-1, `${excludedStage.gameName} should not be in rare legal stages`);
         }
-
+        /**/
+        // console.groupEnd();
       });
     });
 
     it('should put a mix of tourney-legal stages in the appropriate tourney categories', () => {
-        /**/
-        // console.log('=== SPEC - Group stages by tourney category');
+      /**/
+      // console.groupCollapsed('=== SPEC - Group stages by tourney category');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY.input;
       const expectedStages = {
         legalCommon: STAGE_SELECTIONS.TOURNEY.output.legalCommon,
@@ -376,9 +409,13 @@ describe('StageSelectComponent', () => {
           expect(index).toBeGreaterThan(-1, `Could not find ${expectedStage.gameName} in ${legalType} section`);
         });
       }
+      /**/
+      // console.groupEnd();
     });
 
     it('should sort stages within each section alphabetically', () => {
+      /**/
+      // console.groupCollapsed('=== SPEC - sort stages alphabetically');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_STAGE_SORT.inputStages;
       const expectedStages: { [property: string]: StageSelectInfo[] } = STAGE_SELECTIONS.TOURNEY_STAGE_SORT.sortedStages;
       const expectedStageNames: { [property: string]: string[] } = {
@@ -417,6 +454,8 @@ describe('StageSelectComponent', () => {
       for (let i: number = 0; i < expectedStageNames.legalRare.length; i++) {
         expect(actualStageNames.legalRare[i]).withContext(`legalRare[${i}]`).toEqual(expectedStageNames.legalRare[i]);
       }
+      /**/
+      // console.groupEnd();
 
     });
 
@@ -424,145 +463,171 @@ describe('StageSelectComponent', () => {
 
       it('should not appear if there are only banned stages present', () => {
         /**/
-        // console.log('=== SPEC - Hide tourney section when there are no legal stages');
+        // console.groupCollapsed('=== SPEC - Hide tourney section when there are no legal stages');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_HIDE_LEGAL_BANNED;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
         const sectionDElem: DebugElement = selectDElem.query(By.css('form .by-tourney'));
         expect(sectionDElem).toBeNull();
+        /**/
+        // console.groupEnd();
       });
 
       it('should appear if there are commonly legal stages present', () => {
         /**/
-        // console.log('=== SPEC - Show tourney section with common legal stages');
+        // console.groupCollapsed('=== SPEC - Show tourney section with common legal stages');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
         const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
+        /**/
+        // console.groupEnd();
       });
 
       it('should appear if there are commonly legal and banned stages present', () => {
         /**/
-        // console.log('=== SPEC - Show tourney section with commonly legal and banned stages');
+        // console.groupCollapsed('=== SPEC - Show tourney section with commonly legal and banned stages');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON_BANNED;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
         const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
+        /**/
+        // console.groupEnd();
       });
 
       it('should appear if there are uncommonly legal stages present', () => {
         /**/
-        // console.log('=== SPEC - Show tourney section with uncommonly legal stages');
+        // console.groupCollapsed('=== SPEC - Show tourney section with uncommonly legal stages');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_UNCOMMON;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
         const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
+        /**/
+        // console.groupEnd();
       });
 
       it('should appear if there are uncommonly legal and banned stages present', () => {
         /**/
-        // console.log('=== SPEC - Show tourney section with uncommonly legal and banned stages');
+        // console.groupCollapsed('=== SPEC - Show tourney section with uncommonly legal and banned stages');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_UNCOMMON_BANNED;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
         const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
+        /**/
+        // console.groupEnd();
       });
 
       it('should appear if there are rarely legal stages present', () => {
         /**/
-        // console.log('=== SPEC - Show tourney section with rarely legal stages');
+        // console.groupCollapsed('=== SPEC - Show tourney section with rarely legal stages');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_RARE;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
         const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
+        /**/
+        // console.groupEnd();
       });
 
       it('should appear if there are rarely legal and banned stages present', () => {
         /**/
-        // console.log('=== SPEC - Show tourney section with rarely legal and banned stages');
+        // console.groupCollapsed('=== SPEC - Show tourney section with rarely legal and banned stages');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_RARE_BANNED;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
         const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
+        /**/
+        // console.groupEnd();
       });
 
       it('should appear if there are commonly and uncommonly legal stages present', () => {
         /**/
-        // console.log('=== SPEC - Show tourney section with commonly and uncommonly legal stages');
+        // console.groupCollapsed('=== SPEC - Show tourney section with commonly and uncommonly legal stages');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON_UNCOMMON;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
         const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
+        /**/
+        // console.groupEnd();
       });
 
       it('should appear if there are commonly legal, uncommonly legal, and banned stages present', () => {
         /**/
-        // console.log('=== SPEC - Show tourney section with commonly legal, uncommonly legal, and banned stages');
+        // console.groupCollapsed('=== SPEC - Show tourney section with commonly legal, uncommonly legal, and banned stages');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON_UNCOMMON_BANNED;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
         const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
+        /**/
+        // console.groupEnd();
       });
 
       it('should appear if there are commonly and rarely legal stages present', () => {
         /**/
-        // console.log('=== SPEC - Show tourney section with commonly and rarely legal stages');
+        // console.groupCollapsed('=== SPEC - Show tourney section with commonly and rarely legal stages');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON_RARE;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
         const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
+        /**/
+        // console.groupEnd();
       });
 
       it('should appear if there are commonly legal, rarely legal, and banned stages present', () => {
         /**/
-        // console.log('=== SPEC - Show tourney section with commonly legal, rarely legal, and banned stages');
+        // console.groupCollapsed('=== SPEC - Show tourney section with commonly legal, rarely legal, and banned stages');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON_RARE_BANNED;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
         const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
+        /**/
+        // console.groupEnd();
       });
 
       it('should appear if there are uncommonly and rarely legal stages present', () => {
         /**/
-        // console.log('=== SPEC - Show tourney section with uncommonly and rarely legal stages');
+        // console.groupCollapsed('=== SPEC - Show tourney section with uncommonly and rarely legal stages');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_UNCOMMON_RARE;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
         const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
+        /**/
+        // console.groupEnd();
       });
 
       it('should appear if there are uncommonly legal, rarely legal, and banned stages present', () => {
         /**/
-        // console.log('=== SPEC - Show tourney section with uncommonly legal, rarely legal, and banned stages');
+        // console.groupCollapsed('=== SPEC - Show tourney section with uncommonly legal, rarely legal, and banned stages');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_UNCOMMON_RARE_BANNED;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
         const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
+        /**/
+        // console.groupEnd();
       });
 
     });
@@ -570,12 +635,10 @@ describe('StageSelectComponent', () => {
   });
 
   describe('series section', () => {
-    /**/
-    // console.log('=== SPEC - SUITE - SERIES SECTION ===');
 
     it(`should show a list of checkbox inputs with id's of the section id and the provided stages' gameNames`, () => {
       /**/
-      // console.log('=== SPEC - Series - Match checkbox id ===');
+      // console.log('=== SPEC - Series - Match checkbox id');
       const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_STAGE_ID;
       const expectedPrefix: string = 'series_'
 
@@ -592,7 +655,7 @@ describe('StageSelectComponent', () => {
 
     it(`should show a list of checkbox labels with for attributes of the section id and the provided stages' gameNames`, () => {
       /**/
-      // console.log('=== SPEC - Series - Match label attributes ===');
+      // console.log('=== SPEC - Series - Match label attributes');
       const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_STAGE_LABEL_FOR;
       const expectedPrefix: string = 'series_';
 
@@ -609,7 +672,7 @@ describe('StageSelectComponent', () => {
 
     it('should appear if there are stages', () => {
       /**/
-      // console.log('=== SPEC - Show series section ===');
+      // console.log('=== SPEC - Show series section');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_SHOW;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
@@ -620,7 +683,7 @@ describe('StageSelectComponent', () => {
 
     it('should not appear if there are no stages', () => {
       /**/
-      // console.log('=== SPEC - Hide series section ===');
+      // console.log('=== SPEC - Hide series section');
       selectHostComp.stages = [];
       selectHostFixture.detectChanges();
 
@@ -646,11 +709,11 @@ describe('StageSelectComponent', () => {
 
     describe('series subsection', () => {
       /**/
-      // console.log('=== SPEC - SUITE - SERIES - SUBSECTION ===');
+      // console.log('=== SPEC - SUITE - SERIES - SUBSECTION');
 
       it('should show up if there are stages from its series', () => {
         /**/
-        // console.log('=== SPEC - Show series subsection ===');
+        // console.log('=== SPEC - Show series subsection');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_INDIVIDUAL_SHOW.selections;
         const targetSeries: string = STAGE_SELECTIONS.SERIES_INDIVIDUAL_SHOW.series;
         
@@ -666,7 +729,7 @@ describe('StageSelectComponent', () => {
 
       it('should not show up if there are no stages from its series', () => {
         /**/
-        // console.log('=== SPEC - Hide series subsection ===');
+        // console.log('=== SPEC - Hide series subsection');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_INDIVIDUAL_HIDE.selections;
         const targetSeries: string = STAGE_SELECTIONS.SERIES_INDIVIDUAL_HIDE.series;
 
@@ -682,7 +745,7 @@ describe('StageSelectComponent', () => {
 
       it('should show all stages from its series', () => {
         /**/
-        // console.log('=== SPEC - Show series\' stages ===');
+        // console.log('=== SPEC - Show series\' stages');
         const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_INDIVIDUAL_INCLUDE.allStages;
         const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_INDIVIDUAL_INCLUDE.includedStages;
         const targetSeries: string = STAGE_SELECTIONS.SERIES_INDIVIDUAL_INCLUDE.series;
@@ -855,14 +918,14 @@ describe('StageSelectComponent', () => {
   describe('cross-category interaction', () => {
     it(`should check a stage in the series section if it's checked in the tourney section`, () => {
       /**/
-      // console.group('=== SPEC - check series stage from tourney stage selection ===');
+      // console.group('=== SPEC - check series stage from tourney stage selection');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_TOURNEY_SERIES.stages;
       const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_TOURNEY_SERIES.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
@@ -880,14 +943,14 @@ describe('StageSelectComponent', () => {
 
     it(`should check a stage in the tourney section if it's checked in the series section`, () => {
       /**/
-      // console.log('=== SPEC - check tourney stage from series stage selection ===');
+      // console.log('=== SPEC - check tourney stage from series stage selection');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_SERIES_TOURNEY.stages;
       const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_SERIES_TOURNEY.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
@@ -903,14 +966,14 @@ describe('StageSelectComponent', () => {
 
     it(`should uncheck a checked stage in the series section if it's unchecked in the tourney section`, () => {
       /**/
-      // console.log('=== SPEC - uncheck series stage from tourney stage selection ===');
+      // console.log('=== SPEC - uncheck series stage from tourney stage selection');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_TOURNEY_SERIES.stages;
       const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_TOURNEY_SERIES.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
@@ -929,14 +992,14 @@ describe('StageSelectComponent', () => {
 
     it(`should uncheck a checked stage in the tourney section if it's unchecked in the series section`, () => {
       /**/
-      // console.log('=== SPEC - uncheck tourney stage from series stage selection ===');
+      // console.log('=== SPEC - uncheck tourney stage from series stage selection');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_SERIES_TOURNEY.stages;
       const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_SERIES_TOURNEY.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
@@ -955,14 +1018,14 @@ describe('StageSelectComponent', () => {
 
     it(`should not check any stage other than the one matching the clicked series stage`, () => {
       /**/
-      // console.log('=== SPEC - don't check any stage other than the clicked series stage ===');
+      // console.log('=== SPEC - don't check any stage other than the clicked series stage');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_SERIES_TOURNEY_ISOLATE.stages;
       const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_SERIES_TOURNEY_ISOLATE.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
@@ -982,14 +1045,14 @@ describe('StageSelectComponent', () => {
 
     it(`should not check any stage other than the one matching the clicked tourney stage`, () => {
       /**/
-      // console.log('=== SPEC - don't check any stage other than the clicked tourney stage ===');
+      // console.log('=== SPEC - don't check any stage other than the clicked tourney stage');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_TOURNEY_SERIES_ISOLATE.stages;
       const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_TOURNEY_SERIES_ISOLATE.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
@@ -1009,14 +1072,14 @@ describe('StageSelectComponent', () => {
 
     it(`should not uncheck any stages other than the one matching the clicked tourney stage`, () => {
       /**/
-      // console.log('=== SPEC - don't uncheck any stage other than the clicked tourney stage ===');
+      // console.log('=== SPEC - don't uncheck any stage other than the clicked tourney stage');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_TOURNEY_SERIES_ISOLATE.stages;
       const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_TOURNEY_SERIES_ISOLATE.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
@@ -1041,14 +1104,14 @@ describe('StageSelectComponent', () => {
 
     it(`should not uncheck any stages other than the one matching the clicked series stage`, () => {
       /**/
-      // console.log('=== SPEC - don't uncheck any stage other than the clicked series stage ===');
+      // console.log('=== SPEC - don't uncheck any stage other than the clicked series stage');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_SERIES_TOURNEY_ISOLATE.stages;
       const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_SERIES_TOURNEY_ISOLATE.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
@@ -1073,14 +1136,14 @@ describe('StageSelectComponent', () => {
     
     it(`should check multiple stages in the series section if they are checked in the tourney section`, () => {
       /**/
-      // console.log('=== SPEC - check multiple series stages from tourney stage selection ===');
+      // console.log('=== SPEC - check multiple series stages from tourney stage selection');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_TOURNEY_SERIES.stages;
       const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_TOURNEY_SERIES.targetIDs;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
@@ -1102,14 +1165,14 @@ describe('StageSelectComponent', () => {
     
     it(`should check multiple stages in the tourney section if they are checked in the series section`, () => {
       /**/
-      // console.log('=== SPEC - check multiple tourney stages from series stage selection ===');
+      // console.log('=== SPEC - check multiple tourney stages from series stage selection');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_SERIES_TOURNEY.stages;
       const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_SERIES_TOURNEY.targetIDs;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
@@ -1131,14 +1194,14 @@ describe('StageSelectComponent', () => {
     
     it(`should uncheck multiple stages in the series section if they are unchecked in the tourney section`, () => {
       /**/
-      // console.log('=== SPEC - uncheck multiple series stages from tourney stage selection ===');
+      // console.log('=== SPEC - uncheck multiple series stages from tourney stage selection');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_TOURNEY_SERIES.stages;
       const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_TOURNEY_SERIES.targetIDs;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
       
@@ -1164,14 +1227,14 @@ describe('StageSelectComponent', () => {
 
     it(`should uncheck multiple stages in the tourney section if they are unchecked in the series section`, () => {
       /**/
-      // console.log('=== SPEC - uncheck multiple tourney stages from series stage selection ===');
+      // console.log('=== SPEC - uncheck multiple tourney stages from series stage selection');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_SERIES_TOURNEY.stages;
       const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_SERIES_TOURNEY.targetIDs;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
@@ -1196,14 +1259,14 @@ describe('StageSelectComponent', () => {
     });
     
     it(`should not check any stages other than matches for the checked tourney stages`, () => {
-      // console.log('=== SPEC - don't check any stage other than the clicked tourney stages ===');
+      // console.log('=== SPEC - don't check any stage other than the clicked tourney stages');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_TOURNEY_SERIES_ISOLATE.stages;
       const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_TOURNEY_SERIES_ISOLATE.targetIDs;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
@@ -1225,14 +1288,14 @@ describe('StageSelectComponent', () => {
     });
 
     it(`should not check any stages other than matches for the checked series stages`, () => {
-      // console.log('=== SPEC - don't check any stage other than the clicked series stages ===');
+      // console.log('=== SPEC - don't check any stage other than the clicked series stages');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_SERIES_TOURNEY_ISOLATE.stages;
       const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_SERIES_TOURNEY_ISOLATE.targetIDs;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
@@ -1254,14 +1317,14 @@ describe('StageSelectComponent', () => {
     });
 
     it(`should not uncheck any stages other than matches for the checked tourney stages`, () => {
-      // console.log('=== SPEC - don't check any stage other than the clicked tourney stages ===');
+      // console.log('=== SPEC - don't check any stage other than the clicked tourney stages');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_TOURNEY_SERIES_ISOLATE.stages;
       const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_TOURNEY_SERIES_ISOLATE.targetIDs;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
@@ -1290,14 +1353,14 @@ describe('StageSelectComponent', () => {
     });
 
     it(`should not uncheck any stages other than matches for the checked series stages`, () => {
-      // console.log('=== SPEC - don't check any stage other than the clicked series stages ===');
+      // console.log('=== SPEC - don't check any stage other than the clicked series stages');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_SERIES_TOURNEY_ISOLATE.stages;
       const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_SERIES_TOURNEY_ISOLATE.targetIDs;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
@@ -1328,7 +1391,7 @@ describe('StageSelectComponent', () => {
   describe('update button', () => {
     it('should exist', () => {
       /**/
-      // console.group(`=== SPEC - update button exists ===`);
+      // console.groupCollapsed(`=== SPEC - update button exists`);
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_EXISTS;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
@@ -1341,13 +1404,13 @@ describe('StageSelectComponent', () => {
 
     it('should be disabled when no stages are selected', () => {
       /**/
-      // console.group('=== SPEC - disable button when no stages are selected ===');
+      // console.group('=== SPEC - disable button when no stages are selected');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_DISABLED;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
       selectHostFixture.detectChanges();
@@ -1362,14 +1425,14 @@ describe('StageSelectComponent', () => {
 
     it('should be enabled when there are stages selected', () => {
       /**/
-      // console.group("=== SPEC - enable button when stages are selected ===");
+      // console.group("=== SPEC - enable button when stages are selected");
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_ENABLED.inputStages;
       const selectedGameNames: string[] = STAGE_SELECTIONS.UPDATE_ENABLED.selectedStages;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
@@ -1388,14 +1451,14 @@ describe('StageSelectComponent', () => {
 
     it('should send the selected gameNames', () => {
       /**/
-      // console.group(`=== SPEC - send selected stages ===`);
+      // console.group(`=== SPEC - send selected stages`);
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_SELECTED.inputStages;
       const expectedSelected: string[] = STAGE_SELECTIONS.UPDATE_SELECTED.selectedStages;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
@@ -1421,15 +1484,15 @@ describe('StageSelectComponent', () => {
 
     it('should not send any unselected gameNames', () => {
       /**/
-      // console.group(`=== SPEC - don't send unselected gameNames ===`);
+      // console.group(`=== SPEC - don't send unselected gameNames`);
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_UNSELECTED.inputStages;
       const selectedGameNames: string[] = STAGE_SELECTIONS.UPDATE_UNSELECTED.selectedStages;
       const targetGameNames: string[] = STAGE_SELECTIONS.UPDATE_UNSELECTED.targetStages;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
@@ -1456,13 +1519,13 @@ describe('StageSelectComponent', () => {
 
     it('should show an error message when no stages are selected', () => {
       /**/
-      // console.group('=== SPEC - show error when no stages are selected ===');
+      // console.group('=== SPEC - show error when no stages are selected');
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_NO_STAGES;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
@@ -1481,14 +1544,14 @@ describe('StageSelectComponent', () => {
 
     it('should not show an error message if there is a stage in the series section selected', () => {
       /**/
-      // console.group("=== SPEC - don't show error when stages are selected ===");
+      // console.group("=== SPEC - don't show error when stages are selected");
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_NO_ERROR.inputStages;
       const targetGameNames: string[] = STAGE_SELECTIONS.UPDATE_NO_ERROR.targetStages;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of allCheckDElems) {
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = false;
       }
 
@@ -1509,213 +1572,321 @@ describe('StageSelectComponent', () => {
     });
   });
 
-  describe('select all / none checkboxes', () => {
-    describe('select all', () => {
+  describe('select / unselect all checkbox', () => {
 
-      it('should appear in each root section', () => {
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_EXISTS;
-        selectHostComp.stages = [...inputStages];
-        selectHostFixture.detectChanges();
+    it('should appear in each root section', () => {
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_EXISTS;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
 
-        const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('.by-tourney #tourneyPresence_all.form-check-input[name="all"]'));
-        const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('.by-series #series_all.form-check-input[name="all"]'));
-        expect(selectAllTourneyDElem).withContext('select all - tourney').toBeTruthy();
-        expect(selectAllSeriesDElem).withContext('select all - series').toBeTruthy();
-      });
-
-      it('should have the label "All"', () => {
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_LABEL;
-        selectHostComp.stages = [...inputStages];
-        selectHostFixture.detectChanges();
-
-        const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('.by-tourney .form-check-label[for="tourneyPresence_all"]'));
-        const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('.by-series .form-check-label[for="series_all"]'));
-        expect(selectAllTourneyDElem.nativeElement.textContent.trim()).toEqual("All");
-        expect(selectAllSeriesDElem.nativeElement.textContent.trim()).toEqual("All");
-      });
-
-      it('should be in the first subsection', () => {
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_FIRST_SECTION;
-        selectHostComp.stages = [...inputStages];
-        selectHostFixture.detectChanges();
-
-        const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('.by-tourney .row')).query(By.css('#tourneyPresence_all'));
-        const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('.by-series .row')).query(By.css('#series_all'));
-        expect(selectAllTourneyDElem).withContext('select all - tourney').toBeTruthy();
-        expect(selectAllSeriesDElem).withContext('select all - series').toBeTruthy();
-      });
-
-      it('should check all stages in its root section (tourney)', () => {
-        /**/
-        // console.group("=== SPEC - check all stages - tourney ===");
-        let inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_CHECK_POSITIVE_TOURNEY;
-        selectHostComp.stages = [...inputStages];
-        selectHostFixture.detectChanges();
-
-        const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-        const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('#tourneyPresence_all'));
-        const allTourneyDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-tourney .classification .form-check-input'));
-
-        for (const checkDElem of allCheckDElems) {
-          checkDElem.nativeElement.checked = false;
-        }
-        selectHostFixture.detectChanges();
-
-        selectAllTourneyDElem.nativeElement.click();
-        selectHostFixture.detectChanges();
-
-        for (const tourneyDElem of allTourneyDElems) {
-          let stageName = tourneyDElem.nativeElement.getAttribute('name');
-          expect(tourneyDElem.nativeElement.checked).withContext(stageName).toBe(true);
-        }
-        /**/
-        // console.groupEnd();
-      });
-
-      it('should check all stages in its root section (series)', () => {
-        let inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_CHECK_POSITIVE_SERIES;
-        selectHostComp.stages = [...inputStages];
-        selectHostFixture.detectChanges();
-
-        const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
-        const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('#series_all'));
-        const allSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-series .classification .form-check-input'));
-
-        for (const checkDElem of allCheckDElems) {
-          checkDElem.nativeElement.checked = false;
-        }
-        selectHostFixture.detectChanges();
-
-        selectAllSeriesDElem.nativeElement.click();
-        selectHostFixture.detectChanges();
-
-        for (const seriesDElem of allSeriesDElems) {
-          let stageName = seriesDElem.nativeElement.getAttribute('name');
-          expect(seriesDElem.nativeElement.checked).withContext(stageName).toBe(true);
-        }
-      });
-
-      it('should not check all stages in other sections (tourney > series)', () => {
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_CHECK_NEGATIVE_TOURNEY.inputStages;
-        const targetGameNames: string[] = STAGE_SELECTIONS.ALL_CHECK_NEGATIVE_TOURNEY.targetStages;
-        selectHostComp.stages = [...inputStages];
-        selectHostFixture.detectChanges();
-
-        const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
-        const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('#tourneyPresence_all'));
-
-        for (const checkDElem of allCheckDElems) {
-          checkDElem.nativeElement.checked = false;
-        }
-        selectHostFixture.detectChanges();
-
-        selectAllTourneyDElem.nativeElement.click();
-        selectHostFixture.detectChanges();
-
-        for (const targetGameName of targetGameNames) {
-          const targetCheckDElem: DebugElement = selectDElem.query(By.css(`.by-series .form-check-input[name='${targetGameName}']`));
-          expect(targetCheckDElem.nativeElement.checked).withContext(targetGameName).toBe(false);
-        }
-      });
-
-      it('should be checked when all stages in its root section are checked - series', () => {
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_CHECKED_SERIES;
-        selectHostComp.stages = [...inputStages];
-        selectHostFixture.detectChanges();
-
-        const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
-        const seriesDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-series .classification .form-check-input'));
-        const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('#series_all'));
-
-        for (const checkDElem of allCheckDElems) {
-          checkDElem.nativeElement.checked = false;
-        }
-        selectHostFixture.detectChanges();
-
-        for (const seriesDElem of seriesDElems) {
-          seriesDElem.nativeElement.click();
-        }
-        selectHostFixture.detectChanges();
-
-        expect(selectAllSeriesDElem.nativeElement.checked).toBe(true);
-      });
-
-      it('should not be checked when not all stages in its root section are checked - series', () => {
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_UNCHECKED_SERIES.inputStages;
-        const targetGameNames: string[] = STAGE_SELECTIONS.ALL_UNCHECKED_SERIES.targetStages;
-        selectHostComp.stages = [...inputStages];
-        selectHostFixture.detectChanges();
-
-        const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
-        const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('#series_all'));
-
-        for (const checkDElem of allCheckDElems) {
-          checkDElem.nativeElement.checked = false;
-        }
-        selectHostFixture.detectChanges();
-
-        for (const targetGameName of targetGameNames) {
-          const targetDElem: DebugElement = selectDElem.query(By.css(`.by-series .classification .form-check-input[name='${targetGameName}']`));
-          targetDElem.nativeElement.click();
-        }
-        selectHostFixture.detectChanges();
-
-        expect(selectAllSeriesDElem.nativeElement.checked).toBe(false);
-      });
-
-      it('should be checked when all stages in its root section are checked - tourney', () => {
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_CHECKED_TOURNEY;
-        selectHostComp.stages = [...inputStages];
-        selectHostFixture.detectChanges();
-
-        const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
-        const tourneyDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-tourney .classification .form-check-input'));
-        const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('#tourneyPresence_all'));
-
-        for (const checkDElem of allCheckDElems) {
-          checkDElem.nativeElement.checked = false;
-        }
-        selectHostFixture.detectChanges();
-
-        for (const tourneyDElem of tourneyDElems) {
-          tourneyDElem.nativeElement.click();
-        }
-        selectHostFixture.detectChanges();
-
-        expect(selectAllTourneyDElem.nativeElement.checked).toBe(true);
-      });
-
-      it('should not be checked when not all stages in its root section are checked - tourney', () => {
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_UNCHECKED_TOURNEY.inputStages;
-        const targetGameNames: string[] = STAGE_SELECTIONS.ALL_UNCHECKED_TOURNEY.targetStages;
-        selectHostComp.stages = [...inputStages];
-        selectHostFixture.detectChanges();
-
-        const allCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
-        const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('#tourneyPresence_all'));
-
-        for (const checkDElem of allCheckDElems) {
-          checkDElem.nativeElement.checked = false;
-        }
-        selectHostFixture.detectChanges();
-
-        for (const targetGameName of targetGameNames) {
-          const targetDElem: DebugElement = selectDElem.query(By.css(`.by-tourney .classification .form-check-input[name='${targetGameName}']`));
-          targetDElem.nativeElement.click();
-        }
-        selectHostFixture.detectChanges();
-
-        expect(selectAllTourneyDElem.nativeElement.checked).toBe(false);
-      });
+      const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('.by-tourney #tourneyPresence_all.form-check-input[name="all"]'));
+      const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('.by-series #series_all.form-check-input[name="all"]'));
+      expect(selectAllTourneyDElem).withContext('select all - tourney').toBeTruthy();
+      expect(selectAllSeriesDElem).withContext('select all - series').toBeTruthy();
     });
-    describe('select none', () => {
-      it('should appear in each root section');
-      it('should be in the first subsection');
-      it('should uncheck all stages in its root section');
-      it('should not uncheck all stages in other sections (tourney > series');
-      it('should be checked when no stages in its root section are checked');
-      it('should not be checked when stages in its root section are checked');
+
+    it('should have the label "Select / Unselect All"', () => {
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_LABEL;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('.by-tourney .form-check-label[for="tourneyPresence_all"]'));
+      const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('.by-series .form-check-label[for="series_all"]'));
+      expect(selectAllTourneyDElem.nativeElement.textContent.trim()).toEqual("Select / Unselect All");
+      expect(selectAllSeriesDElem.nativeElement.textContent.trim()).toEqual("Select / Unselect All");
     });
+
+    it('should be in the first subsection', () => {
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_FIRST_SECTION;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('.by-tourney .row')).query(By.css('#tourneyPresence_all'));
+      const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('.by-series .row')).query(By.css('#series_all'));
+      expect(selectAllTourneyDElem).withContext('select all - tourney').toBeTruthy();
+      expect(selectAllSeriesDElem).withContext('select all - series').toBeTruthy();
+    });
+
+    it('should check all stages in its root section (tourney)', () => {
+      /**/
+      // console.group("=== SPEC - check all stages - tourney");
+      let inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_CHECK_POSITIVE_TOURNEY;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('#tourneyPresence_all'));
+      const allTourneyDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-tourney .classification .form-check-input'));
+
+      for (const checkDElem of stageCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+      selectHostFixture.detectChanges();
+
+      selectAllTourneyDElem.nativeElement.click();
+      selectHostFixture.detectChanges();
+
+      for (const tourneyDElem of allTourneyDElems) {
+        let stageName = tourneyDElem.nativeElement.getAttribute('name');
+        expect(tourneyDElem.nativeElement.checked).withContext(stageName).toBe(true);
+      }
+      /**/
+      // console.groupEnd();
+    });
+
+    it('should check all stages in its root section (series)', () => {
+      /**/
+      // console.groupCollapsed('=== SPEC - select all - check all series stages');
+      let inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_CHECK_POSITIVE_SERIES;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
+      const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('#series_all'));
+      const allSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-series .classification .form-check-input'));
+
+      for (const checkDElem of stageCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+      selectHostFixture.detectChanges();
+
+      selectAllSeriesDElem.nativeElement.click();
+      selectHostFixture.detectChanges();
+
+      for (const seriesDElem of allSeriesDElems) {
+        let stageName = seriesDElem.nativeElement.getAttribute('name');
+        expect(seriesDElem.nativeElement.checked).withContext(stageName).toBe(true);
+      }
+      /**/
+      // console.groupEnd();
+    });
+
+    it('should not check all stages in other sections (tourney > series)', () => {
+      /**/
+      // console.groupCollapsed('=== SPEC - select all - don\'t check stages in other section');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_CHECK_NEGATIVE_TOURNEY.inputStages;
+      const targetGameNames: string[] = STAGE_SELECTIONS.ALL_CHECK_NEGATIVE_TOURNEY.targetStages;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
+      const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('#tourneyPresence_all'));
+
+      for (const checkDElem of stageCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+      selectHostFixture.detectChanges();
+
+      selectAllTourneyDElem.nativeElement.click();
+      selectHostFixture.detectChanges();
+
+      for (const targetGameName of targetGameNames) {
+        const targetCheckDElem: DebugElement = selectDElem.query(By.css(`.by-series .form-check-input[name='${targetGameName}']`));
+        expect(targetCheckDElem.nativeElement.checked).withContext(targetGameName).toBe(false);
+      }
+      /**/
+      // console.groupEnd();
+    });
+
+    it('should be checked when all stages in its root section are checked - series', () => {
+      /**/
+      // console.groupCollapsed('=== SPEC - select all - check when all series stages checked');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_CHECKED_SERIES;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
+      const seriesDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-series .classification .form-check-input'));
+      const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('#series_all'));
+
+      for (const checkDElem of stageCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+      selectHostFixture.detectChanges();
+
+      for (const seriesDElem of seriesDElems) {
+        seriesDElem.nativeElement.click();
+      }
+      selectHostFixture.detectChanges();
+
+      expect(selectAllSeriesDElem.nativeElement.checked).toBe(true);
+      /**/
+      // console.groupEnd();
+    });
+
+    it('should not be checked when not all stages in its root section are checked - series', () => {
+      /**/
+      // console.groupCollapsed('=== SPEC - select all - don\'t check when not all series stages checked');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_UNCHECKED_SERIES.inputStages;
+      const targetGameNames: string[] = STAGE_SELECTIONS.ALL_UNCHECKED_SERIES.targetStages;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
+      const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('#series_all'));
+
+      for (const checkDElem of stageCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+      selectHostFixture.detectChanges();
+
+      for (const targetGameName of targetGameNames) {
+        const targetDElem: DebugElement = selectDElem.query(By.css(`.by-series .classification .form-check-input[name='${targetGameName}']`));
+        targetDElem.nativeElement.click();
+      }
+      selectHostFixture.detectChanges();
+
+      expect(selectAllSeriesDElem.nativeElement.checked).toBe(false);
+      /**/
+      // console.groupEnd();
+    });
+
+    it('should be checked when all stages in its root section are checked - tourney', () => {
+      /**/
+      // console.groupCollapsed('=== SPEC - select all - check when all tourney stages checked');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_CHECKED_TOURNEY;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
+      const tourneyDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-tourney .classification .form-check-input'));
+      const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('#tourneyPresence_all'));
+
+      for (const checkDElem of stageCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+      selectHostFixture.detectChanges();
+
+      for (const tourneyDElem of tourneyDElems) {
+        tourneyDElem.nativeElement.click();
+      }
+      selectHostFixture.detectChanges();
+
+      expect(selectAllTourneyDElem.nativeElement.checked).toBe(true);
+      /**/
+      // console.groupEnd();
+    });
+
+    it('should not be checked when not all stages in its root section are checked - tourney', () => {
+      /**/
+      // console.groupCollapsed('=== SPEC - select all not checked');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_UNCHECKED_TOURNEY.inputStages;
+      const targetGameNames: string[] = STAGE_SELECTIONS.ALL_UNCHECKED_TOURNEY.targetStages;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
+      const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('#tourneyPresence_all'));
+
+      for (const checkDElem of stageCheckDElems) {
+        checkDElem.nativeElement.checked = false;
+      }
+      selectHostFixture.detectChanges();
+
+      for (const targetGameName of targetGameNames) {
+        const targetDElem: DebugElement = selectDElem.query(By.css(`.by-tourney .classification .form-check-input[name='${targetGameName}']`));
+        targetDElem.nativeElement.click();
+      }
+      selectHostFixture.detectChanges();
+
+      expect(selectAllTourneyDElem.nativeElement.checked).toBe(false);
+      /**/
+      // console.groupEnd();
+    });
+
+    it('should uncheck all stages in its root section when unchecked (series)', () => {
+      /**/
+      // console.groupCollapsed('=== SPEC - uncheck all series stages');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_UNCHECK_POSITIVE_SERIES;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
+      const seriesCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-series .classification .form-check-input'));
+      const selectAllDElem: DebugElement = selectDElem.query(By.css('#series_all'));
+
+      /**/
+      // console.group('SPEC - setting series toggle all to true');
+      selectAllDElem.nativeElement.click();
+      /**/
+      // console.groupEnd();
+
+      for (const checkDElem of stageCheckDElems) {
+        checkDElem.nativeElement.checked = true;
+      }
+      selectHostFixture.detectChanges();
+
+      /**/
+      // console.group('SPEC - clicking series toggle all');
+      selectAllDElem.nativeElement.click();
+      /**/
+      // console.groupEnd();
+      selectHostFixture.detectChanges();
+
+      for (const checkDElem of seriesCheckDElems) {
+        let gameName: string = checkDElem.nativeElement.getAttribute('name');
+        expect(checkDElem.nativeElement.checked).withContext(gameName).toBe(false);
+      }
+      /**/
+      // console.groupEnd();
+    });
+
+    it('should uncheck all stages in its root section when unchecked (tourney)', () => {
+      /**/
+      // console.groupCollapsed('=== SPEC - uncheck all tourney stages');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_UNCHECK_POSITIVE_TOURNEY;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
+      const tourneyCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-tourney .classification .form-check-input'));
+      const selectAllDElem: DebugElement = selectDElem.query(By.css('#tourneyPresence_all'));
+
+      selectAllDElem.nativeElement.click();
+      for (const checkDElem of stageCheckDElems) {
+        checkDElem.nativeElement.checked = true;
+      }
+      selectHostFixture.detectChanges();
+
+      selectAllDElem.nativeElement.click();
+      selectHostFixture.detectChanges();
+
+      for (const checkDElem of tourneyCheckDElems) {
+        let gameName: string = checkDElem.nativeElement.getAttribute('name');
+        expect(checkDElem.nativeElement.checked).withContext(gameName).toBe(false);
+      }
+      /**/
+      // console.groupEnd();
+    });
+
+    it('should not uncheck all stages in other sections when unchecked (tourney > series)', () => {
+      /**/
+      // console.groupCollapsed('=== SPEC - select all - don\' uncheck stages in other sections');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_UNCHECK_NEGATIVE_TOURNEY.inputStages;
+      const targetGameNames: string[] = STAGE_SELECTIONS.ALL_UNCHECK_NEGATIVE_TOURNEY.targetStages;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
+      const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('#tourneyPresence_all'));
+
+      selectAllTourneyDElem.nativeElement.click();
+      for (const checkDElem of stageCheckDElems) {
+        checkDElem.nativeElement.checked = true;
+      }
+      selectHostFixture.detectChanges();
+
+      selectAllTourneyDElem.nativeElement.click();
+      selectHostFixture.detectChanges();
+
+      for (const targetGameName of targetGameNames) {
+        const targetCheckDElem: DebugElement = selectDElem.query(By.css(`.by-series .form-check-input[name='${targetGameName}']`));
+        expect(targetCheckDElem.nativeElement.checked).withContext(targetGameName).toBe(true);
+      }
+      /**/
+      // console.groupEnd();
+    });
+
   });
   // TODO:
     // Make common legal stages selected and submitted to host component on init

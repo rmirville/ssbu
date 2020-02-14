@@ -15,18 +15,6 @@ interface StageSelectSection {
   sections?: StageSelectSection[];
 };
 
-/**
- * Represents the selected status of a collection of stages
- * 
- * @interface StageSelectShortcuts
- */
-interface StageSelectShortcuts {
-  [section: string]: {
-    all: boolean;
-    none: boolean;
-  }
-};
-
 const BLANK_SERIES: string = 'Miscellaneous';
 
 @Component({
@@ -35,22 +23,12 @@ const BLANK_SERIES: string = 'Miscellaneous';
   styleUrls: ['./stage-select.component.css']
 })
 export class StageSelectComponent implements OnInit {
-  selectionForm: FormGroup = this.fb.group({}, {validators: this._checkboxSelected()});
+  selectionForm: FormGroup = this.fb.group({});
   separator: string = '_';
 
   @Input() stages: StageSelectInfo[];
   @Output() submitSelection = new EventEmitter<string[]>();
-  
-  selectShortcuts: StageSelectShortcuts = {
-    series: {
-      all: false,
-      none: true
-    },
-    tourneyPresence: {
-      all: false,
-      none: true
-    }
-  };
+
   classifiedStages: {
     tourneyPresence: {
       legalCommon: StageSelectInfo[],
@@ -111,6 +89,11 @@ export class StageSelectComponent implements OnInit {
   ngOnInit() {
     /**/
     // console.log('StageSelectComponent::ngOnInit()');
+    this.selectionForm.addControl(   'stages', this.fb.group( {}, {validators: this._checkboxSelected()} )   );
+    this.selectionForm.addControl(   'shortcuts', this.fb.group( {
+      tourneyPresence: false,
+      series: false
+    }));
 
     let legalCommonStages: StageSelectInfo[] = [];
     let legalUncommonStages: StageSelectInfo[] = [];
@@ -118,7 +101,7 @@ export class StageSelectComponent implements OnInit {
     let seriesStages: { [seriesName: string]: StageSelectInfo[] } = {};
     
     for (let stage of this.stages) {
-      this.selectionForm.addControl( stage.gameName, this.fb.control(false) );
+      (this.selectionForm.get('stages') as FormGroup).addControl( stage.gameName, this.fb.control(false) );
 
       /**/
       // console.log(`  * checking stage: ${stage.name} (${stage.series})`);
@@ -200,10 +183,10 @@ export class StageSelectComponent implements OnInit {
     // console.group('StageSelectComponent::submitSelected()');
     // console.log(`selectionForm.value: ${JSON.stringify(this.selectionForm.value)}`);
     let stageSelection: string[] = [];
-    for (const stageName in this.selectionForm.value) {
+    for (const stageName in this.selectionForm.value.stages) {
       /**/
       // console.group(`selectionForm.value[${stageName}]:`);
-      if (this.selectionForm.value[stageName] === true) {
+      if (this.selectionForm.value.stages[stageName] === true) {
         /**/
         // console.log(`${stageName} added`);
         stageSelection.push(stageName);
@@ -216,43 +199,50 @@ export class StageSelectComponent implements OnInit {
     // console.groupEnd();
   }
 
-  selectAll(section: string) {
+  updateAll(section: string) {
+    /**/
+    // console.groupCollapsed('StageSelectComponent::updateAll()');
+    // console.log(`selectionForm.shortcuts[${section}]: ${JSON.stringify(this.selectionForm.get(['shortcuts', section]).value)}`);
+    const isSelected: boolean = (this.selectionForm.get(['shortcuts', section]).value) ? false: true;
     if (section === 'tourneyPresence') {
       for (const stage of this.stages) {
         if (stage.tourneyPresence >= 0) {
-          this.selectionForm.controls[stage.gameName].patchValue(true);
+          this.selectionForm.get(['stages', stage.gameName]).patchValue(isSelected);
         }
       }
     }
     else {
       for (const stage of this.stages) {
-        this.selectionForm.controls[stage.gameName].patchValue(true);
+        this.selectionForm.get(['stages', stage.gameName]).patchValue(isSelected);
       }
     }
 
     this.updateShortcuts();
+    /**/
+    // console.groupEnd();
   }
 
   updateShortcuts() {
-    const isUnselected = (checked => {
-      return (checked === false);
-    });
+    /**/
+    // console.groupCollapsed('StageSelectComponent::updateShortcuts()');
     const isSelected = (checked => {
       return (checked === true);
     });
     const seriesStages: boolean[] = this.stages
       .map<boolean>(stage => {
-        return this.selectionForm.value[stage.gameName]
+        return this.selectionForm.value.stages[stage.gameName];
     });
     const legalStages: boolean[] = this.stages
       .filter(stage => { return (stage.tourneyPresence >= 0) })
       .map<boolean>(stage => {
-        return this.selectionForm.value[stage.gameName]
+        return this.selectionForm.value.stages[stage.gameName];
     });
+    const checkSeriesShortcut: boolean = seriesStages.every(isSelected) ? true : false;
+    const checkTourneyPresenceShortcut: boolean = legalStages.every(isSelected) ? true : false;
     
-    this.selectShortcuts.series.all = seriesStages.every(isSelected) ? true : false;
-
-    this.selectShortcuts.tourneyPresence.all = legalStages.every(isSelected) ? true : false;
+    this.selectionForm.get('shortcuts.series').patchValue(checkSeriesShortcut);
+    this.selectionForm.get('shortcuts.tourneyPresence').patchValue(checkTourneyPresenceShortcut);
+    // console.groupEnd();
   }
 
   _compareText(a: string, b: string): number {

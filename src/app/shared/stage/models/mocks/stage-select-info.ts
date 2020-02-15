@@ -2453,6 +2453,126 @@ export const SERIES_STAGE_SORT: {
   ]
 };
 
+export const INIT_CHECKED: {inputStages: StageSelectInfo[], targetStages: string[]} = {
+  inputStages: [
+    {
+      name: "Zesty Pipe",
+      gameName: "twigpipe_",
+      series: "Aquatic Twig",
+      tourneyPresence: 0
+    },
+    {
+      name: "Berserk Seed",
+      gameName: "needleseed_",
+      series: "Disillusioned Needle",
+      tourneyPresence: -1
+    },
+    {
+      name: "Careless Cloth",
+      gameName: "middlecloth_",
+      series: "Hard Middle",
+      tourneyPresence: 1
+    },
+    {
+      name: "Cooing Finger",
+      gameName: "seafinger_",
+      series: "Malicious Sea",
+      tourneyPresence: 2
+    },
+    {
+      name: "Steep Wash",
+      gameName: "copperwash_",
+      series: "Tedious Copper",
+      tourneyPresence: 0
+    },
+    {
+      name: "Wrathful Grain",
+      gameName: "acousticsgrain_",
+      series: "Nice Acoustics",
+      tourneyPresence: -1
+    },
+    {
+      name: "Normal Bite",
+      gameName: "profitbite_",
+      series: "Defeated Profit",
+      tourneyPresence: 2
+    },
+    {
+      name: "Humorous Digestion",
+      gameName: "moneydigestion_",
+      series: "Flaky Money",
+      tourneyPresence: 0
+    }
+  ],
+
+  targetStages: [
+    "twigpipe_",
+    "copperwash_",
+    "moneydigestion_"
+  ]
+};
+
+export const INIT_UNCHECKED: { inputStages: StageSelectInfo[], targetStages: string[] } = {
+  inputStages: [
+    {
+      name: "Witty Wool",
+      gameName: "sackwool_",
+      series: "Fortunate Sack",
+      tourneyPresence: 2
+    },
+    {
+      name: "Jumpy Partner",
+      gameName: "shelfpartner_",
+      series: "Defective Shelf",
+      tourneyPresence: -1
+    },
+    {
+      name: "Painful Horn",
+      gameName: "educationhorn_",
+      series: "Organic Education",
+      tourneyPresence: 0
+    },
+    {
+      name: "Ahead Wave",
+      gameName: "dockwave_",
+      series: "Pushy Dock",
+      tourneyPresence: -1
+    },
+    {
+      name: "Quick Argument",
+      gameName: "offerargument_",
+      series: "Mundane Offer",
+      tourneyPresence: -1
+    },
+    {
+      name: "Breakable Birthday",
+      gameName: "paperbirthday_",
+      series: "Crowded Paper",
+      tourneyPresence: 0
+    },
+    {
+      name: "Sophisticated Comparison",
+      gameName: "bikecomparison_",
+      series: "Square Bike",
+      tourneyPresence: 1
+    },
+    {
+      name: "Vivacious Discovery",
+      gameName: "substancediscovery_",
+      series: "Secret Substance",
+      tourneyPresence: 0
+    }
+  ],
+
+  targetStages: [
+    "sackwool_",
+    "shelfpartner_",
+    "dockwave_",
+    "offerargument_",
+    "bikecomparison_"
+  ]
+};
+
 export const MISC_SHOW_MISC: StageSelectInfo[] = [
   {
     name: "Howdy House",

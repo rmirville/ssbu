@@ -96,8 +96,6 @@ export class StageSelectComponent implements OnInit {
     let seriesStages: { [seriesName: string]: StageSelectInfo[] } = {};
     
     for (let stage of this.stages) {
-      this.selectionForm.addControl( stage.gameName, this.fb.control(false) );
-
       /**/
       // console.log(`  * checking stage: ${stage.name} (${stage.series})`);
       if ( !(stage.series) || stage.series.trim().length === 0 ) {
@@ -113,22 +111,21 @@ export class StageSelectComponent implements OnInit {
 
       /**/
       // console.log(`  * seriesStages[${stage.series}]: ${JSON.stringify(seriesStages[stage.series])}`);
-      let hasTourneyPresence: boolean = false;
+      let isCommonlyLegal: boolean = false;
 
       switch (stage.tourneyPresence) {
         case 0:
-          hasTourneyPresence = true;
+          isCommonlyLegal = true;
           legalCommonStages.push(stage);
           break;
         case 1:
-          hasTourneyPresence = true;
           legalUncommonStages.push(stage);
           break;
         case 2:
-          hasTourneyPresence = true;
           legalRareStages.push(stage);
           break;
       }
+      this.selectionForm.addControl(stage.gameName, this.fb.control(isCommonlyLegal));
     }
 
     // create and sort series section

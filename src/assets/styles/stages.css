@@ -2,6 +2,9 @@
 ssbu-stage-select .classification,
 ssbu-stage-select .shortcuts {
   padding-top: 1rem;
+}
+
+ssbu-stage-select .classification {
   border-bottom: 1px dotted lightgrey;
 }
 

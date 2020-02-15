@@ -19,9 +19,7 @@ th {
 
 hr {
   border-top: 1px dotted hsl(0, 0%, 60%);
-
   margin-left: .1rem;
-
   margin-right: .1rem;
 }
 
@@ -306,11 +304,7 @@ h4 {
   transition: none;
 }
 
-.btn-primary:not(:disabled):not(.disabled):hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary:not(:disabled):not(.disabled).active:focus,
-.btn-primary:not(:disabled):not(.disabled):active:focus {
+.btn-primary:not(:disabled):not(.disabled):hover {
   background-color: hsl(50, 100%, 50%);
   color: hsl(196, 12%, 10%);
 }
@@ -329,6 +323,22 @@ h4 {
 .btn-primary.disabled:hover {
   background-color: hsl(196, 12%, 75%);
   color: white;
+}
+
+.btn-secondary {
+  height: 2.5rem;
+  margin-right: 1rem;
+  padding: .75rem 1rem;
+  border: none;
+  background-color: hsl(218, 12%, 40%);
+  color: white;
+  font-family: 'FOT EB', sans-serif;
+  line-height: 1;
+}
+
+.btn-secondary:not(:disabled):not(.disabled):hover {
+  background-color: hsl(50, 100%, 50%);
+  color: hsl(196, 12%, 10%);
 }
 
 /* Content - Tables */
@@ -436,10 +446,8 @@ h4 {
 }
 
 .card-header .btn-link:hover {
-  background-color: hsl(196, 12%, 17%);
   background-color: hsl(50, 100%, 50%);
   text-decoration: none;
-  color: white;
   color: hsl(196, 12%, 10%);
 }
 

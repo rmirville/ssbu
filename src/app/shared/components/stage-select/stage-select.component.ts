@@ -23,7 +23,7 @@ const BLANK_SERIES: string = 'Miscellaneous';
   styleUrls: ['./stage-select.component.css']
 })
 export class StageSelectComponent implements OnInit {
-  selectionForm: FormGroup = this.fb.group({});
+  selectionForm: FormGroup = this.fb.group({}, { validators: this._checkboxSelected() });
   separator: string = '_';
 
   @Input() stages: StageSelectInfo[];
@@ -89,11 +89,6 @@ export class StageSelectComponent implements OnInit {
   ngOnInit() {
     /**/
     // console.log('StageSelectComponent::ngOnInit()');
-    this.selectionForm.addControl(   'stages', this.fb.group( {}, {validators: this._checkboxSelected()} )   );
-    this.selectionForm.addControl(   'shortcuts', this.fb.group( {
-      tourneyPresence: false,
-      series: false
-    }));
 
     let legalCommonStages: StageSelectInfo[] = [];
     let legalUncommonStages: StageSelectInfo[] = [];
@@ -101,7 +96,7 @@ export class StageSelectComponent implements OnInit {
     let seriesStages: { [seriesName: string]: StageSelectInfo[] } = {};
     
     for (let stage of this.stages) {
-      (this.selectionForm.get('stages') as FormGroup).addControl( stage.gameName, this.fb.control(false) );
+      this.selectionForm.addControl( stage.gameName, this.fb.control(false) );
 
       /**/
       // console.log(`  * checking stage: ${stage.name} (${stage.series})`);
@@ -183,10 +178,10 @@ export class StageSelectComponent implements OnInit {
     // console.group('StageSelectComponent::submitSelected()');
     // console.log(`selectionForm.value: ${JSON.stringify(this.selectionForm.value)}`);
     let stageSelection: string[] = [];
-    for (const stageName in this.selectionForm.value.stages) {
+    for (const stageName in this.selectionForm.value) {
       /**/
       // console.group(`selectionForm.value[${stageName}]:`);
-      if (this.selectionForm.value.stages[stageName] === true) {
+      if (this.selectionForm.value[stageName] === true) {
         /**/
         // console.log(`${stageName} added`);
         stageSelection.push(stageName);
@@ -199,50 +194,18 @@ export class StageSelectComponent implements OnInit {
     // console.groupEnd();
   }
 
-  updateAll(section: string) {
+  updateAll(section: string, value: boolean) {
     /**/
     // console.groupCollapsed('StageSelectComponent::updateAll()');
-    // console.log(`selectionForm.shortcuts[${section}]: ${JSON.stringify(this.selectionForm.get(['shortcuts', section]).value)}`);
-    const isSelected: boolean = (this.selectionForm.get(['shortcuts', section]).value) ? false: true;
+    let affectedStages: StageSelectInfo[] = this.stages;
+
     if (section === 'tourneyPresence') {
-      for (const stage of this.stages) {
-        if (stage.tourneyPresence >= 0) {
-          this.selectionForm.get(['stages', stage.gameName]).patchValue(isSelected);
-        }
-      }
-    }
-    else {
-      for (const stage of this.stages) {
-        this.selectionForm.get(['stages', stage.gameName]).patchValue(isSelected);
-      }
+      affectedStages = this.stages.filter(stage => { return (stage.tourneyPresence >= 0); });
     }
 
-    this.updateShortcuts();
-    /**/
-    // console.groupEnd();
-  }
-
-  updateShortcuts() {
-    /**/
-    // console.groupCollapsed('StageSelectComponent::updateShortcuts()');
-    const isSelected = (checked => {
-      return (checked === true);
-    });
-    const seriesStages: boolean[] = this.stages
-      .map<boolean>(stage => {
-        return this.selectionForm.value.stages[stage.gameName];
-    });
-    const legalStages: boolean[] = this.stages
-      .filter(stage => { return (stage.tourneyPresence >= 0) })
-      .map<boolean>(stage => {
-        return this.selectionForm.value.stages[stage.gameName];
-    });
-    const checkSeriesShortcut: boolean = seriesStages.every(isSelected) ? true : false;
-    const checkTourneyPresenceShortcut: boolean = legalStages.every(isSelected) ? true : false;
-    
-    this.selectionForm.get('shortcuts.series').patchValue(checkSeriesShortcut);
-    this.selectionForm.get('shortcuts.tourneyPresence').patchValue(checkTourneyPresenceShortcut);
-    // console.groupEnd();
+    for (const stage of affectedStages) {
+      this.selectionForm.get(stage.gameName).patchValue(value);
+    }
   }
 
   _compareText(a: string, b: string): number {

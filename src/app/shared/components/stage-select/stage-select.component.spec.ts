@@ -1572,28 +1572,29 @@ describe('StageSelectComponent', () => {
     });
   });
 
-  describe('select / unselect all checkbox', () => {
-
+  describe('select all button', () => {
     it('should appear in each root section', () => {
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_EXISTS;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
+      /**/
+      console.log('changes detected');
 
-      const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('.by-tourney #tourneyPresence_all.form-check-input[name="all"]'));
-      const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('.by-series #series_all.form-check-input[name="all"]'));
-      expect(selectAllTourneyDElem).withContext('select all - tourney').toBeTruthy();
-      expect(selectAllSeriesDElem).withContext('select all - series').toBeTruthy();
+      const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('.by-tourney #tourneyPresence_all[type="button"][name="all"]'));
+      const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('.by-series #series_all[type="button"][name="all"]'));
+      expect(selectAllTourneyDElem).withContext('tourney').toBeTruthy();
+      expect(selectAllSeriesDElem).withContext('series').toBeTruthy();
     });
 
-    it('should have the label "Select / Unselect All"', () => {
+    it('should have the label "Select All"', () => {
       const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_LABEL;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('.by-tourney .form-check-label[for="tourneyPresence_all"]'));
-      const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('.by-series .form-check-label[for="series_all"]'));
-      expect(selectAllTourneyDElem.nativeElement.textContent.trim()).toEqual("Select / Unselect All");
-      expect(selectAllSeriesDElem.nativeElement.textContent.trim()).toEqual("Select / Unselect All");
+      const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('.by-tourney #tourneyPresence_all[type="button"][name="all"]'));
+      const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('.by-series #series_all[type="button"][name="all"]'));
+      expect(selectAllTourneyDElem.nativeElement.textContent.trim()).toEqual("Select All");
+      expect(selectAllSeriesDElem.nativeElement.textContent.trim()).toEqual("Select All");
     });
 
     it('should be in the first subsection', () => {
@@ -1603,14 +1604,14 @@ describe('StageSelectComponent', () => {
 
       const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('.by-tourney .row')).query(By.css('#tourneyPresence_all'));
       const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('.by-series .row')).query(By.css('#series_all'));
-      expect(selectAllTourneyDElem).withContext('select all - tourney').toBeTruthy();
-      expect(selectAllSeriesDElem).withContext('select all - series').toBeTruthy();
+      expect(selectAllTourneyDElem).withContext('tourney').toBeTruthy();
+      expect(selectAllSeriesDElem).withContext('series').toBeTruthy();
     });
 
     it('should check all stages in its root section (tourney)', () => {
       /**/
       // console.group("=== SPEC - check all stages - tourney");
-      let inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_CHECK_POSITIVE_TOURNEY;
+      let inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_SELECT_POSITIVE_TOURNEY;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
@@ -1637,7 +1638,7 @@ describe('StageSelectComponent', () => {
     it('should check all stages in its root section (series)', () => {
       /**/
       // console.groupCollapsed('=== SPEC - select all - check all series stages');
-      let inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_CHECK_POSITIVE_SERIES;
+      let inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_SELECT_POSITIVE_SERIES;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
@@ -1664,8 +1665,8 @@ describe('StageSelectComponent', () => {
     it('should not check all stages in other sections (tourney > series)', () => {
       /**/
       // console.groupCollapsed('=== SPEC - select all - don\'t check stages in other section');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_CHECK_NEGATIVE_TOURNEY.inputStages;
-      const targetGameNames: string[] = STAGE_SELECTIONS.ALL_CHECK_NEGATIVE_TOURNEY.targetStages;
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_SELECT_NEGATIVE_TOURNEY.inputStages;
+      const targetGameNames: string[] = STAGE_SELECTIONS.ALL_SELECT_NEGATIVE_TOURNEY.targetStages;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
@@ -1687,196 +1688,113 @@ describe('StageSelectComponent', () => {
       /**/
       // console.groupEnd();
     });
+  });
 
-    it('should be checked when all stages in its root section are checked - series', () => {
-      /**/
-      // console.groupCollapsed('=== SPEC - select all - check when all series stages checked');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_CHECKED_SERIES;
+  describe('select none button', () => {
+    it('should appear in each root section', () => {
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.NONE_EXISTS;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
-      const seriesDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-series .classification .form-check-input'));
-      const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('#series_all'));
+      const selectNoneTourneyDElem: DebugElement = selectDElem.query(By.css('.by-tourney #tourneyPresence_none[type="button"][name="none"]'));
+      const selectNoneSeriesDElem: DebugElement = selectDElem.query(By.css('.by-series #series_none[type="button"][name="none"]'));
+      expect(selectNoneTourneyDElem).withContext('tourney').toBeTruthy();
+      expect(selectNoneSeriesDElem).withContext('series').toBeTruthy();
+    });
+
+    it('should have the label "Select None"', () => {
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.NONE_LABEL;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const selectNoneTourneyDElem: DebugElement = selectDElem.query(By.css('.by-tourney #tourneyPresence_none[type="button"][name="none"]'));
+      const selectNoneSeriesDElem: DebugElement = selectDElem.query(By.css('.by-series #series_none[type="button"][name="none"]'));
+      expect(selectNoneTourneyDElem.nativeElement.textContent.trim()).toEqual("Select None");
+      expect(selectNoneSeriesDElem.nativeElement.textContent.trim()).toEqual("Select None");
+    });
+
+    it('should be in the first subsection', () => {
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.NONE_FIRST_SECTION;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const selectNoneTourneyDElem: DebugElement = selectDElem.query(By.css('.by-tourney .row')).query(By.css('#tourneyPresence_none'));
+      const selectNoneSeriesDElem: DebugElement = selectDElem.query(By.css('.by-series .row')).query(By.css('#series_none'));
+      expect(selectNoneTourneyDElem).withContext('tourney').toBeTruthy();
+      expect(selectNoneSeriesDElem).withContext('series').toBeTruthy();
+    });
+
+    it('should uncheck all stages in its root section (tourney)', () => {
+      /**/
+      // console.group("=== SPEC - uncheck all stages - tourney");
+      let inputStages: StageSelectInfo[] = STAGE_SELECTIONS.NONE_SELECT_POSITIVE_TOURNEY;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+      const selectNoneTourneyDElem: DebugElement = selectDElem.query(By.css('#tourneyPresence_none'));
+      const allTourneyDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-tourney .classification .form-check-input'));
 
       for (const checkDElem of stageCheckDElems) {
-        checkDElem.nativeElement.checked = false;
+        checkDElem.nativeElement.checked = true;
       }
       selectHostFixture.detectChanges();
 
-      for (const seriesDElem of seriesDElems) {
-        seriesDElem.nativeElement.click();
-      }
+      selectNoneTourneyDElem.nativeElement.click();
       selectHostFixture.detectChanges();
 
-      expect(selectAllSeriesDElem.nativeElement.checked).toBe(true);
+      for (const tourneyDElem of allTourneyDElems) {
+        let stageName = tourneyDElem.nativeElement.getAttribute('name');
+        expect(tourneyDElem.nativeElement.checked).withContext(stageName).toBe(false);
+      }
       /**/
       // console.groupEnd();
     });
 
-    it('should not be checked when not all stages in its root section are checked - series', () => {
-      /**/
-      // console.groupCollapsed('=== SPEC - select all - don\'t check when not all series stages checked');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_UNCHECKED_SERIES.inputStages;
-      const targetGameNames: string[] = STAGE_SELECTIONS.ALL_UNCHECKED_SERIES.targetStages;
-      selectHostComp.stages = [...inputStages];
-      selectHostFixture.detectChanges();
-
-      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
-      const selectAllSeriesDElem: DebugElement = selectDElem.query(By.css('#series_all'));
-
-      for (const checkDElem of stageCheckDElems) {
-        checkDElem.nativeElement.checked = false;
-      }
-      selectHostFixture.detectChanges();
-
-      for (const targetGameName of targetGameNames) {
-        const targetDElem: DebugElement = selectDElem.query(By.css(`.by-series .classification .form-check-input[name='${targetGameName}']`));
-        targetDElem.nativeElement.click();
-      }
-      selectHostFixture.detectChanges();
-
-      expect(selectAllSeriesDElem.nativeElement.checked).toBe(false);
-      /**/
-      // console.groupEnd();
-    });
-
-    it('should be checked when all stages in its root section are checked - tourney', () => {
-      /**/
-      // console.groupCollapsed('=== SPEC - select all - check when all tourney stages checked');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_CHECKED_TOURNEY;
-      selectHostComp.stages = [...inputStages];
-      selectHostFixture.detectChanges();
-
-      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
-      const tourneyDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-tourney .classification .form-check-input'));
-      const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('#tourneyPresence_all'));
-
-      for (const checkDElem of stageCheckDElems) {
-        checkDElem.nativeElement.checked = false;
-      }
-      selectHostFixture.detectChanges();
-
-      for (const tourneyDElem of tourneyDElems) {
-        tourneyDElem.nativeElement.click();
-      }
-      selectHostFixture.detectChanges();
-
-      expect(selectAllTourneyDElem.nativeElement.checked).toBe(true);
-      /**/
-      // console.groupEnd();
-    });
-
-    it('should not be checked when not all stages in its root section are checked - tourney', () => {
-      /**/
-      // console.groupCollapsed('=== SPEC - select all not checked');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_UNCHECKED_TOURNEY.inputStages;
-      const targetGameNames: string[] = STAGE_SELECTIONS.ALL_UNCHECKED_TOURNEY.targetStages;
-      selectHostComp.stages = [...inputStages];
-      selectHostFixture.detectChanges();
-
-      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
-      const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('#tourneyPresence_all'));
-
-      for (const checkDElem of stageCheckDElems) {
-        checkDElem.nativeElement.checked = false;
-      }
-      selectHostFixture.detectChanges();
-
-      for (const targetGameName of targetGameNames) {
-        const targetDElem: DebugElement = selectDElem.query(By.css(`.by-tourney .classification .form-check-input[name='${targetGameName}']`));
-        targetDElem.nativeElement.click();
-      }
-      selectHostFixture.detectChanges();
-
-      expect(selectAllTourneyDElem.nativeElement.checked).toBe(false);
-      /**/
-      // console.groupEnd();
-    });
-
-    it('should uncheck all stages in its root section when unchecked (series)', () => {
+    it('should uncheck all stages in its root section (series)', () => {
       /**/
       // console.groupCollapsed('=== SPEC - uncheck all series stages');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_UNCHECK_POSITIVE_SERIES;
+      let inputStages: StageSelectInfo[] = STAGE_SELECTIONS.NONE_SELECT_POSITIVE_SERIES;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
       const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
-      const seriesCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-series .classification .form-check-input'));
-      const selectAllDElem: DebugElement = selectDElem.query(By.css('#series_all'));
-
-      /**/
-      // console.group('SPEC - setting series toggle all to true');
-      selectAllDElem.nativeElement.click();
-      /**/
-      // console.groupEnd();
+      const selectNoneSeriesDElem: DebugElement = selectDElem.query(By.css('#series_none'));
+      const allSeriesDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-series .classification .form-check-input'));
 
       for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = true;
       }
       selectHostFixture.detectChanges();
 
-      /**/
-      // console.group('SPEC - clicking series toggle all');
-      selectAllDElem.nativeElement.click();
-      /**/
-      // console.groupEnd();
+      selectNoneSeriesDElem.nativeElement.click();
       selectHostFixture.detectChanges();
 
-      for (const checkDElem of seriesCheckDElems) {
-        let gameName: string = checkDElem.nativeElement.getAttribute('name');
-        expect(checkDElem.nativeElement.checked).withContext(gameName).toBe(false);
+      for (const seriesDElem of allSeriesDElems) {
+        let stageName = seriesDElem.nativeElement.getAttribute('name');
+        expect(seriesDElem.nativeElement.checked).withContext(stageName).toBe(false);
       }
       /**/
       // console.groupEnd();
     });
 
-    it('should uncheck all stages in its root section when unchecked (tourney)', () => {
+    it('should not uncheck all stages in other sections (tourney > series)', () => {
       /**/
-      // console.groupCollapsed('=== SPEC - uncheck all tourney stages');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_UNCHECK_POSITIVE_TOURNEY;
+      // console.groupCollapsed('=== SPEC - don\'t uncheck stages in other section');
+      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.NONE_SELECT_NEGATIVE_TOURNEY.inputStages;
+      const targetGameNames: string[] = STAGE_SELECTIONS.NONE_SELECT_NEGATIVE_TOURNEY.targetStages;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
       const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
-      const tourneyCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-tourney .classification .form-check-input'));
-      const selectAllDElem: DebugElement = selectDElem.query(By.css('#tourneyPresence_all'));
+      const selectNoneTourneyDElem: DebugElement = selectDElem.query(By.css('#tourneyPresence_none'));
 
-      selectAllDElem.nativeElement.click();
       for (const checkDElem of stageCheckDElems) {
         checkDElem.nativeElement.checked = true;
       }
       selectHostFixture.detectChanges();
 
-      selectAllDElem.nativeElement.click();
-      selectHostFixture.detectChanges();
-
-      for (const checkDElem of tourneyCheckDElems) {
-        let gameName: string = checkDElem.nativeElement.getAttribute('name');
-        expect(checkDElem.nativeElement.checked).withContext(gameName).toBe(false);
-      }
-      /**/
-      // console.groupEnd();
-    });
-
-    it('should not uncheck all stages in other sections when unchecked (tourney > series)', () => {
-      /**/
-      // console.groupCollapsed('=== SPEC - select all - don\' uncheck stages in other sections');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_UNCHECK_NEGATIVE_TOURNEY.inputStages;
-      const targetGameNames: string[] = STAGE_SELECTIONS.ALL_UNCHECK_NEGATIVE_TOURNEY.targetStages;
-      selectHostComp.stages = [...inputStages];
-      selectHostFixture.detectChanges();
-
-      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css('.classification .form-check-input'));
-      const selectAllTourneyDElem: DebugElement = selectDElem.query(By.css('#tourneyPresence_all'));
-
-      selectAllTourneyDElem.nativeElement.click();
-      for (const checkDElem of stageCheckDElems) {
-        checkDElem.nativeElement.checked = true;
-      }
-      selectHostFixture.detectChanges();
-
-      selectAllTourneyDElem.nativeElement.click();
+      selectNoneTourneyDElem.nativeElement.click();
       selectHostFixture.detectChanges();
 
       for (const targetGameName of targetGameNames) {
@@ -1886,7 +1804,6 @@ describe('StageSelectComponent', () => {
       /**/
       // console.groupEnd();
     });
-
   });
   // TODO:
     // Make common legal stages selected and submitted to host component on init

@@ -18,19 +18,18 @@
             <div id="stage-select-{{rootSection.attribute}}-collapse" class="collapse" [class.show]="rootSection.expand"
               [attr.aria-labelledby]="'stage-select-' + rootSection.attribute + '-header'">
               <div class="card-body">
-                <div class="row shortcuts" formGroupName="shortcuts">
+                <div class="row shortcuts">
                   <div class="form-group form-inline">
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                      <div class="form-check">
-                        <input class="form-check-input" id="{{rootSection.id + separator}}all" formControlName="{{rootSection.id}}" name="all" type="checkbox" (click)="updateAll(rootSection.id)" />
-                        <label class="form-check-label" for="{{rootSection.id + separator}}all">Select / Unselect All</label>
-                      </div>
+                    <div class="col-sm-12">
+                      <button type="button" class="btn btn-secondary" id="{{rootSection.id + separator}}all" name="all" (click)="updateAll(rootSection.id, true)">Select All</button>
+                      <button type="button" class="btn btn-secondary" id="{{rootSection.id + separator}}none"
+                        name="none" (click)="updateAll(rootSection.id, false)">Select None</button>
                     </div>
                   </div>
                 </div>
                 <ng-container *ngFor="let childSection of rootSection.sections">
                   <ng-container *ngIf="childSection.show">
-                    <div class="row classification {{childSection.attribute}}" formGroupName="stages">
+                    <div class="row classification {{childSection.attribute}}">
                       <div class="col-sm-12">
                         <h4>{{childSection.title}}</h4>
                       </div>
@@ -38,7 +37,7 @@
                         <ng-container *ngFor="let stage of classifiedStages[rootSection.id][childSection.id]">
                           <div class="col-md-6 col-lg-4 col-xl-3">
                             <div class="form-check">
-                              <input class="form-check-input" id="{{rootSection.id + separator + stage.gameName}}" formControlName="{{stage.gameName}}" name="{{stage.gameName}}" type="checkbox" [checked]="selectionForm.get(['stages', stage.gameName]).value" (change)="updateShortcuts()" />
+                              <input class="form-check-input" id="{{rootSection.id + separator + stage.gameName}}" formControlName="{{stage.gameName}}" name="{{stage.gameName}}" type="checkbox" [checked]="selectionForm.get(stage.gameName).value" />
                               <label class="form-check-label" for="{{rootSection.id + separator + stage.gameName}}">{{stage.name}}</label>
                             </div>
                           </div>

@@ -1,67 +1,55 @@
 const TOWN = {
   name: "Town & City",
   gameName: "village2_",
-  values: {
-    blastzoneWidth: 230,
-    stageLength: 82.5,
-    offStageDistance: 147.5,
-    ceilingHeight: 195
-  }
+  blastzoneWidth: 230,
+  stageLength: 82.5,
+  offStageDistance: 147.5,
+  ceilingHeight: 195
 };
 
 const SMASHVILLE = {
   name: "Smashville",
   gameName: "xvillage",
-  values: {
-    blastzoneWidth: 229.5,
-    stageLength: 69.6488304,
-    offStageDistance: 159.8511696,
-    ceilingHeight: 189.90001145
-  }
+  blastzoneWidth: 229.5,
+  stageLength: 69.6488304,
+  offStageDistance: 159.8511696,
+  ceilingHeight: 189.90001145
 };
 
 const SAMPLE_STAGE_ONE = {
   name: "Sample Stage",
   gameName: "sample1_",
-  values: {
-    blastzoneWidth: 210,
-    stageLength: 70,
-    offStageDistance: 150,
-    ceilingHeight: 190
-  }
+  blastzoneWidth: 210,
+  stageLength: 70,
+  offStageDistance: 150,
+  ceilingHeight: 190
 };
 
 const SAMPLE_STAGE_TWO = {
   name: "Example Stage",
   gameName: "example2_",
-  values: {
-    blastzoneWidth: 330,
-    stageLength: 25,
-    offStageDistance: 95,
-    ceilingHeight: 425.3
-  }
+  blastzoneWidth: 330,
+  stageLength: 25,
+  offStageDistance: 95,
+  ceilingHeight: 425.3
 };
 
 const SAMPLE_STAGE_THREE = {
   name: "Made-up Placeville",
   gameName: "madeup3_",
-  values: {
-    blastzoneWidth: 840,
-    stageLength: 29,
-    offStageDistance: 103,
-    ceilingHeight: 83
-  }
+  blastzoneWidth: 840,
+  stageLength: 29,
+  offStageDistance: 103,
+  ceilingHeight: 83
 };
 
 const SAMPLE_STAGE_FOUR = {
   name: "Over There",
   gameName: "overthere4_",
-  values: {
-    blastzoneWidth: 203,
-    stageLength: 85,
-    offStageDistance: 49,
-    ceilingHeight: 7524
-  }
+  blastzoneWidth: 203,
+  stageLength: 85,
+  offStageDistance: 49,
+  ceilingHeight: 7524
 };
 
 const VALID_STAGES = [TOWN, SMASHVILLE];

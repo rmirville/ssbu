@@ -99,10 +99,12 @@ export class StageDimensionsService {
       return {
         name: name,
         gameName: gameName,
-        blastzoneWidth: blastzoneWidth,
-        stageLength: stageLength,
-        offStageDistance: offStageDistance,
-        ceilingHeight: ceilingHeight
+        values: {
+          blastzoneWidth: blastzoneWidth,
+          stageLength: stageLength,
+          offStageDistance: offStageDistance,
+          ceilingHeight: ceilingHeight
+        }
       };
     });
     const stageDimensionsRanges = this._getRanges(stageDimensions);
@@ -125,10 +127,10 @@ export class StageDimensionsService {
   _getRanges(dimensionsArr: StageDimensions[]) {
     /**/
     // console.log('StageDimensionsService::_getRanges()');
-    const blastzoneWidths = dimensionsArr.map((dimensionsArr) => dimensionsArr.blastzoneWidth);
-    const stageLengths = dimensionsArr.map((dimensionsArr) => dimensionsArr.stageLength);
-    const offStageDistances = dimensionsArr.map((dimensionsArr) => dimensionsArr.offStageDistance);
-    const ceilingHeights = dimensionsArr.map((dimensionsArr) => dimensionsArr.ceilingHeight);
+    const blastzoneWidths = dimensionsArr.map((dimensionsArr) => dimensionsArr.values.blastzoneWidth);
+    const stageLengths = dimensionsArr.map((dimensionsArr) => dimensionsArr.values.stageLength);
+    const offStageDistances = dimensionsArr.map((dimensionsArr) => dimensionsArr.values.offStageDistance);
+    const ceilingHeights = dimensionsArr.map((dimensionsArr) => dimensionsArr.values.ceilingHeight);
 
     return {
       blastzoneWidth: this._getRange(blastzoneWidths),

@@ -38,10 +38,10 @@ describe('StageDimensionsService', () => {
         for (let i = 0; i < 2; i++) {
           expect(actualDimensions[i]['name']).toEqual(expectedDimensions[i]['name']);
           expect(actualDimensions[i]['gameName']).toEqual(expectedDimensions[i]['gameName']);
-          expect(actualDimensions[i]['blastzoneWidth']).toBeCloseTo(expectedDimensions[i]['blastzoneWidth'], 6);
-          expect(actualDimensions[i]['stageLength']).toBeCloseTo(expectedDimensions[i]['stageLength'], 6);
-          expect(actualDimensions[i]['offStageDistance']).toBeCloseTo(expectedDimensions[i]['offStageDistance'], 6);
-          expect(actualDimensions[i]['ceilingHeight']).toBeCloseTo(expectedDimensions[i]['ceilingHeight'], 6);
+          expect(actualDimensions[i]['values']['blastzoneWidth']).toBeCloseTo(expectedDimensions[i]['values']['blastzoneWidth'], 6);
+          expect(actualDimensions[i]['values']['stageLength']).toBeCloseTo(expectedDimensions[i]['values']['stageLength'], 6);
+          expect(actualDimensions[i]['values']['offStageDistance']).toBeCloseTo(expectedDimensions[i]['values']['offStageDistance'], 6);
+          expect(actualDimensions[i]['values']['ceilingHeight']).toBeCloseTo(expectedDimensions[i]['values']['ceilingHeight'], 6);
         }
 
         const actualRanges = actualDimensionsSet['ranges'];

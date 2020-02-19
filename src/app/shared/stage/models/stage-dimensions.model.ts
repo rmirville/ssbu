@@ -6,10 +6,12 @@
 export interface StageDimensions {
   name: string;
   gameName: string;
-  blastzoneWidth: number;
-  stageLength: number;
-  offStageDistance: number;
-  ceilingHeight: number;
+  values: {
+    blastzoneWidth: number;
+    stageLength: number;
+    offStageDistance: number;
+    ceilingHeight: number;
+  };
 }
 
 /**
@@ -21,10 +23,10 @@ export interface StageDimensions {
 export function isStageDimensions(dimensions): dimensions is StageDimensions {
   if ((typeof dimensions.name !== 'string')
     || (typeof dimensions.gameName !== 'string')
-    || (typeof dimensions.blastzoneWidth !== 'number')
-    || (typeof dimensions.stageLength !== 'number')
-    || (typeof dimensions.offStageDistance !== 'number')
-    || (typeof dimensions.ceilingHeight !== 'number')
+    || (typeof dimensions.values.blastzoneWidth !== 'number')
+    || (typeof dimensions.values.stageLength !== 'number')
+    || (typeof dimensions.values.offStageDistance !== 'number')
+    || (typeof dimensions.values.ceilingHeight !== 'number')
   ) { return false; }
   return true;
 }

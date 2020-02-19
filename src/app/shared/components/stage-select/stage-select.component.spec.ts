@@ -47,8 +47,7 @@ describe('StageSelectComponent', () => {
     selectHostComp.stages = [...expectedStages];
     expect(selectHostComp.stages.length).withContext('the number of stages should be the same').toEqual(expectedStages.length);
     expect(selectHostComp.stages).toEqual(expectedStages);
-    
-  })
+  });
   
   it('should have a stages property set to a provided value on init', () => {
     let expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.ONE;

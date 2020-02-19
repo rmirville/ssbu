@@ -1,6 +1,6 @@
 /**
- * Represents a Stage's summary dimension value
- * and bin parameters within a group of given stages
+ * Represents a raw value paired with
+ * bin parameters within a given group of stages
  *
  * @interface StageDimensionsBinParams
  */
@@ -11,6 +11,12 @@ export interface StageDimensionsBinParams {
   max: boolean;
 }
 
+/**
+ * Type guard for the StageDimensionsBinParams interface
+ *
+ * @param {*} params the variable to validate
+ * @returns {this is StageDimensionsBinParams}
+ */
 export function isStageDimensionsBinParams(params: any): params is StageDimensionsBinParams {
   return ((typeof params.value === 'number')
     && (Number.isInteger(params.bin))

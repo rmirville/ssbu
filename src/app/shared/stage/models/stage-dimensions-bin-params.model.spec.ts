@@ -29,6 +29,10 @@ fdescribe('StageDimensionsBinParamsModel', () => {
         _testBadData('binNotInteger');
       });
 
+      it('should reject bin params with a negative bin', () => {
+        _testBadData('binNegative');
+      });
+
       it('should reject bin params with a non-boolean min', () => {
         _testBadData('minNotBoolean');
       });

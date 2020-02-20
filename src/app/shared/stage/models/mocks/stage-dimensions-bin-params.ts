@@ -27,6 +27,13 @@ export const BAD_DATA: { [problem: string]: any } = {
     max: true
   },
 
+  binNegative: {
+    value: 38.102,
+    bin: -8,
+    min: true,
+    max: false
+  },
+
   minNotBoolean: {
     value: 70.315,
     bin: 31,

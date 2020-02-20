@@ -1,7 +1,7 @@
 import { isStageDimensionsBinParams } from './stage-dimensions-bin-params.model';
 import * as STAGE_BIN_PARAMS from './mocks/stage-dimensions-bin-params';
 
-fdescribe('StageDimensionsBinParamsModel', () => {
+describe('StageDimensionsBinParamsModel', () => {
   describe('isStageDimensionsBinParams()', () => {
 
     function _testBadData(problem) {

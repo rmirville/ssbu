@@ -1,4 +1,5 @@
 export const VALID = {
+  bins: 44,
   dimensions: [
     {
       name: 'uBuoz7LP22',
@@ -110,7 +111,260 @@ export const VALID = {
 };
 
 export const BAD_DATA = {
+  binsNotNumber: {
+    bins: { size: 50 },
+    dimensions: [
+      {
+        name: 'DM8hNlO1CI',
+        gameName: '37ccDH4yEf',
+        blastzoneWidth: {
+          value: -85.566,
+          bin: 8,
+          min: false,
+          max: false
+        },
+        stageLength: {
+          value: 92.946,
+          bin: 2,
+          min: false,
+          max: true
+        },
+        offStageDistance: {
+          value: 45.796,
+          bin: 7,
+          min: false,
+          max: false
+        },
+        ceilingHeight: {
+          value: -51.762,
+          bin: 8,
+          min: false,
+          max: true
+        }
+      },
+      {
+        name: 'PyCQCNn4il',
+        gameName: 'sTc5DBm6g0',
+        blastzoneWidth: {
+          value: -64.606,
+          bin: 5,
+          min: true,
+          max: false
+        },
+        stageLength: {
+          value: -89.827,
+          bin: 7,
+          min: false,
+          max: false
+        },
+        offStageDistance: {
+          value: -35.307,
+          bin: 1,
+          min: true,
+          max: true
+        },
+        ceilingHeight: {
+          value: 39.034,
+          bin: 3,
+          min: true,
+          max: false
+        }
+      }
+    ],
+    ranges: {
+      blastzoneWidth: {
+        min: -47.106,
+        max: 34.230,
+        range: 24.888
+      },
+      stageLength: {
+        min: -43.045,
+        max: 5.497,
+        range: 72.219
+      },
+      offStageDistance: {
+        min: -29.068,
+        max: 0.789,
+        range: 14.500
+      },
+      ceilingHeight: {
+        min: -38.430,
+        max: 26.492,
+        range: 46.991
+      }
+    }
+  },
+  
+  binsNotInteger: {
+    bins: 38.636,
+    dimensions: [
+      {
+        name: 'EaM2n5BrCl',
+        gameName: 'qknxVUgvDY',
+        blastzoneWidth: {
+          value: -26.321,
+          bin: 6,
+          min: false,
+          max: true
+        },
+        stageLength: {
+          value: -85.251,
+          bin: 2,
+          min: false,
+          max: true
+        },
+        offStageDistance: {
+          value: 28.752,
+          bin: 8,
+          min: false,
+          max: true
+        },
+        ceilingHeight: {
+          value: 16.278,
+          bin: 4,
+          min: true,
+          max: true
+        }
+      },
+      {
+        name: 'gahP8KRYhX',
+        gameName: '6txhqlxUfv',
+        blastzoneWidth: {
+          value: 49.950,
+          bin: 7,
+          min: false,
+          max: true
+        },
+        stageLength: {
+          value: -66.198,
+          bin: 6,
+          min: false,
+          max: false
+        },
+        offStageDistance: {
+          value: -89.884,
+          bin: 6,
+          min: false,
+          max: true
+        },
+        ceilingHeight: {
+          value: -16.173,
+          bin: 9,
+          min: false,
+          max: true
+        }
+      }
+    ],
+    ranges: {
+      blastzoneWidth: {
+        min: -39.892,
+        max: 10.845,
+        range: 74.782
+      },
+      stageLength: {
+        min: -30.741,
+        max: 21.886,
+        range: 65.434
+      },
+      offStageDistance: {
+        min: -49.141,
+        max: 46.400,
+        range: 66.723
+      },
+      ceilingHeight: {
+        min: -30.640,
+        max: 15.558,
+        range: 49.382
+      }
+    }
+  },
+
+  binsNotPositive: {
+    bins: -49,
+    dimensions: [
+      {
+        name: '776uitx8VH',
+        gameName: '0sd8bKRhNj',
+        blastzoneWidth: {
+          value: -43.556,
+          bin: 4,
+          min: true,
+          max: true
+        },
+        stageLength: {
+          value: -74.905,
+          bin: 10,
+          min: true,
+          max: true
+        },
+        offStageDistance: {
+          value: 99.337,
+          bin: 5,
+          min: true,
+          max: false
+        },
+        ceilingHeight: {
+          value: 79.192,
+          bin: 4,
+          min: true,
+          max: true
+        }
+      },
+      {
+        name: 'CjwWVevFqb',
+        gameName: '3P63AareCU',
+        blastzoneWidth: {
+          value: 3.696,
+          bin: 6,
+          min: true,
+          max: false
+        },
+        stageLength: {
+          value: -73.291,
+          bin: 5,
+          min: false,
+          max: true
+        },
+        offStageDistance: {
+          value: 77.976,
+          bin: 0,
+          min: false,
+          max: false
+        },
+        ceilingHeight: {
+          value: -72.709,
+          bin: 3,
+          min: false,
+          max: false
+        }
+      }
+    ],
+    ranges: {
+      blastzoneWidth: {
+        min: -41.714,
+        max: 35.008,
+        range: 40.222
+      },
+      stageLength: {
+        min: -15.150,
+        max: 11.933,
+        range: 86.715
+      },
+      offStageDistance: {
+        min: -41.308,
+        max: 28.838,
+        range: 75.948
+      },
+      ceilingHeight: {
+        min: -42.279,
+        max: 41.280,
+        range: 14.711
+      }
+    }
+  },
+
   dimensionsNotArray: {
+    bins: 18,
     dimensions: {
       name: 'TDu8bSZWst',
       gameName: '5k2fQY9oFv',
@@ -164,6 +418,7 @@ export const BAD_DATA = {
   },
 
   dimensionsNotBinnedStageDimensions: {
+    bins: 22,
     dimensions: [true,true,false,true],
     ranges: {
       blastzoneWidth: {
@@ -190,6 +445,7 @@ export const BAD_DATA = {
   },
 
   blastzoneWidthNotRange: {
+    bins: 20,
     dimensions: [
       {
         name: 'b7wBqMMAwN',
@@ -273,6 +529,7 @@ export const BAD_DATA = {
   },
 
   stageLengthNotRange: {
+    bins: 6,
     dimensions: [
       {
         name: 'lRqTleRCSj',
@@ -408,6 +665,7 @@ export const BAD_DATA = {
   },
 
   offStageDistanceNotRange: {
+    bins: 32,
     dimensions: [
       {
         name: 'eagM7HSakn',
@@ -543,6 +801,7 @@ export const BAD_DATA = {
   },
 
   ceilingHeighthNotRange: {
+    bins: 1,
     dimensions: [
       {
         name: 'huP4NuwKYy',

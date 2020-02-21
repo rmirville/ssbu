@@ -10,6 +10,7 @@ import { StageDimensionsRange, isStageDimensionsRange } from './stage-dimensions
  */
 export interface BinnedStageDimensionsSet {
   dimensions: BinnedStageDimensions[];
+  bins: number;
   ranges: {
     blastzoneWidth: StageDimensionsRange;
     stageLength: StageDimensionsRange;
@@ -33,7 +34,9 @@ export function isBinnedStageDimensionsSet(set): set is BinnedStageDimensionsSet
     if (!isBinnedStageDimensions(stageDimensions)) { return false; }
   }
 
-  if (( !isStageDimensionsRange(set.ranges.blastzoneWidth) )
+  if (( !Number.isInteger(set.bins) )
+    || (set.bins <= 0)
+    || ( !isStageDimensionsRange(set.ranges.blastzoneWidth) )
     || ( !isStageDimensionsRange(set.ranges.stageLength) )
     || ( !isStageDimensionsRange(set.ranges.offStageDistance) )
     || ( !isStageDimensionsRange(set.ranges.ceilingHeight) )

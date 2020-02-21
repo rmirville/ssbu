@@ -15,6 +15,18 @@ describe('BinnedStageDimensionsSetModel', () => {
 
     describe('binned stage dimensions set validation', () => {
 
+      it('should reject a set with a non-number bins property', () => {
+        _testBadData('binsNotNumber');
+      });
+
+      it('should reject a set with a non-integer bins property', () => {
+        _testBadData('binsNotInteger');
+      });
+
+      it('should reject a set with a non-positive bins property', () => {
+        _testBadData('binsNotPositive');
+      });
+
       it('should reject a set with a non-array dimensions property', () => {
         _testBadData('dimensionsNotArray');
       });

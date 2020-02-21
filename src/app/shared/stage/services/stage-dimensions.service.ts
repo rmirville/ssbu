@@ -20,13 +20,21 @@ import { StagePieceMap } from '../models/stage-piece-map.model';
 export class StageDimensionsService {
 
   /**
-   * Creates an instance of StageFormatterService.
+   * Creates an instance of StageDimensionsService.
    *
    * @memberof StageDimensionsService
    */
   constructor() {
   }
 
+  /**
+   * Fetches basic dimension data from provided raw stage data
+   *
+   * @param {Stage[]} stages the raw stage dimension data
+   * @param {StagePieceMap[]} [pieceMaps] the map of which StagePiece from each Stage to retrieve data from
+   * @returns {Observable<StageDimensionsSet>}
+   * @memberof StageDimensionsService
+   */
   getDimensionsFull(stages: Stage[], pieceMaps?: StagePieceMap[]): Observable<StageDimensionsSet> {
     /**/
     // console.log('StageDimensionsService::getDimensionsFull()');

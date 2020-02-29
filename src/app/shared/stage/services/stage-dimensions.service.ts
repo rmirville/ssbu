@@ -1,12 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+import { BinnedStageDimensions } from '../models/binned-stage-dimensions.model';
+import { BinnedStageDimensionsSet } from '../models/binned-stage-dimensions-set.model';
 import { Stage } from '../models/stage.model';
 import { StageDimensions } from '../models/stage-dimensions.model';
+import { StageDimensionsBinParams } from '../models/stage-dimensions-bin-params.model';
 import { StageDimensionsSet } from '../models/stage-dimensions-set.model';
 import { StageDimensionsRange } from '../models/stage-dimensions-range.model';
 import { StagePiece } from '../models/stage-piece.model';
 import { StagePieceMap } from '../models/stage-piece-map.model';
+
+/**
+ * Represents the parameters used to bin an individual dimension
+ */
+interface BinningParams {
+  values: number[];
+  range: number;
+  bounds: number[];
+};
+
+/**
+ * Represents the full set of parameters used to bin StageDimensions
+ */
+interface BinningParamsSet {
+  numBins: number;
+  blastzoneWidth: BinningParams;
+  stageLength: BinningParams;
+  offStageDistance: BinningParams;
+  ceilingHeight: BinningParams;
+}
 
 /**
  * Service class providing summary dimensions stage data
@@ -18,6 +41,8 @@ import { StagePieceMap } from '../models/stage-piece-map.model';
   providedIn: 'root'
 })
 export class StageDimensionsService {
+
+  _dimensionsSetFull: StageDimensionsSet;
 
   /**
    * Creates an instance of StageDimensionsService.
@@ -31,7 +56,7 @@ export class StageDimensionsService {
    * Fetches basic dimension data from provided raw stage data
    *
    * @param {Stage[]} stages the raw stage dimension data
-   * @param {StagePieceMap[]} [pieceMaps] the map of which StagePiece from each Stage to retrieve data from
+   * @param {StagePieceMap[]} pieceMaps the map of which StagePiece from each Stage to retrieve data from
    * @returns {Observable<StageDimensionsSet>}
    * @memberof StageDimensionsService
    */
@@ -116,11 +141,162 @@ export class StageDimensionsService {
       const stageDimensionsRanges = this._getRanges(stageDimensions);
     /**/
     // console.log(`  * ranges: ${stageDimensionsRanges}`);
-      observer.next( {dimensions: stageDimensions, ranges: stageDimensionsRanges} );
+      this._dimensionsSetFull = { dimensions: stageDimensions, ranges: stageDimensionsRanges };
+      observer.next(this._dimensionsSetFull);
       observer.complete();
     });
 
     return fullDimensionsSet$;
+  }
+
+  /**
+   * Calculates dimension data with 5-binned statistics about the provided list of stages.
+   * getFullDimensions() must be called before using this method.
+   *
+   * @param {string[]} gameNames the gameNames of the stages to select
+   * @returns {Observable<BinnedStageDimensionsSet>}
+   * @memberof StageDimensionsService
+   */
+  getDimensionsBinned(gameNames: string[]): Observable<BinnedStageDimensionsSet> {
+    const binnedDimensionsSet$: Observable<BinnedStageDimensionsSet> = new Observable<BinnedStageDimensionsSet>(observer => {
+      /**/
+      // console.log('stageDimensionsService::getDimensionsBinned().binnedDimensionsSet$');
+      // console.log(`_dimensionsSetFull: ${JSON.stringify(this._dimensionsSetFull)}`);
+      // console.log(`gameNames: ${gameNames}`);
+      const numBins: number = 5;
+      let stages: StageDimensions[] = this._dimensionsSetFull.dimensions.filter(stage => {
+        return gameNames.includes(stage.gameName);
+      });
+      /**/
+      // console.log(`stages: ${JSON.stringify(stages.map(stage => stage.gameName))}`);
+      let binParamsSet: BinningParamsSet = {
+        numBins: numBins,
+        blastzoneWidth: this._getBinningParams(stages, 'blastzoneWidth', numBins),
+        stageLength: this._getBinningParams(stages, 'stageLength', numBins),
+        offStageDistance: this._getBinningParams(stages, 'offStageDistance', numBins),
+        ceilingHeight: this._getBinningParams(stages, 'ceilingHeight', numBins)
+      }
+      let binnedDimensions: BinnedStageDimensions[] = [];
+      let binnedDimensionsSet: BinnedStageDimensionsSet;
+      for (const gameName of gameNames) {
+        /**/
+        // console.log(`gameName: ${gameName}`);
+        let binnedStage: BinnedStageDimensions;
+        let stage: StageDimensions = stages.find(   stage => { return (stage.gameName === gameName); }   );
+        /**/
+        // console.log(`stage: ${JSON.stringify(stage)}`);
+        /**/
+        // console.group('StageDimensionsService::_getBin()');
+        let blastzoneWidthParams: StageDimensionsBinParams = this._getBinParams(stage.blastzoneWidth, binParamsSet.blastzoneWidth, numBins);
+        // console.groupEnd();
+
+        binnedStage = {
+          name: stage.name,
+          gameName: stage.gameName,
+          blastzoneWidth: blastzoneWidthParams,
+          stageLength: {
+            value: stage.stageLength,
+            bin: 1,
+            min: false,
+            max: false
+          },
+          offStageDistance: {
+            value: stage.offStageDistance,
+            bin: 1,
+            min: false,
+            max: false
+          },
+          ceilingHeight: {
+            value: stage.ceilingHeight,
+            bin: 1,
+            min: false,
+            max: false
+          }
+        };
+        binnedDimensions.push(binnedStage);
+        /**/
+        // console.groupEnd();
+      }
+      binnedDimensionsSet = {
+        bins: 5,
+        dimensions: binnedDimensions,
+        ranges: {
+          blastzoneWidth: {
+            min: 1,
+            max: 1,
+            range: 1
+          },
+          stageLength: {
+            min: 1,
+            max: 1,
+            range: 1
+          },
+          offStageDistance: {
+            min: 1,
+            max: 1,
+            range: 1
+          },
+          ceilingHeight: {
+            min: 1,
+            max: 1,
+            range: 1
+          }
+        }
+      };
+      /**/
+      // console.groupEnd();
+      observer.next(binnedDimensionsSet);
+      observer.complete;
+    });
+    return binnedDimensionsSet$;
+  }
+
+  _getBinningParams(stages: StageDimensions[], dimension: string, numBins: number = 5): BinningParams {
+    /**/
+    // console.group('StageDimensionsService::_getBinParams()');
+    let values: number[] = stages.map(stage => stage[dimension]);
+    const min: number = Math.min(...values);
+    const max: number = Math.max(...values);
+    const range: number = max - min;
+    const interval: number = range / numBins;
+
+    let binBounds: number[] = [min];
+
+    for (let i = 1; i < numBins; i++) {
+      binBounds.push(min + (interval * i));
+    }
+    binBounds.push(max);
+    /**/
+    // console.groupEnd();
+    return {
+      values: values,
+      range: range,
+      bounds: binBounds
+    };
+  }
+
+  _getBinParams(value: number, params: BinningParams, numBins: number = 5): StageDimensionsBinParams {
+    // console.log(`value: ${value}`);
+    // console.log(`bounds: ${JSON.stringify(params.bounds)}`);
+    let binParams: StageDimensionsBinParams = {
+      value: value,
+      bin: -1,
+      min: false,
+      max: false
+    };
+    if (numBins === 5) {
+      // console.log('comparing values');
+      if (value < params.bounds[1]) { binParams.bin = 1; }
+      else if (value < params.bounds[2]) { binParams.bin = 2; }
+      else if (value > params.bounds[4]) { binParams.bin = 5; }
+      else if (value > params.bounds[3]) { binParams.bin = 4; }
+      else if ((value <= params.bounds[3])
+        && (value >= params.bounds[2])
+      ) { binParams.bin = 3; }
+    }
+    binParams.min = (value === params.bounds[0]);
+    binParams.max = (value === params.bounds[params.bounds.length - 1]);
+    return binParams;
   }
 
   _getRange(values: number[]): StageDimensionsRange {

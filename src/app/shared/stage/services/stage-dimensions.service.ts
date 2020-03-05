@@ -178,6 +178,9 @@ export class StageDimensionsService {
       }
       let binnedDimensions: BinnedStageDimensions[] = [];
       let binnedDimensionsSet: BinnedStageDimensionsSet;
+      const dbGameNames: string[] = stages.map(stage => stage.gameName);
+
+      gameNames = gameNames.filter(gameName => { return dbGameNames.includes(gameName); });
       for (const gameName of gameNames) {
         /**/
         // console.log(`gameName: ${gameName}`);

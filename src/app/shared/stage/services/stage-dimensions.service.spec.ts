@@ -119,6 +119,24 @@ describe('StageDimensionsService', () => {
           // console.groupEnd();
         }));
 
+        it('omits stages in the provided gameName array that are not in the database', async(() => {
+          /**/
+          console.groupCollapsed('=== SPEC - dimensions - omits unknown stages ===');
+          const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_UNKNOWN.inputGameNames;
+          const unknownGameNames: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_UNKNOWN.unknownGameNames;
+          service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+          const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+          actualSet$.subscribe(actualSet => {
+            const actualGameNames: string[] = actualSet.dimensions.map(stage => stage.gameName);
+            expect(actualGameNames.length).withContext('dimensions size').toBeGreaterThan(0);
+            for (const unknownGameName of unknownGameNames) {
+              expect(actualGameNames.includes(unknownGameName)).withContext(unknownGameName).toBe(false);
+            }
+          });
+          /**/
+          console.groupEnd();
+        }));
+
         it('is the same size as the gameName array submitted', async(() => {
           /**/
           // console.groupCollapsed('=== SPEC - dimensions - same size as provided stages ===');
@@ -655,9 +673,13 @@ describe('StageDimensionsService', () => {
       });
     });
 
-    it('rejects a gameName array with gameNames not in the saved dataset');
+    describe('data validation', () => {
+      it('returns an error if there is no saved dataset');
 
-    it('returns an error if there is no saved dataset');
+      it('returns an error when no gameNames are provided');
+
+      it('returns an error when no provided gameNames are in the database');
+    });
 
   });
 

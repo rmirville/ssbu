@@ -102,6 +102,23 @@ export const DIMENSIONS_EXCLUDE: { [set: string]: string[] } = {
   ]
 };
 
+export const DIMENSIONS_UNKNOWN: {inputGameNames: string[], unknownGameNames: string[]} = {
+  inputGameNames: [
+    "colloseum_",
+    "u6VJSjkjo7",
+    "xmansion_",
+    "A5hwlOzj9p",
+    "kEQlhSu3gC",
+    "skyward",
+    "xstadium_"
+  ],
+  unknownGameNames: [
+    "u6VJSjkjo7",
+    "A5hwlOzj9p",
+    "kEQlhSu3gC",
+  ]
+};
+
 export const DIMENSIONS_SIZE: {inputGameNames: string[], expectedSize: number} = {
   inputGameNames: [
     "bossstage_final1_",

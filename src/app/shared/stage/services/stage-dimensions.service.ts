@@ -188,30 +188,18 @@ export class StageDimensionsService {
         /**/
         // console.group('StageDimensionsService::_getBin()');
         let blastzoneWidthParams: StageDimensionsBinParams = this._getBinParams(stage.blastzoneWidth, binParamsSet.blastzoneWidth, numBins);
+        let stageLengthParams: StageDimensionsBinParams = this._getBinParams(stage.stageLength, binParamsSet.stageLength, numBins);
+        let offStageDistanceParams: StageDimensionsBinParams = this._getBinParams(stage.offStageDistance, binParamsSet.offStageDistance, numBins);
+        let ceilingHeightParams: StageDimensionsBinParams = this._getBinParams(stage.ceilingHeight, binParamsSet.ceilingHeight, numBins);
         // console.groupEnd();
 
         binnedStage = {
           name: stage.name,
           gameName: stage.gameName,
           blastzoneWidth: blastzoneWidthParams,
-          stageLength: {
-            value: stage.stageLength,
-            bin: 1,
-            min: false,
-            max: false
-          },
-          offStageDistance: {
-            value: stage.offStageDistance,
-            bin: 1,
-            min: false,
-            max: false
-          },
-          ceilingHeight: {
-            value: stage.ceilingHeight,
-            bin: 1,
-            min: false,
-            max: false
-          }
+          stageLength: stageLengthParams,
+          offStageDistance: offStageDistanceParams,
+          ceilingHeight: ceilingHeightParams
         };
         binnedDimensions.push(binnedStage);
         /**/
@@ -290,6 +278,7 @@ export class StageDimensionsService {
       else if (value < params.bounds[2]) { binParams.bin = 2; }
       else if (value > params.bounds[4]) { binParams.bin = 5; }
       else if (value > params.bounds[3]) { binParams.bin = 4; }
+      else if ((value === params.bounds[1]) && (value === params.bounds[5])) { binParams.bin = 0; }
       else if ((value <= params.bounds[3])
         && (value >= params.bounds[2])
       ) { binParams.bin = 3; }

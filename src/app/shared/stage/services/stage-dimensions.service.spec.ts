@@ -154,6 +154,25 @@ describe('StageDimensionsService', () => {
             // console.groupEnd();
           }));
 
+          it('classes values at each bin boundary as the bin closer to the middle', async(() => {
+            /**/
+            // console.groupCollapsed('=== SPEC - dimensions - blastzoneWidth - bin edgecases ===');
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_BLASTZONE_BINS_EDGES.inputStages;
+            const expectedBins: { [gameName: string]: number } = STAGE_DIMENSIONS_SVC.DIMENSIONS_BLASTZONE_BINS_EDGES.expectedBins;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.BLASTZONE_EDGE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
+            actualSet$.subscribe(actualSet => {
+              for (const actualStageDimensions of actualSet.dimensions) {
+                const gameName: string = actualStageDimensions.gameName;
+                const expectedBin: number = expectedBins[gameName];
+                const actualBin: number = actualStageDimensions.blastzoneWidth.bin;
+                expect(actualBin).withContext(gameName).toEqual(expectedBin);
+              }
+            });
+            /**/
+            // console.groupEnd();
+          }));
+
           it('marks the largest value in the group', async(() => {
             /**/
             // console.groupCollapsed('=== SPEC - dimensions - blastzoneWidth - marks the max ===');
@@ -231,13 +250,29 @@ describe('StageDimensionsService', () => {
             // console.groupEnd();
           }));
 
+          it('marks all values in an all-same-value array as both the smallest and largest with a bin of 0.', async(() => {
+            /**/
+            // console.groupCollapsed('=== SPEC - dimensions - blastzoneWidth - marks all-same-value items as min-max ===');
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_BLASTZONE_SAME;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.BLASTZONE_SAME;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
+            actualSet$.subscribe(actualSet => {
+              for (const binnedDimensions of actualSet.dimensions) {
+                expect(binnedDimensions.blastzoneWidth.bin).withContext('bin').toEqual(0);
+                expect(binnedDimensions.blastzoneWidth.max).withContext('max').toBe(true);
+                expect(binnedDimensions.blastzoneWidth.min).withContext('min').toBe(true);
+              }
+            });
+            // console.groupEnd();
+          }));
+
         });
 
-        xdescribe('stageLength', () => {
+        describe('stageLength', () => {
 
           it('classes each stage into one of five bins by value within the group\'s range', async(() => {
-            const inputStages: string[] = null;
-            const expectedBins: { [gameName: string]: number } = null;
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_STAGE_BINS.inputStages;
+            const expectedBins: { [gameName: string]: number } = STAGE_DIMENSIONS_SVC.DIMENSIONS_STAGE_BINS.expectedBins;
             service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
             const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
             actualSet$.subscribe(actualSet => {
@@ -250,9 +285,28 @@ describe('StageDimensionsService', () => {
             });
           }));
 
+          it('classes values at each bin boundary as the bin closer to the middle', async(() => {
+            /**/
+            // console.groupCollapsed('=== SPEC - dimensions - stageLength - bin edgecases ===');
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_STAGE_BINS_EDGES.inputStages;
+            const expectedBins: { [gameName: string]: number } = STAGE_DIMENSIONS_SVC.DIMENSIONS_STAGE_BINS_EDGES.expectedBins;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.STAGE_EDGE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
+            actualSet$.subscribe(actualSet => {
+              for (const actualStageDimensions of actualSet.dimensions) {
+                const gameName: string = actualStageDimensions.gameName;
+                const expectedBin: number = expectedBins[gameName];
+                const actualBin: number = actualStageDimensions.stageLength.bin;
+                expect(actualBin).withContext(gameName).toEqual(expectedBin);
+              }
+            });
+            /**/
+            // console.groupEnd();
+          }));
+
           it('marks the largest value in the group', async(() => {
-            const inputStages: string[] = null;
-            const targetGameName: string = null;
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_STAGE_MAX_POSITIVE.inputStages;
+            const targetGameName: string = STAGE_DIMENSIONS_SVC.DIMENSIONS_STAGE_MAX_POSITIVE.targetGameName;
             service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
             const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
             actualSet$.subscribe(actualSet => {
@@ -262,8 +316,8 @@ describe('StageDimensionsService', () => {
           }));
 
           it('doesn\'t mark values that aren\'t the largest in the group', async(() => {
-            const inputStages: string[] = null;
-            const targetGameNames: string[] = null;
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_STAGE_MAX_NEGATIVE.inputStages;
+            const targetGameNames: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_STAGE_MAX_NEGATIVE.targetGameNames;
             service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
             const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
             actualSet$.subscribe(actualSet => {
@@ -275,8 +329,8 @@ describe('StageDimensionsService', () => {
           }));
 
           it('marks the smallest value in the group', async(() => {
-            const inputStages: string[] = null;
-            const targetGameName: string = null;
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_STAGE_MIN_POSITIVE.inputStages;
+            const targetGameName: string = STAGE_DIMENSIONS_SVC.DIMENSIONS_STAGE_MIN_POSITIVE.targetGameName;
             service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
             const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
             actualSet$.subscribe(actualSet => {
@@ -286,8 +340,8 @@ describe('StageDimensionsService', () => {
           }));
 
           it('doesn\'t mark values that aren\'t the smallest in the group', async(() => {
-            const inputStages: string[] = null;
-            const targetGameNames: string[] = null;
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_STAGE_MIN_NEGATIVE.inputStages;
+            const targetGameNames: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_STAGE_MIN_NEGATIVE.targetGameNames;
             service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
             const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
             actualSet$.subscribe(actualSet => {
@@ -299,7 +353,7 @@ describe('StageDimensionsService', () => {
           }));
 
           it('marks the value in a one-item array as both the smallest and largest.', async(() => {
-            const inputStages: string[] = null;
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_STAGE_MINMAX;
             service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
             const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
             actualSet$.subscribe(actualSet => {
@@ -308,13 +362,29 @@ describe('StageDimensionsService', () => {
             });
           }));
 
+          it('marks all values in an all-same-value array as both the smallest and largest with a bin of 0.', async(() => {
+            /**/
+            // console.groupCollapsed('=== SPEC - dimensions - stageLength - marks all-same-value items as min-max ===');
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_STAGE_SAME;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.STAGE_SAME;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
+            actualSet$.subscribe(actualSet => {
+              for (const binnedDimensions of actualSet.dimensions) {
+                expect(binnedDimensions.stageLength.bin).withContext('bin').toEqual(0);
+                expect(binnedDimensions.stageLength.max).withContext('max').toBe(true);
+                expect(binnedDimensions.stageLength.min).withContext('min').toBe(true);
+              }
+            });
+            // console.groupEnd();
+          }));
+
         });
 
-        xdescribe('offStageDistance', () => {
+        describe('offStageDistance', () => {
 
           it('classes each stage into one of five bins by value within the group\'s range', async(() => {
-            const inputStages: string[] = null;
-            const expectedBins: { [gameName: string]: number } = null;
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_OFFSTAGE_BINS.inputStages;
+            const expectedBins: { [gameName: string]: number } = STAGE_DIMENSIONS_SVC.DIMENSIONS_OFFSTAGE_BINS.expectedBins;
             service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
             const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
             actualSet$.subscribe(actualSet => {
@@ -327,9 +397,28 @@ describe('StageDimensionsService', () => {
             });
           }));
 
+          it('classes values at each bin boundary as the bin closer to the middle', async(() => {
+            /**/
+            // console.groupCollapsed('=== SPEC - dimensions - offStageDistance - edgecases ===');
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_OFFSTAGE_BINS_EDGES.inputStages;
+            const expectedBins: { [gameName: string]: number } = STAGE_DIMENSIONS_SVC.DIMENSIONS_OFFSTAGE_BINS_EDGES.expectedBins;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.OFFSTAGE_EDGE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
+            actualSet$.subscribe(actualSet => {
+              for (const actualStageDimensions of actualSet.dimensions) {
+                const gameName: string = actualStageDimensions.gameName;
+                const expectedBin: number = expectedBins[gameName];
+                const actualBin: number = actualStageDimensions.offStageDistance.bin;
+                expect(actualBin).withContext(gameName).toEqual(expectedBin);
+              }
+            });
+            /**/
+            // console.groupEnd();
+          }));
+
           it('marks the largest value in the group', async(() => {
-            const inputStages: string[] = null;
-            const targetGameName: string = null;
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_OFFSTAGE_MAX_POSITIVE.inputStages;
+            const targetGameName: string = STAGE_DIMENSIONS_SVC.DIMENSIONS_OFFSTAGE_MAX_POSITIVE.targetGameName;
             service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
             const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
             actualSet$.subscribe(actualSet => {
@@ -339,8 +428,8 @@ describe('StageDimensionsService', () => {
           }));
 
           it('doesn\'t mark values that aren\'t the largest in the group', async(() => {
-            const inputStages: string[] = null;
-            const targetGameNames: string[] = null;
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_OFFSTAGE_MAX_NEGATIVE.inputStages;
+            const targetGameNames: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_OFFSTAGE_MAX_NEGATIVE.targetGameNames;
             service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
             const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
             actualSet$.subscribe(actualSet => {
@@ -352,8 +441,8 @@ describe('StageDimensionsService', () => {
           }));
 
           it('marks the smallest value in the group', async(() => {
-            const inputStages: string[] = null;
-            const targetGameName: string = null;
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_OFFSTAGE_MIN_POSITIVE.inputStages;
+            const targetGameName: string = STAGE_DIMENSIONS_SVC.DIMENSIONS_OFFSTAGE_MIN_POSITIVE.targetGameName;
             service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
             const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
             actualSet$.subscribe(actualSet => {
@@ -363,8 +452,8 @@ describe('StageDimensionsService', () => {
           }));
 
           it('doesn\'t mark values that aren\'t the smallest in the group', async(() => {
-            const inputStages: string[] = null;
-            const targetGameNames: string[] = null;
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_OFFSTAGE_MIN_NEGATIVE.inputStages;
+            const targetGameNames: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_OFFSTAGE_MIN_NEGATIVE.targetGameNames;
             service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
             const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
             actualSet$.subscribe(actualSet => {
@@ -376,7 +465,7 @@ describe('StageDimensionsService', () => {
           }));
 
           it('marks the value in a one-item array as both the smallest and largest.', async(() => {
-            const inputStages: string[] = null;
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_OFFSTAGE_MINMAX;
             service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
             const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
             actualSet$.subscribe(actualSet => {
@@ -385,13 +474,29 @@ describe('StageDimensionsService', () => {
             });
           }));
 
+          it('marks all values in an all-same-value array as both the smallest and largest with a bin of 0.', async(() => {
+            /**/
+            // console.groupCollapsed('=== SPEC - dimensions - offStageDistance - marks all-same-value items as min-max ===');
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_OFFSTAGE_SAME;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.OFFSTAGE_SAME;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
+            actualSet$.subscribe(actualSet => {
+              for (const binnedDimensions of actualSet.dimensions) {
+                expect(binnedDimensions.offStageDistance.bin).withContext('bin').toEqual(0);
+                expect(binnedDimensions.offStageDistance.max).withContext('max').toBe(true);
+                expect(binnedDimensions.offStageDistance.min).withContext('min').toBe(true);
+              }
+            });
+            // console.groupEnd();
+          }));
+
         });
 
-        xdescribe('ceilingHeight', () => {
+        describe('ceilingHeight', () => {
 
           it('classes each stage into one of five bins by value within the group\'s range', async(() => {
-            const inputStages: string[] = null;
-            const expectedBins: { [gameName: string]: number } = null;
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_CEILING_BINS.inputStages;
+            const expectedBins: { [gameName: string]: number } = STAGE_DIMENSIONS_SVC.DIMENSIONS_CEILING_BINS.expectedBins;
             service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
             const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
             actualSet$.subscribe(actualSet => {
@@ -404,9 +509,28 @@ describe('StageDimensionsService', () => {
             });
           }));
 
+          it('classes values at each bin boundary as the bin closer to the middle', async(() => {
+            /**/
+            // console.groupCollapsed('=== SPEC - dimensions - ceilingHeight - bin edgecases ===');
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_CEILING_BINS_EDGES.inputStages;
+            const expectedBins: { [gameName: string]: number } = STAGE_DIMENSIONS_SVC.DIMENSIONS_CEILING_BINS_EDGES.expectedBins;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.CEILING_EDGE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
+            actualSet$.subscribe(actualSet => {
+              for (const actualStageDimensions of actualSet.dimensions) {
+                const gameName: string = actualStageDimensions.gameName;
+                const expectedBin: number = expectedBins[gameName];
+                const actualBin: number = actualStageDimensions.ceilingHeight.bin;
+                expect(actualBin).withContext(gameName).toEqual(expectedBin);
+              }
+            });
+            /**/
+            // console.groupEnd();
+          }));
+
           it('marks the largest value in the group', async(() => {
-            const inputStages: string[] = null;
-            const targetGameName: string = null;
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_CEILING_MAX_POSITIVE.inputStages;
+            const targetGameName: string = STAGE_DIMENSIONS_SVC.DIMENSIONS_CEILING_MAX_POSITIVE.targetGameName;
             service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
             const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
             actualSet$.subscribe(actualSet => {
@@ -416,8 +540,8 @@ describe('StageDimensionsService', () => {
           }));
 
           it('doesn\'t mark values that aren\'t the largest in the group', async(() => {
-            const inputStages: string[] = null;
-            const targetGameNames: string[] = null;
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_CEILING_MAX_NEGATIVE.inputStages;
+            const targetGameNames: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_CEILING_MAX_NEGATIVE.targetGameNames;
             service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
             const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
             actualSet$.subscribe(actualSet => {
@@ -429,8 +553,8 @@ describe('StageDimensionsService', () => {
           }));
 
           it('marks the smallest value in the group', async(() => {
-            const inputStages: string[] = null;
-            const targetGameName: string = null;
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_CEILING_MIN_POSITIVE.inputStages;
+            const targetGameName: string = STAGE_DIMENSIONS_SVC.DIMENSIONS_CEILING_MIN_POSITIVE.targetGameName;
             service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
             const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
             actualSet$.subscribe(actualSet => {
@@ -440,8 +564,8 @@ describe('StageDimensionsService', () => {
           }));
 
           it('doesn\'t mark values that aren\'t the smallest in the group', async(() => {
-            const inputStages: string[] = null;
-            const targetGameNames: string[] = null;
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_CEILING_MIN_NEGATIVE.inputStages;
+            const targetGameNames: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_CEILING_MIN_NEGATIVE.targetGameNames;
             service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
             const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
             actualSet$.subscribe(actualSet => {
@@ -453,7 +577,7 @@ describe('StageDimensionsService', () => {
           }));
 
           it('marks the value in a one-item array as both the smallest and largest.', async(() => {
-            const inputStages: string[] = null;
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_CEILING_MINMAX;
             service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
             const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
             actualSet$.subscribe(actualSet => {
@@ -462,11 +586,27 @@ describe('StageDimensionsService', () => {
             });
           }));
 
+          it('marks all values in an all-same-value array as both the smallest and largest with a bin of 0.', async(() => {
+            /**/
+            // console.groupCollapsed('=== SPEC - dimensions - ceilingHeight - marks all-same-value items as min-max ===');
+            const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_CEILING_SAME;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.CEILING_SAME;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
+            actualSet$.subscribe(actualSet => {
+              for (const binnedDimensions of actualSet.dimensions) {
+                expect(binnedDimensions.ceilingHeight.bin).withContext('bin').toEqual(0);
+                expect(binnedDimensions.ceilingHeight.max).withContext('max').toBe(true);
+                expect(binnedDimensions.ceilingHeight.min).withContext('min').toBe(true);
+              }
+            });
+            // console.groupEnd();
+          }));
+
         });
 
       });
       
-      describe('ranges', () => {
+      xdescribe('ranges', () => {
 
         describe('blastzoneWidth', () => {
           

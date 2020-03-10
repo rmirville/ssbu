@@ -175,6 +175,35 @@ export const DIMENSIONS_BIN_SIZE: string[] = [
   "duckhunt_"
 ];
 
+export const DIMENSIONS_VALUES: string[] = [
+  "skyward",
+  "xcrayon_",
+  "xemblem",
+  "xfzero_",
+  "hyrule64_f",
+  "kirby_fountain_",
+  "xmansion_",
+  "mariou_",
+  "battle_common",
+  "mario_rainbow_",
+  "poke_tengam_",
+  "plasma_",
+  "wrecking_",
+  "gamer_",
+  "jack_mementoes_",
+  "64jungle_",
+  "kalos_",
+  "yoshi_story_",
+  "village2_",
+  "xstadium_",
+  "end_l_common",
+  "battlefield_l_",
+  "xvillage",
+  "tomodachi_",
+  "pictchat_",
+  "zelda_tower",
+];
+
 export const DIMENSIONS_BLASTZONE_BINS: {
   inputStages: string[],
   expectedBins: { [gameName: string]: number }
@@ -788,4 +817,338 @@ export const DIMENSIONS_CEILING_SAME: string[] = [
   "ch_2",
   "ch_3",
 ];
+
+export const RANGES_BLASTZONE_MAX: {inputGameNames: string[], expectedMax: number} = {
+  inputGameNames: [
+    "xcrayon_",
+    "xfzero_",
+    "battlefield_l_",
+    "bossstage_final1_",
+    "village2_",
+  ],
+  expectedMax: 290.332306
+};
+
+export const RANGES_STAGE_MAX: { inputGameNames: string[], expectedMax: number } = {
+  inputGameNames: [
+    "end_l_common",
+    "tomodachi_",
+    "yoshi_story_",
+    "battle_common",
+    "hyrule64_f",
+    "kalos_",
+    "pictchat_",
+    "poke_tengam_",
+    "umbra_f",
+  ],
+  expectedMax: 151.129
+};
+
+export const RANGES_OFFSTAGE_MAX: { inputGameNames: string[], expectedMax: number } = {
+  inputGameNames: [
+    "64jungle_",
+    "xice_",
+    "xstarfox_",
+    "skyward",
+    "mario_castledx_",
+    "dk_waterfall_",
+    "pupupuland64_f",
+    "kirby_fountain_",
+    "wily_",
+    "xvillage",
+    "xmadein_",
+    "mario_rainbow_",
+    "gamer_",
+    "colloseum_",
+  ],
+  expectedMax: 172.7263
+};
+
+export const RANGES_CEILING_MAX: { inputGameNames: string[], expectedMax: number } = {
+  inputGameNames: [
+    "jack_mementoes_",
+    "mariou_",
+    "battlefield_",
+    "poke_stadium_",
+    "xemblem",
+    "xstadium_",
+    "yoshi_cartboard_",
+    "wrecking_",
+    "zelda_tower",
+    "duckhunt_",
+    "xmansion_",
+    "plasma_",
+    "windyhill_",
+  ],
+  expectedMax: 243.8
+};
+
+export const RANGES_BLASTZONE_MAX_ONE: { inputGameNames: string[], expectedMax: number } = {
+  inputGameNames: ["xvillage"],
+  expectedMax: 229.5
+};
+
+export const RANGES_STAGE_MAX_ONE: { inputGameNames: string[], expectedMax: number } = {
+  inputGameNames: ["pictchat_"],
+  expectedMax: 80
+};
+
+export const RANGES_OFFSTAGE_MAX_ONE: { inputGameNames: string[], expectedMax: number } = {
+  inputGameNames: ["end_l_common"],
+  expectedMax: 160.0080225
+};
+
+export const RANGES_CEILING_MAX_ONE: { inputGameNames: string[], expectedMax: number } = {
+  inputGameNames: ["kirby_fountain_"],
+  expectedMax: 191.1096737
+};
+
+
+export const RANGES_BLASTZONE_MIN: { inputGameNames: string[], expectedMin: number } = {
+  inputGameNames: [
+    "plasma_",
+    "end_l_common",
+    "xmadein_",
+    "xvillage",
+    "gamer_",
+    "wily_",
+    "yoshi_cartboard_"
+  ],
+  expectedMin: 180
+};
+
+export const RANGES_STAGE_MIN: { inputGameNames: string[], expectedMin: number } = {
+  inputGameNames: [
+    "mariou_",
+    "skyward",
+    "windyhill_",
+    "xfzero_",
+    "xmansion_",
+    "battlefield_",
+    "xmadein_",
+    "zelda_tower",
+    "duckhunt_",
+    "pupupuland64_f",
+    "bossstage_final1_",
+    "poke_stadium_",
+    "wily_",
+    "village2_",
+    "tomodachi_",
+    "pictchat_",
+    "poke_tengam_",
+    "battlefield_l_",
+    "jack_mementoes_",
+    "colloseum_",
+    "mario_castledx_",
+    "64jungle_",
+    "xstadium_",
+    "yoshi_cartboard_",
+    "gamer_",
+    "wrecking_",
+    "dk_waterfall_",
+    "plasma_"
+  ],
+  expectedMin: 45.53241
+};
+
+export const RANGES_OFFSTAGE_MIN: { inputGameNames: string[], expectedMin: number } = {
+  inputGameNames: [
+    "xcrayon_",
+    "umbra_f",
+    "mariou_",
+    "wrecking_",
+    "xfzero_",
+    "hyrule64_f",
+    "dk_waterfall_",
+    "colloseum_",
+    "poke_tengam_",
+    "kalos_",
+    "xice_",
+    "village2_"
+  ],
+  expectedMin: 147.5
+};
+
+export const RANGES_CEILING_MIN: { inputGameNames: string[], expectedMin: number } = {
+  inputGameNames: [
+    "village2_",
+    "jack_mementoes_",
+    "battlefield_",
+    "64jungle_",
+    "xstarfox_",
+    "poke_tengam_",
+    "xice_",
+    "xmansion_",
+    "zelda_tower",
+    "kalos_",
+    "dk_waterfall_",
+    "duckhunt_",
+    "xemblem",
+    "xfzero_",
+    "hyrule64_f",
+    "gamer_",
+    "yoshi_story_",
+    "xvillage",
+    "kirby_fountain_",
+    "colloseum_",
+    "bossstage_final1_",
+    "end_l_common"
+  ],
+  expectedMin: 159.9231
+};
+
+export const RANGES_BLASTZONE_MIN_ONE: { inputGameNames: string[], expectedMin: number } = {
+  inputGameNames: ["mario_castledx_"],
+  expectedMin: 275
+};
+
+export const RANGES_STAGE_MIN_ONE: { inputGameNames: string[], expectedMin: number } = {
+  inputGameNames: ["poke_stadium_"],
+  expectedMin: 88.14794765
+};
+
+export const RANGES_OFFSTAGE_MIN_ONE: { inputGameNames: string[], expectedMin: number } = {
+  inputGameNames: ["xcrayon_"],
+  expectedMin: 150.0564621
+};
+
+export const RANGES_CEILING_MIN_ONE: { inputGameNames: string[], expectedMin: number } = {
+  inputGameNames: ["pupupuland64_f"],
+  expectedMin: 192.1027776
+};
+
+export const RANGES_BLASTZONE_RANGE: { inputGameNames: string[], expectedRange: number } = {
+  inputGameNames: [
+    "tomodachi_",
+    "gamer_",
+    "pupupuland64_f",
+    "xcrayon_",
+    "colloseum_",
+    "xstarfox_",
+    "duckhunt_",
+    "bossstage_final1_",
+    "wily_",
+    "xmadein_",
+    "poke_stadium_",
+    "windyhill_",
+    "zelda_tower",
+    "hyrule64_f",
+    "poke_tengam_",
+    "battlefield_l_",
+    "mario_castledx_",
+    "xemblem",
+    "yoshi_cartboard_",
+    "plasma_",
+    "xfzero_",
+    "mariou_",
+    "xmansion_",
+    "skyward",
+    "end_l_common"
+  ],
+  expectedRange: 145.055213
+};
+
+export const RANGES_STAGE_RANGE: { inputGameNames: string[], expectedRange: number } = {
+  inputGameNames: [
+    "xice_",
+    "mario_rainbow_",
+    "village2_",
+    "kalos_",
+    "mariou_",
+    "64jungle_",
+    "end_l_common",
+    "battlefield_",
+    "jack_mementoes_",
+    "wrecking_",
+    "xvillage",
+    "xcrayon_",
+    "duckhunt_",
+    "pupupuland64_f",
+    "mario_castledx_",
+    "xmansion_",
+    "pictchat_",
+    "gamer_",
+    "poke_stadium_",
+    "poke_tengam_",
+    "xstarfox_",
+    "dk_waterfall_",
+    "zelda_tower",
+    "xemblem"
+  ],
+  expectedRange: 75.5424305
+};
+
+export const RANGES_OFFSTAGE_RANGE: { inputGameNames: string[], expectedRange: number } = {
+  inputGameNames: [
+    "pupupuland64_f",
+    "mariou_",
+    "pictchat_",
+    "jack_mementoes_",
+    "kalos_",
+    "umbra_f",
+    "end_l_common",
+    "hyrule64_f",
+    "gamer_",
+    "xemblem",
+    "duckhunt_",
+    "yoshi_cartboard_",
+    "battlefield_",
+    "mario_rainbow_",
+    "64jungle_",
+    "xmadein_",
+    "zelda_tower",
+    "xice_",
+    "bossstage_final1_",
+    "xstarfox_",
+    "plasma_",
+    "yoshi_story_",
+    "dk_waterfall_",
+    "wily_",
+    "village2_",
+    "windyhill_",
+  ],
+  expectedRange: 183.3329693
+};
+
+export const RANGES_CEILING_RANGE: { inputGameNames: string[], expectedRange: number } = {
+  inputGameNames: [
+    "umbra_f",
+    "wily_",
+    "poke_tengam_",
+    "xvillage",
+    "dk_waterfall_",
+    "wrecking_",
+    "jack_mementoes_",
+    "xmansion_",
+    "xstadium_",
+    "colloseum_",
+    "duckhunt_",
+    "plasma_",
+    "skyward",
+    "kalos_",
+    "kirby_fountain_",
+    "xcrayon_",
+    "mariou_",
+    "xemblem",
+    "hyrule64_f",
+    "end_l_common",
+    "xmadein_",
+    "bossstage_final1_",
+    "xstarfox_",
+    "pictchat_",
+    "64jungle_",
+    "mario_rainbow_",
+    "battle_common",
+    "zelda_tower",
+  ],
+  expectedRange: 138.0885841
+};
+
+export const RANGES_BLASTZONE_RANGE_ONE: string[] = ["pupupuland64_f"];
+
+export const RANGES_STAGE_RANGE_ONE: string[] = ["tomodachi_"];
+
+export const RANGES_OFFSTAGE_RANGE_ONE: string[] = ["windyhill_"];
+
+export const RANGES_CEILING_RANGE_ONE: string[] = ["battlefield_l_"];
 

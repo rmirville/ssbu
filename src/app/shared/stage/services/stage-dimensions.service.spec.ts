@@ -4,7 +4,8 @@ import { StageDimensionsService } from './stage-dimensions.service';
 
 import { BinnedStageDimensions } from '../models/binned-stage-dimensions.model';
 import { BinnedStageDimensionsSet } from '../models/binned-stage-dimensions-set.model';
-import { StageDimensionsSet, isStageDimensionsSet } from '../models/stage-dimensions-set.model';
+import { StageDimensions } from '../models/stage-dimensions.model';
+import { isStageDimensionsSet } from '../models/stage-dimensions-set.model';
 import { StageDimensionsRange } from '../models/stage-dimensions-range.model';
 
 import * as STAGES from '../models/mocks/stage-dimensions-raw';
@@ -14,7 +15,6 @@ import { Observable } from 'rxjs';
 
 describe('StageDimensionsService', () => {
   let service: StageDimensionsService;
-  let stageDimDB: StageDimensionsSet;
 
   describe('getDimensionsFull()', () => {
 
@@ -80,12 +80,13 @@ describe('StageDimensionsService', () => {
         const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
         actualSet$.subscribe(actualSet => {
           expect(actualSet.bins).toEqual(expectedBinSize);
+          /**/
+          // console.groupEnd();
         });
-        /**/
-        // console.groupEnd();
       }));
 
       describe('dimensions array', () => {
+
         it('contains stages from a provided gameName array', async(() => {
           /**/
           // console.groupCollapsed('=== SPEC - dimensions - contains provided stages ===');
@@ -97,9 +98,9 @@ describe('StageDimensionsService', () => {
             for (const expectedStage of expectedStages) {
               expect(actualStages).withContext(expectedStage).toContain(expectedStage);
             }
+            /**/
+            // console.groupEnd();
           });
-          /**/
-          // console.groupEnd();
         }));
 
         it('omits stages not on the provided gameName array', async(() => {
@@ -114,14 +115,14 @@ describe('StageDimensionsService', () => {
             for (const targetStage of targetGameNames) {
               expect(actualStages.includes(targetStage)).withContext(targetStage).toBe(false);
             }
+            /**/
+            // console.groupEnd();
           });
-          /**/
-          // console.groupEnd();
         }));
 
         it('omits stages in the provided gameName array that are not in the database', async(() => {
           /**/
-          console.groupCollapsed('=== SPEC - dimensions - omits unknown stages ===');
+          // console.groupCollapsed('=== SPEC - dimensions - omits unknown stages ===');
           const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_UNKNOWN.inputGameNames;
           const unknownGameNames: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_UNKNOWN.unknownGameNames;
           service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
@@ -132,9 +133,9 @@ describe('StageDimensionsService', () => {
             for (const unknownGameName of unknownGameNames) {
               expect(actualGameNames.includes(unknownGameName)).withContext(unknownGameName).toBe(false);
             }
+            /**/
+            // console.groupEnd();
           });
-          /**/
-          console.groupEnd();
         }));
 
         it('is the same size as the gameName array submitted', async(() => {
@@ -146,9 +147,39 @@ describe('StageDimensionsService', () => {
           const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
           actualSet$.subscribe(actualSet => {
             expect(actualSet.dimensions.length).toEqual(expectedSize);
+            /**/
+            // console.groupEnd();
           });
+        }));
+
+        it('contains the dimension values stored in the saved dataset', async(() => {
           /**/
-          // console.groupEnd();
+          // console.groupCollapsed('=== SPEC - dimensions - same values as in dataset ===');
+          const inputStages: string[] = STAGE_DIMENSIONS_SVC.DIMENSIONS_VALUES;
+          const expectedStages: StageDimensions[] = STAGE_DIMENSIONS_SET.FULL_SIMPLE.dimensions.filter(stage => inputStages.includes(stage.gameName));
+          service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+          const actualSet$ = service.getDimensionsBinned(inputStages);
+          /**/
+          // console.log(`SPEC - inputStages: ${JSON.stringify(inputStages)}`);
+          // console.log(`SPEC - expectedStages: ${JSON.stringify(expectedStages)}`);
+
+          actualSet$.subscribe(actualSet => {
+            for (const gameName of inputStages) {
+              const expectedValues: StageDimensions = expectedStages.find(   stage => { return (stage.gameName === gameName); }   );
+              const actualValues: BinnedStageDimensions = actualSet.dimensions.find(   stage => { return (stage.gameName === gameName); }   );
+              /**/
+              // console.log(`SPEC - gameName: ${gameName}`);
+              // console.log(`SPEC - expectedValues: ${JSON.stringify(expectedValues)}`);
+              // console.log(`SPEC - actualValues: ${JSON.stringify(actualValues)}`);
+
+              expect(actualValues.blastzoneWidth.value).withContext(`${gameName} blastzoneWidth`).toBeCloseTo(expectedValues.blastzoneWidth, 6);
+              expect(actualValues.stageLength.value).withContext(`${gameName} stageLength`).toBeCloseTo(expectedValues.stageLength, 6);
+              expect(actualValues.offStageDistance.value).withContext(`${gameName} offStageDistance`).toBeCloseTo(expectedValues.offStageDistance, 6);
+              expect(actualValues.ceilingHeight.value).withContext(`${gameName} ceilingHeight`).toBeCloseTo(expectedValues.ceilingHeight, 6);
+              /**/
+              // console.groupEnd();
+            }
+          });
         }));
 
         describe('blastzoneWidth', () => {
@@ -167,9 +198,9 @@ describe('StageDimensionsService', () => {
                 const actualBin: number = actualStageDimensions.blastzoneWidth.bin;
                 expect(actualBin).withContext(gameName).toEqual(expectedBin);
               }
+              /**/
+              // console.groupEnd();
             });
-            /**/
-            // console.groupEnd();
           }));
 
           it('classes values at each bin boundary as the bin closer to the middle', async(() => {
@@ -186,9 +217,9 @@ describe('StageDimensionsService', () => {
                 const actualBin: number = actualStageDimensions.blastzoneWidth.bin;
                 expect(actualBin).withContext(gameName).toEqual(expectedBin);
               }
+              /**/
+              // console.groupEnd();
             });
-            /**/
-            // console.groupEnd();
           }));
 
           it('marks the largest value in the group', async(() => {
@@ -201,9 +232,9 @@ describe('StageDimensionsService', () => {
             actualSet$.subscribe(actualSet => {
               const expectedMaxStageDimensions: BinnedStageDimensions = actualSet.dimensions.find(stage => stage.gameName === targetGameName);
               expect(expectedMaxStageDimensions.blastzoneWidth.max).toBe(true);
+              /**/
+              // console.groupEnd();
             });
-            /**/
-            // console.groupEnd();
           }));
 
           it('doesn\'t mark values that aren\'t the largest in the group', async(() => {
@@ -218,9 +249,9 @@ describe('StageDimensionsService', () => {
                 const targetStageDimensions: BinnedStageDimensions = actualSet.dimensions.find(stage => stage.gameName === targetGameName);
                 expect(targetStageDimensions.blastzoneWidth.max).toBe(false);
               }
+              /**/
+              // console.groupEnd();
             });
-            /**/
-            // console.groupEnd();
           }));
 
           it('marks the smallest value in the group', async(() => {
@@ -233,9 +264,9 @@ describe('StageDimensionsService', () => {
             actualSet$.subscribe(actualSet => {
               const expectedMaxStageDimensions: BinnedStageDimensions = actualSet.dimensions.find(stage => stage.gameName === targetGameName);
               expect(expectedMaxStageDimensions.blastzoneWidth.min).toBe(true);
+              /**/
+              // console.groupEnd();
             });
-            /**/
-            // console.groupEnd();
           }));
 
           it('doesn\'t mark values that aren\'t the smallest in the group', async(() => {
@@ -250,9 +281,9 @@ describe('StageDimensionsService', () => {
                 const targetStageDimensions: BinnedStageDimensions = actualSet.dimensions.find(stage => stage.gameName === targetGameName);
                 expect(targetStageDimensions.blastzoneWidth.min).toBe(false);
               }
+              /**/
+              // console.groupEnd();
             });
-            /**/
-            // console.groupEnd();
           }));
 
           it('marks the value in a one-item array as both the smallest and largest.', async(() => {
@@ -264,8 +295,9 @@ describe('StageDimensionsService', () => {
             actualSet$.subscribe(actualSet => {
               expect(actualSet.dimensions[0].blastzoneWidth.max).withContext('max').toBe(true);
               expect(actualSet.dimensions[0].blastzoneWidth.min).withContext('min').toBe(true);
+              /**/
+              // console.groupEnd();
             });
-            // console.groupEnd();
           }));
 
           it('marks all values in an all-same-value array as both the smallest and largest with a bin of 0.', async(() => {
@@ -280,8 +312,9 @@ describe('StageDimensionsService', () => {
                 expect(binnedDimensions.blastzoneWidth.max).withContext('max').toBe(true);
                 expect(binnedDimensions.blastzoneWidth.min).withContext('min').toBe(true);
               }
+              /**/
+              // console.groupEnd();
             });
-            // console.groupEnd();
           }));
 
         });
@@ -317,9 +350,9 @@ describe('StageDimensionsService', () => {
                 const actualBin: number = actualStageDimensions.stageLength.bin;
                 expect(actualBin).withContext(gameName).toEqual(expectedBin);
               }
+              /**/
+              // console.groupEnd();
             });
-            /**/
-            // console.groupEnd();
           }));
 
           it('marks the largest value in the group', async(() => {
@@ -392,8 +425,9 @@ describe('StageDimensionsService', () => {
                 expect(binnedDimensions.stageLength.max).withContext('max').toBe(true);
                 expect(binnedDimensions.stageLength.min).withContext('min').toBe(true);
               }
+              /**/
+              // console.groupEnd();
             });
-            // console.groupEnd();
           }));
 
         });
@@ -429,9 +463,9 @@ describe('StageDimensionsService', () => {
                 const actualBin: number = actualStageDimensions.offStageDistance.bin;
                 expect(actualBin).withContext(gameName).toEqual(expectedBin);
               }
+              /**/
+              // console.groupEnd();
             });
-            /**/
-            // console.groupEnd();
           }));
 
           it('marks the largest value in the group', async(() => {
@@ -504,8 +538,9 @@ describe('StageDimensionsService', () => {
                 expect(binnedDimensions.offStageDistance.max).withContext('max').toBe(true);
                 expect(binnedDimensions.offStageDistance.min).withContext('min').toBe(true);
               }
+              /**/
+              // console.groupEnd();
             });
-            // console.groupEnd();
           }));
 
         });
@@ -541,9 +576,9 @@ describe('StageDimensionsService', () => {
                 const actualBin: number = actualStageDimensions.ceilingHeight.bin;
                 expect(actualBin).withContext(gameName).toEqual(expectedBin);
               }
+              /**/
+              // console.groupEnd();
             });
-            /**/
-            // console.groupEnd();
           }));
 
           it('marks the largest value in the group', async(() => {
@@ -616,57 +651,362 @@ describe('StageDimensionsService', () => {
                 expect(binnedDimensions.ceilingHeight.max).withContext('max').toBe(true);
                 expect(binnedDimensions.ceilingHeight.min).withContext('min').toBe(true);
               }
+              /**/
+              // console.groupEnd();
             });
-            // console.groupEnd();
           }));
 
         });
 
       });
       
-      xdescribe('ranges', () => {
+      describe('ranges', () => {
 
         describe('blastzoneWidth', () => {
           
-          it('should have a max set to the highest blastzoneWidth value');
-          it('should have a max set to a one-stage set\'s only value');
-          it('should have a min set to the lowest blastzoneWidth value');
-          it('should have a min set to a one-stage set\'s only value');
-          it('should have a range set to the range of the blastzoneWidth values');
-          it('should have a range of zero when there is only one stage');
+          it('should have a max set to the highest blastzoneWidth value', async(() => {
+            /**/
+            // console.groupCollapsed('=== SPEC - ranges - blastzoneWidth - max ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_BLASTZONE_MAX.inputGameNames;
+            const expectedMax: number = STAGE_DIMENSIONS_SVC.RANGES_BLASTZONE_MAX.expectedMax;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.blastzoneWidth.max).toBeCloseTo(expectedMax, 6);
+              /**/
+              // console.groupEnd();
+            });
+          }));
+
+          it('should have a max set to a one-stage set\'s only value', async(() => {
+            /**/
+            // console.groupCollapsed('== SPEC - range - blastzoneWidth - one-item max ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_BLASTZONE_MAX_ONE.inputGameNames;
+            const expectedMax: number = STAGE_DIMENSIONS_SVC.RANGES_BLASTZONE_MAX_ONE.expectedMax;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.blastzoneWidth.max).toBeCloseTo(expectedMax, 6);
+              /**/
+              // console.groupEnd();
+            });
+          }));
+
+          it('should have a min set to the lowest blastzoneWidth value', async(() => {
+            /**/
+            // console.groupCollapsed('=== SPEC - ranges - blastzoneWidth - min ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_BLASTZONE_MIN.inputGameNames;
+            const expectedMin: number = STAGE_DIMENSIONS_SVC.RANGES_BLASTZONE_MIN.expectedMin;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.blastzoneWidth.min).toBeCloseTo(expectedMin, 6);
+              /**/
+              // console.groupEnd();
+            });
+          }));
+
+          it('should have a min set to a one-stage set\'s only value', async(() => {
+            /**/
+            // console.groupCollapsed('=== SPEC - ranges - blastzoneWidth - one-item min ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_BLASTZONE_MIN_ONE.inputGameNames;
+            const expectedMin: number = STAGE_DIMENSIONS_SVC.RANGES_BLASTZONE_MIN_ONE.expectedMin;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.blastzoneWidth.min).toBeCloseTo(expectedMin, 6);
+              /**/
+              // console.groupEnd();
+            });
+          }));
+
+          it('should have a range set to the range of the blastzoneWidth values', async(() => {
+            /**/
+            // console.groupCollapsed('== SPEC - ranges - blastzoneWidth - range ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_BLASTZONE_RANGE.inputGameNames;
+            const expectedRange: number = STAGE_DIMENSIONS_SVC.RANGES_BLASTZONE_RANGE.expectedRange;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.blastzoneWidth.range).toBeCloseTo(expectedRange, 6);
+              /**/
+              // console.groupEnd();
+            });
+          }));
+
+          it('should have a range of zero when there is only one stage', async(() => {
+            /**/
+            // console.groupCollapsed('== SPEC - ranges - blastzoneWidth - one-item range ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_BLASTZONE_RANGE_ONE;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.blastzoneWidth.range).toEqual(0);
+              /**/
+              // console.groupEnd();
+            });
+          }));
 
         });
 
         describe('stageLength', () => {
           
-          it('should have a max set to the highest stageLength value');
-          it('should have a max set to a one-stage set\'s only value');
-          it('should have a min set to the lowest stageLength value');
-          it('should have a min set to a one-stage set\'s only value');
-          it('should have a range set to the range of the stageLength values');
-          it('should have a range of zero when there is only one stage');
+          it('should have a max set to the highest stageLength value', async(() => {
+            /**/
+            // console.groupCollapsed('=== SPEC - ranges - stageLength - max ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_STAGE_MAX.inputGameNames;
+            const expectedMax: number = STAGE_DIMENSIONS_SVC.RANGES_STAGE_MAX.expectedMax;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.stageLength.max).toBeCloseTo(expectedMax, 6);
+              /**/
+              // console.groupEnd();
+            });
+          }));
+
+          it('should have a max set to a one-stage set\'s only value', async(() => {
+            /**/
+            // console.groupCollapsed('== SPEC - range - stageLength - one-item max ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_STAGE_MAX_ONE.inputGameNames;
+            const expectedMax: number = STAGE_DIMENSIONS_SVC.RANGES_STAGE_MAX_ONE.expectedMax;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.stageLength.max).toBeCloseTo(expectedMax, 6);
+              /**/
+              // console.groupEnd();
+            });
+          }));
+
+          it('should have a min set to the lowest stageLength value', async(() => {
+            /**/
+            // console.groupCollapsed('=== SPEC - ranges - stageLength - min ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_STAGE_MIN.inputGameNames;
+            const expectedMin: number = STAGE_DIMENSIONS_SVC.RANGES_STAGE_MIN.expectedMin;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.stageLength.min).toBeCloseTo(expectedMin, 6);
+              /**/
+              // console.groupEnd();
+            });
+          }));
+
+          it('should have a min set to a one-stage set\'s only value', async(() => {
+            /**/
+            // console.groupCollapsed('=== SPEC - ranges - stageLength - one-item min ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_STAGE_MIN_ONE.inputGameNames;
+            const expectedMin: number = STAGE_DIMENSIONS_SVC.RANGES_STAGE_MIN_ONE.expectedMin;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.stageLength.min).toBeCloseTo(expectedMin, 6);
+              /**/
+              // console.groupEnd();
+            });
+          }));
+
+          it('should have a range set to the range of the stageLength values', async(() => {
+            /**/
+            // console.groupCollapsed('== SPEC - ranges - stageLength - range ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_STAGE_RANGE.inputGameNames;
+            const expectedRange: number = STAGE_DIMENSIONS_SVC.RANGES_STAGE_RANGE.expectedRange;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.stageLength.range).toBeCloseTo(expectedRange, 6);
+              /**/
+              // console.groupEnd();
+            });
+          }));
+
+          it('should have a range of zero when there is only one stage', async(() => {
+            /**/
+            // console.groupCollapsed('== SPEC - ranges - stageLength - one-item range ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_STAGE_RANGE_ONE;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.stageLength.range).toEqual(0);
+              /**/
+              // console.groupEnd();
+            });
+          }));
 
         });
 
         describe('offStageDistance', () => {
           
-          it('should have a max set to the highest offStageDistance value');
-          it('should have a max set to a one-stage set\'s only value');
-          it('should have a min set to the lowest offStageDistance value');
-          it('should have a min set to a one-stage set\'s only value');
-          it('should have a range set to the range of the offStageDistance values');
-          it('should have a range of zero when there is only one stage');
+          it('should have a max set to the highest offStageDistance value', async(() => {
+            /**/
+            // console.groupCollapsed('=== SPEC - ranges - offStageDistance - max ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_OFFSTAGE_MAX.inputGameNames;
+            const expectedMax: number = STAGE_DIMENSIONS_SVC.RANGES_OFFSTAGE_MAX.expectedMax;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.offStageDistance.max).toBeCloseTo(expectedMax, 6);
+              /**/
+              // console.groupEnd();
+            });
+          }));
+
+          it('should have a max set to a one-stage set\'s only value', async(() => {
+            /**/
+            // console.groupCollapsed('== SPEC - range - offStageDistance - one-item max ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_OFFSTAGE_MAX_ONE.inputGameNames;
+            const expectedMax: number = STAGE_DIMENSIONS_SVC.RANGES_OFFSTAGE_MAX_ONE.expectedMax;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.offStageDistance.max).toBeCloseTo(expectedMax, 6);
+              /**/
+              // console.groupEnd();
+            });
+          }));
+
+          it('should have a min set to the lowest offStageDistance value', async(() => {
+            /**/
+            // console.groupCollapsed('=== SPEC - ranges - offStageDistance - min ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_OFFSTAGE_MIN.inputGameNames;
+            const expectedMin: number = STAGE_DIMENSIONS_SVC.RANGES_OFFSTAGE_MIN.expectedMin;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.offStageDistance.min).toBeCloseTo(expectedMin, 6);
+              /**/
+              // console.groupEnd();
+            });
+          }));
+
+          it('should have a min set to a one-stage set\'s only value', async(() => {
+            /**/
+            // console.groupCollapsed('=== SPEC - ranges - offStageDistance - one-item min ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_OFFSTAGE_MIN_ONE.inputGameNames;
+            const expectedMin: number = STAGE_DIMENSIONS_SVC.RANGES_OFFSTAGE_MIN_ONE.expectedMin;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.offStageDistance.min).toBeCloseTo(expectedMin, 6);
+              /**/
+              // console.groupEnd();
+            });
+          }));
+
+          it('should have a range set to the range of the offStageDistance values', async(() => {
+            /**/
+            // console.groupCollapsed('== SPEC - ranges - offStageDistance - range ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_OFFSTAGE_RANGE.inputGameNames;
+            const expectedRange: number = STAGE_DIMENSIONS_SVC.RANGES_OFFSTAGE_RANGE.expectedRange;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.offStageDistance.range).toBeCloseTo(expectedRange, 6);
+              /**/
+              // console.groupEnd();
+            });
+          }));
+
+          it('should have a range of zero when there is only one stage', async(() => {
+            /**/
+            // console.groupCollapsed('== SPEC - ranges - offStageDistance - one-item range ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_OFFSTAGE_RANGE_ONE;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.offStageDistance.range).toEqual(0);
+              /**/
+              // console.groupEnd();
+            });
+          }));
 
         });
 
         describe('ceilingHeight', () => {
           
-          it('should have a max set to the highest ceilingHeight value');
-          it('should have a max set to a one-stage set\'s only value');
-          it('should have a min set to the lowest ceilingHeight value');
-          it('should have a min set to a one-stage set\'s only value');
-          it('should have a range set to the range of the ceilingHeight values');
-          it('should have a range of zero when there is only one stage');
+          it('should have a max set to the highest ceilingHeight value', async(() => {
+            /**/
+            // console.groupCollapsed('=== SPEC - ranges - ceilingHeight - max ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_CEILING_MAX.inputGameNames;
+            const expectedMax: number = STAGE_DIMENSIONS_SVC.RANGES_CEILING_MAX.expectedMax;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.ceilingHeight.max).toBeCloseTo(expectedMax, 6);
+              /**/
+              // console.groupEnd();
+            });
+          }));
+
+          it('should have a max set to a one-stage set\'s only value', async(() => {
+            /**/
+            // console.groupCollapsed('== SPEC - range - ceilingHeight - one-item max ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_CEILING_MAX_ONE.inputGameNames;
+            const expectedMax: number = STAGE_DIMENSIONS_SVC.RANGES_CEILING_MAX_ONE.expectedMax;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.ceilingHeight.max).toBeCloseTo(expectedMax, 6);
+              /**/
+              // console.groupEnd();
+            });
+          }));
+
+          it('should have a min set to the lowest ceilingHeight value', async(() => {
+            /**/
+            // console.groupCollapsed('=== SPEC - ranges - ceilingHeight - min ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_CEILING_MIN.inputGameNames;
+            const expectedMin: number = STAGE_DIMENSIONS_SVC.RANGES_CEILING_MIN.expectedMin;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.ceilingHeight.min).toBeCloseTo(expectedMin, 6);
+              /**/
+              // console.groupEnd();
+            });
+          }));
+
+          it('should have a min set to a one-stage set\'s only value', async(() => {
+            /**/
+            // console.groupCollapsed('=== SPEC - ranges - ceilingHeight - one-item min ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_CEILING_MIN_ONE.inputGameNames;
+            const expectedMin: number = STAGE_DIMENSIONS_SVC.RANGES_CEILING_MIN_ONE.expectedMin;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.ceilingHeight.min).toBeCloseTo(expectedMin, 6);
+              /**/
+              // console.groupEnd();
+            });
+          }));
+
+          it('should have a range set to the range of the ceilingHeight values', async(() => {
+            /**/
+            // console.groupCollapsed('== SPEC - ranges - ceilingHeight - range ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_CEILING_RANGE.inputGameNames;
+            const expectedRange: number = STAGE_DIMENSIONS_SVC.RANGES_CEILING_RANGE.expectedRange;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.ceilingHeight.range).toBeCloseTo(expectedRange, 6);
+              /**/
+              // console.groupEnd();
+            });
+          }));
+
+          it('should have a range of zero when there is only one stage', async(() => {
+            /**/
+            // console.groupCollapsed('== SPEC - ranges - ceilingHeight - one-item range ===');
+            const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.RANGES_CEILING_RANGE_ONE;
+            service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+            const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+            actualSet$.subscribe(actualSet => {
+              expect(actualSet.ranges.ceilingHeight.range).toEqual(0);
+              /**/
+              // console.groupEnd();
+            });
+          }));
 
         });
 

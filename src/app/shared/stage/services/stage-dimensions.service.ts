@@ -162,7 +162,7 @@ export class StageDimensionsService {
       /**/
       // console.log('stageDimensionsService::getDimensionsBinned().binnedDimensionsSet$');
       // console.log(`_dimensionsSetFull: ${JSON.stringify(this._dimensionsSetFull)}`);
-      // console.log(`gameNames: ${gameNames}`);
+      // console.log(`gameNames: ${JSON.stringify(gameNames)}`);
       const numBins: number = 5;
       let stages: StageDimensions[] = this._dimensionsSetFull.dimensions.filter(stage => {
         return gameNames.includes(stage.gameName);
@@ -213,24 +213,24 @@ export class StageDimensionsService {
         dimensions: binnedDimensions,
         ranges: {
           blastzoneWidth: {
-            min: 1,
-            max: 1,
-            range: 1
+            min: binParamsSet.blastzoneWidth.bounds[0],
+            max: binParamsSet.blastzoneWidth.bounds[numBins],
+            range: binParamsSet.blastzoneWidth.range
           },
           stageLength: {
-            min: 1,
-            max: 1,
-            range: 1
+            min: binParamsSet.stageLength.bounds[0],
+            max: binParamsSet.stageLength.bounds[numBins],
+            range: binParamsSet.stageLength.range
           },
           offStageDistance: {
-            min: 1,
-            max: 1,
-            range: 1
+            min: binParamsSet.offStageDistance.bounds[0],
+            max: binParamsSet.offStageDistance.bounds[numBins],
+            range: binParamsSet.offStageDistance.range
           },
           ceilingHeight: {
-            min: 1,
-            max: 1,
-            range: 1
+            min: binParamsSet.ceilingHeight.bounds[0],
+            max: binParamsSet.ceilingHeight.bounds[numBins],
+            range: binParamsSet.ceilingHeight.range
           }
         }
       };
@@ -246,6 +246,8 @@ export class StageDimensionsService {
     /**/
     // console.group('StageDimensionsService::_getBinParams()');
     let values: number[] = stages.map(stage => stage[dimension]);
+    /**/
+    // console.log(`values: ${JSON.stringify(values)}`);
     const min: number = Math.min(...values);
     const max: number = Math.max(...values);
     const range: number = max - min;

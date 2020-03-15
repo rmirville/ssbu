@@ -1152,3 +1152,25 @@ export const RANGES_OFFSTAGE_RANGE_ONE: string[] = ["windyhill_"];
 
 export const RANGES_CEILING_RANGE_ONE: string[] = ["battlefield_l_"];
 
+export const INVALID_NO_DB: string[] = [
+  "gamer_",
+  "battlefield_",
+  "xmansion_",
+  "xstadium_",
+  "dk_waterfall_",
+  "kirby_fountain_",
+  "hyrule64_f"
+];
+
+export const INVALID_UNKNOWN_GAMENAMES: string[] = [
+  "nPcZgZXShW",
+  "1GXmKy2Qii",
+  "WT93arlW8e",
+  "a82YwRgo2O",
+  "HBy6bokM0C",
+  "m994stwtGs",
+  "vSskwA0AVo",
+  "rEGT06B6Qc",
+  "TJ1BCWPLQJ",
+  "dYj8r2Hxkc"
+];

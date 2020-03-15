@@ -1,6 +1,10 @@
 import { async } from '@angular/core/testing';
+import { Observable } from 'rxjs';
 
 import { StageDimensionsService } from './stage-dimensions.service';
+
+import { DataStoreNotFoundError } from '../../errors/data-store-not-found-error.model';
+import { NotFoundError } from '../../errors/not-found-error.model';
 
 import { BinnedStageDimensions } from '../models/binned-stage-dimensions.model';
 import { BinnedStageDimensionsSet } from '../models/binned-stage-dimensions-set.model';
@@ -11,7 +15,6 @@ import { StageDimensionsRange } from '../models/stage-dimensions-range.model';
 import * as STAGES from '../models/mocks/stage-dimensions-raw';
 import * as STAGE_DIMENSIONS_SET from '../models/mocks/stage-dimensions-set';
 import * as STAGE_DIMENSIONS_SVC from '../models/mocks/stage-dimensions-service';
-import { Observable } from 'rxjs';
 
 describe('StageDimensionsService', () => {
   let service: StageDimensionsService;
@@ -1014,11 +1017,52 @@ describe('StageDimensionsService', () => {
     });
 
     describe('data validation', () => {
-      it('returns an error if there is no saved dataset');
+      it('returns an error if there is no saved dataset', async(() => {
+        /**/
+        // console.groupCollapsed('== SPEC - getDimensionsBinned() - validate - no db ===');
+        const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.INVALID_NO_DB;
+        expect(() => {
+          const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+        }).toThrow(new DataStoreNotFoundError());
+        /**/
+        // console.groupEnd();
+      }));
 
-      it('returns an error when no gameNames are provided');
+      it('returns an error when no gameNames are provided', async(() => {
+        /**/
+        // console.groupCollapsed('== SPEC - getDimensionsBinned() - validate - no gameNames ===');
+        const inputGameNames: string[] = [];
+        expect(() => {
+          const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+        }).toThrow(new NotFoundError());
+        /**/
+        // console.groupEnd();
+      }));
 
-      it('returns an error when no provided gameNames are in the database');
+      it('returns an error when no provided gameNames are in the database', async(() => {
+        /**/
+        // console.groupCollapsed('== SPEC - getDimensionsBinned() - validate - unknown gamenames ===');
+        const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.INVALID_UNKNOWN_GAMENAMES;
+        service._dimensionsSetFull = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+        const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
+        actualSet$.subscribe({
+          next: () => {
+            fail('Expected function to throw an exception');
+            /**/
+            // console.groupEnd();
+          },
+          error: e => {
+            expect(e instanceof NotFoundError).toBe(true);
+            /**/
+            // console.groupEnd();
+          },
+          complete: () => {
+            fail('Expected function to throw an exception');
+            /**/
+            // console.groupEnd();
+          }
+        });
+      }));
     });
 
   });

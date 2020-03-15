@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+
+import { DataStoreNotFoundError } from '../../errors/data-store-not-found-error.model';
+import { NotFoundError } from '../../errors/not-found-error.model';
 
 import { BinnedStageDimensions } from '../models/binned-stage-dimensions.model';
 import { BinnedStageDimensionsSet } from '../models/binned-stage-dimensions-set.model';
@@ -42,7 +45,15 @@ interface BinningParamsSet {
 })
 export class StageDimensionsService {
 
-  _dimensionsSetFull: StageDimensionsSet;
+  _dimensionsSetFull: StageDimensionsSet = {
+    dimensions: [],
+    ranges: {
+      blastzoneWidth: null,
+      stageLength: null,
+      offStageDistance: null,
+      ceilingHeight: null
+    }
+  };
 
   /**
    * Creates an instance of StageDimensionsService.
@@ -158,6 +169,20 @@ export class StageDimensionsService {
    * @memberof StageDimensionsService
    */
   getDimensionsBinned(gameNames: string[]): Observable<BinnedStageDimensionsSet> {
+    /**/
+    // console.group('StageDimensionsService::getDimensionsBinned()');
+    if (!this._dimensionsSetFull.dimensions.length) {
+      /**/
+      // console.groupEnd();
+      throw new DataStoreNotFoundError();
+    }
+
+    if (gameNames.length === 0) {
+      /**/
+      // console.groupEnd();
+      throw new NotFoundError();
+    }
+
     const binnedDimensionsSet$: Observable<BinnedStageDimensionsSet> = new Observable<BinnedStageDimensionsSet>(observer => {
       /**/
       // console.log('stageDimensionsService::getDimensionsBinned().binnedDimensionsSet$');
@@ -181,6 +206,13 @@ export class StageDimensionsService {
       const dbGameNames: string[] = stages.map(stage => stage.gameName);
 
       gameNames = gameNames.filter(gameName => { return dbGameNames.includes(gameName); });
+      /**/
+      // console.log(`filtered gameNames: ${JSON.stringify(gameNames)}`);
+      if(gameNames.length === 0) {
+        /**/
+        // console.groupEnd();
+        observer.error(new NotFoundError());
+      }
       for (const gameName of gameNames) {
         /**/
         // console.log(`gameName: ${gameName}`);
@@ -239,6 +271,8 @@ export class StageDimensionsService {
       observer.next(binnedDimensionsSet);
       observer.complete;
     });
+    /**/
+    // console.groupEnd();
     return binnedDimensionsSet$;
   }
 

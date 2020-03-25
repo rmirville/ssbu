@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { StageSelectInfo } from '../../models/stage-select-info.model';
 
@@ -8,4 +8,5 @@ import { StageSelectInfo } from '../../models/stage-select-info.model';
 })
 export class StageSelectMockComponent {
   @Input() stages: StageSelectInfo[];
+  @Output() submitSelection: EventEmitter<string[]> = new EventEmitter<string[]>();
 }

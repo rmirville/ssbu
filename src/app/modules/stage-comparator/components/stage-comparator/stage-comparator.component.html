@@ -4,7 +4,7 @@
       <h1 class="page-title">Stage Comparison</h1>
     </div>
   </div>
-  <ssbu-stage-select [stages]="stageSelectInfo"></ssbu-stage-select>
+  <ssbu-stage-select [stages]="stageSelectInfo" (submitSelection)="getStats()"></ssbu-stage-select>
   <div class="card">
     <div class="card-header">
       <h2>Stage Dimensions</h2>
@@ -22,13 +22,13 @@
         </li>
       </ul>
       <ng-container *ngIf="view == 'graph'">
-        <ssbu-stage-comparator-graph></ssbu-stage-comparator-graph>
+        <ssbu-stage-comparator-graph [stageData]="binnedStageDimensionsSet"></ssbu-stage-comparator-graph>
       </ng-container>
       <ng-container *ngIf="view == 'text'">
-        <ssbu-stage-comparator-text-table></ssbu-stage-comparator-text-table>
+        <ssbu-stage-comparator-text-table [stageData]="binnedStageDimensionsSet"></ssbu-stage-comparator-text-table>
       </ng-container>
       <ng-container *ngIf="view == 'number'">
-        <ssbu-stage-comparator-number-table></ssbu-stage-comparator-number-table>
+        <ssbu-stage-comparator-number-table [stageData]="binnedStageDimensionsSet"></ssbu-stage-comparator-number-table>
       </ng-container>
     </div>
   </div>

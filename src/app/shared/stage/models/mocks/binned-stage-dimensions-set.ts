@@ -1,3 +1,5 @@
+import { BinnedStageDimensionsSet } from '../binned-stage-dimensions-set.model';
+
 export const VALID = {
   bins: 44,
   dimensions: [
@@ -883,3 +885,56 @@ export const BAD_DATA = {
   },
 };
 
+export const COMPARATOR_SANITY_COMPONENT_ACCESS: BinnedStageDimensionsSet = {
+  bins: 5,
+  dimensions: [{
+    name: 'something',
+    gameName: 'some',
+    blastzoneWidth: {
+      value: 5,
+      bin: 3,
+      min: true,
+      max: true
+    },
+    stageLength: {
+      value: 10,
+      bin: 3,
+      min: true,
+      max: true
+    },
+    offStageDistance: {
+      value: 15,
+      bin: 3,
+      min: true,
+      max: true
+    },
+    ceilingHeight: {
+      value: 20,
+      bin: 3,
+      min: true,
+      max: true
+    }
+  }],
+  ranges: {
+    blastzoneWidth: {
+      min: 5,
+      max: 5,
+      range: 0
+    },
+    stageLength: {
+      min: 10,
+      max: 10,
+      range: 0
+    },
+    offStageDistance: {
+      min: 15,
+      max: 15,
+      range: 0
+    },
+    ceilingHeight: {
+      min: 20,
+      max: 20,
+      range: 0
+    }
+  }
+};

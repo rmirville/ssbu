@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { StageDimensionsService } from '../../../../shared/stage/services/stage-dimensions.service';
+
+import { DataStoreNotFoundError } from '../../../../shared/errors/data-store-not-found-error.model';
+
+import { BinnedStageDimensionsSet } from '../../../../shared/stage/models/binned-stage-dimensions-set.model';
 import { Stage } from '../../../../shared/stage/models/stage.model';
 import { StageDimensionsSet } from '../../../../shared/stage/models/stage-dimensions-set.model';
 import { StageSelectInfo } from '../../../../shared/stage/models/stage-select-info.model';
@@ -15,10 +20,12 @@ export class StageComparatorComponent implements OnInit {
   stages: Stage[];
   stageSelectInfo: StageSelectInfo[];
   stageDimensionsSet: StageDimensionsSet;
+  binnedStageDimensionsSet: BinnedStageDimensionsSet;
   view: string;
 
 
   constructor(
+    private sds: StageDimensionsService,
     private route: ActivatedRoute
   ) { }
 
@@ -55,4 +62,21 @@ export class StageComparatorComponent implements OnInit {
     }
   }
 
+  getStats(stages: string[]) {
+    // TODO: validate the input
+    // get the stats
+    this.sds.getDimensionsBinned(stages).subscribe(
+      {
+        next: (binnedData: BinnedStageDimensionsSet) => {
+          this.binnedStageDimensionsSet = binnedData;
+        },
+        error: (e) => {
+          // generate the datastore if not found
+          /*if (e instanceof DataStoreNotFoundError) {
+            // console.log(e);
+          }*/
+        }
+      }
+    );
+  }
 }

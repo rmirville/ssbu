@@ -2,32 +2,57 @@ import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, throwError } from 'rxjs';
 
-import { Observable } from 'rxjs';
+import { asyncData } from '../../../../testing/async-observable-helpers';
 
 import { StageComparatorComponent } from './stage-comparator.component';
-import { StageSelectInfo } from '../../../../shared/stage/models/stage-select-info.model';
+
+import { DataStoreNotFoundError } from '../../../../shared/errors/data-store-not-found-error.model';
 
 import { StageSelectMockComponent } from '../../../../shared/stage/components/mocks/stage-select.mock.component';
 import { StageComparatorGraphMockComponent } from '../../../../shared/stage/components/mocks/stage-comparator-graph.mock.component';
 import { StageComparatorTextTableMockComponent } from '../../../../shared/stage/components/mocks/stage-comparator-text-table.mock.component';
 import { StageComparatorNumberTableMockComponent } from '../../../../shared/stage/components/mocks/stage-comparator-number-table.mock.component';
 
+import { StageDimensionsService } from '../../../../shared/stage/services/stage-dimensions.service';
+
+import { BinnedStageDimensionsSet } from '../../../../shared/stage/models/binned-stage-dimensions-set.model';
+import { StageSelectInfo } from '../../../../shared/stage/models/stage-select-info.model';
+
 import { STAGES_ONE } from '../../../../shared/stage/models/mocks/stages';
 import * as STAGE_SELECTIONS from '../../../../shared/stage/models/mocks/stage-select-info';
 import { DIMENSIONS_SET_ONE } from '../../../../shared/stage/models/mocks/stage-dimensions-set';
+import * as STAGE_COMPARATOR_CMP from '../../../../shared/stage/models/mocks/stage-comparator-component';
 
 describe('StageComparatorComponent', () => {
   let comparator: StageComparatorComponent;
   let fixture: ComponentFixture<StageComparatorComponent>;
-  let fixtureMock: {
-    select: ComponentFixture<StageSelectMockComponent>,
-    graph: ComponentFixture<StageComparatorGraphMockComponent>,
-    text: ComponentFixture<StageComparatorTextTableMockComponent>,
-    number: ComponentFixture<StageComparatorNumberTableMockComponent>
+  let mocks: {
+    select: {
+      comp: StageSelectMockComponent,
+      dElem: DebugElement,
+      fixture: ComponentFixture<StageSelectMockComponent>
+    },
+    graph: {
+      comp: StageComparatorGraphMockComponent,
+      dElem: DebugElement,
+      fixture: ComponentFixture<StageComparatorGraphMockComponent>
+    },
+    text: {
+      comp: StageComparatorTextTableMockComponent,
+      dElem: DebugElement,
+      fixture: ComponentFixture<StageComparatorTextTableMockComponent>
+    },
+    number: {
+      comp: StageComparatorNumberTableMockComponent,
+      dElem: DebugElement,
+      fixture: ComponentFixture<StageComparatorNumberTableMockComponent>
+    }
   };
   let activatedRouteStub: Partial<ActivatedRoute>;
   let dElem: DebugElement;
+  let stageDimensionsSpy: { getDimensionsFull: jasmine.Spy, getDimensionsBinned: jasmine.Spy };
 
   beforeEach(async(() => {
     activatedRouteStub = {
@@ -40,6 +65,7 @@ describe('StageComparatorComponent', () => {
         observer.complete();
       })
     };
+    stageDimensionsSpy = jasmine.createSpyObj('StageDimensionsService', ['getDimensionsFull', 'getDimensionsBinned']);
     TestBed.configureTestingModule({
       declarations: [
         StageComparatorComponent,
@@ -52,6 +78,10 @@ describe('StageComparatorComponent', () => {
         {
           provide: ActivatedRoute,
           useValue: activatedRouteStub
+        },
+        {
+          provide: StageDimensionsService,
+          useValue: stageDimensionsSpy
         }
       ],
       imports: []
@@ -61,14 +91,31 @@ describe('StageComparatorComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(StageComparatorComponent);
-    fixtureMock = {
-      select: TestBed.createComponent(StageSelectMockComponent),
-      graph: TestBed.createComponent(StageComparatorGraphMockComponent),
-      text: TestBed.createComponent(StageComparatorTextTableMockComponent),
-      number: TestBed.createComponent(StageComparatorNumberTableMockComponent)
+    mocks = {
+      select: {
+        comp: null,
+        dElem: null,
+        fixture: TestBed.createComponent(StageSelectMockComponent)
+      },
+      graph: {
+        comp: null,
+        dElem: null,
+        fixture: TestBed.createComponent(StageComparatorGraphMockComponent)
+      },
+      text: {
+        comp: null,
+        dElem: null,
+        fixture: TestBed.createComponent(StageComparatorTextTableMockComponent)
+      },
+      number: {
+        comp: null,
+        dElem: null,
+        fixture: TestBed.createComponent(StageComparatorNumberTableMockComponent)
+      }
     };
     comparator = fixture.componentInstance;
     fixture.detectChanges();
+
     dElem = fixture.debugElement;
   });
 
@@ -127,21 +174,235 @@ describe('StageComparatorComponent', () => {
 
   });
 
-  describe('template', () => {
-    beforeEach(() => {
+  describe('StageSelectComponent::submitSelection event handling', () => {
 
+    it('should call getStats()', () => {
+      /**/
+      // console.groupCollapsed('=== SPEC - submitSelection - call getStats() ===')
+      let getStatsSpy: jasmine.Spy = spyOn(comparator, 'getStats').and.stub();
+
+      mocks.select.comp = dElem.query(By.css('ssbu-stage-select')).componentInstance;
+      mocks.select.comp.submitSelection.emit(['ZTqzLekxtt','OeqGT2BfYF']);
+      fixture.detectChanges();
+
+      expect(getStatsSpy).toHaveBeenCalled();
+      /**/
+      // console.groupEnd();
     });
+
+    describe('getStats()', () => {
+
+      it('should call getDimensionsBinned()', async(() => {
+        /**/
+        // console.groupCollapsed('=== SPEC - getStats - call getDimensionsBinned() ===');
+        const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_CALLBINNED.inputGameNames;
+        const expectedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_CALLBINNED.expectedData;
+        stageDimensionsSpy.getDimensionsBinned.and.returnValue(asyncData(expectedData));
+        comparator.getStats(inputGameNames);
+
+        fixture.whenStable().then(() => {
+          fixture.detectChanges();
+
+          expect(stageDimensionsSpy.getDimensionsBinned).toHaveBeenCalled();
+          /**/
+          // console.groupEnd();
+        });
+      }));
+
+      it('should send a BinnedStageDimensionsSet to the number table component', async(() => {
+        /**/
+        // console.groupCollapsed('=== SPEC - getStats - send data to number table ===');
+        const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_NUMBER.inputGameNames;
+        const expectedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_NUMBER.expectedData;
+        stageDimensionsSpy.getDimensionsBinned.and.returnValue(asyncData(expectedData));
+
+        comparator.view = 'number';
+        fixture.detectChanges();
+
+        comparator.getStats(inputGameNames);
+
+        fixture.whenStable().then(() => {
+          fixture.detectChanges();
+
+          mocks.number.comp = dElem.query(By.css('ssbu-stage-comparator-number-table')).componentInstance;
+          expect(mocks.number.comp.stageData).toEqual(expectedData);
+          /**/
+          // console.groupEnd();
+        });
+      }));
+
+      it('should send a BinnedStageDimensionsSet to the number table when the table is available', async(() => {
+        /**/
+        // console.groupCollapsed('=== SPEC - getStats - send data to number table when available ===');
+        const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_NUMBER.inputGameNames;
+        const expectedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_NUMBER.expectedData;
+        stageDimensionsSpy.getDimensionsBinned.and.returnValue(asyncData(expectedData));
+
+        comparator.view = 'graph';
+        fixture.detectChanges();
+
+        comparator.getStats(inputGameNames);
+
+        fixture.whenStable().then(() => {
+          fixture.detectChanges();
+
+          comparator.view = 'number';
+          fixture.detectChanges();
+
+          mocks.number.comp = dElem.query(By.css('ssbu-stage-comparator-number-table')).componentInstance;
+          expect(mocks.number.comp.stageData).toEqual(expectedData);
+          /**/
+          // console.groupEnd();
+        });
+      }));
+
+      it('should send a BinnedStageDimensionsSet to the text table component', async(() => {
+        /**/
+        // console.groupCollapsed('=== SPEC - getStats - send data to text table ===');
+        const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_TEXT.inputGameNames;
+        const expectedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_TEXT.expectedData;
+        stageDimensionsSpy.getDimensionsBinned.and.returnValue(asyncData(expectedData));
+
+        comparator.view = 'text';
+        comparator.getStats(inputGameNames);
+
+        fixture.whenStable().then(() => {
+          fixture.detectChanges();
+
+          mocks.text.comp = dElem.query(By.css('ssbu-stage-comparator-text-table')).componentInstance;
+          expect(mocks.text.comp.stageData).toEqual(expectedData);
+          /**/
+          // console.groupEnd();
+        });
+      }));
+
+      it('should send a BinnedStageDimensionsSet to the text table when the table is available', async(() => {
+        /**/
+        // console.groupCollapsed('=== SPEC - getStats - send data to text table when available ===');
+        const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_TEXT.inputGameNames;
+        const expectedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_TEXT.expectedData;
+        stageDimensionsSpy.getDimensionsBinned.and.returnValue(asyncData(expectedData));
+
+        comparator.view = 'graph';
+        fixture.detectChanges();
+
+        comparator.getStats(inputGameNames);
+
+        fixture.whenStable().then(() => {
+          fixture.detectChanges();
+
+          comparator.view = 'text';
+          fixture.detectChanges();
+
+          mocks.text.comp = dElem.query(By.css('ssbu-stage-comparator-text-table')).componentInstance;
+          expect(mocks.text.comp.stageData).toEqual(expectedData);
+          /**/
+          // console.groupEnd();
+        });
+      }));
+
+      it('should send a BinnedStageDimensionsSet to the graph component', async(() => {
+        /**/
+        // console.groupCollapsed('=== SPEC - getStats - send data to graph ===');
+        const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_GRAPH.inputGameNames;
+        const expectedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_GRAPH.expectedData;
+        stageDimensionsSpy.getDimensionsBinned.and.returnValue(asyncData(expectedData));
+
+        comparator.view = 'graph';
+        comparator.getStats(inputGameNames);
+
+        fixture.whenStable().then(() => {
+          fixture.detectChanges();
+
+          mocks.graph.comp = dElem.query(By.css('ssbu-stage-comparator-graph')).componentInstance;
+          expect(mocks.graph.comp.stageData).toEqual(expectedData);
+          /**/
+          // console.groupEnd();
+        });
+      }));
+
+      it('should send a BinnedStageDimensionsSet to the graph when the graph is available', async(() => {
+        /**/
+        // console.groupCollapsed('=== SPEC - getStats - send data to graph when available ===');
+        const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_GRAPH.inputGameNames;
+        const expectedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_GRAPH.expectedData;
+        stageDimensionsSpy.getDimensionsBinned.and.returnValue(asyncData(expectedData));
+
+        comparator.view = 'number';
+        fixture.detectChanges();
+
+        comparator.getStats(inputGameNames);
+
+        fixture.whenStable().then(() => {
+          fixture.detectChanges();
+
+          comparator.view = 'graph';
+          fixture.detectChanges();
+
+          mocks.text.comp = dElem.query(By.css('ssbu-stage-comparator-graph')).componentInstance;
+          expect(mocks.text.comp.stageData).toEqual(expectedData);
+          /**/
+          // console.groupEnd();
+        });
+      }));
+
+      xit('should refuse to update the view components when an empty set is received', async(() => {
+        /**/
+        // console.groupCollapsed('=== SPEC - getStats - empty set -> no change ===');
+        const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_EMPTY.inputGameNames;
+        const emptyGameNames: string[] = [];
+        const expectedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_EMPTY.expectedData;
+        // stageDimensionsSpy.getDimensionsBinned.and.returnValues(asyncData(expectedData), throwError(new StageNotFoundError()));
+
+        comparator.view = 'graph';
+        comparator.getStats(inputGameNames);
+
+        fixture.whenStable().then(() => {
+          fixture.detectChanges();
+
+          comparator.getStats(emptyGameNames);
+
+          fixture.whenStable().then(() => {
+            fixture.detectChanges();
+            mocks.graph.comp = dElem.query(By.css('ssbu-stage-comparator-graph')).componentInstance;
+            expect(mocks.graph.comp.stageData).toEqual(expectedData);
+            /**/
+            // console.groupEnd();
+          });
+        });
+      }));
+
+      xit('should call StageComparatorResolver::???() if it gets a DataStoreNotFoundError from getDimensionsBinned()', async(() => {
+        const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_STORENOTFOUND.inputGameNames;
+        const binnedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_STORENOTFOUND.binnedData;
+        stageDimensionsSpy.getDimensionsBinned.and.returnValues(throwError(new DataStoreNotFoundError()), asyncData(binnedData));
+        // TODO: replace getDimensionsFull spy with StageComparatorResolver method spy
+        // stageDimensionsSpy.getDimensionsFull.and.stub();
+
+        comparator.view = 'graph';
+        comparator.getStats(inputGameNames);
+        fixture.detectChanges();
+
+        // expect(stageDimensionsSpy.getDimensionsFull).toHaveBeenCalled();
+      }));
+
+      xit('should refuse to update the view components if it gets a (Stage?)NotFoundError from getDimensionsBinned()');
+      xit('should tell the user to refresh the page if it gets a (Stage?)NotFoundError from getDimensionsBinned()');
+    });
+  });
+
+  describe('template', () => {
 
     it(`should show the stage select component`, () => {
       /**/
       // console.group('SPEC - Show StageSelectComponent');
-      let expectedContent: string = fixtureMock.select.nativeElement.textContent;
+      let expectedContent: string = mocks.select.fixture.nativeElement.textContent;
       /**/
       // console.log(`expectedContent: ${expectedContent}`);
-      let selectDElem: DebugElement = dElem.query(By.css('ssbu-stage-select'));
+      mocks.select.dElem = dElem.query(By.css('ssbu-stage-select'));
       /**/
       // console.log(`selectDElem: ${JSON.stringify(selectDElem.nativeElement)}`);
-      let actualContent: string = selectDElem.nativeElement.textContent;
+      let actualContent: string = mocks.select.dElem.nativeElement.textContent;
       /**/
       // console.log(`selectDElem.textContent: ${JSON.stringify(selectDElem.nativeElement.textContent)}`);
       // console.log(`actualContent: ${actualContent}`);
@@ -153,14 +414,14 @@ describe('StageComparatorComponent', () => {
     it('should provide the stage selection from the ActivatedRoute to the stage select component', () => {
       /**/
       // console.group('SPEC - Send stage select info to StageSelectComponent');
-      let selectDElem: DebugElement = dElem.query(By.css('ssbu-stage-select'));
+      mocks.select.dElem = dElem.query(By.css('ssbu-stage-select'));
       /**/
       // console.log(`selectDElem: ${JSON.stringify(selectDElem.nativeElement)}`);
-      let selectComp: StageSelectMockComponent = selectDElem.componentInstance;
+      mocks.select.comp = mocks.select.dElem.componentInstance;
       /**/
       // console.log(`selectComp: ${JSON.stringify(selectComp)}`);
       // console.log(`selectComp.stages: ${JSON.stringify(Object.keys(selectComp))}`);
-      let actualStages: StageSelectInfo[] = selectComp.stages;
+      let actualStages: StageSelectInfo[] = mocks.select.comp.stages;
 
       expect(actualStages).toEqual(STAGE_SELECTIONS.ONE);
       /**/
@@ -170,20 +431,20 @@ describe('StageComparatorComponent', () => {
     describe('default view', () => {
 
       it(`should show the graph component by default`, () => {
-        let expectedContent: string = fixtureMock.graph.nativeElement.textContent;
-        let graphDElem: DebugElement = dElem.query(By.css('ssbu-stage-comparator-graph'));
-        let actualContent: string = graphDElem.nativeElement.textContent;
+        let expectedContent: string = mocks.graph.fixture.nativeElement.textContent;
+        mocks.graph.dElem = dElem.query(By.css('ssbu-stage-comparator-graph'));
+        let actualContent: string = mocks.graph.dElem.nativeElement.textContent;
         expect(actualContent).toEqual(expectedContent);
       });
 
       it(`should not show the text table component by default`, () => {
-        let textDElem: DebugElement = dElem.query(By.css('ssbu-stage-comparator-text-table'));
-        expect(textDElem).toBeNull();
+        mocks.text.dElem = dElem.query(By.css('ssbu-stage-comparator-text-table'));
+        expect(mocks.text.dElem).toBeNull();
       });
 
       it(`should not show the number table component by default`, () => {
-        let numDElem: DebugElement = dElem.query(By.css('ssbu-stage-comparator-number-table'));
-        expect(numDElem).toBeNull();
+        mocks.number.dElem = dElem.query(By.css('ssbu-stage-comparator-number-table'));
+        expect(mocks.number.dElem).toBeNull();
       });
 
       it(`should have a graph button with the 'active' class`, () => {
@@ -212,20 +473,20 @@ describe('StageComparatorComponent', () => {
       });
 
       it(`should show the graph component`, () => {
-        let graphDElem: DebugElement = dElem.query(By.css('ssbu-stage-comparator-graph'));
-        let expectedContent: string = graphDElem.nativeElement.textContent;
-        let actualContent: string = fixtureMock.graph.nativeElement.textContent;
+        mocks.graph.dElem = dElem.query(By.css('ssbu-stage-comparator-graph'));
+        let expectedContent: string = mocks.graph.fixture.nativeElement.textContent;
+        let actualContent: string = mocks.graph.dElem.nativeElement.textContent;
         expect(actualContent).toEqual(expectedContent);
       });
 
       it(`should not show the text table component`, () => {
-        let textDElem: DebugElement = dElem.query(By.css('ssbu-stage-comparator-text-table'));
-        expect(textDElem).toBeNull();
+        mocks.text.dElem = dElem.query(By.css('ssbu-stage-comparator-text-table'));
+        expect(mocks.text.dElem).toBeNull();
       });
 
       it(`should not show the number table component`, () => {
-        let numDElem: DebugElement = dElem.query(By.css('ssbu-stage-comparator-number-table'));
-        expect(numDElem).toBeNull();
+        mocks.number.dElem = dElem.query(By.css('ssbu-stage-comparator-number-table'));
+        expect(mocks.number.dElem).toBeNull();
       });
 
       it(`should have a graph button with the 'active' class`, () => {
@@ -253,20 +514,20 @@ describe('StageComparatorComponent', () => {
       });
 
       it('should not show the graph component', () => {
-        let graphDElem: DebugElement = dElem.query(By.css('ssbu-stage-comparator-graph'));
-        expect(graphDElem).toBeNull();
+        mocks.graph.dElem = dElem.query(By.css('ssbu-stage-comparator-graph'));
+        expect(mocks.graph.dElem).toBeNull();
       });
 
       it('should show the text table component', () => {
-        let expectedContent: string = fixtureMock.text.nativeElement.textContent;
-        let textDElem: DebugElement = dElem.query(By.css('ssbu-stage-comparator-text-table'));
-        let actualContent: string = textDElem.nativeElement.textContent;
+        let expectedContent: string = mocks.text.fixture.nativeElement.textContent;
+        mocks.text.dElem = dElem.query(By.css('ssbu-stage-comparator-text-table'));
+        let actualContent: string = mocks.text.dElem.nativeElement.textContent;
         expect(actualContent).toEqual(expectedContent);
       });
 
       it('should not show the number component', () => {
-        let numDElem: DebugElement = dElem.query(By.css('ssbu-stage-comparator-number-table'));
-        expect(numDElem).toBeNull();
+        mocks.number.dElem = dElem.query(By.css('ssbu-stage-comparator-number-table'));
+        expect(mocks.number.dElem).toBeNull();
       });
 
       it(`should have a graph button without the 'active' class`, () => {
@@ -294,19 +555,19 @@ describe('StageComparatorComponent', () => {
       });
 
       it('should not show the graph component', () => {
-        let graphDElem: DebugElement = dElem.query(By.css('ssbu-stage-comparator-graph'));
-        expect(graphDElem).toBeNull();
+        mocks.graph.dElem = dElem.query(By.css('ssbu-stage-comparator-graph'));
+        expect(mocks.graph.dElem).toBeNull();
       });
 
       it('should not show the text table component', () => {
-        let textDElem: DebugElement = dElem.query(By.css('ssbu-stage-comparator-text-table'));
-        expect(textDElem).toBeNull();
+        mocks.text.dElem = dElem.query(By.css('ssbu-stage-comparator-text-table'));
+        expect(mocks.text.dElem).toBeNull();
       });
 
       it('should show the number table component', () => {
-        let expectedContent: string = fixtureMock.number.nativeElement.textContent;
-        let numDElem: DebugElement = dElem.query(By.css('ssbu-stage-comparator-number-table'));
-        let actualContent: string = numDElem.nativeElement.textContent;
+        let expectedContent: string = mocks.number.fixture.nativeElement.textContent;
+        mocks.number.dElem = dElem.query(By.css('ssbu-stage-comparator-number-table'));
+        let actualContent: string = mocks.number.dElem.nativeElement.textContent;
         expect(actualContent).toEqual(expectedContent);
       });
 

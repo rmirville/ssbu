@@ -1,6 +1,7 @@
 /**
- *
- *
+ * Represents an error that occurs when a required
+ * value is not provided or available
+ * 
  * @export
  * @class NotFoundError
  * @extends {Error}

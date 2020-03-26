@@ -755,7 +755,7 @@ export const GETSTATS_EMPTY: { inputGameNames: string[], expectedData: BinnedSta
   }
 };
 
-export const GETSTATS_STORENOTFOUND: {inputGameNames: string[], binnedData: BinnedStageDimensionsSet} = {
+export const GETSTATS_SETNOTFOUND: {inputGameNames: string[], binnedData: BinnedStageDimensionsSet} = {
   inputGameNames: [
     "battle_common",
     "xcrayon_",

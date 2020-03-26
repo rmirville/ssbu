@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { StageDimensionsService } from '../../../../shared/stage/services/stage-dimensions.service';
 
-import { DataStoreNotFoundError } from '../../../../shared/errors/data-store-not-found-error.model';
+import { DatasetNotFoundError } from '../../../../shared/errors/dataset-not-found-error.model';
 
 import { BinnedStageDimensionsSet } from '../../../../shared/stage/models/binned-stage-dimensions-set.model';
 import { Stage } from '../../../../shared/stage/models/stage.model';

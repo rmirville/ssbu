@@ -8,7 +8,7 @@ import { asyncData } from '../../../../testing/async-observable-helpers';
 
 import { StageComparatorComponent } from './stage-comparator.component';
 
-import { DataStoreNotFoundError } from '../../../../shared/errors/data-store-not-found-error.model';
+import { DatasetNotFoundError } from '../../../../shared/errors/dataset-not-found-error.model';
 
 import { StageSelectMockComponent } from '../../../../shared/stage/components/mocks/stage-select.mock.component';
 import { StageComparatorGraphMockComponent } from '../../../../shared/stage/components/mocks/stage-comparator-graph.mock.component';
@@ -372,10 +372,10 @@ describe('StageComparatorComponent', () => {
         });
       }));
 
-      xit('should call StageComparatorResolver::???() if it gets a DataStoreNotFoundError from getDimensionsBinned()', async(() => {
-        const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_STORENOTFOUND.inputGameNames;
-        const binnedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_STORENOTFOUND.binnedData;
-        stageDimensionsSpy.getDimensionsBinned.and.returnValues(throwError(new DataStoreNotFoundError()), asyncData(binnedData));
+      xit('should call StageComparatorResolver::???() if it gets a DatasetNotFoundError from getDimensionsBinned()', async(() => {
+        const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_SETNOTFOUND.inputGameNames;
+        const binnedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_SETNOTFOUND.binnedData;
+        stageDimensionsSpy.getDimensionsBinned.and.returnValues(throwError(new DatasetNotFoundError()), asyncData(binnedData));
         // TODO: replace getDimensionsFull spy with StageComparatorResolver method spy
         // stageDimensionsSpy.getDimensionsFull.and.stub();
 

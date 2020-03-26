@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 
 import { StageDimensionsService } from './stage-dimensions.service';
 
-import { DataStoreNotFoundError } from '../../errors/data-store-not-found-error.model';
+import { DatasetNotFoundError } from '../../errors/dataset-not-found-error.model';
 import { NotFoundError } from '../../errors/not-found-error.model';
 
 import { BinnedStageDimensions } from '../models/binned-stage-dimensions.model';
@@ -1023,7 +1023,7 @@ describe('StageDimensionsService', () => {
         const inputGameNames: string[] = STAGE_DIMENSIONS_SVC.INVALID_NO_DB;
         expect(() => {
           const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames);
-        }).toThrow(new DataStoreNotFoundError());
+        }).toThrow(new DatasetNotFoundError());
         /**/
         // console.groupEnd();
       }));

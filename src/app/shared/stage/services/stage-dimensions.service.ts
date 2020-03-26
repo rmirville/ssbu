@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { DataStoreNotFoundError } from '../../errors/data-store-not-found-error.model';
+import { DatasetNotFoundError } from '../../errors/dataset-not-found-error.model';
 import { NotFoundError } from '../../errors/not-found-error.model';
 
 import { BinnedStageDimensions } from '../models/binned-stage-dimensions.model';
@@ -174,7 +174,7 @@ export class StageDimensionsService {
     if (!this._dimensionsSetFull.dimensions.length) {
       /**/
       // console.groupEnd();
-      throw new DataStoreNotFoundError();
+      throw new DatasetNotFoundError();
     }
 
     if (gameNames.length === 0) {

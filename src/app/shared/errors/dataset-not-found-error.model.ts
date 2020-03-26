@@ -1,13 +1,13 @@
 import { NotFoundError } from './not-found-error.model';
 /**
  * Represents an error that occurs when a required
- * data store is not provided
+ * dataset is not provided
  *
  * @export
- * @class DataStoreNotFoundError
+ * @class DatasetNotFoundError
  * @extends {NotFoundError}
  */
-export class DataStoreNotFoundError extends NotFoundError {
+export class DatasetNotFoundError extends NotFoundError {
   constructor(message?: string) {
     super(message);
 

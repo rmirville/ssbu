@@ -1,6 +1,6 @@
 /**
  * Represents an error that occurs when a function
- * argument has no required values
+ * argument is blank or has no required values
  * 
  * @export
  * @class EmptyArgumentError

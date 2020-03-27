@@ -170,3 +170,5 @@ export const GETMAPS_OUTPUT_VALUE: StagePieceMap[] = [
     pieceName: "COL_curve1"
   }
 ];
+
+export const GETMAPS_INVALID_UNKNOWN: string = 'avn9 24lnjsf8';

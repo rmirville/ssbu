@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { StagePieceMap } from '../models/stage-piece-map.model';
+
+import { DataNotFoundError } from '../../errors/data-not-found-error.model';
+import { EmptyArgumentError } from '../../errors/empty-argument-error.model';
 
 /**
  * Service class providing StagePiece selection data for each Stage
@@ -191,11 +194,17 @@ export class StagePieceMapService {
   constructor() { }
 
   getMaps(mapSetName: string): Observable<StagePieceMap[]> {
+    if (mapSetName.trim().length === 0) {
+      throw new EmptyArgumentError();
+    }
     const maps$ = new Observable<StagePieceMap[]>((observer) => {
       if ( Object.keys(this.mapSets).includes(mapSetName) ) {
         observer.next(this.mapSets[mapSetName]);
-        observer.complete();
       }
+      else {
+        observer.error(new DataNotFoundError());
+      }
+      observer.complete();
     });
     return maps$;
   }

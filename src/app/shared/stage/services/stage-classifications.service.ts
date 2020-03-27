@@ -15,7 +15,7 @@ import { StageClassifications } from '../models/stage-classifications.model';
 })
 export class StageClassificationsService {
 
-  classificationsStore: StageClassifications[] = [
+  classificationsSet: StageClassifications[] = [
     {
       gameName: "village2_",
       series: "Animal Crossing",
@@ -281,7 +281,7 @@ export class StageClassificationsService {
       stages.forEach(stage => {
 
         let classifiedStage = stage;
-        let attributes = this.classificationsStore.find(classifications => classifications.gameName === stage.gameName);
+        let attributes = this.classificationsSet.find(classifications => classifications.gameName === stage.gameName);
 
         if (attributes === undefined) {
           classifiedStage.series = null;

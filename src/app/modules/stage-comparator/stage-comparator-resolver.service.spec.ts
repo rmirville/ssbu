@@ -15,10 +15,12 @@ import { StageDimensionsSet, isStageDimensionsSet } from '../../shared/stage/mod
 import { StageSelectInfo, isStageSelectInfo } from '../../shared/stage/models/stage-select-info.model';
 
 import { StageComparatorResolverService } from './stage-comparator-resolver.service';
+import { StagePieceMapService } from '../../shared/stage/services/stage-piece-map.service';
 
 import { STAGES_ONE, STAGES_TWO, STAGES_THREE } from '../../shared/stage/models/mocks/stages';
 import * as STAGE_DIMENSIONS_SETS from '../../shared/stage/models/mocks/stage-dimensions-set';
 import * as STAGE_SELECTIONS from '../../shared/stage/models/mocks/stage-select-info';
+import * as PIECE_MAPS from '../../shared/stage/models/mocks/stage-piece-map';
 import { EmptyMockComponent } from '../../shared/mocks/empty.mock.component';
 
 describe('StageComparatorResolverService', () => {
@@ -26,6 +28,7 @@ describe('StageComparatorResolverService', () => {
   let stageLoaderSpy: { loadStages: jasmine.Spy };
   let stageDimensionsSpy: { getDimensionsFull: jasmine.Spy };
   let stageClassificationsSpy: { classifyStages: jasmine.Spy };
+  let stagePieceMapStub: Partial<StagePieceMapService>;
   let router: Router;
 
   beforeEach(() => {
@@ -49,8 +52,11 @@ describe('StageComparatorResolverService', () => {
     stageLoaderSpy = jasmine.createSpyObj('StageLoaderService', ['loadStages']);
     stageDimensionsSpy = jasmine.createSpyObj('StageDimensionsService', ['getDimensionsFull']);
     stageClassificationsSpy = jasmine.createSpyObj('StageClassificationsService', ['classifyStages']);
+    stagePieceMapStub = {
+      getMaps: () => { return asyncData(PIECE_MAPS.STAGE_COMPARATOR); }
+    };
     router = TestBed.get(Router);
-    resolverService = new StageComparatorResolverService(stageLoaderSpy as any, stageDimensionsSpy as any, stageClassificationsSpy as any, router);
+    resolverService = new StageComparatorResolverService(stageLoaderSpy as any, stageDimensionsSpy as any, stageClassificationsSpy as any, stagePieceMapStub as any, router);
   });
 
   beforeEach(inject([Router, Location], (_router: Router) => {

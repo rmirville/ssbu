@@ -8,6 +8,7 @@ import { asyncData } from '../../../../testing/async-observable-helpers';
 
 import { StageComparatorComponent } from './stage-comparator.component';
 
+import { DataNotFoundError } from '../../../../shared/errors/data-not-found-error.model';
 import { DatasetNotFoundError } from '../../../../shared/errors/dataset-not-found-error.model';
 
 import { StageSelectMockComponent } from '../../../../shared/stage/components/mocks/stage-select.mock.component';
@@ -16,14 +17,17 @@ import { StageComparatorTextTableMockComponent } from '../../../../shared/stage/
 import { StageComparatorNumberTableMockComponent } from '../../../../shared/stage/components/mocks/stage-comparator-number-table.mock.component';
 
 import { StageDimensionsService } from '../../../../shared/stage/services/stage-dimensions.service';
+import { StagePieceMapService } from '../../../../shared/stage/services/stage-piece-map.service';
 
 import { BinnedStageDimensionsSet } from '../../../../shared/stage/models/binned-stage-dimensions-set.model';
+import { StageDimensionsSet } from '../../../../shared/stage/models/stage-dimensions-set.model';
 import { StageSelectInfo } from '../../../../shared/stage/models/stage-select-info.model';
 
 import { STAGES_ONE } from '../../../../shared/stage/models/mocks/stages';
 import * as STAGE_SELECTIONS from '../../../../shared/stage/models/mocks/stage-select-info';
-import { DIMENSIONS_SET_ONE } from '../../../../shared/stage/models/mocks/stage-dimensions-set';
+import * as STAGE_DIMENSIONS_SET from '../../../../shared/stage/models/mocks/stage-dimensions-set';
 import * as STAGE_COMPARATOR_CMP from '../../../../shared/stage/models/mocks/stage-comparator-component';
+import * as PIECE_MAPS from '../../../../shared/stage/models/mocks/stage-piece-map';
 
 describe('StageComparatorComponent', () => {
   let comparator: StageComparatorComponent;
@@ -53,19 +57,25 @@ describe('StageComparatorComponent', () => {
   let activatedRouteStub: Partial<ActivatedRoute>;
   let dElem: DebugElement;
   let stageDimensionsSpy: { getDimensionsFull: jasmine.Spy, getDimensionsBinned: jasmine.Spy };
+  let stagePieceMapStub: Partial<StagePieceMapService>;
 
   beforeEach(async(() => {
     activatedRouteStub = {
       data: Observable.create((observer) => {
         observer.next({stageData: {
           stages: STAGES_ONE,
-          dimensionsFull: DIMENSIONS_SET_ONE,
+          dimensionsFull: STAGE_DIMENSIONS_SET.DIMENSIONS_SET_ONE,
           stageSelectInfo: STAGE_SELECTIONS.ONE
         }});
         observer.complete();
       })
     };
     stageDimensionsSpy = jasmine.createSpyObj('StageDimensionsService', ['getDimensionsFull', 'getDimensionsBinned']);
+    stagePieceMapStub = {
+      getMaps: function(mapSetName: string) {
+        return asyncData(PIECE_MAPS.STAGE_COMPARATOR);
+      }
+    };
     TestBed.configureTestingModule({
       declarations: [
         StageComparatorComponent,
@@ -82,6 +92,10 @@ describe('StageComparatorComponent', () => {
         {
           provide: StageDimensionsService,
           useValue: stageDimensionsSpy
+        },
+        {
+          provide: StagePieceMapService,
+          useValue: stagePieceMapStub
         }
       ],
       imports: []
@@ -136,7 +150,7 @@ describe('StageComparatorComponent', () => {
   });
 
   it('should have a fullDimensionsSet property set to the DimensionsSet provided by the ActivatedRoute on init', () => {
-    expect(comparator.stageDimensionsSet).toEqual(DIMENSIONS_SET_ONE);
+    expect(comparator.stageDimensionsSet).toEqual(STAGE_DIMENSIONS_SET.DIMENSIONS_SET_ONE);
   });
 
   describe('setView()', () => {
@@ -346,13 +360,13 @@ describe('StageComparatorComponent', () => {
         });
       }));
 
-      xit('should refuse to update the view components when an empty set is received', async(() => {
+      it('should refuse to update the view components when an empty set is received', async(() => {
         /**/
         // console.groupCollapsed('=== SPEC - getStats - empty set -> no change ===');
         const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_EMPTY.inputGameNames;
         const emptyGameNames: string[] = [];
         const expectedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_EMPTY.expectedData;
-        // stageDimensionsSpy.getDimensionsBinned.and.returnValues(asyncData(expectedData), throwError(new StageNotFoundError()));
+        stageDimensionsSpy.getDimensionsBinned.and.returnValues(asyncData(expectedData), throwError(new DataNotFoundError()));
 
         comparator.view = 'graph';
         comparator.getStats(inputGameNames);
@@ -372,22 +386,117 @@ describe('StageComparatorComponent', () => {
         });
       }));
 
-      xit('should call StageComparatorResolver::???() if it gets a DatasetNotFoundError from getDimensionsBinned()', async(() => {
+      it('should not call getDimensionsBinned when an empty set is received', async(() => {
+        /**/
+        // console.groupCollapsed('=== SPEC - getStats - empty set - no call to getDimensionsBinned ===');
+        const emptyGameNames: string[] = [];
+
+        comparator.view = 'graph';
+        comparator.getStats(emptyGameNames);
+
+        fixture.whenStable().then(() => {
+          fixture.detectChanges();
+
+          expect(stageDimensionsSpy.getDimensionsBinned).toHaveBeenCalledTimes(0);
+          /**/
+          // console.groupEnd();
+        });
+      }));
+
+      it('should call StagePieceMapService::getMaps() if it gets a DatasetNotFoundError from getDimensionsBinned()', async(() => {
+        let pieceMapSpy: { getMaps: jasmine.Spy } = jasmine.createSpyObj('StagePieceMapService', ['getMaps']);
+        TestBed.resetTestingModule();
+
+        TestBed.configureTestingModule({
+          declarations: [
+            StageComparatorComponent,
+            StageSelectMockComponent,
+            StageComparatorGraphMockComponent,
+            StageComparatorTextTableMockComponent,
+            StageComparatorNumberTableMockComponent
+          ],
+          providers: [
+            {
+              provide: ActivatedRoute,
+              useValue: activatedRouteStub
+            },
+            {
+              provide: StageDimensionsService,
+              useValue: stageDimensionsSpy
+            },
+            {
+              provide: StagePieceMapService,
+              useValue: pieceMapSpy
+            }
+          ],
+          imports: []
+        }).compileComponents();
+        fixture = TestBed.createComponent(StageComparatorComponent);
+        comparator = fixture.componentInstance;
+        fixture.detectChanges();
+
+        /**/
+        // console.groupCollapsed('=== SPEC - getStats - call getMaps on DatasetNotFoundError ===');
         const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_SETNOTFOUND.inputGameNames;
         const binnedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_SETNOTFOUND.binnedData;
+        const dimensionsData: StageDimensionsSet = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+        pieceMapSpy.getMaps.and.returnValue(asyncData(PIECE_MAPS.STAGE_COMPARATOR));
+        stageDimensionsSpy.getDimensionsFull.and.returnValue(asyncData(dimensionsData));
         stageDimensionsSpy.getDimensionsBinned.and.returnValues(throwError(new DatasetNotFoundError()), asyncData(binnedData));
-        // TODO: replace getDimensionsFull spy with StageComparatorResolver method spy
-        // stageDimensionsSpy.getDimensionsFull.and.stub();
 
         comparator.view = 'graph';
         comparator.getStats(inputGameNames);
-        fixture.detectChanges();
-
-        // expect(stageDimensionsSpy.getDimensionsFull).toHaveBeenCalled();
+        fixture.whenStable().then(() => {
+          fixture.detectChanges();
+          expect(pieceMapSpy.getMaps).toHaveBeenCalled();
+          /**/
+          // console.groupEnd();
+        });
       }));
 
-      xit('should refuse to update the view components if it gets a (Stage?)NotFoundError from getDimensionsBinned()');
-      xit('should tell the user to refresh the page if it gets a (Stage?)NotFoundError from getDimensionsBinned()');
+      it('should call StageDimensionsService::getDimensionsFull() if it gets a DatasetNotFoundError from getDimensionsBinned()', async(() => {
+        /**/
+        // console.groupCollapsed('=== SPEC - getStats - call getDimensionsFull on DatasetNotFoundError ===');
+        const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_SETNOTFOUND.inputGameNames;
+        const binnedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_SETNOTFOUND.binnedData;
+        const dimensionsData: StageDimensionsSet = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+        stageDimensionsSpy.getDimensionsFull.and.returnValue(asyncData(dimensionsData));
+        stageDimensionsSpy.getDimensionsBinned.and.returnValues(throwError(new DatasetNotFoundError()), asyncData(binnedData));
+
+        comparator.view = 'graph';
+        comparator.getStats(inputGameNames);
+        fixture.whenStable().then(() => {
+          fixture.detectChanges();
+
+          expect(stageDimensionsSpy.getDimensionsFull).toHaveBeenCalled();
+          /**/
+          // console.groupEnd();
+        });
+      }));
+
+      it('should still be able to get data if it gets a DatasetNotFoundError from getDimensionsBinned()', async(() => {
+        /**/
+        // console.groupCollapsed('=== SPEC - getStats - get data on DatasetNotFound ===');
+        const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_SETNOTFOUND.inputGameNames;
+        const binnedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_SETNOTFOUND.binnedData;
+        const dimensionsData: StageDimensionsSet = STAGE_DIMENSIONS_SET.FULL_SIMPLE;
+        stageDimensionsSpy.getDimensionsFull.and.returnValue(asyncData(dimensionsData));
+        stageDimensionsSpy.getDimensionsBinned.and.returnValues(throwError(new DatasetNotFoundError()), asyncData(binnedData));
+
+        comparator.view = 'graph';
+        comparator.getStats(inputGameNames);
+        fixture.whenStable().then(() => {
+          /**/
+          // console.group('SPEC - whenStable().then()');
+          fixture.detectChanges();
+          expect(comparator.binnedStageDimensionsSet).toEqual(binnedData);
+          /**/
+          // console.groupEnd();
+        });
+      }));
+
+      xit('should refuse to update the view components if it gets a DataNotFoundError from getDimensionsBinned()');
+      xit('should tell the user to refresh the page if it gets a DataNotFoundError from getDimensionsBinned()');
     });
   });
 

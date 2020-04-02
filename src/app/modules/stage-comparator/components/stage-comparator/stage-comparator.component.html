@@ -4,7 +4,7 @@
       <h1 class="page-title">Stage Comparison</h1>
     </div>
   </div>
-  <ssbu-stage-select [stages]="stageSelectInfo" (submitSelection)="getStats()"></ssbu-stage-select>
+  <ssbu-stage-select [stages]="stageSelectInfo" [parentEvent$]="selectSubject$.asObservable()" (submitSelection)="getStats()"></ssbu-stage-select>
   <div class="card">
     <div class="card-header">
       <h2>Stage Dimensions</h2>

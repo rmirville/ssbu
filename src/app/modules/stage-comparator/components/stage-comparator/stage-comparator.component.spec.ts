@@ -495,8 +495,37 @@ describe('StageComparatorComponent', () => {
         });
       }));
 
-      xit('should refuse to update the view components if it gets a DataNotFoundError from getDimensionsBinned()');
-      xit('should tell the user to refresh the page if it gets a DataNotFoundError from getDimensionsBinned()');
+      it('should refuse to update the view components if it gets a DataNotFoundError from getDimensionsBinned()', async(() => {
+        const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_DATANOTFOUND_VIEW.inputGameNames;
+        const unknownGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_DATANOTFOUND_VIEW.unknownGameNames;
+        const expectedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_DATANOTFOUND_VIEW.expectedData;
+        stageDimensionsSpy.getDimensionsBinned.and.returnValues(asyncData(expectedData), throwError(new DataNotFoundError()));
+        
+        comparator.getStats(inputGameNames);
+        comparator.view = 'graph';
+        
+        fixture.whenStable().then(() => {
+          fixture.detectChanges();
+
+          mocks.graph.comp = dElem.query(By.css('ssbu-stage-comparator-graph')).componentInstance;
+          expect(mocks.graph.comp.stageData).toEqual(expectedData);
+        });
+      }));
+
+      it('should notify the select component if it gets a DataNotFoundError from getDimensionsBinned()', async(() => {
+        const unknownGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_DATANOTFOUND_NOTICE;
+        stageDimensionsSpy.getDimensionsBinned.and.returnValue(throwError(new DataNotFoundError()));
+
+        comparator.view = 'text';
+        comparator.getStats(unknownGameNames);
+
+        fixture.whenStable().then(() => {
+          fixture.detectChanges();
+
+          mocks.select.comp = dElem.query(By.css('ssbu-stage-select')).componentInstance;
+          expect(mocks.select.comp.fatalError).toBe(true);
+        });
+      }));
     });
   });
 

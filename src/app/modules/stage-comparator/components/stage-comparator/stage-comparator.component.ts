@@ -1,10 +1,11 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { StageDimensionsService } from '../../../../shared/stage/services/stage-dimensions.service';
 import { StagePieceMapService } from '../../../../shared/stage/services/stage-piece-map.service';
 
+import { DataNotFoundError } from '../../../../shared/errors/data-not-found-error.model';
 import { DatasetNotFoundError } from '../../../../shared/errors/dataset-not-found-error.model';
 
 import { BinnedStageDimensionsSet } from '../../../../shared/stage/models/binned-stage-dimensions-set.model';
@@ -22,10 +23,10 @@ export class StageComparatorComponent implements OnInit {
 
   stages: Stage[];
   stageSelectInfo: StageSelectInfo[];
+  selectSubject$: Subject<string>;
   stageDimensionsSet: StageDimensionsSet;
   binnedStageDimensionsSet: BinnedStageDimensionsSet;
   view: string;
-
 
   constructor(
     private sds: StageDimensionsService,
@@ -48,6 +49,7 @@ export class StageComparatorComponent implements OnInit {
       /**/
       // console.log(`this.stageSelectInfo: ${JSON.stringify(this.stageSelectInfo)}`);
     });
+    this.selectSubject$ = new Subject<string>();
     this.view = 'graph';
     /**/
     // console.groupEnd();
@@ -96,6 +98,9 @@ export class StageComparatorComponent implements OnInit {
                   });
                 });
               });
+            }
+            else if (e instanceof DataNotFoundError) {
+              this.selectSubject$.next('fatalError');
             }
           });
         }

@@ -1,4 +1,5 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { StageSelectInfo } from '../../models/stage-select-info.model';
 
@@ -7,12 +8,14 @@ import { StageSelectInfo } from '../../models/stage-select-info.model';
   template:
     `<ssbu-stage-select
       [stages]="stages"
+      [parentEvent$]="selectSubject$.asObservable()"
       (submitSelection)="updateSelection($event)"
     ></ssbu-stage-select>`
 })
 export class StageSelectHostMockComponent implements OnInit, OnChanges {
   stages: StageSelectInfo[];
   selectedStages: string[];
+  selectSubject$: Subject<string> = new Subject<string>();
 
   constructor() {
     this.selectedStages = [];
@@ -25,7 +28,8 @@ export class StageSelectHostMockComponent implements OnInit, OnChanges {
     console.groupEnd();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   updateSelection(emittedStages: string[]) {
     this.selectedStages = [...emittedStages];

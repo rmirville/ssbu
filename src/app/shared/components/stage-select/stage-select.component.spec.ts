@@ -48,7 +48,7 @@ describe('StageSelectComponent', () => {
     expect(selectHostComp.stages.length).withContext('the number of stages should be the same').toEqual(expectedStages.length);
     expect(selectHostComp.stages).toEqual(expectedStages);
     
-  })
+  });
   
   it('should have a stages property set to a provided value on init', () => {
     let expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.ONE;
@@ -1466,205 +1466,251 @@ describe('StageSelectComponent', () => {
     });
   });
 
-  describe('update button', () => {
-    it('should exist', () => {
-      /**/
-      // console.groupCollapsed(`=== SPEC - update button exists`);
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_EXISTS;
-      selectHostComp.stages = [...inputStages];
-      selectHostFixture.detectChanges();
-      
-      const buttonDElem: DebugElement = selectDElem.query(By.css(`button[type="submit"]`));
-      expect(buttonDElem.nativeElement.textContent.trim()).toEqual('Update');
-      /**/
-      // console.groupEnd();
-    });
+  describe('submit section', () => {
+    describe('update button', () => {
+      it('should exist', () => {
+        /**/
+        // console.groupCollapsed(`=== SPEC - update button exists`);
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_EXISTS;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
 
-    it('should be disabled when no stages are selected', () => {
-      /**/
-      // console.group('=== SPEC - disable button when no stages are selected');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_DISABLED;
-      selectHostComp.stages = [...inputStages];
-      selectHostFixture.detectChanges();
+        const buttonDElem: DebugElement = selectDElem.query(By.css(`button[type="submit"]`));
+        expect(buttonDElem.nativeElement.textContent.trim()).toEqual('Update');
+        /**/
+        // console.groupEnd();
+      });
 
-      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of stageCheckDElems) {
-        while (checkDElem.nativeElement.checked === true) {
-          checkDElem.nativeElement.click();
-          selectHostFixture.detectChanges();
+      it('should be disabled when no stages are selected', () => {
+        /**/
+        // console.group('=== SPEC - disable button when no stages are selected');
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_DISABLED;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+        for (const checkDElem of stageCheckDElems) {
+          while (checkDElem.nativeElement.checked === true) {
+            checkDElem.nativeElement.click();
+            selectHostFixture.detectChanges();
+          }
         }
-      }
-      selectHostFixture.detectChanges();
+        selectHostFixture.detectChanges();
 
-      const submitDElem: DebugElement = selectDElem.query(By.css(`button[type="submit"]`));
-      expect(submitDElem.nativeElement.disabled).toBe(true);
-      selectHostFixture.detectChanges();
+        const submitDElem: DebugElement = selectDElem.query(By.css(`button[type="submit"]`));
+        expect(submitDElem.nativeElement.disabled).toBe(true);
+        selectHostFixture.detectChanges();
 
-      /**/
-      // console.groupEnd();
-    });
+        /**/
+        // console.groupEnd();
+      });
 
-    it('should be enabled when there are stages selected', () => {
-      /**/
-      // console.group("=== SPEC - enable button when stages are selected");
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_ENABLED.inputStages;
-      const selectedGameNames: string[] = STAGE_SELECTIONS.UPDATE_ENABLED.selectedStages;
-      selectHostComp.stages = [...inputStages];
-      selectHostFixture.detectChanges();
+      it('should be enabled when there are stages selected', () => {
+        /**/
+        // console.group("=== SPEC - enable button when stages are selected");
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_ENABLED.inputStages;
+        const selectedGameNames: string[] = STAGE_SELECTIONS.UPDATE_ENABLED.selectedStages;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
 
-      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of stageCheckDElems) {
-        while (checkDElem.nativeElement.checked === true) {
-          checkDElem.nativeElement.click();
-          selectHostFixture.detectChanges();
+        const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+        for (const checkDElem of stageCheckDElems) {
+          while (checkDElem.nativeElement.checked === true) {
+            checkDElem.nativeElement.click();
+            selectHostFixture.detectChanges();
+          }
         }
-      }
 
-      for (const selectedGameName of selectedGameNames) {
-        const selectedStageDElem: DebugElement = selectDElem.query(By.css(`.classification .form-check-input[name="${selectedGameName}"]`));
-        selectedStageDElem.nativeElement.click();
-      }
-      selectHostFixture.detectChanges();
-
-      const submitDElem: DebugElement = selectDElem.query(By.css(`button[type="submit"]`));
-      expect(submitDElem.nativeElement.disabled).toBe(false);
-
-      /**/
-      // console.groupEnd();
-    });
-
-    it('should send the selected gameNames', () => {
-      /**/
-      // console.group(`=== SPEC - send selected stages`);
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_SELECTED.inputStages;
-      const expectedSelected: string[] = STAGE_SELECTIONS.UPDATE_SELECTED.selectedStages;
-      selectHostComp.stages = [...inputStages];
-      selectHostFixture.detectChanges();
-
-      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of stageCheckDElems) {
-        while (checkDElem.nativeElement.checked === true) {
-          checkDElem.nativeElement.click();
-          selectHostFixture.detectChanges();
+        for (const selectedGameName of selectedGameNames) {
+          const selectedStageDElem: DebugElement = selectDElem.query(By.css(`.classification .form-check-input[name="${selectedGameName}"]`));
+          selectedStageDElem.nativeElement.click();
         }
-      }
+        selectHostFixture.detectChanges();
 
-      const selectedDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .classification .form-check-input`))
-        .filter(   dElem => {   return expectedSelected.includes( dElem.nativeElement.getAttribute('name') );   }   );
+        const submitDElem: DebugElement = selectDElem.query(By.css(`button[type="submit"]`));
+        expect(submitDElem.nativeElement.disabled).toBe(false);
 
-      for (const selectedDElem of selectedDElems) {
-        selectedDElem.nativeElement.click();
-      }
-      selectHostFixture.detectChanges();
+        /**/
+        // console.groupEnd();
+      });
 
-      const submitDElem: DebugElement = selectDElem.query(By.css('button[type="submit"]'));
-      submitDElem.nativeElement.click();
-      selectHostFixture.detectChanges();
-      
-      const actualSelected: string[] = [...selectHostComp.selectedStages];
-      for (const expectedStage of expectedSelected) {
-        expect(actualSelected).toContain(expectedStage);
-      }
-      /**/
-      // console.groupEnd();
-    });
+      it('should send the selected gameNames', () => {
+        /**/
+        // console.group(`=== SPEC - send selected stages`);
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_SELECTED.inputStages;
+        const expectedSelected: string[] = STAGE_SELECTIONS.UPDATE_SELECTED.selectedStages;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
 
-    it('should not send any unselected gameNames', () => {
-      /**/
-      // console.group(`=== SPEC - don't send unselected gameNames`);
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_UNSELECTED.inputStages;
-      const selectedGameNames: string[] = STAGE_SELECTIONS.UPDATE_UNSELECTED.selectedStages;
-      const targetGameNames: string[] = STAGE_SELECTIONS.UPDATE_UNSELECTED.targetStages;
-      selectHostComp.stages = [...inputStages];
-      selectHostFixture.detectChanges();
-
-      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of stageCheckDElems) {
-        while (checkDElem.nativeElement.checked === true) {
-          checkDElem.nativeElement.click();
-          selectHostFixture.detectChanges();
+        const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+        for (const checkDElem of stageCheckDElems) {
+          while (checkDElem.nativeElement.checked === true) {
+            checkDElem.nativeElement.click();
+            selectHostFixture.detectChanges();
+          }
         }
-      }
 
-      for (const selectedGameName of selectedGameNames) {
-        const selectedDElem: DebugElement = selectDElem.query(By.css(`.classification .form-check-input[name="${selectedGameName}"]`));
-        expect(selectDElem).withContext(`sanity - should find ${selectedGameName} checkbox`).toBeTruthy();
-        selectedDElem.nativeElement.click();
+        const selectedDElems: DebugElement[] = selectDElem.queryAll(By.css(`.by-series .classification .form-check-input`))
+          .filter(dElem => { return expectedSelected.includes(dElem.nativeElement.getAttribute('name')); });
+
+        for (const selectedDElem of selectedDElems) {
+          selectedDElem.nativeElement.click();
+        }
+        selectHostFixture.detectChanges();
+
+        const submitDElem: DebugElement = selectDElem.query(By.css('button[type="submit"]'));
+        submitDElem.nativeElement.click();
+        selectHostFixture.detectChanges();
+
+        const actualSelected: string[] = [...selectHostComp.selectedStages];
+        for (const expectedStage of expectedSelected) {
+          expect(actualSelected).toContain(expectedStage);
+        }
+        /**/
+        // console.groupEnd();
+      });
+
+      it('should not send any unselected gameNames', () => {
+        /**/
+        // console.group(`=== SPEC - don't send unselected gameNames`);
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_UNSELECTED.inputStages;
+        const selectedGameNames: string[] = STAGE_SELECTIONS.UPDATE_UNSELECTED.selectedStages;
+        const targetGameNames: string[] = STAGE_SELECTIONS.UPDATE_UNSELECTED.targetStages;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+        for (const checkDElem of stageCheckDElems) {
+          while (checkDElem.nativeElement.checked === true) {
+            checkDElem.nativeElement.click();
+            selectHostFixture.detectChanges();
+          }
+        }
+
+        for (const selectedGameName of selectedGameNames) {
+          const selectedDElem: DebugElement = selectDElem.query(By.css(`.classification .form-check-input[name="${selectedGameName}"]`));
+          expect(selectDElem).withContext(`sanity - should find ${selectedGameName} checkbox`).toBeTruthy();
+          selectedDElem.nativeElement.click();
         /**/expect(selectedDElem.nativeElement.checked).withContext(`sanity - should select ${selectedGameName} checkbox`).toBe(true);
-      }
-      selectHostFixture.detectChanges();
+        }
+        selectHostFixture.detectChanges();
 
-      const updateDElem: DebugElement = selectDElem.query(By.css('button[type="submit"]'));
+        const updateDElem: DebugElement = selectDElem.query(By.css('button[type="submit"]'));
       /**/expect(updateDElem.nativeElement.disabled).withContext('sanity - update button should be enabled').toBe(false);
-      updateDElem.nativeElement.click();
-      selectHostFixture.detectChanges();
+        updateDElem.nativeElement.click();
+        selectHostFixture.detectChanges();
 
-      const actualSelected: string[] = [...selectHostComp.selectedStages];
-      for (const targetGameName of targetGameNames) {
-        expect(actualSelected.includes(targetGameName)).withContext(targetGameName).toBe(false);
-      }
-      /**/
-      // console.groupEnd();
+        const actualSelected: string[] = [...selectHostComp.selectedStages];
+        for (const targetGameName of targetGameNames) {
+          expect(actualSelected.includes(targetGameName)).withContext(targetGameName).toBe(false);
+        }
+        /**/
+        // console.groupEnd();
+      });
+
+      it('should show an error message when no stages are selected', () => {
+        /**/
+        // console.group('=== SPEC - show error when no stages are selected');
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_NO_STAGES;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+        for (const checkDElem of stageCheckDElems) {
+          while (checkDElem.nativeElement.checked === true) {
+            checkDElem.nativeElement.click();
+            selectHostFixture.detectChanges();
+          }
+        }
+
+        const submitDElem: DebugElement = selectDElem.query(By.css(`button[type="submit"]`));
+        submitDElem.nativeElement.click();
+        selectHostFixture.detectChanges();
+
+        const errorDElem: DebugElement = selectDElem.query(By.css(`.stage-select-submit .error`));
+        expect(errorDElem).withContext('find error message element').toBeTruthy();
+
+        expect(errorDElem.nativeElement.textContent.trim()).withContext('match error message').toEqual('Please select at least one stage.');
+
+        /**/
+        // console.groupEnd();
+      });
+
+      it('should not show an error message if there is a stage in the series section selected', () => {
+        /**/
+        // console.group("=== SPEC - don't show error when stages are selected");
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_NO_ERROR.inputStages;
+        const targetGameNames: string[] = STAGE_SELECTIONS.UPDATE_NO_ERROR.targetStages;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+
+        const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+        for (const checkDElem of stageCheckDElems) {
+          while (checkDElem.nativeElement.checked === true) {
+            checkDElem.nativeElement.click();
+            selectHostFixture.detectChanges();
+          }
+        }
+
+        for (const targetGameName of targetGameNames) {
+          const targetStageDElem: DebugElement = selectDElem.query(By.css(`.classification .form-check-input[name="${targetGameName}"]`));
+          targetStageDElem.nativeElement.click();
+        }
+
+        const submitDElem: DebugElement = selectDElem.query(By.css(`button[type="submit"]`));
+        submitDElem.nativeElement.click();
+        selectHostFixture.detectChanges();
+
+        const errorDElem: DebugElement = selectDElem.query(By.css(`.stage-select-submit .error`));
+        expect(errorDElem).toBeNull();
+
+        /**/
+        // console.groupEnd();
+      });
     });
 
-    it('should show an error message when no stages are selected', () => {
-      /**/
-      // console.group('=== SPEC - show error when no stages are selected');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_NO_STAGES;
-      selectHostComp.stages = [...inputStages];
-      selectHostFixture.detectChanges();
+    describe('parentError section', () => {
+      it('should show an error when it receives a fatalError notification', async(() => {
+        /**/
+        // console.groupCollapsed('=== SPEC - parentError - fatalError');
 
-      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of stageCheckDElems) {
-        while (checkDElem.nativeElement.checked === true) {
-          checkDElem.nativeElement.click();
-          selectHostFixture.detectChanges();
+        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.PARENTERROR_FATAL.inputStages;
+        const targetGameNames: string[] = STAGE_SELECTIONS.PARENTERROR_FATAL.targetGameNames;
+        const expectedMessage: string = STAGE_SELECTIONS.PARENTERROR_FATAL.expectedMessage;
+        const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
+
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+        
+        for (const checkDElem of stageCheckDElems) {
+          while (checkDElem.nativeElement.checked === true) {
+            checkDElem.nativeElement.click();
+            selectHostFixture.detectChanges();
+          }
         }
-      }
 
-      const submitDElem: DebugElement = selectDElem.query(By.css(`button[type="submit"]`));
-      submitDElem.nativeElement.click();
-      selectHostFixture.detectChanges();
-
-      const errorDElem: DebugElement = selectDElem.query(By.css(`.stage-select-submit .error`));
-      expect(errorDElem).withContext('find error message element').toBeTruthy();
-
-      expect(errorDElem.nativeElement.textContent.trim()).withContext('match error message').toEqual('Please select at least one stage.');
-
-      /**/
-      // console.groupEnd();
-    });
-
-    it('should not show an error message if there is a stage in the series section selected', () => {
-      /**/
-      // console.group("=== SPEC - don't show error when stages are selected");
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_NO_ERROR.inputStages;
-      const targetGameNames: string[] = STAGE_SELECTIONS.UPDATE_NO_ERROR.targetStages;
-      selectHostComp.stages = [...inputStages];
-      selectHostFixture.detectChanges();
-
-      const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
-      for (const checkDElem of stageCheckDElems) {
-        while (checkDElem.nativeElement.checked === true) {
-          checkDElem.nativeElement.click();
-          selectHostFixture.detectChanges();
+        for (const targetGameName of targetGameNames) {
+          const targetStageDElem: DebugElement = selectDElem.query(By.css(`.classification .form-check-input[name="${targetGameName}"]`));
+          targetStageDElem.nativeElement.click();
         }
-      }
 
-      for (const targetGameName of targetGameNames) {
-        const targetStageDElem: DebugElement = selectDElem.query(By.css(`.classification .form-check-input[name="${targetGameName}"]`));
-        targetStageDElem.nativeElement.click();
-      }
+        selectHostComp.selectSubject$.next('fatalError');
 
-      const submitDElem: DebugElement = selectDElem.query(By.css(`button[type="submit"]`));
-      submitDElem.nativeElement.click();
-      selectHostFixture.detectChanges();
+        selectHostFixture.whenStable().then(() => {
+          selectHostFixture.detectChanges();
 
-      const errorDElem: DebugElement = selectDElem.query(By.css(`.stage-select-submit .error`));
-      expect(errorDElem).toBeNull();
+          const errorDElem: DebugElement = selectDElem.query(By.css('.stage-select-submit .error'));
+          if (errorDElem === null) {
+            fail('error message should exist');
+          }
 
-      /**/
-      // console.groupEnd();
+          const actualMessage: string = errorDElem.nativeElement.textContent.trim();
+          expect(actualMessage).toEqual(expectedMessage);
+
+          /**/
+          // console.groupEnd();
+        });
+      }));
     });
   });
 

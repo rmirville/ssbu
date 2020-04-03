@@ -1,5 +1,6 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, NgZone, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 import { StageSelectInfo } from '../../stage/models/stage-select-info.model';
 
@@ -27,7 +28,13 @@ export class StageSelectComponent implements OnInit {
   separator: string = '_';
 
   @Input() stages: StageSelectInfo[];
+  @Input() parentEvent$: Observable<string>;
   @Output() submitSelection = new EventEmitter<string[]>();
+
+  parentError: { active: boolean, message: string } = {
+    active: false,
+    message: ""
+  };
 
   classifiedStages: {
     tourneyPresence: {
@@ -83,12 +90,21 @@ export class StageSelectComponent implements OnInit {
     sections: []
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private zone: NgZone) {
   }
 
   ngOnInit() {
-    /**/
-    // console.log('StageSelectComponent::ngOnInit()');
+
+    this.parentEvent$.subscribe({
+      next: (event: string) => {
+        switch (event) {
+          case 'fatalError':
+            this.parentError.active = true;
+            this.parentError.message = "Something went wrong. Try refreshing the page.";
+            break;
+        }
+      }
+    });
 
     let legalCommonStages: StageSelectInfo[] = [];
     let legalUncommonStages: StageSelectInfo[] = [];
@@ -203,6 +219,8 @@ export class StageSelectComponent implements OnInit {
     for (const stage of affectedStages) {
       this.selectionForm.get(stage.gameName).patchValue(value);
     }
+    /**/
+    // console.groupEnd();
   }
 
   _compareText(a: string, b: string): number {

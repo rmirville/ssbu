@@ -57,6 +57,11 @@
             <p class="error">Please select at least one stage.</p>
           </div>
         </div>
+        <div *ngIf="parentError.active" class="row">
+          <div class="col-sm-12">
+            <p class="error">{{parentError.message}}</p>
+          </div>
+        </div>
         <button type="submit" class="btn btn-primary mb-2" [disabled]="!selectionForm.valid">Update</button>
       </div>
     </form>

@@ -4685,3 +4685,44 @@ export const ALL_UNCHECKED_TOURNEY: {inputStages: StageSelectInfo[], targetStage
     "armyshock_"
   ]
 };
+
+export const PARENTERROR_FATAL: { inputStages: StageSelectInfo[], targetGameNames: string[], expectedMessage: string } = {
+  inputStages: [
+    {
+      name: "Dry Comparison",
+      gameName: "policycompare_",
+      series: "Cloudy Policy",
+      tourneyPresence: -1
+    },
+    {
+      name: "Stormy Cancer",
+      gameName: "newsstormy_",
+      series: "Harsh News",
+      tourneyPresence: 2
+    },
+    {
+      name: "Polite Orange",
+      gameName: "performancepolite_",
+      series: "Spicy Performance",
+      tourneyPresence: -1
+    },
+    {
+      name: "Ethereal Story",
+      gameName: "actorstory_",
+      series: "Sleepy Actor",
+      tourneyPresence: 1
+    },
+    {
+      name: "Special Priority",
+      gameName: "moviepriority_",
+      series: "Global Movie",
+      tourneyPresence: 2
+    }
+  ],
+  targetGameNames: [
+    "newsstormy_",
+    "performancepolite_",
+    "moviepriority_"
+  ],
+  expectedMessage: "Something went wrong. Try refreshing the page."
+};

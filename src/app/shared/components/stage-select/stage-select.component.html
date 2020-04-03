@@ -52,14 +52,10 @@
         </div>
       </ng-container>
       <div class="form-group stage-select-submit">
-        <div *ngIf="!selectionForm.valid" class="row">
+        <div *ngIf="errorActive" class="row">
           <div class="col-sm-12">
-            <p class="error">Please select at least one stage.</p>
-          </div>
-        </div>
-        <div *ngIf="parentError.active" class="row">
-          <div class="col-sm-12">
-            <p class="error">{{parentError.message}}</p>
+            <p *ngIf="parentError.active" class="error">{{parentError.message}}</p>
+            <p *ngIf="!selectionForm.valid" class="error">Please select at least one stage.</p>
           </div>
         </div>
         <button type="submit" class="btn btn-primary mb-2" [disabled]="!selectionForm.valid">Update</button>

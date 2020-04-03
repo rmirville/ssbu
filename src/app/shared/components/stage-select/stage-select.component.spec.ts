@@ -1,6 +1,6 @@
 import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 import { StageSelectComponent } from './stage-select.component';
@@ -1591,12 +1591,12 @@ describe('StageSelectComponent', () => {
           const selectedDElem: DebugElement = selectDElem.query(By.css(`.classification .form-check-input[name="${selectedGameName}"]`));
           expect(selectDElem).withContext(`sanity - should find ${selectedGameName} checkbox`).toBeTruthy();
           selectedDElem.nativeElement.click();
-        /**/expect(selectedDElem.nativeElement.checked).withContext(`sanity - should select ${selectedGameName} checkbox`).toBe(true);
+          /**/expect(selectedDElem.nativeElement.checked).withContext(`sanity - should select ${selectedGameName} checkbox`).toBe(true);
         }
         selectHostFixture.detectChanges();
 
         const updateDElem: DebugElement = selectDElem.query(By.css('button[type="submit"]'));
-      /**/expect(updateDElem.nativeElement.disabled).withContext('sanity - update button should be enabled').toBe(false);
+        /**/expect(updateDElem.nativeElement.disabled).withContext('sanity - update button should be enabled').toBe(false);
         updateDElem.nativeElement.click();
         selectHostFixture.detectChanges();
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Input, NgZone, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs';
 
@@ -23,13 +23,15 @@ const BLANK_SERIES: string = 'Miscellaneous';
   templateUrl: './stage-select.component.html',
   styleUrls: ['./stage-select.component.css']
 })
-export class StageSelectComponent implements OnInit {
+export class StageSelectComponent implements OnChanges, OnInit {
   selectionForm: FormGroup = this.fb.group({}, { validators: this._checkboxSelected() });
   separator: string = '_';
 
   @Input() stages: StageSelectInfo[];
   @Input() parentEvent$: Observable<string>;
   @Output() submitSelection = new EventEmitter<string[]>();
+
+  errorActive: boolean = false;
 
   parentError: { active: boolean, message: string } = {
     active: false,
@@ -90,7 +92,7 @@ export class StageSelectComponent implements OnInit {
     sections: []
   };
 
-  constructor(private fb: FormBuilder, private zone: NgZone) {
+  constructor(private fb: FormBuilder) {
   }
 
   ngOnInit() {
@@ -101,6 +103,7 @@ export class StageSelectComponent implements OnInit {
           case 'fatalError':
             this.parentError.active = true;
             this.parentError.message = "Something went wrong. Try refreshing the page.";
+            this._updateErrorActive();
             break;
         }
       }
@@ -186,6 +189,12 @@ export class StageSelectComponent implements OnInit {
     this.rootSections.push(this.series);
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.stages) {
+      this._updateErrorActive();
+    }
+  }
+
   submitSelected() {
     /**/
     // console.group('StageSelectComponent::submitSelected()');
@@ -221,6 +230,10 @@ export class StageSelectComponent implements OnInit {
     }
     /**/
     // console.groupEnd();
+  }
+
+  _updateErrorActive() {
+    this.errorActive = ((!this.selectionForm.valid) || this.parentError.active);
   }
 
   _compareText(a: string, b: string): number {

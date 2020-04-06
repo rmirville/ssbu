@@ -55,6 +55,7 @@
         <div *ngIf="errorActive" class="row">
           <div class="col-sm-12">
             <p *ngIf="parentError.active" class="error">{{parentError.message}}</p>
+            <p *ngIf="errors.noStages.active" class="error">{{errors.noStages.message}}</p>
             <p *ngIf="!selectionForm.valid" class="error">Please select at least one stage.</p>
           </div>
         </div>

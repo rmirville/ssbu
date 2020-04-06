@@ -38,6 +38,13 @@ export class StageSelectComponent implements OnChanges, OnInit {
     message: ""
   };
 
+  errors: { [type: string]: {active: boolean, message: string} } = {
+    noStages: {
+      active: false,
+      message: "Stages could not be loaded. Try refreshing the page."
+    }
+  };
+
   classifiedStages: {
     tourneyPresence: {
       legalCommon: StageSelectInfo[],
@@ -114,79 +121,86 @@ export class StageSelectComponent implements OnChanges, OnInit {
     let legalRareStages: StageSelectInfo[] = [];
     let seriesStages: { [seriesName: string]: StageSelectInfo[] } = {};
     
-    for (let stage of this.stages) {
-      /**/
-      // console.log(`  * checking stage: ${stage.name} (${stage.series})`);
-      if ( !(stage.series) || stage.series.trim().length === 0 ) {
-        stage.series = BLANK_SERIES;
-      }
-      // group stages by series
-      if (!(stage.series in seriesStages)) {
-        seriesStages[stage.series] = [];
-      }
-      /**/
-      // console.log(`  * seriesStages so far: ${JSON.stringify(Object.keys(seriesStages))}`);
-      seriesStages[stage.series].push(stage);
-
-      /**/
-      // console.log(`  * seriesStages[${stage.series}]: ${JSON.stringify(seriesStages[stage.series])}`);
-      let isCommonlyLegal: boolean = false;
-
-      switch (stage.tourneyPresence) {
-        case 0:
-          isCommonlyLegal = true;
-          legalCommonStages.push(stage);
-          break;
-        case 1:
-          legalUncommonStages.push(stage);
-          break;
-        case 2:
-          legalRareStages.push(stage);
-          break;
-      }
-      this.selectionForm.addControl(stage.gameName, this.fb.control(isCommonlyLegal));
+    if (this.stages.length === 0) {
+      this.errors.noStages.active = true;
+      this._updateErrorActive();
     }
+    else {
+      for (let stage of this.stages) {
+        /**/
+        // console.log(`  * checking stage: ${stage.name} (${stage.series})`);
+        if (!(stage.series) || stage.series.trim().length === 0) {
+          stage.series = BLANK_SERIES;
+        }
+        // group stages by series
+        if (!(stage.series in seriesStages)) {
+          seriesStages[stage.series] = [];
+        }
+        /**/
+        // console.log(`  * seriesStages so far: ${JSON.stringify(Object.keys(seriesStages))}`);
+        seriesStages[stage.series].push(stage);
 
-    // create and sort series section
-    for (const stageList in seriesStages) {
-      const title: string = stageList;
-      const attribute: string = stageList.replace(/ /g, '-').replace(/[^a-zA-Z\-]/g, '').toLowerCase();
-      const id: string = attribute.replace(/\-/g, '');
-      this.series.sections.push({
-        id: id,
-        title: title,
-        attribute: attribute,
-        show: true,
-        expand: false
-      });
-      this.classifiedStages.series[id] = [...seriesStages[stageList].sort(this._compareInfo.bind(this))];
+        /**/
+        // console.log(`  * seriesStages[${stage.series}]: ${JSON.stringify(seriesStages[stage.series])}`);
+        let isCommonlyLegal: boolean = false;
+
+        switch (stage.tourneyPresence) {
+          case 0:
+            isCommonlyLegal = true;
+            legalCommonStages.push(stage);
+            break;
+          case 1:
+            legalUncommonStages.push(stage);
+            break;
+          case 2:
+            legalRareStages.push(stage);
+            break;
+        }
+        this.selectionForm.addControl(stage.gameName, this.fb.control(isCommonlyLegal));
+      }
+
+      // create and sort series section
+      for (const stageList in seriesStages) {
+        const title: string = stageList;
+        const attribute: string = stageList.replace(/ /g, '-').replace(/[^a-zA-Z\-]/g, '').toLowerCase();
+        const id: string = attribute.replace(/\-/g, '');
+        this.series.sections.push({
+          id: id,
+          title: title,
+          attribute: attribute,
+          show: true,
+          expand: false
+        });
+        this.classifiedStages.series[id] = [...seriesStages[stageList].sort(this._compareInfo.bind(this))];
+      }
+
+      this.series.sections.sort(this._compareSection.bind(this));
+
+      // put miscellaneous section last
+      const miscSectionIndex: number = this.series.sections.findIndex(section => section.title === BLANK_SERIES);
+      if (miscSectionIndex !== -1) {
+        this.series.sections.push(this.series.sections.splice(miscSectionIndex, 1)[0]);
+      }
+      /**/
+      // console.log(`  * classified.series: ${JSON.stringify(this.classifiedStages.series)}`);
+
+      // create and sort tournament presence section
+      this.classifiedStages.tourneyPresence.legalCommon = [...legalCommonStages.sort(this._compareInfo.bind(this))];
+      this.classifiedStages.tourneyPresence.legalUncommon = [...legalUncommonStages.sort(this._compareInfo.bind(this))];
+      this.classifiedStages.tourneyPresence.legalRare = [...legalRareStages.sort(this._compareInfo.bind(this))];
+
+      /**/
+      // console.log(`* classifiedStages.legalCommon: ${JSON.stringify(this.classifiedStages.tourneyPresence.legalCommon)}`);
+      this.series.show = (this.stages.length > 0);
+      this.tourneyPresence.sections[0].show = (this.classifiedStages.tourneyPresence.legalCommon.length > 0);
+      this.tourneyPresence.sections[1].show = (this.classifiedStages.tourneyPresence.legalUncommon.length > 0);
+      this.tourneyPresence.sections[2].show = (this.classifiedStages.tourneyPresence.legalRare.length > 0);
+      this.tourneyPresence.show = (this.tourneyPresence.sections[0].show || this.tourneyPresence.sections[1].show || this.tourneyPresence.sections[2].show);
+
+      this.rootSections.push(this.tourneyPresence);
+      this.rootSections.push(this.series);
+
     }
-    
-    this.series.sections.sort(this._compareSection.bind(this));
-
-    // put miscellaneous section last
-    const miscSectionIndex: number = this.series.sections.findIndex(section => section.title === BLANK_SERIES);
-    if (miscSectionIndex !== -1) {
-      this.series.sections.push(this.series.sections.splice(miscSectionIndex, 1)[0]);
-    }
-    /**/
-    // console.log(`  * classified.series: ${JSON.stringify(this.classifiedStages.series)}`);
-
-    // create and sort tournament presence section
-    this.classifiedStages.tourneyPresence.legalCommon = [...legalCommonStages.sort(this._compareInfo.bind(this))];
-    this.classifiedStages.tourneyPresence.legalUncommon = [...legalUncommonStages.sort(this._compareInfo.bind(this))];
-    this.classifiedStages.tourneyPresence.legalRare = [...legalRareStages.sort(this._compareInfo.bind(this))];
-
-    /**/
-    // console.log(`* classifiedStages.legalCommon: ${JSON.stringify(this.classifiedStages.tourneyPresence.legalCommon)}`);
-    this.series.show = (this.stages.length > 0);
-    this.tourneyPresence.sections[0].show = (this.classifiedStages.tourneyPresence.legalCommon.length > 0);
-    this.tourneyPresence.sections[1].show = (this.classifiedStages.tourneyPresence.legalUncommon.length > 0);
-    this.tourneyPresence.sections[2].show = (this.classifiedStages.tourneyPresence.legalRare.length > 0);
-    this.tourneyPresence.show = (this.tourneyPresence.sections[0].show || this.tourneyPresence.sections[1].show || this.tourneyPresence.sections[2].show);
-
-    this.rootSections.push(this.tourneyPresence);
-    this.rootSections.push(this.series);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -233,7 +247,11 @@ export class StageSelectComponent implements OnChanges, OnInit {
   }
 
   _updateErrorActive() {
-    this.errorActive = ((!this.selectionForm.valid) || this.parentError.active);
+    this.errorActive = (
+      (!this.selectionForm.valid)
+      || this.parentError.active
+      || Object.values(this.errors).map(error => error.active).includes(true)
+    );
   }
 
   _compareText(a: string, b: string): number {

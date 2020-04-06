@@ -163,6 +163,38 @@ describe('StageSelectComponent', () => {
     }
   });
 
+  it('should show an error message when there are no stages loaded', () => {
+    /**/
+    console.groupCollapsed('=== SPEC - no stages loaded -> error');
+    const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.NOSTAGES_ERROR.inputStages;
+    const expectedMessage: string = STAGE_SELECTIONS.NOSTAGES_ERROR.expectedMessage;
+    selectHostComp.stages = [...inputStages];
+    selectHostFixture.detectChanges();
+
+    const errorDElems: DebugElement[] = selectDElem.queryAll(By.css(`.stage-select-submit .error`));
+    expect(errorDElems.length).withContext('should find an error message').toBeGreaterThan(0);
+    
+    const expectedErrorDElem: DebugElement = errorDElems.find(dElem => { return (dElem.nativeElement.textContent.trim() === expectedMessage); });
+
+    expect(expectedErrorDElem).toBeDefined();
+    /**/
+    console.groupEnd();
+  });
+
+  it('should not show an error message when there are stages loaded', () => {
+    /**/
+    console.groupCollapsed('=== SPEC - stages loaded -> no error');
+    const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.NOSTAGES_ERROR_NEGATIVE.inputStages;
+    const targetMessage: string = STAGE_SELECTIONS.NOSTAGES_ERROR_NEGATIVE.targetMessage;
+    selectHostComp.stages = [...inputStages];
+    selectHostFixture.detectChanges();
+
+    const errorDElem: DebugElement = selectDElem.queryAll(By.css(`.stage-select-submit .error`)).find(dElem => dElem.nativeElement.textContent.trim() === targetMessage);
+    expect(errorDElem).toBeUndefined();
+    /**/
+    console.groupEnd();
+  })
+
   describe('tournament legality section', () => {
 
     it(`should show a list of checkbox inputs with id's of the section id and the provided stages' gameNames`, () => {

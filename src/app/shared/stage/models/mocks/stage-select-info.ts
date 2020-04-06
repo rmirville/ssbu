@@ -1,5 +1,10 @@
 import { StageSelectInfo } from '../stage-select-info.model';
 
+const MESSAGES: {[type: string]: string} = {
+  noStagesLoaded: "Stages could not be loaded. Try refreshing the page.",
+  unknownError: "Something went wrong. Try refreshing the page."
+}
+
 export const VALID: StageSelectInfo = {
   name: "Princess Peach's Castle",
   gameName: "foodfighterz",
@@ -4724,5 +4729,40 @@ export const PARENTERROR_FATAL: { inputStages: StageSelectInfo[], targetGameName
     "performancepolite_",
     "moviepriority_"
   ],
-  expectedMessage: "Something went wrong. Try refreshing the page."
+  expectedMessage: MESSAGES.unknownError
+};
+
+export const NOSTAGES_ERROR: { inputStages: StageSelectInfo[], expectedMessage: string } = {
+  inputStages: [],
+  expectedMessage: MESSAGES.noStagesLoaded
+};
+
+export const NOSTAGES_ERROR_NEGATIVE: { inputStages: StageSelectInfo[], targetMessage: string } = {
+  inputStages: [
+    {
+      name: "Whispering Screw",
+      gameName: "inkscrew_",
+      series: "Ink",
+      tourneyPresence: 2
+    },
+    {
+      name: "Plain Memory",
+      gameName: "balancememory_",
+      series: "Solid Balance",
+      tourneyPresence: 2
+    },
+    {
+      name: "Elbow",
+      gameName: "brickelbow_",
+      series: "Dead Brick",
+      tourneyPresence: 1
+    },
+    {
+      name: "Sense",
+      gameName: "debtsense_",
+      series: "Useful Debt",
+      tourneyPresence: -1
+    }
+  ],
+  targetMessage: MESSAGES.noStagesLoaded
 };

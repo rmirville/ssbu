@@ -1,6 +1,7 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
+import { concatMap } from 'rxjs/operators';
 
 import { StageDimensionsService } from '../../../../shared/stage/services/stage-dimensions.service';
 import { StagePieceMapService } from '../../../../shared/stage/services/stage-piece-map.service';
@@ -85,18 +86,13 @@ export class StageComparatorComponent implements OnInit {
           this.zone.run(() => {
             // if StageDimensionsService's dataset isn't created yet, regenerate it and try again
             if (e instanceof DatasetNotFoundError) {
-              const pieceMaps$: Observable<StagePieceMap[]> = this.spms.getMaps('stageComparator');
-
-              pieceMaps$.subscribe((pieceMaps: StagePieceMap[]) => {
-                const fullData$: Observable<StageDimensionsSet> = this.sds.getDimensionsFull(this.stages, pieceMaps);
-
-                fullData$.subscribe((fullData: StageDimensionsSet) => {
-                  const binnedData$: Observable<BinnedStageDimensionsSet> = this.sds.getDimensionsBinned(stages);
-
-                  binnedData$.subscribe((binnedData: BinnedStageDimensionsSet) => {
-                    this.binnedStageDimensionsSet = binnedData;
-                  });
-                });
+              const binnedData$: Observable<BinnedStageDimensionsSet> = this.spms.getMaps('stageComparator')
+                .pipe(
+                  concatMap((pieceMaps: StagePieceMap[]) => this.sds.getDimensionsFull(this.stages, pieceMaps)),
+                  concatMap(() => this.sds.getDimensionsBinned(stages))
+              );
+              binnedData$.subscribe((binnedData: BinnedStageDimensionsSet) => {
+                this.binnedStageDimensionsSet = binnedData;
               });
             }
             else if (e instanceof DataNotFoundError) {

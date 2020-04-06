@@ -5,9 +5,9 @@ import { By } from '@angular/platform-browser';
 
 import { StageSelectComponent } from './stage-select.component';
 
-import { StageSelectHostMockComponent } from '../../stage/components/mocks/stage-select-host.mock.component';
-import { StageSelectInfo } from '../../stage/models/stage-select-info.model';
-import * as STAGE_SELECTIONS from '../../stage/models/mocks/stage-select-info';
+import { StageSelectHostMockComponent } from '../mocks/stage-select-host.mock.component';
+import { StageSelectInfo } from '../../models/stage-select-info.model';
+import * as STAGE_SELECTIONS from '../../models/mocks/stage-select-info';
 
 describe('StageSelectComponent', () => {
   let selectComp: StageSelectComponent;

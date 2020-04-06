@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { FormBuilder, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { StageSelectInfo } from '../../stage/models/stage-select-info.model';
+import { StageSelectInfo } from '../../models/stage-select-info.model';
 
 /**
  * Represents the UI configuration of a section of stages

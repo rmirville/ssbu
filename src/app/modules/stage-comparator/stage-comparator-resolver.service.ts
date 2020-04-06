@@ -6,7 +6,7 @@ import {
 } from '@angular/router';
 
 import { Observable, forkJoin } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { concatMap, map } from 'rxjs/operators';
 
 import { StageLoaderService } from '../../shared/stage/services/stage-loader.service';
 import { StageClassificationsService } from '../../shared/stage/services/stage-classifications.service';
@@ -36,37 +36,39 @@ export class StageComparatorResolverService implements Resolve<StageComparatorRo
       /**/
       // console.log(`  * observer at start: ${JSON.stringify(Object.keys(observer))}`);
       let stageData: StageComparatorRouteData = {stages: null, dimensionsFull: null, stageSelectInfo: null};
-
-      const pieceMaps$ = this.spms.getMaps('stageComparator');
-      pieceMaps$.subscribe(pieceMaps => {
-
-        const stages$ = this.sls.loadStages('include', pieceMaps.map(stage => stage.lvd));
-        stages$.subscribe(stages => {
-          /**/
-          // console.log('  * received stages');
-          // console.log(`  * stages.length: ${JSON.stringify(stages.length)}`);
-          // console.log(`  * stageData: ${JSON.stringify(stageData)}`);
-          stageData.stages = stages;
-          // console.log(`  * stageData: ${JSON.stringify(stageData)}`);
-
-          /**/
-          // console.log('  * calling getDimensionsFull()');
-          const stagesBasic = stages.map(stage => { return { name: stage.name, gameName: stage.gameName }; });
-          const stageCalculations$ = forkJoin(
-            this.sds.getDimensionsFull(stages, pieceMaps),
-            this.scs.classifyStages(stagesBasic)
-          ).pipe(
-            map(([dimensionsFull, stageSelectInfo]) => {
-              return { dimensionsFull, stageSelectInfo };
-            })
-          );
-          stageCalculations$.subscribe(stageCalculations => {
-            stageData.dimensionsFull = stageCalculations.dimensionsFull;
-            stageData.stageSelectInfo = stageCalculations.stageSelectInfo;
-            observer.next(stageData);
-            observer.complete();
-          });
-        });
+      
+      /**/
+      const stageCalculations$ = this.spms.getMaps('stageComparator')
+        .pipe(
+          // use piece maps to get raw stage data, then save piece maps for the next operation
+          concatMap(pieceMaps => this.sls.loadStages('include', pieceMaps.map(stage => stage.lvd))
+            .pipe(
+              map(stages => {
+                // add raw stage data to the route data
+                stageData.stages = stages;
+                return {stages, pieceMaps};
+              })
+            )
+          ),
+          // use piece maps and raw stage data to calculate dimensions and get classification data
+          concatMap(rawData => {
+            const stagesBasic = rawData.stages.map(stage => { return { name: stage.name, gameName: stage.gameName }; });
+            return forkJoin(
+              this.sds.getDimensionsFull(rawData.stages, rawData.pieceMaps),
+              this.scs.classifyStages(stagesBasic)
+            ).pipe(
+              map(([dimensionsFull, stageSelectInfo]) => {
+                return { dimensionsFull, stageSelectInfo };
+              })
+            );
+          })
+      );
+      // add final calculations to the route data
+      stageCalculations$.subscribe(stageCalculations => {
+        stageData.dimensionsFull = stageCalculations.dimensionsFull;
+        stageData.stageSelectInfo = stageCalculations.stageSelectInfo;
+        observer.next(stageData);
+        observer.complete();
       });
     });
 

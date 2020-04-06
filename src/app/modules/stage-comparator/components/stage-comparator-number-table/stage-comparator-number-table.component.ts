@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
-import { StageDimensionsSet } from '../../../../shared/stage/models/stage-dimensions-set.model';
+import { BinnedStageDimensionsSet } from '../../../../shared/stage/models/binned-stage-dimensions-set.model';
 
 @Component({
   selector: 'ssbu-stage-comparator-number-table',
@@ -9,7 +9,7 @@ import { StageDimensionsSet } from '../../../../shared/stage/models/stage-dimens
 })
 export class StageComparatorNumberTableComponent implements OnInit {
 
-  public dimensions: StageDimensionsSet;
+  @Input() stageData: BinnedStageDimensionsSet;
 
   constructor() { }
 

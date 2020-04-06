@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
+import { BinnedStageDimensionsSet } from '../../../../shared/stage/models/binned-stage-dimensions-set.model';
 
 @Component({
   selector: 'ssbu-stage-comparator-text-table',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./stage-comparator-text-table.component.css']
 })
 export class StageComparatorTextTableComponent implements OnInit {
+
+  @Input() stageData: BinnedStageDimensionsSet;
 
   constructor() { }
 

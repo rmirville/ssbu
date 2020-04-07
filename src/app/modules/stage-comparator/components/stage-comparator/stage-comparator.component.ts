@@ -72,7 +72,10 @@ export class StageComparatorComponent implements OnInit {
 
   getStats(stages: string[]) {
     // validate the provided stage selection
-    if (stages.length === 0) {
+    if ((stages === undefined)
+        || !stages.hasOwnProperty(length)
+        || (stages.length === 0)
+      ) {
       return;
     }
 

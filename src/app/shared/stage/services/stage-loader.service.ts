@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { httpRetryBackoff } from '../../rxjs-operators/http-retry-backoff';
+
 import { StageSummary, isStageSummary } from '../models/stage-summary.model';
 import { StageDetails, isStageDetails } from '../models/stage-details.model';
 import { Stage } from '../models/stage.model';
@@ -63,7 +65,7 @@ export class StageLoaderService {
       const { next, error } = observer;
 
       // get stage summary data
-      const stagesHttp$: Observable<StageSummary[]> = this.http.get<StageSummary[]>(API_URL + API_STAGE_LIST_PATH);
+      const stagesHttp$: Observable<StageSummary[]> = this.http.get<StageSummary[]>(API_URL + API_STAGE_LIST_PATH).pipe(httpRetryBackoff());
       /**/
       // console.log(`    * created stagesHttp$: ${stagesHttp$}`);
 
@@ -186,7 +188,7 @@ export class StageLoaderService {
         /**/
         // console.log(`      + retrieving details from url: ${url}`);
         // retrieve json
-        const stageDetailsHttp$ = this.http.get<StageDetails[]>(url);
+        const stageDetailsHttp$ = this.http.get<StageDetails[]>(url).pipe(httpRetryBackoff());
         /**/
         // console.log('      + stageDetailsHttp$: ' + stageDetailsHttp$);
         stageDetailsHttp$.subscribe((details) => {

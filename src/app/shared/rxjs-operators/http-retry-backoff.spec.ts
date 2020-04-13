@@ -1,4 +1,4 @@
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 import { asyncData } from '../../testing/async-observable-helpers';
 import 'zone.js/dist/zone';
@@ -50,6 +50,43 @@ describe('httpRetryBackoff()', () => {
       response$.subscribe({
         next: () => {
           expect(httpSpy.get).toHaveBeenCalledTimes(1);
+          ///
+          console.groupEnd();
+          done();
+        }
+      });
+    });
+
+    it('should not retry on a non-500 error', (done: DoneFn) => {
+      ///
+      console.groupCollapsed('=== SPEC - don\'t retry on non-500 error');
+      const inputUrl: string = '/cbbo/fQZWa1XTswP2Of';
+      const expectedTries: number = 1;
+      let actualTries: number = 0;
+
+      httpSpy.get.and.callFake(() => {
+        return Observable.create((observer) => {
+          actualTries++;
+          observer.error({ status: 400 })
+        });
+      });
+
+      const response$: Observable<string> = httpSpy.get(inputUrl).pipe(httpRetryBackoff());
+      response$.subscribe({
+        next: () => {
+          fail('The request should return an error');
+          ///
+          console.groupEnd();
+          done();
+        },
+        error: () => {
+          expect(actualTries).toEqual(expectedTries);
+          ///
+          console.groupEnd();
+          done();
+        },
+        complete: () => {
+          fail('The request should return an error');
           ///
           console.groupEnd();
           done();
@@ -230,6 +267,10 @@ describe('httpRetryBackoff()', () => {
       });
     });
 
+  });
+
+  describe('parameters', () => {
+
     it('should retry the subscription the number of times provided max', (done: DoneFn) => {
       ///
       console.groupCollapsed('=== SPEC - retry provided number of times max');
@@ -266,6 +307,92 @@ describe('httpRetryBackoff()', () => {
           done();
         }
       });
+    });
+
+    it('should use the provided delay as the initial delay', (done: DoneFn) => {
+      ///
+      console.groupCollapsed('=== SPEC - delay first retry');
+      const inputUrl: string = '/6ih/ZMZgB';
+      const inputDelay: number = 30;
+      const inputRetries: number = 3;
+      const expectedData: string = 'YGbI8g1';
+      let tries: number = 0;
+
+      httpSpy.get.and.callFake(() => {
+        return Observable.create((observer) => {
+          ///
+          console.group('SPEC - response$');
+          tries++;
+          ///
+          console.log(`attempt #${tries}`);
+          if (tries < 2) {
+            ///
+            console.log('SPEC - throwing error');
+            console.groupEnd();
+            observer.error({ status: 533 });
+          }
+          else {
+            ///
+            console.log('SPEC - returning data');
+            console.groupEnd();
+            observer.next(expectedData);
+          }
+        });
+      });
+
+      scheduler.run(({ expectObservable }) => {
+        const expectedMarble: string = `${inputDelay}ms d`;
+        const expectedValues: { [value: string]: any } = { d: expectedData };
+        const data$: Observable<string> = httpSpy.get(inputUrl).pipe(httpRetryBackoff(inputRetries, inputDelay));
+        expectObservable(data$).toBe(expectedMarble, expectedValues);
+        ///
+        console.groupEnd();
+        done();
+      });
+    });
+
+    it('should increment delays by the provided delay', (done: DoneFn) => {
+      ///
+      console.groupCollapsed('=== SPEC - delay third retry');
+      const inputUrl: string = '/aylZi/SLX6g';
+      const inputDelay: number = 85;
+      const inputRetries: number = 3;
+      const expectedData: string = 'nLkY1VMdWw';
+      const expectedDelay: number = 255;
+      let tries: number = 0;
+
+      httpSpy.get.and.callFake(() => {
+        return Observable.create((observer) => {
+          ///
+          console.group('SPEC - response$');
+          tries++;
+          ///
+          console.log(`attempt #${tries}`);
+          if (tries < 4) {
+            ///
+            console.log('SPEC - throwing error');
+            console.groupEnd();
+            observer.error({ status: 568 });
+          }
+          else {
+            ///
+            console.log('SPEC - returning data');
+            console.groupEnd();
+            observer.next(expectedData);
+          }
+        });
+      });
+
+      scheduler.run(({ expectObservable }) => {
+        const expectedMarble: string = `${expectedDelay}ms d`;
+        const expectedValues: { [value: string]: any } = { d: expectedData };
+        const data$: Observable<string> = httpSpy.get(inputUrl).pipe(httpRetryBackoff(inputRetries, inputDelay));
+        expectObservable(data$).toBe(expectedMarble, expectedValues);
+        ///
+        console.groupEnd();
+        done();
+      });
+      
     });
 
   });

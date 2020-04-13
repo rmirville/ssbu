@@ -16,31 +16,32 @@ const DEFAULT_DELAY: number = 500;
  * @returns {(src: Observable<any>) => Observable<any>}
  */
 export function httpRetryBackoff(maxRetries: number = DEFAULT_MAX_RETRIES, backoffDelay: number = DEFAULT_DELAY): (src: Observable<any>) => Observable<any> {
+  if (maxRetries <= 0) {
+    throw new TypeError('maxRetries must be positive');
+  }
+  if (!Number.isInteger(maxRetries)) {
+    throw new TypeError('maxRetries must be an integer');
+  }
+  if (backoffDelay <= 0) {
+    throw new TypeError('backoffDelay must be positive');
+  }
+  if (!Number.isInteger(backoffDelay)) {
+    throw new TypeError('backoffDelay must be an integer');
+  }
   let retries: number = maxRetries;
   return (src: Observable<any>) => src.pipe(
     retryWhen((errors: Observable<any>) => {
       return errors.pipe(
         delay(backoffDelay * (maxRetries - retries + 1)),
         concatMap(error => {
-          ///
-          console.group('httpRetryBackoff::retryWhen::notifier::concatMap()');
-          console.log(`attempts remaining: ${retries}`);
-          console.log(`delayTime: ${backoffDelay * (maxRetries - retries + 1)}`);
-          console.log(`error: ${JSON.stringify(error)}`);
           if (
             (retries-- > 0)
             && (error.status >= 500)
             && (error.status < 600)
           ) {
-            ///
-            console.log('retries-- > 0, returning of(error)');
-            console.groupEnd();
             return of(error);
           }
           else {
-            ///
-            console.log('retries-- == 0, returning Observable.throw(error');
-            console.groupEnd();
             return Observable.throw(error);
           }
         })

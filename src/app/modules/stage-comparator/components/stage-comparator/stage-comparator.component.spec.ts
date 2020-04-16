@@ -206,7 +206,7 @@ describe('StageComparatorComponent', () => {
 
     it('should submit stages to getStats()', () => {
       ///
-      console.groupCollapsed('=== SPEC - submitSelection - submit stages to getStats()');
+      // console.groupCollapsed('=== SPEC - submitSelection - submit stages to getStats()');
       const expectedStages: string[] = ['KMVzgTSUcW','swOBde8GXM','5rLvzaVCIw'];
       let getStatsSpy: jasmine.Spy = spyOn(comparator, 'getStats').and.callFake((stages: string[]) => {
         expect(stages).toEqual(expectedStages);
@@ -216,7 +216,7 @@ describe('StageComparatorComponent', () => {
       mocks.select.comp.submitSelection.emit(expectedStages);
       fixture.detectChanges();
       ///
-      console.groupEnd();
+      // console.groupEnd();
     });
 
     describe('getStats()', () => {

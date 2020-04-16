@@ -2025,6 +2025,4 @@ describe('StageSelectComponent', () => {
       expect(expectedErrorDElem).withContext('should display correct error message').toBeDefined();
     });
   });
-  // TODO:
-    // Handle no stages loaded error
 });

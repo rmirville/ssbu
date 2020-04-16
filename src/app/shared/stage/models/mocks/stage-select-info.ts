@@ -2,6 +2,7 @@ import { StageSelectInfo } from '../stage-select-info.model';
 
 const MESSAGES: {[type: string]: string} = {
   noStagesLoaded: "Stages could not be loaded. Try refreshing the page.",
+  noStagesSelected: "Please select at least one stage.",
   unknownError: "Something went wrong. Try refreshing the page."
 }
 
@@ -4824,4 +4825,58 @@ export const NOSTAGES_ERROR_NEGATIVE: { inputStages: StageSelectInfo[], targetMe
     }
   ],
   targetMessage: MESSAGES.noStagesLoaded
+};
+
+export const NONE_SELECT_ERROR: { inputStages: StageSelectInfo[], expectedMessage: string } = {
+  inputStages: [
+    {
+      name: "Outrageous Airplane",
+      gameName: "feelplane_",
+      series: "Discreet Feeling",
+      tourneyPresence: -1
+    },
+    {
+      name: "Crooked Arm",
+      gameName: "catarm_",
+      series: "Tidy Cat",
+      tourneyPresence: 0
+    },
+    {
+      name: "Tightfisted Wish",
+      gameName: "markwish_",
+      series: "Ambitious Mark",
+      tourneyPresence: 0
+    },
+    {
+      name: "Ritzy Quill",
+      gameName: "spiderquill_",
+      series: "Imaginary Spiders",
+      tourneyPresence: 1
+    },
+    {
+      name: "Dependent Things",
+      gameName: "keythings_",
+      series: "Successful Key",
+      tourneyPresence: -1
+    },
+    {
+      name: "Husky Pear",
+      gameName: "streampear_",
+      series: "Elfin Stream",
+      tourneyPresence: -1
+    },
+    {
+      name: "Straight Channel",
+      gameName: "eggnogchannel_",
+      series: "Lying Eggnog",
+      tourneyPresence: 2
+    },
+    {
+      name: "Sudden Lace",
+      gameName: "worklace_",
+      series: "Tremendous Work",
+      tourneyPresence: 0
+    }
+  ],
+  expectedMessage: MESSAGES.noStagesSelected
 };

@@ -200,6 +200,7 @@ export class StageSelectComponent implements OnChanges, OnInit {
       this.rootSections.push(this.tourneyPresence);
       this.rootSections.push(this.series);
 
+      this._updateErrorActive();
       this.submitSelected();
     }
   }
@@ -245,6 +246,7 @@ export class StageSelectComponent implements OnChanges, OnInit {
     for (const stage of affectedStages) {
       this.selectionForm.get(stage.gameName).patchValue(value);
     }
+    this._updateErrorActive();
     ///
     // console.groupEnd();
   }

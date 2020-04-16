@@ -163,6 +163,19 @@ describe('StageSelectComponent', () => {
     }
   });
 
+  it('should submit all commonly legal stages on initialization', () => {
+    const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.INIT_SUBMITTED.inputStages;
+    const expectedGameNames: string[] = STAGE_SELECTIONS.INIT_SUBMITTED.expectedGameNames;
+    const expectedLength: number = STAGE_SELECTIONS.INIT_SUBMITTED.expectedLength;
+    selectHostComp.stages = [...inputStages];
+    selectHostFixture.detectChanges();
+    
+    for (const expectedGameName of expectedGameNames) {
+      expect(selectHostComp.selectedStages).toContain(expectedGameName);
+    }
+    expect(selectHostComp.selectedStages.length).withContext('submitted stages should have *only* common stages').toEqual(expectedLength);
+  });
+
   it('should show an error message when there are no stages loaded', () => {
     /**/
     console.groupCollapsed('=== SPEC - no stages loaded -> error');

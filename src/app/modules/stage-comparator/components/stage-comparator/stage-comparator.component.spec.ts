@@ -192,7 +192,7 @@ describe('StageComparatorComponent', () => {
 
     it('should call getStats()', () => {
       /**/
-      // console.groupCollapsed('=== SPEC - submitSelection - call getStats() ===')
+      // console.groupCollapsed('=== SPEC - submitSelection - call getStats() ===');
       let getStatsSpy: jasmine.Spy = spyOn(comparator, 'getStats').and.stub();
 
       mocks.select.comp = dElem.query(By.css('ssbu-stage-select')).componentInstance;
@@ -202,6 +202,21 @@ describe('StageComparatorComponent', () => {
       expect(getStatsSpy).toHaveBeenCalled();
       /**/
       // console.groupEnd();
+    });
+
+    it('should submit stages to getStats()', () => {
+      ///
+      console.groupCollapsed('=== SPEC - submitSelection - submit stages to getStats()');
+      const expectedStages: string[] = ['KMVzgTSUcW','swOBde8GXM','5rLvzaVCIw'];
+      let getStatsSpy: jasmine.Spy = spyOn(comparator, 'getStats').and.callFake((stages: string[]) => {
+        expect(stages).toEqual(expectedStages);
+      });
+
+      mocks.select.comp = dElem.query(By.css('ssbu-stage-select')).componentInstance;
+      mocks.select.comp.submitSelection.emit(expectedStages);
+      fixture.detectChanges();
+      ///
+      console.groupEnd();
     });
 
     describe('getStats()', () => {

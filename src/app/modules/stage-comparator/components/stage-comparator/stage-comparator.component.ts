@@ -71,11 +71,17 @@ export class StageComparatorComponent implements OnInit {
   }
 
   getStats(stages: string[]) {
+    ///
+    console.group('StageComparatorComponent::getStats()');
+    console.log(`stages: ${stages}`);
     // validate the provided stage selection
     if ((stages === undefined)
         || !stages.hasOwnProperty(length)
         || (stages.length === 0)
       ) {
+      ///
+      console.log('stage selection invalid, doing nothing');
+      console.groupEnd();
       return;
     }
 
@@ -105,5 +111,7 @@ export class StageComparatorComponent implements OnInit {
         }
       }
     );
+    ///
+    console.groupEnd();
   }
 }

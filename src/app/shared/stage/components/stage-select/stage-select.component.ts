@@ -127,7 +127,7 @@ export class StageSelectComponent implements OnChanges, OnInit {
     }
     else {
       for (let stage of this.stages) {
-        /**/
+        ///
         // console.log(`  * checking stage: ${stage.name} (${stage.series})`);
         if (!(stage.series) || stage.series.trim().length === 0) {
           stage.series = BLANK_SERIES;
@@ -136,11 +136,11 @@ export class StageSelectComponent implements OnChanges, OnInit {
         if (!(stage.series in seriesStages)) {
           seriesStages[stage.series] = [];
         }
-        /**/
+        ///
         // console.log(`  * seriesStages so far: ${JSON.stringify(Object.keys(seriesStages))}`);
         seriesStages[stage.series].push(stage);
 
-        /**/
+        ///
         // console.log(`  * seriesStages[${stage.series}]: ${JSON.stringify(seriesStages[stage.series])}`);
         let isCommonlyLegal: boolean = false;
 
@@ -181,7 +181,7 @@ export class StageSelectComponent implements OnChanges, OnInit {
       if (miscSectionIndex !== -1) {
         this.series.sections.push(this.series.sections.splice(miscSectionIndex, 1)[0]);
       }
-      /**/
+      ///
       // console.log(`  * classified.series: ${JSON.stringify(this.classifiedStages.series)}`);
 
       // create and sort tournament presence section
@@ -189,7 +189,7 @@ export class StageSelectComponent implements OnChanges, OnInit {
       this.classifiedStages.tourneyPresence.legalUncommon = [...legalUncommonStages.sort(this._compareInfo.bind(this))];
       this.classifiedStages.tourneyPresence.legalRare = [...legalRareStages.sort(this._compareInfo.bind(this))];
 
-      /**/
+      ///
       // console.log(`* classifiedStages.legalCommon: ${JSON.stringify(this.classifiedStages.tourneyPresence.legalCommon)}`);
       this.series.show = (this.stages.length > 0);
       this.tourneyPresence.sections[0].show = (this.classifiedStages.tourneyPresence.legalCommon.length > 0);
@@ -200,6 +200,7 @@ export class StageSelectComponent implements OnChanges, OnInit {
       this.rootSections.push(this.tourneyPresence);
       this.rootSections.push(this.series);
 
+      this.submitSelected();
     }
   }
 
@@ -210,28 +211,30 @@ export class StageSelectComponent implements OnChanges, OnInit {
   }
 
   submitSelected() {
-    /**/
+    ///
     // console.group('StageSelectComponent::submitSelected()');
     // console.log(`selectionForm.value: ${JSON.stringify(this.selectionForm.value)}`);
     let stageSelection: string[] = [];
     for (const stageName in this.selectionForm.value) {
-      /**/
+      ///
       // console.group(`selectionForm.value[${stageName}]:`);
       if (this.selectionForm.value[stageName] === true) {
-        /**/
+        ///
         // console.log(`${stageName} added`);
         stageSelection.push(stageName);
       }
-      /**/
+      ///
       // console.groupEnd();
     }
+    ///
+    // console.log(`stageSelection: ${JSON.stringify(stageSelection)}`);
     this.submitSelection.emit(stageSelection);
-    /**/
+    ///
     // console.groupEnd();
   }
 
   updateAll(section: string, value: boolean) {
-    /**/
+    ///
     // console.groupCollapsed('StageSelectComponent::updateAll()');
     let affectedStages: StageSelectInfo[] = this.stages;
 
@@ -242,16 +245,23 @@ export class StageSelectComponent implements OnChanges, OnInit {
     for (const stage of affectedStages) {
       this.selectionForm.get(stage.gameName).patchValue(value);
     }
-    /**/
+    ///
     // console.groupEnd();
   }
 
   _updateErrorActive() {
+    ///
+    // console.group('StageSelectComponent::_updateErrorActive()');
+    // console.log(`form invalid? ${!this.selectionForm.valid}`);
+    // console.log(`parent error active? ${this.parentError.active}`);
+    // console.log(`component error active? ${Object.values(this.errors).map(error => error.active).includes(true)}`);
     this.errorActive = (
       (!this.selectionForm.valid)
       || this.parentError.active
       || Object.values(this.errors).map(error => error.active).includes(true)
     );
+    ///
+    // console.groupEnd();
   }
 
   _compareText(a: string, b: string): number {
@@ -272,11 +282,11 @@ export class StageSelectComponent implements OnChanges, OnInit {
 
   _checkboxSelected(): ValidatorFn {
     const validator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
-      /**/
+      ///
       // console.group('StageSelectComponent::checkboxSelected()');
       // console.log(`control.value: ${JSON.stringify(control.value)}`);
       let selected = Object.values(control.value).includes(true);
-      /**/
+      ///
       // console.log(`selected: ${selected}`);
       // console.groupEnd();
 

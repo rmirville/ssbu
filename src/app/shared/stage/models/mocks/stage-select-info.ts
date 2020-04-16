@@ -2578,6 +2578,65 @@ export const INIT_UNCHECKED: { inputStages: StageSelectInfo[], targetStages: str
   ]
 };
 
+export const INIT_SUBMITTED: { inputStages: StageSelectInfo[], expectedGameNames: string[], expectedLength: number } = {
+  inputStages: [
+    {
+      name: "Torpid Quiet",
+      gameName: "vesselquiet_",
+      series: "Excellent Vessel",
+      tourneyPresence: 0
+    },
+    {
+      name: "Noisy Spiders",
+      gameName: "boatspiders_",
+      series: "Dusty Boat",
+      tourneyPresence: 1
+    },
+    {
+      name: "Unable Railway",
+      gameName: "limitrail_",
+      series: "Huge Limit",
+      tourneyPresence: 0
+    },
+    {
+      name: "Screeching Dad",
+      gameName: "hilldad_",
+      series: "Vacuous Hill",
+      tourneyPresence: 0
+    },
+    {
+      name: "Hypnotic Notebook",
+      gameName: "weightbook_",
+      series: "Whispering Weight",
+      tourneyPresence: 2
+    },
+    {
+      name: "Bad Birthday",
+      gameName: "throatbirthday_",
+      series: "Cheerful Throat",
+      tourneyPresence: 2
+    },
+    {
+      name: "Waggish Wren",
+      gameName: "competitionwren_",
+      series: "Adventurous Competition",
+      tourneyPresence: 2
+    },
+    {
+      name: "Discreet Crate",
+      gameName: "expcrate_",
+      series: "Skinny Experience",
+      tourneyPresence: -1
+    }
+  ],
+  expectedGameNames: [
+    "vesselquiet_",
+    "limitrail_",
+    "hilldad_",
+  ],
+  expectedLength: 3
+};
+
 export const MISC_SHOW_MISC: StageSelectInfo[] = [
   {
     name: "Howdy House",

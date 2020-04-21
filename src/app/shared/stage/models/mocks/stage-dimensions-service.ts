@@ -1,3 +1,5 @@
+import { BinnedStageDimensions } from '../binned-stage-dimensions.model';
+import { BinnedStageDimensionsSet } from '../binned-stage-dimensions-set.model';
 /* gameNames:
 size: 41
 "battlefield_l_",
@@ -1174,3 +1176,639 @@ export const INVALID_UNKNOWN_GAMENAMES: string[] = [
   "TJ1BCWPLQJ",
   "dYj8r2Hxkc"
 ];
+
+///
+export const INTEGER_VALUES: { inputGameNames: string[], expectedSet: BinnedStageDimensionsSet } = {
+  inputGameNames: [
+    "battlefield_l_",
+    "kalos_",
+    "xmadein_",
+    "xvillage",
+    "mario_rainbow_"
+  ],
+  expectedSet: {
+    bins: 5,
+    dimensions: [
+      {
+        name: "Big Battlefield",
+        gameName: "battlefield_l_",
+        blastzoneWidth: {
+          value: 290,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        stageLength: {
+          value: 122,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        offStageDistance: {
+          value: 168,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        ceilingHeight: {
+          value: 216,
+          bin:   5,
+          min:   false,
+          max:   true
+        }
+      },
+      {
+        name: "Kalos Pokemon League",
+        gameName: "kalos_",
+        blastzoneWidth: {
+          value: 245,
+          bin:   3,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 80,
+          bin:   2,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 165,
+          bin:   5,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 192,
+          bin:   4,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "WarioWare",
+        gameName: "xmadein_",
+        blastzoneWidth: {
+          value: 180,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        stageLength: {
+          value: 58,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        offStageDistance: {
+          value: 122,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 198,
+          bin:   4,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "Smashville",
+        gameName: "xvillage",
+        blastzoneWidth: {
+          value: 230,
+          bin:   3,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 70,
+          bin:   1,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 160,
+          bin:   5,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 190,
+          bin:   4,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "Rainbow Cruise",
+        gameName: "mario_rainbow_",
+        blastzoneWidth: {
+          value: 228,
+          bin:   3,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 96,
+          bin:   3,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 132,
+          bin:   2,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 139,
+          bin:   1,
+          min:   true,
+          max:   false
+        }
+      },
+    ],
+    ranges: {
+      blastzoneWidth: {
+        min:   180,
+        max:   290,
+        range: 110
+      },
+      stageLength: {
+        min:   58,
+        max:   122,
+        range: 64
+      },
+      offStageDistance: {
+        min:   122,
+        max:   168,
+        range: 46
+      },
+      ceilingHeight: {
+        min:   139,
+        max:   216,
+        range: 77
+      }
+    }
+  }
+};
+
+export const INTEGER_MIN: { inputGameNames: string[], expectedDimensions: BinnedStageDimensions[] } = {
+  inputGameNames: [
+    "duckhunt_",
+    "end_l_common",
+    "xice_",
+    "zelda_tower",
+    "wily_"
+  ],
+  expectedDimensions: [
+    {
+      name: "Duck Hunt",
+      gameName: "duckhunt_",
+      blastzoneWidth: {
+        value: 250,
+        bin:   3,
+        min:   false,
+        max:   false
+      },
+      stageLength: {
+        value: 95,
+        bin:   3,
+        min:   false,
+        max:   false
+      },
+      offStageDistance: {
+        value: 155,
+        bin:   1,
+        min:   true,
+        max:   false
+      },
+      ceilingHeight: {
+        value: 180,
+        bin:   1,
+        min:   true,
+        max:   false
+      }
+    },
+    {
+      name: "Final Destination (Large)",
+      gameName: "end_l_common",
+      blastzoneWidth: {
+        value: 280,
+        bin:   5,
+        min:   false,
+        max:   true
+      },
+      stageLength: {
+        value: 120,
+        bin:   5,
+        min:   false,
+        max:   true
+      },
+      offStageDistance: {
+        value: 160,
+        bin:   2,
+        min:   false,
+        max:   false
+      },
+      ceilingHeight: {
+        value: 180,
+        bin:   1,
+        min:   true,
+        max:   false
+      }
+    },
+    {
+      name: "Summit",
+      gameName: "xice_",
+      blastzoneWidth: {
+        value: 220,
+        bin:   1,
+        min:   true,
+        max:   false
+      },
+      stageLength: {
+        value: 60,
+        bin:   1,
+        min:   true,
+        max:   false
+      },
+      offStageDistance: {
+        value: 160,
+        bin:   2,
+        min:   false,
+        max:   false
+      },
+      ceilingHeight: {
+        value: 220,
+        bin:   5,
+        min:   false,
+        max:   true
+      }
+    },
+    {
+      name: "Great Plateau Tower",
+      gameName: "zelda_tower",
+      blastzoneWidth: {
+        value: 267,
+        bin:   4,
+        min:   false,
+        max:   false
+      },
+      stageLength: {
+        value: 91,
+        bin:   3,
+        min:   false,
+        max:   false
+      },
+      offStageDistance: {
+        value: 176,
+        bin:   5,
+        min:   false,
+        max:   true
+      },
+      ceilingHeight: {
+        value: 192,
+        bin:   2,
+        min:   false,
+        max:   false
+      }
+    },
+    {
+      name: "Wily Castle",
+      gameName: "wily_",
+      blastzoneWidth: {
+        value: 248,
+        bin:   3,
+        min:   false,
+        max:   false
+      },
+      stageLength: {
+        value: 87,
+        bin:   3,
+        min:   false,
+        max:   false
+      },
+      offStageDistance: {
+        value: 161,
+        bin:   2,
+        min:   false,
+        max:   false
+      },
+      ceilingHeight: {
+        value: 212,
+        bin:   5,
+        min:   false,
+        max:   false
+      }
+    },
+  ]
+};
+
+export const INTEGER_MAX: { inputGameNames: string[], expectedDimensions: BinnedStageDimensions[] } = {
+  inputGameNames: [
+    "colloseum_",
+    "xmansion_",
+    "gamer_",
+    "mario_rainbow_",
+    "skyward",
+    "xmadein_"
+  ],
+  expectedDimensions: [
+    {
+      name: "Arena Ferox",
+      gameName: "colloseum_",
+      blastzoneWidth: {
+        value: 253,
+        bin:   5,
+        min:   false,
+        max:   false
+      },
+      stageLength: {
+        value: 93,
+        bin:   5,
+        min:   false,
+        max:   false
+      },
+      offStageDistance: {
+        value: 160,
+        bin:   5,
+        min:   false,
+        max:   true
+      },
+      ceilingHeight: {
+        value: 190,
+        bin:   5,
+        min:   false,
+        max:   false
+      }
+    },
+    {
+      name: "Luigi's Mansion",
+      gameName: "xmansion_",
+      blastzoneWidth: {
+        value: 255,
+        bin:   5,
+        min:   false,
+        max:   true
+      },
+      stageLength: {
+        value: 95,
+        bin:   5,
+        min:   false,
+        max:   false
+      },
+      offStageDistance: {
+        value: 160,
+        bin:   5,
+        min:   false,
+        max:   true
+      },
+      ceilingHeight: {
+        value: 200,
+        bin:   5,
+        min:   false,
+        max:   true
+      }
+    },
+    {
+      name: "Gamer",
+      gameName: "gamer_",
+      blastzoneWidth: {
+        value: 230,
+        bin:   4,
+        min:   false,
+        max:   false
+      },
+      stageLength: {
+        value: 91,
+        bin:   5,
+        min:   false,
+        max:   false
+      },
+      offStageDistance: {
+        value: 139,
+        bin:   3,
+        min:   false,
+        max:   false
+      },
+      ceilingHeight: {
+        value: 192,
+        bin:   5,
+        min:   false,
+        max:   false
+      }
+    },
+    {
+      name: "Rainbow Cruise",
+      gameName: "mario_rainbow_",
+      blastzoneWidth: {
+        value: 228,
+        bin:   4,
+        min:   false,
+        max:   false
+      },
+      stageLength: {
+        value: 96,
+        bin:   5,
+        min:   false,
+        max:   true
+      },
+      offStageDistance: {
+        value: 132,
+        bin:   2,
+        min:   false,
+        max:   false
+      },
+      ceilingHeight: {
+        value: 139,
+        bin:   1,
+        min:   true,
+        max:   false
+      }
+    },
+    {
+      name: "Skyloft",
+      gameName: "skyward",
+      blastzoneWidth: {
+        value: 230,
+        bin:   4,
+        min:   false,
+        max:   false
+      },
+      stageLength: {
+        value: 86,
+        bin:   4,
+        min:   false,
+        max:   false
+      },
+      offStageDistance: {
+        value: 144,
+        bin:   3,
+        min:   false,
+        max:   false
+      },
+      ceilingHeight: {
+        value: 192,
+        bin:   5,
+        min:   false,
+        max:   false
+      }
+    },
+    {
+      name: "WarioWare",
+      gameName: "xmadein_",
+      blastzoneWidth: {
+        value: 180,
+        bin:   1,
+        min:   true,
+        max:   false
+      },
+      stageLength: {
+        value: 58,
+        bin:   1,
+        min:   true,
+        max:   false
+      },
+      offStageDistance: {
+        value: 122,
+        bin:   1,
+        min:   true,
+        max:   false
+      },
+      ceilingHeight: {
+        value: 198,
+        bin:   5,
+        min:   false,
+        max:   false
+      }
+    }
+  ],
+};
+
+export const INTEGER_MINMAX: { inputGameNames: string[], expectedDimensions: BinnedStageDimensions[] } = {
+  inputGameNames: [
+    "battlefield_",
+    "bossstage_final1_"
+  ],
+  expectedDimensions: [
+    {
+      name: "Battlefield",
+      gameName: "battlefield_",
+      blastzoneWidth: {
+        value: 240,
+        bin:   0,
+        min:   true,
+        max:   true
+      },
+      stageLength: {
+        value: 80,
+        bin:   0,
+        min:   true,
+        max:   true
+      },
+      offStageDistance: {
+        value: 160,
+        bin:   0,
+        min:   true,
+        max:   true
+      },
+      ceilingHeight: {
+        value: 192,
+        bin:   5,
+        min:   false,
+        max:   true
+      }
+    },
+    {
+      name: "Final Destination",
+      gameName: "bossstage_final1_",
+      blastzoneWidth: {
+        value: 240,
+        bin:   0,
+        min:   true,
+        max:   true
+      },
+      stageLength: {
+        value: 80,
+        bin:   0,
+        min:   true,
+        max:   true
+      },
+      offStageDistance: {
+        value: 160,
+        bin:   0,
+        min:   true,
+        max:   true
+      },
+      ceilingHeight: {
+        value: 180,
+        bin:   1,
+        min:   true,
+        max:   false
+      }
+    },
+  ]
+};
+/*
+  inputGameNames: [
+
+  ],
+  expectedSet: {
+    bins: 5,
+    dimensions: [
+      {
+        name: "",
+        gameName: "",
+        blastzoneWidth: {
+          value: null,
+          bin:   null,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: null,
+          bin:   null,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: null,
+          bin:   null,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: null,
+          bin:   null,
+          min:   false,
+          max:   false
+        }
+      },
+    ],
+    ranges: {
+      blastzoneWidth: {
+        min:   null,
+        max:   null,
+        range: null
+      },
+      stageLength: {
+        min:   null,
+        max:   null,
+        range: null
+      },
+      offStageDistance: {
+        min:   null,
+        max:   null,
+        range: null
+      },
+      ceilingHeight: {
+        min:   null,
+        max:   null,
+        range: null
+      }
+    }
+  }
+*/

@@ -165,10 +165,13 @@ export class StageDimensionsService {
    * getFullDimensions() must be called before using this method.
    *
    * @param {string[]} gameNames the gameNames of the stages to select
+   * @param {boolean} round whether to round values to the nearest integer. Setting round
+   * to "true" also classifies stage values as the minimum or maximum in the list based on
+   * the integer value, not the original value.
    * @returns {Observable<BinnedStageDimensionsSet>}
    * @memberof StageDimensionsService
    */
-  getDimensionsBinned(gameNames: string[]): Observable<BinnedStageDimensionsSet> {
+  getDimensionsBinned(gameNames: string[], round: boolean = false): Observable<BinnedStageDimensionsSet> {
     /**/
     // console.group('StageDimensionsService::getDimensionsBinned()');
     if (!this._dimensionsSetFull.dimensions.length) {
@@ -192,6 +195,18 @@ export class StageDimensionsService {
       let stages: StageDimensions[] = this._dimensionsSetFull.dimensions.filter(stage => {
         return gameNames.includes(stage.gameName);
       });
+      if (round) {
+        stages = stages.map(stage => {
+          return {
+            name: stage.name,
+            gameName: stage.gameName,
+            blastzoneWidth: Math.round(stage.blastzoneWidth),
+            stageLength: Math.round(stage.stageLength),
+            offStageDistance: Math.round(stage.offStageDistance),
+            ceilingHeight: Math.round(stage.ceilingHeight)
+          };
+        })
+      }
       /**/
       // console.log(`stages: ${JSON.stringify(stages.map(stage => stage.gameName))}`);
       let binParamsSet: BinningParamsSet = {

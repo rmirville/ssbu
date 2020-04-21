@@ -86,7 +86,7 @@ export class StageComparatorComponent implements OnInit {
     }
 
     // get the stats
-    this.sds.getDimensionsBinned(stages).subscribe(
+    this.sds.getDimensionsBinned(stages, true).subscribe(
       {
         next: (binnedData: BinnedStageDimensionsSet) => {
           this.binnedStageDimensionsSet = binnedData;
@@ -98,7 +98,7 @@ export class StageComparatorComponent implements OnInit {
               const binnedData$: Observable<BinnedStageDimensionsSet> = this.spms.getMaps('stageComparator')
                 .pipe(
                   concatMap((pieceMaps: StagePieceMap[]) => this.sds.getDimensionsFull(this.stages, pieceMaps)),
-                  concatMap(() => this.sds.getDimensionsBinned(stages))
+                  concatMap(() => this.sds.getDimensionsBinned(stages, true))
               );
               binnedData$.subscribe((binnedData: BinnedStageDimensionsSet) => {
                 this.binnedStageDimensionsSet = binnedData;

@@ -252,7 +252,7 @@ export const CLASS: { inputSet: BinnedStageDimensionsSet, expectedClasses: strin
   ]
 };
 
-export const DISPLAY_NAME: { inputSet: BinnedStageDimensionsSet, expectedNames: string[] } = {
+export const DISPLAY_NAME: { inputSet: BinnedStageDimensionsSet, expectedValues: {stage: string, value: string}[] } = {
   inputSet: {
     bins: 5,
     dimensions: [
@@ -420,12 +420,27 @@ export const DISPLAY_NAME: { inputSet: BinnedStageDimensionsSet, expectedNames: 
       }
     }
   },
-  expectedNames: [
-    "Gamer",
-    "Lylat Cruise",
-    "Port Town Aero Dive",
-    "Town & City",
-    "Hyrule Castle",
+  expectedValues: [
+    {
+      stage: "numtable_gamer_",
+      value: "Gamer"
+    },
+    {
+      stage: "numtable_xstarfox_",
+      value: "Lylat Cruise"
+    },
+    {
+      stage: "numtable_xfzero_",
+      value: "Port Town Aero Dive"
+    },
+    {
+      stage: "numtable_village2_",
+      value: "Town & City"
+    },
+    {
+      stage: "numtable_hyrule64_f",
+      value: "Hyrule Castle"
+    }
   ]
 };
 

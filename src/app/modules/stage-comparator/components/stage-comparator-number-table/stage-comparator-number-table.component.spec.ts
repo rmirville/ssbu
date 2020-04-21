@@ -54,7 +54,7 @@ describe('NumberTableComponent', () => {
       // console.log(`numComp.stageData.bins: ${numComp.stageData.bins}`);
       // console.log(`numComp.displayData.dimensions stages: ${numComp.displayData.dimensions.length}`);
 
-      const actualStageDElems: DebugElement[] = numDElem.queryAll(By.css('tbody tr:not(.range)'));
+      const actualStageDElems: DebugElement[] = numDElem.queryAll(By.css('tbody tr:not(.stats)'));
       const actualClasses: string[] = actualStageDElems.map(dElem => dElem.nativeElement.className.split(' ').find(name => name.startsWith('numtable_')));
 
       for (const expectedClass of expectedClasses) {
@@ -65,14 +65,19 @@ describe('NumberTableComponent', () => {
     });
     it('should display each stage\'s name', () => {
       const inputSet: BinnedStageDimensionsSet = NUMBER_TABLE.DISPLAY_NAME.inputSet;
-      const expectedNames: string[] = NUMBER_TABLE.DISPLAY_NAME.expectedNames;
+      const expectedValues: { stage: string, value:string }[] = NUMBER_TABLE.DISPLAY_NAME.expectedValues;
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualNames: string[] = numDElem.queryAll(By.css('tbody :not(.range) .name')).map(dElem => dElem.nativeElement.textContent.trim());
+      const actualValues: { stage: string, value: number }[] = numDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
+        return {
+          stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('numtable_')),
+          value: dElem.query(By.css('.name')).nativeElement.textContent.trim()
+        };
+      });
 
-      for (const expectedName of expectedNames) {
-        expect(actualNames).withContext(expectedName).toContain(expectedName);
+      for (const stage in expectedValues) {
+        expect(actualValues).withContext(expectedValues[stage].stage).toContain(expectedValues[stage]);
       }
     });
 
@@ -82,7 +87,7 @@ describe('NumberTableComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: {stage: string, value: number}[] = numDElem.queryAll(By.css('tbody tr:not(.range)')).map(dElem => {
+      const actualValues: {stage: string, value: number}[] = numDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('numtable_')),
           value: dElem.query(By.css('.blastzone')).nativeElement.textContent.trim() * 1
@@ -100,7 +105,7 @@ describe('NumberTableComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: { stage: string, value: number }[] = numDElem.queryAll(By.css('tbody tr:not(.range)')).map(dElem => {
+      const actualValues: { stage: string, value: number }[] = numDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('numtable_')),
           value: dElem.query(By.css('.stagelength')).nativeElement.textContent.trim() * 1
@@ -118,7 +123,7 @@ describe('NumberTableComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: { stage: string, value: number }[] = numDElem.queryAll(By.css('tbody tr:not(.range)')).map(dElem => {
+      const actualValues: { stage: string, value: number }[] = numDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('numtable_')),
           value: dElem.query(By.css('.offstage')).nativeElement.textContent.trim() * 1
@@ -136,7 +141,7 @@ describe('NumberTableComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: { stage: string, value: number }[] = numDElem.queryAll(By.css('tbody tr:not(.range)')).map(dElem => {
+      const actualValues: { stage: string, value: number }[] = numDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('numtable_')),
           value: dElem.query(By.css('.ceiling')).nativeElement.textContent.trim() * 1

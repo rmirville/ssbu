@@ -1,7 +1,7 @@
 <section class="row">
   <div class="col-lg-12">
     <div class="table-responsive">
-      <table class="table table-hover">
+      <table *ngIf="dataPresent" class="table table-hover">
         <thead class="thead-dark">
           <tr>
             <th class="th-sticky">Stage Name</th>
@@ -12,193 +12,30 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th class="th-sticky">Range</th>
-            <td>220 - 260</td>
-            <td>68 - 100</td>
-            <td>148 - 165</td>
-            <td>180 - 195</td>
+          <tr class="stats">
+            <th class="th-sticky">Min - Max (Range)</th>
+            <td class="blastzone"><span class="min">{{displayData.ranges.blastzoneWidth.min}}</span> - <span
+                class="max">{{displayData.ranges.blastzoneWidth.max}}</span> (<span
+                class="range">{{displayData.ranges.blastzoneWidth.range}}</span>)</td>
+            <td class="stagelength"><span class="min">{{displayData.ranges.stageLength.min}}</span> - <span
+                class="max">{{displayData.ranges.stageLength.max}}</span> (<span
+                class="range">{{displayData.ranges.stageLength.range}}</span>)</td>
+            <td class="offstage"><span class="min">{{displayData.ranges.offStageDistance.min}}</span> - <span
+                class="max">{{displayData.ranges.offStageDistance.max}}</span> (<span
+                class="range">{{displayData.ranges.offStageDistance.range}}</span>)</td>
+            <td class="ceiling"><span class="min">{{displayData.ranges.ceilingHeight.min}}</span> - <span
+                class="max">{{displayData.ranges.ceilingHeight.max}}</span> (<span
+                class="range">{{displayData.ranges.ceilingHeight.range}}</span>)</td>
           </tr>
-          <tr class="mm">
-            <th class="th-sticky" scope="row">Mementos</th>
-            <td>
-              Biggest
-            </td>
-            <td>
-              Longest
-            </td>
-            <td>
-              Far
-            </td>
-            <td>
-              High
-            </td>
-          </tr>
-          <tr class="ps2">
-            <th class="th-sticky" scope="row">Pokemon Stadium 2</th>
-            <td>
-              Big
-            </td>
-            <td>
-              Longer
-            </td>
-            <td>
-              Mid
-            </td>
-            <td>
-              Lowest
-            </td>
-          </tr>
-          <tr class="ps1">
-            <th class="th-sticky" scope="row">Pokemon Stadium 1</th>
-            <td>
-              Big
-            </td>
-            <td>
-              Long
-            </td>
-            <td>
-              Farther
-            </td>
-            <td>
-              Lowest
-            </td>
-          </tr>
-          <tr class="kpl">
-            <th class="th-sticky" scope="row">Kalos</th>
-            <td>
-              Big
-            </td>
-            <td>
-              Short
-            </td>
-            <td>
-              Farthest
-            </td>
-            <td>
-              Higher
-            </td>
-          </tr>
-          <tr class="fd">
-            <th class="th-sticky" scope="row">Final Destination</th>
-            <td>
-              Mid
-            </td>
-            <td>
-              Short
-            </td>
-            <td>
-              Far
-            </td>
-            <td>
-              Lowest
-            </td>
-          </tr>
-          <tr class="bf">
-            <th class="th-sticky" scope="row">Battlefield</th>
-            <td>
-              Mid
-            </td>
-            <td>
-              Short
-            </td>
-            <td>
-              Far
-            </td>
-            <td>
-              Higher
-            </td>
-          </tr>
-          <tr class="upl">
-            <th class="th-sticky" scope="row">Unova</th>
-            <td>
-              Mid
-            </td>
-            <td>
-              Mid
-            </td>
-            <td>
-              Mid
-            </td>
-            <td>
-              High
-            </td>
-          </tr>
-          <tr class="tc">
-            <th class="th-sticky" scope="row">Town & City</th>
-            <td>
-              Small
-            </td>
-            <td>
-              Mid
-            </td>
-            <td>
-              Closest
-            </td>
-            <td>
-              Highest
-            </td>
-          </tr>
-          <tr class="lc">
-            <th class="th-sticky" scope="row">Lylat</th>
-            <td>
-              Small
-            </td>
-            <td>
-              Short
-            </td>
-            <td>
-              Closer
-            </td>
-            <td>
-              Mid
-            </td>
-          </tr>
-          <tr class="sv">
-            <th class="th-sticky" scope="row">Smashville</th>
-            <td>
-              Small
-            </td>
-            <td>
-              Shorter
-            </td>
-            <td>
-              Far
-            </td>
-            <td>
-              High
-            </td>
-          </tr>
-          <tr class="ys">
-            <th class="th-sticky" scope="row">Yoshi's Story</th>
-            <td>
-              Smaller
-            </td>
-            <td>
-              Shortest
-            </td>
-            <td>
-              Far
-            </td>
-            <td>
-              Low
-            </td>
-          </tr>
-          <tr class="yib">
-            <th class="th-sticky" scope="row">Yoshi's Island (Brawl)</th>
-            <td>
-              Smallest
-            </td>
-            <td>
-              Shorter
-            </td>
-            <td>
-              Closer
-            </td>
-            <td>
-              Low
-            </td>
-          </tr>
+          <ng-container *ngFor="let stage of displayData.dimensions">
+            <tr class="texttable_{{stage.gameName}}">
+              <th class="th-sticky name">{{stage.name}}</th>
+              <td class="blastzone">{{stage.blastzoneWidth}}</td>
+              <td class="stagelength">{{stage.stageLength}}</td>
+              <td class="offstage">{{stage.offStageDistance}}</td>
+              <td class="ceiling">{{stage.ceilingHeight}}</td>
+            </tr>
+          </ng-container>
         </tbody>
       </table>
     </div>

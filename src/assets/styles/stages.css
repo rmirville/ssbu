@@ -35,45 +35,45 @@ ssbu-stage-select form > .form-group {
 }
 
 /**/
-.table-responsive .r1 {
+.table-responsive .bin-1 {
   background-color: hsl(0, 75%, 55%);
 }
 
-.table-responsive .r2 {
+.table-responsive .bin-2 {
   background-color: hsl(30, 85%, 55%);
 }
 
-.table-responsive .r3 {
+.table-responsive .bin-3 {
   background-color: hsl(60, 80%, 50%);
 }
 
-.table-responsive .r4 {
+.table-responsive .bin-4 {
   background-color: hsl(100, 55%, 50%);
 }
 
-.table-responsive .r5 {
+.table-responsive .bin-5 {
   background-color: hsl(220, 75%, 55%);
 }
 /**/
 
 /* Color-blind *//*
-.table-responsive .r1 {
+.table-responsive .bin-1 {
   background-color: hsl(0, 0%, 20%);
 }
 
-.table-responsive .r2 {
+.table-responsive .bin-2 {
   background-color: hsl(30, 0%, 40%);
 }
 
-.table-responsive .r3 {
+.table-responsive .bin-3 {
   background-color: hsl(60, 0%, 60%);
 }
 
-.table-responsive .r4 {
+.table-responsive .bin-4 {
   background-color: hsl(120, 0%, 80%);
 }
 
-.table-responsive .r5 {
+.table-responsive .bin-5 {
   background-color: hsl(240, 0%, 100%);
 }
 /**/

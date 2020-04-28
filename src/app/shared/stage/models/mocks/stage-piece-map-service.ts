@@ -154,10 +154,6 @@ export const GETMAPS_OUTPUT_VALUE: StagePieceMap[] = [
     pieceName: "COL_00_Floor01"
   },
   {
-    lvd: "yoshi_story_00",
-    pieceName: "COL_Ground"
-  },
-  {
     lvd: "hyrule64_f00",
     pieceName: "COL_curve1"
   },

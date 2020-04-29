@@ -13,7 +13,6 @@ ssbu-stage-select form > .form-group {
 }
 
 /* Stages */
-
 .table-responsive .td-graph {
   background-image: repeating-linear-gradient(to right,
       transparent,
@@ -32,6 +31,13 @@ ssbu-stage-select form > .form-group {
   float: left;
   margin: 0;
   height: .75rem;
+}
+
+ssbu-stage-comparator-text-table .stats th,
+ssbu-stage-comparator-text-table .stats td,
+ssbu-stage-comparator-number-table .stats th,
+ssbu-stage-comparator-number-table .stats td {
+  font-style: italic;
 }
 
 /**/

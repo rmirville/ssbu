@@ -1,11 +1,10 @@
+import { StageInfo, isStageInfo } from './stage-info.model';
 /**
  * Represents summary data describing a Stage
  *
  * @interface StageSummary
  */
-export interface StageSummary {
-  name: string;
-  gameName: string;
+export interface StageSummary extends StageInfo {
   Type: number;
 }
 
@@ -20,9 +19,7 @@ export function isStageSummary(stage): stage is StageSummary {
   // console.log('  isStageSummary()');
   /**/
   // console.log(`    * stage: ${JSON.stringify(stage)}`);
-  if (typeof stage.name !== 'string') {
-    return false;
-  } else if (typeof stage.gameName !== 'string') {
+  if (!isStageInfo(stage)) {
     return false;
   } else if (typeof stage.Type !== 'number') {
     return false;

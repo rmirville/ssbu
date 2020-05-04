@@ -22,8 +22,10 @@ import { StagePieceMapService } from '../../../../shared/stage/services/stage-pi
 import { BinnedStageDimensionsSet } from '../../../../shared/stage/models/binned-stage-dimensions-set.model';
 import { StageDimensionsSet } from '../../../../shared/stage/models/stage-dimensions-set.model';
 import { StageSelectInfo } from '../../../../shared/stage/models/stage-select-info.model';
+import { StageClassifications } from '../../../../shared/stage/models/stage-classifications.model';
 
 import { STAGES_ONE } from '../../../../shared/stage/models/mocks/stages';
+import * as STAGE_CLASSES from '../../../../shared/stage/models/mocks/stage-classifications';
 import * as STAGE_SELECTIONS from '../../../../shared/stage/models/mocks/stage-select-info';
 import * as STAGE_DIMENSIONS_SET from '../../../../shared/stage/models/mocks/stage-dimensions-set';
 import * as STAGE_COMPARATOR_CMP from '../../../../shared/stage/models/mocks/stage-comparator-component';
@@ -65,7 +67,7 @@ describe('StageComparatorComponent', () => {
         observer.next({stageData: {
           stages: STAGES_ONE,
           dimensionsFull: STAGE_DIMENSIONS_SET.DIMENSIONS_SET_ONE,
-          stageSelectInfo: STAGE_SELECTIONS.ONE
+          stageClassifications: STAGE_CLASSES.ONE
         }});
         observer.complete();
       })
@@ -145,7 +147,11 @@ describe('StageComparatorComponent', () => {
     expect(comparator.stages).toEqual(STAGES_ONE);
   });
 
-  it('should have a stageSelectInfo property set to the classified stages provided by the ActivatedRoute on init', () => {
+  it('should have a stageClassifications property set to the classified stages provided by the ActivatedRoute on init', () => {
+    expect(comparator.stageClassifications).toEqual(STAGE_CLASSES.ONE);
+  });
+
+  it('should have a stageSelectInfo property set to a StageSelect version of the classified stages provided by the ActivatedRoute on init', () => {
     expect(comparator.stageSelectInfo).toEqual(STAGE_SELECTIONS.ONE);
   });
 

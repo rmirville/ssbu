@@ -11,6 +11,7 @@ import { DatasetNotFoundError } from '../../../../shared/errors/dataset-not-foun
 
 import { BinnedStageDimensionsSet } from '../../../../shared/stage/models/binned-stage-dimensions-set.model';
 import { Stage } from '../../../../shared/stage/models/stage.model';
+import { StageClassifications } from '../../../../shared/stage/models/stage-classifications.model';
 import { StageDimensionsSet } from '../../../../shared/stage/models/stage-dimensions-set.model';
 import { StagePieceMap } from '../../../../shared/stage/models/stage-piece-map.model';
 import { StageSelectInfo } from '../../../../shared/stage/models/stage-select-info.model';
@@ -23,6 +24,7 @@ import { StageSelectInfo } from '../../../../shared/stage/models/stage-select-in
 export class StageComparatorComponent implements OnInit {
 
   stages: Stage[];
+  stageClassifications: StageClassifications[];
   stageSelectInfo: StageSelectInfo[];
   selectSubject$: Subject<string>;
   stageDimensionsSet: StageDimensionsSet;
@@ -37,22 +39,30 @@ export class StageComparatorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    /**/
+    ///
     // console.group('StageComparatorComponent::ngOnInit()');
-    this.route.data.subscribe((data: { stageData: {stages: Stage[], dimensionsFull: StageDimensionsSet, stageSelectInfo: StageSelectInfo[]} }) => {
-      /**/
+    this.route.data.subscribe((data: { stageData: {stages: Stage[], dimensionsFull: StageDimensionsSet, stageClassifications: StageClassifications[]} }) => {
+      ///
       // console.log(`data: ${JSON.stringify(data)}`);
       // console.log(`data.stages: ${JSON.stringify(data.stageData)}`);
-      // console.log(`data.stages type: ${typeof data.stages}`);
+      // console.log(`data.stages type: ${typeof data.stageData.stages}`);
       this.stages = [...data.stageData.stages];
       this.stageDimensionsSet = data.stageData.dimensionsFull;
-      this.stageSelectInfo = [...data.stageData.stageSelectInfo];
-      /**/
+      this.stageClassifications = [...data.stageData.stageClassifications];
+      this.stageSelectInfo = this.stageClassifications.map(stage => {
+        return {
+          gameName: stage.gameName,
+          name: stage.name,
+          series: stage.series,
+          tourneyPresence: stage.tourneyPresence
+        }
+      });
+      ///
       // console.log(`this.stageSelectInfo: ${JSON.stringify(this.stageSelectInfo)}`);
     });
     this.selectSubject$ = new Subject<string>();
     this.view = 'graph';
-    /**/
+    ///
     // console.groupEnd();
   }
 

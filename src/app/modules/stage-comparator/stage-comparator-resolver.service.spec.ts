@@ -12,14 +12,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Stage, isStage } from '../../shared/stage/models/stage.model';
 import { StageDimensionsRange } from '../../shared/stage/models/stage-dimensions-range.model';
 import { StageDimensionsSet, isStageDimensionsSet } from '../../shared/stage/models/stage-dimensions-set.model';
-import { StageSelectInfo, isStageSelectInfo } from '../../shared/stage/models/stage-select-info.model';
+import { StageClassifications, isStageClassifications } from '../../shared/stage/models/stage-classifications.model';
 
 import { StageComparatorResolverService } from './stage-comparator-resolver.service';
 import { StagePieceMapService } from '../../shared/stage/services/stage-piece-map.service';
 
 import { STAGES_ONE, STAGES_TWO, STAGES_THREE } from '../../shared/stage/models/mocks/stages';
 import * as STAGE_DIMENSIONS_SETS from '../../shared/stage/models/mocks/stage-dimensions-set';
-import * as STAGE_SELECTIONS from '../../shared/stage/models/mocks/stage-select-info';
+import * as STAGE_CLASSES from '../../shared/stage/models/mocks/stage-classifications';
 import * as PIECE_MAPS from '../../shared/stage/models/mocks/stage-piece-map';
 import { EmptyMockComponent } from '../../shared/mocks/empty.mock.component';
 
@@ -80,28 +80,28 @@ describe('StageComparatorResolverService', () => {
       expect(actualRange['range']).toBeCloseTo(expectedRange['range'], 6);
     }
 
-    function _compareStageData(expectedStages: Stage[], expectedDimensionsSet: StageDimensionsSet, expectedSelectInfo: StageSelectInfo[]) {
+    function _compareStageData(expectedStages: Stage[], expectedDimensionsSet: StageDimensionsSet, expectedClassifications: StageClassifications[]) {
 
       const expectedDimensions = expectedDimensionsSet.dimensions;
       const expectedRanges = expectedDimensionsSet.ranges;
 
       stageLoaderSpy.loadStages.and.returnValue(asyncData(expectedStages));
       stageDimensionsSpy.getDimensionsFull.and.returnValue(asyncData(expectedDimensionsSet));
-      stageClassificationsSpy.classifyStages.and.returnValue(asyncData(expectedSelectInfo))
+      stageClassificationsSpy.classifyStages.and.returnValue(asyncData(expectedClassifications))
 
       const actualStageData$ = resolverService.resolve(route, state);
       actualStageData$.subscribe((actualStageData) => {
         const actualStages = actualStageData['stages'];
         const actualDimensionsSet = actualStageData['dimensionsFull'];
-        const actualSelectInfo = actualStageData['stageSelectInfo'];
+        const actualClassifications = actualStageData['stageClassifications'];
 
         expect(stageLoaderSpy.loadStages).toHaveBeenCalledTimes(1);
         expect(stageDimensionsSpy.getDimensionsFull).toHaveBeenCalledTimes(1);
         expect(stageClassificationsSpy.classifyStages).toHaveBeenCalledTimes(1);
         expect(actualStages['length']).toEqual(expectedStages.length);
         expect(actualStages).toEqual(expectedStages);
-        expect(actualSelectInfo['length']).toEqual(expectedSelectInfo.length);
-        expect(actualSelectInfo).toEqual(expectedSelectInfo);
+        expect(actualClassifications['length']).toEqual(expectedClassifications.length);
+        expect(actualClassifications).toEqual(expectedClassifications);
 
         const actualDimensions = actualDimensionsSet['dimensions'];
         expect(actualDimensions.length).toEqual(expectedDimensions.length);
@@ -123,12 +123,12 @@ describe('StageComparatorResolverService', () => {
 
     }
 
-    it('should return an Observable of an object with an array of Stages, an array of StageSelectInfo, and a StageDimensionsSet', async(() => {
+    it('should return an Observable of an object with an array of Stages, an array of StageClassifications, and a StageDimensionsSet', async(() => {
       /**/
       // console.log('=== SPEC - OUTPUT TYPE ===');
       stageLoaderSpy.loadStages.and.returnValue(asyncData(STAGES_ONE));
       stageDimensionsSpy.getDimensionsFull.and.returnValue(asyncData(STAGE_DIMENSIONS_SETS.TWO_STAGE_SET));
-      stageClassificationsSpy.classifyStages.and.returnValue(asyncData(STAGE_SELECTIONS.ONE));
+      stageClassificationsSpy.classifyStages.and.returnValue(asyncData(STAGE_CLASSES.ONE));
 
       let actualStageData$ = resolverService.resolve(route, state);
       actualStageData$.subscribe({
@@ -146,11 +146,11 @@ describe('StageComparatorResolverService', () => {
             expect(isStage(stage)).withContext(`SPEC FAILURE - ${stage.name} is not a stage`).toEqual(true);
           });
 
-          if ( (!actualStageData['stageSelectInfo'].forEach)
+          if ( (!actualStageData['stageClassifications'].forEach)
               || (!Array.isArray(actualStageData['stages']))
-          ) { fail('the returned stageSelectInfo data is not an array'); }
-          actualStageData['stageSelectInfo'].forEach(selection => {
-            expect(isStageSelectInfo(selection)).withContext(`SPEC FAILURE - ${JSON.stringify(selection)} is not a stage`).toEqual(true);
+          ) { fail('the returned stageClassifications data is not an array'); }
+          actualStageData['stageClassifications'].forEach(selection => {
+            expect(isStageClassifications(selection)).withContext(`SPEC FAILURE - ${JSON.stringify(selection)} is not a stage`).toEqual(true);
           });
 
           expect(isStageDimensionsSet(actualStageData['dimensionsFull'])).withContext('SPEC FAILURE - dimensionsFull is not a StageDimensionsSet').toEqual(true);
@@ -166,17 +166,17 @@ describe('StageComparatorResolverService', () => {
     it('should return the data that StageLoaderService and StageDimensionsService provide', async(() => {
       const expectedStages = STAGES_TWO;
       const expectedDimensionsSet = STAGE_DIMENSIONS_SETS.DIMENSIONS_SET_TWO;
-      const expectedSelectInfo = STAGE_SELECTIONS.TWO;
+      const expectedClassifications = STAGE_CLASSES.TWO;
 
-      _compareStageData(expectedStages, expectedDimensionsSet, expectedSelectInfo);
+      _compareStageData(expectedStages, expectedDimensionsSet, expectedClassifications);
     }));
 
     it('should return different data provided by StageLoaderService and StageDimensionsService', async(() => {
       const expectedStages = STAGES_THREE;
       const expectedDimensionsSet = STAGE_DIMENSIONS_SETS.DIMENSIONS_SET_THREE;
-      const expectedSelectInfo = STAGE_SELECTIONS.THREE;
+      const expectedClassifications = STAGE_CLASSES.THREE;
 
-      _compareStageData(expectedStages, expectedDimensionsSet, expectedSelectInfo);
+      _compareStageData(expectedStages, expectedDimensionsSet, expectedClassifications);
     }));
 
   });

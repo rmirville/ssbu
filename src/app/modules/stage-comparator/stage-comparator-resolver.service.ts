@@ -14,12 +14,12 @@ import { StageDimensionsService } from '../../shared/stage/services/stage-dimens
 import { StagePieceMapService } from '../../shared/stage/services/stage-piece-map.service';
 import { Stage } from '../../shared/stage/models/stage.model';
 import { StageDimensionsSet } from '../../shared/stage/models/stage-dimensions-set.model';
-import { StageSelectInfo } from '../../shared/stage/models/stage-select-info.model';
+import { StageClassifications } from '../../shared/stage/models/stage-classifications.model';
 
 interface StageComparatorRouteData {
   stages: Stage[],
   dimensionsFull: StageDimensionsSet,
-  stageSelectInfo: StageSelectInfo[]
+  stageClassifications: StageClassifications[]
 };
 
 @Injectable({
@@ -35,7 +35,7 @@ export class StageComparatorResolverService implements Resolve<StageComparatorRo
     const stageData$ = new Observable<StageComparatorRouteData>(observer => {
       /**/
       // console.log(`  * observer at start: ${JSON.stringify(Object.keys(observer))}`);
-      let stageData: StageComparatorRouteData = {stages: null, dimensionsFull: null, stageSelectInfo: null};
+      let stageData: StageComparatorRouteData = {stages: null, dimensionsFull: null, stageClassifications: null};
       
       /**/
       const stageCalculations$ = this.spms.getMaps('stageComparator')
@@ -57,8 +57,8 @@ export class StageComparatorResolverService implements Resolve<StageComparatorRo
               this.sds.getDimensionsFull(rawData.stages, rawData.pieceMaps),
               this.scs.classifyStages(stagesBasic)
             ).pipe(
-              map(([dimensionsFull, stageSelectInfo]) => {
-                return { dimensionsFull, stageSelectInfo };
+              map(([dimensionsFull, stageClassifications]) => {
+                return { dimensionsFull, stageClassifications };
               })
             );
           })
@@ -66,7 +66,7 @@ export class StageComparatorResolverService implements Resolve<StageComparatorRo
       // add final calculations to the route data
       stageCalculations$.subscribe(stageCalculations => {
         stageData.dimensionsFull = stageCalculations.dimensionsFull;
-        stageData.stageSelectInfo = stageCalculations.stageSelectInfo;
+        stageData.stageClassifications = stageCalculations.stageClassifications;
         observer.next(stageData);
         observer.complete();
       });

@@ -1,3 +1,5 @@
+import { StageClassifications } from '../stage-classifications.model';
+
 export const VALID = {
   gameName: "something",
   name: "Laughable Monkey",
@@ -252,6 +254,80 @@ export const SIMPLE_LIST = [
   {
     gameName: "zelda_tower",
     series: "The Legend of Zelda",
+    tourneyPresence: -1
+  }
+];
+
+
+
+export const ONE: StageClassifications[] = [
+  {
+    name: "Princess Peach's Castle",
+    abbr: "PPC",
+    gameName: "mario_castledx_",
+    series: "Super Mario",
+    tourneyPresence: -1
+  },
+  {
+    name: "Yoshi's Story",
+    abbr: "YS",
+    gameName: "yoshi_cartboard_",
+    series: "Yoshi",
+    tourneyPresence: 0
+  },
+  {
+    name: "Great Plateau Tower",
+    abbr: "GPT",
+    gameName: "zelda_tower",
+    series: "The Legend of Zelda",
+    tourneyPresence: -1
+  }
+];
+
+export const TWO: StageClassifications[] = [
+  {
+    name: "Arena Ferox",
+    abbr: "AF",
+    gameName: "colloseum_",
+    series: "Fire Emblem",
+    tourneyPresence: -1
+  },
+  {
+    gameName: "duckhunt_",
+    name: "Duck Hunt",
+    abbr: "DH",
+    series: "Duck Hunt",
+    tourneyPresence: -1
+  },
+  {
+    name: "Pokémon Stadium",
+    abbr: "PS1",
+    gameName: "poke_stadium_",
+    series: "Pokémon",
+    tourneyPresence: 2
+  }
+];
+
+export const THREE: StageClassifications[] = [
+  {
+    name: "Wily Castle",
+    abbr: "WC",
+    gameName: "wily_",
+    series: "Mega Man",
+    tourneyPresence: -1
+  },
+  {
+    name: "Gamer",
+    abbr: "GMR",
+    gameName: "gamer_",
+    series: "Wario Ware",
+    tourneyPresence: -1
+  },
+  {
+    name: "PictoChat 2",
+    abbr: "PC",
+    gameName: "pictchat_",
+    series: "Miscellaneous",
     tourneyPresence: -1
   }
 ];

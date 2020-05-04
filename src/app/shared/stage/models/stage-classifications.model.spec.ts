@@ -21,6 +21,14 @@ describe('StageClassificationsModel', () => {
         _testBadData('gameNameNotString');
       });
 
+      it('should reject a classifications object with a non-string name', () => {
+        _testBadData('nameNotString');
+      });
+
+      it('should reject a classifications object with a non-string abbreviation', () => {
+        _testBadData('abbrNotString');
+      });
+
       it('should reject a classifications object with a non-string series', () => {
         _testBadData('seriesNotString');
       });

@@ -3,7 +3,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { StageClassificationsService } from './stage-classifications.service';
 
 import { isStageClassifications } from '../models/stage-classifications.model';
-import { isStageSelectInfo } from '../models/stage-select-info.model';
+import { StageMiscInfo } from '../models/stage-misc-info.model';
 
 import * as STAGE_CLASSES_INPUT from '../models/mocks/stage-classifications-input';
 import * as STAGE_CLASSES_OUTPUT from '../models/mocks/stage-classifications-output';
@@ -27,7 +27,7 @@ describe('StageClassificationsService', () => {
 
     describe('basic functionality', () => {
 
-      it('should produce a StageClassifications array when fed only gameName', async(() => {
+      it('should produce a StageClassifications array when fed gameName', async(() => {
 
         const input = STAGE_CLASSES_INPUT.GAME_NAME_ONLY;
         let actualClassifiedStages$ = service.classifyStages(input);
@@ -37,22 +37,6 @@ describe('StageClassificationsService', () => {
           expect(actualClassifiedStages.length).withContext('There should be items in the array').toEqual(input.length);
           actualClassifiedStages.forEach(actualClassifiedStage => {
             expect(isStageClassifications(actualClassifiedStage)).toEqual(true);
-          });
-
-        });
-
-      }));
-
-      it('should produce a StageSelectInfo array when fed only gameName and name', async(() => {
-        
-        const input = STAGE_CLASSES_INPUT.GAME_NAME_NAME;
-        let actualClassifiedStages$ = service.classifyStages(input);
-
-        actualClassifiedStages$.subscribe(actualClassifiedStages => {
-
-          expect(actualClassifiedStages.length).withContext('There should be items in the array').toEqual(input.length);
-          actualClassifiedStages.forEach(actualClassifiedStage => {
-            expect(isStageSelectInfo(actualClassifiedStage)).toEqual(true);
           });
 
         });
@@ -103,10 +87,10 @@ describe('StageClassificationsService', () => {
     describe('data validation', () => {
 
       function _testBadData(problem, message) {
-        /**/
+        ///
         // console.log(`=== SPEC - CHECK PARAMETER DATA TYPE (${problem}) ===`);
-        const invalidStages = STAGE_CLASSES_INPUT.BAD_DATA[problem];
-        /**/
+        const invalidStages: StageMiscInfo[] = STAGE_CLASSES_INPUT.BAD_DATA[problem];
+        ///
         // console.log(`  * invalid stages: ${JSON.stringify(invalidStages)}`);
         expect(() => {
           const actualClassifiedStages$ = service.classifyStages(invalidStages);

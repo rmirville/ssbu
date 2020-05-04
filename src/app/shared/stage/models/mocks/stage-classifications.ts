@@ -1,25 +1,48 @@
 export const VALID = {
   gameName: "something",
+  name: "Laughable Monkey",
+  abbr: "LM",
   series: "Super World Prime",
   tourneyPresence: 9
 };
 
 export const BAD_DATA = {
-  
   gameNameNotString: {
     gameName: false,
+    name: "Dusty Potato",
+    abbr: "DP",
     series: "Absolute Serious Omega",
     tourneyPresence: 29
+  },
+
+  nameNotString: {
+    gameName: "Mammoth Burst",
+    name: -12378.68901235,
+    abbr: "N1",
+    series: "Murky Approval",
+    tourneyPresence: 93
+  },
+
+  abbrNotString: {
+    gameName: "tempprob_",
+    name: "Bridge of Probability",
+    abbr: false,
+    series: "Temporary Setback Brigade",
+    tourneyPresence: 8310
   },
   
   seriesNotString: {
     gameName: "placeword_",
+    name: "Warm Eggnog",
+    abbr: "WE",
     series: [39, 28],
     tourneyPresence: 100
   },
   
   tourneyPresenceNotNumber: {
     gameName: "foodfighter_",
+    name: "Phobic Meeting",
+    abbr: "PM",
     series: "Food Fighter Supreme",
     tourneyPresence: "Ultimate Chicken Force 25"
   }

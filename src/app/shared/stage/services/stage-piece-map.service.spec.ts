@@ -29,7 +29,7 @@ describe('StagePieceMapService', () => {
     });
 
     it('should produce a StagePieceMap array when given the map name', async(() => {
-      /**/
+      ///
       // console.groupCollapsed('=== SPEC - getMaps - output type ===');
       const inputMapSetName: string = MAPS_NAME_STAGE_COMPARATOR;
       const actualMaps$ = service.getMaps(inputMapSetName);
@@ -42,14 +42,14 @@ describe('StagePieceMapService', () => {
           expect(isStagePieceMap(actualMap)).toEqual(true);
         });
 
-        /**/
+        ///
         // console.groupEnd();
       });
 
     }));
 
     it('should produce the associated StagePieceMap array when given the map name', async(() => {
-      /**/
+      ///
       // console.groupCollapsed('=== SPEC - getMaps - output value ===')
       const inputMapSetName: string = MAPS_NAME_STAGE_COMPARATOR;
       const expectedMaps: StagePieceMap[] = PIECE_MAP_SVC.GETMAPS_OUTPUT_VALUE;
@@ -60,7 +60,7 @@ describe('StagePieceMapService', () => {
         actualMaps.forEach(actualMap => {
           expect(expectedMaps).toContain(actualMap);
         });
-        /**/
+        ///
         // console.groupEnd();
       });
     }));
@@ -68,7 +68,7 @@ describe('StagePieceMapService', () => {
     describe('data validation', () => {
 
       it('should reject a map set name that is not in the data source', async(() => {
-        /**/
+        ///
         // console.groupCollapsed('=== SPEC - getMaps - reject unknown map set name');
         const inputMapSetName: string = PIECE_MAP_SVC.GETMAPS_INVALID_UNKNOWN;
         
@@ -85,12 +85,29 @@ describe('StagePieceMapService', () => {
           }
         });
 
-        /**/
+        ///
         // console.groupEnd();
       }));
 
+      it('should reject a non-string map set name', async(() => {
+        ///
+        console.groupCollapsed('=== SPEC - getMaps - reject non-string map set name');
+        const badInput = {
+          setName: 38
+        };
+        const propName: string = 'setName';
+
+        expect(() => {
+          const actualMaps$ = service.getMaps(badInput[propName]);
+        }).toThrow(new TypeError());
+
+        ///
+        console.groupEnd();
+
+      }));
+
       it('should reject an empty map set name', async(() => {
-        /**/
+        ///
         // console.groupCollapsed('=== SPEC - getMaps - reject empty map set name');
         const inputMapSetName: string = '';
 
@@ -98,7 +115,7 @@ describe('StagePieceMapService', () => {
           const actualMaps$ = service.getMaps(inputMapSetName);
         }).toThrow(new EmptyArgumentError());
 
-        /**/
+        ///
         // console.groupEnd();
       }));
 

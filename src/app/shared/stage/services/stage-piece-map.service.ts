@@ -190,6 +190,9 @@ export class StagePieceMapService {
   constructor() { }
 
   getMaps(mapSetName: string): Observable<StagePieceMap[]> {
+    if (typeof mapSetName !== 'string') {
+      throw new TypeError();
+    }
     if (mapSetName.trim().length === 0) {
       throw new EmptyArgumentError();
     }

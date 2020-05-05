@@ -7,6 +7,7 @@ import { httpRetryBackoff } from '../../rxjs-operators/http-retry-backoff';
 import { StageSummary, isStageSummary } from '../models/stage-summary.model';
 import { StageDetails, isStageDetails } from '../models/stage-details.model';
 import { Stage } from '../models/stage.model';
+import { catchError } from 'rxjs/operators';
 
 const API_URL = 'https://rubendal.github.io/ssbu/data/patch/4.0.0';
 const API_STAGE_LIST_PATH = '/stages.json';
@@ -191,33 +192,39 @@ export class StageLoaderService {
         const stageDetailsHttp$ = this.http.get<StageDetails[]>(url).pipe(httpRetryBackoff());
         /**/
         // console.log('      + stageDetailsHttp$: ' + stageDetailsHttp$);
-        stageDetailsHttp$.subscribe((details) => {
-          /**/
-          // console.log(`      + details$ - retrieved details: ${JSON.stringify(details)}`);
-          /**/
-          // console.log('      + details$ - retrieved details');
-          if (!Array.isArray(details)) {
+        stageDetailsHttp$.subscribe({
+          next: (details) => {
             /**/
-            // console.log('      + throwing array TypeError');
-            observer.error(new TypeError(`The ${filteredSummaries[i].name} stage details data fetched was not an array`));
-            return;
-          }
-          details.forEach((phase) => {
-            if (!isStageDetails(phase)) {
+            // console.log(`      + details$ - retrieved details: ${JSON.stringify(details)}`);
+            /**/
+            // console.log('      + details$ - retrieved details');
+            if (!Array.isArray(details)) {
               /**/
-              // console.log('      + throwing property TypeError');
-              observer.error(new TypeError(`The ${filteredSummaries[i].name} stage details data fetched was not of type StageDetails[]`));
+              // console.log('      + throwing array TypeError');
+              observer.error(new TypeError(`The ${filteredSummaries[i].name} stage details data fetched was not an array`));
               return;
             }
-          });
-          stages[i] = {
-            name: filteredSummaries[i].name,
-            gameName: filteredSummaries[i].gameName,
-            Type: filteredSummaries[i].Type,
-            details
-          };
-          observer.next(stages[i]);
-          if (i == filteredSummaries.length - 1) { observer.complete(); }
+            details.forEach((phase) => {
+              if (!isStageDetails(phase)) {
+                /**/
+                // console.log('      + throwing property TypeError');
+                observer.error(new TypeError(`The ${filteredSummaries[i].name} stage details data fetched was not of type StageDetails[]`));
+                return;
+              }
+            });
+            stages[i] = {
+              name: filteredSummaries[i].name,
+              gameName: filteredSummaries[i].gameName,
+              Type: filteredSummaries[i].Type,
+              details
+            };
+            observer.next(stages[i]);
+            if (i == filteredSummaries.length - 1) { observer.complete(); }
+          },
+          error: (e) => {
+            ///
+            console.warn(`Couldn't load stage "${filteredSummaries[i].name}"`);
+          }
         });
       }
       //observer.complete();

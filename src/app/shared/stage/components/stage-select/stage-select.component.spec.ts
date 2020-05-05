@@ -6,8 +6,9 @@ import { By } from '@angular/platform-browser';
 import { StageSelectComponent } from './stage-select.component';
 
 import { StageSelectHostMockComponent } from '../mocks/stage-select-host.mock.component';
-import { StageSelectInfo } from '../../models/stage-select-info.model';
-import * as STAGE_SELECTIONS from '../../models/mocks/stage-select-info';
+import { StageClassifications } from '../../models/stage-classifications.model';
+import * as STAGE_SELECTIONS from '../../models/mocks/stage-select-component';
+import * as STAGE_CLASSES from '../../models/mocks/stage-classifications';
 
 describe('StageSelectComponent', () => {
   let selectComp: StageSelectComponent;
@@ -43,7 +44,7 @@ describe('StageSelectComponent', () => {
   });
 
   it('sanity: host component should have provided stages property', () => {
-    let expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.ONE;
+    let expectedStages: StageClassifications[] = STAGE_CLASSES.ONE;
     selectHostComp.stages = [...expectedStages];
     expect(selectHostComp.stages.length).withContext('the number of stages should be the same').toEqual(expectedStages.length);
     expect(selectHostComp.stages).toEqual(expectedStages);
@@ -51,7 +52,7 @@ describe('StageSelectComponent', () => {
   });
   
   it('should have a stages property set to a provided value on init', () => {
-    let expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.ONE;
+    let expectedStages: StageClassifications[] = STAGE_CLASSES.ONE;
     selectHostComp.stages = [...expectedStages];
     ///
     // console.log(`SPEC - hostComponent stages set`);
@@ -72,7 +73,7 @@ describe('StageSelectComponent', () => {
   it('should show a list of checkbox inputs', () => {
     ///
     // console.log('=== SPEC - Show checkboxes');
-    const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.ONE;
+    const expectedStages: StageClassifications[] = STAGE_CLASSES.ONE;
 
     selectHostComp.stages = [...expectedStages];
     selectHostFixture.detectChanges();
@@ -85,7 +86,7 @@ describe('StageSelectComponent', () => {
   it('should show a list of checkbox labels', () => {
     ///
     // console.groupCollapsed('=== SPEC - Show labels');
-    const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.ONE;
+    const expectedStages: StageClassifications[] = STAGE_CLASSES.ONE;
 
     selectHostComp.stages = [...expectedStages];
     selectHostFixture.detectChanges();
@@ -100,7 +101,7 @@ describe('StageSelectComponent', () => {
   it(`should show a list of checkbox inputs with names that match the provided stages' gameNames`, () => {
     ///
     // console.groupCollapsed('=== SPEC - Match checkbox name');
-    const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.ONE;
+    const expectedStages: StageClassifications[] = STAGE_CLASSES.ONE;
 
     selectHostComp.stages = [...expectedStages];
     selectHostFixture.detectChanges();
@@ -118,7 +119,7 @@ describe('StageSelectComponent', () => {
   it(`should show a list of checkbox labels with texts that match the provided stages' names`, () => {
     ///
     // console.groupCollapsed('=== SPEC - Match label text');
-    const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.ONE;
+    const expectedStages: StageClassifications[] = STAGE_CLASSES.ONE;
 
     selectHostComp.stages = [...expectedStages];
     selectHostFixture.detectChanges();
@@ -134,7 +135,7 @@ describe('StageSelectComponent', () => {
   });
 
   it('should have all commonly-legal stages checked on initialization', () => {
-    const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.INIT_CHECKED.inputStages;
+    const inputStages: StageClassifications[] = STAGE_SELECTIONS.INIT_CHECKED.inputStages;
     const targetGameNames: string[] = STAGE_SELECTIONS.INIT_CHECKED.targetStages;
     selectHostComp.stages = [...inputStages];
     selectHostFixture.detectChanges();
@@ -149,7 +150,7 @@ describe('StageSelectComponent', () => {
   });
 
   it('should have all stages that aren\'t commonly legal unchecked on initialization', () => {
-    const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.INIT_UNCHECKED.inputStages;
+    const inputStages: StageClassifications[] = STAGE_SELECTIONS.INIT_UNCHECKED.inputStages;
     const targetGameNames: string[] = STAGE_SELECTIONS.INIT_UNCHECKED.targetStages;
     selectHostComp.stages = [...inputStages];
     selectHostFixture.detectChanges();
@@ -164,7 +165,7 @@ describe('StageSelectComponent', () => {
   });
 
   it('should submit all commonly legal stages on initialization', () => {
-    const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.INIT_SUBMITTED.inputStages;
+    const inputStages: StageClassifications[] = STAGE_SELECTIONS.INIT_SUBMITTED.inputStages;
     const expectedGameNames: string[] = STAGE_SELECTIONS.INIT_SUBMITTED.expectedGameNames;
     const expectedLength: number = STAGE_SELECTIONS.INIT_SUBMITTED.expectedLength;
     selectHostComp.stages = [...inputStages];
@@ -179,7 +180,7 @@ describe('StageSelectComponent', () => {
   it('should show an error message when there are no stages loaded', () => {
     ///
     // console.groupCollapsed('=== SPEC - no stages loaded -> error');
-    const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.NOSTAGES_ERROR.inputStages;
+    const inputStages: StageClassifications[] = STAGE_SELECTIONS.NOSTAGES_ERROR.inputStages;
     const expectedMessage: string = STAGE_SELECTIONS.NOSTAGES_ERROR.expectedMessage;
     selectHostComp.stages = [...inputStages];
     selectHostFixture.detectChanges();
@@ -197,7 +198,7 @@ describe('StageSelectComponent', () => {
   it('should not show an error message when there are stages loaded', () => {
     ///
     // console.groupCollapsed('=== SPEC - stages loaded -> no error');
-    const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.NOSTAGES_ERROR_NEGATIVE.inputStages;
+    const inputStages: StageClassifications[] = STAGE_SELECTIONS.NOSTAGES_ERROR_NEGATIVE.inputStages;
     const targetMessage: string = STAGE_SELECTIONS.NOSTAGES_ERROR_NEGATIVE.targetMessage;
     selectHostComp.stages = [...inputStages];
     selectHostFixture.detectChanges();
@@ -213,7 +214,7 @@ describe('StageSelectComponent', () => {
     it(`should show a list of checkbox inputs with id's of the section id and the provided stages' gameNames`, () => {
       ///
       // console.groupCollapsed('=== SPEC - Tourney - Match checkbox id');
-      const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_STAGE_ID;
+      const expectedStages: StageClassifications[] = STAGE_SELECTIONS.TOURNEY_STAGE_ID;
       const expectedPrefix: string = 'tourneyPresence_'
 
       selectHostComp.stages = [...expectedStages];
@@ -232,7 +233,7 @@ describe('StageSelectComponent', () => {
     it(`should show a list of checkbox labels with for attributes of the section id and the provided stages' gameNames`, () => {
       ///
       // console.groupCollapsed('=== SPEC - Tourney - Match label attributes');
-      const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_STAGE_LABEL_FOR;
+      const expectedStages: StageClassifications[] = STAGE_SELECTIONS.TOURNEY_STAGE_LABEL_FOR;
       const expectedPrefix: string = 'tourneyPresence_';
 
       selectHostComp.stages = [...expectedStages];
@@ -253,7 +254,7 @@ describe('StageSelectComponent', () => {
       it('should show a common legal stages category if there are commonly legal stages', () => {
         ///
         // console.groupCollapsed('=== SPEC - Show common legal category');
-        const stages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_COMMON_PRESENT;
+        const stages: StageClassifications[] = STAGE_SELECTIONS.LEGAL_COMMON_PRESENT;
         selectHostComp.stages = [...stages];
         selectHostFixture.detectChanges();
 
@@ -265,7 +266,7 @@ describe('StageSelectComponent', () => {
       it('should not show a common legal stages category if there are no commonly legal stages', () => {
         ///
         // console.groupCollapsed('=== SPEC - Hide common legal category');
-        const stages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_COMMON_ABSENT;
+        const stages: StageClassifications[] = STAGE_SELECTIONS.LEGAL_COMMON_ABSENT;
         selectHostComp.stages = [...stages];
         selectHostFixture.detectChanges();
         
@@ -278,8 +279,8 @@ describe('StageSelectComponent', () => {
       it('should show all common legal stages in the common legal stages category', () => {
         ///
         // console.groupCollapsed('=== SPEC - Show all common legal stages in common legal category');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_COMMON_INCLUDE.allStages;
-        const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_COMMON_INCLUDE.includedStages;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.LEGAL_COMMON_INCLUDE.allStages;
+        const expectedStages: StageClassifications[] = STAGE_SELECTIONS.LEGAL_COMMON_INCLUDE.includedStages;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
         
@@ -298,8 +299,8 @@ describe('StageSelectComponent', () => {
       it('should not show other stages in the common legal stages category', () => {
         ///
         // console.groupCollapsed('=== SPEC - Hide other stages from common legal category');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_COMMON_EXCLUDE.allStages;
-        const excludedStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_COMMON_EXCLUDE.excludedStages;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.LEGAL_COMMON_EXCLUDE.allStages;
+        const excludedStages: StageClassifications[] = STAGE_SELECTIONS.LEGAL_COMMON_EXCLUDE.excludedStages;
 
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
@@ -323,7 +324,7 @@ describe('StageSelectComponent', () => {
       it('should show an uncommonly legal stages category if there are uncommonly legal stages', () => {
         ///
         // console.groupCollapsed('=== SPEC - Show uncommon legal category');
-        const stages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_PRESENT;
+        const stages: StageClassifications[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_PRESENT;
         selectHostComp.stages = [...stages];
         selectHostFixture.detectChanges();
 
@@ -335,7 +336,7 @@ describe('StageSelectComponent', () => {
       it('should not show an uncommon legal stages category if there are no uncommonly legal stages', () => {
         ///
         // console.groupCollapsed('=== SPEC - Hide uncommon legal category');
-        const stages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_ABSENT;
+        const stages: StageClassifications[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_ABSENT;
         selectHostComp.stages = [...stages];
         selectHostFixture.detectChanges();
 
@@ -348,8 +349,8 @@ describe('StageSelectComponent', () => {
       it('should show all uncommon legal stages in the uncommon legal stages category', () => {
         ///
         // console.groupCollapsed('=== SPEC - Show all uncommon legal stages in uncommon legal category');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_INCLUDE.allStages;
-        const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_INCLUDE.includedStages;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_INCLUDE.allStages;
+        const expectedStages: StageClassifications[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_INCLUDE.includedStages;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -368,8 +369,8 @@ describe('StageSelectComponent', () => {
       it('should not show other stages in the uncommon legal stages category', () => {
         ///
         // console.groupCollapsed('=== SPEC - Hide other stages from uncommon legal category');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_EXCLUDE.allStages;
-        const excludedStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_EXCLUDE.excludedStages;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_EXCLUDE.allStages;
+        const excludedStages: StageClassifications[] = STAGE_SELECTIONS.LEGAL_UNCOMMON_EXCLUDE.excludedStages;
 
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
@@ -393,7 +394,7 @@ describe('StageSelectComponent', () => {
       it('should show a rarely legal stages category if there are rarely legal stages', () => {
         ///
         // console.groupCollapsed('=== SPEC - Show rare legal category');
-        const stages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_RARE_PRESENT;
+        const stages: StageClassifications[] = STAGE_SELECTIONS.LEGAL_RARE_PRESENT;
         selectHostComp.stages = [...stages];
         selectHostFixture.detectChanges();
 
@@ -405,7 +406,7 @@ describe('StageSelectComponent', () => {
       it('should not show a rare legal stages category if there are no rarely legal stages', () => {
         ///
         // console.groupCollapsed('=== SPEC - Hide rare legal category');
-        const stages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_RARE_ABSENT;
+        const stages: StageClassifications[] = STAGE_SELECTIONS.LEGAL_RARE_ABSENT;
         selectHostComp.stages = [...stages];
         selectHostFixture.detectChanges();
 
@@ -418,8 +419,8 @@ describe('StageSelectComponent', () => {
       it('should show all rarely legal stages in the rarely legal stages category', () => {
         ///
         // console.groupCollapsed('=== SPEC - Show all rare legal stages in rare legal category');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_RARE_INCLUDE.allStages;
-        const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_RARE_INCLUDE.includedStages;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.LEGAL_RARE_INCLUDE.allStages;
+        const expectedStages: StageClassifications[] = STAGE_SELECTIONS.LEGAL_RARE_INCLUDE.includedStages;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -438,8 +439,8 @@ describe('StageSelectComponent', () => {
       it('should not show other stages in the rarely legal stages category', () => {
         ///
         // console.groupCollapsed('=== SPEC - Hide other stages from rare legal category');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_RARE_EXCLUDE.allStages;
-        const excludedStages: StageSelectInfo[] = STAGE_SELECTIONS.LEGAL_RARE_EXCLUDE.excludedStages;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.LEGAL_RARE_EXCLUDE.allStages;
+        const excludedStages: StageClassifications[] = STAGE_SELECTIONS.LEGAL_RARE_EXCLUDE.excludedStages;
 
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
@@ -460,7 +461,7 @@ describe('StageSelectComponent', () => {
     it('should put a mix of tourney-legal stages in the appropriate tourney categories', () => {
       ///
       // console.groupCollapsed('=== SPEC - Group stages by tourney category');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY.input;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.TOURNEY.input;
       const expectedStages = {
         legalCommon: STAGE_SELECTIONS.TOURNEY.output.legalCommon,
         legalUncommon: STAGE_SELECTIONS.TOURNEY.output.legalUncommon,
@@ -491,8 +492,8 @@ describe('StageSelectComponent', () => {
     it('should sort stages within each section alphabetically', () => {
       ///
       // console.groupCollapsed('=== SPEC - sort stages alphabetically');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_STAGE_SORT.inputStages;
-      const expectedStages: { [property: string]: StageSelectInfo[] } = STAGE_SELECTIONS.TOURNEY_STAGE_SORT.sortedStages;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.TOURNEY_STAGE_SORT.inputStages;
+      const expectedStages: { [property: string]: StageClassifications[] } = STAGE_SELECTIONS.TOURNEY_STAGE_SORT.sortedStages;
       const expectedStageNames: { [property: string]: string[] } = {
         legalCommon: expectedStages.legalCommon.map(stage => stage.name),
         legalUncommon: expectedStages.legalUncommon.map(stage => stage.name),
@@ -539,7 +540,7 @@ describe('StageSelectComponent', () => {
       it('should not appear if there are only banned stages present', () => {
         ///
         // console.groupCollapsed('=== SPEC - Hide tourney section when there are no legal stages');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_HIDE_LEGAL_BANNED;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.TOURNEY_HIDE_LEGAL_BANNED;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -552,7 +553,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are commonly legal stages present', () => {
         ///
         // console.groupCollapsed('=== SPEC - Show tourney section with common legal stages');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -565,7 +566,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are commonly legal and banned stages present', () => {
         ///
         // console.groupCollapsed('=== SPEC - Show tourney section with commonly legal and banned stages');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON_BANNED;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON_BANNED;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -578,7 +579,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are uncommonly legal stages present', () => {
         ///
         // console.groupCollapsed('=== SPEC - Show tourney section with uncommonly legal stages');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_UNCOMMON;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_UNCOMMON;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -591,7 +592,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are uncommonly legal and banned stages present', () => {
         ///
         // console.groupCollapsed('=== SPEC - Show tourney section with uncommonly legal and banned stages');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_UNCOMMON_BANNED;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_UNCOMMON_BANNED;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -604,7 +605,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are rarely legal stages present', () => {
         ///
         // console.groupCollapsed('=== SPEC - Show tourney section with rarely legal stages');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_RARE;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_RARE;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -617,7 +618,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are rarely legal and banned stages present', () => {
         ///
         // console.groupCollapsed('=== SPEC - Show tourney section with rarely legal and banned stages');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_RARE_BANNED;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_RARE_BANNED;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -630,7 +631,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are commonly and uncommonly legal stages present', () => {
         ///
         // console.groupCollapsed('=== SPEC - Show tourney section with commonly and uncommonly legal stages');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON_UNCOMMON;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON_UNCOMMON;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -643,7 +644,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are commonly legal, uncommonly legal, and banned stages present', () => {
         ///
         // console.groupCollapsed('=== SPEC - Show tourney section with commonly legal, uncommonly legal, and banned stages');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON_UNCOMMON_BANNED;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON_UNCOMMON_BANNED;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -656,7 +657,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are commonly and rarely legal stages present', () => {
         ///
         // console.groupCollapsed('=== SPEC - Show tourney section with commonly and rarely legal stages');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON_RARE;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON_RARE;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -669,7 +670,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are commonly legal, rarely legal, and banned stages present', () => {
         ///
         // console.groupCollapsed('=== SPEC - Show tourney section with commonly legal, rarely legal, and banned stages');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON_RARE_BANNED;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_COMMON_RARE_BANNED;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -682,7 +683,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are uncommonly and rarely legal stages present', () => {
         ///
         // console.groupCollapsed('=== SPEC - Show tourney section with uncommonly and rarely legal stages');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_UNCOMMON_RARE;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_UNCOMMON_RARE;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -695,7 +696,7 @@ describe('StageSelectComponent', () => {
       it('should appear if there are uncommonly legal, rarely legal, and banned stages present', () => {
         ///
         // console.groupCollapsed('=== SPEC - Show tourney section with uncommonly legal, rarely legal, and banned stages');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_UNCOMMON_RARE_BANNED;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.TOURNEY_SHOW_LEGAL_UNCOMMON_RARE_BANNED;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -714,7 +715,7 @@ describe('StageSelectComponent', () => {
     it(`should show a list of checkbox inputs with id's of the section id and the provided stages' gameNames`, () => {
       ///
       // console.log('=== SPEC - Series - Match checkbox id');
-      const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_STAGE_ID;
+      const expectedStages: StageClassifications[] = STAGE_SELECTIONS.SERIES_STAGE_ID;
       const expectedPrefix: string = 'series_'
 
       selectHostComp.stages = [...expectedStages];
@@ -731,7 +732,7 @@ describe('StageSelectComponent', () => {
     it(`should show a list of checkbox labels with for attributes of the section id and the provided stages' gameNames`, () => {
       ///
       // console.log('=== SPEC - Series - Match label attributes');
-      const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_STAGE_LABEL_FOR;
+      const expectedStages: StageClassifications[] = STAGE_SELECTIONS.SERIES_STAGE_LABEL_FOR;
       const expectedPrefix: string = 'series_';
 
       selectHostComp.stages = [...expectedStages];
@@ -748,7 +749,7 @@ describe('StageSelectComponent', () => {
     it('should appear if there are stages', () => {
       ///
       // console.log('=== SPEC - Show series section');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_SHOW;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.SERIES_SHOW;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
@@ -767,8 +768,8 @@ describe('StageSelectComponent', () => {
     });
 
     it('should list defined series in alphabetical order', () => {
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_SORT.inputStages;
-      const sortedStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_SORT.sortedStages;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.SERIES_SORT.inputStages;
+      const sortedStages: StageClassifications[] = STAGE_SELECTIONS.SERIES_SORT.sortedStages;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
@@ -789,7 +790,7 @@ describe('StageSelectComponent', () => {
       it('should show up if there are stages from its series', () => {
         ///
         // console.log('=== SPEC - Show series subsection');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_INDIVIDUAL_SHOW.selections;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.SERIES_INDIVIDUAL_SHOW.selections;
         const targetSeries: string = STAGE_SELECTIONS.SERIES_INDIVIDUAL_SHOW.series;
         
         selectHostComp.stages = [...inputStages];
@@ -805,7 +806,7 @@ describe('StageSelectComponent', () => {
       it('should not show up if there are no stages from its series', () => {
         ///
         // console.log('=== SPEC - Hide series subsection');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_INDIVIDUAL_HIDE.selections;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.SERIES_INDIVIDUAL_HIDE.selections;
         const targetSeries: string = STAGE_SELECTIONS.SERIES_INDIVIDUAL_HIDE.series;
 
         selectHostComp.stages = [...inputStages];
@@ -821,8 +822,8 @@ describe('StageSelectComponent', () => {
       it('should show all stages from its series', () => {
         ///
         // console.log('=== SPEC - Show series\' stages');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_INDIVIDUAL_INCLUDE.allStages;
-        const expectedStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_INDIVIDUAL_INCLUDE.includedStages;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.SERIES_INDIVIDUAL_INCLUDE.allStages;
+        const expectedStages: StageClassifications[] = STAGE_SELECTIONS.SERIES_INDIVIDUAL_INCLUDE.includedStages;
         const targetSeries: string = STAGE_SELECTIONS.SERIES_INDIVIDUAL_INCLUDE.series;
 
         selectHostComp.stages = [...inputStages];
@@ -844,8 +845,8 @@ describe('StageSelectComponent', () => {
       });
 
       it('should not show any stages from a different series', () => {
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_INDIVIDUAL_EXCLUDE.allStages;
-        const targetStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_INDIVIDUAL_EXCLUDE.excludedStages;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.SERIES_INDIVIDUAL_EXCLUDE.allStages;
+        const targetStages: StageClassifications[] = STAGE_SELECTIONS.SERIES_INDIVIDUAL_EXCLUDE.excludedStages;
         const targetSeries: string = STAGE_SELECTIONS.SERIES_INDIVIDUAL_EXCLUDE.series;
 
         selectHostComp.stages = [...inputStages];
@@ -868,13 +869,13 @@ describe('StageSelectComponent', () => {
       });
 
       it('should list stages in alphabetical order', () => {
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.SERIES_STAGE_SORT.inputStages;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.SERIES_STAGE_SORT.inputStages;
         const sortedStages: {
           series: string,
-          stages: StageSelectInfo[]
+          stages: StageClassifications[]
         }[] = STAGE_SELECTIONS.SERIES_STAGE_SORT.sortedStages;
 
-        let expectedStages: { [series: string]: StageSelectInfo[] } = {};
+        let expectedStages: { [series: string]: StageClassifications[] } = {};
         for (const stageList of sortedStages) {
           expectedStages[stageList.series] = [...stageList.stages];
         }
@@ -900,7 +901,7 @@ describe('StageSelectComponent', () => {
     });
     describe('miscellaneous category', () => {
       it('should show up if there are stages with a miscellaneous series', () => {
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.MISC_SHOW_MISC;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.MISC_SHOW_MISC;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -910,7 +911,7 @@ describe('StageSelectComponent', () => {
       });
       
       it('should show up if there are stages with a blank series', () => {
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.MISC_SHOW_BLANK;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.MISC_SHOW_BLANK;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -920,7 +921,7 @@ describe('StageSelectComponent', () => {
       });
       
       it('should not appear if there are no stages with a blank or miscellaneous series', () => {
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.MISC_HIDE;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.MISC_HIDE;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -930,7 +931,7 @@ describe('StageSelectComponent', () => {
       });
 
       it('should show all stages with a blank series', () => {
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.MISC_STAGE_INCLUDE_BLANK.inputStages;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.MISC_STAGE_INCLUDE_BLANK.inputStages;
         const expectedGameNames: string[] = STAGE_SELECTIONS.MISC_STAGE_INCLUDE_BLANK.includedStages.map(stage => stage.gameName);
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
@@ -944,7 +945,7 @@ describe('StageSelectComponent', () => {
         }
       });
       it('should show all stages with a miscellaneous series', () => {
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.MISC_STAGE_INCLUDE_MISC.inputStages;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.MISC_STAGE_INCLUDE_MISC.inputStages;
         const expectedGameNames: string[] = STAGE_SELECTIONS.MISC_STAGE_INCLUDE_MISC.includedStages.map(stage => stage.gameName);
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
@@ -959,7 +960,7 @@ describe('StageSelectComponent', () => {
       });
       
       it('should not show stages from a defined series', () => {
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.MISC_STAGE_EXCLUDE.inputStages;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.MISC_STAGE_EXCLUDE.inputStages;
         const targetGameNames: string[] = STAGE_SELECTIONS.MISC_STAGE_EXCLUDE.excludedStages.map(stage => stage.gameName);
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
@@ -974,7 +975,7 @@ describe('StageSelectComponent', () => {
       });
       
       it('should show up last, even after series that follow it alphabetically', () => {
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.MISC_STAGE_EXCLUDE.inputStages;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.MISC_STAGE_EXCLUDE.inputStages;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -994,7 +995,7 @@ describe('StageSelectComponent', () => {
     it(`should check a stage in the series section if it's checked in the tourney section`, () => {
       ///
       // console.group('=== SPEC - check series stage from tourney stage selection');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_TOURNEY_SERIES.stages;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_TOURNEY_SERIES.stages;
       const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_TOURNEY_SERIES.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
@@ -1022,7 +1023,7 @@ describe('StageSelectComponent', () => {
     it(`should check a stage in the tourney section if it's checked in the series section`, () => {
       ///
       // console.log('=== SPEC - check tourney stage from series stage selection');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_SERIES_TOURNEY.stages;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_SERIES_TOURNEY.stages;
       const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_SERIES_TOURNEY.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
@@ -1048,7 +1049,7 @@ describe('StageSelectComponent', () => {
     it(`should uncheck a checked stage in the series section if it's unchecked in the tourney section`, () => {
       ///
       // console.log('=== SPEC - uncheck series stage from tourney stage selection');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_TOURNEY_SERIES.stages;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_TOURNEY_SERIES.stages;
       const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_TOURNEY_SERIES.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
@@ -1077,7 +1078,7 @@ describe('StageSelectComponent', () => {
     it(`should uncheck a checked stage in the tourney section if it's unchecked in the series section`, () => {
       ///
       // console.log('=== SPEC - uncheck tourney stage from series stage selection');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_SERIES_TOURNEY.stages;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_SERIES_TOURNEY.stages;
       const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_SERIES_TOURNEY.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
@@ -1106,7 +1107,7 @@ describe('StageSelectComponent', () => {
     it(`should not check any stage other than the one matching the clicked series stage`, () => {
       ///
       // console.log('=== SPEC - don't check any stage other than the clicked series stage');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_SERIES_TOURNEY_ISOLATE.stages;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_SERIES_TOURNEY_ISOLATE.stages;
       const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_SERIES_TOURNEY_ISOLATE.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
@@ -1136,7 +1137,7 @@ describe('StageSelectComponent', () => {
     it(`should not check any stage other than the one matching the clicked tourney stage`, () => {
       ///
       // console.log('=== SPEC - don't check any stage other than the clicked tourney stage');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_TOURNEY_SERIES_ISOLATE.stages;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_TOURNEY_SERIES_ISOLATE.stages;
       const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_CHECK_TOURNEY_SERIES_ISOLATE.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
@@ -1166,7 +1167,7 @@ describe('StageSelectComponent', () => {
     it(`should not uncheck any stages other than the one matching the clicked tourney stage`, () => {
       ///
       // console.log('=== SPEC - don't uncheck any stage other than the clicked tourney stage');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_TOURNEY_SERIES_ISOLATE.stages;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_TOURNEY_SERIES_ISOLATE.stages;
       const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_TOURNEY_SERIES_ISOLATE.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
@@ -1201,7 +1202,7 @@ describe('StageSelectComponent', () => {
     it(`should not uncheck any stages other than the one matching the clicked series stage`, () => {
       ///
       // console.log('=== SPEC - don't uncheck any stage other than the clicked series stage');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_SERIES_TOURNEY_ISOLATE.stages;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_SERIES_TOURNEY_ISOLATE.stages;
       const targetGameName: string = STAGE_SELECTIONS.CROSS_SINGLE_UNCHECK_SERIES_TOURNEY_ISOLATE.targetID;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
@@ -1236,7 +1237,7 @@ describe('StageSelectComponent', () => {
     it(`should check multiple stages in the series section if they are checked in the tourney section`, () => {
       ///
       // console.log('=== SPEC - check multiple series stages from tourney stage selection');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_TOURNEY_SERIES.stages;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_TOURNEY_SERIES.stages;
       const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_TOURNEY_SERIES.targetIDs;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
@@ -1268,7 +1269,7 @@ describe('StageSelectComponent', () => {
     it(`should check multiple stages in the tourney section if they are checked in the series section`, () => {
       ///
       // console.log('=== SPEC - check multiple tourney stages from series stage selection');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_SERIES_TOURNEY.stages;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_SERIES_TOURNEY.stages;
       const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_SERIES_TOURNEY.targetIDs;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
@@ -1300,7 +1301,7 @@ describe('StageSelectComponent', () => {
     it(`should uncheck multiple stages in the series section if they are unchecked in the tourney section`, () => {
       ///
       // console.log('=== SPEC - uncheck multiple series stages from tourney stage selection');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_TOURNEY_SERIES.stages;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_TOURNEY_SERIES.stages;
       const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_TOURNEY_SERIES.targetIDs;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
@@ -1336,7 +1337,7 @@ describe('StageSelectComponent', () => {
     it(`should uncheck multiple stages in the tourney section if they are unchecked in the series section`, () => {
       ///
       // console.log('=== SPEC - uncheck multiple tourney stages from series stage selection');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_SERIES_TOURNEY.stages;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_SERIES_TOURNEY.stages;
       const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_SERIES_TOURNEY.targetIDs;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
@@ -1371,7 +1372,7 @@ describe('StageSelectComponent', () => {
     
     it(`should not check any stages other than matches for the checked tourney stages`, () => {
       // console.log('=== SPEC - don't check any stage other than the clicked tourney stages');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_TOURNEY_SERIES_ISOLATE.stages;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_TOURNEY_SERIES_ISOLATE.stages;
       const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_TOURNEY_SERIES_ISOLATE.targetIDs;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
@@ -1403,7 +1404,7 @@ describe('StageSelectComponent', () => {
 
     it(`should not check any stages other than matches for the checked series stages`, () => {
       // console.log('=== SPEC - don't check any stage other than the clicked series stages');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_SERIES_TOURNEY_ISOLATE.stages;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_SERIES_TOURNEY_ISOLATE.stages;
       const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_CHECK_SERIES_TOURNEY_ISOLATE.targetIDs;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
@@ -1435,7 +1436,7 @@ describe('StageSelectComponent', () => {
 
     it(`should not uncheck any stages other than matches for the checked tourney stages`, () => {
       // console.log('=== SPEC - don't check any stage other than the clicked tourney stages');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_TOURNEY_SERIES_ISOLATE.stages;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_TOURNEY_SERIES_ISOLATE.stages;
       const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_TOURNEY_SERIES_ISOLATE.targetIDs;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
@@ -1474,7 +1475,7 @@ describe('StageSelectComponent', () => {
 
     it(`should not uncheck any stages other than matches for the checked series stages`, () => {
       // console.log('=== SPEC - don't check any stage other than the clicked series stages');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_SERIES_TOURNEY_ISOLATE.stages;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_SERIES_TOURNEY_ISOLATE.stages;
       const targetGameNames: string[] = STAGE_SELECTIONS.CROSS_MULTIPLE_UNCHECK_SERIES_TOURNEY_ISOLATE.targetIDs;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
@@ -1516,7 +1517,7 @@ describe('StageSelectComponent', () => {
       it('should exist', () => {
         ///
         // console.groupCollapsed(`=== SPEC - update button exists`);
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_EXISTS;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.UPDATE_EXISTS;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -1529,7 +1530,7 @@ describe('StageSelectComponent', () => {
       it('should be disabled when no stages are selected', () => {
         ///
         // console.group('=== SPEC - disable button when no stages are selected');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_DISABLED;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.UPDATE_DISABLED;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -1553,7 +1554,7 @@ describe('StageSelectComponent', () => {
       it('should be enabled when there are stages selected', () => {
         ///
         // console.group("=== SPEC - enable button when stages are selected");
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_ENABLED.inputStages;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.UPDATE_ENABLED.inputStages;
         const selectedGameNames: string[] = STAGE_SELECTIONS.UPDATE_ENABLED.selectedStages;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
@@ -1582,7 +1583,7 @@ describe('StageSelectComponent', () => {
       it('should send the selected gameNames', () => {
         ///
         // console.group(`=== SPEC - send selected stages`);
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_SELECTED.inputStages;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.UPDATE_SELECTED.inputStages;
         const expectedSelected: string[] = STAGE_SELECTIONS.UPDATE_SELECTED.selectedStages;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
@@ -1618,7 +1619,7 @@ describe('StageSelectComponent', () => {
       it('should not send any unselected gameNames', () => {
         ///
         // console.group(`=== SPEC - don't send unselected gameNames`);
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_UNSELECTED.inputStages;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.UPDATE_UNSELECTED.inputStages;
         const selectedGameNames: string[] = STAGE_SELECTIONS.UPDATE_UNSELECTED.selectedStages;
         const targetGameNames: string[] = STAGE_SELECTIONS.UPDATE_UNSELECTED.targetStages;
         selectHostComp.stages = [...inputStages];
@@ -1656,7 +1657,7 @@ describe('StageSelectComponent', () => {
       it('should show an error message when no stages are selected', () => {
         ///
         // console.group('=== SPEC - show error when no stages are selected');
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_NO_STAGES;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.UPDATE_NO_STAGES;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
@@ -1684,7 +1685,7 @@ describe('StageSelectComponent', () => {
       it('should not show an error message if there is a stage in the series section selected', () => {
         ///
         // console.group("=== SPEC - don't show error when stages are selected");
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.UPDATE_NO_ERROR.inputStages;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.UPDATE_NO_ERROR.inputStages;
         const targetGameNames: string[] = STAGE_SELECTIONS.UPDATE_NO_ERROR.targetStages;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
@@ -1719,7 +1720,7 @@ describe('StageSelectComponent', () => {
         ///
         // console.groupCollapsed('=== SPEC - parentError - fatalError');
 
-        const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.PARENTERROR_FATAL.inputStages;
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.PARENTERROR_FATAL.inputStages;
         const targetGameNames: string[] = STAGE_SELECTIONS.PARENTERROR_FATAL.targetGameNames;
         const expectedMessage: string = STAGE_SELECTIONS.PARENTERROR_FATAL.expectedMessage;
         const stageCheckDElems: DebugElement[] = selectDElem.queryAll(By.css(`.classification .form-check-input`));
@@ -1761,7 +1762,7 @@ describe('StageSelectComponent', () => {
 
   describe('select all button', () => {
     it('should appear in each root section', () => {
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_EXISTS;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.ALL_EXISTS;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
@@ -1772,7 +1773,7 @@ describe('StageSelectComponent', () => {
     });
 
     it('should have the label "Select All"', () => {
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_LABEL;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.ALL_LABEL;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
@@ -1783,7 +1784,7 @@ describe('StageSelectComponent', () => {
     });
 
     it('should be in the first subsection', () => {
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_FIRST_SECTION;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.ALL_FIRST_SECTION;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
@@ -1796,7 +1797,7 @@ describe('StageSelectComponent', () => {
     it('should check all stages in its root section (tourney)', () => {
       ///
       // console.group("=== SPEC - check all stages - tourney");
-      let inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_SELECT_POSITIVE_TOURNEY;
+      let inputStages: StageClassifications[] = STAGE_SELECTIONS.ALL_SELECT_POSITIVE_TOURNEY;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
@@ -1825,7 +1826,7 @@ describe('StageSelectComponent', () => {
     it('should check all stages in its root section (series)', () => {
       ///
       // console.groupCollapsed('=== SPEC - select all - check all series stages');
-      let inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_SELECT_POSITIVE_SERIES;
+      let inputStages: StageClassifications[] = STAGE_SELECTIONS.ALL_SELECT_POSITIVE_SERIES;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
@@ -1854,7 +1855,7 @@ describe('StageSelectComponent', () => {
     it('should not check all stages in other sections (tourney > series)', () => {
       ///
       // console.groupCollapsed('=== SPEC - select all - don\'t check stages in other section');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.ALL_SELECT_NEGATIVE_TOURNEY.inputStages;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.ALL_SELECT_NEGATIVE_TOURNEY.inputStages;
       const targetGameNames: string[] = STAGE_SELECTIONS.ALL_SELECT_NEGATIVE_TOURNEY.targetStages;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
@@ -1883,7 +1884,7 @@ describe('StageSelectComponent', () => {
 
   describe('select none button', () => {
     it('should appear in each root section', () => {
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.NONE_EXISTS;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.NONE_EXISTS;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
@@ -1894,7 +1895,7 @@ describe('StageSelectComponent', () => {
     });
 
     it('should have the label "Select None"', () => {
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.NONE_LABEL;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.NONE_LABEL;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
@@ -1905,7 +1906,7 @@ describe('StageSelectComponent', () => {
     });
 
     it('should be in the first subsection', () => {
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.NONE_FIRST_SECTION;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.NONE_FIRST_SECTION;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
@@ -1918,7 +1919,7 @@ describe('StageSelectComponent', () => {
     it('should uncheck all stages in its root section (tourney)', () => {
       ///
       // console.group("=== SPEC - uncheck all stages - tourney");
-      let inputStages: StageSelectInfo[] = STAGE_SELECTIONS.NONE_SELECT_POSITIVE_TOURNEY;
+      let inputStages: StageClassifications[] = STAGE_SELECTIONS.NONE_SELECT_POSITIVE_TOURNEY;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
@@ -1948,7 +1949,7 @@ describe('StageSelectComponent', () => {
     it('should uncheck all stages in its root section (series)', () => {
       ///
       // console.groupCollapsed('=== SPEC - uncheck all series stages');
-      let inputStages: StageSelectInfo[] = STAGE_SELECTIONS.NONE_SELECT_POSITIVE_SERIES;
+      let inputStages: StageClassifications[] = STAGE_SELECTIONS.NONE_SELECT_POSITIVE_SERIES;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
@@ -1978,7 +1979,7 @@ describe('StageSelectComponent', () => {
     it('should not uncheck all stages in other sections (tourney > series)', () => {
       ///
       // console.groupCollapsed('=== SPEC - don\'t uncheck stages in other section');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.NONE_SELECT_NEGATIVE_TOURNEY.inputStages;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.NONE_SELECT_NEGATIVE_TOURNEY.inputStages;
       const targetGameNames: string[] = STAGE_SELECTIONS.NONE_SELECT_NEGATIVE_TOURNEY.targetStages;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
@@ -2008,7 +2009,7 @@ describe('StageSelectComponent', () => {
     it('should cause a no stages selected error message if it unchecks all currently checked stages', () => {
       ///
       // console.groupCollapsed('=== SPEC - cause no stages selected error');
-      const inputStages: StageSelectInfo[] = STAGE_SELECTIONS.NONE_SELECT_ERROR.inputStages;
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.NONE_SELECT_ERROR.inputStages;
       const expectedMessage: string = STAGE_SELECTIONS.NONE_SELECT_ERROR.expectedMessage;
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();

@@ -21,12 +21,10 @@ import { StagePieceMapService } from '../../../../shared/stage/services/stage-pi
 
 import { BinnedStageDimensionsSet } from '../../../../shared/stage/models/binned-stage-dimensions-set.model';
 import { StageDimensionsSet } from '../../../../shared/stage/models/stage-dimensions-set.model';
-import { StageSelectInfo } from '../../../../shared/stage/models/stage-select-info.model';
 import { StageClassifications } from '../../../../shared/stage/models/stage-classifications.model';
 
 import { STAGES_ONE } from '../../../../shared/stage/models/mocks/stages';
 import * as STAGE_CLASSES from '../../../../shared/stage/models/mocks/stage-classifications';
-import * as STAGE_SELECTIONS from '../../../../shared/stage/models/mocks/stage-select-info';
 import * as STAGE_DIMENSIONS_SET from '../../../../shared/stage/models/mocks/stage-dimensions-set';
 import * as STAGE_COMPARATOR_CMP from '../../../../shared/stage/models/mocks/stage-comparator-component';
 import * as PIECE_MAPS from '../../../../shared/stage/models/mocks/stage-piece-map';
@@ -149,10 +147,6 @@ describe('StageComparatorComponent', () => {
 
   it('should have a stageClassifications property set to the classified stages provided by the ActivatedRoute on init', () => {
     expect(comparator.stageClassifications).toEqual(STAGE_CLASSES.ONE);
-  });
-
-  it('should have a stageSelectInfo property set to a StageSelect version of the classified stages provided by the ActivatedRoute on init', () => {
-    expect(comparator.stageSelectInfo).toEqual(STAGE_SELECTIONS.ONE);
   });
 
   it('should have a fullDimensionsSet property set to the DimensionsSet provided by the ActivatedRoute on init', () => {
@@ -580,9 +574,9 @@ describe('StageComparatorComponent', () => {
       /**/
       // console.log(`selectComp: ${JSON.stringify(selectComp)}`);
       // console.log(`selectComp.stages: ${JSON.stringify(Object.keys(selectComp))}`);
-      let actualStages: StageSelectInfo[] = mocks.select.comp.stages;
+      let actualStages: StageClassifications[] = mocks.select.comp.stages;
 
-      expect(actualStages).toEqual(STAGE_SELECTIONS.ONE);
+      expect(actualStages).toEqual(STAGE_CLASSES.ONE);
       /**/
       // console.groupEnd();
     });

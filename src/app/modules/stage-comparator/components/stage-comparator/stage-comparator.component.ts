@@ -14,7 +14,6 @@ import { Stage } from '../../../../shared/stage/models/stage.model';
 import { StageClassifications } from '../../../../shared/stage/models/stage-classifications.model';
 import { StageDimensionsSet } from '../../../../shared/stage/models/stage-dimensions-set.model';
 import { StagePieceMap } from '../../../../shared/stage/models/stage-piece-map.model';
-import { StageSelectInfo } from '../../../../shared/stage/models/stage-select-info.model';
 
 @Component({
   selector: 'ssbu-stage-comparator',
@@ -25,7 +24,6 @@ export class StageComparatorComponent implements OnInit {
 
   stages: Stage[];
   stageClassifications: StageClassifications[];
-  stageSelectInfo: StageSelectInfo[];
   selectSubject$: Subject<string>;
   stageDimensionsSet: StageDimensionsSet;
   binnedStageDimensionsSet: BinnedStageDimensionsSet;
@@ -47,16 +45,8 @@ export class StageComparatorComponent implements OnInit {
       // console.log(`data.stages: ${JSON.stringify(data.stageData)}`);
       // console.log(`data.stages type: ${typeof data.stageData.stages}`);
       this.stages = [...data.stageData.stages];
-      this.stageDimensionsSet = data.stageData.dimensionsFull;
+      this.stageDimensionsSet = {...data.stageData.dimensionsFull};
       this.stageClassifications = [...data.stageData.stageClassifications];
-      this.stageSelectInfo = this.stageClassifications.map(stage => {
-        return {
-          gameName: stage.gameName,
-          name: stage.name,
-          series: stage.series,
-          tourneyPresence: stage.tourneyPresence
-        }
-      });
       ///
       // console.log(`this.stageSelectInfo: ${JSON.stringify(this.stageSelectInfo)}`);
     });

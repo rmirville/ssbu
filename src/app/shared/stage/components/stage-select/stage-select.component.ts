@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { FormBuilder, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { StageSelectInfo } from '../../models/stage-select-info.model';
+import { StageClassifications } from '../../models/stage-classifications.model';
 
 /**
  * Represents the UI configuration of a section of stages
@@ -27,7 +27,7 @@ export class StageSelectComponent implements OnChanges, OnInit {
   selectionForm: FormGroup = this.fb.group({}, { validators: this._checkboxSelected() });
   separator: string = '_';
 
-  @Input() stages: StageSelectInfo[];
+  @Input() stages: StageClassifications[];
   @Input() parentEvent$: Observable<string>;
   @Output() submitSelection = new EventEmitter<string[]>();
 
@@ -47,12 +47,12 @@ export class StageSelectComponent implements OnChanges, OnInit {
 
   classifiedStages: {
     tourneyPresence: {
-      legalCommon: StageSelectInfo[],
-      legalUncommon: StageSelectInfo[],
-      legalRare: StageSelectInfo[]
+      legalCommon: StageClassifications[],
+      legalUncommon: StageClassifications[],
+      legalRare: StageClassifications[]
     },
     series: {
-      [seriesName: string]: StageSelectInfo[]
+      [seriesName: string]: StageClassifications[]
     }
   } = {
     tourneyPresence: {
@@ -116,10 +116,10 @@ export class StageSelectComponent implements OnChanges, OnInit {
       }
     });
 
-    let legalCommonStages: StageSelectInfo[] = [];
-    let legalUncommonStages: StageSelectInfo[] = [];
-    let legalRareStages: StageSelectInfo[] = [];
-    let seriesStages: { [seriesName: string]: StageSelectInfo[] } = {};
+    let legalCommonStages: StageClassifications[] = [];
+    let legalUncommonStages: StageClassifications[] = [];
+    let legalRareStages: StageClassifications[] = [];
+    let seriesStages: { [seriesName: string]: StageClassifications[] } = {};
     
     if (this.stages.length === 0) {
       this.errors.noStages.active = true;
@@ -237,7 +237,7 @@ export class StageSelectComponent implements OnChanges, OnInit {
   updateAll(section: string, value: boolean) {
     ///
     // console.groupCollapsed('StageSelectComponent::updateAll()');
-    let affectedStages: StageSelectInfo[] = this.stages;
+    let affectedStages: StageClassifications[] = this.stages;
 
     if (section === 'tourneyPresence') {
       affectedStages = this.stages.filter(stage => { return (stage.tourneyPresence >= 0); });
@@ -278,7 +278,7 @@ export class StageSelectComponent implements OnChanges, OnInit {
     return this._compareText(a.title, b.title);
   }
 
-  _compareInfo(a: StageSelectInfo, b: StageSelectInfo): number {
+  _compareInfo(a: StageClassifications, b: StageClassifications): number {
     return this._compareText(a.name, b.name);
   }
 

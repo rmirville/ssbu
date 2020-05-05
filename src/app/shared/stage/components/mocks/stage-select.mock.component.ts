@@ -1,14 +1,14 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { StageSelectInfo } from '../../models/stage-select-info.model';
+import { StageClassifications } from '../../models/stage-classifications.model';
 
 @Component({
   selector: 'ssbu-stage-select',
   template: 'SSBU Stage Select'
 })
 export class StageSelectMockComponent implements OnInit {
-  @Input() stages: StageSelectInfo[];
+  @Input() stages: StageClassifications[];
   @Input() parentEvent$: Observable<string>;
   @Output() submitSelection: EventEmitter<string[]> = new EventEmitter<string[]>();
   fatalError: boolean;

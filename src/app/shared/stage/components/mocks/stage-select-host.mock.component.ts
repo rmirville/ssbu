@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { StageSelectInfo } from '../../models/stage-select-info.model';
+import { StageClassifications } from '../../models/stage-classifications.model';
 
 @Component({
   selector: 'ssbu-stage-select-host',
@@ -13,7 +13,7 @@ import { StageSelectInfo } from '../../models/stage-select-info.model';
     ></ssbu-stage-select>`
 })
 export class StageSelectHostMockComponent implements OnInit, OnChanges {
-  stages: StageSelectInfo[];
+  stages: StageClassifications[];
   selectedStages: string[];
   selectSubject$: Subject<string> = new Subject<string>();
 

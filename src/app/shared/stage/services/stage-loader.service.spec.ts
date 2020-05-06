@@ -13,10 +13,6 @@ describe('StageLoaderService', () => {
   let service: StageLoaderService;
   let httpClientSpy: { get: jasmine.Spy };
 
-  describe('constructor()', () => {
-    it(`should reject a parameter that isn't an HttpClient`);
-  });
-
   describe('loadStages()', () => {
     beforeEach(() => {
       httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
@@ -156,6 +152,22 @@ describe('StageLoaderService', () => {
         }));
         
       });  
+    });
+
+    describe('data validation', () => {
+      it('should reject a filter that isn\'t a string', async(() => {
+        ///
+        // console.groupCollapsed('=== SPEC - REJECT NON-STRING FILTER ===');
+        const badFilter = {
+          filter: [38, 49, -34]
+        };
+        const propName: string = 'filter';
+        expect(() => {
+          const stages$ = service.loadStages(badFilter[propName]);
+        }).toThrow(TypeError('The filter argument was not a string.'));
+        ///
+        // console.groupEnd();
+      }));
     });
 
     describe('stage list data validation', () => {

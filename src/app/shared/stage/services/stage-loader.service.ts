@@ -7,7 +7,6 @@ import { httpRetryBackoff } from '../../rxjs-operators/http-retry-backoff';
 import { StageSummary, isStageSummary } from '../models/stage-summary.model';
 import { StageDetails, isStageDetails } from '../models/stage-details.model';
 import { Stage } from '../models/stage.model';
-import { catchError } from 'rxjs/operators';
 
 const API_URL = 'https://rubendal.github.io/ssbu/data/patch/4.0.0';
 const API_STAGE_LIST_PATH = '/stages.json';
@@ -45,8 +44,15 @@ export class StageLoaderService {
   loadStages(filter?: string, filterList?: string[]): Observable<Stage[]> {
     /**/
     // console.log('  StageLoaderService::loadStages()');
+
+    // data validation
+    if (filter !== undefined) {
+      if (typeof filter !== 'string') {
+        throw new TypeError('The filter argument was not a string.');
+      }
+    }
     let hasFilter: boolean = false;
-    // validate exclusions
+
     if (filter == 'exclude' || filter == 'include') {
       if ((!Array.isArray(filterList))
         || (!filterList.forEach)

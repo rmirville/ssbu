@@ -18,12 +18,12 @@ export interface StageDimensionsRange {
  * @returns {range is StageDimensionsRange}
  */
 export function isStageDimensionsRange(range): range is StageDimensionsRange {
-  if ((typeof range.min !== 'number')
-    || (typeof range.max !== 'number')
-    || (typeof range.range !== 'number')
-  ) { return false; }
-  if ((range.min > range.max)
-    || (range.range < 0)
-  ) { return false; }
-  return true;
+  return ( (range !== undefined)
+    && (range !== null)
+    && (typeof range.min === 'number')
+    && (typeof range.max === 'number')
+    && (typeof range.range === 'number')
+    && (range.min <= range.max)
+    && (range.range >= 0)
+  );
 }

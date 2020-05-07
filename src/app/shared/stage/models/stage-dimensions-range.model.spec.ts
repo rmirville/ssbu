@@ -17,6 +17,16 @@ describe('StageDimensionsRangeModel', () => {
 
     describe('stage dimensions range validation', () => {
 
+      it('should reject an undefined value', () => {
+        const badValue = undefined;
+        expect(isStageDimensionsRange(badValue)).toBe(false);
+      });
+
+      it('should reject a null value', () => {
+        const badValue = null;
+        expect(isStageDimensionsRange(badValue)).toBe(false);
+      });
+
       it('should reject a range with a non-numerical min', () => {
         _testBadData('minNotNumber'); 
       });

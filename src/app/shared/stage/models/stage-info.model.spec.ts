@@ -9,6 +9,16 @@ describe('StageInfoModel', () => {
       expect(isStageInfo(validInfo)).toBe(true);
     });
 
+    it('should reject an undefined value', () => {
+      const invalidInfo = undefined;
+      expect(isStageInfo(invalidInfo)).toBe(false);
+    });
+
+    it('should reject a null value', () => {
+      const invalidInfo = null;
+      expect(isStageInfo(invalidInfo)).toBe(false);
+    });
+
     it('should reject an info object with a non-string name', () => {
       const invalidInfo = STAGE_INFO.BAD_DATA_NAME;
       expect(isStageInfo(invalidInfo)).toBe(false);

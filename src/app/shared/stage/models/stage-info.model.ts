@@ -10,6 +10,8 @@ export interface StageInfo {
 }
 
 export function isStageInfo(info: any): info is StageInfo {
-  return ((typeof info.gameName === 'string')
+  return ((info !== undefined)
+    && (info !== null)
+    && (typeof info.gameName === 'string')
     && (typeof info.name === 'string'));
 }

@@ -18,7 +18,9 @@ export interface StageDimensionsBinParams {
  * @returns {this is StageDimensionsBinParams}
  */
 export function isStageDimensionsBinParams(params: any): params is StageDimensionsBinParams {
-  return ((typeof params.value === 'number')
+  return ((params !== undefined)
+    && (params !== null)
+    && (typeof params.value === 'number')
     && (Number.isInteger(params.bin))
     && (params.bin >= 0)
     && (typeof params.min === 'boolean')

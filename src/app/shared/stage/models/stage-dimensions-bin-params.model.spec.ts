@@ -17,6 +17,16 @@ describe('StageDimensionsBinParamsModel', () => {
 
     describe('stage dimensions bin params validation', () => {
 
+      it('should reject an undefined value', () => {
+        const badValue = undefined;
+        expect(isStageDimensionsBinParams(badValue)).toBe(false);
+      });
+
+      it('should reject a null value', () => {
+        const badValue = null;
+        expect(isStageDimensionsBinParams(badValue)).toBe(false);
+      })
+
       it('should reject bin params with a non-numerical value', () => {
         _testBadData('valueNotNumber'); 
       });

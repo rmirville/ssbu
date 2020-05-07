@@ -30,10 +30,18 @@ export function isStageDetails(phase): phase is StageDetails {
   // console.log('  isStageDetails()');
   /**/
   // console.log(`    * details: ${JSON.stringify(phase)}`);
-  if ((typeof phase.stage !== 'string')
+  if ((phase === undefined)
+    || (phase === null)
+    || (typeof phase.stage !== 'string')
     || (typeof phase.name !== 'string')
     || (typeof phase.lvd !== 'string')
+    || (!isStageBoundaries(phase.blast_zones))
+    || (!isStageBoundaries(phase.camera))
+    || (!isStagePosition(phase.center))
+    || (!hasStagePositions(phase.spawns))
+    || (!hasStagePositions(phase.respawns))
     || (!Array.isArray(phase.collisions))
+    || (!Array.isArray(phase.platforms))
   ) { 
     /**/
     // console.log(`    * phase.stage type: ${typeof phase.stage}`);
@@ -52,21 +60,9 @@ export function isStageDetails(phase): phase is StageDetails {
     if (!isStagePiece(piece)) { return false; }
   }
 
-  if (!Array.isArray(phase.platforms)) { return false; }
-
   for (const piece of phase.platforms) {
     if (!isStagePiece(piece)) { return false; }
   }
-
-  if (!isStageBoundaries(phase.blast_zones)) { return false; }
-
-  if (!isStageBoundaries(phase.camera)) { return false; }
-
-  if (!isStagePosition(phase.center)) { return false; }
-
-  if (!hasStagePositions(phase.spawns)) { return false; }
-
-  if (!hasStagePositions(phase.respawns)) { return false; }
 
   return true;
 }

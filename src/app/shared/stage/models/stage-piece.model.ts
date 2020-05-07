@@ -22,27 +22,19 @@ export interface StagePiece {
 export function isStagePiece(piece): piece is StagePiece {
   /**/
   // console.log('  isStagePiece()');
-  if (typeof piece.name !== 'string') {
-    /**/
-    // console.log(`    * piece.name type: ${typeof piece.name}`);
-    // console.log(`    * piece.name: ${JSON.stringify(piece.name)}`);
-    return false;
+  if ((piece === undefined)
+    || (piece === null)
+    || (typeof piece.name !== 'string')
+    || (!hasStagePositions(piece.vertex))
+    || (!hasStagePositions(piece.boundingBox))
+    || (!Array.isArray(piece.materials))
+    ) {
+      return false;
   }
-
-  if (!hasStagePositions(piece.vertex)) {
-    /**/
-    // console.log(`    * piece.vertex type: ${typeof piece.vertex}`);
-    // console.log(`    * piece.vertex: ${JSON.stringify(piece.vertex)}`);
-    return false;
-  }
-
-  if (!Array.isArray(piece.materials)) { return false; }
 
   for (const material of piece.materials) {
     if (!isStageMaterial(material)) { return false; }
   }
-
-  if (!hasStagePositions(piece.boundingBox)) { return false; }
 
   return true;
 }

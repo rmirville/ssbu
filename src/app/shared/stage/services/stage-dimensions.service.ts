@@ -6,13 +6,13 @@ import { NotFoundError } from '../../errors/not-found-error.model';
 
 import { BinnedStageDimensions } from '../models/binned-stage-dimensions.model';
 import { BinnedStageDimensionsSet } from '../models/binned-stage-dimensions-set.model';
-import { Stage } from '../models/stage.model';
+import { Stage, isStage } from '../models/stage.model';
 import { StageDimensions } from '../models/stage-dimensions.model';
 import { StageDimensionsBinParams } from '../models/stage-dimensions-bin-params.model';
 import { StageDimensionsSet } from '../models/stage-dimensions-set.model';
 import { StageDimensionsRange } from '../models/stage-dimensions-range.model';
 import { StagePiece } from '../models/stage-piece.model';
-import { StagePieceMap } from '../models/stage-piece-map.model';
+import { StagePieceMap, isStagePieceMap } from '../models/stage-piece-map.model';
 
 /**
  * Represents the parameters used to bin an individual dimension
@@ -76,6 +76,26 @@ export class StageDimensionsService {
     // console.log('StageDimensionsService::getDimensionsFull()');
     // console.log(`  * number of stages: ${stages.length}`);
     // console.log(`  * pieceMaps: ${JSON.stringify(pieceMaps)}`);
+    if (!Array.isArray(stages)) {
+      throw new TypeError('The stages argument was not an array');
+    }
+    stages.forEach(stage => {
+      if (!isStage(stage)) {
+        throw new TypeError('The stages argument was not a Stage array');
+      }
+    });
+
+    if (pieceMaps !== undefined) {
+      if (!Array.isArray(pieceMaps)) {
+        throw new TypeError('The pieceMaps argument was not an array');
+      }
+      pieceMaps.forEach(pieceMap => {
+        if (!isStagePieceMap(pieceMap)) {
+          throw new TypeError('The pieceMaps argument was not a StagePieceMap array');
+        }
+      });
+    }
+    
     let fullDimensionsSet$: Observable<StageDimensionsSet> = new Observable<StageDimensionsSet>(observer => {
       let stageDimensions: StageDimensions[] = stages.map((stage) => {
         let name = stage.name;

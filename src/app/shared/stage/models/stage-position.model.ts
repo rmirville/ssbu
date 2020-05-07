@@ -10,7 +10,9 @@ export type StagePosition = [number, number];
  * @returns {this is StagePosition}
  */
 export function isStagePosition(position): position is StagePosition {
-  if ((!Array.isArray(position))
+  if ((position === undefined)
+    || (position === null)
+    || (!Array.isArray(position))
     || (position.length !== 2)
   ) { return false; }
 
@@ -28,7 +30,10 @@ export function isStagePosition(position): position is StagePosition {
  * @returns {boolean}
  */
 export function hasStagePositions(positions): boolean {
-  if (!Array.isArray(positions)) { return false; }
+  if ((positions === undefined)
+    || (positions === null)
+    || (!Array.isArray(positions))
+    ) { return false; }
 
   for (const position of positions) {
     if (!isStagePosition(position)) { return false; }

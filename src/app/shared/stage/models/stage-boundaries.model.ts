@@ -10,7 +10,9 @@ export type StageBoundaries = [number, number, number, number];
  * @returns {this is StageBoundaries}
  */
 export function isStageBoundaries(dimensions): dimensions is StageBoundaries {
-  if ((!Array.isArray(dimensions))
+  if ((dimensions === undefined)
+    || (dimensions === null)
+    || (!Array.isArray(dimensions))
     || (dimensions.length !== 4)
   ) { return false; }
 

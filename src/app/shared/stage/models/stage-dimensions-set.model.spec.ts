@@ -19,6 +19,16 @@ describe('StageDimensionsSetModel', () => {
 
     describe('stage dimensions set validation', () => {
 
+      it('should reject an undefined value', () => {
+        const badValue = undefined;
+        expect(isStageDimensionsSet(badValue)).toBe(false);
+      });
+
+      it('should reject a null value', () => {
+        const badValue = null;
+        expect(isStageDimensionsSet(badValue)).toBe(false);
+      });
+
       it('should reject a set with a non-array dimensions property', () => {
         _testBadData('dimensionsNotArray');
       });

@@ -20,21 +20,18 @@ export interface StageDimensionsSet {
 export function isStageDimensionsSet(set): set is StageDimensionsSet {
   /**/
   // console.log('StageDimensionsSetModel::isStageDimensionsSet()');
-  if (!Array.isArray(set.dimensions)) {
-      /**/
-      // console.log(`  * set.dimensions is not array`);
-      return false;
-    }
+  if ((set === undefined)
+    || (set === null)
+    || (!Array.isArray(set.dimensions))
+    || (!isStageDimensionsRange(set.ranges.blastzoneWidth))
+    || (!isStageDimensionsRange(set.ranges.stageLength))
+    || (!isStageDimensionsRange(set.ranges.offStageDistance))
+    || (!isStageDimensionsRange(set.ranges.ceilingHeight))
+    ) { return false; }
 
   for (const stageDimensions of set.dimensions) {
     if (!isStageDimensions(stageDimensions)) { return false; }
   }
-
-  if (( !isStageDimensionsRange(set.ranges.blastzoneWidth) )
-    || ( !isStageDimensionsRange(set.ranges.stageLength) )
-    || ( !isStageDimensionsRange(set.ranges.offStageDistance) )
-    || ( !isStageDimensionsRange(set.ranges.ceilingHeight) )
-    ) { return false; }
 
   return true;
 }

@@ -15,7 +15,16 @@ describe('StagePieceMapModel', () => {
       expect(isStagePieceMap(STAGE_MAP.VALID)).toBe(true);
     });
 
-    describe('stage dimensions range validation', () => {
+    describe('data validation', () => {
+
+      it('should reject a null value', () => {
+        expect(isStagePieceMap(null)).toBe(false);
+      });
+
+      it('should reject an undefined value', () => {
+        const badValue = undefined;
+        expect(isStagePieceMap(badValue)).toBe(false);
+      })
 
       it('should reject a range with a non-string lvd', () => {
         _testBadData('lvdNotString'); 

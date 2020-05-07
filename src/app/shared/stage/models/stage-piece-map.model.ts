@@ -10,8 +10,9 @@ export interface StagePieceMap {
 }
 
 export function isStagePieceMap(stageMap): stageMap is StagePieceMap {
-  if ((typeof stageMap.lvd !== 'string') || (typeof stageMap.pieceName !== 'string')) {
-    return false;
-  }
-  return true;
+  return ((stageMap !== undefined)
+    && (stageMap !== null)
+    && (typeof stageMap.lvd === 'string')
+    && (typeof stageMap.pieceName === 'string')
+  );
 }

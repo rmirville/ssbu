@@ -15,6 +15,16 @@ describe('BinnedStageDimensionsSetModel', () => {
 
     describe('binned stage dimensions set validation', () => {
 
+      it('should reject an undefined value', () => {
+        const badValue = undefined;
+        expect(isBinnedStageDimensionsSet(badValue)).toBe(false);
+      });
+
+      it('should reject a null value', () => {
+        const badValue = null;
+        expect(isBinnedStageDimensionsSet(badValue)).toBe(false);
+      });
+
       it('should reject a set with a non-number bins property', () => {
         _testBadData('binsNotNumber');
       });

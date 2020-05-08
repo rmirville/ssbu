@@ -26,21 +26,20 @@ export interface BinnedStageDimensionsSet {
  * @returns {this is BinnedStageDimensionsSet}
  */
 export function isBinnedStageDimensionsSet(set): set is BinnedStageDimensionsSet {
-  if (!Array.isArray(set.dimensions)) {
-      return false;
-    }
+  if ((set === undefined)
+    || (set === null)
+    || (!Array.isArray(set.dimensions))
+    || (!Number.isInteger(set.bins))
+    || (set.bins <= 0)
+    || (!isStageDimensionsRange(set.ranges.blastzoneWidth))
+    || (!isStageDimensionsRange(set.ranges.stageLength))
+    || (!isStageDimensionsRange(set.ranges.offStageDistance))
+    || (!isStageDimensionsRange(set.ranges.ceilingHeight))
+    ) { return false; }
 
   for (const stageDimensions of set.dimensions) {
     if (!isBinnedStageDimensions(stageDimensions)) { return false; }
   }
-
-  if (( !Number.isInteger(set.bins) )
-    || (set.bins <= 0)
-    || ( !isStageDimensionsRange(set.ranges.blastzoneWidth) )
-    || ( !isStageDimensionsRange(set.ranges.stageLength) )
-    || ( !isStageDimensionsRange(set.ranges.offStageDistance) )
-    || ( !isStageDimensionsRange(set.ranges.ceilingHeight) )
-    ) { return false; }
 
   return true;
 }

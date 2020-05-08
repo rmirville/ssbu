@@ -1,4 +1,4 @@
-import { hasStagePositions } from './stage-position.model';
+import { isStagePositionArray } from './stage-position.model';
 import { StageMaterial, isStageMaterial } from './stage-material.model';
 
 /**
@@ -25,8 +25,8 @@ export function isStagePiece(piece): piece is StagePiece {
   if ((piece === undefined)
     || (piece === null)
     || (typeof piece.name !== 'string')
-    || (!hasStagePositions(piece.vertex))
-    || (!hasStagePositions(piece.boundingBox))
+    || (!isStagePositionArray(piece.vertex))
+    || (!isStagePositionArray(piece.boundingBox))
     || (!Array.isArray(piece.materials))
     ) {
       return false;

@@ -1,5 +1,5 @@
 import { isStageBoundaries } from './stage-boundaries.model';
-import { hasStagePositions, isStagePosition } from './stage-position.model';
+import { isStagePosition, isStagePositionArray } from './stage-position.model';
 import { StagePiece, isStagePiece } from './stage-piece.model';
 
 /**
@@ -38,8 +38,8 @@ export function isStageDetails(phase): phase is StageDetails {
     || (!isStageBoundaries(phase.blast_zones))
     || (!isStageBoundaries(phase.camera))
     || (!isStagePosition(phase.center))
-    || (!hasStagePositions(phase.spawns))
-    || (!hasStagePositions(phase.respawns))
+    || (!isStagePositionArray(phase.spawns))
+    || (!isStagePositionArray(phase.respawns))
     || (!Array.isArray(phase.collisions))
     || (!Array.isArray(phase.platforms))
   ) { 

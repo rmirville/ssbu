@@ -22,3 +22,24 @@ export const BAD_DATA: { [problem: string]: any } = {
     "Type": "a7jB15RRjc"
   }
 };
+
+export const VALID_ARRAY = [
+  {
+    "name": "jdiCsl6iiK",
+    "gameName": "9oBLi9frKC",
+    "Type": 31
+  },
+  {
+    "name": "ntRztyr8H4",
+    "gameName": "ab2GQzOtgD",
+    "Type": 85
+  }
+];
+
+export const BAD_DATA_ARRAY: { [problem: string]: any } = {
+  "notArray": {
+    "name": "CJ172sPiEg",
+    "gameName": "TkDazAcvra",
+    "Type": 82
+  }
+};

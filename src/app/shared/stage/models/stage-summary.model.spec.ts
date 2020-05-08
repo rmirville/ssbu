@@ -1,4 +1,4 @@
-import { isStageSummary } from './stage-summary.model';
+import { isStageSummary, isStageSummaryArray } from './stage-summary.model';
 import * as STAGE_SUMMARY from './mocks/stage-summary';
 
 describe('StageSummaryModel', () => {
@@ -37,5 +37,32 @@ describe('StageSummaryModel', () => {
 
     });
 
+  });
+
+  describe('isStageSummaryArray()', () => {
+    it('should pass a valid StageSummary array', () => {
+      const badValue = STAGE_SUMMARY.VALID_ARRAY;
+      expect(isStageSummaryArray(badValue)).toBe(true);
+    });
+
+    it('should reject an undefined value', () => {
+      const badValue = undefined;
+      expect(isStageSummaryArray(badValue)).toBe(false);
+    });
+    
+    it('should reject a null value', () => {
+      const badValue = null;
+      expect(isStageSummaryArray(badValue)).toBe(false);
+    });
+    
+    it('should reject a non-array object', () => {
+      const badValue = STAGE_SUMMARY.BAD_DATA_ARRAY["notArray"];
+      expect(isStageSummaryArray(badValue)).toBe(false);
+    });
+
+    it('should reject an array containing a non-StageSummary item', () => {
+      const badValue = STAGE_SUMMARY.BAD_DATA_ARRAY["invaliditem"];
+      expect(isStageSummaryArray(badValue)).toBe(false);
+    });
   });
 });

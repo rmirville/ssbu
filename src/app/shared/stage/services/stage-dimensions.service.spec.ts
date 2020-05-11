@@ -1230,6 +1230,66 @@ describe('StageDimensionsService', () => {
           }
         });
       }));
+
+      it('rejects a non-array gameNames', () => {
+        ///
+        // console.groupCollapsed('=== SPEC - getDimensionsBinned() - validate - non-array gameNames');
+
+        const badData = {
+          gameNames: "lrDcx0DGRS"
+        };
+
+        const propName: string = "gameNames";
+
+        service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
+        expect(() => {
+          const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(badData[propName]);
+        }).toThrow(new TypeError('gameNames is not of type string[]'));
+
+        ///
+        // console.groupEnd();
+      });
+
+      it('rejects a gameNames with non-string items', () => {
+        ///
+        // console.groupCollapsed('=== SPEC - getDimensionsBinned() - validate - gameNames w/ non-string items');
+
+        const badData = {
+          gameNames: ["dw4G9MQCCy",5,false]
+        };
+
+        const propName: string = "gameNames";
+
+        service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
+        expect(() => {
+          const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(badData[propName]);
+        }).toThrow(new TypeError('gameNames is not of type string[]'));
+
+        ///
+        // console.groupEnd();
+      });
+
+      it('rejects a non-boolean round', () => {
+        ///
+        // console.groupCollapsed('=== SPEC - getDimensionsBinned() - validate - non-boolean round');
+
+        const inputGameNames: string[] = ["mhrImLZ1vO","CUpustSUyx","hQhNnzppm5"];
+
+        const badData = {
+          round: 35
+        };
+
+        const propName: string = "round";
+
+        service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
+        expect(() => {
+          const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputGameNames, badData[propName]);
+        }).toThrow(new TypeError('round is not of type boolean'));
+        
+        ///
+        // console.groupEnd();
+      });
+
     });
 
   });

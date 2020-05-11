@@ -192,22 +192,38 @@ export class StageDimensionsService {
    * @memberof StageDimensionsService
    */
   getDimensionsBinned(gameNames: string[], round: boolean = false): Observable<BinnedStageDimensionsSet> {
-    /**/
+    ///
     // console.group('StageDimensionsService::getDimensionsBinned()');
+
+    // data validation
     if (!this._dimensionsSetFull.dimensions.length) {
-      /**/
+      ///
       // console.groupEnd();
       throw new DatasetNotFoundError();
     }
 
+    if (typeof round !== 'boolean') {
+      throw new TypeError('round is not of type boolean');
+    }
+
+    if (!Array.isArray(gameNames)) {
+      throw new TypeError('gameNames is not of type string[]');
+    }
+
     if (gameNames.length === 0) {
-      /**/
+      ///
       // console.groupEnd();
       throw new NotFoundError();
     }
 
+    gameNames.forEach(gameName => {
+      if (typeof gameName !== 'string') {
+        throw new TypeError('gameNames is not of type string[]');
+      }
+    });
+
     const binnedDimensionsSet$: Observable<BinnedStageDimensionsSet> = new Observable<BinnedStageDimensionsSet>(observer => {
-      /**/
+      ///
       // console.log('stageDimensionsService::getDimensionsBinned().binnedDimensionsSet$');
       // console.log(`_dimensionsSetFull: ${JSON.stringify(this._dimensionsSetFull)}`);
       // console.log(`gameNames: ${JSON.stringify(gameNames)}`);
@@ -227,7 +243,7 @@ export class StageDimensionsService {
           };
         })
       }
-      /**/
+      ///
       // console.log(`stages: ${JSON.stringify(stages.map(stage => stage.gameName))}`);
       let binParamsSet: BinningParamsSet = {
         numBins: numBins,
@@ -241,21 +257,21 @@ export class StageDimensionsService {
       const dbGameNames: string[] = stages.map(stage => stage.gameName);
 
       gameNames = gameNames.filter(gameName => { return dbGameNames.includes(gameName); });
-      /**/
+      ///
       // console.log(`filtered gameNames: ${JSON.stringify(gameNames)}`);
       if(gameNames.length === 0) {
-        /**/
+        ///
         // console.groupEnd();
         observer.error(new NotFoundError());
       }
       for (const gameName of gameNames) {
-        /**/
+        ///
         // console.log(`gameName: ${gameName}`);
         let binnedStage: BinnedStageDimensions;
         let stage: StageDimensions = stages.find(   stage => { return (stage.gameName === gameName); }   );
-        /**/
+        ///
         // console.log(`stage: ${JSON.stringify(stage)}`);
-        /**/
+        ///
         // console.group('StageDimensionsService::_getBin()');
         let blastzoneWidthParams: StageDimensionsBinParams = this._getBinParams(stage.blastzoneWidth, binParamsSet.blastzoneWidth, numBins);
         let stageLengthParams: StageDimensionsBinParams = this._getBinParams(stage.stageLength, binParamsSet.stageLength, numBins);
@@ -272,7 +288,7 @@ export class StageDimensionsService {
           ceilingHeight: ceilingHeightParams
         };
         binnedDimensions.push(binnedStage);
-        /**/
+        ///
         // console.groupEnd();
       }
       binnedDimensionsSet = {
@@ -301,12 +317,12 @@ export class StageDimensionsService {
           }
         }
       };
-      /**/
+      ///
       // console.groupEnd();
       observer.next(binnedDimensionsSet);
       observer.complete;
     });
-    /**/
+    ///
     // console.groupEnd();
     return binnedDimensionsSet$;
   }

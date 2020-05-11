@@ -2026,4 +2026,48 @@ describe('StageSelectComponent', () => {
       expect(expectedErrorDElem).withContext('should display correct error message').toBeDefined();
     });
   });
+
+  describe('selectAll() data validation', () => {
+    it('should reject a non-string section', () => {
+      ///
+      // console.groupCollapsed('=== SPEC - updateAll() - reject non-string section');
+
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.UPDATE_ALL_INVALID_SECTION;
+      const badData = {
+        section: false
+      };
+      const propName: string = 'section';
+      const inputValue: boolean = true;
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      expect(() => {
+        selectComp.updateAll(badData[propName], inputValue)
+      }).toThrow(new TypeError('section was not of type string'));
+
+      ///
+      // console.groupEnd();
+    });
+
+    it('should reject a non-boolean value parameter', () => {
+      ///
+      // console.groupCollapsed('=== SPEC - updateAll() - reject non-boolean value');
+
+      const inputStages: StageClassifications[] = STAGE_SELECTIONS.UPDATE_ALL_INVALID_VALUE;
+      const inputSection: string = 'tourneyPresence';
+      const badData = {
+        value: 35
+      };
+      const propName: string = 'value';
+      selectHostComp.stages = [...inputStages];
+      selectHostFixture.detectChanges();
+
+      expect(() => {
+        selectComp.updateAll(inputSection, badData[propName])
+      }).toThrow(new TypeError('value was not of type boolean'));
+
+      ///
+      // console.groupEnd();
+    });
+  });
 });

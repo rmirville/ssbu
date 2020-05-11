@@ -237,6 +237,14 @@ export class StageSelectComponent implements OnChanges, OnInit {
   updateAll(section: string, value: boolean) {
     ///
     // console.groupCollapsed('StageSelectComponent::updateAll()');
+    // data validation
+    if (typeof section !== 'string') {
+      throw new TypeError('section was not of type string');
+    }
+
+    if (typeof value !== 'boolean') {
+      throw new TypeError('value was not of type boolean');
+    }
     let affectedStages: StageClassifications[] = this.stages;
 
     if (section === 'tourneyPresence') {

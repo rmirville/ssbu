@@ -5597,3 +5597,65 @@ export const NONE_SELECT_ERROR: { inputStages: StageClassifications[], expectedM
   ],
   expectedMessage: MESSAGES.noStagesSelected
 };
+
+export const UPDATE_ALL_INVALID_SECTION: StageClassifications[] = [
+  {
+    name: "Closed Education",
+    abbr: "CE",
+    gameName: "valueclosed_",
+    series: "Impartial Value",
+    tourneyPresence: -1
+  },
+  {
+    name: "Windy Rail",
+    abbr: "WR",
+    gameName: "coachrail_",
+    series: "Workable Coach",
+    tourneyPresence: 1
+  },
+  {
+    name: "Oceanic Eggs",
+    abbr: "OE",
+    gameName: "homelesseggs_",
+    series: "Homeless Lock",
+    tourneyPresence: 1
+  },
+  {
+    name: "Bloody Rainstorm",
+    abbr: "BR",
+    gameName: "cumberstorm_",
+    series: "Cumbersome Thing",
+    tourneyPresence: 1
+  }
+];
+
+export const UPDATE_ALL_INVALID_VALUE: StageClassifications[] = [
+  {
+    name: "Ludicrous Riddle",
+    abbr: "LR",
+    gameName: "verseriddle_",
+    series: "Needy Verse",
+    tourneyPresence: -1
+  },
+  {
+    name: "Elite Duck",
+    abbr: "ED",
+    gameName: "debtduck_",
+    series: "Ill Debt",
+    tourneyPresence: 1
+  },
+  {
+    name: "Nutritious Wrist",
+    abbr: "NW",
+    gameName: "actionwrist_",
+    series: "Kaput Action",
+    tourneyPresence: 0
+  },
+  {
+    name: "Ancient Army",
+    abbr: "AA",
+    gameName: "armybead_",
+    series: "Unwritten Bead",
+    tourneyPresence: 1
+  },
+]

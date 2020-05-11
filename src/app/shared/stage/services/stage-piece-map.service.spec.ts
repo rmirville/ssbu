@@ -91,7 +91,7 @@ describe('StagePieceMapService', () => {
 
       it('should reject a non-string map set name', async(() => {
         ///
-        console.groupCollapsed('=== SPEC - getMaps - reject non-string map set name');
+        // console.groupCollapsed('=== SPEC - getMaps - reject non-string map set name');
         const badInput = {
           setName: 38
         };
@@ -102,7 +102,7 @@ describe('StagePieceMapService', () => {
         }).toThrow(new TypeError());
 
         ///
-        console.groupEnd();
+        // console.groupEnd();
 
       }));
 

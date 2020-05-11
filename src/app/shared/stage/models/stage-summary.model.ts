@@ -16,16 +16,23 @@ export interface StageSummary extends StageInfo {
  */
 export function isStageSummary(summary): summary is StageSummary {
   ///
-  // console.log('  isStageSummary()');
-  ///
-  // console.log(`    * stage: ${JSON.stringify(stage)}`);
+  // console.group('  isStageSummary()');
+  // console.log(`    * summary: ${JSON.stringify(summary)}`);
+  // console.log(`typeof summary.Type: ${typeof summary.Type}`);
+  // console.log(`typeof summary.name: ${typeof summary.name}`);
+  // console.log(`typeof summary.gameName: ${typeof summary.gameName}`);
   if (!isStageInfo(summary)) {
+    ///
+    // console.groupEnd();
     return false;
   } else if (typeof summary.Type !== 'number') {
+    ///
+    // console.groupEnd();
     return false;
   }
   ///
   // console.log('    * returning true');
+  // console.groupEnd();
   return true;
 }
 
@@ -36,13 +43,27 @@ export function isStageSummary(summary): summary is StageSummary {
  * @returns {boolean}
  */
 export function isStageSummaryArray(summaries): boolean {
+  ///
+  // console.group('isStageSummaryArray()');
   if ((summaries === undefined)
   || (summaries === null)
   || (!Array.isArray(summaries))
-  ) { return false; }
+  ) {
+    ///
+    // console.groupEnd();
+    return false;
+  }
 
   for (const summary of summaries) {
-    if (!isStageInfo(summary)) { return false; }
+    ///
+    // console.log('calling isStageSummary()');
+    if (!isStageSummary(summary)) {
+      ///
+      // console.groupEnd();
+      return false;
+    }
   }
+  ///
+  // console.groupEnd();
   return true;
 }

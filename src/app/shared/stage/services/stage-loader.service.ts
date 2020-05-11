@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { httpRetryBackoff } from '../../rxjs-operators/http-retry-backoff';
 
-import { StageSummary, isStageSummary } from '../models/stage-summary.model';
+import { StageSummary, isStageSummaryArray } from '../models/stage-summary.model';
 import { StageDetails, isStageDetails } from '../models/stage-details.model';
 import { Stage } from '../models/stage.model';
 
@@ -143,9 +143,11 @@ export class StageLoaderService {
       let filteredSummaries: StageSummary[];
 
       /**/
-      // console.log(`    * summaries isArray: ${Array.isArray(summaries)}`);
-      if (!Array.isArray(summaries)) {
-        throw new TypeError('The stage summary data fetched was not an array');
+      // console.log(`    * summaries isStageSummaryArray: ${isStageSummaryArray(summaries)}`);
+      if (!isStageSummaryArray(summaries)) {
+        /**/
+        // console.log(`      * throwing typeError`);
+        throw new TypeError('The stage summary data fetched was not of type StageSummary[]');
       }
 
       /**/
@@ -183,12 +185,6 @@ export class StageLoaderService {
         // console.log(`      + details$ - summary: ${JSON.stringify(summaries[i])}`);
         /**/
         // console.log('      + checking summary type');
-
-        if (!isStageSummary(filteredSummaries[i])) {
-          /**/
-          // console.log('        = throwing TypeError');
-          throw new TypeError('The stage summary data fetched was not of type StageSummary[]');
-        }
 
         const url = API_URL + API_STAGE_DETAILS_PREFIX + filteredSummaries[i].name + API_STAGE_DETAILS_PATH;
 

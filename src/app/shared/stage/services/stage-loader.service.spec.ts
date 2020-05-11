@@ -21,33 +21,33 @@ describe('StageLoaderService', () => {
 
     describe('basic functionality', () => {
       it('should return data composed of stage list data and stage details data', async(() => {
-        /**/
+        ///
         // console.log(`=== SPEC - LOADSTAGES() BASIC ===`);
 
         const stageSummaryList = STAGE_SUMMARY_LIST.PRINCESS_PEACH_CASTLE;
-        /**/
+        ///
         // console.log('SPEC - stageSummaryList: ' + JSON.stringify(stageSummaryList));
         const stageDetails = STAGE_DETAILS.PRINCESS_PEACH_CASTLE;
         const expectedStages = STAGES.ONE_STAGE;
 
         httpClientSpy.get.and.returnValues(asyncData(stageSummaryList), asyncData(stageDetails));
-        /**/
+        ///
         // console.log(`SPEC - stageDetails type: ${typeof stageDetails}`);
-        /**/
+        ///
         // console.log(`SPEC - stageDetails length: ${stageDetails.length}`);
 
         const actualStages$ = service.loadStages();
-        /**/
+        ///
         // console.log('SPEC - obtained observable from service.loadStages()');
 
         actualStages$.subscribe((actualStages) => {
-          /**/
+          ///
           // console.log(`SPEC - actualStages: ${JSON.stringify(actualStages)}`);
           expect(actualStages.length).toBe(1);
           expect(actualStages).toEqual(expectedStages);
           expect(httpClientSpy.get.calls.count()).toBe(2);
         });
-        /**/
+        ///
         // console.log('SPEC - subscribed to service.loadStages()');
       }));
     });
@@ -55,7 +55,7 @@ describe('StageLoaderService', () => {
     describe(`filtering stages`, () => {
 
       function _testBadData(problem, message) {
-        /**/
+        ///
         // console.log(`=== SPEC - CHECK STAGE EXCLUSIONS DATA TYPE (${problem}) ===`);
         const stageSummaryList = STAGE_SUMMARY_LIST.BAD_STAGE_EXCLUDE;
         const stageDetails = STAGE_DETAILS.BAD_STAGE_EXCLUDE;
@@ -71,7 +71,7 @@ describe('StageLoaderService', () => {
       describe(`including stages`, () => {
 
         it(`should fetch only data from a stage whose name is provided when prompted`, async(() => {
-          /**/
+          ///
           // console.log('=== SPEC - INCLUDE ONE STAGE ===');
           const stageSummaryList = STAGE_SUMMARY_LIST.STAGE_INCLUDE;
           const stageDetails = STAGE_DETAILS.ONE_STAGE_INCLUDE;
@@ -88,7 +88,7 @@ describe('StageLoaderService', () => {
         }));
 
         it(`should fetch only data from a list of provided stages when prompted`, async(() => {
-          /**/
+          ///
           // console.log('=== SPEC - INCLUDE TWO STAGES ===');
           const stageSummaryList = STAGE_SUMMARY_LIST.STAGE_INCLUDE;
           const stageDetails = STAGE_DETAILS.TWO_STAGES_INCLUDE;
@@ -108,7 +108,7 @@ describe('StageLoaderService', () => {
 
       describe(`excluding stages`, () => {
         it(`should omit data from a stage whose name is provided when prompted`, async(() => {
-          /**/
+          ///
           // console.log('=== SPEC - EXCLUDE ONE STAGE ===');
           const stageSummaryList = STAGE_SUMMARY_LIST.TWO_STAGES_EXCLUDE;
           const stageDetails = STAGE_DETAILS.TWO_STAGES_EXCLUDE;
@@ -125,7 +125,7 @@ describe('StageLoaderService', () => {
         }));
 
         it(`should omit data from a list of stages whose names are provided`, async(() => {
-          /**/
+          ///
           // console.log('=== SPEC - EXCLUDE TWO STAGES ===');
           const stageSummaryList = STAGE_SUMMARY_LIST.FOUR_STAGES_EXCLUDE;
           const stageDetails = STAGE_DETAILS.FOUR_STAGES_EXCLUDE;
@@ -136,7 +136,7 @@ describe('StageLoaderService', () => {
 
           const actualStages$ = service.loadStages('exclude', stageExclusions);
           actualStages$.subscribe((actualStages) => {
-            /**/
+            ///
             // console.log(`SPEC - actualStages: ${JSON.stringify(actualStages)}`);
             expect(actualStages.length).toEqual(2);
             expect(actualStages).toEqual(expectedStages);
@@ -172,7 +172,7 @@ describe('StageLoaderService', () => {
 
     describe('stage list data validation', () => {
       it(`should reject stage list data that isn't of type StageSummary[]`, async(() => {
-        /**/
+        ///
         // console.log(`=== SPEC - CHECK STAGE LIST DATA TYPE ===`);
 
         const stageSummaryListBad = STAGE_SUMMARY_LIST.BAD_DATA;
@@ -182,19 +182,19 @@ describe('StageLoaderService', () => {
         for (let i = 0; i < stageSummaryListBad.length; i++) {
           httpClientSpy.get.and.returnValues(asyncData(stageSummaryListBad[i]), asyncData(stageDetails));
 
-          /**/
+          ///
           // console.log('SPEC - loading stages');
           actualStages$Arr[i] = service.loadStages();
-          /**/
+          ///
           // console.log(`SPEC - actualStages$: ${actualStages$Arr[i]}`);
           actualStages$Arr[i].subscribe({
             next: () => {
-              /**/
+              ///
               // console.log('SPEC - got data somehow');
               fail(`loadStages() did not encounter TypeError`);
             },
             error: (error) => {
-              /**/
+              ///
               // console.log(`SPEC - Error: ${error}`);
               expect(error instanceof TypeError).toBeTruthy(`error instanceof TypeError`);
             }
@@ -209,21 +209,21 @@ describe('StageLoaderService', () => {
       let actualStages$;
 
       function _testBadData(problem) {
-        /**/
+        ///
         // console.log(`=== SPEC - CHECK STAGE DETAILS DATA TYPE (${problem}) ===`);
         httpClientSpy.get.and.returnValues(asyncData(stageSummaryList), asyncData(stageDetailsBad[problem]));
 
         actualStages$ = service.loadStages();
-        /**/
+        ///
         // console.log('SPEC - actualStages$: ' + actualStages$);
         actualStages$.subscribe({
           next: () => {
-            /**/
+            ///
             // console.log('SPEC - got data somehow');
             fail(`loadStages() did not encounter TypeError`);
           },
           error: (error) => {
-            /**/
+            ///
             // console.log(`SPEC - ${error}`);
             expect(error instanceof TypeError).toBeTruthy(`error instanceof TypeError`);
           }

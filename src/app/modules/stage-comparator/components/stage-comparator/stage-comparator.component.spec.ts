@@ -190,31 +190,31 @@ describe('StageComparatorComponent', () => {
 
       it('should reject a null view', () => {
         ///
-        console.groupCollapsed('=== SPEC - setView() - validate - reject null view');
+        // console.groupCollapsed('=== SPEC - setView() - validate - reject null view');
 
         expect(() => {
           comparator.setView(null);
         }).toThrow(TypeError('view should be of type string'));
 
         ///
-        console.groupEnd();
+        // console.groupEnd();
       });
 
       it('should reject an undefined view', () => {
         ///
-        console.groupCollapsed('=== SPEC - setView() - validate - reject undefined view');
+        // console.groupCollapsed('=== SPEC - setView() - validate - reject undefined view');
 
         expect(() => {
           comparator.setView(undefined);
         }).toThrow(TypeError('view should be of type string'));
 
         ///
-        console.groupEnd();
+        // console.groupEnd();
       });
 
       it('should reject a non-string view', () => {
         ///
-        console.groupCollapsed('=== SPEC - setView() - validate - reject non-string view');
+        // console.groupCollapsed('=== SPEC - setView() - validate - reject non-string view');
 
         const badValue = {
           view: { view: 45 }
@@ -225,7 +225,7 @@ describe('StageComparatorComponent', () => {
         }).toThrow(TypeError('view should be of type string'));
 
         ///
-        console.groupEnd();
+        // console.groupEnd();
       });
 
     });
@@ -590,31 +590,31 @@ describe('StageComparatorComponent', () => {
 
         it('should reject an undefined stages', () => {
           ///
-          console.groupCollapsed('=== SPEC - getStats() - validate - reject undefined stages');
+          // console.groupCollapsed('=== SPEC - getStats() - validate - reject undefined stages');
 
           expect(() => {
             comparator.getStats(undefined);
           }).toThrow(new TypeError('stages should be of type string[]'));
 
           ///
-          console.groupEnd();
+          // console.groupEnd();
         });
 
         it('should reject a null stages', () => {
           ///
-          console.groupCollapsed('=== SPEC - getStats() - validate - reject null stages');
+          // console.groupCollapsed('=== SPEC - getStats() - validate - reject null stages');
 
           expect(() => {
             comparator.getStats(null);
           }).toThrow(new TypeError('stages should be of type string[]'));
           
           ///
-          console.groupEnd();
+          // console.groupEnd();
         });
 
         it('should reject a non-array stages', () => {
           ///
-          console.groupCollapsed('=== SPEC - getStats() - validate - reject non-array stages');
+          // console.groupCollapsed('=== SPEC - getStats() - validate - reject non-array stages');
 
           const badValue = {
             stages: 'dfTNvfW5HK'
@@ -626,12 +626,12 @@ describe('StageComparatorComponent', () => {
           }).toThrow(new TypeError('stages should be of type string[]'));
 
           ///
-          console.groupEnd();
+          // console.groupEnd();
         });
 
         it('should reject a stages array with non-string items', () => {
           ///
-          console.groupCollapsed('=== SPEC - getStats() - validate - reject stages w/ non-string items');
+          // console.groupCollapsed('=== SPEC - getStats() - validate - reject stages w/ non-string items');
 
           const badValue = {
             stages: ['wZJsEGXCZa', false, 'ZsJkcRSpAj']
@@ -643,12 +643,12 @@ describe('StageComparatorComponent', () => {
           }).toThrow(new TypeError('stages should be of type string[]'));
 
           ///
-          console.groupEnd();
+          // console.groupEnd();
         });
 
         it('should reject a stages array with null items', () => {
           ///
-          console.groupCollapsed('=== SPEC - getStats() - validate - reject stages w/ null items');
+          // console.groupCollapsed('=== SPEC - getStats() - validate - reject stages w/ null items');
 
           const badValue = {
             stages: [null, 'XrnGRPl02a', 'J6ATJmydlJ']
@@ -660,12 +660,12 @@ describe('StageComparatorComponent', () => {
           }).toThrow(new TypeError('stages should be of type string[]'));
 
           ///
-          console.groupEnd();
+          // console.groupEnd();
         });
 
         it('should reject a stages array with undefined items', () => {
           ///
-          console.groupCollapsed('=== SPEC - getStats() - validate - reject stages w/ undefined items');
+          // console.groupCollapsed('=== SPEC - getStats() - validate - reject stages w/ undefined items');
 
           const badValue = {
             stages: ['dF4T2VW3Tl', 'WAsJMUPRMR', undefined]
@@ -677,7 +677,7 @@ describe('StageComparatorComponent', () => {
           }).toThrow(new TypeError('stages should be of type string[]'));
 
           ///
-          console.groupEnd();
+          // console.groupEnd();
         });
 
       });

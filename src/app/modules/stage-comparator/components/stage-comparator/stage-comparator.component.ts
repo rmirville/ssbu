@@ -57,10 +57,7 @@ export class StageComparatorComponent implements OnInit {
   }
 
   setView(view: string) {
-    if ((view === undefined)
-      || (view === null)
-      || (typeof view !== 'string')
-    ) {
+    if (typeof view !== 'string') {
       throw new TypeError('view should be of type string');
     }
     switch (view) {
@@ -81,18 +78,12 @@ export class StageComparatorComponent implements OnInit {
     // console.group('StageComparatorComponent::getStats()');
     // console.log(`stages: ${stages}`);
     // validate the provided stage selection
-    if ((stages === undefined)
-        || (stages === null)
-        || (!Array.isArray(stages))
-      ) {
+    if (!Array.isArray(stages)) {
         throw new TypeError('stages should be of type string[]');
     }
 
     stages.forEach(stage => {
-      if ((stage === undefined)
-        || (stage === null)
-        || (typeof stage !== 'string')
-      ) {
+      if (typeof stage !== 'string') {
         throw new TypeError('stages should be of type string[]');
       }
     });

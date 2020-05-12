@@ -5,6 +5,7 @@ import { BinnedStageDimensionsSet } from '../../../../shared/stage/models/binned
 interface GraphDimensions {
   name: string;
   gameName: string;
+  abbr: string;
   blastzoneWidth: GraphDimensionsBinParams;
   stageLength: GraphDimensionsBinParams;
   offStageDistance: GraphDimensionsBinParams;
@@ -46,6 +47,7 @@ export class StageComparatorGraphComponent implements OnChanges, OnInit {
         return {
           name: stage.name,
           gameName: stage.gameName,
+          abbr: stage.abbr,
           blastzoneWidth: {
             value: stage.blastzoneWidth.value,
             bin: stage.blastzoneWidth.bin

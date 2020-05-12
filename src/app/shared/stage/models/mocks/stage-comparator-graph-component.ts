@@ -446,6 +446,210 @@ export const DISPLAY_NAME: { inputSet: BinnedStageDimensionsSet, expectedValues:
   ]
 };
 
+/*
+"kalos_",
+"xice_",
+"xfzero_",
+"battle_common",
+"jack_mementoes_",
+*/
+export const DISPLAY_ABBR: { inputSet: BinnedStageDimensionsSet, expectedValues: { stage: string, value: string }[] } = {
+  inputSet: {
+    bins: 5,
+    dimensions: [
+      {
+        name: "Kalos Pokemon League",
+        gameName: "kalos_",
+        abbr: "KPL",
+        blastzoneWidth: {
+          value: 245,
+          bin: 4,
+          min: false,
+          max: false
+        },
+        stageLength: {
+          value: 80,
+          bin: 3,
+          min: false,
+          max: false
+        },
+        offStageDistance: {
+          value: 165,
+          bin: 5,
+          min: false,
+          max: false
+        },
+        ceilingHeight: {
+          value: 192,
+          bin: 3,
+          min: false,
+          max: false
+        }
+      },
+      {
+        name: "Summit",
+        gameName: "xice_",
+        abbr: "SMT",
+        blastzoneWidth: {
+          value: 220,
+          bin: 1,
+          min: true,
+          max: false
+        },
+        stageLength: {
+          value: 60,
+          bin: 1,
+          min: true,
+          max: false
+        },
+        offStageDistance: {
+          value: 160,
+          bin: 1,
+          min: true,
+          max: false
+        },
+        ceilingHeight: {
+          value: 220,
+          bin: 5,
+          min: false,
+          max: true
+        }
+      },
+      {
+        name: "Port Town Aero Dive",
+        gameName: "xfzero_",
+        abbr: "PTAD",
+        blastzoneWidth: {
+          value: 230,
+          bin: 2,
+          min: false,
+          max: false
+        },
+        stageLength: {
+          value: 65,
+          bin: 1,
+          min: false,
+          max: false
+        },
+        offStageDistance: {
+          value: 165,
+          bin: 5,
+          min: false,
+          max: true
+        },
+        ceilingHeight: {
+          value: 160,
+          bin: 1,
+          min: true,
+          max: false
+        }
+      },
+      {
+        name: "BattleField (Common)",
+        gameName: "battle_common",
+        abbr: "BF(C)",
+        blastzoneWidth: {
+          value: 240,
+          bin: 3,
+          min: false,
+          max: false
+        },
+        stageLength: {
+          value: 80,
+          bin: 3,
+          min: false,
+          max: false
+        },
+        offStageDistance: {
+          value: 160,
+          bin: 1,
+          min: false,
+          max: false
+        },
+        ceilingHeight: {
+          value: 192,
+          bin: 3,
+          min: false,
+          max: false
+        }
+      },
+      {
+        name: "Mementos",
+        gameName: "jack_mementoes_",
+        abbr: "MM",
+        blastzoneWidth: {
+          value: 260,
+          bin: 5,
+          min: false,
+          max: true
+        },
+        stageLength: {
+          value: 100,
+          bin: 5,
+          min: false,
+          max: true
+        },
+        offStageDistance: {
+          value: 160,
+          bin: 1,
+          min: false,
+          max: false
+        },
+        ceilingHeight: {
+          value: 185,
+          bin: 3,  
+          min: false,
+          max: false
+        }
+      }
+    ],
+    ranges: {
+      blastzoneWidth: {
+        min:   220,
+        max:   260,
+        range: 40
+      },
+      stageLength: {
+        min:   60,
+        max:   100,
+        range: 40
+      },
+      offStageDistance: {
+        min:   160,
+        max:   165,
+        range: 6
+      },
+      ceilingHeight: {
+        min:   160,
+        max:   220,
+        range: 60
+      }
+    }
+  },
+  expectedValues: [
+    {
+      stage: "graph_kalos_",
+      value: "KPL"
+    },
+    {
+      stage: "graph_xice_",
+      value: "SMT"
+    },
+    {
+      stage: "graph_xfzero_",
+      value: "PTAD"
+    },
+    {
+      stage: "graph_battle_common",
+      value: "BF(C)"
+    },
+    {
+      stage: "graph_jack_mementoes_",
+      value: "MM"
+    }
+  ]
+};
+
 export const DISPLAY_BLASTZONE_VALUE: { inputSet: BinnedStageDimensionsSet, expectedValues: {stage: string, value: number}[] } = {
   inputSet: {
     bins: 5,

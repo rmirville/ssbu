@@ -82,6 +82,24 @@ describe('StageComparatorGraphComponent', () => {
       }
     });
 
+    it('should display each stage\'s abbreviation', () => {
+      const inputSet: BinnedStageDimensionsSet = GRAPH.DISPLAY_ABBR.inputSet;
+      const expectedValues: {stage: string, value: string}[] = GRAPH.DISPLAY_ABBR.expectedValues;
+      hostComp.binnedStageDimensionsSet = inputSet;
+      hostFixture.detectChanges();
+
+      const actualValues: { stage: string, value: string }[] = graphDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
+        return {
+          stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('graph_')),
+          value: dElem.query(By.css('.abbr')).nativeElement.textContent.trim()
+        };
+      });
+
+      for (const stage in expectedValues) {
+        expect(actualValues).withContext(expectedValues[stage].stage).toContain(expectedValues[stage]);
+      }
+    });
+
     it('should display each stage\'s blastzone width values as a pixel-width', () => {
       const inputSet: BinnedStageDimensionsSet = GRAPH.DISPLAY_BLASTZONE_VALUE.inputSet;
       const expectedValues: { stage: string, value: number }[] = GRAPH.DISPLAY_BLASTZONE_VALUE.expectedValues;

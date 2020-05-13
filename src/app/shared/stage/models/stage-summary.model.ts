@@ -42,7 +42,7 @@ export function isStageSummary(summary): summary is StageSummary {
  * @param {*} summaries the variable to validate
  * @returns {boolean}
  */
-export function isStageSummaryArray(summaries): boolean {
+export function isStageSummaryArray(summaries): summaries is StageSummary[] {
   ///
   // console.group('isStageSummaryArray()');
   if ((summaries === undefined)

@@ -29,7 +29,7 @@ export function isStagePosition(position): position is StagePosition {
  * @param {*} positions the variable to validate
  * @returns {boolean}
  */
-export function isStagePositionArray(positions): boolean {
+export function isStagePositionArray(positions): positions is StagePosition[] {
   if ((positions === undefined)
     || (positions === null)
     || (!Array.isArray(positions))

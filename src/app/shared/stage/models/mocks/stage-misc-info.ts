@@ -10,16 +10,16 @@ export const EXTRA_PROPERTIES = {
   oops: 8
 };
 
+export const NAME = {
+  name: [35, 70, 100],
+  gameName: "georgia_",
+  georgia: "gameName"
+};
+
 export const BAD_DATA_GAMENAME = {
   name: "Bad Data",
   gameName: -82,
   farm: "south"
-};
-
-export const BAD_DATA_NAME = {
-  name: [35, 70, 100],
-  gameName: "georgia_",
-  georgia: "gameName"
 };
 
 export const ARRAY_VALID = [

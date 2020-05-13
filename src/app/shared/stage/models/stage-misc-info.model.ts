@@ -6,12 +6,15 @@ import { StageInfo, isStageInfo } from './stage-info.model';
  * @export
  * @interface StageMiscInfo
  */
-export interface StageMiscInfo extends StageInfo {
+export interface StageMiscInfo {
+  gameName: string;
   [propName: string]: any;
 }
 
 export function isStageMiscInfo(info: any): info is StageMiscInfo {
-  return isStageInfo(info);
+  return ((info !== undefined)
+    && (info !== null)
+    && (typeof info.gameName === 'string'));
 }
 
 export function isStageMiscInfoArray(info: any): info is StageMiscInfo[] {
@@ -21,7 +24,7 @@ export function isStageMiscInfoArray(info: any): info is StageMiscInfo[] {
   ) { return false; }
 
   for (const position of info) {
-    if (!isStageInfo(position)) { return false; }
+    if (!isStageMiscInfo(position)) { return false; }
   }
 
   return true;

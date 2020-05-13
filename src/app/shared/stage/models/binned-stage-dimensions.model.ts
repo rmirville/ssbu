@@ -8,6 +8,7 @@ import { StageDimensionsBinParams, isStageDimensionsBinParams } from './stage-di
  * @interface BinnedStageDimensions
  */
 export interface BinnedStageDimensions extends StageMiscInfo {
+  name: string;
   blastzoneWidth: StageDimensionsBinParams;
   stageLength: StageDimensionsBinParams;
   offStageDistance: StageDimensionsBinParams;
@@ -22,6 +23,7 @@ export interface BinnedStageDimensions extends StageMiscInfo {
  */
 export function isBinnedStageDimensions(dimensions: any): dimensions is BinnedStageDimensions {
   return ((isStageMiscInfo(dimensions))
+    && (typeof dimensions.name === 'string')
     && (isStageDimensionsBinParams(dimensions.blastzoneWidth))
     && (isStageDimensionsBinParams(dimensions.stageLength))
     && (isStageDimensionsBinParams(dimensions.offStageDistance))

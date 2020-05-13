@@ -14,13 +14,13 @@ describe('StageMiscInfoModel', () => {
       expect(isStageMiscInfo(validInfo)).toBe(true);
     });
 
-    it('should reject an info object with a non-string gameName', () => {
-      const invalidInfo = STAGE_MISC_INFO.BAD_DATA_GAMENAME;
-      expect(isStageMiscInfo(invalidInfo)).toBe(false);
+    it('should accept an info object with a non-string name', () => {
+      const validInfo = STAGE_MISC_INFO.NAME;
+      expect(isStageMiscInfo(validInfo)).toBe(true);
     });
 
-    it('should reject an info object with a non-string ame', () => {
-      const invalidInfo = STAGE_MISC_INFO.BAD_DATA_NAME;
+    it('should reject an info object with a non-string gameName', () => {
+      const invalidInfo = STAGE_MISC_INFO.BAD_DATA_GAMENAME;
       expect(isStageMiscInfo(invalidInfo)).toBe(false);
     });
   });

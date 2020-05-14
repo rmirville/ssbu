@@ -13,6 +13,7 @@ import { BinnedStageDimensionsSet } from '../../../../shared/stage/models/binned
 import { Stage } from '../../../../shared/stage/models/stage.model';
 import { StageClassifications } from '../../../../shared/stage/models/stage-classifications.model';
 import { StageDimensionsSet } from '../../../../shared/stage/models/stage-dimensions-set.model';
+import { StageMiscInfo } from '../../../../shared/stage/models/stage-misc-info.model';
 import { StagePieceMap } from '../../../../shared/stage/models/stage-piece-map.model';
 
 @Component({
@@ -73,27 +74,29 @@ export class StageComparatorComponent implements OnInit {
     }
   }
 
-  getStats(stages: string[]) {
+  getStats(gameNames: string[]) {
     ///
     // console.group('StageComparatorComponent::getStats()');
     // console.log(`stages: ${stages}`);
     // validate the provided stage selection
-    if (!Array.isArray(stages)) {
+    if (!Array.isArray(gameNames)) {
         throw new TypeError('stages should be of type string[]');
     }
 
-    stages.forEach(stage => {
+    gameNames.forEach(stage => {
       if (typeof stage !== 'string') {
         throw new TypeError('stages should be of type string[]');
       }
     });
 
-    if (stages.length === 0) {
+    if (gameNames.length === 0) {
       ///
       // console.log('stage selection invalid, doing nothing');
       // console.groupEnd();
       return;
     }
+
+    const stages: StageMiscInfo[] = this.stageClassifications.filter( stage => gameNames.includes(stage.gameName));
 
     // get the stats
     this.sds.getDimensionsBinned(stages, true).subscribe(

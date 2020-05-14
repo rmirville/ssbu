@@ -260,6 +260,25 @@ describe('StageDimensionsService', () => {
           });
         }));
 
+        it('retains all properties from provided stages', async(() => {
+          ///
+          console.groupCollapsed('=== SPEC - dimensions - retain extra properties ===');
+          const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_PROPERTIES;
+          service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
+          const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
+          actualSet$.subscribe(actualSet => {
+            for (const actualStage of actualSet.dimensions) {
+              const gameName: string = actualStage.gameName;
+              const expectedStage: StageMiscInfo = inputStages.find(inputStage => inputStage.gameName === gameName);
+              for (const prop in expectedStage) {
+                expect(actualStage[prop]).withContext(`${gameName}[${prop}]`).toEqual(expectedStage[prop]);
+              }
+            }
+            ///
+            console.groupEnd();
+          });
+        }));
+
         describe('blastzoneWidth', () => {
 
           it('classes each stage into one of five bins by value within the group\'s range', async(() => {
@@ -1090,15 +1109,7 @@ describe('StageDimensionsService', () => {
 
       });
     });
-    ///
-    /*
-      TODO: Start converting
-        inputGameNames -> inputStages
-        inputGameNames: string[] => inputStages: StageMiscInfo[]
-        copy/paste "StageMiscInfo" to make things quicker
-        Rename Symbol for both instances of inputGameNames to make things quicker
-    */
-    ///
+
     describe('with integer parameter', () => {
       it('rounds all values to the nearest integer', async(() => {
         ///

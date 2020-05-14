@@ -264,20 +264,21 @@ export class StageDimensionsService {
         ///
         // console.log(`gameName: ${gameName}`);
         let binnedStage: BinnedStageDimensions;
-        let refStage: StageDimensions = refStages.find(   rStage => { return (rStage.gameName === stage.gameName); }   );
+        const refStage: StageDimensions = refStages.find(   rStage => { return (rStage.gameName === stage.gameName); }   );
+        const name: string = stage.hasOwnProperty('name') && typeof stage['name'] === 'string' ? stage.name : refStage.name;
         ///
         // console.log(`stage: ${JSON.stringify(stage)}`);
         ///
         // console.group('StageDimensionsService::_getBin()');
-        let blastzoneWidthParams: StageDimensionsBinParams = this._getBinParams(refStage.blastzoneWidth, binParamsSet.blastzoneWidth, numBins);
-        let stageLengthParams: StageDimensionsBinParams = this._getBinParams(refStage.stageLength, binParamsSet.stageLength, numBins);
-        let offStageDistanceParams: StageDimensionsBinParams = this._getBinParams(refStage.offStageDistance, binParamsSet.offStageDistance, numBins);
-        let ceilingHeightParams: StageDimensionsBinParams = this._getBinParams(refStage.ceilingHeight, binParamsSet.ceilingHeight, numBins);
+        const blastzoneWidthParams: StageDimensionsBinParams = this._getBinParams(refStage.blastzoneWidth, binParamsSet.blastzoneWidth, numBins);
+        const stageLengthParams: StageDimensionsBinParams = this._getBinParams(refStage.stageLength, binParamsSet.stageLength, numBins);
+        const offStageDistanceParams: StageDimensionsBinParams = this._getBinParams(refStage.offStageDistance, binParamsSet.offStageDistance, numBins);
+        const ceilingHeightParams: StageDimensionsBinParams = this._getBinParams(refStage.ceilingHeight, binParamsSet.ceilingHeight, numBins);
         // console.groupEnd();
 
         binnedStage = {
-          name: stage.name,
-          gameName: stage.gameName,
+          ...stage,
+          name: name,
           blastzoneWidth: blastzoneWidthParams,
           stageLength: stageLengthParams,
           offStageDistance: offStageDistanceParams,

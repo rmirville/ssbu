@@ -207,6 +207,51 @@ export const DIMENSIONS_VALUES: StageMiscInfo[] = [
   { gameName: "zelda_tower" }
 ];
 
+export const DIMENSIONS_PROPERTIES: StageMiscInfo[] = [
+  {
+    gameName: "windyhill_",
+    name: "1Z903BovB7",
+    abbr: "BO",
+    tourneyPresence: 1
+  },
+  {
+    gameName: "pictchat_",
+    name: "Bva1ySyGPP",
+    abbr: "YP",
+    tourneyPresence: 2
+  },
+  {
+    gameName: "bossstage_final1_",
+    name: "Pif4M5868w",
+    abbr: "OR",
+    tourneyPresence: 0
+  },
+  {
+    gameName: "xstarfox_",
+    name: "10WZeTAFie",
+    abbr: "EB",
+    tourneyPresence: -1
+  },
+  {
+    gameName: "xice_",
+    name: "cbvDW7vUO0",
+    abbr: "SP",
+    tourneyPresence: -1
+  },
+  {
+    gameName: "mario_castledx_",
+    name: "wdnqqcsPqf",
+    abbr: "CK",
+    tourneyPresence: 1
+  },
+  {
+    gameName: "poke_tengam_",
+    name: "L2uZVfzeOq",
+    abbr: "VD",
+    tourneyPresence: 1
+  },
+];
+
 export const DIMENSIONS_BLASTZONE_BINS: {
   inputStages: StageMiscInfo[],
   expectedBins: { [gameName: string]: number }

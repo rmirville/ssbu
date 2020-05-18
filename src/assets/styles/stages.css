@@ -13,6 +13,11 @@ ssbu-stage-select form > .form-group {
 }
 
 /* Stages */
+.table-responsive .th-sticky.name,
+.table-responsive .abbr {
+  padding-right: 0;
+}
+
 .table-responsive .td-graph {
   background-image: repeating-linear-gradient(to right,
       transparent,
@@ -40,7 +45,7 @@ ssbu-stage-comparator-number-table .stats td {
   font-style: italic;
 }
 
-/**/
+/* RGB */
 .table-responsive .bin-1 {
   background-color: hsl(0, 75%, 55%);
 }
@@ -60,26 +65,24 @@ ssbu-stage-comparator-number-table .stats td {
 .table-responsive .bin-5 {
   background-color: hsl(220, 75%, 55%);
 }
-/**/
 
-/* Color-blind *//*
-.table-responsive .bin-1 {
+/* Monochrome */
+.table-responsive .mc-bin-1 {
   background-color: hsl(0, 0%, 20%);
 }
 
-.table-responsive .bin-2 {
+.table-responsive .mc-bin-2 {
   background-color: hsl(30, 0%, 40%);
 }
 
-.table-responsive .bin-3 {
+.table-responsive .mc-bin-3 {
   background-color: hsl(60, 0%, 60%);
 }
 
-.table-responsive .bin-4 {
+.table-responsive .mc-bin-4 {
   background-color: hsl(120, 0%, 80%);
 }
 
-.table-responsive .bin-5 {
+.table-responsive .mc-bin-5 {
   background-color: hsl(240, 0%, 100%);
 }
-/**/

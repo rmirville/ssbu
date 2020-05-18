@@ -162,6 +162,7 @@ h4 {
 }
 
 .nav-container {
+  min-height: .5rem;
   background-color: hsl(0, 91%, 50%);
 }
 
@@ -262,7 +263,7 @@ h4 {
   text-shadow:
     /* base */
     -2px -2px 0px black,
-    -1px -1px 0px black,
+    -1px -1px 1px black,
     0px 0px 1px black,
     1px 1px 1px black,
     2px 2px 1px black,
@@ -287,13 +288,20 @@ h4 {
     -1px 1px 1px black,
     0px 2px 1px black,
     1px 3px 1px black,
-    2px 4px 1px black,
+    2px 4px 0px black,
 
     /* round out the corners */
+    -2px -1px 1px black,
     5px 4px 0px black
 }
 
 /* Content */
+
+/* Content - Alerts */
+.alert {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
 
 /* Content - Navs */
 .row.nav-pills {

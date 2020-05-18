@@ -261,41 +261,36 @@ h4 {
   color: white;
   text-shadow:
     /* base */
-    -2px -2px 1px black,
-    -1px -1px 1px black,
+    -2px -2px 0px black,
+    -1px -1px 0px black,
     0px 0px 1px black,
     1px 1px 1px black,
     2px 2px 1px black,
-    3px 3px 1px black,
+    3px 3px 0px black,
 
     /* right offset */
-    0px -2px 1px black,
+    0px -2px 0px black,
     1px -1px 1px black,
     2px 0px 1px black,
     3px 1px 1px black,
-    4px 2px 1px black,
-    5px 3px 1px black,
+    4px 2px 0px black,
 
     /* right offset - correction */
-    1px -2px 1px black,
+    1px -2px 0px black,
     2px -1px 1px black,
     3px 0px 1px black,
     4px 1px 1px black,
-    5px 2px 1px black,
-    6px 3px 1px black,
+    5px 2px 0px black,
 
     /* bottom offset */
-    -2px 0px 1px black,
+    -2px 0px 0px black,
     -1px 1px 1px black,
     0px 2px 1px black,
     1px 3px 1px black,
     2px 4px 1px black,
-    3px 5px 1px black,
-    
+
     /* round out the corners */
-    6px 4px 1px black,
-    5px 5px 1px black,
-    7px 5px 1px black;
+    5px 4px 0px black
 }
 
 /* Content */

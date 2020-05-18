@@ -18,6 +18,10 @@ ssbu-stage-select form > .form-group {
   padding-right: 0;
 }
 
+.table-responsive .abbr {
+  display: none;
+}
+
 .table-responsive .td-graph {
   background-image: repeating-linear-gradient(to right,
       transparent,
@@ -85,4 +89,10 @@ ssbu-stage-comparator-number-table .stats td {
 
 .table-responsive .mc-bin-5 {
   background-color: hsl(240, 0%, 100%);
+}
+
+@media (min-width: 992px) {
+  .table-responsive .abbr {
+    display: table-cell;
+  }
 }

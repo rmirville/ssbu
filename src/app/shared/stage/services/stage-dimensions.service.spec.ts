@@ -262,7 +262,7 @@ describe('StageDimensionsService', () => {
 
         it('retains all properties from provided stages', async(() => {
           ///
-          console.groupCollapsed('=== SPEC - dimensions - retain extra properties ===');
+          // console.groupCollapsed('=== SPEC - dimensions - retain extra properties ===');
           const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_PROPERTIES;
           service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
           const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
@@ -275,7 +275,7 @@ describe('StageDimensionsService', () => {
               }
             }
             ///
-            console.groupEnd();
+            // console.groupEnd();
           });
         }));
 

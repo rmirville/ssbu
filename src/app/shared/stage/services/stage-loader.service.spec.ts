@@ -1,7 +1,11 @@
 import { async, fakeAsync } from '@angular/core/testing';
+import { Observable } from 'rxjs';
 import { asyncData } from '../../../testing/async-observable-helpers';
 
 import { StageLoaderService } from './stage-loader.service';
+
+import { Stage } from '../models/stage.model';
+import { StageSummary } from '../models/stage-summary.model';
 
 import * as STAGE_SUMMARY_LIST from '../models/mocks/stage-summary-list';
 import * as STAGE_DETAILS from '../models/mocks/stage-details';
@@ -12,6 +16,10 @@ import * as STAGES from '../models/mocks/stages';
 describe('StageLoaderService', () => {
   let service: StageLoaderService;
   let httpClientSpy: { get: jasmine.Spy };
+  const API_URL: string = 'https://rubendal.github.io/ssbu/data/patch/4.0.0';
+  const API_STAGE_LIST_PATH: string = '/stages.json';
+  const API_STAGE_DETAILS_PATH: string = '/data.json';
+  const API_STAGE_DETAILS_PREFIX: string = '/stage/';
 
   describe('loadStages()', () => {
     beforeEach(() => {
@@ -49,6 +57,41 @@ describe('StageLoaderService', () => {
         });
         ///
         // console.log('SPEC - subscribed to service.loadStages()');
+      }));
+
+      it('should return all stages\' details even when earlier details requests return after the final details request issued', async(() => {
+        ///
+        // console.groupCollapsed('=== SPEC - details out of order');
+        const summaries: StageSummary[] = STAGE_SUMMARY_LIST.DETAILS_OUTOFORDER.summaries;
+        const normalNames: string[] = ["Great Plateau Tower", "Princess Peach's Castle"];
+        const lateName: string = "Yoshi's Story";
+        const normalDetails = [STAGE_DETAILS.ZELDA_TOWER, STAGE_DETAILS.PRINCESS_PEACH_CASTLE];
+        const lateDetails = STAGE_DETAILS.YOSHI_STORY;
+        const expectedStages: Stage[] = [STAGES.ZELDA_TOWER, STAGES.PRINCESS_PEACH_CASTLE, STAGES.YOSHI_STORY];
+
+        httpClientSpy.get.withArgs(API_URL + API_STAGE_LIST_PATH).and.returnValue(asyncData(summaries));
+
+        httpClientSpy.get.withArgs(API_URL + API_STAGE_DETAILS_PREFIX + normalNames[0] + API_STAGE_DETAILS_PATH).and.returnValue(asyncData(normalDetails[0]));
+        httpClientSpy.get.withArgs(API_URL + API_STAGE_DETAILS_PREFIX + normalNames[1] + API_STAGE_DETAILS_PATH).and.returnValue(asyncData(normalDetails[1]));
+        
+        httpClientSpy.get.withArgs(API_URL + API_STAGE_DETAILS_PREFIX + lateName + API_STAGE_DETAILS_PATH).and.callFake(() => {
+          return Observable.create((observer) => {
+            setTimeout(() => {
+              observer.next(lateDetails);
+              observer.complete();
+            }, 250);
+          });
+        });
+
+        const actualStages$: Observable<Stage[]> = service.loadStages();
+        actualStages$.subscribe((actualStages) => {
+          expect(actualStages.length).withContext('should have same number of stages').toEqual(expectedStages.length);
+          for (const expectedStage of expectedStages) {
+            expect(actualStages).withContext(expectedStage['name']).toContain(expectedStage);
+          }
+          ///
+          // console.groupEnd();
+        });
       }));
     });
 

@@ -17,17 +17,17 @@
             <tr class="graph_{{stage.gameName}}">
               <th scope="row" class="th-sticky name">{{stage.name}}</th>
               <td class="td-graph">
-                <div class="blastzone bin-{{stage.blastzoneWidth.bin}}" [ngStyle]="{'width.px': stage.blastzoneWidth.value}"></div>
+                <div class="bar blastzone bin-{{stage.blastzoneWidth.bin}}" [ngStyle]="{'width.px': stage.blastzoneWidth.value}"></div>
               </td>
               <td class="td-graph">
-                <div class="stagelength bin-{{stage.stageLength.bin}}" [ngStyle]="{'width.px': stage.stageLength.value}"></div>
+                <div class="bar stagelength bin-{{stage.stageLength.bin}}" [ngStyle]="{'width.px': stage.stageLength.value}"></div>
               </td>
               <td class="abbr">{{stage.abbr}}</td>
               <td class="td-graph">
-                <div class="offstage bin-{{stage.offStageDistance.bin}}" [ngStyle]="{'width.px': stage.offStageDistance.value}"></div>
+                <div class="bar offstage bin-{{stage.offStageDistance.bin}}" [ngStyle]="{'width.px': stage.offStageDistance.value}"></div>
               </td>
               <td class="td-graph">
-                <div class="ceiling bin-{{stage.ceilingHeight.bin}}" [ngStyle]="{'width.px': stage.ceilingHeight.value}"></div>
+                <div class="bar ceiling bin-{{stage.ceilingHeight.bin}}" [ngStyle]="{'width.px': stage.ceilingHeight.value}"></div>
               </td>
             </tr>
           </ng-container>

@@ -36,9 +36,9 @@ ssbu-stage-select form > .form-group {
   box-shadow: inset 1rem 0 hsl(0, 0%, 93%), -.75rem 0 hsl(0, 0%, 93%);
 }
 
-.table-responsive .td-graph div {
+.table-responsive .td-graph .bar {
   float: left;
-  margin: 0;
+  margin: 1.125rem 0;
   height: .75rem;
 }
 
@@ -49,46 +49,24 @@ ssbu-stage-comparator-number-table .stats td {
   font-style: italic;
 }
 
-/* RGB */
 .table-responsive .bin-1 {
-  background-color: hsl(0, 75%, 55%);
+  background-color: hsl(188, 55%, 80%);
 }
 
 .table-responsive .bin-2 {
-  background-color: hsl(30, 85%, 55%);
+  background-color: hsl(188, 45%, 60%);
 }
 
 .table-responsive .bin-3 {
-  background-color: hsl(60, 80%, 50%);
+  background-color: hsl(188, 65%, 40%);
 }
 
 .table-responsive .bin-4 {
-  background-color: hsl(100, 55%, 50%);
+  background-color: hsl(188, 55%, 25%);
 }
 
 .table-responsive .bin-5 {
-  background-color: hsl(220, 75%, 55%);
-}
-
-/* Monochrome */
-.table-responsive .mc-bin-1 {
-  background-color: hsl(0, 0%, 20%);
-}
-
-.table-responsive .mc-bin-2 {
-  background-color: hsl(30, 0%, 40%);
-}
-
-.table-responsive .mc-bin-3 {
-  background-color: hsl(60, 0%, 60%);
-}
-
-.table-responsive .mc-bin-4 {
-  background-color: hsl(120, 0%, 80%);
-}
-
-.table-responsive .mc-bin-5 {
-  background-color: hsl(240, 0%, 100%);
+  background-color: hsl(188, 55%, 0%);
 }
 
 @media (min-width: 992px) {

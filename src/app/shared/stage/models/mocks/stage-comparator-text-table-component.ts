@@ -1564,6 +1564,183 @@ export const DISPLAY_CEILING: { inputSet: BinnedStageDimensionsSet, expectedValu
   ]
 };
 
+export const DISPLAY_SORT_DEFAULT: { inputSet: BinnedStageDimensionsSet, expectedClasses: string[] } = {
+  inputSet: {
+    bins: 5,
+    dimensions: [
+      {
+        name: "Hyrule Castle",
+        gameName: "hyrule64_f",
+        blastzoneWidth: {
+          value: 325.055213,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        stageLength: {
+          value: 151.129,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        offStageDistance: {
+          value: 173.926213,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        ceilingHeight: {
+          value: 276.6675146,
+          bin:   5,
+          min:   false,
+          max:   true
+        }
+      },
+      {
+        name: "Fountain of Dreams",
+        gameName: "kirby_fountain_",
+        blastzoneWidth: {
+          value: 240.0000075,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        stageLength: {
+          value: 76.59685235,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        offStageDistance: {
+          value: 163.4031551,
+          bin:   3,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 191.1096737,
+          bin:   1,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "Arena Ferox",
+        gameName: "colloseum_",
+        blastzoneWidth: {
+          value: 252.982597,
+          bin:   1,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 92.8398674,
+          bin:   2,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 160.1427296,
+          bin:   2,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 189.991974,
+          bin:   1,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "Pokemon Stadium 2",
+        gameName: "xstadium_",
+        blastzoneWidth: {
+          value: 250,
+          bin:   1,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 93.7759552,
+          bin:   2,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 156.2240448,
+          bin:   1,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 179.9998002,
+          bin:   1,
+          min:   true,
+          max:   false
+        }
+      },
+      {
+        name: "Princess Peach's Castle",
+        gameName: "mario_castledx_",
+        blastzoneWidth: {
+          value: 275,
+          bin:   3,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 121.0748405,
+          bin:   3,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 153.9251595,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 208.70288,
+          bin:   2,
+          min:   false,
+          max:   false
+        }
+      },
+    ],
+    ranges: {
+      blastzoneWidth: {
+        min:   240.0000075,
+        max:   325.055213,
+        range: 85.0552055
+      },
+      stageLength: {
+        min:   76.59685235,
+        max:   151.129,
+        range: 74.53214765
+      },
+      offStageDistance: {
+        min:   153.9251595,
+        max:   173.926213,
+        range: 20.0010535
+      },
+      ceilingHeight: {
+        min:   179.9998002,
+        max:   276.6675146,
+        range: 96.66771443
+      }
+    }
+  },
+  expectedClasses: [
+    "texttable_hyrule64_f",
+    "texttable_mario_castledx_",
+    "texttable_colloseum_",
+    "texttable_xstadium_",
+    "texttable_kirby_fountain_",
+  ]
+}
+
 /*
 colloseum_
 xmansion_

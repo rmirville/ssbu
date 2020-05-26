@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 
 import { BinnedStageDimensionsSet } from '../../../../shared/stage/models/binned-stage-dimensions-set.model';
+import { BinnedStageDimensions } from '../../../../shared/stage/models/binned-stage-dimensions.model';
 import { StageDimensionsBinParams } from '../../../../shared/stage/models/stage-dimensions-bin-params.model';
 import { StageDimensionsRange } from '../../../../shared/stage/models/stage-dimensions-range.model';
 
@@ -112,7 +113,7 @@ export class StageComparatorTextTableComponent implements OnChanges, OnInit {
 
   _updateData(): void {
     if (this.stageData !== undefined) {
-      this.displayData.dimensions = this.stageData.dimensions.map(stage => {
+      this.displayData.dimensions = this.stageData.dimensions.sort(BinnedStageDimensions.sortBlastzoneDesc).map(stage => {
         return {
           name: stage.name,
           gameName: stage.gameName,

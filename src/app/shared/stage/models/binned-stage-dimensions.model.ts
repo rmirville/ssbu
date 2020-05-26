@@ -30,3 +30,21 @@ export function isBinnedStageDimensions(dimensions: any): dimensions is BinnedSt
     && (isStageDimensionsBinParams(dimensions.ceilingHeight))
   );
 }
+
+export namespace BinnedStageDimensions {
+  export function sortBlastzoneDesc(a: BinnedStageDimensions, b: BinnedStageDimensions): number {
+    if ((!isBinnedStageDimensions(a))
+      || (!isBinnedStageDimensions(b))) {
+      throw new TypeError('One of the arguments was not of type BinneDstageDimensions');
+    }
+    let result: number = b.blastzoneWidth.value - a.blastzoneWidth.value;
+    if (result !== 0) { return result; }
+    else {
+      result = b.stageLength.value - a.stageLength.value;
+      if (result !== 0) { return result; }
+      else {
+        return b.ceilingHeight.value - a.ceilingHeight.value;
+      }
+    }
+  }
+}

@@ -1739,7 +1739,7 @@ export const DISPLAY_SORT_DEFAULT: { inputSet: BinnedStageDimensionsSet, expecte
     "texttable_xstadium_",
     "texttable_kirby_fountain_",
   ]
-}
+};
 
 /*
 colloseum_

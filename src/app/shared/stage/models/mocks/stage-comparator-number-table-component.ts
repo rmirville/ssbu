@@ -1490,6 +1490,191 @@ export const DISPLAY_RANGES: {   inputSet: BinnedStageDimensionsSet, expectedRan
 };
 
 /*
+skyward
+hyrule64_f
+gamer_
+wrecking_
+poke_tengam_
+*/
+
+export const DISPLAY_SORT_DEFAULT: { inputSet: BinnedStageDimensionsSet, expectedClasses: string[] } = {
+  inputSet: {
+    bins: 5,
+    dimensions: [
+      {
+        name: "Skyloft",
+        gameName: "skyward",
+        blastzoneWidth: {
+          value: 230,
+          bin:   1,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 85.56019725,
+          bin:   1,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 144.4398028,
+          bin:   1,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 192,
+          bin:   1,
+          min:   true,
+          max:   false
+        }
+      },
+      {
+        name: "Hyrule Castle",
+        gameName: "hyrule64_f",
+        blastzoneWidth: {
+          value: 325.055213,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        stageLength: {
+          value: 151.129,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        offStageDistance: {
+          value: 173.926213,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        ceilingHeight: {
+          value: 276.6675146,
+          bin:   5,
+          min:   false,
+          max:   true
+        }
+      },
+      {
+        name: "Gamer",
+        gameName: "gamer_",
+        blastzoneWidth: {
+          value: 229.9999925,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        stageLength: {
+          value: 91,
+          bin:   1,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 138.9999925,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 192,
+          bin:   1,
+          min:   true,
+          max:   false
+        }
+      },
+      {
+        name: "Wrecking Crew",
+        gameName: "wrecking_",
+        blastzoneWidth: {
+          value: 252,
+          bin:   2,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 97.2,
+          bin:   2,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 154.8,
+          bin:   3,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 243.8,
+          bin:   4,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "Spear Pillar",
+        gameName: "poke_tengam_",
+        blastzoneWidth: {
+          value: 245,
+          bin:   1,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 80,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        offStageDistance: {
+          value: 165,
+          bin:   4,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 259.999985,
+          bin:   5,
+          min:   false,
+          max:   false
+        }
+      }
+    ],
+    ranges: {
+      blastzoneWidth: {
+        min:   229.9999925,
+        max:   325.055213,
+        range: 95.0552205
+      },
+      stageLength: {
+        min:   80,
+        max:   151.129,
+        range: 71.129
+      },
+      offStageDistance: {
+        min:   138.9999925,
+        max:   173.926213,
+        range: 34.9262205
+      },
+      ceilingHeight: {
+        min:   192,
+        max:   276.6675146,
+        range: 84.6675146
+      }
+    }
+  },
+  expectedClasses: [
+    "numtable_hyrule64_f",
+    "numtable_wrecking_",
+    "numtable_poke_tengam_",
+    "numtable_skyward",
+    "numtable_gamer_",
+  ]
+};
+
+/*
   inputSet: {
     bins: 5,
     dimensions: [

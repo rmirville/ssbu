@@ -188,6 +188,27 @@ describe('NumberTableComponent', () => {
     });
   });
 
+  describe('sorting', () => {
+    it('should sort stages by blastzone width descending by default', () => {
+      ///
+      // console.groupCollapsed('=== SPEC - sort by blastzone');
+
+      const inputSet: BinnedStageDimensionsSet = NUMBER_TABLE.DISPLAY_SORT_DEFAULT.inputSet;
+      const expectedClasses: string[] = NUMBER_TABLE.DISPLAY_SORT_DEFAULT.expectedClasses;
+      hostComp.binnedStageDimensionsSet = inputSet;
+      hostFixture.detectChanges();
+
+      const actualClasses: string[] = numDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => dElem.nativeElement.className.split(' ').find(name => name.startsWith('numtable_')));
+
+      for (let i: number = 0; i < expectedClasses.length; i++) {
+        expect(actualClasses[i]).withContext(`position ${i}`).toEqual(expectedClasses[i]);
+      }
+      
+      ///
+      // console.groupEnd();
+    });
+  });
+
   describe('error handling', () => {
 
   });

@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 
-import { BinnedStageDimensionsSet, isBinnedStageDimensionsSet } from '../../../../shared/stage/models/binned-stage-dimensions-set.model';
+import { BinnedStageDimensions } from '../../../../shared/stage/models/binned-stage-dimensions.model';
+import { BinnedStageDimensionsSet } from '../../../../shared/stage/models/binned-stage-dimensions-set.model';
 import { StageDimensionsRange } from '../../../../shared/stage/models/stage-dimensions-range.model';
 
 interface NumberTableDimensions {
@@ -52,7 +53,7 @@ export class StageComparatorNumberTableComponent implements OnChanges, OnInit {
 
   _updateData(): void {
     if (this.stageData !== undefined) {
-      this.displayData.dimensions = this.stageData.dimensions.map(stage => {
+      this.displayData.dimensions = this.stageData.dimensions.sort(BinnedStageDimensions.sortBlastzoneDesc).map(stage => {
         return {
           name: stage.name,
           gameName: stage.gameName,

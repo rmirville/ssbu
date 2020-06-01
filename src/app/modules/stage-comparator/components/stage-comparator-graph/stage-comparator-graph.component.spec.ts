@@ -102,7 +102,7 @@ describe('StageComparatorGraphComponent', () => {
 
     it('should display each stage\'s blastzone width values as a pixel-width', () => {
       ///
-      console.groupCollapsed('=== SPEC - display blastzone')
+      // console.groupCollapsed('=== SPEC - display blastzone')
       const inputSet: BinnedStageDimensionsSet = GRAPH.DISPLAY_BLASTZONE_VALUE.inputSet;
       const expectedValues: { stage: string, value: number }[] = GRAPH.DISPLAY_BLASTZONE_VALUE.expectedValues;
       hostComp.binnedStageDimensionsSet = inputSet;
@@ -248,5 +248,26 @@ describe('StageComparatorGraphComponent', () => {
       }
     });
 
+  });
+
+  describe('sorting', () => {
+    it('should sort stages by blastzone width descending by default', () => {
+      ///
+      // console.groupCollapsed('=== SPEC - sort by blastzone');
+
+      const inputSet: BinnedStageDimensionsSet = GRAPH.DISPLAY_SORT_DEFAULT.inputSet;
+      const expectedClasses: string[] = GRAPH.DISPLAY_SORT_DEFAULT.expectedClasses;
+      hostComp.binnedStageDimensionsSet = inputSet;
+      hostFixture.detectChanges();
+
+      const actualClasses: string[] = graphDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => dElem.nativeElement.className.split(' ').find(name => name.startsWith('graph_')));
+
+      for (let i: number = 0; i < expectedClasses.length; i++) {
+        expect(actualClasses[i]).withContext(`position ${i}`).toEqual(expectedClasses[i]);
+      }
+      
+      ///
+      // console.groupEnd();
+    });
   });
 });

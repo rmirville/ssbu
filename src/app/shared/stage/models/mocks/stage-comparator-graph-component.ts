@@ -2506,6 +2506,194 @@ export const DISPLAY_CEILING_BIN: { inputSet: BinnedStageDimensionsSet, expected
   ]
 };
 
+
+/*
+"wily_",
+"duckhunt_",
+"kalos_",
+"plasma_",
+"dk_waterfall_",
+*/
+
+export const DISPLAY_SORT_DEFAULT: { inputSet: BinnedStageDimensionsSet, expectedClasses: string[] } = {
+  inputSet: {
+    bins: 5,
+    dimensions: [
+      {
+        name: "Kongo Falls",
+        gameName: "dk_waterfall_",
+        blastzoneWidth: {
+          value: 202.5,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        stageLength: {
+          value: 45.53241,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        offStageDistance: {
+          value: 156.96759,
+          bin:   2,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 193.0210655,
+          bin:   3,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "Duck Hunt",
+        gameName: "duckhunt_",
+        blastzoneWidth: {
+          value: 250,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        stageLength: {
+          value: 95.1552,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        offStageDistance: {
+          value: 154.8448,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 180,
+          bin:   1,
+          min:   true,
+          max:   false
+        }
+      },
+      {
+        name: "Kalos Pokemon League",
+        gameName: "kalos_",
+        blastzoneWidth: {
+          value: 245,
+          bin:   5,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 80,
+          bin:   4,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 165,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        ceilingHeight: {
+          value: 192,
+          bin:   2,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "Wily Castle",
+        gameName: "wily_",
+        blastzoneWidth: {
+          value: 248,
+          bin:   5,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 87.0689725,
+          bin:   5,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 160.9310275,
+          bin:   3,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 212.1908383,
+          bin:   5,
+          min:   false,
+          max:   true
+        }
+      },
+      {
+        name: "Unova Pokemon League",
+        gameName: "plasma_",
+        blastzoneWidth: {
+          value: 237,
+          bin:   4,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 81.75,
+          bin:   4,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 155.25,
+          bin:   1,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 190,
+          bin:   2,
+          min:   false,
+          max:   false
+        }
+      },
+    ],
+    ranges: {
+      blastzoneWidth: {
+        min:   202.5,
+        max:   250,
+        range: 47.5
+      },
+      stageLength: {
+        min:   45.53241,
+        max:   95.1552,
+        range: 49.62279
+      },
+      offStageDistance: {
+        min:   154.8448,
+        max:   165,
+        range: 10.1552
+      },
+      ceilingHeight: {
+        min:   180,
+        max:   212.1908383,
+        range: 32.19083828
+      }
+    }
+  },
+  expectedClasses: [
+    "graph_duckhunt_",
+    "graph_wily_",
+    "graph_kalos_",
+    "graph_plasma_",
+    "graph_dk_waterfall_",
+  ]
+};
+
+
+
 /*
   inputSet: {
     bins: 5,

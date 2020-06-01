@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 
+import { BinnedStageDimensions } from '../../../../shared/stage/models/binned-stage-dimensions.model';
 import { BinnedStageDimensionsSet } from '../../../../shared/stage/models/binned-stage-dimensions-set.model';
 
 interface GraphDimensions {
@@ -43,7 +44,7 @@ export class StageComparatorGraphComponent implements OnChanges, OnInit {
   _updateData() {
     if (this.stageData !== undefined) {
       this.dataPresent = true;
-      this.displayData = this.stageData.dimensions.map(stage => {
+      this.displayData = this.stageData.dimensions.sort(BinnedStageDimensions.sortBlastzoneDesc).map(stage => {
         return {
           name: stage.name,
           gameName: stage.gameName,

@@ -101,6 +101,8 @@ describe('StageComparatorGraphComponent', () => {
     });
 
     it('should display each stage\'s blastzone width values as a pixel-width', () => {
+      ///
+      console.groupCollapsed('=== SPEC - display blastzone')
       const inputSet: BinnedStageDimensionsSet = GRAPH.DISPLAY_BLASTZONE_VALUE.inputSet;
       const expectedValues: { stage: string, value: number }[] = GRAPH.DISPLAY_BLASTZONE_VALUE.expectedValues;
       hostComp.binnedStageDimensionsSet = inputSet;
@@ -109,13 +111,15 @@ describe('StageComparatorGraphComponent', () => {
       const actualValues: { stage: string, value: number }[] = graphDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('graph_')),
-          value: dElem.query(By.css('.blastzone')).nativeElement.clientWidth
+          value: Math.round(dElem.query(By.css('.blastzone')).nativeElement.getClientRects()[0].width)
         };
       });
 
       for (const stage in expectedValues) {
         expect(actualValues).withContext(expectedValues[stage].stage).toContain(expectedValues[stage]);
       }
+      ///
+      console.groupEnd();
     });
 
     it('should encode each stage\'s blastzone width bin value as a class', () => {
@@ -145,7 +149,7 @@ describe('StageComparatorGraphComponent', () => {
       const actualValues: { stage: string, value: number }[] = graphDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('graph_')),
-          value: dElem.query(By.css('.stagelength')).nativeElement.clientWidth
+          value: Math.round(dElem.query(By.css('.stagelength')).nativeElement.getClientRects()[0].width)
         };
       });
 
@@ -181,7 +185,7 @@ describe('StageComparatorGraphComponent', () => {
       const actualValues: { stage: string, value: number }[] = graphDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('graph_')),
-          value: dElem.query(By.css('.offstage')).nativeElement.clientWidth
+          value: Math.round(dElem.query(By.css('.offstage')).nativeElement.getClientRects()[0].width)
         };
       });
 
@@ -217,7 +221,7 @@ describe('StageComparatorGraphComponent', () => {
       const actualValues: { stage: string, value: number }[] = graphDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('graph_')),
-          value: dElem.query(By.css('.ceiling')).nativeElement.clientWidth
+          value: Math.round(dElem.query(By.css('.ceiling')).nativeElement.getClientRects()[0].width)
         };
       });
 

@@ -106,7 +106,7 @@ export class StageDimensionsService {
         let phase = stage.details[0];
 
         let blastzones = phase.blast_zones;
-        let blastzoneWidth = (blastzones[1] - blastzones[0]) / 2;
+        let blastzoneWidth = (blastzones[1] - blastzones[0]);
         let piece: StagePiece = null;
         let pieceMap: StagePieceMap = null;
 
@@ -134,8 +134,8 @@ export class StageDimensionsService {
         let leftLedgePosition = piece.vertex[leftIndex];
         let rightLedgePosition = piece.vertex[rightIndex];
 
-        let stageLength = (rightLedgePosition[0] - leftLedgePosition[0]) / 2;
-        let offStageDistance = blastzoneWidth - stageLength;
+        let stageLength = (rightLedgePosition[0] - leftLedgePosition[0]);
+        let offStageDistance = (blastzoneWidth - stageLength) / 2;
         let ceilingHeight = blastzones[2] - ((rightLedgePosition[1] + leftLedgePosition[1]) / 2);
         /**/
         /*console.log(

@@ -18,6 +18,8 @@ interface GraphDimensionsBinParams {
   bin: number;
 }
 
+const SCALE: number = 0.5;
+
 @Component({
   selector: 'ssbu-stage-comparator-graph',
   templateUrl: './stage-comparator-graph.component.html',
@@ -50,19 +52,19 @@ export class StageComparatorGraphComponent implements OnChanges, OnInit {
           gameName: stage.gameName,
           abbr: stage.abbr,
           blastzoneWidth: {
-            value: stage.blastzoneWidth.value,
+            value: stage.blastzoneWidth.value * SCALE,
             bin: stage.blastzoneWidth.bin
           },
           stageLength: {
-            value: stage.stageLength.value,
+            value: stage.stageLength.value * SCALE,
             bin: stage.stageLength.bin
           },
           offStageDistance: {
-            value: stage.offStageDistance.value,
+            value: stage.offStageDistance.value * SCALE,
             bin: stage.offStageDistance.bin
           },
           ceilingHeight: {
-            value: stage.ceilingHeight.value,
+            value: stage.ceilingHeight.value * SCALE,
             bin: stage.ceilingHeight.bin
           },
         };

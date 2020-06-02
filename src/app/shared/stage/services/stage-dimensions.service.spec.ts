@@ -16,7 +16,6 @@ import { StageMiscInfo } from '../models/stage-misc-info.model';
 import { StagePieceMap } from '../models/stage-piece-map.model';
 
 import * as STAGES from '../models/mocks/stages';
-import * as STAGE_DIM_RAW from '../models/mocks/stage-dimensions-raw';
 import * as STAGE_DIM_SET from '../models/mocks/stage-dimensions-set';
 import * as STAGE_DIM_SVC from '../models/mocks/stage-dimensions-service';
 
@@ -30,14 +29,14 @@ describe('StageDimensionsService', () => {
     });
 
     function _testRange(actualRange: StageDimensionsRange, expectedRange: StageDimensionsRange) {
-      expect(actualRange['min']).toBeCloseTo(expectedRange['min'], 6);
-      expect(actualRange['max']).toBeCloseTo(expectedRange['max'], 6);
-      expect(actualRange['range']).toBeCloseTo(expectedRange['range'], 6);
+      expect(actualRange['min']).withContext('min').toBeCloseTo(expectedRange['min'], 6);
+      expect(actualRange['max']).withContext('max').toBeCloseTo(expectedRange['max'], 6);
+      expect(actualRange['range']).withContext('range').toBeCloseTo(expectedRange['range'], 6);
     }
 
     it('takes an array of stages and returns their set of stage dimensions', async(() => {
-      const stages = STAGE_DIM_RAW.TWO_STAGES;
-      const expectedDimensionsSet = STAGE_DIM_SET.TWO_STAGE_SET;
+      const stages: Stage[] = STAGE_DIM_SVC.DIMENSIONS_FULL_CALC.inputStages;
+      const expectedDimensionsSet: StageDimensionsSet = STAGE_DIM_SVC.DIMENSIONS_FULL_CALC.expectedSet;
       const expectedDimensions = expectedDimensionsSet.dimensions;
       const expectedRanges = expectedDimensionsSet.ranges;
       let actualDimensionsSet$ = service.getDimensionsFull(stages);
@@ -50,10 +49,10 @@ describe('StageDimensionsService', () => {
         for (let i = 0; i < 2; i++) {
           expect(actualDimensions[i]['name']).toEqual(expectedDimensions[i]['name']);
           expect(actualDimensions[i]['gameName']).toEqual(expectedDimensions[i]['gameName']);
-          expect(actualDimensions[i]['blastzoneWidth']).toBeCloseTo(expectedDimensions[i]['blastzoneWidth'], 6);
-          expect(actualDimensions[i]['stageLength']).toBeCloseTo(expectedDimensions[i]['stageLength'], 6);
-          expect(actualDimensions[i]['offStageDistance']).toBeCloseTo(expectedDimensions[i]['offStageDistance'], 6);
-          expect(actualDimensions[i]['ceilingHeight']).toBeCloseTo(expectedDimensions[i]['ceilingHeight'], 6);
+          expect(actualDimensions[i]['blastzoneWidth']).withContext(`${expectedDimensions[i]['name']} blastzoneWidth`).toBeCloseTo(expectedDimensions[i]['blastzoneWidth'], 6);
+          expect(actualDimensions[i]['stageLength']).withContext(`${expectedDimensions[i]['name']} stageLength`).toBeCloseTo(expectedDimensions[i]['stageLength'], 6);
+          expect(actualDimensions[i]['offStageDistance']).withContext(`${expectedDimensions[i]['name']} offStageDistance`).toBeCloseTo(expectedDimensions[i]['offStageDistance'], 6);
+          expect(actualDimensions[i]['ceilingHeight']).withContext(`${expectedDimensions[i]['name']} ceilingHeight`).toBeCloseTo(expectedDimensions[i]['ceilingHeight'], 6);
         }
 
         const actualRanges = actualDimensionsSet['ranges'];

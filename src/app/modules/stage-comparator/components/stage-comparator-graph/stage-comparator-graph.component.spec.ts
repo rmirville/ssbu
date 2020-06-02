@@ -100,7 +100,7 @@ describe('StageComparatorGraphComponent', () => {
       }
     });
 
-    it('should display each stage\'s blastzone width values as a pixel-width', () => {
+    it('should display each stage\'s blastzone width values as a halved pixel-width', () => {
       ///
       // console.groupCollapsed('=== SPEC - display blastzone')
       const inputSet: BinnedStageDimensionsSet = GRAPH.DISPLAY_BLASTZONE_VALUE.inputSet;
@@ -140,7 +140,7 @@ describe('StageComparatorGraphComponent', () => {
       }
     });
 
-    it('should display each stage\'s stage length values as a pixel-width', () => {
+    it('should display each stage\'s stage length values as a halved pixel-width', () => {
       const inputSet: BinnedStageDimensionsSet = GRAPH.DISPLAY_STAGELENGTH_VALUE.inputSet;
       const expectedValues: { stage: string, value: number }[] = GRAPH.DISPLAY_STAGELENGTH_VALUE.expectedValues;
       hostComp.binnedStageDimensionsSet = inputSet;
@@ -176,7 +176,7 @@ describe('StageComparatorGraphComponent', () => {
       }
     });
 
-    it('should display each stage\'s off-stage distance values as a pixel-width', () => {
+    it('should display each stage\'s off-stage distance values as a halved pixel-width', () => {
       const inputSet: BinnedStageDimensionsSet = GRAPH.DISPLAY_OFFSTAGE_VALUE.inputSet;
       const expectedValues: { stage: string, value: number }[] = GRAPH.DISPLAY_OFFSTAGE_VALUE.expectedValues;
       hostComp.binnedStageDimensionsSet = inputSet;
@@ -212,7 +212,7 @@ describe('StageComparatorGraphComponent', () => {
       }
     });
 
-    it('should display each stage\'s ceiling height value as a pixel-width', () => {
+    it('should display each stage\'s ceiling height value as a halved pixel-width', () => {
       const inputSet: BinnedStageDimensionsSet = GRAPH.DISPLAY_CEILING_VALUE.inputSet;
       const expectedValues: { stage: string, value: number }[] = GRAPH.DISPLAY_CEILING_VALUE.expectedValues;
       hostComp.binnedStageDimensionsSet = inputSet;

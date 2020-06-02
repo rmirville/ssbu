@@ -849,27 +849,27 @@ export const DISPLAY_BLASTZONE_VALUE: { inputSet: BinnedStageDimensionsSet, expe
   expectedValues: [
     {
       stage: "graph_gamer_",
-      value: 230
+      value: 115
     },
     {
       stage: "graph_wily_",
-      value: 248
+      value: 124
     },
     {
       stage: "graph_umbra_f",
-      value: 250
+      value: 125
     },
     {
       stage: "graph_plasma_",
-      value: 237
+      value: 119
     },
     {
       stage: "graph_duckhunt_",
-      value: 250
+      value: 125
     },
     {
       stage: "graph_zelda_tower",
-      value: 267
+      value: 134
     },
   ]
 };
@@ -1265,27 +1265,27 @@ export const DISPLAY_STAGELENGTH_VALUE: { inputSet: BinnedStageDimensionsSet, ex
   expectedValues: [
     {
       stage: "graph_wily_",
-      value: 87
+      value: 44
     },
     {
       stage: "graph_xstarfox_",
-      value: 80
+      value: 40
     },
     {
       stage: "graph_yoshi_story_",
-      value: 5
+      value: 3
     },
     {
       stage: "graph_bossstage_final1_",
-      value: 80
+      value: 40
     },
     {
       stage: "graph_mariou_",
-      value: 81
+      value: 41
     },
     {
       stage: "graph_duckhunt_",
-      value: 95
+      value: 48
     },
   ]
 };
@@ -1749,23 +1749,23 @@ export const DISPLAY_OFFSTAGE_VALUE: { inputSet: BinnedStageDimensionsSet, expec
   expectedValues: [
     {
       stage: "graph_xmadein_",
-      value: 122
+      value: 61
     },
     {
       stage: "graph_poke_tengam_",
-      value: 165
+      value: 83
     },
     {
       stage: "graph_gamer_",
-      value: 139
+      value: 70
     },
     {
       stage: "graph_mario_rainbow_",
-      value: 132
+      value: 66
     },
     {
       stage: "graph_village2_",
-      value: 148
+      value: 74
     },
   ]
 };
@@ -2229,23 +2229,23 @@ export const DISPLAY_CEILING_VALUE: { inputSet: BinnedStageDimensionsSet, expect
   expectedValues: [
     {
       stage: "graph_dk_waterfall_",
-      value: 193
+      value: 97
     },
     {
       stage: "graph_poke_stadium_",
-      value: 180
+      value: 90
     },
     {
       stage: "graph_end_l_common",
-      value: 180
+      value: 90
     },
     {
       stage: "graph_battlefield_l_",
-      value: 216
+      value: 108
     },
     {
       stage: "graph_colloseum_",
-      value: 190
+      value: 95
     },
   ]
 };

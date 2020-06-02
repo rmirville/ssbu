@@ -17,6 +17,8 @@ export interface StageDetails {
   camera: number[];
   spawns: number[][];
   respawns: number[][];
+  center?: number[];
+  items?: any[];
 }
 
 /**

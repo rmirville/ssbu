@@ -4,13 +4,18 @@ import { BinnedStageDimensions } from '../../../../shared/stage/models/binned-st
 import { BinnedStageDimensionsSet } from '../../../../shared/stage/models/binned-stage-dimensions-set.model';
 import { StageDimensionsRange } from '../../../../shared/stage/models/stage-dimensions-range.model';
 
+interface NumberTableValueDisplay {
+  value: number;
+  highlight: boolean;
+}
+
 interface NumberTableDimensions {
   name: string;
   gameName: string;
-  blastzoneWidth: number;
-  stageLength: number;
-  offStageDistance: number;
-  ceilingHeight: number;
+  blastzoneWidth: NumberTableValueDisplay;
+  stageLength: NumberTableValueDisplay;
+  offStageDistance: NumberTableValueDisplay;
+  ceilingHeight: NumberTableValueDisplay;
 }
 
 interface NumberTableRanges {
@@ -57,10 +62,22 @@ export class StageComparatorNumberTableComponent implements OnChanges, OnInit {
         return {
           name: stage.name,
           gameName: stage.gameName,
-          blastzoneWidth: Math.round(stage.blastzoneWidth.value),
-          stageLength: Math.round(stage.stageLength.value),
-          offStageDistance: Math.round(stage.offStageDistance.value),
-          ceilingHeight: Math.round(stage.ceilingHeight.value),
+          blastzoneWidth: {
+            value: Math.round(stage.blastzoneWidth.value),
+            highlight: this._getHighlight(Math.round(stage.blastzoneWidth.value), 'blastzoneWidth')
+          },
+          stageLength: {
+            value: Math.round(stage.stageLength.value),
+            highlight: this._getHighlight(Math.round(stage.stageLength.value), 'stageLength')
+          },
+          offStageDistance: {
+            value: Math.round(stage.offStageDistance.value),
+            highlight: this._getHighlight(Math.round(stage.offStageDistance.value), 'offStageDistance')
+          },
+          ceilingHeight: {
+            value: Math.round(stage.ceilingHeight.value),
+            highlight: this._getHighlight(Math.round(stage.ceilingHeight.value), 'ceilingHeight')
+          }
         }
       });
 
@@ -91,5 +108,11 @@ export class StageComparatorNumberTableComponent implements OnChanges, OnInit {
     else {
       this.dataPresent = false;
     }
+  }
+
+  _getHighlight(value: number, dimension: string): boolean {
+    return ((value === Math.round(this.stageData.ranges[dimension].min))
+      || (value === Math.round(this.stageData.ranges[dimension].max))
+    );
   }
 }

@@ -89,6 +89,11 @@ ssbu-stage-comparator-number-table .stats td {
   background-color: hsl(188, 55%, 0%);
 }
 
+.table-responsive .highlight {
+  font-weight: bold;
+  font-style: italic;
+}
+
 @media (min-width: 992px) {
   .table-responsive .abbr {
     display: table-cell;

@@ -5,13 +5,18 @@ import { BinnedStageDimensions } from '../../../../shared/stage/models/binned-st
 import { StageDimensionsBinParams } from '../../../../shared/stage/models/stage-dimensions-bin-params.model';
 import { StageDimensionsRange } from '../../../../shared/stage/models/stage-dimensions-range.model';
 
+interface TextTableValueDisplay {
+  value: string;
+  highlight: boolean;
+}
+
 interface TextTableDimensions {
   name: string;
   gameName: string;
-  blastzoneWidth: string;
-  stageLength: string;
-  offStageDistance: string;
-  ceilingHeight: string;
+  blastzoneWidth: TextTableValueDisplay;
+  stageLength: TextTableValueDisplay;
+  offStageDistance: TextTableValueDisplay;
+  ceilingHeight: TextTableValueDisplay;
 }
 
 interface TextTableRanges {
@@ -153,38 +158,52 @@ export class StageComparatorTextTableComponent implements OnChanges, OnInit {
     }
   }
 
-  _getValue(params: StageDimensionsBinParams, dimension: string): string {
+  _getValue(params: StageDimensionsBinParams, dimension: string): TextTableValueDisplay {
+    let highlight: boolean = false;
+    let value: string = '';
     switch (params.bin) {
       case 0:
         if (this.stageData.dimensions.length === 1) {
-          return this.textValues[dimension].solo;
+          value = this.textValues[dimension].solo;
         }
         else {
-          return this.textValues[dimension].same;
+          value = this.textValues[dimension].same;
         }
+        break;
       case 1:
         if (params.min === true) {
-          return this.textValues[dimension].min;
+          value = this.textValues[dimension].min;
+          highlight = true;
         }
         else {
-          return this.textValues[dimension][1];
+          value = this.textValues[dimension][1];
         }
+        break;
       case 2:
-        return this.textValues[dimension][2];
+        value = this.textValues[dimension][2];
+        break;
       case 3:
-        return this.textValues[dimension][3];
+        value = this.textValues[dimension][3];
+        break;
       case 4:
-        return this.textValues[dimension][4];
+        value = this.textValues[dimension][4];
+        break;
       case 5:
         if (params.max === true) {
-          return this.textValues[dimension].max;
+          value = this.textValues[dimension].max;
+          highlight = true;
         }
         else {
-          return this.textValues[dimension][5];
+          value = this.textValues[dimension][5];
         }
+        break;
       default:
-        return 'N/A';
+        value = 'N/A';
     }
+    return {
+      value: value,
+      highlight: highlight
+    };
   }
 
 }

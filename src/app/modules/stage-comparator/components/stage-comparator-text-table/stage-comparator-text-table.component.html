@@ -30,10 +30,10 @@
           <ng-container *ngFor="let stage of displayData.dimensions">
             <tr class="texttable_{{stage.gameName}}">
               <th class="th-sticky name">{{stage.name}}</th>
-              <td class="blastzone">{{stage.blastzoneWidth}}</td>
-              <td class="stagelength">{{stage.stageLength}}</td>
-              <td class="offstage">{{stage.offStageDistance}}</td>
-              <td class="ceiling">{{stage.ceilingHeight}}</td>
+              <td [class.highlight]="stage.blastzoneWidth.highlight" class="blastzone">{{stage.blastzoneWidth.value}}</td>
+              <td [class.highlight]="stage.stageLength.highlight" class="stagelength">{{stage.stageLength.value}}</td>
+              <td [class.highlight]="stage.offStageDistance.highlight" class="offstage">{{stage.offStageDistance.value}}</td>
+              <td [class.highlight]="stage.ceilingHeight.highlight" class="ceiling">{{stage.ceilingHeight.value}}</td>
             </tr>
           </ng-container>
         </tbody>

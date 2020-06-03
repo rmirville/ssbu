@@ -26,10 +26,6 @@ export const GETMAPS_OUTPUT_VALUE: StagePieceMap[] = [
     pieceName: "COL_00_Floor"
   },
   {
-    lvd: "battle_common",
-    pieceName: "COL_00_Ring01"
-  },
-  {
     lvd: "end_l_common",
     pieceName: "COL_00_Floor"
   },

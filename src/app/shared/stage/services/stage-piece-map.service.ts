@@ -45,10 +45,6 @@ export class StagePieceMapService {
         pieceName: "COL_00_Floor"
       },
       {
-        lvd: "battle_common",
-        pieceName: "COL_00_Ring01"
-      },
-      {
         lvd: "end_l_common",
         pieceName: "COL_00_Floor"
       },
@@ -184,6 +180,12 @@ export class StagePieceMapService {
         lvd: "zelda_tower",
         pieceName: "COL_curve1"
       }
+    ],
+    omitted: [
+      {
+        lvd: "battle_common",
+        pieceName: "COL_00_Ring01"
+      },
     ]
   };
 

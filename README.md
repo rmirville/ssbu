@@ -11,4 +11,4 @@ This tool creates charts and tables that compare the dimensions of selected stag
 * Determining a legal stage list for a tournament
 * Determining what stages are advantageous for a given character
 
-## More tools coming...eventually
+## More tools to to come

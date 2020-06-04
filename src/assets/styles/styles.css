@@ -121,6 +121,13 @@ h2 {
   color: white;
 }
 
+noscript h2 {
+  padding: 0;
+  line-height: 4.5rem;
+  background-color: transparent;
+  color: black;
+}
+
 h3 {
   font-size: 1.25rem;
   line-height: 3.75rem;

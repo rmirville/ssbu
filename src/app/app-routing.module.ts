@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const ROUTES: Routes = [
   {
-    path: 'stage-comparator',
+    path: 'stage-comparison',
     loadChildren: () => import('./modules/stage-comparator/stage-comparator.module').then(m => m.StageComparatorModule)
   },
   {
@@ -11,7 +11,7 @@ const ROUTES: Routes = [
     loadChildren: () => import('./modules/credits/credits.module').then(m => m.CreditsModule)
   },
   { path: '',
-    redirectTo: 'stage-comparator',
+    redirectTo: 'stage-comparison',
     pathMatch: 'full'
   }
 ];

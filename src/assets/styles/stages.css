@@ -1,7 +1,13 @@
 /* Stage Select */
 ssbu-stage-select .classification,
+ssbu-stage-select .note,
 ssbu-stage-select .shortcuts {
   padding-top: 1rem;
+}
+
+ssbu-stage-select .note p {
+  margin-bottom: 0;
+  font-style: italic;
 }
 
 ssbu-stage-select .classification {

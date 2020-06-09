@@ -18,6 +18,9 @@
             <div id="stage-select-{{rootSection.attribute}}-collapse" class="collapse" [class.show]="rootSection.expand"
               [attr.aria-labelledby]="'stage-select-' + rootSection.attribute + '-header'">
               <div class="card-body">
+                <div *ngIf="rootSection.id==='tourneyPresence'" class="note">
+                  <p>Tournament legality is based on appearance in <a href="https://www.redbull.com/us-en/pgru-fall-2019" target="_blank">PGRU</a> S-tier and A-tier tournaments during the 2019 Fall and 2020 Spring seasons.</p>
+                </div>
                 <div class="row shortcuts">
                   <div class="form-group form-inline">
                     <div class="col-sm-12">

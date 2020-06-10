@@ -219,7 +219,7 @@ export class StageClassificationsService {
       name: "Unova Pokémon League",
       abbr: "UPL",
       series: "Pokémon",
-      tourneyPresence: 2
+      tourneyPresence: -1
     },
     {
       gameName: "wily_",

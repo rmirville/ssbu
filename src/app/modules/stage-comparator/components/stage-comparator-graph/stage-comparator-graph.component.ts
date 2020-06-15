@@ -52,19 +52,19 @@ export class StageComparatorGraphComponent implements OnChanges, OnInit {
           gameName: stage.gameName,
           abbr: stage.abbr,
           blastzoneWidth: {
-            value: stage.blastzoneWidth.value * SCALE,
+            value: Math.round(stage.blastzoneWidth.value * SCALE),
             bin: stage.blastzoneWidth.bin
           },
           stageLength: {
-            value: stage.stageLength.value * SCALE,
+            value: Math.round(stage.stageLength.value * SCALE),
             bin: stage.stageLength.bin
           },
           offStageDistance: {
-            value: stage.offStageDistance.value * SCALE,
+            value: Math.round(stage.offStageDistance.value * SCALE),
             bin: stage.offStageDistance.bin
           },
           ceilingHeight: {
-            value: stage.ceilingHeight.value * SCALE,
+            value: Math.round(stage.ceilingHeight.value * SCALE),
             bin: stage.ceilingHeight.bin
           },
         };

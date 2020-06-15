@@ -7,7 +7,11 @@ module.exports = function (config) {
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
       require('karma-jasmine'),
-      require('karma-chrome-launcher'),
+      // require('karma-chrome-launcher'),
+      // require('karma-firefox-launcher'),
+      // require('karma-edgium-launcher'),
+      // require('karma-ie-launcher'),
+      require('karma-safari-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
       require('@angular-devkit/build-angular/plugins/karma')
@@ -30,12 +34,12 @@ module.exports = function (config) {
     singleRun: false,
     restartOnFileChange: true,
     loggers: [{ type: 'console' }],
-    customLaunchers: {
+    /*customLaunchers: {
       Chrome_with_debugging: {
         base: 'Chrome',
         flags: ['--remote-debugging-port=9222'],
         debug: true
       }
-    }
+    }*/
   });
 };

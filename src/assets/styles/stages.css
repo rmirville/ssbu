@@ -73,27 +73,28 @@ ssbu-stage-comparator-number-table .stats td {
   font-style: italic;
 }
 
-.table-responsive .bin-1,
+.table-responsive .td-graph .bar.bin-1,
 .legend .bin-1 {
   background-color: hsl(188, 55%, 80%);
 }
 
-.table-responsive .bin-2,
+.table-responsive .td-graph .bar.bin-2,
 .legend .bin-2 {
   background-color: hsl(188, 45%, 60%);
 }
 
-.table-responsive .bin-3,
+.table-responsive .td-graph .bar,
+.table-responsive .td-graph .bar.bin-3,
 .legend .bin-3 {
   background-color: hsl(188, 65%, 40%);
 }
 
-.table-responsive .bin-4,
+.table-responsive .td-graph .bar.bin-4,
 .legend .bin-4 {
   background-color: hsl(188, 55%, 25%);
 }
 
-.table-responsive .bin-5,
+.table-responsive .td-graph .bar.bin-5,
 .legend .bin-5 {
   background-color: hsl(188, 55%, 0%);
 }

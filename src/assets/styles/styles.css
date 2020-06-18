@@ -90,6 +90,12 @@
   font-family: 'Roboto', sans-serif;
 }
 
+body {
+  background: url('../media/img/bg.png') repeat top left/auto;
+  background-image: url('../media/img/bg.png');
+  background-color: black;
+}
+
 hr {
   border-top: 1px dotted hsl(0, 0%, 60%);
   margin-left: .1rem;
@@ -146,9 +152,6 @@ h4 {
 
 .brand {
   height: 3rem;
-  background: url('../media/img/nav.png') repeat top left/auto;
-  background-image: url('../media/img/nav.png');
-  background-color: black;
 }
 
 .navbar-desktop {
@@ -264,6 +267,14 @@ h4 {
 @media (min-width: 1200px) {}
 
 /* Page Content */
+
+#main {
+  background-color: white;
+}
+
+.ssbu-module {
+  padding-bottom: 1rem;
+}
 
 .page-title {
   color: white;
@@ -569,4 +580,14 @@ h4 {
 .form-group > .card > .collapse > .card-body,
 .form-group > .card > .collapsing > .card-body {
   padding: 0 1rem;
+}
+
+.footer {
+  padding: 2rem 0;
+  border-top: .5rem solid hsl(0, 91%, 50%);
+  color: white;
+}
+
+.footer > .container {
+  padding-left: 2rem;
 }

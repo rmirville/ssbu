@@ -1,9 +1,5 @@
 <div class="container ssbu-module">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-title">Stage Comparison</h1>
-    </div>
-  </div>
+  <h1 class="page-title">Stage Comparison</h1>
   <ssbu-stage-select [stages]="stageClassifications" [parentEvent$]="selectSubject$.asObservable()" (submitSelection)="getStats($event)"></ssbu-stage-select>
   <div class="card">
     <div class="card-header">

@@ -159,6 +159,10 @@ h4 {
   visibility: hidden;
 }
 
+.navbar-mobile {
+  border-bottom: .5rem solid hsl(0, 91%, 50%);
+}
+
 .navbar-brand {
   font-weight: 900;
   letter-spacing: 1px;
@@ -176,12 +180,17 @@ h4 {
 }
 
 .nav-container {
+  width: 100%;
   min-height: .5rem;
   background-color: hsl(0, 91%, 50%);
 }
 
 .navbar-desktop .navbar-nav {
   padding: 0 3rem;
+}
+
+.navbar-mobile .navbar-nav {
+  text-align: center;
 }
 
 .navbar-dark .navbar-toggler {

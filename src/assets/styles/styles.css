@@ -579,7 +579,7 @@ h4 {
 
 .card .form-inline .form-check {
   margin-bottom: 1rem;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .form-group > .card > .collapse > .card-body,

@@ -619,7 +619,7 @@ a:visited {
 }
 
 .footer-brand {
-  display: block;
+  display: inline-block;
   margin-bottom: 1rem;
   font-size: 1.25rem;
   font-weight: 900;

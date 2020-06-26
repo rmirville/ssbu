@@ -164,7 +164,7 @@ a:visited {
 }
 
 .brand {
-  height: 3rem;
+  min-height: 3rem;
 }
 
 .navbar-desktop {

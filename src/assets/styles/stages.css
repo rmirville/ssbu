@@ -67,6 +67,14 @@ ssbu-stage-select form > .form-group {
   height: .75rem;
 }
 
+ssbu-stage-comparator-text-table .table-responsive tbody td,
+ssbu-stage-comparator-text-table .table-responsive tbody .th-sticky,
+ssbu-stage-comparator-number-table .table-responsive tbody td,
+ssbu-stage-comparator-number-table .table-responsive tbody .th-sticky {
+  border-top: none;
+  border-bottom: 1px solid #dee2e6;
+}
+
 ssbu-stage-comparator-text-table .stats th,
 ssbu-stage-comparator-text-table .stats td,
 ssbu-stage-comparator-number-table .stats th,

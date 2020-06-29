@@ -1,6 +1,16 @@
 /* Stage Select */
-ssbu-stage-select .classification {
+ssbu-stage-select .classification,
+ssbu-stage-select .note,
+ssbu-stage-select .shortcuts {
   padding-top: 1rem;
+}
+
+ssbu-stage-select .note p {
+  margin-bottom: 0;
+  font-style: italic;
+}
+
+ssbu-stage-select .classification {
   border-bottom: 1px dotted lightgrey;
 }
 
@@ -9,281 +19,102 @@ ssbu-stage-select form > .form-group {
 }
 
 /* Stages */
+.legend {
+  margin-bottom: 1rem;
+}
+
+.legend .legend-bin,
+.legend label {
+  margin: 1rem 0 1rem 1rem;
+  vertical-align: middle;
+}
+
+.legend .legend-bin {
+  width: 1rem;
+  height: 1rem;
+}
+
+.table-responsive .th-sticky.name,
+.table-responsive .abbr {
+  padding-right: 0;
+}
+
+.table-responsive .th-sticky.name {
+  min-width: 9rem;
+}
+
+.table-responsive .abbr {
+  display: none;
+}
 
 .table-responsive .td-graph {
-  background-image: repeating-linear-gradient(to right,
-      transparent,
-      hsla(0, 0%, 0%, 50%) 1px,
-      transparent 0px,
-      transparent 20px);
+  background-image: url('../media/img/bg-graph.png');
+  /*background-image: repeating-linear-gradient(to right,
+      hsla(0, 0%, 0%, 50%) 0px,
+      transparent 1px,
+      transparent 20px);*/
   background-position-x: 1rem;
-  box-shadow: inset 1rem 0 white, -.75rem 0 white;
+  box-shadow: /*inset*/ 1rem 0 white, -.75rem 0 white;
 }
 
 .table-hover tr:hover .td-graph {
-  box-shadow: inset 1rem 0 hsl(0, 0%, 93%), -.75rem 0 hsl(0, 0%, 93%);
+  box-shadow: /*inset*/ 1rem 0 hsl(0, 0%, 93%), -.75rem 0 hsl(0, 0%, 93%);
 }
 
-.table-responsive .td-graph div {
+.table-responsive .td-graph .bar {
   float: left;
-  margin: 0;
+  margin: 1.125rem 0;
   height: .75rem;
 }
 
-/**/
-.table-responsive .r1 {
-  background-color: hsl(0, 75%, 55%);
+ssbu-stage-comparator-text-table .table-responsive tbody td,
+ssbu-stage-comparator-text-table .table-responsive tbody .th-sticky,
+ssbu-stage-comparator-number-table .table-responsive tbody td,
+ssbu-stage-comparator-number-table .table-responsive tbody .th-sticky {
+  border-top: none;
+  border-bottom: 1px solid #dee2e6;
 }
 
-.table-responsive .r2 {
-  background-color: hsl(30, 85%, 55%);
+ssbu-stage-comparator-text-table .stats th,
+ssbu-stage-comparator-text-table .stats td,
+ssbu-stage-comparator-number-table .stats th,
+ssbu-stage-comparator-number-table .stats td {
+  font-style: italic;
 }
 
-.table-responsive .r3 {
-  background-color: hsl(60, 80%, 50%);
+.table-responsive .td-graph .bar.bin-1,
+.legend .bin-1 {
+  background-color: hsl(188, 55%, 80%);
 }
 
-.table-responsive .r4 {
-  background-color: hsl(100, 55%, 50%);
+.table-responsive .td-graph .bar.bin-2,
+.legend .bin-2 {
+  background-color: hsl(188, 45%, 60%);
 }
 
-.table-responsive .r5 {
-  background-color: hsl(220, 75%, 55%);
-}
-/**/
-
-/* Color-blind *//*
-.table-responsive .r1 {
-  background-color: hsl(0, 0%, 20%);
+.table-responsive .td-graph .bar,
+.table-responsive .td-graph .bar.bin-3,
+.legend .bin-3 {
+  background-color: hsl(188, 65%, 40%);
 }
 
-.table-responsive .r2 {
-  background-color: hsl(30, 0%, 40%);
+.table-responsive .td-graph .bar.bin-4,
+.legend .bin-4 {
+  background-color: hsl(188, 55%, 25%);
 }
 
-.table-responsive .r3 {
-  background-color: hsl(60, 0%, 60%);
+.table-responsive .td-graph .bar.bin-5,
+.legend .bin-5 {
+  background-color: hsl(188, 55%, 0%);
 }
 
-.table-responsive .r4 {
-  background-color: hsl(120, 0%, 80%);
+.table-responsive .highlight {
+  font-weight: bold;
+  font-style: italic;
 }
 
-.table-responsive .r5 {
-  background-color: hsl(240, 0%, 100%);
-}
-/**/
-
-
-.table-responsive .bf .blastzone {
-  width: 240px;
-}
-
-.table-responsive .bf .stage {
-  width: 80px;
-}
-
-.table-responsive .bf .off-stage {
-  width: 160px;
-}
-
-.table-responsive .bf .ceiling {
-  width: 192px;
-}
-
-
-
-.table-responsive .fd .blastzone {
-  width: 240px;
-}
-
-.table-responsive .fd .stage {
-  width: 80px;
-}
-
-.table-responsive .fd .off-stage {
-  width: 160px;
-}
-
-.table-responsive .fd .ceiling {
-  width: 180px;
-}
-
-
-
-.table-responsive .ps2 .blastzone {
-  width: 250px;
-}
-
-.table-responsive .ps2 .stage {
-  width: 94px;
-}
-
-.table-responsive .ps2 .off-stage {
-  width: 156px;
-}
-
-.table-responsive .ps2 .ceiling {
-  width: 180px;
-}
-
-
-
-.table-responsive .ps1 .blastzone {
-  width: 250px;
-}
-
-.table-responsive .ps1 .stage {
-  width: 88px;
-}
-
-.table-responsive .ps1 .off-stage {
-  width: 162px;
-}
-
-.table-responsive .ps1 .ceiling {
-  width: 180px;
-}
-
-
-
-.table-responsive .sv .blastzone {
-  width: 230px;
-}
-
-.table-responsive .sv .stage {
-  width: 70px;
-}
-
-.table-responsive .sv .off-stage {
-  width: 160px;
-}
-
-.table-responsive .sv .ceiling {
-  width: 190px;
-}
-
-
-
-.table-responsive .kpl .blastzone {
-  width: 245px;
-}
-
-.table-responsive .kpl .stage {
-  width: 80px;
-}
-
-.table-responsive .kpl .off-stage {
-  width: 165px;
-}
-
-.table-responsive .kpl .ceiling {
-  width: 192px;
-}
-
-
-.table-responsive .yib .blastzone {
-  width: 220px;
-}
-
-.table-responsive .yib .stage {
-  width: 70px;
-}
-
-.table-responsive .yib .off-stage {
-  width: 150px;
-}
-
-.table-responsive .yib .ceiling {
-  width: 185px;
-}
-
-
-
-.table-responsive .tc .blastzone {
-  width: 230px;
-}
-
-.table-responsive .tc .stage {
-  width: 82px;
-}
-
-.table-responsive .tc .off-stage {
-  width: 148px;
-}
-
-.table-responsive .tc .ceiling {
-  width: 195px;
-}
-
-
-
-.table-responsive .upl .blastzone {
-  width: 237px;
-}
-
-.table-responsive .upl .stage {
-  width: 82px;
-}
-
-.table-responsive .upl .off-stage {
-  width: 155px;
-}
-
-.table-responsive .upl .ceiling {
-  width: 190px;
-}
-
-
-
-.table-responsive .ys .blastzone {
-  width: 227px;
-}
-
-.table-responsive .ys .stage {
-  width: 68px;
-}
-
-.table-responsive .ys .off-stage {
-  width: 159px;
-}
-
-.table-responsive .ys .ceiling {
-  width: 184px;
-}
-
-
-
-.table-responsive .lc .blastzone {
-  width: 230px;
-}
-
-.table-responsive .lc .stage {
-  width: 80px;
-}
-
-.table-responsive .lc .off-stage {
-  width: 150px;
-}
-
-.table-responsive .lc .ceiling {
-  width: 188px;
-}
-
-
-
-.table-responsive .mm .blastzone {
-  width: 260px;
-}
-
-.table-responsive .mm .stage {
-  width: 100px;
-}
-
-.table-responsive .mm .off-stage {
-  width: 160px;
-}
-
-.table-responsive .mm .ceiling {
-  width: 190px;
+@media (min-width: 992px) {
+  .table-responsive .abbr {
+    display: table-cell;
+  }
 }

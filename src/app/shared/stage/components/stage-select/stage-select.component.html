@@ -8,7 +8,7 @@
         <div *ngIf="rootSection.show" class="form-group {{rootSection.attribute}}">
           <div class="card">
             <div class="card-header">
-              <h3 class="btn btn-link" [class.collapsed]="!rootSection.expand" data-toggle="collapse"
+              <h3 class="btn btn-link" id="stage-select-{{rootSection.attribute}}-header" [class.collapsed]="!rootSection.expand" data-toggle="collapse"
                 [attr.data-target]="'#stage-select-' + rootSection.attribute + '-collapse'"
                 [attr.aria-expanded]="rootSection.expand"
                 [attr.aria-controls]="'stage-select-' + rootSection.attribute + '-collapse'">

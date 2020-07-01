@@ -1,14 +1,14 @@
 <div class="card">
   <div class="card-header">
-    <h2>Stage Selection</h2>
+    <h2 id="stage-select-header">Stage Selection</h2>
   </div>
   <div class="card-body">
-    <form [formGroup]="selectionForm" (ngSubmit)="submitSelected()">
+    <form role="form" aria-labelledby="stage-select-header" [formGroup]="selectionForm" (ngSubmit)="submitSelected()">
       <ng-container *ngFor="let rootSection of rootSections">
-        <div *ngIf="rootSection.show" class="form-group {{rootSection.attribute}}">
+        <div role="region" [attr.aria-labelledby]="'stage-select-' + rootSection.attribute + '-header'" *ngIf="rootSection.show" class="form-group {{rootSection.attribute}}">
           <div class="card">
             <div class="card-header">
-              <button class="h3 btn btn-link stage-select-root-section-header" id="stage-select-{{rootSection.attribute}}-header" [class.collapsed]="!rootSection.expand" data-toggle="collapse"
+              <button class="h3 btn btn-link stage-select-root-section-header" role="heading" id="stage-select-{{rootSection.attribute}}-header" [class.collapsed]="!rootSection.expand" data-toggle="collapse"
                 [attr.data-target]="'#stage-select-' + rootSection.attribute + '-collapse'"
                 [attr.aria-expanded]="rootSection.expand"
                 [attr.aria-controls]="'stage-select-' + rootSection.attribute + '-collapse'">

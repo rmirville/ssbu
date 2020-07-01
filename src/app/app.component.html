@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="container-fluid nav-container nav-collapse collapse">
-    <ul class="container navbar-nav justify-content-around">
+    <ul role="navigation" class="container navbar-nav justify-content-around">
       <li class="nav-item">
         <a class="nav-link" [routerLink]="'/stage-comparison'">Stage Comparison</a>
       </li>
@@ -37,6 +37,6 @@
 </nav>
 
 <!-- Page Content -->
-<section id="main">
+<section id="main" role="main">
   <router-outlet></router-outlet>
 </section>

@@ -742,17 +742,17 @@ describe('StageComparatorComponent', () => {
       });
 
       it(`should have a graph button with the 'active' class`, () => {
-        let graphNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(1) a'));
+        let graphNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(1) .stage-comparator-view-toggle'));
         expect(graphNavDElem.nativeElement.classList.contains('active')).toBe(true);
       });
 
       it(`should have a text button without the 'active' class`, () => {
-        let textNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(2) a'));
+        let textNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(2) .stage-comparator-view-toggle'));
         expect(textNavDElem.nativeElement.classList.contains('active')).toBe(false);
       });
 
       it(`should have a numbers button without the 'active' class`, () => {
-        let numNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(3) a'));
+        let numNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(3) .stage-comparator-view-toggle'));
         expect(numNavDElem.nativeElement.classList.contains('active')).toBe(false);
       });
 
@@ -784,17 +784,17 @@ describe('StageComparatorComponent', () => {
       });
 
       it(`should have a graph button with the 'active' class`, () => {
-        let graphNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(1) a'));
+        let graphNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(1) .stage-comparator-view-toggle'));
         expect(graphNavDElem.nativeElement.classList.contains('active')).toBe(true);
       });
 
       it(`should have a text button without the 'active' class`, () => {
-        let textNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(2) a'));
+        let textNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(2) .stage-comparator-view-toggle'));
         expect(textNavDElem.nativeElement.classList.contains('active')).toBe(false);
       });
 
       it(`should have a numbers button without the 'active' class`, () => {
-        let numNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(3) a'));
+        let numNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(3) .stage-comparator-view-toggle'));
         expect(numNavDElem.nativeElement.classList.contains('active')).toBe(false);
       });
 
@@ -825,17 +825,17 @@ describe('StageComparatorComponent', () => {
       });
 
       it(`should have a graph button without the 'active' class`, () => {
-        let graphNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(1) a'));
+        let graphNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(1) .stage-comparator-view-toggle'));
         expect(graphNavDElem.nativeElement.classList.contains('active')).toBe(false);
       });
 
       it(`should have a text button with the 'active' class`, () => {
-        let textNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(2) a'));
+        let textNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(2) .stage-comparator-view-toggle'));
         expect(textNavDElem.nativeElement.classList.contains('active')).toBe(true);
       });
 
       it(`should have a numbers button without the 'active' class`, () => {
-        let numNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(3) a'));
+        let numNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(3) .stage-comparator-view-toggle'));
         expect(numNavDElem.nativeElement.classList.contains('active')).toBe(false);
       });
 
@@ -866,17 +866,17 @@ describe('StageComparatorComponent', () => {
       });
 
       it(`should have a graph button without the 'active' class`, () => {
-        let graphNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(1) a'));
+        let graphNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(1) .stage-comparator-view-toggle'));
         expect(graphNavDElem.nativeElement.classList.contains('active')).toBe(false);
       });
 
       it(`should have a text button without the 'active' class`, () => {
-        let textNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(2) a'));
+        let textNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(2) .stage-comparator-view-toggle'));
         expect(textNavDElem.nativeElement.classList.contains('active')).toBe(false);
       });
 
       it(`should have a numbers button with the 'active' class`, () => {
-        let numNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(3) a'));
+        let numNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(3) .stage-comparator-view-toggle'));
         expect(numNavDElem.nativeElement.classList.contains('active')).toBe(true);
       });
 

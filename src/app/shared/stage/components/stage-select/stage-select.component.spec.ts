@@ -557,7 +557,7 @@ describe('StageSelectComponent', () => {
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
-        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
+        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney .stage-select-root-section-header'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
         ///
         // console.groupEnd();
@@ -570,7 +570,7 @@ describe('StageSelectComponent', () => {
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
-        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
+        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney .stage-select-root-section-header'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
         ///
         // console.groupEnd();
@@ -583,7 +583,7 @@ describe('StageSelectComponent', () => {
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
-        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
+        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney .stage-select-root-section-header'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
         ///
         // console.groupEnd();
@@ -596,7 +596,7 @@ describe('StageSelectComponent', () => {
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
-        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
+        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney .stage-select-root-section-header'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
         ///
         // console.groupEnd();
@@ -609,7 +609,7 @@ describe('StageSelectComponent', () => {
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
-        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
+        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney .stage-select-root-section-header'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
         ///
         // console.groupEnd();
@@ -622,7 +622,7 @@ describe('StageSelectComponent', () => {
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
-        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
+        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney .stage-select-root-section-header'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
         ///
         // console.groupEnd();
@@ -635,7 +635,7 @@ describe('StageSelectComponent', () => {
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
-        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
+        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney .stage-select-root-section-header'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
         ///
         // console.groupEnd();
@@ -648,7 +648,7 @@ describe('StageSelectComponent', () => {
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
-        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
+        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney .stage-select-root-section-header'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
         ///
         // console.groupEnd();
@@ -661,7 +661,7 @@ describe('StageSelectComponent', () => {
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
-        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
+        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney .stage-select-root-section-header'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
         ///
         // console.groupEnd();
@@ -674,7 +674,7 @@ describe('StageSelectComponent', () => {
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
-        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
+        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney .stage-select-root-section-header'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
         ///
         // console.groupEnd();
@@ -687,7 +687,7 @@ describe('StageSelectComponent', () => {
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
-        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
+        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney .stage-select-root-section-header'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
         ///
         // console.groupEnd();
@@ -700,7 +700,7 @@ describe('StageSelectComponent', () => {
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
-        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney h3'));
+        const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-tourney .stage-select-root-section-header'));
         expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Tournament Legality');
         ///
         // console.groupEnd();
@@ -753,7 +753,7 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-series h3'));
+      const sectionHeaderDElem: DebugElement = selectDElem.query(By.css('form .by-series .stage-select-root-section-header'));
       expect(sectionHeaderDElem.nativeElement.textContent.trim()).toEqual('By Series');
     });
 
@@ -773,7 +773,7 @@ describe('StageSelectComponent', () => {
       selectHostComp.stages = [...inputStages];
       selectHostFixture.detectChanges();
 
-      const seriesDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-series .classification h4'));
+      const seriesDElems: DebugElement[] = selectDElem.queryAll(By.css('.by-series .classification .classification-header'));
 
       expect(seriesDElems.length).toEqual(sortedStages.length, `There should be ${sortedStages.length} series, but found ${seriesDElems.length}`);
       for (let i = 0; i < sortedStages.length; i++) {
@@ -829,7 +829,7 @@ describe('StageSelectComponent', () => {
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
-        const seriesHeaderDElems: DebugElement[] = selectDElem.queryAll(By.css('form .by-series > .card .classification h4'));
+        const seriesHeaderDElems: DebugElement[] = selectDElem.queryAll(By.css('form .by-series > .card .classification .classification-header'));
         const seriesIndex: number = seriesHeaderDElems.findIndex(elem => {
           return (elem.nativeElement.textContent.trim() === targetSeries);
         });
@@ -852,7 +852,7 @@ describe('StageSelectComponent', () => {
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
-        const seriesHeaderDElems: DebugElement[] = selectDElem.queryAll(By.css('form .by-series > .card .classification h4'));
+        const seriesHeaderDElems: DebugElement[] = selectDElem.queryAll(By.css('form .by-series > .card .classification .classification-header'));
         const seriesIndex: number = seriesHeaderDElems.findIndex(elem => {
           return (elem.nativeElement.textContent === targetSeries);
         });
@@ -905,7 +905,7 @@ describe('StageSelectComponent', () => {
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
-        const actualSeries: string[] = selectDElem.queryAll(By.css('.by-series .classification h4')).map(elem => elem.nativeElement.textContent);
+        const actualSeries: string[] = selectDElem.queryAll(By.css('.by-series .classification .classification-header')).map(elem => elem.nativeElement.textContent);
         
         expect(actualSeries).toContain('Miscellaneous');
       });
@@ -915,7 +915,7 @@ describe('StageSelectComponent', () => {
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
-        const actualSeries: string[] = selectDElem.queryAll(By.css('.by-series .classification h4')).map(elem => elem.nativeElement.textContent);
+        const actualSeries: string[] = selectDElem.queryAll(By.css('.by-series .classification .classification-header')).map(elem => elem.nativeElement.textContent);
 
         expect(actualSeries).toContain('Miscellaneous');
       });
@@ -925,7 +925,7 @@ describe('StageSelectComponent', () => {
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
 
-        const actualSeries: string[] = selectDElem.queryAll(By.css('.by-series .classification h4')).map(elem => elem.nativeElement.textContent);
+        const actualSeries: string[] = selectDElem.queryAll(By.css('.by-series .classification .classification-header')).map(elem => elem.nativeElement.textContent);
 
         expect(actualSeries.includes('Miscellaneous')).toBe(false);
       });

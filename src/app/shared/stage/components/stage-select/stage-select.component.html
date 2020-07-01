@@ -8,12 +8,12 @@
         <div *ngIf="rootSection.show" class="form-group {{rootSection.attribute}}">
           <div class="card">
             <div class="card-header">
-              <h3 class="btn btn-link" id="stage-select-{{rootSection.attribute}}-header" [class.collapsed]="!rootSection.expand" data-toggle="collapse"
+              <button class="h3 btn btn-link stage-select-root-section-header" id="stage-select-{{rootSection.attribute}}-header" [class.collapsed]="!rootSection.expand" data-toggle="collapse"
                 [attr.data-target]="'#stage-select-' + rootSection.attribute + '-collapse'"
                 [attr.aria-expanded]="rootSection.expand"
                 [attr.aria-controls]="'stage-select-' + rootSection.attribute + '-collapse'">
                 <span class="collapse-icon"></span> {{rootSection.title}}
-              </h3>
+              </button>
             </div>
             <div id="stage-select-{{rootSection.attribute}}-collapse" class="collapse" [class.show]="rootSection.expand"
               [attr.aria-labelledby]="'stage-select-' + rootSection.attribute + '-header'">
@@ -34,7 +34,7 @@
                   <ng-container *ngIf="childSection.show">
                     <div class="row classification {{childSection.attribute}}">
                       <div class="col-sm-12">
-                        <h4>{{childSection.title}}</h4>
+                        <h4 class="classification-header">{{childSection.title}}</h4>
                       </div>
                       <div class="form-group form-inline">
                         <ng-container *ngFor="let stage of classifiedStages[rootSection.id][childSection.id]">

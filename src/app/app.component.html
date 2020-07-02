@@ -1,5 +1,8 @@
 <!-- Navigation -->
 <nav class="navbar-desktop navbar navbar-dark">
+  <div class="container">
+    <a class="aria-skip-link" [href]="ariaSkipPath">Skip to main content</a>
+  </div>
   <div role="banner" class="container-fluid brand">
     <div class="brand-desktop container">
       <a class="navbar-brand" [routerLink]="'/stage-comparison'">Super Smash Bros. Ultimate Tools</a>
@@ -17,6 +20,9 @@
   </div>
 </nav>
 <nav class="navbar-mobile navbar navbar-dark justify-content-end">
+  <div class="container-fluid">
+    <a class="aria-skip-link" [href]="ariaSkipPath">Skip to main content</a>
+  </div>
   <div role="banner" class="brand container-fluid d-flex flex-row justify-content-between">
     <a class="navbar-brand" [routerLink]="'/stage-comparison'">SSBU Tools</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ssbu-header-nav"
@@ -37,6 +43,6 @@
 </nav>
 
 <!-- Page Content -->
-<section id="main" role="main">
+<section id="main" role="main" name="main">
   <router-outlet></router-outlet>
 </section>

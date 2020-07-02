@@ -90,10 +90,21 @@
   font-family: 'Roboto', sans-serif;
 }
 
-:focus {
+:focus,
+button:focus,
+.btn:focus {
   outline-style: solid;
-  outline-width: 4px;
-  outline-color: hsla(218, 100%, 50%, .8);
+  outline-width: 3px;
+}
+
+:hover:focus,
+button:hover:focus,
+.btn:hover:focus {
+  outline: 0;
+}
+
+:focus {
+  outline-color: hsl(218, 100%, 50%);
 }
 
 body {
@@ -178,6 +189,36 @@ a:visited {
   visibility: hidden;
 }
 
+.aria-skip-link:not(:focus) {
+  position: absolute;
+  left: -999px;
+  top: -999px;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.aria-skip-link {
+  margin-top: 1rem;
+  padding: 0;
+}
+
+a.aria-skip-link,
+.footer a {
+  color: hsl(218, 100%, 75%);
+}
+
+a.aria-skip-link:hover,
+.footer a:hover {
+  color: hsl(50, 100%, 50%);
+}
+
+a.aria-skip-link:visited,
+.footer a:visited {
+  color: hsl(277, 85%, 65%);
+}
+
 .navbar-mobile {
   border-bottom: .5rem solid hsl(0, 91%, 48%);
 }
@@ -203,7 +244,7 @@ a:visited {
 
 .navbar-dark :focus,
 .footer :focus {
-  outline-color: hsla(218, 100%, 75%, .9);
+  outline-color: hsl(50, 100%, 50%);
 }
 
 .nav-container {
@@ -233,6 +274,10 @@ a:visited {
 .navbar-dark .navbar-toggler:focus {
   outline-style: solid;
   outline-width: 4px;
+}
+
+.navbar-dark .navbar-toggler:hover:focus {
+  outline: 0;
 }
 
 .navbar-dark .navbar-toggler-icon {
@@ -291,7 +336,7 @@ a:visited {
 
 @media (min-width: 768px) {
   .brand {
-    height: 5rem;
+    min-height: 5rem;
   }
 
   .navbar-desktop {
@@ -440,9 +485,12 @@ a:visited {
 }
 
 .nav-pills .nav-link:focus {
-  outline-style: solid;
-  outline-width: 4px;
-  outline-color: hsla(218, 100%, 50%, .8);
+  outline-offset: 2px;
+  outline-color: hsl(196, 12%, 10%);
+}
+
+.nav-pills .nav-link.active:focus {
+  outline-offset: 6px;
 }
 
 /* Content - Buttons */
@@ -462,9 +510,9 @@ a:visited {
 
 .btn-primary:focus,
 .btn-secondary:focus {
-  outline-style: solid;
-  outline-width: 4px;
-  outline-color: hsla(218, 100%, 50%, .8);
+  box-shadow: none;
+  outline-offset: 2px;
+  outline-color: hsl(196, 12%, 10%);
 }
 
 .btn-primary {
@@ -473,6 +521,7 @@ a:visited {
 }
 
 .btn-primary:not(:disabled):not(.disabled):hover {
+  box-shadow: none;
   background-color: hsl(50, 100%, 50%);
   color: hsl(196, 12%, 10%);
 }
@@ -499,6 +548,7 @@ a:visited {
 }
 
 .btn-secondary:not(:disabled):not(.disabled):hover {
+  box-shadow: none;
   background-color: hsl(50, 100%, 50%);
   color: hsl(196, 12%, 10%);
 }
@@ -623,9 +673,8 @@ a:visited {
 }
 
 .card-header .btn-link:focus {
-  outline-style: solid;
-  outline-width: 4px;
-  outline-color: hsla(218, 100%, 50%, .9);
+  outline-offset: 2px;
+  outline-color: hsl(196, 12%, 10%);
 }
 
 .card-header .collapse-icon {
@@ -687,16 +736,4 @@ a:visited {
 
 .footer > .container {
   padding-left: 2rem;
-}
-
-.footer a {
-  color: hsl(218, 100%, 75%);
-}
-
-.footer a:hover {
-  color: hsl(50, 100%, 50%);
-}
-
-.footer a:visited {
-  color: hsl(277, 85%, 65%);
 }

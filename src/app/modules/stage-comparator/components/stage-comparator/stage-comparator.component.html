@@ -1,5 +1,18 @@
 <div class="container ssbu-module">
   <h1 class="page-title">Stage Comparison</h1>
+
+  <section>
+    <p>This tool compares the size of stages of your choice for tournament play. Use this to think about:</p>
+    
+    <ul>
+      <li>What stages generally favor your character or a potential opponent's character.</li>
+      <li>Which stages in a specific tourney favor your character or an opponent's character.</li>
+      <li>If a new DLC stage could be legal, by comparing it to common legal stages.</li>
+    </ul>
+    
+    <p>Select which stages you want to compare, press <strong>Update</strong> below to see the results. Use the <strong>Graph</strong> / <strong>Text</strong> / <strong>Number</strong> buttons to see different charts of the data.</p>
+  </section>
+
   <ssbu-stage-select [stages]="stageClassifications" [parentEvent$]="selectSubject$.asObservable()" (submitSelection)="getStats($event)"></ssbu-stage-select>
   <div class="card">
     <div class="card-header">

@@ -15,10 +15,41 @@ interface GraphDimensions {
 
 interface GraphDimensionsBinParams {
   value: number;
+  percent: number;
   bin: number;
 }
 
+interface GraphDimensionIds {
+  class: string;
+  property: string;
+  label: string;
+}
+
 const SCALE: number = 0.5;
+const MAX: number = 860;
+
+const DIMENSION_IDS: { [dimension: string]: GraphDimensionIds } = {
+  blastzoneWidth: {
+    class: 'blastzone-width',
+    property: 'blastzoneWidth',
+    label: 'Blastzone Width'
+  },
+  stageLength: {
+    class: 'stage-length',
+    property: 'stageLength',
+    label: 'Floor Length'
+  },
+  offStageDistance: {
+    class: 'off-stage-distance',
+    property: 'offStageDistance',
+    label: 'Off-Stage Distance'
+  },
+  ceilingHeight: {
+    class: 'ceiling-height',
+    property: 'ceilingHeight',
+    label: 'Ceiling Height'
+  }
+}
 
 @Component({
   selector: 'ssbu-stage-comparator-graph',
@@ -33,6 +64,8 @@ export class StageComparatorGraphComponent implements OnChanges, OnInit {
 
   dataPresent: boolean = false;
 
+  selectedIds: GraphDimensionIds = DIMENSION_IDS.blastzoneWidth;
+
   constructor() { }
 
   ngOnInit() {
@@ -41,6 +74,10 @@ export class StageComparatorGraphComponent implements OnChanges, OnInit {
 
   ngOnChanges() {
     this._updateData();
+  }
+
+  setDimension(dimension: string) {
+    this.selectedIds = DIMENSION_IDS[dimension];
   }
 
   _updateData() {
@@ -53,18 +90,22 @@ export class StageComparatorGraphComponent implements OnChanges, OnInit {
           abbr: stage.abbr,
           blastzoneWidth: {
             value: Math.round(stage.blastzoneWidth.value * SCALE),
+            percent: stage.blastzoneWidth.value * 100 / MAX,
             bin: stage.blastzoneWidth.bin
           },
           stageLength: {
             value: Math.round(stage.stageLength.value * SCALE),
+            percent: stage.stageLength.value * 100 / MAX,
             bin: stage.stageLength.bin
           },
           offStageDistance: {
             value: Math.round(stage.offStageDistance.value * SCALE),
+            percent: stage.offStageDistance.value * 100 / MAX,
             bin: stage.offStageDistance.bin
           },
           ceilingHeight: {
             value: Math.round(stage.ceilingHeight.value * SCALE),
+            percent: stage.ceilingHeight.value * 100 / MAX,
             bin: stage.ceilingHeight.bin
           },
         };

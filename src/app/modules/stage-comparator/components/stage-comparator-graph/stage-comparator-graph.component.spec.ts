@@ -10,6 +10,8 @@ import { BinnedStageDimensionsSet } from '../../../../shared/stage/models/binned
 
 import * as GRAPH from '../../../../shared/stage/models/mocks/stage-comparator-graph-component';
 
+const SCALE: number = 860;
+
 describe('StageComparatorGraphComponent', () => {
   let hostComp: HostComponent;
   let hostFixture: ComponentFixture<HostComponent>;
@@ -34,10 +36,6 @@ describe('StageComparatorGraphComponent', () => {
     graphComp = graphDElem.componentInstance;
   });
 
-  it('should create', () => {
-    expect(graphComp).toBeTruthy();
-  });
-
   describe('basic display', () => {
     it('should have a table row with a class for each stage prefixed by "graph_"', () => {
       ///
@@ -53,7 +51,7 @@ describe('StageComparatorGraphComponent', () => {
       // console.log(`graphComp.stageData.bins: ${graphComp.stageData.bins}`);
       // console.log(`graphComp.displayData.dimensions stages: ${graphComp.displayData.dimensions.length}`);
 
-      const actualStageDElems: DebugElement[] = graphDElem.queryAll(By.css('tbody tr:not(.stats)'));
+      const actualStageDElems: DebugElement[] = graphDElem.queryAll(By.css('.graph-rows .graph-row'));
       const actualClasses: string[] = actualStageDElems.map(dElem => dElem.nativeElement.className.split(' ').find(name => name.startsWith('graph_')));
 
       for (const expectedClass of expectedClasses) {
@@ -69,7 +67,7 @@ describe('StageComparatorGraphComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: {stage: string, value: string}[] = graphDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem =>
+      const actualValues: {stage: string, value: string}[] = graphDElem.queryAll(By.css('.graph-rows .graph-row')).map(dElem =>
         {
           return {
             stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('graph_')),
@@ -82,25 +80,7 @@ describe('StageComparatorGraphComponent', () => {
       }
     });
 
-    it('should display each stage\'s abbreviation', () => {
-      const inputSet: BinnedStageDimensionsSet = GRAPH.DISPLAY_ABBR.inputSet;
-      const expectedValues: {stage: string, value: string}[] = GRAPH.DISPLAY_ABBR.expectedValues;
-      hostComp.binnedStageDimensionsSet = inputSet;
-      hostFixture.detectChanges();
-
-      const actualValues: { stage: string, value: string }[] = graphDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
-        return {
-          stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('graph_')),
-          value: dElem.query(By.css('.abbr')).nativeElement.textContent.trim()
-        };
-      });
-
-      for (const stage in expectedValues) {
-        expect(actualValues).withContext(expectedValues[stage].stage).toContain(expectedValues[stage]);
-      }
-    });
-
-    it('should display each stage\'s blastzone width values as a halved pixel-width', () => {
+    it('should display each stage\'s blastzone width values as a proportional pixel-width', () => {
       ///
       // console.groupCollapsed('=== SPEC - display blastzone')
       const inputSet: BinnedStageDimensionsSet = GRAPH.DISPLAY_BLASTZONE_VALUE.inputSet;
@@ -108,10 +88,17 @@ describe('StageComparatorGraphComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: { stage: string, value: number }[] = graphDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
+      const selectDElem: DebugElement = graphDElem.query(By.css('.dimension-control'));
+      selectDElem.nativeElement.value = 'blastzoneWidth';
+      selectDElem.nativeElement.dispatchEvent(new Event('change'));
+      hostFixture.detectChanges();
+
+      const actualValues: { stage: string, value: number }[] = graphDElem.queryAll(By.css('.graph-rows .graph-row')).map(dElem => {
+        const barWidth: number = dElem.query(By.css('.bar')).nativeElement.getClientRects()[0].width;
+        const containerWidth: number = dElem.query(By.css('.bar-container')).nativeElement.getClientRects()[0].width;
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('graph_')),
-          value: Math.round(dElem.query(By.css('.blastzone')).nativeElement.getClientRects()[0].width)
+          value: Math.round(barWidth * (SCALE / containerWidth))
         };
       });
 
@@ -128,10 +115,15 @@ describe('StageComparatorGraphComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: { stage: string, value: string }[] = graphDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
+      const selectDElem: DebugElement = graphDElem.query(By.css('.dimension-control'));
+      selectDElem.nativeElement.value = 'blastzoneWidth';
+      selectDElem.nativeElement.dispatchEvent(new Event('change'));
+      hostFixture.detectChanges();
+
+      const actualValues: { stage: string, value: string }[] = graphDElem.queryAll(By.css('.graph-rows .graph-row')).map(dElem => {
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('graph_')),
-          value: dElem.query(By.css('.blastzone')).nativeElement.className.split(' ').find(name => name.startsWith('bin-'))
+          value: dElem.query(By.css('.bar')).nativeElement.className.split(' ').find(name => name.startsWith('bin-'))
         }
       });
 
@@ -140,16 +132,23 @@ describe('StageComparatorGraphComponent', () => {
       }
     });
 
-    it('should display each stage\'s stage length values as a halved pixel-width', () => {
+    it('should display each stage\'s stage length values as a proportional pixel-width', () => {
       const inputSet: BinnedStageDimensionsSet = GRAPH.DISPLAY_STAGELENGTH_VALUE.inputSet;
       const expectedValues: { stage: string, value: number }[] = GRAPH.DISPLAY_STAGELENGTH_VALUE.expectedValues;
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: { stage: string, value: number }[] = graphDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
+      const selectDElem: DebugElement = graphDElem.query(By.css('.dimension-control'));
+      selectDElem.nativeElement.value = 'stageLength';
+      selectDElem.nativeElement.dispatchEvent(new Event('change'));
+      hostFixture.detectChanges();
+
+      const actualValues: { stage: string, value: number }[] = graphDElem.queryAll(By.css('.graph-rows .graph-row')).map(dElem => {
+        const barWidth: number = dElem.query(By.css('.bar')).nativeElement.getClientRects()[0].width;
+        const containerWidth: number = dElem.query(By.css('.bar-container')).nativeElement.getClientRects()[0].width;
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('graph_')),
-          value: Math.round(dElem.query(By.css('.stagelength')).nativeElement.getClientRects()[0].width)
+          value: Math.round(barWidth * (SCALE / containerWidth))
         };
       });
 
@@ -164,10 +163,15 @@ describe('StageComparatorGraphComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: { stage: string, value: string }[] = graphDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
+      const selectDElem: DebugElement = graphDElem.query(By.css('.dimension-control'));
+      selectDElem.nativeElement.value = 'stageLength';
+      selectDElem.nativeElement.dispatchEvent(new Event('change'));
+      hostFixture.detectChanges();
+
+      const actualValues: { stage: string, value: string }[] = graphDElem.queryAll(By.css('.graph-rows .graph-row')).map(dElem => {
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('graph_')),
-          value: dElem.query(By.css('.stagelength')).nativeElement.className.split(' ').find(name => name.startsWith('bin-'))
+          value: dElem.query(By.css('.bar')).nativeElement.className.split(' ').find(name => name.startsWith('bin-'))
         }
       });
 
@@ -176,16 +180,23 @@ describe('StageComparatorGraphComponent', () => {
       }
     });
 
-    it('should display each stage\'s off-stage distance values as a halved pixel-width', () => {
+    it('should display each stage\'s off-stage distance values as a proportional pixel-width', () => {
       const inputSet: BinnedStageDimensionsSet = GRAPH.DISPLAY_OFFSTAGE_VALUE.inputSet;
       const expectedValues: { stage: string, value: number }[] = GRAPH.DISPLAY_OFFSTAGE_VALUE.expectedValues;
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: { stage: string, value: number }[] = graphDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
+      const selectDElem: DebugElement = graphDElem.query(By.css('.dimension-control'));
+      selectDElem.nativeElement.value = 'offStageDistance';
+      selectDElem.nativeElement.dispatchEvent(new Event('change'));
+      hostFixture.detectChanges();
+
+      const actualValues: { stage: string, value: number }[] = graphDElem.queryAll(By.css('.graph-rows .graph-row')).map(dElem => {
+        const barWidth: number = dElem.query(By.css('.bar')).nativeElement.getClientRects()[0].width;
+        const containerWidth: number = dElem.query(By.css('.bar-container')).nativeElement.getClientRects()[0].width;
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('graph_')),
-          value: Math.round(dElem.query(By.css('.offstage')).nativeElement.getClientRects()[0].width)
+          value: Math.round(barWidth * (SCALE / containerWidth))
         };
       });
 
@@ -200,10 +211,15 @@ describe('StageComparatorGraphComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: { stage: string, value: string }[] = graphDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
+      const selectDElem: DebugElement = graphDElem.query(By.css('.dimension-control'));
+      selectDElem.nativeElement.value = 'offStageDistance';
+      selectDElem.nativeElement.dispatchEvent(new Event('change'));
+      hostFixture.detectChanges();
+
+      const actualValues: { stage: string, value: string }[] = graphDElem.queryAll(By.css('.graph-rows .graph-row')).map(dElem => {
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('graph_')),
-          value: dElem.query(By.css('.offstage')).nativeElement.className.split(' ').find(name => name.startsWith('bin-'))
+          value: dElem.query(By.css('.bar')).nativeElement.className.split(' ').find(name => name.startsWith('bin-'))
         }
       });
 
@@ -212,16 +228,23 @@ describe('StageComparatorGraphComponent', () => {
       }
     });
 
-    it('should display each stage\'s ceiling height value as a halved pixel-width', () => {
+    it('should display each stage\'s ceiling height value as a proportional pixel-width', () => {
       const inputSet: BinnedStageDimensionsSet = GRAPH.DISPLAY_CEILING_VALUE.inputSet;
       const expectedValues: { stage: string, value: number }[] = GRAPH.DISPLAY_CEILING_VALUE.expectedValues;
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: { stage: string, value: number }[] = graphDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
+      const selectDElem: DebugElement = graphDElem.query(By.css('.dimension-control'));
+      selectDElem.nativeElement.value = 'ceilingHeight';
+      selectDElem.nativeElement.dispatchEvent(new Event('change'));
+      hostFixture.detectChanges();
+
+      const actualValues: { stage: string, value: number }[] = graphDElem.queryAll(By.css('.graph-rows .graph-row')).map(dElem => {
+        const barWidth: number = dElem.query(By.css('.bar')).nativeElement.getClientRects()[0].width;
+        const containerWidth: number = dElem.query(By.css('.bar-container')).nativeElement.getClientRects()[0].width;
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('graph_')),
-          value: Math.round(dElem.query(By.css('.ceiling')).nativeElement.getClientRects()[0].width)
+          value: Math.round(barWidth * (SCALE / containerWidth))
         };
       });
 
@@ -236,10 +259,15 @@ describe('StageComparatorGraphComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: { stage: string, value: string }[] = graphDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
+      const selectDElem: DebugElement = graphDElem.query(By.css('.dimension-control'));
+      selectDElem.nativeElement.value = 'ceilingHeight';
+      selectDElem.nativeElement.dispatchEvent(new Event('change'));
+      hostFixture.detectChanges();
+
+      const actualValues: { stage: string, value: string }[] = graphDElem.queryAll(By.css('.graph-rows .graph-row')).map(dElem => {
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('graph_')),
-          value: dElem.query(By.css('.ceiling')).nativeElement.className.split(' ').find(name => name.startsWith('bin-'))
+          value: dElem.query(By.css('.bar')).nativeElement.className.split(' ').find(name => name.startsWith('bin-'))
         }
       });
 
@@ -260,7 +288,7 @@ describe('StageComparatorGraphComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualClasses: string[] = graphDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => dElem.nativeElement.className.split(' ').find(name => name.startsWith('graph_')));
+      const actualClasses: string[] = graphDElem.queryAll(By.css('.graph-rows .graph-row')).map(dElem => dElem.nativeElement.className.split(' ').find(name => name.startsWith('graph_')));
 
       for (let i: number = 0; i < expectedClasses.length; i++) {
         expect(actualClasses[i]).withContext(`position ${i}`).toEqual(expectedClasses[i]);

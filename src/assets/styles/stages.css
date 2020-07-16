@@ -19,18 +19,19 @@ ssbu-stage-select form > .form-group {
 }
 
 /* Stages */
+
 .legend {
   margin-bottom: 1rem;
 }
 
 .legend .legend-bin,
 .legend label {
-  margin: 1rem 0 1rem 1rem;
+  margin: 1rem 1rem 1rem 0;
   vertical-align: middle;
 }
 
 .legend .legend-bin {
-  width: 1rem;
+  width: 1.3rem;
   height: 1rem;
 }
 
@@ -49,10 +50,6 @@ ssbu-stage-select form > .form-group {
 
 .table-responsive .td-graph {
   background-image: url('../media/img/bg-graph.png');
-  /*background-image: repeating-linear-gradient(to right,
-      hsla(0, 0%, 0%, 50%) 0px,
-      transparent 1px,
-      transparent 20px);*/
   background-position-x: 1rem;
   box-shadow: /*inset*/ 1rem 0 white, -.75rem 0 white;
 }
@@ -82,32 +79,6 @@ ssbu-stage-comparator-number-table .stats td {
   font-style: italic;
 }
 
-.table-responsive .td-graph .bar.bin-1,
-.legend .bin-1 {
-  background-color: hsl(188, 55%, 80%);
-}
-
-.table-responsive .td-graph .bar.bin-2,
-.legend .bin-2 {
-  background-color: hsl(188, 45%, 60%);
-}
-
-.table-responsive .td-graph .bar,
-.table-responsive .td-graph .bar.bin-3,
-.legend .bin-3 {
-  background-color: hsl(188, 65%, 40%);
-}
-
-.table-responsive .td-graph .bar.bin-4,
-.legend .bin-4 {
-  background-color: hsl(188, 55%, 25%);
-}
-
-.table-responsive .td-graph .bar.bin-5,
-.legend .bin-5 {
-  background-color: hsl(188, 55%, 0%);
-}
-
 .table-responsive .highlight {
   font-weight: bold;
   font-style: italic;
@@ -116,5 +87,120 @@ ssbu-stage-comparator-number-table .stats td {
 @media (min-width: 992px) {
   .table-responsive .abbr {
     display: table-cell;
+  }
+}
+
+/* Stages - Graph */
+
+.graph {
+  margin-bottom: 2rem;
+}
+
+.graph-header {
+  padding: 1rem;
+  color: white;
+  font-weight: 700;
+  background-color: hsl(218, 75%, 50%);
+}
+
+.graph-row .name-bg {
+  padding: 0;
+  border-left: 1px solid hsl(196,12%, 60%);
+  background-color: hsl(196, 12%, 80%);
+}
+
+.graph-row .name-container {
+  padding: .5rem 1rem;
+  line-height: 1;
+}
+
+.graph-row .bar-bg {
+  border-left: 1px solid hsl(196,12%, 60%);
+  background-image: url('../media/img/bg-graph-20.png');
+}
+
+.graph-row .bar-container {
+  max-width: 215px;
+  height: 3.5rem;
+  padding: .5rem 0 2rem 0;
+}
+
+.graph-row .bar {
+  float: left;
+  height: 1rem;
+}
+
+.graph-row .bar.bin-1,
+.legend .bin-1 {
+  border-style: none;
+  background-image: url('../media/img/bin-1.gif');
+}
+
+.graph-row .bar.bin-2,
+.legend .bin-2 {
+  background-image: url('../media/img/bin-2.gif');
+  border-style: none;
+}
+
+.graph-row .bar,
+.graph-row .bar.bin-3,
+.legend .bin-3 {
+  background-color: hsl(188, 55%, 30%);
+}
+
+.graph-row .bar.bin-4,
+.legend .bin-4 {
+  border-style: none;
+  background-image: url('../media/img/bin-4.gif');
+}
+
+.graph-row .bar.bin-5,
+.legend .bin-5 {
+  border-style: none;
+  background-image: url('../media/img/bin-5.gif');
+}
+
+@media (min-width: 576px) {
+  .graph-row .name-container,
+  .graph-row .bar-container {
+    width: 430px;
+    max-width: none;
+  }
+
+  .graph-row .bar-bg {
+    background-image: url('../media/img/bg-graph-20.png');
+  }
+}
+
+@media (min-width: 768px) {
+  .graph-row .name-container,
+  .graph-row .bar-container {
+    width: 645px;
+  }
+
+  .graph-row .bar-bg {
+    background-image: url('../media/img/bg-graph-30.png');
+  }
+}
+
+@media (min-width: 992px) {
+  .graph-row .name-container,
+  .graph-row .bar-container {
+    width: 860px;
+  }
+
+  .graph-row .bar-bg {
+    background-image: url('../media/img/bg-graph-40.png');
+  }
+}
+
+@media (min-width: 1200px) {
+  .graph-row .name-container,
+  .graph-row .bar-container {
+    width: 1075px;
+  }
+
+  .graph-row .bar-bg {
+    background-image: url('../media/img/bg-graph-50.png');
   }
 }

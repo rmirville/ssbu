@@ -1,61 +1,70 @@
-<section role="region" class="row" aria-label="Graph">
-  <div class="col-lg-12">
-    <div class="row legend">
-      <div class="col-6 col-sm-4 col-xl-2">
-        <div class="legend-bin bin-1 d-inline-block"></div>
-        <label>Smaller</label>
+<section role="region" class="graph" aria-label="Graph">
+  <div class="dimension-control-container">
+    <select class="custom-select dimension-control" #dimensionControl (change)="setDimension(dimensionControl.value)">
+      <option value="blastzoneWidth" selected>
+        Blastzone Width
+      </option>
+      <option value="stageLength">
+        Floor Length
+      </option>
+      <option value="offStageDistance">
+        Off-Stage Distance
+      </option>
+      <option value="ceilingHeight">
+        Ceiling Height
+      </option>
+    </select>
+  </div>
+  <div class="row legend">
+    <div class="col-6 col-sm-4 col-xl-2">
+      <label><strong>Size (within selected group):</strong></label>
+    </div>
+    <div class="col-6 col-sm-4 col-xl-2">
+      <div class="legend-bin bin-5 d-inline-block"></div>
+      <label>Larger</label>
+    </div>
+    <div class="col-6 col-sm-4 col-xl-2">
+      <div class="legend-bin bin-4 d-inline-block"></div>
+      <label>Large</label>
+    </div>
+    <div class="col-6 col-sm-4 col-xl-2">
+      <div class="legend-bin bin-3 d-inline-block"></div>
+      <label>Medium</label>
+    </div>
+    <div class="col-6 col-sm-4 col-xl-2">
+      <div class="legend-bin bin-2 d-inline-block"></div>
+      <label>Small</label>
+    </div>
+    <div class="col-6 col-sm-4 col-xl-2">
+      <div class="legend-bin bin-1 d-inline-block"></div>
+      <label>Smaller</label>
+    </div>
+  </div>
+  <div class="graph-header">
+    {{selectedIds.label}}
+  </div>
+  <div class="row graph-rows">
+    <ng-container *ngFor="let stage of displayData">
+    <div class="col-12 graph-row graph_{{stage.gameName}}">
+      <div class="row name-row">
+        <div class="col-12">
+          <div class="name-bg">
+            <div class="name-container">
+              <span class="name">{{stage.name}}</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-6 col-sm-4 col-xl-2">
-        <div class="legend-bin bin-2 d-inline-block"></div>
-        <label>Small</label>
-      </div>
-      <div class="col-6 col-sm-4 col-xl-2">
-        <div class="legend-bin bin-3 d-inline-block"></div>
-        <label>Medium</label>
-      </div>
-      <div class="col-6 col-sm-4 col-xl-2">
-        <div class="legend-bin bin-4 d-inline-block"></div>
-        <label>Large</label>
-      </div>
-      <div class="col-6 col-sm-4 col-xl-2">
-        <div class="legend-bin bin-5 d-inline-block"></div>
-        <label>Larger</label>
+      <div class="row bar-row">
+        <div class="col-12">
+          <div class="bar-bg">
+            <div class="bar-container">
+              <div class="bar bin-{{stage[selectedIds.property].bin}}" [ngStyle]="{'width': stage[selectedIds.property].percent + '%'}"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="table-responsive" tabindex="0">
-      <table class="table table-borderless table-hover">
-        <thead class="thead-dark">
-          <tr>
-            <th class="th-sticky">Stage</th>
-            <th>Blastzone Width</th>
-            <th>Floor Length</th>
-            <th class="abbr">&nbsp;</th>
-            <th>Off-Stage Distance</th>
-            <th>Ceiling Height</th>
-          </tr>
-        </thead>
-        <tbody>
-          <ng-container *ngFor="let stage of displayData">
-            <tr class="graph_{{stage.gameName}}">
-              <th scope="row" class="th-sticky name">{{stage.name}}</th>
-              <td class="td-graph">
-                <div class="bar blastzone bin-{{stage.blastzoneWidth.bin}}" [ngStyle]="{'width.px': stage.blastzoneWidth.value}"></div>
-              </td>
-              <td class="td-graph">
-                <div class="bar stagelength bin-{{stage.stageLength.bin}}" [ngStyle]="{'width.px': stage.stageLength.value}"></div>
-              </td>
-              <td class="abbr">{{stage.abbr}}</td>
-              <td class="td-graph">
-                <div class="bar offstage bin-{{stage.offStageDistance.bin}}" [ngStyle]="{'width.px': stage.offStageDistance.value}"></div>
-              </td>
-              <td class="td-graph">
-                <div class="bar ceiling bin-{{stage.ceilingHeight.bin}}" [ngStyle]="{'width.px': stage.ceilingHeight.value}"></div>
-              </td>
-            </tr>
-          </ng-container>
-        </tbody>
-        <caption></caption>
-      </table>
-    </div>
+    </ng-container>
   </div>
 </section>

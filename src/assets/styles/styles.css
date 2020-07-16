@@ -568,6 +568,15 @@ a.aria-skip-link:visited,
   box-shadow: none;
 }
 
+/* Content - Forms */
+.custom-select:focus {
+  box-shadow: none;
+  outline-width: 3px;
+  outline-offset: 2px;
+  outline-style: solid;
+  outline-color: hsl(196, 12%, 10%);
+}
+
 /* Content - Tables */
 .table th {
   padding: 1rem;

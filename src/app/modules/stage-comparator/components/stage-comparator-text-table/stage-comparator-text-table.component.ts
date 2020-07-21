@@ -51,6 +51,7 @@ interface TextTableValues {
 export class StageComparatorTextTableComponent implements OnChanges, OnInit {
 
   @Input() stageData: BinnedStageDimensionsSet;
+  @Input() dimension: string;
 
   displayData: TextTableDimensionsSet = {
     dimensions: null,

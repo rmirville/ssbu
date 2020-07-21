@@ -88,9 +88,7 @@ describe('StageComparatorGraphComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const selectDElem: DebugElement = graphDElem.query(By.css('.dimension-control'));
-      selectDElem.nativeElement.value = 'blastzoneWidth';
-      selectDElem.nativeElement.dispatchEvent(new Event('change'));
+      hostComp.selectedDimension = 'blastzoneWidth';
       hostFixture.detectChanges();
 
       const actualValues: { stage: string, value: number }[] = graphDElem.queryAll(By.css('.graph-rows .graph-row')).map(dElem => {
@@ -115,9 +113,7 @@ describe('StageComparatorGraphComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const selectDElem: DebugElement = graphDElem.query(By.css('.dimension-control'));
-      selectDElem.nativeElement.value = 'blastzoneWidth';
-      selectDElem.nativeElement.dispatchEvent(new Event('change'));
+      hostComp.selectedDimension = 'blastzoneWidth';
       hostFixture.detectChanges();
 
       const actualValues: { stage: string, value: string }[] = graphDElem.queryAll(By.css('.graph-rows .graph-row')).map(dElem => {
@@ -138,9 +134,7 @@ describe('StageComparatorGraphComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const selectDElem: DebugElement = graphDElem.query(By.css('.dimension-control'));
-      selectDElem.nativeElement.value = 'stageLength';
-      selectDElem.nativeElement.dispatchEvent(new Event('change'));
+      hostComp.selectedDimension = 'stageLength';
       hostFixture.detectChanges();
 
       const actualValues: { stage: string, value: number }[] = graphDElem.queryAll(By.css('.graph-rows .graph-row')).map(dElem => {
@@ -163,9 +157,7 @@ describe('StageComparatorGraphComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const selectDElem: DebugElement = graphDElem.query(By.css('.dimension-control'));
-      selectDElem.nativeElement.value = 'stageLength';
-      selectDElem.nativeElement.dispatchEvent(new Event('change'));
+      hostComp.selectedDimension = 'stageLength';
       hostFixture.detectChanges();
 
       const actualValues: { stage: string, value: string }[] = graphDElem.queryAll(By.css('.graph-rows .graph-row')).map(dElem => {
@@ -186,9 +178,7 @@ describe('StageComparatorGraphComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const selectDElem: DebugElement = graphDElem.query(By.css('.dimension-control'));
-      selectDElem.nativeElement.value = 'offStageDistance';
-      selectDElem.nativeElement.dispatchEvent(new Event('change'));
+      hostComp.selectedDimension = 'offStageDistance';
       hostFixture.detectChanges();
 
       const actualValues: { stage: string, value: number }[] = graphDElem.queryAll(By.css('.graph-rows .graph-row')).map(dElem => {
@@ -211,9 +201,7 @@ describe('StageComparatorGraphComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const selectDElem: DebugElement = graphDElem.query(By.css('.dimension-control'));
-      selectDElem.nativeElement.value = 'offStageDistance';
-      selectDElem.nativeElement.dispatchEvent(new Event('change'));
+      hostComp.selectedDimension = 'offStageDistance';
       hostFixture.detectChanges();
 
       const actualValues: { stage: string, value: string }[] = graphDElem.queryAll(By.css('.graph-rows .graph-row')).map(dElem => {
@@ -234,9 +222,7 @@ describe('StageComparatorGraphComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const selectDElem: DebugElement = graphDElem.query(By.css('.dimension-control'));
-      selectDElem.nativeElement.value = 'ceilingHeight';
-      selectDElem.nativeElement.dispatchEvent(new Event('change'));
+      hostComp.selectedDimension = 'ceilingHeight';
       hostFixture.detectChanges();
 
       const actualValues: { stage: string, value: number }[] = graphDElem.queryAll(By.css('.graph-rows .graph-row')).map(dElem => {
@@ -259,9 +245,7 @@ describe('StageComparatorGraphComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const selectDElem: DebugElement = graphDElem.query(By.css('.dimension-control'));
-      selectDElem.nativeElement.value = 'ceilingHeight';
-      selectDElem.nativeElement.dispatchEvent(new Event('change'));
+      hostComp.selectedDimension = 'ceilingHeight';
       hostFixture.detectChanges();
 
       const actualValues: { stage: string, value: string }[] = graphDElem.queryAll(By.css('.graph-rows .graph-row')).map(dElem => {

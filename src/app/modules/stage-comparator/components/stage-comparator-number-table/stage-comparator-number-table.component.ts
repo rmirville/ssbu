@@ -38,6 +38,7 @@ interface NumberTableDimensionsSet {
 export class StageComparatorNumberTableComponent implements OnChanges, OnInit {
 
   @Input() stageData: BinnedStageDimensionsSet;
+  @Input() dimension: string;
 
   displayData: NumberTableDimensionsSet = {
     dimensions: null,

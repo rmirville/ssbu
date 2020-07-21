@@ -19,25 +19,45 @@
       <h2>Stage Dimensions</h2>
     </div>
     <div class="card-body">
-      <ul class="row nav nav-pills">
-        <li class="nav-item col-12 col-sm-4">
-          <button class="nav-link h-100 align-middle stage-comparator-view-toggle" [class.active]="view == 'graph'" (click)="setView('graph')">Graph</button>
-        </li>
-        <li class="nav-item col-12 col-sm-4">
-          <button class="nav-link h-100 align-middle stage-comparator-view-toggle" [class.active]="view == 'text'" (click)="setView('text')">Text</button>
-        </li>
-        <li class="nav-item col-12 col-sm-4">
-          <button class="nav-link h-100 align-middle stage-comparator-view-toggle" [class.active]="view == 'number'" (click)="setView('number')">Numbers</button>
-        </li>
-      </ul>
+      <div class="form-group">
+        <div class="dimension-control-container">
+          <label for="dimensionControl"><h3>Dimension</h3></label>
+          <select id="dimensionControl" class="custom-select dimension-control" #dimensionControl (change)="setDimension(dimensionControl.value)">
+            <option value="blastzoneWidth" selected>
+              Blastzone Width
+            </option>
+            <option value="stageLength">
+              Floor Length
+            </option>
+            <option value="offStageDistance">
+              Off-Stage Distance
+            </option>
+            <option value="ceilingHeight">
+              Ceiling Height
+            </option>
+          </select>
+        </div>
+        <label><h3>Format</h3></label>
+        <ul class="row nav nav-pills">
+          <li class="nav-item col-12 col-sm-4">
+            <button class="nav-link h-100 align-middle stage-comparator-view-toggle" [class.active]="view == 'graph'" (click)="setView('graph')">Graph</button>
+          </li>
+          <li class="nav-item col-12 col-sm-4">
+            <button class="nav-link h-100 align-middle stage-comparator-view-toggle" [class.active]="view == 'text'" (click)="setView('text')">Text</button>
+          </li>
+          <li class="nav-item col-12 col-sm-4">
+            <button class="nav-link h-100 align-middle stage-comparator-view-toggle" [class.active]="view == 'number'" (click)="setView('number')">Numbers</button>
+          </li>
+        </ul>
+      </div>
       <ng-container *ngIf="view == 'graph'">
-        <ssbu-stage-comparator-graph [stageData]="binnedStageDimensionsSet"></ssbu-stage-comparator-graph>
+        <ssbu-stage-comparator-graph [stageData]="binnedStageDimensionsSet" [dimension]="selectedDimension"></ssbu-stage-comparator-graph>
       </ng-container>
       <ng-container *ngIf="view == 'text'">
-        <ssbu-stage-comparator-text-table [stageData]="binnedStageDimensionsSet"></ssbu-stage-comparator-text-table>
+        <ssbu-stage-comparator-text-table [stageData]="binnedStageDimensionsSet" [dimension]="selectedDimension"></ssbu-stage-comparator-text-table>
       </ng-container>
       <ng-container *ngIf="view == 'number'">
-        <ssbu-stage-comparator-number-table [stageData]="binnedStageDimensionsSet"></ssbu-stage-comparator-number-table>
+        <ssbu-stage-comparator-number-table [stageData]="binnedStageDimensionsSet" [dimension]="selectedDimension"></ssbu-stage-comparator-number-table>
       </ng-container>
     </div>
   </div>

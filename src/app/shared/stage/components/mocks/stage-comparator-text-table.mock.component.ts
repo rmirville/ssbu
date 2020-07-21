@@ -8,4 +8,5 @@ import { BinnedStageDimensionsSet } from '../../models/binned-stage-dimensions-s
 })
 export class StageComparatorTextTableMockComponent {
   @Input() stageData: BinnedStageDimensionsSet;
+  @Input() dimension: string = 'blastzoneWidth';
 }

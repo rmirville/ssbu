@@ -59,14 +59,17 @@ const DIMENSION_IDS: { [dimension: string]: GraphDimensionIds } = {
 export class StageComparatorGraphComponent implements OnChanges, OnInit {
 
   @Input() stageData: BinnedStageDimensionsSet;
+  @Input() dimension: string;
 
   displayData: GraphDimensions[] = [];
 
   dataPresent: boolean = false;
 
-  selectedIds: GraphDimensionIds = DIMENSION_IDS.blastzoneWidth;
+  ids: GraphDimensionIds = DIMENSION_IDS.blastzoneWidth;
 
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit() {
     this._updateData();
@@ -76,13 +79,15 @@ export class StageComparatorGraphComponent implements OnChanges, OnInit {
     this._updateData();
   }
 
-  setDimension(dimension: string) {
-    this.selectedIds = DIMENSION_IDS[dimension];
-  }
-
   _updateData() {
-    if (this.stageData !== undefined) {
+    const dimensions: string[] = ['blastzoneWidth', 'stageLength', 'offStageDistance', 'ceilingHeight'];
+    if (
+      (this.stageData !== undefined)
+      && (this.dimension !== undefined)
+      && ( dimensions.includes(this.dimension) )
+    ) {
       this.dataPresent = true;
+      this.ids = DIMENSION_IDS[this.dimension];
       this.displayData = this.stageData.dimensions.sort(BinnedStageDimensions.sortBlastzoneDesc).map(stage => {
         return {
           name: stage.name,
@@ -113,8 +118,8 @@ export class StageComparatorGraphComponent implements OnChanges, OnInit {
     }
     else {
       this.dataPresent = false;
+      this.dimension = 'blastzoneWidth';
     }
-
   }
 
 }

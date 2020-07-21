@@ -8,6 +8,7 @@ import { BinnedStageDimensionsSet } from '../../models/binned-stage-dimensions-s
 })
 export class StageComparatorNumberTableMockComponent implements OnChanges {
   @Input() stageData: BinnedStageDimensionsSet;
+  @Input() dimension: string = 'blastzoneWidth';
 
   ngOnChanges(changes: SimpleChanges) {
     /**/

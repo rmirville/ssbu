@@ -8,11 +8,13 @@ import { BinnedStageDimensionsSet } from '../../models/binned-stage-dimensions-s
   template:
     `<ssbu-stage-comparator-graph
       [stageData]="binnedStageDimensionsSet"
+      [dimension]="selectedDimension"
     ></ssbu-stage-comparator-graph>`
 })
 export class StageComparatorGraphHostMockComponent implements OnInit, OnChanges {
   binnedStageDimensionsSet: BinnedStageDimensionsSet;
   selectSubject$: Subject<string> = new Subject<string>();
+  selectedDimension: string = 'blastzoneWidth';
 
   constructor() {
   }

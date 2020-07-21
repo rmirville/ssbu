@@ -1,20 +1,4 @@
 <section role="region" class="graph" aria-label="Graph">
-  <div class="dimension-control-container">
-    <select class="custom-select dimension-control" #dimensionControl (change)="setDimension(dimensionControl.value)">
-      <option value="blastzoneWidth" selected>
-        Blastzone Width
-      </option>
-      <option value="stageLength">
-        Floor Length
-      </option>
-      <option value="offStageDistance">
-        Off-Stage Distance
-      </option>
-      <option value="ceilingHeight">
-        Ceiling Height
-      </option>
-    </select>
-  </div>
   <div class="row legend">
     <div class="col-6 col-sm-4 col-xl-2">
       <label><strong>Size (within selected group):</strong></label>
@@ -41,7 +25,7 @@
     </div>
   </div>
   <div class="graph-header">
-    {{selectedIds.label}}
+    {{ids.label}}
   </div>
   <div class="row graph-rows">
     <ng-container *ngFor="let stage of displayData">
@@ -59,7 +43,7 @@
         <div class="col-12">
           <div class="bar-bg">
             <div class="bar-container">
-              <div class="bar bin-{{stage[selectedIds.property].bin}}" [ngStyle]="{'width': stage[selectedIds.property].percent + '%'}"></div>
+              <div class="bar bin-{{stage[ids.property].bin}}" [ngStyle]="{'width': stage[ids.property].percent + '%'}"></div>
             </div>
           </div>
         </div>

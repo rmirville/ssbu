@@ -35,21 +35,25 @@ describe('StageComparatorComponent', () => {
   let mocks: {
     select: {
       comp: StageSelectMockComponent,
+      tag: string,
       dElem: DebugElement,
       fixture: ComponentFixture<StageSelectMockComponent>
     },
     graph: {
       comp: StageComparatorGraphMockComponent,
+      tag: string,
       dElem: DebugElement,
       fixture: ComponentFixture<StageComparatorGraphMockComponent>
     },
     text: {
       comp: StageComparatorTextTableMockComponent,
+      tag: string,
       dElem: DebugElement,
       fixture: ComponentFixture<StageComparatorTextTableMockComponent>
     },
     number: {
       comp: StageComparatorNumberTableMockComponent,
+      tag: string,
       dElem: DebugElement,
       fixture: ComponentFixture<StageComparatorNumberTableMockComponent>
     }
@@ -108,21 +112,25 @@ describe('StageComparatorComponent', () => {
     mocks = {
       select: {
         comp: null,
+        tag: 'ssbu-stage-select',
         dElem: null,
         fixture: TestBed.createComponent(StageSelectMockComponent)
       },
       graph: {
         comp: null,
+        tag: 'ssbu-stage-comparator-graph',
         dElem: null,
         fixture: TestBed.createComponent(StageComparatorGraphMockComponent)
       },
       text: {
         comp: null,
+        tag: 'ssbu-stage-comparator-text-table',
         dElem: null,
         fixture: TestBed.createComponent(StageComparatorTextTableMockComponent)
       },
       number: {
         comp: null,
+        tag: 'ssbu-stage-comparator-number-table',
         dElem: null,
         fixture: TestBed.createComponent(StageComparatorNumberTableMockComponent)
       }
@@ -741,7 +749,7 @@ describe('StageComparatorComponent', () => {
         expect(mocks.number.dElem).toBeNull();
       });
 
-      it(`should have a graph button with the 'active' class`, () => {
+      /*it(`should have a graph button with the 'active' class`, () => {
         let graphNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(1) .stage-comparator-view-toggle'));
         expect(graphNavDElem.nativeElement.classList.contains('active')).toBe(true);
       });
@@ -754,7 +762,7 @@ describe('StageComparatorComponent', () => {
       it(`should have a numbers button without the 'active' class`, () => {
         let numNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(3) .stage-comparator-view-toggle'));
         expect(numNavDElem.nativeElement.classList.contains('active')).toBe(false);
-      });
+      });*/
 
     });
 
@@ -783,7 +791,7 @@ describe('StageComparatorComponent', () => {
         expect(mocks.number.dElem).toBeNull();
       });
 
-      it(`should have a graph button with the 'active' class`, () => {
+      /*it(`should have a graph button with the 'active' class`, () => {
         let graphNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(1) .stage-comparator-view-toggle'));
         expect(graphNavDElem.nativeElement.classList.contains('active')).toBe(true);
       });
@@ -796,7 +804,7 @@ describe('StageComparatorComponent', () => {
       it(`should have a numbers button without the 'active' class`, () => {
         let numNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(3) .stage-comparator-view-toggle'));
         expect(numNavDElem.nativeElement.classList.contains('active')).toBe(false);
-      });
+      });*/
 
     });
 
@@ -824,7 +832,7 @@ describe('StageComparatorComponent', () => {
         expect(mocks.number.dElem).toBeNull();
       });
 
-      it(`should have a graph button without the 'active' class`, () => {
+      /*it(`should have a graph button without the 'active' class`, () => {
         let graphNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(1) .stage-comparator-view-toggle'));
         expect(graphNavDElem.nativeElement.classList.contains('active')).toBe(false);
       });
@@ -837,7 +845,7 @@ describe('StageComparatorComponent', () => {
       it(`should have a numbers button without the 'active' class`, () => {
         let numNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(3) .stage-comparator-view-toggle'));
         expect(numNavDElem.nativeElement.classList.contains('active')).toBe(false);
-      });
+      });*/
 
     });
 
@@ -865,7 +873,7 @@ describe('StageComparatorComponent', () => {
         expect(actualContent).toEqual(expectedContent);
       });
 
-      it(`should have a graph button without the 'active' class`, () => {
+      /*it(`should have a graph button without the 'active' class`, () => {
         let graphNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(1) .stage-comparator-view-toggle'));
         expect(graphNavDElem.nativeElement.classList.contains('active')).toBe(false);
       });
@@ -878,6 +886,86 @@ describe('StageComparatorComponent', () => {
       it(`should have a numbers button with the 'active' class`, () => {
         let numNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(3) .stage-comparator-view-toggle'));
         expect(numNavDElem.nativeElement.classList.contains('active')).toBe(true);
+      });*/
+
+    });
+
+
+    describe('dimension selector', () => {
+
+      it('should exist', () => {
+        const dimControlDElem: DebugElement = dElem.query(By.css('.dimension-control'));
+        expect(dimControlDElem.nativeElement).toBeDefined();
+      });
+
+      it('should be set to blastzone width by default', () => {
+        const dimControlDElem: DebugElement = dElem.query(By.css('.dimension-control'));
+        expect(dimControlDElem.nativeElement.value).toEqual('blastzoneWidth');
+      });
+
+      it('should set the dimension property of the current view to the selected value', () => {
+        ///
+        console.groupCollapsed('=== SPEC - dimension selector - set child properties ===');
+        const dimensions: string[] = ['stageLength', 'offStageDistance', 'ceilingHeight', 'blastzoneWidth'];
+        const views: string[] = ['graph', 'text', 'number'];
+        const dimControlDElem: DebugElement = dElem.query(By.css('.dimension-control'));
+
+        comparator.view = 'graph';
+        fixture.detectChanges();
+        
+        dimControlDElem.nativeElement.value = 'blastzoneWidth';
+        dimControlDElem.nativeElement.dispatchEvent(new Event('change'));
+        fixture.detectChanges();
+        
+        for (const view of views) {
+          comparator.view = view;
+          fixture.detectChanges();
+          
+          for (const dim of dimensions) {
+            const expectedDimension: string = dim;
+            dimControlDElem.nativeElement.value = dim;
+            dimControlDElem.nativeElement.dispatchEvent(new Event('change'));
+            fixture.detectChanges();
+
+            mocks[view].comp = dElem.query(By.css(mocks[view].tag)).componentInstance;
+            expect(mocks[view].comp.dimension).withContext(`view - ${view}, dimension - ${dim}`).toEqual(expectedDimension);
+          }
+        }
+
+        ///
+        console.groupEnd();
+      });
+
+      it('should carry the selected value to the dimension property of the child views it switches to', () => {
+        ///
+        console.groupCollapsed('=== SPEC - dimension selector - carry between child properties ===');
+        const dimensions: string[] = ['stageLength', 'offStageDistance', 'ceilingHeight', 'blastzoneWidth'];
+        const views: string[] = ['text', 'number', 'graph'];
+        const dimControlDElem: DebugElement = dElem.query(By.css('.dimension-control'));
+        
+        comparator.view = 'graph';
+        fixture.detectChanges();
+        
+        dimControlDElem.nativeElement.value = 'blastzoneWidth';
+        dimControlDElem.nativeElement.dispatchEvent(new Event('change'));
+        fixture.detectChanges();
+
+        for (const dim of dimensions) {
+          const expectedDimension: string = dim;
+          dimControlDElem.nativeElement.value = dim;
+          dimControlDElem.nativeElement.dispatchEvent(new Event('change'));
+          fixture.detectChanges();
+
+          for (const view of views) {
+            comparator.view = view;
+            fixture.detectChanges();
+
+            mocks[view].comp = dElem.query(By.css(mocks[view].tag)).componentInstance;
+            expect(mocks[view].comp.dimension).withContext(`dimension - ${dim}, view - ${view}`).toEqual(expectedDimension);
+          }
+        }
+        ///
+        console.groupEnd();
       });
 
     });

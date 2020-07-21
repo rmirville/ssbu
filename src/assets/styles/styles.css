@@ -428,7 +428,6 @@ a.aria-skip-link:visited,
 
 /* Content - Navs */
 .row.nav-pills {
-  margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
@@ -569,12 +568,20 @@ a.aria-skip-link:visited,
 }
 
 /* Content - Forms */
+.custom-select {
+  margin-bottom: 1rem;
+}
+
 .custom-select:focus {
   box-shadow: none;
   outline-width: 3px;
   outline-offset: 2px;
   outline-style: solid;
   outline-color: hsl(196, 12%, 10%);
+}
+
+label h3 {
+  margin-bottom: 0;
 }
 
 /* Content - Tables */

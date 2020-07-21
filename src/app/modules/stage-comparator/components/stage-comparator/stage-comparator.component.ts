@@ -29,6 +29,7 @@ export class StageComparatorComponent implements OnInit {
   stageDimensionsSet: StageDimensionsSet;
   binnedStageDimensionsSet: BinnedStageDimensionsSet;
   view: string;
+  selectedDimension: string;
 
   constructor(
     private sds: StageDimensionsService,
@@ -55,6 +56,18 @@ export class StageComparatorComponent implements OnInit {
     this.view = 'graph';
     ///
     // console.groupEnd();
+  }
+
+  setDimension(dimension: string) {
+    const dimensions: string[] = ['blastzoneWidth', 'stageLength', 'offStageDistance', 'ceilingHeight'];
+    if (typeof dimension !== 'string') {
+      throw new TypeError('dimension should be of type string');
+    }
+    if ( (dimension !== undefined)
+        && ( dimensions.includes(dimension) )
+    ) {
+      this.selectedDimension = dimension;
+    }
   }
 
   setView(view: string) {

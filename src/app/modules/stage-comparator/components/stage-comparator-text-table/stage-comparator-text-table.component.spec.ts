@@ -54,7 +54,7 @@ describe('StageComparatorTextTableComponent', () => {
       // console.log(`textComp.stageData.bins: ${textComp.stageData.bins}`);
       // console.log(`textComp.displayData.dimensions stages: ${textComp.displayData.dimensions.length}`);
 
-      const actualStageDElems: DebugElement[] = textDElem.queryAll(By.css('tbody tr:not(.stats)'));
+      const actualStageDElems: DebugElement[] = textDElem.queryAll(By.css('.ssbu-table .entry'));
       const actualClasses: string[] = actualStageDElems.map(dElem => dElem.nativeElement.className.split(' ').find(name => name.startsWith('texttable_')));
 
       for (const expectedClass of expectedClasses) {
@@ -70,7 +70,7 @@ describe('StageComparatorTextTableComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: { stage: string, value: string }[] = textDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
+      const actualValues: { stage: string, value: string }[] = textDElem.queryAll(By.css('.ssbu-table .entry')).map(dElem => {
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('texttable_')),
           value: dElem.query(By.css('.name')).nativeElement.textContent.trim()
@@ -88,10 +88,13 @@ describe('StageComparatorTextTableComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: { stage: string, value: string }[] = textDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
+      hostComp.selectedDimension = 'blastzoneWidth';
+      hostFixture.detectChanges();
+
+      const actualValues: { stage: string, value: string }[] = textDElem.queryAll(By.css('.ssbu-table .entry')).map(dElem => {
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('texttable_')),
-          value: dElem.query(By.css('.blastzone')).nativeElement.textContent.trim()
+          value: dElem.query(By.css('.value')).nativeElement.textContent.trim()
         };
       });
 
@@ -106,10 +109,13 @@ describe('StageComparatorTextTableComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: { stage: string, value: string }[] = textDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
+      hostComp.selectedDimension = 'stageLength';
+      hostFixture.detectChanges();
+
+      const actualValues: { stage: string, value: string }[] = textDElem.queryAll(By.css('.ssbu-table .entry')).map(dElem => {
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('texttable_')),
-          value: dElem.query(By.css('.stagelength')).nativeElement.textContent.trim()
+          value: dElem.query(By.css('.value')).nativeElement.textContent.trim()
         };
       });
 
@@ -124,10 +130,13 @@ describe('StageComparatorTextTableComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: { stage: string, value: string }[] = textDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
+      hostComp.selectedDimension = 'offStageDistance';
+      hostFixture.detectChanges();
+
+      const actualValues: { stage: string, value: string }[] = textDElem.queryAll(By.css('.ssbu-table .entry')).map(dElem => {
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('texttable_')),
-          value: dElem.query(By.css('.offstage')).nativeElement.textContent.trim()
+          value: dElem.query(By.css('.value')).nativeElement.textContent.trim()
         };
       });
 
@@ -142,10 +151,13 @@ describe('StageComparatorTextTableComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: { stage: string, value: string }[] = textDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
+      hostComp.selectedDimension = 'ceilingHeight';
+      hostFixture.detectChanges();
+
+      const actualValues: { stage: string, value: string }[] = textDElem.queryAll(By.css('.ssbu-table .entry')).map(dElem => {
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('texttable_')),
-          value: dElem.query(By.css('.ceiling')).nativeElement.textContent.trim()
+          value: dElem.query(By.css('.value')).nativeElement.textContent.trim()
         };
       });
 
@@ -154,15 +166,19 @@ describe('StageComparatorTextTableComponent', () => {
       }
     });
 
+    // TODO: Separate the tests for these
     it('should display the dimension ranges as integers', () => {
       ///
       // console.groupCollapsed('=== SPEC - display ranges');
-      function testRanges(dimension: string, attribute: string) {
+      function testRanges(dimension: string) {
         ///
         // console.group('SPEC - testRanges()');
-        const actualMin: number = textDElem.query(By.css(`tbody .stats .${attribute} .min`)).nativeElement.textContent.trim() * 1;
-        const actualMax: number = textDElem.query(By.css(`tbody .stats .${attribute} .max`)).nativeElement.textContent.trim() * 1;
-        const actualRange: number = textDElem.query(By.css(`tbody .stats .${attribute} .range`)).nativeElement.textContent.trim() * 1;
+        hostComp.selectedDimension = dimension;
+        hostFixture.detectChanges();
+
+        const actualMin: number = textDElem.query(By.css(`.ssbu-table .stats .min`)).nativeElement.textContent.trim() * 1;
+        const actualMax: number = textDElem.query(By.css(`.ssbu-table .stats .max`)).nativeElement.textContent.trim() * 1;
+        const actualRange: number = textDElem.query(By.css(`.ssbu-table .stats .range`)).nativeElement.textContent.trim() * 1;
 
         ///
         // console.log(`tbody .stats .${attribute} .min: ${textDElem.query(By.css(`tbody .stats .${attribute} .min`)).nativeElement.textContent}`);
@@ -180,10 +196,10 @@ describe('StageComparatorTextTableComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      testRanges('blastzoneWidth', 'blastzone');
-      testRanges('stageLength', 'stagelength');
-      testRanges('offStageDistance', 'offstage');
-      testRanges('ceilingHeight', 'ceiling');
+      testRanges('blastzoneWidth');
+      testRanges('stageLength');
+      testRanges('offStageDistance');
+      testRanges('ceilingHeight');
       ///
       // console.groupEnd();
     });
@@ -199,7 +215,7 @@ describe('StageComparatorTextTableComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualClasses: string[] = textDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => dElem.nativeElement.className.split(' ').find(name => name.startsWith('texttable_')));
+      const actualClasses: string[] = textDElem.queryAll(By.css('.ssbu-table .entry')).map(dElem => dElem.nativeElement.className.split(' ').find(name => name.startsWith('texttable_')));
 
       for (let i: number = 0; i < expectedClasses.length; i++) {
         expect(actualClasses[i]).withContext(`position ${i}`).toEqual(expectedClasses[i]);

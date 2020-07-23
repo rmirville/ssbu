@@ -11,14 +11,14 @@ ssbu-stage-select .note p {
 }
 
 ssbu-stage-select .classification {
-  border-bottom: 1px dotted lightgrey;
+  border-bottom: 1px solid hsl(196, 12%, 60%);
 }
 
 ssbu-stage-select form > .form-group {
   margin-bottom: 1.5rem;
 }
 
-/* Stages */
+/* Figures */
 
 .legend {
   margin-bottom: 1rem;
@@ -51,11 +51,11 @@ ssbu-stage-select form > .form-group {
 .table-responsive .td-graph {
   background-image: url('../media/img/bg-graph.png');
   background-position-x: 1rem;
-  box-shadow: /*inset*/ 1rem 0 white, -.75rem 0 white;
+  box-shadow: 1rem 0 white, -.75rem 0 white;
 }
 
 .table-hover tr:hover .td-graph {
-  box-shadow: /*inset*/ 1rem 0 hsl(0, 0%, 93%), -.75rem 0 hsl(0, 0%, 93%);
+  box-shadow: 1rem 0 hsl(0, 0%, 93%), -.75rem 0 hsl(0, 0%, 93%);
 }
 
 .table-responsive .td-graph .bar {
@@ -64,19 +64,19 @@ ssbu-stage-select form > .form-group {
   height: .75rem;
 }
 
-ssbu-stage-comparator-text-table .table-responsive tbody td,
-ssbu-stage-comparator-text-table .table-responsive tbody .th-sticky,
 ssbu-stage-comparator-number-table .table-responsive tbody td,
 ssbu-stage-comparator-number-table .table-responsive tbody .th-sticky {
   border-top: none;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid hsl(196, 12%, 80%);
 }
 
-ssbu-stage-comparator-text-table .stats th,
-ssbu-stage-comparator-text-table .stats td,
 ssbu-stage-comparator-number-table .stats th,
 ssbu-stage-comparator-number-table .stats td {
   font-style: italic;
+}
+
+ssbu-stage-comparator-number-table th.name {
+  max-width: 300px;
 }
 
 .table-responsive .highlight {
@@ -90,7 +90,41 @@ ssbu-stage-comparator-number-table .stats td {
   }
 }
 
-/* Stages - Graph */
+.ssbu-table .header {
+  color: white;
+  font-weight: 700;
+  background-color: hsl(218, 75%, 50%);
+}
+
+.ssbu-table .stats {
+  background-color: hsl(196, 12%, 80%);
+}
+
+.ssbu-table .entry:nth-of-type(2n) {
+  background-color: hsl(196, 12%, 90%);
+}
+
+.ssbu-table .stats {
+  font-style: italic;
+}
+
+.ssbu-table .content-wrapper {
+  display: inline-table;
+  height: 100%;
+}
+
+.ssbu-table .content {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 1rem 0;
+}
+
+.ssbu-table .highlight {
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Figures - Graph */
 
 .graph {
   margin-bottom: 2rem;

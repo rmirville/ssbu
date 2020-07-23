@@ -43,6 +43,35 @@ interface TextTableValues {
   max: string;
 }
 
+interface TextTableDimensionIds {
+  class: string;
+  property: string;
+  label: string;
+}
+
+const DIMENSION_IDS: { [dimension: string]: TextTableDimensionIds } = {
+  blastzoneWidth: {
+    class: 'blastzone-width',
+    property: 'blastzoneWidth',
+    label: 'Blastzone Width'
+  },
+  stageLength: {
+    class: 'stage-length',
+    property: 'stageLength',
+    label: 'Floor Length'
+  },
+  offStageDistance: {
+    class: 'off-stage-distance',
+    property: 'offStageDistance',
+    label: 'Off-Stage Distance'
+  },
+  ceilingHeight: {
+    class: 'ceiling-height',
+    property: 'ceilingHeight',
+    label: 'Ceiling Height'
+  }
+};
+
 @Component({
   selector: 'ssbu-stage-comparator-text-table',
   templateUrl: './stage-comparator-text-table.component.html',
@@ -59,6 +88,8 @@ export class StageComparatorTextTableComponent implements OnChanges, OnInit {
   };
 
   dataPresent: boolean = false;
+
+  ids: TextTableDimensionIds = DIMENSION_IDS.blastzoneWidth;
 
   textValues: { [dimension: string]: TextTableValues } = {
     blastzoneWidth: {
@@ -118,6 +149,7 @@ export class StageComparatorTextTableComponent implements OnChanges, OnInit {
   }
 
   _updateData(): void {
+    const dimensions: string[] = ['blastzoneWidth', 'stageLength', 'offStageDistance', 'ceilingHeight'];
     if (this.stageData !== undefined) {
       this.displayData.dimensions = this.stageData.dimensions.sort(BinnedStageDimensions.sortBlastzoneDesc).map(stage => {
         return {
@@ -156,6 +188,17 @@ export class StageComparatorTextTableComponent implements OnChanges, OnInit {
     }
     else {
       this.dataPresent = false;
+    }
+
+    if (
+      (this.dimension !== undefined)
+      && ( dimensions.includes(this.dimension) )
+    ) {
+      this.ids = DIMENSION_IDS[this.dimension];
+    }
+    else {
+      this.dimension = 'blastzoneWidth';
+      this.ids = DIMENSION_IDS.blastzoneWidth;
     }
   }
 

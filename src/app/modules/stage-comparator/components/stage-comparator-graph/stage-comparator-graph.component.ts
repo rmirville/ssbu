@@ -49,7 +49,7 @@ const DIMENSION_IDS: { [dimension: string]: GraphDimensionIds } = {
     property: 'ceilingHeight',
     label: 'Ceiling Height'
   }
-}
+};
 
 @Component({
   selector: 'ssbu-stage-comparator-graph',
@@ -81,11 +81,7 @@ export class StageComparatorGraphComponent implements OnChanges, OnInit {
 
   _updateData() {
     const dimensions: string[] = ['blastzoneWidth', 'stageLength', 'offStageDistance', 'ceilingHeight'];
-    if (
-      (this.stageData !== undefined)
-      && (this.dimension !== undefined)
-      && ( dimensions.includes(this.dimension) )
-    ) {
+    if (this.stageData !== undefined) {
       this.dataPresent = true;
       this.ids = DIMENSION_IDS[this.dimension];
       this.displayData = this.stageData.dimensions.sort(BinnedStageDimensions.sortBlastzoneDesc).map(stage => {
@@ -118,7 +114,17 @@ export class StageComparatorGraphComponent implements OnChanges, OnInit {
     }
     else {
       this.dataPresent = false;
+    }
+
+    if (
+      (this.dimension !== undefined)
+      && ( dimensions.includes(this.dimension) )
+    ) {
+      this.ids = DIMENSION_IDS[this.dimension];
+    }
+    else {
       this.dimension = 'blastzoneWidth';
+      this.ids = DIMENSION_IDS.blastzoneWidth;
     }
   }
 

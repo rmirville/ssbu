@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { compareText } from '../../../utility/compare-functions';
 
 import { StageClassifications } from '../../models/stage-classifications.model';
 
@@ -274,20 +275,12 @@ export class StageSelectComponent implements OnChanges, OnInit {
     // console.groupEnd();
   }
 
-  _compareText(a: string, b: string): number {
-    const aString = a.toLowerCase();
-    const bString = b.toLowerCase();
-    if (aString > bString) { return 1; }
-    if (aString < bString) { return -1; }
-    return 0;
-  }
-
   _compareSection(a: StageSelectSection, b: StageSelectSection): number {
-    return this._compareText(a.title, b.title);
+    return compareText(a.title, b.title);
   }
 
   _compareInfo(a: StageClassifications, b: StageClassifications): number {
-    return this._compareText(a.name, b.name);
+    return compareText(a.name, b.name);
   }
 
   _checkboxSelected(): ValidatorFn {

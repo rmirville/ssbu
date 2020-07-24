@@ -3,7 +3,7 @@ import { TestScheduler } from 'rxjs/testing';
 import { asyncData } from '../../testing/async-observable-helpers';
 import 'zone.js/dist/zone';
 
-import { httpRetryBackoff } from './http-retry-backoff';
+import { httpRetryBackoff } from './rxjs-operators';
 
 describe('httpRetryBackoff()', () => {
   let httpSpy: {get: jasmine.Spy};

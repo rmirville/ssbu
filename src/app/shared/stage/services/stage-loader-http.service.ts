@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { httpRetryBackoff } from '../../rxjs-operators/http-retry-backoff';
+import { httpRetryBackoff } from '../../utility/rxjs-operators';
 
 import { StageLoaderSubService } from './stage-loader-sub.service';
 

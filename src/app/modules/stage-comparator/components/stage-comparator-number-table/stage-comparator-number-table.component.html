@@ -1,35 +1,50 @@
 <section role="region" class="row" aria-label="Numbers">
   <div class="col-lg-12">
-    <div class="table-responsive" tabindex="0">
-      <table *ngIf="dataPresent" class="table table-hover">
-        <thead class="thead-dark">
-          <tr>
-            <th class="th-sticky">Stage</th>
-            <th>Blastzone Width</th>
-            <th>Floor Length</th>
-            <th>Off-Stage Distance</th>
-            <th>Ceiling Height</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="stats">
-            <th class="th-sticky">Min - Max (Range)</th>
-            <td class="blastzone"><span class="min">{{displayData.ranges.blastzoneWidth.min}}</span> - <span class="max">{{displayData.ranges.blastzoneWidth.max}}</span> (<span class="range">{{displayData.ranges.blastzoneWidth.range}}</span>)</td>
-            <td class="stagelength"><span class="min">{{displayData.ranges.stageLength.min}}</span> - <span class="max">{{displayData.ranges.stageLength.max}}</span> (<span class="range">{{displayData.ranges.stageLength.range}}</span>)</td>
-            <td class="offstage"><span class="min">{{displayData.ranges.offStageDistance.min}}</span> - <span class="max">{{displayData.ranges.offStageDistance.max}}</span> (<span class="range">{{displayData.ranges.offStageDistance.range}}</span>)</td>
-            <td class="ceiling"><span class="min">{{displayData.ranges.ceilingHeight.min}}</span> - <span class="max">{{displayData.ranges.ceilingHeight.max}}</span> (<span class="range">{{displayData.ranges.ceilingHeight.range}}</span>)</td>
-          </tr>
-          <ng-container *ngFor="let stage of displayData.dimensions">
-            <tr class="numtable_{{stage.gameName}}">
-              <th class="th-sticky name">{{stage.name}}</th>
-              <td [class.highlight]="stage.blastzoneWidth.highlight" class="blastzone">{{stage.blastzoneWidth.value}}</td>
-              <td [class.highlight]="stage.stageLength.highlight" class="stagelength">{{stage.stageLength.value}}</td>
-              <td [class.highlight]="stage.offStageDistance.highlight" class="offstage">{{stage.offStageDistance.value}}</td>
-              <td [class.highlight]="stage.ceilingHeight.highlight" class="ceiling">{{stage.ceilingHeight.value}}</td>
-            </tr>
-          </ng-container>
-        </tbody>
-      </table>
+    <div *ngIf="dataPresent" class="container ssbu-table" tabindex="0">
+      <div class="row header">
+        <div class="col-6 col-lg-4 name">
+          <div class="content-wrapper">
+            <span class="content">Stage</span>
+          </div>
+        </div>
+        <div class="col-6 col-lg-8 value">
+          <div class="content-wrapper">
+            <span class="content">{{ids.label}}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row stats">
+        <div class="col-6 col-lg-4 name">
+          <div class="content-wrapper">
+            <span class="content">Min - Max (Range)</span>
+          </div>
+        </div>
+        <div class="col-6 col-lg-8 value">
+          <div class="content-wrapper">
+            <span class="content">
+              <span class="min">{{displayData.ranges[ids.property].min}}</span>
+              - <span class="max">{{displayData.ranges[ids.property].max}}</span>
+              (<span class="range">{{displayData.ranges[ids.property].range}}</span>)
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <ng-container *ngFor="let stage of displayData.dimensions">
+        <div class="row entry numtable_{{stage.gameName}}">
+          <div class="col-6 col-lg-4 name">
+            <div class="content-wrapper">
+              <span class="content">{{stage.name}}</span>
+            </div>
+          </div>
+          <div class="col-6 col-lg-8 value">
+            <div class="content-wrapper">
+              <span class="content" [class.highlight]="stage[ids.property].highlight">{{stage[ids.property].value}}</span>
+            </div>
+          </div>
+        </div>
+      </ng-container>
     </div>
   </div>
 </section>

@@ -30,6 +30,35 @@ interface NumberTableDimensionsSet {
   ranges: NumberTableRanges;
 }
 
+interface NumberTableDimensionIds {
+  class: string;
+  property: string;
+  label: string;
+}
+
+const DIMENSION_IDS: { [dimension: string]: NumberTableDimensionIds } = {
+  blastzoneWidth: {
+    class: 'blastzone-width',
+    property: 'blastzoneWidth',
+    label: 'Blastzone Width'
+  },
+  stageLength: {
+    class: 'stage-length',
+    property: 'stageLength',
+    label: 'Floor Length'
+  },
+  offStageDistance: {
+    class: 'off-stage-distance',
+    property: 'offStageDistance',
+    label: 'Off-Stage Distance'
+  },
+  ceilingHeight: {
+    class: 'ceiling-height',
+    property: 'ceilingHeight',
+    label: 'Ceiling Height'
+  }
+};
+
 @Component({
   selector: 'ssbu-stage-comparator-number-table',
   templateUrl: './stage-comparator-number-table.component.html',
@@ -47,6 +76,8 @@ export class StageComparatorNumberTableComponent implements OnChanges, OnInit {
 
   dataPresent: boolean = false;
 
+  ids: NumberTableDimensionIds = DIMENSION_IDS.blastzoneWidth;
+
   constructor() { }
 
   ngOnInit() {
@@ -58,6 +89,7 @@ export class StageComparatorNumberTableComponent implements OnChanges, OnInit {
   }
 
   _updateData(): void {
+    const dimensions: string[] = ['blastzoneWidth', 'stageLength', 'offStageDistance', 'ceilingHeight'];
     if (this.stageData !== undefined) {
       this.displayData.dimensions = this.stageData.dimensions.sort(BinnedStageDimensions.sortBlastzoneDesc).map(stage => {
         return {
@@ -108,6 +140,17 @@ export class StageComparatorNumberTableComponent implements OnChanges, OnInit {
     }
     else {
       this.dataPresent = false;
+    }
+
+    if (
+      (this.dimension !== undefined)
+      && ( dimensions.includes(this.dimension) )
+    ) {
+      this.ids = DIMENSION_IDS[this.dimension];
+    }
+    else {
+      this.dimension = 'blastzoneWidth';
+      this.ids = DIMENSION_IDS.blastzoneWidth;
     }
   }
 

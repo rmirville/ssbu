@@ -54,7 +54,7 @@ describe('NumberTableComponent', () => {
       // console.log(`numComp.stageData.bins: ${numComp.stageData.bins}`);
       // console.log(`numComp.displayData.dimensions stages: ${numComp.displayData.dimensions.length}`);
 
-      const actualStageDElems: DebugElement[] = numDElem.queryAll(By.css('tbody tr:not(.stats)'));
+      const actualStageDElems: DebugElement[] = numDElem.queryAll(By.css('.ssbu-table .entry'));
       const actualClasses: string[] = actualStageDElems.map(dElem => dElem.nativeElement.className.split(' ').find(name => name.startsWith('numtable_')));
 
       for (const expectedClass of expectedClasses) {
@@ -66,18 +66,25 @@ describe('NumberTableComponent', () => {
     it('should display each stage\'s name', () => {
       const inputSet: BinnedStageDimensionsSet = NUMBER_TABLE.DISPLAY_NAME.inputSet;
       const expectedValues: { stage: string, value:string }[] = NUMBER_TABLE.DISPLAY_NAME.expectedValues;
+      const dimensions: string[] = ['blastzoneWidth', 'stageLength', 'offStageDistance', 'ceilingHeight'];
+
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: { stage: string, value: number }[] = numDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
-        return {
-          stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('numtable_')),
-          value: dElem.query(By.css('.name')).nativeElement.textContent.trim()
-        };
-      });
-
-      for (const stage in expectedValues) {
-        expect(actualValues).withContext(expectedValues[stage].stage).toContain(expectedValues[stage]);
+      for (const dimension of dimensions) {
+        hostComp.selectedDimension = dimension;
+        hostFixture.detectChanges();
+  
+        const actualValues: { stage: string, value: number }[] = numDElem.queryAll(By.css('.ssbu-table .entry')).map(dElem => {
+          return {
+            stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('numtable_')),
+            value: dElem.query(By.css('.name')).nativeElement.textContent.trim()
+          };
+        });
+  
+        for (const stage in expectedValues) {
+          expect(actualValues).withContext(expectedValues[stage].stage).toContain(expectedValues[stage]);
+        }
       }
     });
 
@@ -87,10 +94,13 @@ describe('NumberTableComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: {stage: string, value: number}[] = numDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
+      hostComp.selectedDimension = 'blastzoneWidth';
+      hostFixture.detectChanges();
+
+      const actualValues: {stage: string, value: number}[] = numDElem.queryAll(By.css('.ssbu-table .entry')).map(dElem => {
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('numtable_')),
-          value: dElem.query(By.css('.blastzone')).nativeElement.textContent.trim() * 1
+          value: dElem.query(By.css('.value')).nativeElement.textContent.trim() * 1
         };
       });
 
@@ -105,10 +115,13 @@ describe('NumberTableComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: { stage: string, value: number }[] = numDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
+      hostComp.selectedDimension = 'stageLength';
+      hostFixture.detectChanges();
+
+      const actualValues: { stage: string, value: number }[] = numDElem.queryAll(By.css('.ssbu-table .entry')).map(dElem => {
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('numtable_')),
-          value: dElem.query(By.css('.stagelength')).nativeElement.textContent.trim() * 1
+          value: dElem.query(By.css('.value')).nativeElement.textContent.trim() * 1
         };
       });
 
@@ -123,10 +136,13 @@ describe('NumberTableComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: { stage: string, value: number }[] = numDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
+      hostComp.selectedDimension = 'offStageDistance';
+      hostFixture.detectChanges();
+
+      const actualValues: { stage: string, value: number }[] = numDElem.queryAll(By.css('.ssbu-table .entry')).map(dElem => {
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('numtable_')),
-          value: dElem.query(By.css('.offstage')).nativeElement.textContent.trim() * 1
+          value: dElem.query(By.css('.value')).nativeElement.textContent.trim() * 1
         };
       });
 
@@ -141,10 +157,13 @@ describe('NumberTableComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualValues: { stage: string, value: number }[] = numDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => {
+      hostComp.selectedDimension = 'ceilingHeight';
+      hostFixture.detectChanges();
+
+      const actualValues: { stage: string, value: number }[] = numDElem.queryAll(By.css('.ssbu-table .entry')).map(dElem => {
         return {
           stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('numtable_')),
-          value: dElem.query(By.css('.ceiling')).nativeElement.textContent.trim() * 1
+          value: dElem.query(By.css('.value')).nativeElement.textContent.trim() * 1
         };
       });
 
@@ -156,12 +175,15 @@ describe('NumberTableComponent', () => {
     it('should display the dimension ranges as integers', () => {
       ///
       // console.groupCollapsed('=== SPEC - display ranges');
-      function testRanges(dimension: string, attribute: string) {
+      function testRanges(dimension: string) {
         ///
         // console.group('SPEC - testRanges()');
-        const actualMin: number = numDElem.query(By.css(`tbody .stats .${attribute} .min`)).nativeElement.textContent.trim() * 1;
-        const actualMax: number = numDElem.query(By.css(`tbody .stats .${attribute} .max`)).nativeElement.textContent.trim() * 1;
-        const actualRange: number = numDElem.query(By.css(`tbody .stats .${attribute} .range`)).nativeElement.textContent.trim() * 1;
+        hostComp.selectedDimension = dimension;
+        hostFixture.detectChanges();
+
+        const actualMin: number = numDElem.query(By.css(`.ssbu-table .stats .min`)).nativeElement.textContent.trim() * 1;
+        const actualMax: number = numDElem.query(By.css(`.ssbu-table .stats .max`)).nativeElement.textContent.trim() * 1;
+        const actualRange: number = numDElem.query(By.css(`.ssbu-table .stats .range`)).nativeElement.textContent.trim() * 1;
 
         ///
         // console.log(`tbody .stats .${attribute} .min: ${numDElem.query(By.css(`tbody .stats .${attribute} .min`)).nativeElement.textContent}`);
@@ -179,10 +201,10 @@ describe('NumberTableComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      testRanges('blastzoneWidth', 'blastzone');
-      testRanges('stageLength', 'stagelength');
-      testRanges('offStageDistance', 'offstage');
-      testRanges('ceilingHeight', 'ceiling');
+      testRanges('blastzoneWidth');
+      testRanges('stageLength');
+      testRanges('offStageDistance');
+      testRanges('ceilingHeight');
       ///
       // console.groupEnd();
     });
@@ -198,7 +220,7 @@ describe('NumberTableComponent', () => {
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
 
-      const actualClasses: string[] = numDElem.queryAll(By.css('tbody tr:not(.stats)')).map(dElem => dElem.nativeElement.className.split(' ').find(name => name.startsWith('numtable_')));
+      const actualClasses: string[] = numDElem.queryAll(By.css('.ssbu-table .entry')).map(dElem => dElem.nativeElement.className.split(' ').find(name => name.startsWith('numtable_')));
 
       for (let i: number = 0; i < expectedClasses.length; i++) {
         expect(actualClasses[i]).withContext(`position ${i}`).toEqual(expectedClasses[i]);

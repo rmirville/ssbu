@@ -18,77 +18,9 @@ ssbu-stage-select form > .form-group {
   margin-bottom: 1.5rem;
 }
 
-/* Figures */
 
-.legend {
-  margin-bottom: 1rem;
-}
 
-.legend .legend-bin,
-.legend label {
-  margin: 1rem 1rem 1rem 0;
-  vertical-align: middle;
-}
-
-.legend .legend-bin {
-  width: 1.3rem;
-  height: 1rem;
-}
-
-.table-responsive .th-sticky.name,
-.table-responsive .abbr {
-  padding-right: 0;
-}
-
-.table-responsive .th-sticky.name {
-  min-width: 9rem;
-}
-
-.table-responsive .abbr {
-  display: none;
-}
-
-.table-responsive .td-graph {
-  background-image: url('../media/img/bg-graph.png');
-  background-position-x: 1rem;
-  box-shadow: 1rem 0 white, -.75rem 0 white;
-}
-
-.table-hover tr:hover .td-graph {
-  box-shadow: 1rem 0 hsl(0, 0%, 93%), -.75rem 0 hsl(0, 0%, 93%);
-}
-
-.table-responsive .td-graph .bar {
-  float: left;
-  margin: 1.125rem 0;
-  height: .75rem;
-}
-
-ssbu-stage-comparator-number-table .table-responsive tbody td,
-ssbu-stage-comparator-number-table .table-responsive tbody .th-sticky {
-  border-top: none;
-  border-bottom: 1px solid hsl(196, 12%, 80%);
-}
-
-ssbu-stage-comparator-number-table .stats th,
-ssbu-stage-comparator-number-table .stats td {
-  font-style: italic;
-}
-
-ssbu-stage-comparator-number-table th.name {
-  max-width: 300px;
-}
-
-.table-responsive .highlight {
-  font-weight: bold;
-  font-style: italic;
-}
-
-@media (min-width: 992px) {
-  .table-responsive .abbr {
-    display: table-cell;
-  }
-}
+/* Figures - Table */
 
 .ssbu-table .header {
   color: white;
@@ -124,7 +56,24 @@ ssbu-stage-comparator-number-table th.name {
   font-style: italic;
 }
 
+
+
 /* Figures - Graph */
+
+.legend {
+  margin-bottom: 1rem;
+}
+
+.legend .legend-bin,
+.legend label {
+  margin: 1rem 1rem 1rem 0;
+  vertical-align: middle;
+}
+
+.legend .legend-bin {
+  width: 1.3rem;
+  height: 1rem;
+}
 
 .graph {
   margin-bottom: 2rem;

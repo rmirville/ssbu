@@ -905,7 +905,7 @@ describe('StageComparatorComponent', () => {
 
       it('should set the dimension property of the current view to the selected value', () => {
         ///
-        console.groupCollapsed('=== SPEC - dimension selector - set child properties ===');
+        // console.groupCollapsed('=== SPEC - dimension selector - set child properties ===');
         const dimensions: string[] = ['stageLength', 'offStageDistance', 'ceilingHeight', 'blastzoneWidth'];
         const views: string[] = ['graph', 'text', 'number'];
         const dimControlDElem: DebugElement = dElem.query(By.css('.dimension-control'));
@@ -933,12 +933,12 @@ describe('StageComparatorComponent', () => {
         }
 
         ///
-        console.groupEnd();
+        // console.groupEnd();
       });
 
       it('should carry the selected value to the dimension property of the child views it switches to', () => {
         ///
-        console.groupCollapsed('=== SPEC - dimension selector - carry between child properties ===');
+        // console.groupCollapsed('=== SPEC - dimension selector - carry between child properties ===');
         const dimensions: string[] = ['stageLength', 'offStageDistance', 'ceilingHeight', 'blastzoneWidth'];
         const views: string[] = ['text', 'number', 'graph'];
         const dimControlDElem: DebugElement = dElem.query(By.css('.dimension-control'));
@@ -965,7 +965,7 @@ describe('StageComparatorComponent', () => {
           }
         }
         ///
-        console.groupEnd();
+        // console.groupEnd();
       });
 
     });

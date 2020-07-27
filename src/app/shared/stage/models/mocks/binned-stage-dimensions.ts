@@ -306,238 +306,121 @@ export const SORTBLASTDESC_BLAST_NEG: { [name: string]: BinnedStageDimensions } 
   }
 };
 
-export const SORTBLASTDESC_STAGELENGTH_POS: { [name: string]: BinnedStageDimensions } = {
+// TODO
+export const SORTBLASTDESC_NAME_POS: { [name: string]: BinnedStageDimensions } = {
   dimA: {
-    name: 'VcHmAZSWqQ',
-    gameName: 'nbGBqwv5Bb',
+    name: 'NYs636V5O3',
+    gameName: 'umoH6Dc0j4',
     blastzoneWidth: {
-      value: 23,
-      bin: 70,
+      value: 0,
+      bin: 0,
       min: true,
       max: true
     },
     stageLength: {
-      value: 28,
-      bin: 79,
-      min: true,
+      value: 0,
+      bin: 0,
+      min: false,
       max: false
     },
     offStageDistance: {
-      value: 82,
-      bin: 66,
-      min: true,
+      value: 0,
+      bin: 0,
+      min: false,
       max: true
     },
     ceilingHeight: {
-      value: 100,
-      bin: 25,
+      value: 0,
+      bin: 0,
       min: true,
       max: true
     }
   },
   dimB: {
-    name: 'eigV6iK3BX',
-    gameName: 'jA4BZaM7uw',
+    name: 'iQ83UiGZo9',
+    gameName: '634gwM2XGx',
     blastzoneWidth: {
-      value: 23,
-      bin: 70,
+      value: 0,
+      bin: 0,
       min: true,
       max: true
     },
     stageLength: {
-      value: 89,
-      bin: 24,
-      min: true,
-      max: true
-    },
-    offStageDistance: {
-      value: 37,
-      bin: 15,
+      value: 0,
+      bin: 0,
       min: false,
       max: true
     },
-    ceilingHeight: {
-      value: 3,
-      bin: 75,
+    offStageDistance: {
+      value: 0,
+      bin: 0,
       min: true,
       max: false
+    },
+    ceilingHeight: {
+      value: 0,
+      bin: 0,
+      min: false,
+      max: true
     }
   }
 };
 
-export const SORTBLASTDESC_STAGELENGTH_NEG: { [name: string]: BinnedStageDimensions } = {
+export const SORTBLASTDESC_NAME_NEG: { [name: string]: BinnedStageDimensions } = {
   dimA: {
-    name: 'm1yYQj9l0I',
-    gameName: '2wGERb2Vtb',
+    name: 'GuSIQXQ5PG',
+    gameName: 'SMwxZdLsUV',
     blastzoneWidth: {
-      value: 48,
-      bin: 44,
-      min: false,
-      max: true
-    },
-    stageLength: {
-      value: 10,
+      value: 31,
       bin: 61,
-      min: false,
-      max: false
-    },
-    offStageDistance: {
-      value: 14,
-      bin: 67,
       min: true,
       max: false
     },
-    ceilingHeight: {
-      value: 34,
-      bin: 73,
-      min: false,
-      max: false
-    }
-  },
-  dimB: {
-    name: '6A1eJefFha',
-    gameName: '1vkGL8u7CH',
-    blastzoneWidth: {
-      value: 48,
-      bin: 44,
-      min: false,
-      max: false
-    },
     stageLength: {
-      value: 1,
-      bin: 75,
+      value: 3,
+      bin: 72,
       min: false,
       max: true
     },
     offStageDistance: {
-      value: 43,
-      bin: 82,
-      min: false,
-      max: true
-    },
-    ceilingHeight: {
-      value: 76,
-      bin: 47,
-      min: false,
-      max: false
-    }
-  }
-};
-
-export const SORTBLASTDESC_CEILING_POS: { [name: string]: BinnedStageDimensions } = {
-  dimA: {
-    name: 'qCBOJxYsZM',
-    gameName: 'UMA6A9kV59',
-    blastzoneWidth: {
       value: 88,
-      bin: 17,
-      min: true,
+      bin: 89,
+      min: false,
       max: true
-    },
-    stageLength: {
-      value: 38,
-      bin: 40,
-      min: true,
-      max: true
-    },
-    offStageDistance: {
-      value: 80,
-      bin: 31,
-      min: true,
-      max: true
-    },
-    ceilingHeight: {
-      value: 5,
-      bin: 25,
-      min: false,
-      max: false
-    }
-  },
-  dimB: {
-    name: '5pZS5rA6WT',
-    gameName: 'tncmoKSDPg',
-    blastzoneWidth: {
-      value: 88,
-      bin: 17,
-      min: false,
-      max: false
-    },
-    stageLength: {
-      value: 38,
-      bin: 40,
-      min: false,
-      max: false
-    },
-    offStageDistance: {
-      value: 80,
-      bin: 31,
-      min: false,
-      max: false
     },
     ceilingHeight: {
       value: 6,
-      bin: 88,
-      min: false,
-      max: false
-    }
-  }
-};
-
-export const SORTBLASTDESC_CEILING_NEG: { [name: string]: BinnedStageDimensions } = {
-  dimA: {
-    name: 'z9m1mxr0rj',
-    gameName: 'vmHe5mtSB6',
-    blastzoneWidth: {
-      value: 63,
-      bin: 17,
-      min: true,
-      max: false
-    },
-    stageLength: {
-      value: 83,
-      bin: 24,
-      min: true,
-      max: false
-    },
-    offStageDistance: {
-      value: 65,
-      bin: 66,
-      min: true,
-      max: true
-    },
-    ceilingHeight: {
-      value: 57,
-      bin: 83,
+      bin: 77,
       min: true,
       max: true
     }
   },
   dimB: {
-    name: '4Es3i17oW8',
-    gameName: 'R0vikFPQX7',
+    name: 'mp1JIuL6FB',
+    gameName: 'KQYsWbQ8R9',
     blastzoneWidth: {
-      value: 63,
-      bin: 17,
+      value: 31,
+      bin: 61,
+      min: true,
+      max: false
+    },
+    stageLength: {
+      value: 77,
+      bin: 96,
+      min: false,
+      max: true
+    },
+    offStageDistance: {
+      value: 32,
+      bin: 13,
       min: true,
       max: true
     },
-    stageLength: {
-      value: 83,
-      bin: 24,
-      min: false,
-      max: false
-    },
-    offStageDistance: {
-      value: 65,
-      bin: 66,
-      min: false,
-      max: false
-    },
     ceilingHeight: {
-      value: 44,
-      bin: 75,
-      min: true,
-      max: false
+      value: 95,
+      bin: 1,
+      min: false,
+      max: true
     }
   }
 };
@@ -553,26 +436,26 @@ export const SORTBLASTDESC_EQUAL: { [name: string]: BinnedStageDimensions } = {
       max: true
     },
     stageLength: {
-      value: 74,
-      bin: 1,
+      value: 9,
+      bin: 75,
       min: false,
       max: false
     },
     offStageDistance: {
-      value: 81,
-      bin: 31,
+      value: 95,
+      bin: 30,
       min: true,
       max: true
     },
     ceilingHeight: {
-      value: 100,
-      bin: 49,
+      value: 50,
+      bin: 93,
       min: false,
       max: false
     }
   },
   dimB: {
-    name: 'nXovX8tDHW',
+    name: 'nR0vEWS2Ag',
     gameName: 'KJTDVblQZX',
     blastzoneWidth: {
       value: 3,
@@ -581,20 +464,20 @@ export const SORTBLASTDESC_EQUAL: { [name: string]: BinnedStageDimensions } = {
       max: false
     },
     stageLength: {
-      value: 74,
-      bin: 1,
+      value: 1,
+      bin: 32,
       min: false,
       max: false
     },
     offStageDistance: {
-      value: 81,
-      bin: 31,
+      value: 1,
+      bin: 86,
       min: true,
       max: true
     },
     ceilingHeight: {
-      value: 100,
-      bin: 49,
+      value: 16,
+      bin: 52,
       min: false,
       max: true
     }
@@ -665,33 +548,1113 @@ export const SORTBLASTDESC_INVALID_B = {
   invalidDim: [2500, 47]
 };
 
+export const SORTSTAGELENGTHDESC_STAGELENGTH_POS: { [name: string]: BinnedStageDimensions } = {
+  dimA: {
+    name: 'LmbEzKBTPw',
+    gameName: 'RNRTUvXTB4',
+    blastzoneWidth: {
+      value: 65,
+      bin: 47,
+      min: true,
+      max: false
+    },
+    stageLength: {
+      value: 3,
+      bin: 96,
+      min: true,
+      max: true
+    },
+    offStageDistance: {
+      value: 68,
+      bin: 31,
+      min: false,
+      max: false
+    },
+    ceilingHeight: {
+      value: 81,
+      bin: 26,
+      min: true,
+      max: true
+    }
+  },
+  dimB: {
+    name: 'FuGGdSmCj6',
+    gameName: '8VLwMUYivs',
+    blastzoneWidth: {
+      value: 89,
+      bin: 46,
+      min: true,
+      max: false
+    },
+    stageLength: {
+      value: 69,
+      bin: 72,
+      min: true,
+      max: true
+    },
+    offStageDistance: {
+      value: 70,
+      bin: 13,
+      min: true,
+      max: false
+    },
+    ceilingHeight: {
+      value: 98,
+      bin: 71,
+      min: false,
+      max: false
+    }
+  }
+};
+
+export const SORTSTAGELENGTHDESC_STAGELENGTH_NEG: { [name: string]: BinnedStageDimensions } = {
+  dimA: {
+    name: 'FQXHKNbWln',
+    gameName: 'TJnidIzqmf',
+    blastzoneWidth: {
+      value: 52,
+      bin: 8,
+      min: false,
+      max: true
+    },
+    stageLength: {
+      value: 55,
+      bin: 13,
+      min: false,
+      max: false
+    },
+    offStageDistance: {
+      value: 6,
+      bin: 58,
+      min: true,
+      max: false
+    },
+    ceilingHeight: {
+      value: 63,
+      bin: 68,
+      min: true,
+      max: false
+    }
+  },
+  dimB: {
+    name: 'DLLSbnSxyt',
+    gameName: 'fY8wtX1faR',
+    blastzoneWidth: {
+      value: 37,
+      bin: 81,
+      min: false,
+      max: false
+    },
+    stageLength: {
+      value: 45,
+      bin: 11,
+      min: true,
+      max: true
+    },
+    offStageDistance: {
+      value: 24,
+      bin: 70,
+      min: false,
+      max: true
+    },
+    ceilingHeight: {
+      value: 96,
+      bin: 83,
+      min: false,
+      max: true
+    }
+  }
+};
+
+export const SORTSTAGELENGTHDESC_NAME_POS: { [name: string]: BinnedStageDimensions } = {
+  dimA: {
+    name: 'vLP2urnQNd',
+    gameName: 'OuBrryYKxg',
+    blastzoneWidth: {
+      value: 89,
+      bin: 10,
+      min: false,
+      max: false
+    },
+    stageLength: {
+      value: 62,
+      bin: 87,
+      min: false,
+      max: true
+    },
+    offStageDistance: {
+      value: 38,
+      bin: 6,
+      min: true,
+      max: false
+    },
+    ceilingHeight: {
+      value: 73,
+      bin: 94,
+      min: true,
+      max: true
+    }
+  },
+  dimB: {
+    name: 'NYs636V5O3',
+    gameName: 'Hjgusu7c16',
+    blastzoneWidth: {
+      value: 92,
+      bin: 22,
+      min: false,
+      max: true
+    },
+    stageLength: {
+      value: 62,
+      bin: 87,
+      min: false,
+      max: true
+    },
+    offStageDistance: {
+      value: 58,
+      bin: 5,
+      min: false,
+      max: false
+    },
+    ceilingHeight: {
+      value: 23,
+      bin: 78,
+      min: false,
+      max: false
+    }
+  }
+};
+
+export const SORTSTAGELENGTHDESC_NAME_NEG: { [name: string]: BinnedStageDimensions } = {
+  dimA: {
+    name: 'ljDDKksqA6',
+    gameName: 'SzBm8GXYJm',
+    blastzoneWidth: {
+      value: 32,
+      bin: 52,
+      min: true,
+      max: true
+    },
+    stageLength: {
+      value: 58,
+      bin: 62,
+      min: false,
+      max: true
+    },
+    offStageDistance: {
+      value: 39,
+      bin: 57,
+      min: false,
+      max: true
+    },
+    ceilingHeight: {
+      value: 1,
+      bin: 24,
+      min: false,
+      max: false
+    }
+  },
+  dimB: {
+    name: 'VNJFznxgXp',
+    gameName: '29pE5kjRCa',
+    blastzoneWidth: {
+      value: 18,
+      bin: 60,
+      min: true,
+      max: false
+    },
+    stageLength: {
+      value: 58,
+      bin: 62,
+      min: false,
+      max: true
+    },
+    offStageDistance: {
+      value: 19,
+      bin: 36,
+      min: true,
+      max: true
+    },
+    ceilingHeight: {
+      value: 72,
+      bin: 47,
+      min: false,
+      max: false
+    }
+  }
+};
+
+export const SORTSTAGELENGTHDESC_EQUAL: { [name: string]: BinnedStageDimensions } = {
+  dimA: {
+    name: 'pq3ZW2Kjpd',
+    gameName: '3J41iiFAEE',
+    blastzoneWidth: {
+      value: 19,
+      bin: 86,
+      min: true,
+      max: true
+    },
+    stageLength: {
+      value: 75,
+      bin: 17,
+      min: true,
+      max: false
+    },
+    offStageDistance: {
+      value: 15,
+      bin: 93,
+      min: true,
+      max: true
+    },
+    ceilingHeight: {
+      value: 60,
+      bin: 85,
+      min: true,
+      max: true
+    }
+  },
+  dimB: {
+    name: 'pq3ZW2Kjpd',
+    gameName: 'a4i2reFyRe',
+    blastzoneWidth: {
+      value: 50,
+      bin: 19,
+      min: true,
+      max: true
+    },
+    stageLength: {
+      value: 75,
+      bin: 17,
+      min: true,
+      max: false
+    },
+    offStageDistance: {
+      value: 95,
+      bin: 2,
+      min: false,
+      max: false
+    },
+    ceilingHeight: {
+      value: 18,
+      bin: 99,
+      min: false,
+      max: false
+    }
+  }
+};
+
+export const SORTSTAGELENGTHDESC_INVALID_A: { invalidDim: any, dimB: BinnedStageDimensions } = {
+  invalidDim: 'bB6mF6uR1e',
+  dimB: {
+    name: 'AKNcF30cyY',
+    gameName: 'w6PRRlC31R',
+    blastzoneWidth: {
+      value: 65,
+      bin:   12,
+      min: false,
+      max: true
+    },
+    stageLength: {
+      value: 90,
+      bin:   6,
+      min: false,
+      max: false
+    },
+    offStageDistance: {
+      value: 59,
+      bin:   45,
+      min: false,
+      max: true
+    },
+    ceilingHeight: {
+      value: 12,
+      bin:   11,
+      min: false,
+      max: false
+    }
+  }
+};
+
+export const SORTSTAGELENGTHDESC_INVALID_B: { dimA: BinnedStageDimensions, invalidDim: any } = {
+  dimA: {
+    name: 'bLhNqozZOV',
+    gameName: '0CYVUJGWIf',
+    blastzoneWidth: {
+      value: 23,
+      bin:   62,
+      min: true,
+      max: false
+    },
+    stageLength: {
+      value: 51,
+      bin:   60,
+      min: false,
+      max: true
+    },
+    offStageDistance: {
+      value: 70,
+      bin:   98,
+      min: false,
+      max: false
+    },
+    ceilingHeight: {
+      value: 67,
+      bin:   91,
+      min: false,
+      max: true
+    }
+  },
+  invalidDim: 14
+};
+
+export const SORTOFFSTAGEDESC_OFFSTAGE_POS: { [name: string]: BinnedStageDimensions } = {
+  dimA: {
+    name: 'NE49gy4s71',
+    gameName: 'vRAV7XRhgd',
+    blastzoneWidth: {
+      value: 82,
+      bin:   11,
+      min: false,
+      max: true
+    },
+    stageLength: {
+      value: 51,
+      bin:   61,
+      min: false,
+      max: true
+    },
+    offStageDistance: {
+      value: 4,
+      bin:   29,
+      min: true,
+      max: false
+    },
+    ceilingHeight: {
+      value: 10,
+      bin:   78,
+      min: true,
+      max: false
+    }
+  },
+  dimB: {
+    name: 'LNBoRB0TPN',
+    gameName: 'TQZyCAbFhx',
+    blastzoneWidth: {
+      value: 84,
+      bin:   89,
+      min: false,
+      max: false
+    },
+    stageLength: {
+      value: 40,
+      bin:   66,
+      min: false,
+      max: true
+    },
+    offStageDistance: {
+      value: 88,
+      bin:   80,
+      min: false,
+      max: false
+    },
+    ceilingHeight: {
+      value: 28,
+      bin:   95,
+      min: true,
+      max: true
+    }
+  }
+};
+
+export const SORTOFFSTAGEDESC_OFFSTAGE_NEG: { [name: string]: BinnedStageDimensions } = {
+  dimA: {
+    name: 'hhqv6ZLyPI',
+    gameName: 'XKSjVcFOjc',
+    blastzoneWidth: {
+      value: 58,
+      bin:   53,
+      min: false,
+      max: false
+    },
+    stageLength: {
+      value: 7,
+      bin:   88,
+      min: true,
+      max: true
+    },
+    offStageDistance: {
+      value: 58,
+      bin:   9,
+      min: true,
+      max: false
+    },
+    ceilingHeight: {
+      value: 13,
+      bin:   66,
+      min: true,
+      max: false
+    }
+  },
+  dimB: {
+    name: 'If7jvXL6jg',
+    gameName: 'O2PySdkvEb',
+    blastzoneWidth: {
+      value: 77,
+      bin:   3,
+      min: false,
+      max: false
+    },
+    stageLength: {
+      value: 25,
+      bin:   2,
+      min: false,
+      max: true
+    },
+    offStageDistance: {
+      value: 37,
+      bin:   74,
+      min: false,
+      max: false
+    },
+    ceilingHeight: {
+      value: 82,
+      bin:   15,
+      min: true,
+      max: true
+    }
+  }
+};
+
+export const SORTOFFSTAGEDESC_NAME_POS: { [name: string]: BinnedStageDimensions } = {
+  dimA: {
+    name: 'zHOWTYGMI7',
+    gameName: 'ZeNjieGUZf',
+    blastzoneWidth: {
+      value: 69,
+      bin:   81,
+      min: true,
+      max: false
+    },
+    stageLength: {
+      value: 99,
+      bin:   5,
+      min: true,
+      max: false
+    },
+    offStageDistance: {
+      value: 64,
+      bin:   47,
+      min: true,
+      max: true
+    },
+    ceilingHeight: {
+      value: 8,
+      bin:   94,
+      min: true,
+      max: false
+    }
+  },
+  dimB: {
+    name: 'xy4Dd5KVJf',
+    gameName: 'DgYB3PvA80',
+    blastzoneWidth: {
+      value: 37,
+      bin:   93,
+      min: true,
+      max: false
+    },
+    stageLength: {
+      value: 56,
+      bin:   85,
+      min: false,
+      max: true
+    },
+    offStageDistance: {
+      value: 64,
+      bin:   47,
+      min: true,
+      max: true
+    },
+    ceilingHeight: {
+      value: 64,
+      bin:   37,
+      min: true,
+      max: false
+    }
+  }
+};
+
+export const SORTOFFSTAGEDESC_NAME_NEG: { [name: string]: BinnedStageDimensions } = {
+  dimA: {
+    name: 'LaPEWXqOGN',
+    gameName: 'UlWzIEG3Lt',
+    blastzoneWidth: {
+      value: 67,
+      bin:   55,
+      min: false,
+      max: true
+    },
+    stageLength: {
+      value: 64,
+      bin:   100,
+      min: false,
+      max: false
+    },
+    offStageDistance: {
+      value: 94,
+      bin:   37,
+      min: true,
+      max: true
+    },
+    ceilingHeight: {
+      value: 17,
+      bin:   39,
+      min: true,
+      max: false
+    }
+  },
+  dimB: {
+    name: 'TS0oGDBpMi',
+    gameName: 'oOfkHBJMp0',
+    blastzoneWidth: {
+      value: 35,
+      bin:   99,
+      min: false,
+      max: false
+    },
+    stageLength: {
+      value: 68,
+      bin:   73,
+      min: true,
+      max: false
+    },
+    offStageDistance: {
+      value: 94,
+      bin:   37,
+      min: true,
+      max: false
+    },
+    ceilingHeight: {
+      value: 81,
+      bin:   32,
+      min: false,
+      max: false
+    }
+  }
+};
+
+export const SORTOFFSTAGEDESC_EQUAL: { [name: string]: BinnedStageDimensions } = {
+  dimA: {
+    name: 'isxGejmnKl',
+    gameName: 'oYjaOu5fHN',
+    blastzoneWidth: {
+      value: 83,
+      bin:   28,
+      min: true,
+      max: true
+    },
+    stageLength: {
+      value: 64,
+      bin:   63,
+      min: true,
+      max: true
+    },
+    offStageDistance: {
+      value: 36,
+      bin:   14,
+      min: true,
+      max: false
+    },
+    ceilingHeight: {
+      value: 20,
+      bin:   7,
+      min: false,
+      max: true
+    }
+  },
+  dimB: {
+    name: 'isxGejmnKl',
+    gameName: 'mTSEv949Cn',
+    blastzoneWidth: {
+      value: 24,
+      bin:   13,
+      min: false,
+      max: true
+    },
+    stageLength: {
+      value: 12,
+      bin:   91,
+      min: true,
+      max: true
+    },
+    offStageDistance: {
+      value: 36,
+      bin:   14,
+      min: true,
+      max: false
+    },
+    ceilingHeight: {
+      value: 10,
+      bin:   95,
+      min: false,
+      max: false
+    }
+  }
+};
+
+export const SORTOFFSTAGEDESC_INVALID_A: { invalidDim: any, dimB: BinnedStageDimensions } = {
+  invalidDim: 'FW4skHt4Ss',
+  dimB: {
+    name: 'FrsQf5EdaZ',
+    gameName: 'qel5DoF2Fx',
+    blastzoneWidth: {
+      value: 12,
+      bin:   44,
+      min: true,
+      max: true
+    },
+    stageLength: {
+      value: 17,
+      bin:   84,
+      min: false,
+      max: true
+    },
+    offStageDistance: {
+      value: 46,
+      bin:   83,
+      min: true,
+      max: false
+    },
+    ceilingHeight: {
+      value: 88,
+      bin:   19,
+      min: false,
+      max: false
+    }
+  }
+};
+
+export const SORTOFFSTAGEDESC_INVALID_B: { dimA: BinnedStageDimensions, invalidDim: any } = {
+  dimA: {
+    name: 'weXJ0m8muZ',
+    gameName: 'O90ugrFcdv',
+    blastzoneWidth: {
+      value: 49,
+      bin:   30,
+      min: true,
+      max: false
+    },
+    stageLength: {
+      value: 92,
+      bin:   67,
+      min: false,
+      max: true
+    },
+    offStageDistance: {
+      value: 19,
+      bin:   73,
+      min: true,
+      max: true
+    },
+    ceilingHeight: {
+      value: 38,
+      bin:   49,
+      min: true,
+      max: false
+    }
+  },
+  invalidDim: false
+};
+
+export const SORTCEILINGDESC_CEILING_POS: { [name: string]: BinnedStageDimensions } = {
+  dimA: {
+    name: 'lIfmLOkfYX',
+    gameName: 'hF2G1nHQnn',
+    blastzoneWidth: {
+      value: 71,
+      bin:   71,
+      min: true,
+      max: false
+    },
+    stageLength: {
+      value: 74,
+      bin:   92,
+      min: true,
+      max: true
+    },
+    offStageDistance: {
+      value: 27,
+      bin:   46,
+      min: false,
+      max: false
+    },
+    ceilingHeight: {
+      value: 75,
+      bin:   99,
+      min: true,
+      max: true
+    }
+  },
+  dimB: {
+    name: 'sdjrL3R334',
+    gameName: 'g4KfDJatTZ',
+    blastzoneWidth: {
+      value: 71,
+      bin:   35,
+      min: false,
+      max: true
+    },
+    stageLength: {
+      value: 21,
+      bin:   80,
+      min: false,
+      max: false
+    },
+    offStageDistance: {
+      value: 2,
+      bin:   79,
+      min: false,
+      max: false
+    },
+    ceilingHeight: {
+      value: 87,
+      bin:   33,
+      min: true,
+      max: true
+    }
+  }
+};
+
+export const SORTCEILINGDESC_CEILING_NEG: { [name: string]: BinnedStageDimensions } = {
+  dimA: {
+    name: 'mGqMkSaFcy',
+    gameName: 'GES5Ec6ke6',
+    blastzoneWidth: {
+      value: 32,
+      bin:   33,
+      min: false,
+      max: false
+    },
+    stageLength: {
+      value: 58,
+      bin:   83,
+      min: true,
+      max: true
+    },
+    offStageDistance: {
+      value: 73,
+      bin:   82,
+      min: true,
+      max: true
+    },
+    ceilingHeight: {
+      value: 34,
+      bin:   68,
+      min: true,
+      max: true
+    }
+  },
+  dimB: {
+    name: 'tojYXWYf8b',
+    gameName: 'HXlENYkCdI',
+    blastzoneWidth: {
+      value: 81,
+      bin:   13,
+      min: false,
+      max: false
+    },
+    stageLength: {
+      value: 90,
+      bin:   50,
+      min: false,
+      max: true
+    },
+    offStageDistance: {
+      value: 40,
+      bin:   31,
+      min: false,
+      max: true
+    },
+    ceilingHeight: {
+      value: 21,
+      bin:   89,
+      min: true,
+      max: true
+    }
+  }
+};
+
+export const SORTCEILINGDESC_NAME_POS: { [name: string]: BinnedStageDimensions } = {
+  dimA: {
+    name: 'pGc0eIuOJz',
+    gameName: 'wQdfagpDWh',
+    blastzoneWidth: {
+      value: 48,
+      bin:   70,
+      min: false,
+      max: true
+    },
+    stageLength: {
+      value: 19,
+      bin:   14,
+      min: false,
+      max: true
+    },
+    offStageDistance: {
+      value: 93,
+      bin:   3,
+      min: false,
+      max: false
+    },
+    ceilingHeight: {
+      value: 14,
+      bin:   29,
+      min: true,
+      max: true
+    }
+  },
+  dimB: {
+    name: 'eb85YCwvJd',
+    gameName: 'BNSg9afkjJ',
+    blastzoneWidth: {
+      value: 9,
+      bin:   41,
+      min: true,
+      max: true
+    },
+    stageLength: {
+      value: 7,
+      bin:   32,
+      min: false,
+      max: false
+    },
+    offStageDistance: {
+      value: 26,
+      bin:   52,
+      min: false,
+      max: true
+    },
+    ceilingHeight: {
+      value: 14,
+      bin:   29,
+      min: true,
+      max: true
+    }
+  }
+};
+
+export const SORTCEILINGDESC_NAME_NEG: { [name: string]: BinnedStageDimensions } = {
+  dimA: {
+    name: 'c2L6Cvkxma',
+    gameName: 'pCh8rRIQKG',
+    blastzoneWidth: {
+      value: 55,
+      bin:   80,
+      min: true,
+      max: true
+    },
+    stageLength: {
+      value: 20,
+      bin:   98,
+      min: false,
+      max: false
+    },
+    offStageDistance: {
+      value: 62,
+      bin:   57,
+      min: true,
+      max: true
+    },
+    ceilingHeight: {
+      value: 12,
+      bin:   37,
+      min: false,
+      max: true
+    }
+  },
+  dimB: {
+    name: 'OyLpvlRSiy',
+    gameName: 'ySp1MCRPCW',
+    blastzoneWidth: {
+      value: 72,
+      bin:   36,
+      min: true,
+      max: true
+    },
+    stageLength: {
+      value: 68,
+      bin:   99,
+      min: true,
+      max: true
+    },
+    offStageDistance: {
+      value: 96,
+      bin:   74,
+      min: false,
+      max: true
+    },
+    ceilingHeight: {
+      value: 12,
+      bin:   37,
+      min: false,
+      max: true
+    }
+  }
+};
+
+export const SORTCEILINGDESC_EQUAL: { [name: string]: BinnedStageDimensions } = {
+  dimA: {
+    name: 'wDts8fUKD4',
+    gameName: 'CfvpGjfY7W',
+    blastzoneWidth: {
+      value: 59,
+      bin:   78,
+      min: true,
+      max: false
+    },
+    stageLength: {
+      value: 83,
+      bin:   38,
+      min: false,
+      max: true
+    },
+    offStageDistance: {
+      value: 27,
+      bin:   32,
+      min: false,
+      max: false
+    },
+    ceilingHeight: {
+      value: 92,
+      bin:   80,
+      min: false,
+      max: true
+    }
+  },
+  dimB: {
+    name: 'wDts8fUKD4',
+    gameName: 'lWiuB5QZL5',
+    blastzoneWidth: {
+      value: 51,
+      bin:   6,
+      min: true,
+      max: true
+    },
+    stageLength: {
+      value: 95,
+      bin:   81,
+      min: true,
+      max: true
+    },
+    offStageDistance: {
+      value: 99,
+      bin:   47,
+      min: false,
+      max: false
+    },
+    ceilingHeight: {
+      value: 92,
+      bin:   80,
+      min: false,
+      max: true
+    }
+  }
+};
+
+export const SORTCEILINGDESC_INVALID_A: { invalidDim: any, dimB: BinnedStageDimensions } = {
+  invalidDim: {
+    att: [30, 9],
+    bet: [-17, 34, 5938]
+  },
+  dimB: {
+    name: 'qk8znJKZmn',
+    gameName: 'ncmchRwD0A',
+    blastzoneWidth: {
+      value: 69,
+      bin:   56,
+      min: true,
+      max: false
+    },
+    stageLength: {
+      value: 79,
+      bin:   52,
+      min: false,
+      max: false
+    },
+    offStageDistance: {
+      value: 85,
+      bin:   48,
+      min: true,
+      max: true
+    },
+    ceilingHeight: {
+      value: 59,
+      bin:   92,
+      min: false,
+      max: true
+    }
+  }
+};
+
+export const SORTCEILINGDESC_INVALID_B: { dimA: BinnedStageDimensions, invalidDim: any } = {
+  dimA: {
+    name: 'WwwtT0CpIa',
+    gameName: 'UkMeJD6HoO',
+    blastzoneWidth: {
+      value: 23,
+      bin:   94,
+      min: true,
+      max: false
+    },
+    stageLength: {
+      value: 27,
+      bin:   50,
+      min: false,
+      max: false
+    },
+    offStageDistance: {
+      value: 28,
+      bin:   4,
+      min: true,
+      max: true
+    },
+    ceilingHeight: {
+      value: 88,
+      bin:   74,
+      min: true,
+      max: true
+    }
+  },
+  invalidDim: 39
+};
+
 /*
 
-export const SORTBLASTDESC_DIM_VAL: { [name: string]: BinnedStageDimensions } = {
+export const SORTCEILINGDESC_DIM_VAL: { [name: string]: BinnedStageDimensions } = {
   dimA: {
     name: '',
     gameName: '',
     blastzoneWidth: {
       value: 0,
-      bin: 0,
+      bin:   0,
       min: false,
       max: false
     },
     stageLength: {
       value: 0,
-      bin: 0,
+      bin:   0,
       min: false,
       max: false
     },
     offStageDistance: {
       value: 0,
-      bin: 0,
+      bin:   0,
       min: false,
       max: false
     },
     ceilingHeight: {
       value: 0,
-      bin: 0,
+      bin:   0,
       min: false,
       max: false
     }
@@ -701,25 +1664,25 @@ export const SORTBLASTDESC_DIM_VAL: { [name: string]: BinnedStageDimensions } = 
     gameName: '',
     blastzoneWidth: {
       value: 0,
-      bin: 0,
+      bin:   0,
       min: false,
       max: false
     },
     stageLength: {
       value: 0,
-      bin: 0,
+      bin:   0,
       min: false,
       max: false
     },
     offStageDistance: {
       value: 0,
-      bin: 0,
+      bin:   0,
       min: false,
       max: false
     },
     ceilingHeight: {
       value: 0,
-      bin: 0,
+      bin:   0,
       min: false,
       max: false
     }

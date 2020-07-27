@@ -81,10 +81,39 @@ export class StageComparatorGraphComponent implements OnChanges, OnInit {
 
   _updateData() {
     const dimensions: string[] = ['blastzoneWidth', 'stageLength', 'offStageDistance', 'ceilingHeight'];
+    if (
+      (this.dimension !== undefined)
+      && ( dimensions.includes(this.dimension) )
+    ) {
+      this.ids = DIMENSION_IDS[this.dimension];
+    }
+    else {
+      this.dimension = 'blastzoneWidth';
+      this.ids = DIMENSION_IDS.blastzoneWidth;
+    }
+
     if (this.stageData !== undefined) {
+      let sortMethod: (a: BinnedStageDimensions, b: BinnedStageDimensions) => number = BinnedStageDimensions.sortBlastzoneDesc;
+      switch (this.dimension) {
+        case 'blastzoneWidth':
+          sortMethod = BinnedStageDimensions.sortBlastzoneDesc;
+          break;
+        case 'stageLength':
+          sortMethod = BinnedStageDimensions.sortStageLengthDesc;
+          break;
+        case 'offStageDistance':
+          sortMethod = BinnedStageDimensions.sortOffStageDesc;
+          break;
+        case 'ceilingHeight':
+          sortMethod = BinnedStageDimensions.sortCeilingDesc;
+          break;
+        default:
+          sortMethod = BinnedStageDimensions.sortBlastzoneDesc;
+      }
+
       this.dataPresent = true;
       this.ids = DIMENSION_IDS[this.dimension];
-      this.displayData = this.stageData.dimensions.sort(BinnedStageDimensions.sortBlastzoneDesc).map(stage => {
+      this.displayData = this.stageData.dimensions.sort(sortMethod).map(stage => {
         return {
           name: stage.name,
           gameName: stage.gameName,
@@ -114,17 +143,6 @@ export class StageComparatorGraphComponent implements OnChanges, OnInit {
     }
     else {
       this.dataPresent = false;
-    }
-
-    if (
-      (this.dimension !== undefined)
-      && ( dimensions.includes(this.dimension) )
-    ) {
-      this.ids = DIMENSION_IDS[this.dimension];
-    }
-    else {
-      this.dimension = 'blastzoneWidth';
-      this.ids = DIMENSION_IDS.blastzoneWidth;
     }
   }
 

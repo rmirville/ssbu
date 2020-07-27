@@ -1489,14 +1489,6 @@ export const DISPLAY_RANGES: {   inputSet: BinnedStageDimensionsSet, expectedRan
   }
 };
 
-/*
-skyward
-hyrule64_f
-gamer_
-wrecking_
-poke_tengam_
-*/
-
 export const DISPLAY_SORT_DEFAULT: { inputSet: BinnedStageDimensionsSet, expectedClasses: string[] } = {
   inputSet: {
     bins: 5,
@@ -1671,6 +1663,830 @@ export const DISPLAY_SORT_DEFAULT: { inputSet: BinnedStageDimensionsSet, expecte
     "numtable_poke_tengam_",
     "numtable_skyward",
     "numtable_gamer_",
+  ]
+};
+
+export const DISPLAY_SORT_BLASTZONE: { inputSet: BinnedStageDimensionsSet, expectedClasses: string[] } = {
+  inputSet: {
+    bins: 5,
+    dimensions: [
+      {
+        name: "Skyloft",
+        gameName: "skyward",
+        blastzoneWidth: {
+          value: 230,
+          bin:   3,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 86,
+          bin:   3,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 144,
+          bin:   4,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 192,
+          bin:   4,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "Yoshi's Story",
+        gameName: "yoshi_cartboard_",
+        blastzoneWidth: {
+          value: 227,
+          bin:   3,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 68,
+          bin:   1,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 159,
+          bin:   5,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 184,
+          bin:   2,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "Final Destination (Large)",
+        gameName: "end_l_common",
+        blastzoneWidth: {
+          value: 280,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        stageLength: {
+          value: 120,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        offStageDistance: {
+          value: 160,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        ceilingHeight: {
+          value: 180,
+          bin:   1,
+          min:   true,
+          max:   false
+        }
+      },
+      {
+        name: "Windy Hill Zone",
+        gameName: "windyhill_",
+        blastzoneWidth: {
+          value: 222,
+          bin:   3,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 115,
+          bin:   5,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 107,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 193,
+          bin:   4,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "Duck Hunt",
+        gameName: "duckhunt_",
+        blastzoneWidth: {
+          value: 250,
+          bin:   4,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 95,
+          bin:   3,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 155,
+          bin:   5,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 180,
+          bin:   1,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "WarioWare",
+        gameName: "xmadein_",
+        blastzoneWidth: {
+          value: 180,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        stageLength: {
+          value: 58,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        offStageDistance: {
+          value: 122,
+          bin:   2,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 198,
+          bin:   5,
+          min:   false,
+          max:   true
+        }
+      },
+    ],
+    ranges: {
+      blastzoneWidth: {
+        min:   180,
+        max:   280,
+        range: 100
+      },
+      stageLength: {
+        min:   58,
+        max:   120,
+        range: 62
+      },
+      offStageDistance: {
+        min:   107,
+        max:   160,
+        range: 53
+      },
+      ceilingHeight: {
+        min:   180,
+        max:   198,
+        range: 18
+      }
+    }
+  },
+  expectedClasses: [
+    "numtable_end_l_common",
+    "numtable_duckhunt_",
+    "numtable_skyward",
+    "numtable_yoshi_cartboard_",
+    "numtable_windyhill_",
+    "numtable_xmadein_",
+  ]
+};
+
+export const DISPLAY_SORT_STAGELENGTH: { inputSet: BinnedStageDimensionsSet, expectedClasses: string[] } = {
+  inputSet: {
+    bins: 5,
+    dimensions: [
+      {
+        name: "Rainbow Cruise",
+        gameName: "mario_rainbow_",
+        blastzoneWidth: {
+          value: 228,
+          bin:   2,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 96,
+          bin:   5,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 132,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 139,
+          bin:   1,
+          min:   true,
+          max:   false
+        }
+      },
+      {
+        name: "Luigi's Mansion",
+        gameName: "xmansion_",
+        blastzoneWidth: {
+          value: 255,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        stageLength: {
+          value: 95,
+          bin:   5,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 160,
+          bin:   4,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 200,
+          bin:   3,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "Wrecking Crew",
+        gameName: "wrecking_",
+        blastzoneWidth: {
+          value: 252,
+          bin:   5,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 97,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        offStageDistance: {
+          value: 155,
+          bin:   4,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 244,
+          bin:   5,
+          min:   false,
+          max:   true
+        }
+      },
+      {
+        name: "Arena Ferox",
+        gameName: "colloseum_",
+        blastzoneWidth: {
+          value: 253,
+          bin:   5,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 93,
+          bin:   5,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 160,
+          bin:   4,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 190,
+          bin:   3,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "Yoshi Island",
+        gameName: "xcrayon_",
+        blastzoneWidth: {
+          value: 220,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        stageLength: {
+          value: 70,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        offStageDistance: {
+          value: 150,
+          bin:   3,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 185,
+          bin:   3,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "Mushroom Kingdom U",
+        gameName: "mariou_",
+        blastzoneWidth: {
+          value: 250,
+          bin:   5,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 81,
+          bin:   3,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 169,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        ceilingHeight: {
+          value: 192,
+          bin:   3,
+          min:   false,
+          max:   false
+        }
+      },
+    ],
+    ranges: {
+      blastzoneWidth: {
+        min:   220,
+        max:   255,
+        range: 35
+      },
+      stageLength: {
+        min:   70,
+        max:   97,
+        range: 27
+      },
+      offStageDistance: {
+        min:   132,
+        max:   169,
+        range: 37
+      },
+      ceilingHeight: {
+        min:   139,
+        max:   244,
+        range: 105
+      }
+    }
+  },
+  expectedClasses: [
+    "numtable_wrecking_",
+    "numtable_mario_rainbow_",
+    "numtable_xmansion_",
+    "numtable_colloseum_",
+    "numtable_mariou_",
+    "numtable_xcrayon_",
+  ]
+};
+
+export const DISPLAY_SORT_OFFSTAGE: { inputSet: BinnedStageDimensionsSet, expectedClasses: string[] } = {
+  inputSet: {
+    bins: 5,
+    dimensions: [
+      {
+        name: "Princess Peach's Castle",
+        gameName: "mario_castledx_",
+        blastzoneWidth: {
+          value: 275,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        stageLength: {
+          value: 121,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        offStageDistance: {
+          value: 154,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 209,
+          bin:   2,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "Mementos",
+        gameName: "jack_mementoes_",
+        blastzoneWidth: {
+          value: 260,
+          bin:   4,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 100,
+          bin:   3,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 160,
+          bin:   2,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 185,
+          bin:   1,
+          min:   true,
+          max:   false
+        }
+      },
+      {
+        name: "Kongo Jungle",
+        gameName: "64jungle_",
+        blastzoneWidth: {
+          value: 230,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        stageLength: {
+          value: 71,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        offStageDistance: {
+          value: 159,
+          bin:   2,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 190,
+          bin:   1,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "Umbra Clock Tower",
+        gameName: "umbra_f",
+        blastzoneWidth: {
+          value: 250,
+          bin:   3,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 80,
+          bin:   1,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 170,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        ceilingHeight: {
+          value: 192,
+          bin:   1,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "Fountain of Dreams",
+        gameName: "kirby_fountain_",
+        blastzoneWidth: {
+          value: 240,
+          bin:   2,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 77,
+          bin:   1,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 163,
+          bin:   3,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 191,
+          bin:   1,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "Spear Pillar",
+        gameName: "poke_tengam_",
+        blastzoneWidth: {
+          value: 245,
+          bin:   2,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 80,
+          bin:   1,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 165,
+          bin:   4,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 260,
+          bin:   5,
+          min:   false,
+          max:   true
+        }
+      },
+    ],
+    ranges: {
+      blastzoneWidth: {
+        min:   230,
+        max:   275,
+        range: 45
+      },
+      stageLength: {
+        min:   71,
+        max:   121,
+        range: 50
+      },
+      offStageDistance: {
+        min:   154,
+        max:   170,
+        range: 16
+      },
+      ceilingHeight: {
+        min:   185,
+        max:   260,
+        range: 75
+      }
+    }
+  },
+  expectedClasses: [
+    "numtable_umbra_f",
+    "numtable_poke_tengam_",
+    "numtable_kirby_fountain_",
+    "numtable_jack_mementoes_",
+    "numtable_64jungle_",
+    "numtable_mario_castledx_",
+  ]
+};
+
+export const DISPLAY_SORT_CEILING: { inputSet: BinnedStageDimensionsSet, expectedClasses: string[] } = {
+  inputSet: {
+    bins: 5,
+    dimensions: [
+      {
+        name: "Super Happy Tree",
+        gameName: "yoshi_story_",
+        blastzoneWidth: {
+          value: 295,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        stageLength: {
+          value: 5,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        offStageDistance: {
+          value: 290,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        ceilingHeight: {
+          value: 213,
+          bin:   5,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "Lylat Cruise",
+        gameName: "xstarfox_",
+        blastzoneWidth: {
+          value: 230,
+          bin:   2,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 80,
+          bin:   4,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 150,
+          bin:   1,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 188,
+          bin:   1,
+          min:   true,
+          max:   false
+        }
+      },
+      {
+        name: "PictoChat 2",
+        gameName: "pictchat_",
+        blastzoneWidth: {
+          value: 225,
+          bin:   2,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 80,
+          bin:   4,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 145,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 196,
+          bin:   2,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "Kalos Pokemon League",
+        gameName: "kalos_",
+        blastzoneWidth: {
+          value: 245,
+          bin:   3,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 80,
+          bin:   4,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 165,
+          bin:   1,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 192,
+          bin:   1,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "Kongo Falls",
+        gameName: "dk_waterfall_",
+        blastzoneWidth: {
+          value: 203,
+          bin:   1,
+          min:   true,
+          max:   false
+        },
+        stageLength: {
+          value: 46,
+          bin:   2,
+          min:   false,
+          max:   false
+        },
+        offStageDistance: {
+          value: 157,
+          bin:   1,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 193,
+          bin:   1,
+          min:   false,
+          max:   false
+        }
+      },
+      {
+        name: "Big Battlefield",
+        gameName: "battlefield_l_",
+        blastzoneWidth: {
+          value: 290,
+          bin:   5,
+          min:   false,
+          max:   false
+        },
+        stageLength: {
+          value: 122,
+          bin:   5,
+          min:   false,
+          max:   true
+        },
+        offStageDistance: {
+          value: 168,
+          bin:   1,
+          min:   false,
+          max:   false
+        },
+        ceilingHeight: {
+          value: 216,
+          bin:   5,
+          min:   false,
+          max:   true
+        }
+      },
+    ],
+    ranges: {
+      blastzoneWidth: {
+        min:   203,
+        max:   295,
+        range: 92
+      },
+      stageLength: {
+        min:   5,
+        max:   122,
+        range: 117
+      },
+      offStageDistance: {
+        min:   145,
+        max:   290,
+        range: 145
+      },
+      ceilingHeight: {
+        min:   188,
+        max:   216,
+        range: 28
+      }
+    }
+  },
+  expectedClasses: [
+    "numtable_battlefield_l_",
+    "numtable_yoshi_story_",
+    "numtable_pictchat_",
+    "numtable_dk_waterfall_",
+    "numtable_kalos_",
+    "numtable_xstarfox_",
   ]
 };
 

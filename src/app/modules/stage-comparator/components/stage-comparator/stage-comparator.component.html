@@ -22,7 +22,7 @@
       <div class="form-group">
         <div class="dimension-control-container">
           <label for="dimensionControl"><h3>Dimension</h3></label>
-          <select id="dimensionControl" class="custom-select dimension-control" #dimensionControl (change)="setDimension(dimensionControl.value)">
+          <select id="dimensionControl" name="dimensionControl" class="custom-select dimension-control" #dimensionControl (change)="setDimension(dimensionControl.value)">
             <option value="blastzoneWidth" selected>
               Blastzone Width
             </option>
@@ -37,18 +37,18 @@
             </option>
           </select>
         </div>
-        <label><h3>Format</h3></label>
-        <ul class="row nav nav-pills">
-          <li class="nav-item col-12 col-sm-4">
-            <button class="nav-link h-100 align-middle stage-comparator-view-toggle" [class.active]="view == 'graph'" (click)="setView('graph')">Graph</button>
-          </li>
-          <li class="nav-item col-12 col-sm-4">
-            <button class="nav-link h-100 align-middle stage-comparator-view-toggle" [class.active]="view == 'text'" (click)="setView('text')">Text</button>
-          </li>
-          <li class="nav-item col-12 col-sm-4">
-            <button class="nav-link h-100 align-middle stage-comparator-view-toggle" [class.active]="view == 'number'" (click)="setView('number')">Numbers</button>
-          </li>
-        </ul>
+        <label for="viewControl"><h3>Format</h3></label>
+        <select id="viewControl" name="viewControl" class="custom-select view-control" #viewControl (change)="setView(viewControl.value)">
+          <option value="graph" selected>
+            Graph
+          </option>
+          <option value="text">
+            Text Table
+          </option>
+          <option value="number">
+            Number Table
+          </option>
+        </select>
       </div>
       <ng-container *ngIf="view == 'graph'">
         <ssbu-stage-comparator-graph [stageData]="binnedStageDimensionsSet" [dimension]="selectedDimension"></ssbu-stage-comparator-graph>

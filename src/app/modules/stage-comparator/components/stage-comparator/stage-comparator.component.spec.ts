@@ -749,21 +749,6 @@ describe('StageComparatorComponent', () => {
         expect(mocks.number.dElem).toBeNull();
       });
 
-      /*it(`should have a graph button with the 'active' class`, () => {
-        let graphNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(1) .stage-comparator-view-toggle'));
-        expect(graphNavDElem.nativeElement.classList.contains('active')).toBe(true);
-      });
-
-      it(`should have a text button without the 'active' class`, () => {
-        let textNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(2) .stage-comparator-view-toggle'));
-        expect(textNavDElem.nativeElement.classList.contains('active')).toBe(false);
-      });
-
-      it(`should have a numbers button without the 'active' class`, () => {
-        let numNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(3) .stage-comparator-view-toggle'));
-        expect(numNavDElem.nativeElement.classList.contains('active')).toBe(false);
-      });*/
-
     });
 
     describe('graph view', () => {
@@ -832,21 +817,6 @@ describe('StageComparatorComponent', () => {
         expect(mocks.number.dElem).toBeNull();
       });
 
-      /*it(`should have a graph button without the 'active' class`, () => {
-        let graphNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(1) .stage-comparator-view-toggle'));
-        expect(graphNavDElem.nativeElement.classList.contains('active')).toBe(false);
-      });
-
-      it(`should have a text button with the 'active' class`, () => {
-        let textNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(2) .stage-comparator-view-toggle'));
-        expect(textNavDElem.nativeElement.classList.contains('active')).toBe(true);
-      });
-
-      it(`should have a numbers button without the 'active' class`, () => {
-        let numNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(3) .stage-comparator-view-toggle'));
-        expect(numNavDElem.nativeElement.classList.contains('active')).toBe(false);
-      });*/
-
     });
 
     describe('number view', () => {
@@ -873,23 +843,45 @@ describe('StageComparatorComponent', () => {
         expect(actualContent).toEqual(expectedContent);
       });
 
-      /*it(`should have a graph button without the 'active' class`, () => {
-        let graphNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(1) .stage-comparator-view-toggle'));
-        expect(graphNavDElem.nativeElement.classList.contains('active')).toBe(false);
-      });
-
-      it(`should have a text button without the 'active' class`, () => {
-        let textNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(2) .stage-comparator-view-toggle'));
-        expect(textNavDElem.nativeElement.classList.contains('active')).toBe(false);
-      });
-
-      it(`should have a numbers button with the 'active' class`, () => {
-        let numNavDElem: DebugElement = dElem.query(By.css('.nav-pills li:nth-of-type(3) .stage-comparator-view-toggle'));
-        expect(numNavDElem.nativeElement.classList.contains('active')).toBe(true);
-      });*/
-
     });
 
+    describe('view selector', () => {
+      it('should exist', () => {
+        ///
+        // console.groupCollapsed('=== SPEC - view selector - exists ===');
+        const viewControlDElem: DebugElement = dElem.query(By.css('.view-control'));
+        expect(viewControlDElem.nativeElement).toBeDefined();
+        ///
+        // console.groupEnd();
+      });
+
+      it('should be set to graph by default', () => {
+        ///
+        // console.groupCollapsed('=== SPEC - view selector - graph view by default ===');
+        const viewControlDElem: DebugElement = dElem.query(By.css('.view-control'));
+        expect(viewControlDElem.nativeElement.value).toEqual('graph');
+        ///
+        // console.groupEnd();
+      });
+
+      it('should set the view property to the selected value', () => {
+        ///
+        // console.groupCollapsed('=== SPEC - view selector - set view property ===');
+        const views: string[] = ['text', 'number', 'graph'];
+        const viewControlDElem: DebugElement = dElem.query(By.css('.view-control'));
+
+        for (const view of views) {
+          const expectedView: string = view;
+          viewControlDElem.nativeElement.value = view;
+          viewControlDElem.nativeElement.dispatchEvent(new Event('change'));
+          fixture.detectChanges();
+
+          expect(comparator.view).withContext(expectedView).toEqual(expectedView);
+        }
+        ///
+        // console.groupEnd();
+      });
+    });
 
     describe('dimension selector', () => {
 

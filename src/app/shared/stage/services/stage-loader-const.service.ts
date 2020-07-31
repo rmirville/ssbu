@@ -37,8 +37,8 @@ export class StageLoaderConstService implements StageLoaderSubService {
       }
       else {
         observer.next(SAVED_STAGES);
+        observer.complete();
       }
-      observer.complete();
     });
   }
 }

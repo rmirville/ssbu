@@ -20,8 +20,12 @@
             "tsConfig": "tsconfig.app.json",
             "aot": false,
             "assets": [
+              "src/assets",
               "src/favicon.ico",
-              "src/assets"
+              "src/icon-16x16.png",
+              "src/icon-32x32.png",
+              "src/android-chrome-192x192.png",
+              "src/apple-touch-icon.png"
             ],
             "styles": [
               "src/styles.css"

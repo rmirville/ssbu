@@ -253,14 +253,14 @@ export class StageClassificationsService {
       gameName: "xmadein_",
       name: "WarioWare, Inc.",
       abbr: "WW",
-      series: "WarioWare",
+      series: "WarioWare, Inc.",
       tourneyPresence: -1
     },
     {
       gameName: "wrecking_",
       name: "Wrecking Crew",
       abbr: "WC",
-      series: "Miscellaneous",
+      series: "Super Mario",
       tourneyPresence: -1
     },
     {

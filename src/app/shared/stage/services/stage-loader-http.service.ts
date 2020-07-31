@@ -10,7 +10,7 @@ import { StageSummary, isStageSummaryArray } from '../models/stage-summary.model
 import { StageDetails, isStageDetails } from '../models/stage-details.model';
 import { Stage } from '../models/stage.model';
 
-const API_URL = 'https://rubendal.github.io/ssbu/data/patch/7.0.0';
+const API_URL = 'https://rubendal.github.io/ssbu/data/patch/8.0.0';
 const API_STAGE_LIST_PATH = '/stages.json';
 const API_STAGE_DETAILS_PATH = '/data.json';
 const API_STAGE_DETAILS_PREFIX = '/stage/';
@@ -181,7 +181,9 @@ export class StageLoaderHttpService implements StageLoaderSubService {
         // console.log(`      + details$ - summary: ${JSON.stringify(summaries[i])}`);
         // console.log('      + checking summary type');
 
-        const url = API_URL + API_STAGE_DETAILS_PREFIX + filteredSummaries[i].name + API_STAGE_DETAILS_PATH;
+        let namePath: string = filteredSummaries[i].name.replace('.', '');
+
+        const url = API_URL + API_STAGE_DETAILS_PREFIX + namePath + API_STAGE_DETAILS_PATH;
 
         ///
         // console.log(`      + retrieving details from url: ${url}`);

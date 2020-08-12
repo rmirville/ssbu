@@ -6,9 +6,18 @@ const ROUTES: Routes = [
     path: 'stage-comparison',
     loadChildren: () => import('./modules/stage-comparator/stage-comparator.module').then(m => m.StageComparatorModule)
   },
-  { path: '',
+  {
+    path: '404',
+    loadChildren: () => import('./modules/pages/page-not-found/page-not-found.module').then(m => m.PageNotFoundModule)
+  },
+  {
+    path: '',
     redirectTo: 'stage-comparison',
     pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: '404'
   }
 ];
 

@@ -713,7 +713,7 @@ label h3 {
 }
 
 .card-header .collapse-icon::before {
-  content: "–";
+  content: "-";
 }
 
 .card-header .collapsed .collapse-icon::before {

@@ -11,12 +11,14 @@
     </ul>
     
     <p>Select which stages you want to compare below.</p>
+
+    <p><span class="badge badge-dark">Note</span> Not all stages are available. See <a [routerLink]="'.'" [fragment]="'limits'">Limitations</a> below for details.</p>
   </section>
 
   <ssbu-stage-select [stages]="stageClassifications" [parentEvent$]="selectSubject$.asObservable()" (submitSelection)="getStats($event)"></ssbu-stage-select>
   <div class="card">
     <div class="card-header">
-      <h2>Stage Dimensions</h2>
+      <h2><a name="dimensions">Stage Dimensions</a></h2>
     </div>
     <div class="card-body">
       <div class="form-group">
@@ -63,7 +65,7 @@
   </div>
   <div role="region" aria-labelledby="notes-header" class="card">
     <div class="card-header">
-      <h2 id="notes-header">Notes</h2>
+      <h2 id="notes-header"><a name="notes">Notes</a></h2>
     </div>
     <div class="card-body">
       <h3>Definitions</h3>
@@ -75,7 +77,7 @@
       <p><strong>Commonly / Rarely legal:</strong> How frequently a stage appeared in <a href="https://www.redbull.com/us-en/pgru-fall-2019" target="_blank">PGRU</a> S-tier and A-tier tournaments during the Fall 2019 and Spring 2020 seasons</p>
       <p>All number values are rounded to the nearest integer.</p>
 
-      <h3>Limitations</h3>
+      <h3><a name="limits">Limitations</a></h3>
 
       <p>Not all stages could be represented, due to how this site's code interprets stage data. Example skipped stages include:</p>
 

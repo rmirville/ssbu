@@ -426,6 +426,13 @@ a.aria-skip-link:visited,
   margin-bottom: 0;
 }
 
+/* Content - Badges */
+.badge {
+  margin-bottom: .25em;
+  vertical-align: middle;
+  font-size: 85%;
+}
+
 /* Content - Navs */
 .row.nav-pills {
   margin-bottom: 1rem;

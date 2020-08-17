@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
-const BASE_HREF: string = '/ssbu';
+const BASE_HREF: string = '';
 
 @Component({
   selector: 'ssbu-root',

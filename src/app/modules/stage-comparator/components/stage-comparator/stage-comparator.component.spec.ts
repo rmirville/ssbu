@@ -2,6 +2,7 @@ import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { Observable, throwError } from 'rxjs';
 
 import { asyncData } from '../../../../testing/async-observable-helpers';
@@ -58,7 +59,7 @@ describe('StageComparatorComponent', () => {
       fixture: ComponentFixture<StageComparatorNumberTableMockComponent>
     }
   };
-  let activatedRouteStub: Partial<ActivatedRoute>;
+  let activatedRouteStub: any;
   let dElem: DebugElement;
   let stageDimensionsSpy: { getDimensionsFull: jasmine.Spy, getDimensionsBinned: jasmine.Spy };
   let stagePieceMapStub: Partial<StagePieceMapService>;
@@ -72,7 +73,8 @@ describe('StageComparatorComponent', () => {
           stageClassifications: STAGE_CLASSES.ONE
         }});
         observer.complete();
-      })
+      }),
+      snapshot: {}
     };
     stageDimensionsSpy = jasmine.createSpyObj('StageDimensionsService', ['getDimensionsFull', 'getDimensionsBinned']);
     stagePieceMapStub = {
@@ -102,7 +104,9 @@ describe('StageComparatorComponent', () => {
           useValue: stagePieceMapStub
         }
       ],
-      imports: []
+      imports: [
+        RouterTestingModule.withRoutes([{path: 'stage-comparison', component: StageComparatorComponent}])
+      ]
     })
     .compileComponents();
   }));
@@ -496,7 +500,9 @@ describe('StageComparatorComponent', () => {
               useValue: pieceMapSpy
             }
           ],
-          imports: []
+          imports: [
+            RouterTestingModule.withRoutes([{path: 'stage-comparison', component: StageComparatorComponent}])
+          ]
         }).compileComponents();
         fixture = TestBed.createComponent(StageComparatorComponent);
         comparator = fixture.componentInstance;

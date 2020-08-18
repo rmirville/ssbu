@@ -50,7 +50,8 @@ export class StageSelectComponent implements OnChanges, OnInit {
     tourneyPresence: {
       legalCommon: StageClassifications[],
       legalUncommon: StageClassifications[],
-      legalRare: StageClassifications[]
+      legalRare: StageClassifications[],
+      legalPotential: StageClassifications[]
     },
     series: {
       [seriesName: string]: StageClassifications[]
@@ -59,7 +60,8 @@ export class StageSelectComponent implements OnChanges, OnInit {
     tourneyPresence: {
       legalCommon: [],
       legalUncommon: [],
-      legalRare: []
+      legalRare: [],
+      legalPotential: []
     },
     series: {}
   };
@@ -87,6 +89,12 @@ export class StageSelectComponent implements OnChanges, OnInit {
         id: 'legalRare',
         title: 'Rarely Legal',
         attribute: 'tourney-legal-rare',
+        show: false
+      },
+      {
+        id: 'legalPotential',
+        title: 'Potentially / Formerly Legal',
+        attribute: 'tourney-legal-potential',
         show: false
       }
     ]
@@ -120,6 +128,7 @@ export class StageSelectComponent implements OnChanges, OnInit {
     let legalCommonStages: StageClassifications[] = [];
     let legalUncommonStages: StageClassifications[] = [];
     let legalRareStages: StageClassifications[] = [];
+    let legalPotentialStages: StageClassifications[] = [];
     let seriesStages: { [seriesName: string]: StageClassifications[] } = {};
     
     if (this.stages.length === 0) {
@@ -156,6 +165,9 @@ export class StageSelectComponent implements OnChanges, OnInit {
           case 2:
             legalRareStages.push(stage);
             break;
+          case 3:
+            legalPotentialStages.push(stage);
+            break;
         }
         this.selectionForm.addControl(stage.gameName, this.fb.control(isCommonlyLegal));
       }
@@ -189,6 +201,7 @@ export class StageSelectComponent implements OnChanges, OnInit {
       this.classifiedStages.tourneyPresence.legalCommon = [...legalCommonStages.sort(this._compareInfo.bind(this))];
       this.classifiedStages.tourneyPresence.legalUncommon = [...legalUncommonStages.sort(this._compareInfo.bind(this))];
       this.classifiedStages.tourneyPresence.legalRare = [...legalRareStages.sort(this._compareInfo.bind(this))];
+      this.classifiedStages.tourneyPresence.legalPotential = [...legalPotentialStages.sort(this._compareInfo.bind(this))];
 
       ///
       // console.log(`* classifiedStages.legalCommon: ${JSON.stringify(this.classifiedStages.tourneyPresence.legalCommon)}`);
@@ -196,6 +209,7 @@ export class StageSelectComponent implements OnChanges, OnInit {
       this.tourneyPresence.sections[0].show = (this.classifiedStages.tourneyPresence.legalCommon.length > 0);
       this.tourneyPresence.sections[1].show = (this.classifiedStages.tourneyPresence.legalUncommon.length > 0);
       this.tourneyPresence.sections[2].show = (this.classifiedStages.tourneyPresence.legalRare.length > 0);
+      this.tourneyPresence.sections[3].show = (this.classifiedStages.tourneyPresence.legalPotential.length > 0);
       this.tourneyPresence.show = (this.tourneyPresence.sections[0].show || this.tourneyPresence.sections[1].show || this.tourneyPresence.sections[2].show);
 
       this.rootSections.push(this.tourneyPresence);

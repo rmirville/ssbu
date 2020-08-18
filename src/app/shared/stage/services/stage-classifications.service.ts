@@ -54,6 +54,13 @@ export class StageClassificationsService {
       tourneyPresence: -1
     },
     {
+      gameName: "battlefield_s_",
+      name: "Small Battlefield",
+      abbr: "SBF",
+      series: "Super Smash Bros.",
+      tourneyPresence: 3
+    },
+    {
       gameName: "umbra_f",
       name: "Umbra Clock Tower",
       abbr: "UCT",
@@ -107,7 +114,7 @@ export class StageClassificationsService {
       name: "Castle Siege",
       abbr: "CS",
       series: "Fire Emblem",
-      tourneyPresence: -1
+      tourneyPresence: 3
     },
     {
       gameName: "xstarfox_",
@@ -219,7 +226,7 @@ export class StageClassificationsService {
       name: "Unova Pokémon League",
       abbr: "UPL",
       series: "Pokémon",
-      tourneyPresence: -1
+      tourneyPresence: 3
     },
     {
       gameName: "wily_",

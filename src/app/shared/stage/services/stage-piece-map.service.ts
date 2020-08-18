@@ -37,6 +37,10 @@ export class StagePieceMapService {
         pieceName: "COL_00_Floor01"
       },
       {
+        lvd: "battlefield_s_00",
+        pieceName: "COL_00_Floor01"
+      },
+      {
         lvd: "umbra_f00",
         pieceName: "COL_00_Floor01"
       },

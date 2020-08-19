@@ -55,17 +55,17 @@
         </div>
       </ng-container>
       <div class="form-group stage-select-submit">
-        <div *ngIf="errorActive" class="row">
-          <div class="col-12">
-            <div *ngIf="parentError.active" class="alert alert-error error">{{parentError.message}}</div>
-            <div *ngIf="errors.noStages.active" class="alert alert-error error">{{errors.noStages.message}}</div>
-            <div *ngIf="!selectionForm.valid" class="alert alert-error error">Please select at least one stage.</div>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary mb-2" [disabled]="!selectionForm.valid">Update</button>
+        <ng-container *ngIf="errorActive">
+          <div *ngIf="parentError.active" class="alert alert-danger error">{{parentError.message}}</div>
+          <div *ngIf="errors.noStages.active" class="alert alert-danger error">{{errors.noStages.message}}</div>
+          <div *ngIf="!selectionForm.valid" class="alert alert-danger error">Please select at least one stage.</div>
+        </ng-container>
+        
         <div *ngIf="showUpdateSuccess" class="alert alert-success update-success" role="alert">
           Update succeeded! View the results below.
         </div>
+        
+        <button type="submit" class="btn btn-primary mb-2" [disabled]="!selectionForm.valid">Update</button>
       </div>
     </form>
   </div>

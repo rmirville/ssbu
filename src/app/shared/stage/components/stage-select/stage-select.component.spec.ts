@@ -1,5 +1,5 @@
 import { DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, fakeAsync, ComponentFixture, TestBed, tick, flush } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule, } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
@@ -207,6 +207,24 @@ describe('StageSelectComponent', () => {
     expect(errorDElem).toBeUndefined();
     ///
     // console.groupEnd();
+  });
+
+  describe('root sections', () => {
+    describe('root section header', () => {
+      it('should not trigger a submission after being clicked', () => {
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.ROOTHEADER_NOSUBMIT;
+        let submitSelectedSpy: jasmine.Spy = spyOn(selectComp, 'submitSelected').and.stub();
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+        
+        const headerDElem: DebugElement = selectDElem.query(By.css(`.stage-select-root-section-header`));
+        headerDElem.nativeElement.click();
+        selectHostFixture.detectChanges();
+        
+        // StageSelect calls submitSelected() once on initialization, so make sure it isn't called a second time.
+        expect(submitSelectedSpy).toHaveBeenCalledTimes(1);
+      });
+    });
   })
 
   describe('tournament legality section', () => {
@@ -1713,6 +1731,55 @@ describe('StageSelectComponent', () => {
         ///
         // console.groupEnd();
       });
+    });
+
+    describe('success message', () => {
+      it('should not appear by default', () => {
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.SUCCESS_NOTICE_INIT;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+        
+        const successDElem: DebugElement = selectDElem.query(By.css(`.stage-select-submit .update-success`));
+        expect(successDElem).toBeNull();
+      });
+
+      it('should appear after receiving a success notification', async(() => {
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.SUCCESS_NOTICE_SHOW;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+        
+        selectHostComp.selectSubject$.next('updateSuccess');
+        selectHostFixture.detectChanges();
+        const successDElem: DebugElement = selectDElem.query(By.css(`.stage-select-submit .update-success`));
+
+        expect(successDElem.nativeElement.textContent.trim()).withContext('match success message').toEqual('Update succeeded! View the results below.');
+      }));
+
+      it('should hide 3 seconds after it appears', fakeAsync(() => {
+        const inputStages: StageClassifications[] = STAGE_SELECTIONS.SUCCESS_NOTICE_AUTOHIDE;
+        selectHostComp.stages = [...inputStages];
+        selectHostFixture.detectChanges();
+        
+        selectHostComp.selectSubject$.next('updateSuccess');
+        tick(2999);
+
+        selectHostFixture.detectChanges();
+        
+        let successDElem: DebugElement = selectDElem.query(By.css(`.stage-select-submit .update-success`));
+
+        expect(successDElem.nativeElement.textContent.trim()).withContext('match success message').toEqual('Update succeeded! View the results below.');
+
+        tick(1);
+        selectHostFixture.whenStable().then(() => {
+          selectHostFixture.detectChanges();
+          
+          successDElem = selectDElem.query(By.css(`.stage-select-submit .update-success`));
+
+          expect(successDElem).toBeNull();
+          
+          flush();
+        });
+      }));
     });
 
     describe('parentError section', () => {

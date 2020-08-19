@@ -33,6 +33,7 @@ export class StageSelectComponent implements OnChanges, OnInit {
   @Output() submitSelection = new EventEmitter<string[]>();
 
   errorActive: boolean = false;
+  showUpdateSuccess: boolean = false;
 
   parentError: { active: boolean, message: string } = {
     active: false,
@@ -120,6 +121,12 @@ export class StageSelectComponent implements OnChanges, OnInit {
             this.parentError.active = true;
             this.parentError.message = "Something went wrong. Try refreshing the page.";
             this._updateErrorActive();
+            break;
+          case 'updateSuccess':
+            this.showUpdateSuccess = true;
+            setTimeout(() => {
+              this.showUpdateSuccess = false;
+            }, 3000);
             break;
         }
       }

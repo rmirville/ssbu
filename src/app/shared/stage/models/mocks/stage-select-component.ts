@@ -5658,4 +5658,158 @@ export const UPDATE_ALL_INVALID_VALUE: StageClassifications[] = [
     series: "Unwritten Bead",
     tourneyPresence: 1
   },
-]
+];
+
+export const SUCCESS_NOTICE_INIT: StageClassifications[] = [
+  {
+    name: "qJSIuIeCKK",
+    abbr: "YH",
+    gameName: "VOCJROoIqk",
+    series: "ptUzuhVbhl",
+    tourneyPresence: -1
+  },
+  {
+    name: "QcMkUhIIFp",
+    abbr: "YK",
+    gameName: "fffsDYvUJi",
+    series: "tJjNeCEKkf",
+    tourneyPresence: -1
+  },
+  {
+    name: "MzUlZWsDbr",
+    abbr: "UX",
+    gameName: "AgReThTmtv",
+    series: "cWIdDSFpFC",
+    tourneyPresence: -1
+  },
+  {
+    name: "TYsSRIkNoP",
+    abbr: "EJ",
+    gameName: "DxSbJMNImh",
+    series: "EgHRhhaNWv",
+    tourneyPresence: -1
+  },
+];
+
+export const SUCCESS_NOTICE_SHOW: StageClassifications[] = [
+  {
+    name: "uqkDSsxWXS",
+    abbr: "ZH",
+    gameName: "fjIIocgEmv",
+    series: "RAJTxvFNlW",
+    tourneyPresence: 1
+  },
+  {
+    name: "ODVpZaUcXW",
+    abbr: "YO",
+    gameName: "srfGPalxDb",
+    series: "TskcNDuyEy",
+    tourneyPresence: 0
+  },
+  {
+    name: "saDsvEOksD",
+    abbr: "UG",
+    gameName: "ADjGVAZFrs",
+    series: "qgXUjceQpf",
+    tourneyPresence: -1
+  },
+];
+export const SUCCESS_NOTICE_AUTOHIDE: StageClassifications[] = [
+  {
+    name: "zVIVfYlvGZ",
+    abbr: "ZF",
+    gameName: "XlzrzVSNZX",
+    series: "pVuoQxuaaG",
+    tourneyPresence: 3
+  },
+  {
+    name: "ewrjQqAiVo",
+    abbr: "VM",
+    gameName: "hZfkuiSGJM",
+    series: "LFjrzwPAlL",
+    tourneyPresence: 1
+  },
+  {
+    name: "pSPdBRFFmg",
+    abbr: "PO",
+    gameName: "mLSVAQIleU",
+    series: "kUlHhAFUDn",
+    tourneyPresence: -1
+  },
+  {
+    name: "alKnLErXvq",
+    abbr: "AH",
+    gameName: "lAAGBiLkCw",
+    series: "ewqqhYaaVR",
+    tourneyPresence: 0
+  },
+  {
+    name: "hMQgqCVsXS",
+    abbr: "QS",
+    gameName: "XBqHkTJXPd",
+    series: "pXCeXFkbhz",
+    tourneyPresence: 2
+  },
+];
+
+export const ROOTHEADER_NOSUBMIT: StageClassifications[] = [
+  {
+    name: "CuwaveLYggJabBS",
+    abbr: "DQ",
+    gameName: "IhPmvbKcyiLCNvN",
+    series: "UjVAdTcKeASfRkl",
+    tourneyPresence: 1
+  },
+  {
+    name: "qHhReHWoJojiBhK",
+    abbr: "IZ",
+    gameName: "PRSWglTgpPlnULa",
+    series: "htikLFjcxDwgTKE",
+    tourneyPresence: 1
+  },
+  {
+    name: "ZmsHuszbXDyjSdY",
+    abbr: "QX",
+    gameName: "oqjTNRdHqbWxeLB",
+    series: "TYCCddRpIcnAWeJ",
+    tourneyPresence: -1
+  },
+  {
+    name: "ofRcbYuABbFOESV",
+    abbr: "GD",
+    gameName: "yyKyIyKVWMvRgwi",
+    series: "jYFGBsprQLeNVdM",
+    tourneyPresence: 3
+  },
+  {
+    name: "AgjfDUTNPjdsGUB",
+    abbr: "SC",
+    gameName: "HiKeYmIIxiPJnkz",
+    series: "SSyAuLfzlPuPJFN",
+    tourneyPresence: 3
+  },
+  {
+    name: "WCcirsbImWNjhSu",
+    abbr: "VY",
+    gameName: "TzFonZdaqBAiwRh",
+    series: "CBFqcqRxmBPyRHX",
+    tourneyPresence: 0
+  },
+  {
+    name: "ixYeLvcxEfmRblR",
+    abbr: "IK",
+    gameName: "fJcXbDhLMhxFFKj",
+    series: "QoIMLqQOUYPVQyE",
+    tourneyPresence: 2
+  },
+];
+
+/*
+{
+  name: "",
+  abbr: "",
+  gameName: "",
+  series: "",
+  tourneyPresence: -1
+},
+*/

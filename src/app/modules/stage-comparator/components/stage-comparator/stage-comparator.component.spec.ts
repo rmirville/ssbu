@@ -600,6 +600,46 @@ describe('StageComparatorComponent', () => {
         });
       }));
 
+      it('should not notify the select component if it updates stats successfuly the first time', async(() => {
+        const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_UPDATESUCCESS_INIT.inputGameNames;
+        const binnedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_UPDATESUCCESS_INIT.binnedData;
+        stageDimensionsSpy.getDimensionsBinned.and.returnValue(asyncData(binnedData));
+
+        comparator.getStats(inputGameNames);
+        comparator.view = 'graph';
+
+        fixture.whenStable().then(() => {
+          fixture.detectChanges();
+
+          mocks.select.comp = dElem.query(By.css('ssbu-stage-select')).componentInstance;
+          expect(mocks.select.comp.updateSuccess).toBe(false);
+        });
+
+      }));
+
+      it('should notify the select component if it updates the stats successfully the second time', async(() => {
+        const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_UPDATESUCCESS_NOTICE.inputGameNames;
+        const binnedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_UPDATESUCCESS_NOTICE.binnedData;
+        stageDimensionsSpy.getDimensionsBinned.and.returnValue(asyncData(binnedData));
+
+        comparator.getStats(inputGameNames);
+        comparator.view = 'graph';
+
+        fixture.whenStable().then(() => {
+          fixture.detectChanges();
+
+          comparator.getStats(inputGameNames);
+
+          fixture.whenStable().then(() => {
+            fixture.detectChanges();
+
+            mocks.select.comp = dElem.query(By.css('ssbu-stage-select')).componentInstance;
+            expect(mocks.select.comp.updateSuccess).toBe(true);
+
+          });
+        });
+      }));
+
       describe('data validation', () => {
 
         it('should reject an undefined stages', () => {

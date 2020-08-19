@@ -30,6 +30,7 @@ export class StageComparatorComponent implements OnInit {
   binnedStageDimensionsSet: BinnedStageDimensionsSet;
   view: string;
   selectedDimension: string;
+  firstLoad: boolean;
 
   constructor(
     private sds: StageDimensionsService,
@@ -53,6 +54,7 @@ export class StageComparatorComponent implements OnInit {
       // console.log(`this.stageSelectInfo: ${JSON.stringify(this.stageSelectInfo)}`);
     });
     this.selectSubject$ = new Subject<string>();
+    this.firstLoad = true;
     this.view = 'graph';
     ///
     // console.groupEnd();
@@ -116,6 +118,12 @@ export class StageComparatorComponent implements OnInit {
       {
         next: (binnedData: BinnedStageDimensionsSet) => {
           this.binnedStageDimensionsSet = binnedData;
+          if (!this.firstLoad) {
+            this.selectSubject$.next('updateSuccess');
+          }
+          else {
+            this.firstLoad = false;
+          }
         },
         error: (e: Error) => {
           this.zone.run(() => {

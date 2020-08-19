@@ -12,9 +12,11 @@ export class StageSelectMockComponent implements OnInit {
   @Input() parentEvent$: Observable<string>;
   @Output() submitSelection: EventEmitter<string[]> = new EventEmitter<string[]>();
   fatalError: boolean;
+  updateSuccess: boolean;
 
   constructor() {
     this.fatalError = false;
+    this.updateSuccess = false;
   }
 
   _initParentEvent(): void {
@@ -24,6 +26,13 @@ export class StageSelectMockComponent implements OnInit {
           switch (event) {
             case 'fatalError':
               this.fatalError = true;
+              break;
+            case 'updateSuccess':
+              this.updateSuccess = true;
+              setTimeout(() => {
+                this.updateSuccess = false;
+              }, 1000);
+              break;
           }
         }
       });

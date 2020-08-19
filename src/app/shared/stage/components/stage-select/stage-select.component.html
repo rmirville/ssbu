@@ -8,7 +8,7 @@
         <div role="region" [attr.aria-labelledby]="'stage-select-' + rootSection.attribute + '-header'" *ngIf="rootSection.show" class="form-group {{rootSection.attribute}}">
           <div class="card">
             <div class="card-header">
-              <button class="h3 btn btn-link stage-select-root-section-header" role="heading" id="stage-select-{{rootSection.attribute}}-header" [class.collapsed]="!rootSection.expand" data-toggle="collapse"
+              <button type="button" class="h3 btn btn-link stage-select-root-section-header" role="heading" id="stage-select-{{rootSection.attribute}}-header" [class.collapsed]="!rootSection.expand" data-toggle="collapse"
                 [attr.data-target]="'#stage-select-' + rootSection.attribute + '-collapse'"
                 [attr.aria-expanded]="rootSection.expand"
                 [attr.aria-controls]="'stage-select-' + rootSection.attribute + '-collapse'">
@@ -56,13 +56,16 @@
       </ng-container>
       <div class="form-group stage-select-submit">
         <div *ngIf="errorActive" class="row">
-          <div class="col-sm-12">
-            <p *ngIf="parentError.active" class="error">{{parentError.message}}</p>
-            <p *ngIf="errors.noStages.active" class="error">{{errors.noStages.message}}</p>
-            <p *ngIf="!selectionForm.valid" class="error">Please select at least one stage.</p>
+          <div class="col-12">
+            <div *ngIf="parentError.active" class="alert alert-error error">{{parentError.message}}</div>
+            <div *ngIf="errors.noStages.active" class="alert alert-error error">{{errors.noStages.message}}</div>
+            <div *ngIf="!selectionForm.valid" class="alert alert-error error">Please select at least one stage.</div>
           </div>
         </div>
         <button type="submit" class="btn btn-primary mb-2" [disabled]="!selectionForm.valid">Update</button>
+        <div *ngIf="showUpdateSuccess" class="alert alert-success update-success" role="alert">
+          Update succeeded! View the results below.
+        </div>
       </div>
     </form>
   </div>

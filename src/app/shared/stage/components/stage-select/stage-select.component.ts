@@ -94,7 +94,7 @@ export class StageSelectComponent implements OnChanges, OnInit {
       },
       {
         id: 'legalPotential',
-        title: 'Potentially / Formerly Legal',
+        title: 'Formerly / Potentially Legal',
         attribute: 'tourney-legal-potential',
         show: false
       }

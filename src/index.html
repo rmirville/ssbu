@@ -63,7 +63,7 @@
         <div class="row">
           <div class="col-lg-12">
 
-            <div class="alert alert-primary"><strong>Notice:</strong> Your browser has JavaScript disabled. This site requires JavaScript to run all functionality.</div>
+            <div class="alert alert-primary js-notice"><strong>Notice:</strong> Your browser has JavaScript disabled. This site requires JavaScript to run all functionality.</div>
 
             <h1 class="page-title">About this Site</h1>
             
@@ -73,113 +73,79 @@
 
             <p>This tool displays a graph and tables comparing different dimensions of stages. You can select which stages you want to compare.</p>
 
-            <p>To select stages to compare, enable JavaScript on your browser.</p>
+            <section role="region" class="graph" aria-label="Graph">
+              <div class="graph-header">
+                Blastzone Width
+              </div>
+              <div class="row graph-rows">
+                <div class="col-12 graph-row graph_a">
+                  <div class="row name-row">
+                    <div class="col-12">
+                      <div class="name-bg">
+                        <div class="name-container">
+                          <span class="name">Stage A</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row bar-row">
+                    <div class="col-12">
+                      <div class="bar-bg">
+                        <div class="bar-container">
+                          <div class="bar bin-5" style="width:80%"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-            <div class="table-responsive">
-              <table class="table table-borderless table-hover">
-                <thead class="thead-dark">
-                  <tr>
-                    <th class="th-sticky">Stage</th>
-                    <th>Blastzone Width</th>
-                    <th>Floor Length</th>
-                    <th class="abbr">&nbsp;</th>
-                    <th>Off-Stage Distance</th>
-                    <th>Ceiling Height</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="graph_a">
-                    <th scope="row" class="th-sticky name">Stage A</th>
-                    <td class="td-graph">
-                      <div class="bar blastzone bin-5" style="width: 150px;"></div>
-                    </td>
-                    <td class="td-graph">
-                      <div class="bar stagelength bin-4" style="width: 140px;"></div>
-                    </td>
-                    <td class="abbr">SA</td>
-                    <td class="td-graph">
-                      <div class="bar offstage bin-1" style="width: 110px;"></div>
-                    </td>
-                    <td class="td-graph">
-                      <div class="bar ceiling bin-2" style="width: 120px;"></div>
-                    </td>
-                  </tr>
-                  <tr class="graph_b">
-                    <th scope="row" class="th-sticky name">Stage B</th>
-                    <td class="td-graph">
-                      <div class="bar blastzone bin-4" style="width: 140px;"></div>
-                    </td>
-                    <td class="td-graph">
-                      <div class="bar stagelength bin-1" style="width: 110px;"></div>
-                    </td>
-                    <td class="abbr">SB</td>
-                    <td class="td-graph">
-                      <div class="bar offstage bin-2" style="width: 120px;"></div>
-                    </td>
-                    <td class="td-graph">
-                      <div class="bar ceiling bin-4" style="width: 140px;"></div>
-                    </td>
-                  </tr>
-                  <tr class="graph_c">
-                    <th scope="row" class="th-sticky name">Stage C</th>
-                    <td class="td-graph">
-                      <div class="bar blastzone bin-3" style="width: 130px;"></div>
-                    </td>
-                    <td class="td-graph">
-                      <div class="bar stagelength bin-5" style="width: 150px;"></div>
-                    </td>
-                    <td class="abbr">SC</td>
-                    <td class="td-graph">
-                      <div class="bar offstage bin-4" style="width: 140px;"></div>
-                    </td>
-                    <td class="td-graph">
-                      <div class="bar ceiling bin-3" style="width: 130px;"></div>
-                    </td>
-                  </tr>
-                  <tr class="graph_d">
-                    <th scope="row" class="th-sticky name">Stage D</th>
-                    <td class="td-graph">
-                      <div class="bar blastzone bin-2" style="width: 120px;"></div>
-                    </td>
-                    <td class="td-graph">
-                      <div class="bar stagelength bin-2" style="width: 120px;"></div>
-                    </td>
-                    <td class="abbr">SD</td>
-                    <td class="td-graph">
-                      <div class="bar offstage bin-5" style="width: 150px;"></div>
-                    </td>
-                    <td class="td-graph">
-                      <div class="bar ceiling bin-1" style="width: 110px;"></div>
-                    </td>
-                  </tr>
-                  <tr class="graph_e">
-                    <th scope="row" class="th-sticky name">Stage E</th>
-                    <td class="td-graph">
-                      <div class="bar blastzone bin-1" style="width: 110px;"></div>
-                    </td>
-                    <td class="td-graph">
-                      <div class="bar stagelength bin-3" style="width: 130px;"></div>
-                    </td>
-                    <td class="abbr">SE</td>
-                    <td class="td-graph">
-                      <div class="bar offstage bin-2" style="width: 120px;"></div>
-                    </td>
-                    <td class="td-graph">
-                      <div class="bar ceiling bin-5" style="width: 150px;"></div>
-                    </td>
-                  </tr>
-                </tbody>
-                <caption></caption>
-              </table>
-            </div>
+                <div class="col-12 graph-row graph_b">
+                  <div class="row name-row">
+                    <div class="col-12">
+                      <div class="name-bg">
+                        <div class="name-container">
+                          <span class="name">Stage B</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row bar-row">
+                    <div class="col-12">
+                      <div class="bar-bg">
+                        <div class="bar-container">
+                          <div class="bar bin-3" style="width:60%"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-            <p>More tools to come</p>
+                <div class="col-12 graph-row graph_c">
+                  <div class="row name-row">
+                    <div class="col-12">
+                      <div class="name-bg">
+                        <div class="name-container">
+                          <span class="name">Stage C</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row bar-row">
+                    <div class="col-12">
+                      <div class="bar-bg">
+                        <div class="bar-container">
+                          <div class="bar bin-1" style="width:40%"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
 
-            <h2>Credits</h2>
-            
-            <p><strong>Developer:</strong> Raynald Mirville (The Green Lanyard) - <a href="https://raynaldmirville.com">Portfolio</a> | <a href="https://github.com/rmirville/">GitHub</a></p>
+            <p>To select stages, enable JavaScript on your browser.</p>
 
-            <p><strong>Stage Data Provider:</strong> Ruben - <a href="https://twitter.com/Ruben_dal">Twitter</a> | <a href="https://github.com/rubendal">GitHub</a></p>
+            <p><strong>More tools to come</strong></p>
 
           </div>
         </div>
@@ -196,7 +162,7 @@
         <a class="footer-brand" href="/">Super Smash Bros. Ultimate Tools</a>
         <div class="row">
           <div class="col-lg-6">
-            <p>Site developed by Raynald Mirville (The Green Lanyard) &ndash; <a href="https://raynaldmirville.com" target="_blank">Portfolio</a> | <a href="https://github.com/rmirville/" target="_blank">GitHub</a></p>
+            <p>Site developed by Raynald Mirville &ndash; <a href="https://raynaldmirville.com" target="_blank">Portfolio</a> | <a href="https://github.com/rmirville/" target="_blank">GitHub</a></p>
             <p>Stage data provided by Ruben &ndash; <a href="https://twitter.com/Ruben_dal" target="_blank"><i class="fab fa-twitter"></i> Twitter</a> | <a href="https://github.com/rubendal" target="_blank">GitHub</a></p>
           </div>
           <div class="col-lg-6">

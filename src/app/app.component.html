@@ -44,5 +44,8 @@
 
 <!-- Page Content -->
 <section id="main" role="main" name="main">
+  <ng-container *ngIf="isLoading">
+    <h1 class="text-center">Loading...</h1>
+  </ng-container>
   <router-outlet></router-outlet>
 </section>

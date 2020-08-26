@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { concatMap } from 'rxjs/operators';
 
+import { LoadingStatusService } from '../../../../core/services/loading-status.service';
 import { StageDimensionsService } from '../../../../shared/stage/services/stage-dimensions.service';
 import { StagePieceMapService } from '../../../../shared/stage/services/stage-piece-map.service';
 
@@ -33,6 +34,7 @@ export class StageComparatorComponent implements OnInit {
   firstLoad: boolean;
 
   constructor(
+    private lss: LoadingStatusService,
     private sds: StageDimensionsService,
     private spms: StagePieceMapService,
     private route: ActivatedRoute,
@@ -55,6 +57,7 @@ export class StageComparatorComponent implements OnInit {
     });
     this.selectSubject$ = new Subject<string>();
     this.firstLoad = true;
+    this.lss.stopLoading('app');
     this.view = 'graph';
     ///
     // console.groupEnd();

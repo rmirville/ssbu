@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { LoadingStatusService } from '../../../../core/services/loading-status.service';
+
 @Component({
   selector: 'app-page-not-found',
   templateUrl: './page-not-found.component.html',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageNotFoundComponent implements OnInit {
 
-  constructor() { }
+  constructor( private lss: LoadingStatusService ) { }
 
   ngOnInit() {
+    this.lss.stopLoading('app');
   }
 
 }

@@ -15,7 +15,7 @@ describe('StageClassificationsService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    service = TestBed.get(StageClassificationsService);
+    service = TestBed.inject(StageClassificationsService);
     expect(service).toBeTruthy();
   });
 

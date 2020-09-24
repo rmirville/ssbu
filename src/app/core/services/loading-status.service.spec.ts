@@ -6,7 +6,7 @@ describe('LoadingStatusService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: LoadingStatusService = TestBed.get(LoadingStatusService);
+    const service: LoadingStatusService = TestBed.inject(LoadingStatusService);
     expect(service).toBeTruthy();
   });
 });

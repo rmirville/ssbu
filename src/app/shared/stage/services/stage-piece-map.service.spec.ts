@@ -18,7 +18,7 @@ describe('StagePieceMapService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    service = TestBed.get(StagePieceMapService);
+    service = TestBed.inject(StagePieceMapService);
     expect(service).toBeTruthy();
   });
 

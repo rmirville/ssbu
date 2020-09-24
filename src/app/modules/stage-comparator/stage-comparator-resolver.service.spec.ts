@@ -55,7 +55,7 @@ describe('StageComparatorResolverService', () => {
     stagePieceMapStub = {
       getMaps: () => { return asyncData(PIECE_MAPS.STAGE_COMPARATOR); }
     };
-    router = TestBed.get(Router);
+    router = TestBed.inject(Router);
     resolverService = new StageComparatorResolverService(stageLoaderSpy as any, stageDimensionsSpy as any, stageClassificationsSpy as any, stagePieceMapStub as any, router);
   });
 

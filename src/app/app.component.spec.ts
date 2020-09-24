@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'Super Smash Bros. Ultimate Tools'`, () => {
+  it(`should have as title 'SSBU Tools'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('Super Smash Bros. Ultimate Tools');
+    expect(app.title).toEqual('SSBU Tools');
   });
 
   it('should render title in a navbar-brand tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.navbar-brand').textContent).toContain('Super Smash Bros. Ultimate Tools');
+    expect(compiled.querySelector('.navbar-brand').textContent).toContain('SSBU Tools');
   });
 });

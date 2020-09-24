@@ -13,7 +13,7 @@ const BASE_HREF: string = '';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnChanges, OnInit {
-  title: string = 'Super Smash Bros. Ultimate Tools';
+  title: string = 'SSBU Tools';
   ariaSkipPath: string = BASE_HREF + '/#main';
   isLoading: boolean;
   isLoading$: Observable<boolean>;

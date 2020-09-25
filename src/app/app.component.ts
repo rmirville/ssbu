@@ -19,13 +19,13 @@ export class AppComponent implements OnChanges, OnInit {
   isLoading$: Observable<boolean>;
 
   constructor(private router: Router, private lss: LoadingStatusService) {
-    console.group('AppComponent::constructor()');
+    // console.group('AppComponent::constructor()');
     this.isLoading = true;
-    console.groupEnd();
+    // console.groupEnd();
   }
 
   ngOnInit() {
-    console.group('AppComponent::ngOnInit()');
+    // console.group('AppComponent::ngOnInit()');
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
       if( !this.router.url.endsWith('#main') ) {
         this.ariaSkipPath = BASE_HREF + this.router.url + '#main';
@@ -38,16 +38,16 @@ export class AppComponent implements OnChanges, OnInit {
     this.isLoading$.subscribe(status => {
       setTimeout(() => {
         this.isLoading = status;
-        console.log(`new loading status: ${status}`);
+        // console.log(`new loading status: ${status}`);
       }, 0);
     });
     this.lss.startLoading('app');
-    console.groupEnd();
+    // console.groupEnd();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.group('AppComponent::ngOnChanges()');
-    console.log(`changes to isLoading: ${JSON.stringify(changes.isLoading)}`);
-    console.groupEnd();
+    // console.group('AppComponent::ngOnChanges()');
+    // console.log(`changes to isLoading: ${JSON.stringify(changes.isLoading)}`);
+    // console.groupEnd();
   }
 }

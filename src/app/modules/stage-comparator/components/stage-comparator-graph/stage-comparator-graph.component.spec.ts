@@ -104,7 +104,7 @@ describe('StageComparatorGraphComponent', () => {
         expect(actualValues).withContext(expectedValues[stage].stage).toContain(expectedValues[stage]);
       }
       ///
-      console.groupEnd();
+      // console.groupEnd();
     });
 
     it('should encode each stage\'s blastzone width bin value as a class', () => {

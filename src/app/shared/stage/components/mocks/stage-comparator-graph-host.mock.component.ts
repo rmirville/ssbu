@@ -21,9 +21,9 @@ export class StageComparatorGraphHostMockComponent implements OnInit, OnChanges 
 
   ngOnChanges(changes: SimpleChanges) {
     ///
-    console.group('StageComparatorGraphHostMockComponent::ngOnChanges()');
-    console.log(`StageComparatorGraphHost changes: ${JSON.stringify(changes)}`);
-    console.groupEnd();
+    // console.group('StageComparatorGraphHostMockComponent::ngOnChanges()');
+    // console.log(`StageComparatorGraphHost changes: ${JSON.stringify(changes)}`);
+    // console.groupEnd();
   }
 
   ngOnInit() {

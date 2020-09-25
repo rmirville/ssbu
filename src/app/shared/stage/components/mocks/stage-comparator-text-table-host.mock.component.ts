@@ -21,9 +21,9 @@ export class StageComparatorTextTableHostMockComponent implements OnInit, OnChan
 
   ngOnChanges(changes: SimpleChanges) {
     ///
-    console.group('StageComparatorTextTableHostMockComponent::ngOnChanges()');
-    console.log(`StageComparatorTextTableHost changes: ${JSON.stringify(changes)}`);
-    console.groupEnd();
+    // console.group('StageComparatorTextTableHostMockComponent::ngOnChanges()');
+    // console.log(`StageComparatorTextTableHost changes: ${JSON.stringify(changes)}`);
+    // console.groupEnd();
   }
 
   ngOnInit() {

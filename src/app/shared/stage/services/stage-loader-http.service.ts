@@ -224,7 +224,7 @@ export class StageLoaderHttpService implements StageLoaderSubService {
             observer.next(stages[i]);
             ///
             /*if (successes == filteredSummaries.length) {
-              console.log(JSON.stringify(stages));
+              // console.log(JSON.stringify(stages));
             }*/
             if (responses == filteredSummaries.length) {
               ///

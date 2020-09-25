@@ -21,9 +21,9 @@ export class StageComparatorNumberTableHostMockComponent implements OnInit, OnCh
 
   ngOnChanges(changes: SimpleChanges) {
     ///
-    console.group('StageComparatorNumberTableHostMockComponent::ngOnChanges()');
-    console.log(`StageComparatorNumberTableHost changes: ${JSON.stringify(changes)}`);
-    console.groupEnd();
+    // console.group('StageComparatorNumberTableHostMockComponent::ngOnChanges()');
+    // console.log(`StageComparatorNumberTableHost changes: ${JSON.stringify(changes)}`);
+    // console.groupEnd();
   }
 
   ngOnInit() {

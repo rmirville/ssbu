@@ -23,9 +23,9 @@ export class StageSelectHostMockComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     /**/
-    console.group('StageSelectHostMockComponent::ngOnChanges()');
-    console.log(`StageSelectHost changes: ${JSON.stringify(changes)}`);
-    console.groupEnd();
+    // console.group('StageSelectHostMockComponent::ngOnChanges()');
+    // console.log(`StageSelectHost changes: ${JSON.stringify(changes)}`);
+    // console.groupEnd();
   }
 
   ngOnInit() {

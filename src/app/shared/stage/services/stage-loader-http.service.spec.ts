@@ -16,7 +16,7 @@ import * as STAGES from '../models/mocks/stages';
 describe('StageLoaderHttpService', () => {
   let service: StageLoaderHttpService;
   let httpClientSpy: { get: jasmine.Spy };
-  const API_URL: string = 'https://rubendal.github.io/ssbu/data/patch/8.0.0';
+  const API_URL: string = 'https://rubendal.github.io/ssbu/data/patch/9.0.0';
   const API_STAGE_LIST_PATH: string = '/stages.json';
   const API_STAGE_DETAILS_PATH: string = '/data.json';
   const API_STAGE_DETAILS_PREFIX: string = '/stage/';

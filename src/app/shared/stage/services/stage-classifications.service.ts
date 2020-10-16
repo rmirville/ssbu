@@ -318,6 +318,13 @@ export class StageClassificationsService {
       abbr: "GPT",
       series: "The Legend of Zelda",
       tourneyPresence: -1
+    },
+    {
+      gameName: "pickel_world_",
+      name: "Minecraft World",
+      abbr: "MW",
+      series: "Minecraft",
+      tourneyPresence: 3
     }
   ];
 

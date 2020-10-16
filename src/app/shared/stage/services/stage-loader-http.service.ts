@@ -10,7 +10,7 @@ import { StageSummary, isStageSummaryArray } from '../models/stage-summary.model
 import { StageDetails, isStageDetails } from '../models/stage-details.model';
 import { Stage } from '../models/stage.model';
 
-const API_URL = 'https://rubendal.github.io/ssbu/data/patch/8.0.0';
+const API_URL = 'https://rubendal.github.io/ssbu/data/patch/9.0.0';
 const API_STAGE_LIST_PATH = '/stages.json';
 const API_STAGE_DETAILS_PATH = '/data.json';
 const API_STAGE_DETAILS_PREFIX = '/stage/';

@@ -43,7 +43,7 @@
 </nav>
 
 <!-- Page Content -->
-<section id="main" role="main" name="main">
+<section id="main" [class.loading]="isLoading" role="main" name="main">
   <ng-container *ngIf="isLoading">
     <h1 class="text-center">Loading...</h1>
   </ng-container>

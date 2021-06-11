@@ -381,6 +381,10 @@ a.aria-skip-link:visited,
   min-height: 10rem;
 }
 
+#main.loading {
+  padding-bottom: 100vh;
+}
+
 .ssbu-module {
   padding-bottom: 1rem;
 }

@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 
 import { StageClassificationsService } from './stage-classifications.service';
 
@@ -27,7 +27,7 @@ describe('StageClassificationsService', () => {
 
     describe('basic functionality', () => {
 
-      it('should produce a StageClassifications array when fed gameName', async(() => {
+      it('should produce a StageClassifications array when fed gameName', waitForAsync(() => {
 
         const input = STAGE_CLASSES_INPUT.GAME_NAME_ONLY;
         let actualClassifiedStages$ = service.classifyStages(input);
@@ -43,7 +43,7 @@ describe('StageClassificationsService', () => {
 
       }));
 
-      it('should match classifications from its database to the objects by gameName', async(() => {
+      it('should match classifications from its database to the objects by gameName', waitForAsync(() => {
 
         const input = STAGE_CLASSES_INPUT.MATCH_GAME_NAME;
         const expectedClassifiedStages = STAGE_CLASSES_OUTPUT.MATCH_GAME_NAME;
@@ -63,7 +63,7 @@ describe('StageClassificationsService', () => {
 
       }));
 
-      it('should add null values to stages not in the db', async(() => {
+      it('should add null values to stages not in the db', waitForAsync(() => {
         const input = STAGE_CLASSES_INPUT.UNKNOWN_GAME_NAMES;
         const expectedClassifiedStages = STAGE_CLASSES_OUTPUT.UNKNOWN_GAME_NAMES;
 

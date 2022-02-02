@@ -1,4 +1,4 @@
-import { async, fakeAsync } from '@angular/core/testing';
+import { waitForAsync, fakeAsync } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 import { asyncData } from '../../../testing/async-observable-helpers';
 
@@ -28,7 +28,7 @@ describe('StageLoaderHttpService', () => {
     });
 
     describe('basic functionality', () => {
-      it('should return data composed of stage list data and stage details data', async(() => {
+      it('should return data composed of stage list data and stage details data', waitForAsync(() => {
         ///
         // console.log(`=== SPEC - LOADSTAGES() BASIC ===`);
 
@@ -59,7 +59,7 @@ describe('StageLoaderHttpService', () => {
         // console.log('SPEC - subscribed to service.loadStages()');
       }));
 
-      it('should return all stages\' details even when earlier details requests return after the final details request issued', async(() => {
+      it('should return all stages\' details even when earlier details requests return after the final details request issued', waitForAsync(() => {
         ///
         // console.groupCollapsed('=== SPEC - details out of order');
         const summaries: StageSummary[] = STAGE_SUMMARY_LIST.DETAILS_OUTOFORDER.summaries;
@@ -113,7 +113,7 @@ describe('StageLoaderHttpService', () => {
 
       describe(`including stages`, () => {
 
-        it(`should fetch only data from a stage whose name is provided when prompted`, async(() => {
+        it(`should fetch only data from a stage whose name is provided when prompted`, waitForAsync(() => {
           ///
           // console.log('=== SPEC - INCLUDE ONE STAGE ===');
           const stageSummaryList = STAGE_SUMMARY_LIST.STAGE_INCLUDE;
@@ -130,7 +130,7 @@ describe('StageLoaderHttpService', () => {
           });
         }));
 
-        it(`should fetch only data from a list of provided stages when prompted`, async(() => {
+        it(`should fetch only data from a list of provided stages when prompted`, waitForAsync(() => {
           ///
           // console.log('=== SPEC - INCLUDE TWO STAGES ===');
           const stageSummaryList = STAGE_SUMMARY_LIST.STAGE_INCLUDE;
@@ -150,7 +150,7 @@ describe('StageLoaderHttpService', () => {
       });
 
       describe(`excluding stages`, () => {
-        it(`should omit data from a stage whose name is provided when prompted`, async(() => {
+        it(`should omit data from a stage whose name is provided when prompted`, waitForAsync(() => {
           ///
           // console.log('=== SPEC - EXCLUDE ONE STAGE ===');
           const stageSummaryList = STAGE_SUMMARY_LIST.TWO_STAGES_EXCLUDE;
@@ -167,7 +167,7 @@ describe('StageLoaderHttpService', () => {
           });
         }));
 
-        it(`should omit data from a list of stages whose names are provided`, async(() => {
+        it(`should omit data from a list of stages whose names are provided`, waitForAsync(() => {
           ///
           // console.log('=== SPEC - EXCLUDE TWO STAGES ===');
           const stageSummaryList = STAGE_SUMMARY_LIST.FOUR_STAGES_EXCLUDE;
@@ -186,11 +186,11 @@ describe('StageLoaderHttpService', () => {
           });
         }));
 
-        it(`should reject a stage exclusion list that isn't an array`, async(() => {
+        it(`should reject a stage exclusion list that isn't an array`, waitForAsync(() => {
           _testBadData('notArray', 'The list of stages to filter was not a string array.');
         }));
 
-        it(`should reject a stage exclusion list whose items aren't strings`, async(() => {
+        it(`should reject a stage exclusion list whose items aren't strings`, waitForAsync(() => {
           _testBadData('itemsNotString', 'The list of stages to filter was not a string array.');
         }));
         
@@ -198,7 +198,7 @@ describe('StageLoaderHttpService', () => {
     });
 
     describe('data validation', () => {
-      it('should reject a filter that isn\'t a string', async(() => {
+      it('should reject a filter that isn\'t a string', waitForAsync(() => {
         ///
         // console.groupCollapsed('=== SPEC - REJECT NON-STRING FILTER ===');
         const badFilter = {
@@ -214,7 +214,7 @@ describe('StageLoaderHttpService', () => {
     });
 
     describe('stage list data validation', () => {
-      it(`should reject stage list data that isn't of type StageSummary[]`, async(() => {
+      it(`should reject stage list data that isn't of type StageSummary[]`, waitForAsync(() => {
         ///
         // console.log(`=== SPEC - CHECK STAGE LIST DATA TYPE ===`);
 

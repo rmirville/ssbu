@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 
 import { StagePieceMapConstService } from './stage-piece-map-const.service';
 
@@ -28,7 +28,7 @@ describe('StagePieceMapConstService', () => {
       service = new StagePieceMapConstService();
     });
 
-    it('should produce a StagePieceMap array when given the map name', async(() => {
+    it('should produce a StagePieceMap array when given the map name', waitForAsync(() => {
       ///
       // console.groupCollapsed('=== SPEC - getMaps - output type ===');
       const inputMapSetName: string = MAPS_NAME_STAGE_COMPARATOR;
@@ -48,7 +48,7 @@ describe('StagePieceMapConstService', () => {
 
     }));
 
-    it('should produce the associated StagePieceMap array when given the map name', async(() => {
+    it('should produce the associated StagePieceMap array when given the map name', waitForAsync(() => {
       ///
       // console.groupCollapsed('=== SPEC - getMaps - output value ===')
       const inputMapSetName: string = MAPS_NAME_STAGE_COMPARATOR;
@@ -67,7 +67,7 @@ describe('StagePieceMapConstService', () => {
   
     describe('data validation', () => {
 
-      it('should reject a map set name that is not in the data source', async(() => {
+      it('should reject a map set name that is not in the data source', waitForAsync(() => {
         ///
         // console.groupCollapsed('=== SPEC - getMaps - reject unknown map set name');
         const inputMapSetName: string = PIECE_MAP_SVC.GETMAPS_INVALID_UNKNOWN;
@@ -89,7 +89,7 @@ describe('StagePieceMapConstService', () => {
         // console.groupEnd();
       }));
 
-      it('should reject a non-string map set name', async(() => {
+      it('should reject a non-string map set name', waitForAsync(() => {
         ///
         // console.groupCollapsed('=== SPEC - getMaps - reject non-string map set name');
         const badInput = {
@@ -106,7 +106,7 @@ describe('StagePieceMapConstService', () => {
 
       }));
 
-      it('should reject an empty map set name', async(() => {
+      it('should reject an empty map set name', waitForAsync(() => {
         ///
         // console.groupCollapsed('=== SPEC - getMaps - reject empty map set name');
         const inputMapSetName: string = '';

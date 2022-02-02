@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed, waitForAsync, inject } from '@angular/core/testing';
 import { asyncData } from '../../testing/async-observable-helpers';
 
 import {
@@ -123,7 +123,7 @@ describe('StageComparatorResolverService', () => {
 
     }
 
-    it('should return an Observable of an object with an array of Stages, an array of StageClassifications, and a StageDimensionsSet', async(() => {
+    it('should return an Observable of an object with an array of Stages, an array of StageClassifications, and a StageDimensionsSet', waitForAsync(() => {
       /**/
       // console.log('=== SPEC - OUTPUT TYPE ===');
       stageLoaderSpy.loadStages.and.returnValue(asyncData(STAGES_ONE));
@@ -163,7 +163,7 @@ describe('StageComparatorResolverService', () => {
 
     }));
 
-    it('should return the data that StageLoaderService and StageDimensionsService provide', async(() => {
+    it('should return the data that StageLoaderService and StageDimensionsService provide', waitForAsync(() => {
       const expectedStages = STAGES_TWO;
       const expectedDimensionsSet = STAGE_DIMENSIONS_SETS.DIMENSIONS_SET_TWO;
       const expectedClassifications = STAGE_CLASSES.TWO;
@@ -171,7 +171,7 @@ describe('StageComparatorResolverService', () => {
       _compareStageData(expectedStages, expectedDimensionsSet, expectedClassifications);
     }));
 
-    it('should return different data provided by StageLoaderService and StageDimensionsService', async(() => {
+    it('should return different data provided by StageLoaderService and StageDimensionsService', waitForAsync(() => {
       const expectedStages = STAGES_THREE;
       const expectedDimensionsSet = STAGE_DIMENSIONS_SETS.DIMENSIONS_SET_THREE;
       const expectedClassifications = STAGE_CLASSES.THREE;

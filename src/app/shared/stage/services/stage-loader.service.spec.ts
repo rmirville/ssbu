@@ -1,4 +1,4 @@
-import { async } from '@angular/core/testing';
+import { waitForAsync } from '@angular/core/testing';
 import { Observable, throwError } from 'rxjs';
 import { asyncData } from '../../../testing/async-observable-helpers';
 
@@ -20,7 +20,7 @@ describe('StageLoaderService', () => {
 
   describe('loadStages', () => {
 
-    it('should return an array of Stages', async(() => {
+    it('should return an array of Stages', waitForAsync(() => {
       ///
       // console.groupCollapsed('=== SPEC - RETURN STAGES ===');
       const expectedStages: Stage[] = STAGE_LOADER_SVC.GET_STAGES;
@@ -36,7 +36,7 @@ describe('StageLoaderService', () => {
       });
     }));
 
-    it('should not call the http service when the constant service succeeds', async(() => {
+    it('should not call the http service when the constant service succeeds', waitForAsync(() => {
       ///
       // console.groupCollapsed('=== SPEC - DON\'T USE HTTP SVC ON CONST SVC SUCCESS ===');
       const storedStages: Stage[] = STAGE_LOADER_SVC.CONST_SVC_ONLY;
@@ -53,7 +53,7 @@ describe('StageLoaderService', () => {
       });
     }));
 
-    it('should return data even when the constant service fails', async(() => {
+    it('should return data even when the constant service fails', waitForAsync(() => {
       ///
       // console.groupCollapsed('=== SPEC - USE HTTP SVC ON CONST SVC FAIL ===');
       const expectedStages: Stage[] = STAGE_LOADER_SVC.CONST_SVC_FAIL;
@@ -77,7 +77,7 @@ describe('StageLoaderService', () => {
     }));
 
     describe('data validation', () => {
-      it('should reject a filter that isn\'t a string', async(() => {
+      it('should reject a filter that isn\'t a string', waitForAsync(() => {
         ///
         // console.groupCollapsed('=== SPEC - REJECT NON-STRING FILTER ===');
         const storedStages: Stage[] = STAGE_LOADER_SVC.BAD_FILTER;
@@ -96,7 +96,7 @@ describe('StageLoaderService', () => {
         // console.groupEnd();
       }));
 
-      it('should reject a filterList that isn\'t a string array', async(() => {
+      it('should reject a filterList that isn\'t a string array', waitForAsync(() => {
         ///
         // console.groupCollapsed('=== SPEC - REJECT NON-STRING ARRAY FILTERLIST ===');
         const storedStages: Stage[] = STAGE_LOADER_SVC.BAD_FILTER_LIST;

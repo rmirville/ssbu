@@ -1,5 +1,5 @@
 import { DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { StageComparatorGraphComponent as GraphComponent } from './stage-comparator-graph.component';
@@ -18,7 +18,7 @@ describe('StageComparatorGraphComponent', () => {
   let graphComp: GraphComponent;
   let graphDElem: DebugElement;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         HostComponent,

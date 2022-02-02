@@ -1,5 +1,5 @@
 import { DebugElement } from '@angular/core';
-import { async, fakeAsync, ComponentFixture, TestBed, tick, flush } from '@angular/core/testing';
+import { waitForAsync, fakeAsync, ComponentFixture, TestBed, tick, flush } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule, } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
@@ -16,7 +16,7 @@ describe('StageSelectComponent', () => {
   let selectHostComp: StageSelectHostMockComponent;
   let selectHostFixture: ComponentFixture<StageSelectHostMockComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         StageSelectComponent,
@@ -1743,7 +1743,7 @@ describe('StageSelectComponent', () => {
         expect(successDElem).toBeNull();
       });
 
-      it('should appear after receiving a success notification', async(() => {
+      it('should appear after receiving a success notification', waitForAsync(() => {
         const inputStages: StageClassifications[] = STAGE_SELECTIONS.SUCCESS_NOTICE_SHOW;
         selectHostComp.stages = [...inputStages];
         selectHostFixture.detectChanges();
@@ -1783,7 +1783,7 @@ describe('StageSelectComponent', () => {
     });
 
     describe('parentError section', () => {
-      it('should show an error when it receives a fatalError notification', async(() => {
+      it('should show an error when it receives a fatalError notification', waitForAsync(() => {
         ///
         // console.groupCollapsed('=== SPEC - parentError - fatalError');
 

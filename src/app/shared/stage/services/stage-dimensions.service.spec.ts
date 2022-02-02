@@ -1,4 +1,4 @@
-import { async } from '@angular/core/testing';
+import { waitForAsync } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 
 import { StageDimensionsService } from './stage-dimensions.service';
@@ -34,7 +34,7 @@ describe('StageDimensionsService', () => {
       expect(actualRange['range']).withContext('range').toBeCloseTo(expectedRange['range'], 6);
     }
 
-    it('takes an array of stages and returns their set of stage dimensions', async(() => {
+    it('takes an array of stages and returns their set of stage dimensions', waitForAsync(() => {
       const stages: Stage[] = STAGE_DIM_SVC.DIMENSIONS_FULL_CALC.inputStages;
       const expectedDimensionsSet: StageDimensionsSet = STAGE_DIM_SVC.DIMENSIONS_FULL_CALC.expectedSet;
       const expectedDimensions = expectedDimensionsSet.dimensions;
@@ -64,7 +64,7 @@ describe('StageDimensionsService', () => {
     }));
 
     describe('data validation', () => {
-      it('rejects a non-array stages parameter', async(() => {
+      it('rejects a non-array stages parameter', waitForAsync(() => {
         ///
         // console.groupCollapsed('=== SPEC - dimensionsFull() - reject non-array stages');
         const badData: {stages: Stage} = {
@@ -80,7 +80,7 @@ describe('StageDimensionsService', () => {
         // console.groupEnd();
       }));
 
-      it('rejects a non-Stage array stages parameter', async(() => {
+      it('rejects a non-Stage array stages parameter', waitForAsync(() => {
         ///
         // console.groupCollapsed('=== SPEC - dimensionsFull() - reject non-Stage[] stages');
         const badData: {stages: number[]} = {
@@ -96,7 +96,7 @@ describe('StageDimensionsService', () => {
         // console.groupEnd();
       }));
 
-      it('rejects a non-array pieceMaps', async(() => {
+      it('rejects a non-array pieceMaps', waitForAsync(() => {
         ///
         // console.groupCollapsed('=== SPEC - dimensionsFull() - reject non-array pieceMaps');
         const inputStages: Stage[] = [STAGES.DUCK_HUNT, STAGES.MAGICANT];
@@ -116,7 +116,7 @@ describe('StageDimensionsService', () => {
         // console.groupEnd();
       }));
 
-      it('rejects a non-StagePieceMap array pieceMaps', async(() => {
+      it('rejects a non-StagePieceMap array pieceMaps', waitForAsync(() => {
         ///
         // console.groupCollapsed('=== SPEC - dimensionsFull() - reject non-StagePieceMap[] pieceMaps');
         const inputStages: Stage[] = [STAGES.POKEMON_STADIUM, STAGES.YOSHI_STORY, STAGES.DUCK_HUNT];
@@ -146,7 +146,7 @@ describe('StageDimensionsService', () => {
 
     describe('output', () => {
 
-      it('has five bins by default', async(() => {
+      it('has five bins by default', waitForAsync(() => {
         ///
         // console.groupCollapsed('=== SPEC - has 5 bins ===');
         const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_BIN_SIZE;
@@ -162,7 +162,7 @@ describe('StageDimensionsService', () => {
 
       describe('dimensions array', () => {
 
-        it('contains stages from a provided StageMiscInfo array', async(() => {
+        it('contains stages from a provided StageMiscInfo array', waitForAsync(() => {
           ///
           // console.groupCollapsed('=== SPEC - dimensions - contains provided stages ===');
           const expectedStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_INCLUDE;
@@ -178,7 +178,7 @@ describe('StageDimensionsService', () => {
           });
         }));
 
-        it('omits stages not on the provided stages', async(() => {
+        it('omits stages not on the provided stages', waitForAsync(() => {
           ///
           // console.groupCollapsed('=== SPEC - dimensions - omits excluded stages ===');
           const inputGameNames: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_EXCLUDE.inputStages;
@@ -195,7 +195,7 @@ describe('StageDimensionsService', () => {
           });
         }));
 
-        it('omits stages in the provided stages that are not in the database', async(() => {
+        it('omits stages in the provided stages that are not in the database', waitForAsync(() => {
           ///
           // console.groupCollapsed('=== SPEC - dimensions - omits unknown stages ===');
           const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_UNKNOWN.inputStages;
@@ -213,7 +213,7 @@ describe('StageDimensionsService', () => {
           });
         }));
 
-        it('is the same size as the stage array submitted', async(() => {
+        it('is the same size as the stage array submitted', waitForAsync(() => {
           ///
           // console.groupCollapsed('=== SPEC - dimensions - same size as provided stages ===');
           const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_SIZE.inputStages;
@@ -227,7 +227,7 @@ describe('StageDimensionsService', () => {
           });
         }));
 
-        it('contains the dimension values stored in the saved dataset', async(() => {
+        it('contains the dimension values stored in the saved dataset', waitForAsync(() => {
           ///
           // console.groupCollapsed('=== SPEC - dimensions - same values as in dataset ===');
           const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_VALUES;
@@ -259,7 +259,7 @@ describe('StageDimensionsService', () => {
           });
         }));
 
-        it('retains all properties from provided stages', async(() => {
+        it('retains all properties from provided stages', waitForAsync(() => {
           ///
           // console.groupCollapsed('=== SPEC - dimensions - retain extra properties ===');
           const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_PROPERTIES;
@@ -280,7 +280,7 @@ describe('StageDimensionsService', () => {
 
         describe('blastzoneWidth', () => {
 
-          it('classes each stage into one of five bins by value within the group\'s range', async(() => {
+          it('classes each stage into one of five bins by value within the group\'s range', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - dimensions - blastzoneWidth - properly binned ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_BLASTZONE_BINS.inputStages;
@@ -299,7 +299,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('classes values at each bin boundary as the bin closer to the middle', async(() => {
+          it('classes values at each bin boundary as the bin closer to the middle', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - dimensions - blastzoneWidth - bin edgecases ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_BLASTZONE_BINS_EDGES.inputStages;
@@ -318,7 +318,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('marks the largest value in the group', async(() => {
+          it('marks the largest value in the group', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - dimensions - blastzoneWidth - marks the max ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_BLASTZONE_MAX_POSITIVE.inputStages;
@@ -333,7 +333,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('doesn\'t mark values that aren\'t the largest in the group', async(() => {
+          it('doesn\'t mark values that aren\'t the largest in the group', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - dimensions - blastzoneWidth - doesn\'t mark non-max ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_BLASTZONE_MAX_NEGATIVE.inputStages;
@@ -350,7 +350,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('marks the smallest value in the group', async(() => {
+          it('marks the smallest value in the group', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - dimensions - blastzoneWidth - marks min ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_BLASTZONE_MIN_POSITIVE.inputStages;
@@ -365,7 +365,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('doesn\'t mark values that aren\'t the smallest in the group', async(() => {
+          it('doesn\'t mark values that aren\'t the smallest in the group', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - dimensions - blastzoneWidth - doesn\'t mark non-min ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_BLASTZONE_MIN_NEGATIVE.inputStages;
@@ -382,7 +382,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('marks the value in a one-item array as both the smallest and largest.', async(() => {
+          it('marks the value in a one-item array as both the smallest and largest.', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - dimensions - blastzoneWidth - marks solo item as min-max ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_BLASTZONE_MINMAX;
@@ -396,7 +396,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('marks all values in an all-same-value array as both the smallest and largest with a bin of 0.', async(() => {
+          it('marks all values in an all-same-value array as both the smallest and largest with a bin of 0.', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - dimensions - blastzoneWidth - marks all-same-value items as min-max ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_BLASTZONE_SAME;
@@ -417,7 +417,7 @@ describe('StageDimensionsService', () => {
 
         describe('stageLength', () => {
 
-          it('classes each stage into one of five bins by value within the group\'s range', async(() => {
+          it('classes each stage into one of five bins by value within the group\'s range', waitForAsync(() => {
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_STAGE_BINS.inputStages;
             const expectedBins: { [gameName: string]: number } = STAGE_DIM_SVC.DIMENSIONS_STAGE_BINS.expectedBins;
             service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
@@ -432,7 +432,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('classes values at each bin boundary as the bin closer to the middle', async(() => {
+          it('classes values at each bin boundary as the bin closer to the middle', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - dimensions - stageLength - bin edgecases ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_STAGE_BINS_EDGES.inputStages;
@@ -451,7 +451,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('marks the largest value in the group', async(() => {
+          it('marks the largest value in the group', waitForAsync(() => {
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_STAGE_MAX_POSITIVE.inputStages;
             const targetGameName: string = STAGE_DIM_SVC.DIMENSIONS_STAGE_MAX_POSITIVE.targetGameName;
             service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
@@ -462,7 +462,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('doesn\'t mark values that aren\'t the largest in the group', async(() => {
+          it('doesn\'t mark values that aren\'t the largest in the group', waitForAsync(() => {
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_STAGE_MAX_NEGATIVE.inputStages;
             const targetGameNames: string[] = STAGE_DIM_SVC.DIMENSIONS_STAGE_MAX_NEGATIVE.targetGameNames;
             service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
@@ -475,7 +475,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('marks the smallest value in the group', async(() => {
+          it('marks the smallest value in the group', waitForAsync(() => {
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_STAGE_MIN_POSITIVE.inputStages;
             const targetGameName: string = STAGE_DIM_SVC.DIMENSIONS_STAGE_MIN_POSITIVE.targetGameName;
             service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
@@ -486,7 +486,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('doesn\'t mark values that aren\'t the smallest in the group', async(() => {
+          it('doesn\'t mark values that aren\'t the smallest in the group', waitForAsync(() => {
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_STAGE_MIN_NEGATIVE.inputStages;
             const targetGameNames: string[] = STAGE_DIM_SVC.DIMENSIONS_STAGE_MIN_NEGATIVE.targetGameNames;
             service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
@@ -499,7 +499,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('marks the value in a one-item array as both the smallest and largest.', async(() => {
+          it('marks the value in a one-item array as both the smallest and largest.', waitForAsync(() => {
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_STAGE_MINMAX;
             service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
             const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
@@ -509,7 +509,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('marks all values in an all-same-value array as both the smallest and largest with a bin of 0.', async(() => {
+          it('marks all values in an all-same-value array as both the smallest and largest with a bin of 0.', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - dimensions - stageLength - marks all-same-value items as min-max ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_STAGE_SAME;
@@ -530,7 +530,7 @@ describe('StageDimensionsService', () => {
 
         describe('offStageDistance', () => {
 
-          it('classes each stage into one of five bins by value within the group\'s range', async(() => {
+          it('classes each stage into one of five bins by value within the group\'s range', waitForAsync(() => {
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_OFFSTAGE_BINS.inputStages;
             const expectedBins: { [gameName: string]: number } = STAGE_DIM_SVC.DIMENSIONS_OFFSTAGE_BINS.expectedBins;
             service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
@@ -545,7 +545,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('classes values at each bin boundary as the bin closer to the middle', async(() => {
+          it('classes values at each bin boundary as the bin closer to the middle', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - dimensions - offStageDistance - edgecases ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_OFFSTAGE_BINS_EDGES.inputStages;
@@ -564,7 +564,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('marks the largest value in the group', async(() => {
+          it('marks the largest value in the group', waitForAsync(() => {
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_OFFSTAGE_MAX_POSITIVE.inputStages;
             const targetGameName: string = STAGE_DIM_SVC.DIMENSIONS_OFFSTAGE_MAX_POSITIVE.targetGameName;
             service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
@@ -575,7 +575,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('doesn\'t mark values that aren\'t the largest in the group', async(() => {
+          it('doesn\'t mark values that aren\'t the largest in the group', waitForAsync(() => {
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_OFFSTAGE_MAX_NEGATIVE.inputStages;
             const targetGameNames: string[] = STAGE_DIM_SVC.DIMENSIONS_OFFSTAGE_MAX_NEGATIVE.targetGameNames;
             service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
@@ -588,7 +588,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('marks the smallest value in the group', async(() => {
+          it('marks the smallest value in the group', waitForAsync(() => {
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_OFFSTAGE_MIN_POSITIVE.inputStages;
             const targetGameName: string = STAGE_DIM_SVC.DIMENSIONS_OFFSTAGE_MIN_POSITIVE.targetGameName;
             service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
@@ -599,7 +599,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('doesn\'t mark values that aren\'t the smallest in the group', async(() => {
+          it('doesn\'t mark values that aren\'t the smallest in the group', waitForAsync(() => {
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_OFFSTAGE_MIN_NEGATIVE.inputStages;
             const targetGameNames: string[] = STAGE_DIM_SVC.DIMENSIONS_OFFSTAGE_MIN_NEGATIVE.targetGameNames;
             service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
@@ -612,7 +612,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('marks the value in a one-item array as both the smallest and largest.', async(() => {
+          it('marks the value in a one-item array as both the smallest and largest.', waitForAsync(() => {
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_OFFSTAGE_MINMAX;
             service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
             const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
@@ -622,7 +622,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('marks all values in an all-same-value array as both the smallest and largest with a bin of 0.', async(() => {
+          it('marks all values in an all-same-value array as both the smallest and largest with a bin of 0.', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - dimensions - offStageDistance - marks all-same-value items as min-max ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_OFFSTAGE_SAME;
@@ -643,7 +643,7 @@ describe('StageDimensionsService', () => {
 
         describe('ceilingHeight', () => {
 
-          it('classes each stage into one of five bins by value within the group\'s range', async(() => {
+          it('classes each stage into one of five bins by value within the group\'s range', waitForAsync(() => {
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_CEILING_BINS.inputStages;
             const expectedBins: { [gameName: string]: number } = STAGE_DIM_SVC.DIMENSIONS_CEILING_BINS.expectedBins;
             service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
@@ -658,7 +658,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('classes values at each bin boundary as the bin closer to the middle', async(() => {
+          it('classes values at each bin boundary as the bin closer to the middle', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - dimensions - ceilingHeight - bin edgecases ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_CEILING_BINS_EDGES.inputStages;
@@ -677,7 +677,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('marks the largest value in the group', async(() => {
+          it('marks the largest value in the group', waitForAsync(() => {
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_CEILING_MAX_POSITIVE.inputStages;
             const targetGameName: string = STAGE_DIM_SVC.DIMENSIONS_CEILING_MAX_POSITIVE.targetGameName;
             service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
@@ -688,7 +688,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('doesn\'t mark values that aren\'t the largest in the group', async(() => {
+          it('doesn\'t mark values that aren\'t the largest in the group', waitForAsync(() => {
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_CEILING_MAX_NEGATIVE.inputStages;
             const targetGameNames: string[] = STAGE_DIM_SVC.DIMENSIONS_CEILING_MAX_NEGATIVE.targetGameNames;
             service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
@@ -701,7 +701,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('marks the smallest value in the group', async(() => {
+          it('marks the smallest value in the group', waitForAsync(() => {
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_CEILING_MIN_POSITIVE.inputStages;
             const targetGameName: string = STAGE_DIM_SVC.DIMENSIONS_CEILING_MIN_POSITIVE.targetGameName;
             service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
@@ -712,7 +712,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('doesn\'t mark values that aren\'t the smallest in the group', async(() => {
+          it('doesn\'t mark values that aren\'t the smallest in the group', waitForAsync(() => {
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_CEILING_MIN_NEGATIVE.inputStages;
             const targetGameNames: string[] = STAGE_DIM_SVC.DIMENSIONS_CEILING_MIN_NEGATIVE.targetGameNames;
             service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
@@ -725,7 +725,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('marks the value in a one-item array as both the smallest and largest.', async(() => {
+          it('marks the value in a one-item array as both the smallest and largest.', waitForAsync(() => {
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_CEILING_MINMAX;
             service._dimensionsSetFull = STAGE_DIM_SET.FULL_SIMPLE;
             const actualSet$: Observable<BinnedStageDimensionsSet> = service.getDimensionsBinned(inputStages);
@@ -735,7 +735,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('marks all values in an all-same-value array as both the smallest and largest with a bin of 0.', async(() => {
+          it('marks all values in an all-same-value array as both the smallest and largest with a bin of 0.', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - dimensions - ceilingHeight - marks all-same-value items as min-max ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.DIMENSIONS_CEILING_SAME;
@@ -760,7 +760,7 @@ describe('StageDimensionsService', () => {
 
         describe('blastzoneWidth', () => {
           
-          it('should have a max set to the highest blastzoneWidth value', async(() => {
+          it('should have a max set to the highest blastzoneWidth value', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - ranges - blastzoneWidth - max ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_BLASTZONE_MAX.inputStages;
@@ -774,7 +774,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('should have a max set to a one-stage set\'s only value', async(() => {
+          it('should have a max set to a one-stage set\'s only value', waitForAsync(() => {
             ///
             // console.groupCollapsed('== SPEC - range - blastzoneWidth - one-item max ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_BLASTZONE_MAX_ONE.inputStages;
@@ -788,7 +788,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('should have a min set to the lowest blastzoneWidth value', async(() => {
+          it('should have a min set to the lowest blastzoneWidth value', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - ranges - blastzoneWidth - min ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_BLASTZONE_MIN.inputStages;
@@ -802,7 +802,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('should have a min set to a one-stage set\'s only value', async(() => {
+          it('should have a min set to a one-stage set\'s only value', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - ranges - blastzoneWidth - one-item min ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_BLASTZONE_MIN_ONE.inputStages;
@@ -816,7 +816,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('should have a range set to the range of the blastzoneWidth values', async(() => {
+          it('should have a range set to the range of the blastzoneWidth values', waitForAsync(() => {
             ///
             // console.groupCollapsed('== SPEC - ranges - blastzoneWidth - range ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_BLASTZONE_RANGE.inputStages;
@@ -830,7 +830,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('should have a range of zero when there is only one stage', async(() => {
+          it('should have a range of zero when there is only one stage', waitForAsync(() => {
             ///
             // console.groupCollapsed('== SPEC - ranges - blastzoneWidth - one-item range ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_BLASTZONE_RANGE_ONE;
@@ -847,7 +847,7 @@ describe('StageDimensionsService', () => {
 
         describe('stageLength', () => {
           
-          it('should have a max set to the highest stageLength value', async(() => {
+          it('should have a max set to the highest stageLength value', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - ranges - stageLength - max ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_STAGE_MAX.inputStages;
@@ -861,7 +861,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('should have a max set to a one-stage set\'s only value', async(() => {
+          it('should have a max set to a one-stage set\'s only value', waitForAsync(() => {
             ///
             // console.groupCollapsed('== SPEC - range - stageLength - one-item max ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_STAGE_MAX_ONE.inputStages;
@@ -875,7 +875,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('should have a min set to the lowest stageLength value', async(() => {
+          it('should have a min set to the lowest stageLength value', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - ranges - stageLength - min ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_STAGE_MIN.inputStages;
@@ -889,7 +889,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('should have a min set to a one-stage set\'s only value', async(() => {
+          it('should have a min set to a one-stage set\'s only value', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - ranges - stageLength - one-item min ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_STAGE_MIN_ONE.inputStages;
@@ -903,7 +903,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('should have a range set to the range of the stageLength values', async(() => {
+          it('should have a range set to the range of the stageLength values', waitForAsync(() => {
             ///
             // console.groupCollapsed('== SPEC - ranges - stageLength - range ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_STAGE_RANGE.inputStages;
@@ -917,7 +917,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('should have a range of zero when there is only one stage', async(() => {
+          it('should have a range of zero when there is only one stage', waitForAsync(() => {
             ///
             // console.groupCollapsed('== SPEC - ranges - stageLength - one-item range ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_STAGE_RANGE_ONE;
@@ -934,7 +934,7 @@ describe('StageDimensionsService', () => {
 
         describe('offStageDistance', () => {
           
-          it('should have a max set to the highest offStageDistance value', async(() => {
+          it('should have a max set to the highest offStageDistance value', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - ranges - offStageDistance - max ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_OFFSTAGE_MAX.inputStages;
@@ -948,7 +948,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('should have a max set to a one-stage set\'s only value', async(() => {
+          it('should have a max set to a one-stage set\'s only value', waitForAsync(() => {
             ///
             // console.groupCollapsed('== SPEC - range - offStageDistance - one-item max ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_OFFSTAGE_MAX_ONE.inputStages;
@@ -962,7 +962,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('should have a min set to the lowest offStageDistance value', async(() => {
+          it('should have a min set to the lowest offStageDistance value', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - ranges - offStageDistance - min ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_OFFSTAGE_MIN.inputStages;
@@ -976,7 +976,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('should have a min set to a one-stage set\'s only value', async(() => {
+          it('should have a min set to a one-stage set\'s only value', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - ranges - offStageDistance - one-item min ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_OFFSTAGE_MIN_ONE.inputStages;
@@ -990,7 +990,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('should have a range set to the range of the offStageDistance values', async(() => {
+          it('should have a range set to the range of the offStageDistance values', waitForAsync(() => {
             ///
             // console.groupCollapsed('== SPEC - ranges - offStageDistance - range ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_OFFSTAGE_RANGE.inputStages;
@@ -1004,7 +1004,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('should have a range of zero when there is only one stage', async(() => {
+          it('should have a range of zero when there is only one stage', waitForAsync(() => {
             ///
             // console.groupCollapsed('== SPEC - ranges - offStageDistance - one-item range ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_OFFSTAGE_RANGE_ONE;
@@ -1021,7 +1021,7 @@ describe('StageDimensionsService', () => {
 
         describe('ceilingHeight', () => {
           
-          it('should have a max set to the highest ceilingHeight value', async(() => {
+          it('should have a max set to the highest ceilingHeight value', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - ranges - ceilingHeight - max ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_CEILING_MAX.inputStages;
@@ -1035,7 +1035,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('should have a max set to a one-stage set\'s only value', async(() => {
+          it('should have a max set to a one-stage set\'s only value', waitForAsync(() => {
             ///
             // console.groupCollapsed('== SPEC - range - ceilingHeight - one-item max ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_CEILING_MAX_ONE.inputStages;
@@ -1049,7 +1049,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('should have a min set to the lowest ceilingHeight value', async(() => {
+          it('should have a min set to the lowest ceilingHeight value', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - ranges - ceilingHeight - min ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_CEILING_MIN.inputStages;
@@ -1063,7 +1063,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('should have a min set to a one-stage set\'s only value', async(() => {
+          it('should have a min set to a one-stage set\'s only value', waitForAsync(() => {
             ///
             // console.groupCollapsed('=== SPEC - ranges - ceilingHeight - one-item min ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_CEILING_MIN_ONE.inputStages;
@@ -1077,7 +1077,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('should have a range set to the range of the ceilingHeight values', async(() => {
+          it('should have a range set to the range of the ceilingHeight values', waitForAsync(() => {
             ///
             // console.groupCollapsed('== SPEC - ranges - ceilingHeight - range ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_CEILING_RANGE.inputStages;
@@ -1091,7 +1091,7 @@ describe('StageDimensionsService', () => {
             });
           }));
 
-          it('should have a range of zero when there is only one stage', async(() => {
+          it('should have a range of zero when there is only one stage', waitForAsync(() => {
             ///
             // console.groupCollapsed('== SPEC - ranges - ceilingHeight - one-item range ===');
             const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.RANGES_CEILING_RANGE_ONE;
@@ -1110,7 +1110,7 @@ describe('StageDimensionsService', () => {
     });
 
     describe('with integer parameter', () => {
-      it('rounds all values to the nearest integer', async(() => {
+      it('rounds all values to the nearest integer', waitForAsync(() => {
         ///
         // console.groupCollapsed('=== SPEC - integer - rounds all values');
         const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.INTEGER_VALUES.inputStages;
@@ -1136,7 +1136,7 @@ describe('StageDimensionsService', () => {
           });
       }));
 
-      it('sets stages as minimums based on their integer values', async(() => {
+      it('sets stages as minimums based on their integer values', waitForAsync(() => {
         // use two stages with close minimums
         ///
         // console.groupCollapsed('=== SPEC - integer - minimum by integer value');
@@ -1157,7 +1157,7 @@ describe('StageDimensionsService', () => {
         });
       }));
 
-      it('sets stages as maximums based on their integer values', async(() => {
+      it('sets stages as maximums based on their integer values', waitForAsync(() => {
         // use two stages with close maxes
         ///
         // console.groupCollapsed('=== SPEC - integer - maximum by integer value');
@@ -1205,7 +1205,7 @@ describe('StageDimensionsService', () => {
     });
 
     describe('data validation', () => {
-      it('returns an error if there is no saved dataset', async(() => {
+      it('returns an error if there is no saved dataset', waitForAsync(() => {
         ///
         // console.groupCollapsed('== SPEC - getDimensionsBinned() - validate - no db ===');
         const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.INVALID_NO_DB;
@@ -1216,7 +1216,7 @@ describe('StageDimensionsService', () => {
         // console.groupEnd();
       }));
 
-      it('returns an error when no gameNames are provided', async(() => {
+      it('returns an error when no gameNames are provided', waitForAsync(() => {
         ///
         // console.groupCollapsed('== SPEC - getDimensionsBinned() - validate - no gameNames ===');
         const inputStages: StageMiscInfo[] = [];
@@ -1227,7 +1227,7 @@ describe('StageDimensionsService', () => {
         // console.groupEnd();
       }));
 
-      it('returns an error when no provided gameNames are in the database', async(() => {
+      it('returns an error when no provided gameNames are in the database', waitForAsync(() => {
         ///
         // console.groupCollapsed('== SPEC - getDimensionsBinned() - validate - unknown gamenames ===');
         const inputStages: StageMiscInfo[] = STAGE_DIM_SVC.INVALID_UNKNOWN_STAGES;

@@ -1,5 +1,5 @@
 import { DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -64,7 +64,7 @@ describe('StageComparatorComponent', () => {
   let stageDimensionsSpy: { getDimensionsFull: jasmine.Spy, getDimensionsBinned: jasmine.Spy };
   let stagePieceMapStub: Partial<StagePieceMapService>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     activatedRouteStub = {
       data: Observable.create((observer) => {
         observer.next({stageData: {
@@ -277,7 +277,7 @@ describe('StageComparatorComponent', () => {
 
     describe('getStats()', () => {
 
-      it('should call getDimensionsBinned()', async(() => {
+      it('should call getDimensionsBinned()', waitForAsync(() => {
         /**/
         // console.groupCollapsed('=== SPEC - getStats - call getDimensionsBinned() ===');
         const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_CALLBINNED.inputGameNames;
@@ -294,7 +294,7 @@ describe('StageComparatorComponent', () => {
         });
       }));
 
-      it('should send a BinnedStageDimensionsSet to the number table component', async(() => {
+      it('should send a BinnedStageDimensionsSet to the number table component', waitForAsync(() => {
         /**/
         // console.groupCollapsed('=== SPEC - getStats - send data to number table ===');
         const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_NUMBER.inputGameNames;
@@ -316,7 +316,7 @@ describe('StageComparatorComponent', () => {
         });
       }));
 
-      it('should send a BinnedStageDimensionsSet to the number table when the table is available', async(() => {
+      it('should send a BinnedStageDimensionsSet to the number table when the table is available', waitForAsync(() => {
         /**/
         // console.groupCollapsed('=== SPEC - getStats - send data to number table when available ===');
         const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_NUMBER.inputGameNames;
@@ -341,7 +341,7 @@ describe('StageComparatorComponent', () => {
         });
       }));
 
-      it('should send a BinnedStageDimensionsSet to the text table component', async(() => {
+      it('should send a BinnedStageDimensionsSet to the text table component', waitForAsync(() => {
         /**/
         // console.groupCollapsed('=== SPEC - getStats - send data to text table ===');
         const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_TEXT.inputGameNames;
@@ -361,7 +361,7 @@ describe('StageComparatorComponent', () => {
         });
       }));
 
-      it('should send a BinnedStageDimensionsSet to the text table when the table is available', async(() => {
+      it('should send a BinnedStageDimensionsSet to the text table when the table is available', waitForAsync(() => {
         /**/
         // console.groupCollapsed('=== SPEC - getStats - send data to text table when available ===');
         const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_TEXT.inputGameNames;
@@ -386,7 +386,7 @@ describe('StageComparatorComponent', () => {
         });
       }));
 
-      it('should send a BinnedStageDimensionsSet to the graph component', async(() => {
+      it('should send a BinnedStageDimensionsSet to the graph component', waitForAsync(() => {
         /**/
         // console.groupCollapsed('=== SPEC - getStats - send data to graph ===');
         const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_GRAPH.inputGameNames;
@@ -406,7 +406,7 @@ describe('StageComparatorComponent', () => {
         });
       }));
 
-      it('should send a BinnedStageDimensionsSet to the graph when the graph is available', async(() => {
+      it('should send a BinnedStageDimensionsSet to the graph when the graph is available', waitForAsync(() => {
         /**/
         // console.groupCollapsed('=== SPEC - getStats - send data to graph when available ===');
         const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_GRAPH.inputGameNames;
@@ -431,7 +431,7 @@ describe('StageComparatorComponent', () => {
         });
       }));
 
-      it('should refuse to update the view components when an empty set is received', async(() => {
+      it('should refuse to update the view components when an empty set is received', waitForAsync(() => {
         /**/
         // console.groupCollapsed('=== SPEC - getStats - empty set -> no change ===');
         const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_EMPTY.inputGameNames;
@@ -457,7 +457,7 @@ describe('StageComparatorComponent', () => {
         });
       }));
 
-      it('should not call getDimensionsBinned when an empty set is received', async(() => {
+      it('should not call getDimensionsBinned when an empty set is received', waitForAsync(() => {
         /**/
         // console.groupCollapsed('=== SPEC - getStats - empty set - no call to getDimensionsBinned ===');
         const emptyGameNames: string[] = [];
@@ -474,7 +474,7 @@ describe('StageComparatorComponent', () => {
         });
       }));
 
-      it('should call StagePieceMapService::getMaps() if it gets a DatasetNotFoundError from getDimensionsBinned()', async(() => {
+      it('should call StagePieceMapService::getMaps() if it gets a DatasetNotFoundError from getDimensionsBinned()', waitForAsync(() => {
         let pieceMapSpy: { getMaps: jasmine.Spy } = jasmine.createSpyObj('StagePieceMapService', ['getMaps']);
         TestBed.resetTestingModule();
 
@@ -527,7 +527,7 @@ describe('StageComparatorComponent', () => {
         });
       }));
 
-      it('should call StageDimensionsService::getDimensionsFull() if it gets a DatasetNotFoundError from getDimensionsBinned()', async(() => {
+      it('should call StageDimensionsService::getDimensionsFull() if it gets a DatasetNotFoundError from getDimensionsBinned()', waitForAsync(() => {
         /**/
         // console.groupCollapsed('=== SPEC - getStats - call getDimensionsFull on DatasetNotFoundError ===');
         const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_SETNOTFOUND.inputGameNames;
@@ -547,7 +547,7 @@ describe('StageComparatorComponent', () => {
         });
       }));
 
-      it('should still be able to get data if it gets a DatasetNotFoundError from getDimensionsBinned()', async(() => {
+      it('should still be able to get data if it gets a DatasetNotFoundError from getDimensionsBinned()', waitForAsync(() => {
         /**/
         // console.groupCollapsed('=== SPEC - getStats - get data on DatasetNotFound ===');
         const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_SETNOTFOUND.inputGameNames;
@@ -568,7 +568,7 @@ describe('StageComparatorComponent', () => {
         });
       }));
 
-      it('should refuse to update the view components if it gets a DataNotFoundError from getDimensionsBinned()', async(() => {
+      it('should refuse to update the view components if it gets a DataNotFoundError from getDimensionsBinned()', waitForAsync(() => {
         const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_DATANOTFOUND_VIEW.inputGameNames;
         const unknownGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_DATANOTFOUND_VIEW.unknownGameNames;
         const expectedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_DATANOTFOUND_VIEW.expectedData;
@@ -585,7 +585,7 @@ describe('StageComparatorComponent', () => {
         });
       }));
 
-      it('should notify the select component if it gets a DataNotFoundError from getDimensionsBinned()', async(() => {
+      it('should notify the select component if it gets a DataNotFoundError from getDimensionsBinned()', waitForAsync(() => {
         const unknownGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_DATANOTFOUND_NOTICE;
         stageDimensionsSpy.getDimensionsBinned.and.returnValue(throwError(new DataNotFoundError()));
 
@@ -600,7 +600,7 @@ describe('StageComparatorComponent', () => {
         });
       }));
 
-      it('should not notify the select component if it updates stats successfuly the first time', async(() => {
+      it('should not notify the select component if it updates stats successfuly the first time', waitForAsync(() => {
         const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_UPDATESUCCESS_INIT.inputGameNames;
         const binnedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_UPDATESUCCESS_INIT.binnedData;
         stageDimensionsSpy.getDimensionsBinned.and.returnValue(asyncData(binnedData));
@@ -617,7 +617,7 @@ describe('StageComparatorComponent', () => {
 
       }));
 
-      it('should notify the select component if it updates the stats successfully the second time', async(() => {
+      it('should notify the select component if it updates the stats successfully the second time', waitForAsync(() => {
         const inputGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_UPDATESUCCESS_NOTICE.inputGameNames;
         const binnedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_UPDATESUCCESS_NOTICE.binnedData;
         stageDimensionsSpy.getDimensionsBinned.and.returnValue(asyncData(binnedData));

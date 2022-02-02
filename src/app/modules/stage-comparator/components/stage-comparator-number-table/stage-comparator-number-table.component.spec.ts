@@ -1,5 +1,5 @@
 import { DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { StageComparatorNumberTableComponent as NumberTableComponent } from './stage-comparator-number-table.component';
@@ -17,7 +17,7 @@ describe('NumberTableComponent', () => {
   let numComp: NumberTableComponent;
   let numDElem: DebugElement;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         NumberTableComponent,

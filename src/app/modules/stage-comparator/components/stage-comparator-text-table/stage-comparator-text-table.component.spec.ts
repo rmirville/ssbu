@@ -1,5 +1,5 @@
 import { DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { StageComparatorTextTableComponent as TextComponent } from './stage-comparator-text-table.component';
@@ -17,7 +17,7 @@ describe('StageComparatorTextTableComponent', () => {
   let textComp: TextComponent;
   let textDElem: DebugElement;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         HostComponent,

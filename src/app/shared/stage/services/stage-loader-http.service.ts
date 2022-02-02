@@ -24,7 +24,7 @@ const API_STAGE_DETAILS_PREFIX = '/stage/';
 @Injectable({
   providedIn: 'root'
 })
-export class StageLoaderHttpService implements StageLoaderSubService {
+export class StageLoaderHttpService extends StageLoaderSubService {
 
   /**
    * Creates an instance of StageLoaderHttpService.
@@ -33,6 +33,7 @@ export class StageLoaderHttpService implements StageLoaderSubService {
    * @memberof StageLoaderHttpService
    */
   constructor( private http: HttpClient ) {
+    super();
   }
 
   /**

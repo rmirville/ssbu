@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Stage } from '../models/stage.model';
@@ -10,9 +9,6 @@ import { Stage } from '../models/stage.model';
  * @abstract
  * @class StageLoaderSubService
  */
-@Injectable({
-  providedIn: 'root'
-})
 export abstract class StageLoaderSubService {
   /**
    * Fetch stage data

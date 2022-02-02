@@ -1,6 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 
-import { StagePieceMapService } from './stage-piece-map.service';
+import { StagePieceMapConstService } from './stage-piece-map-const.service';
 
 import { StagePieceMap, isStagePieceMap } from '../models/stage-piece-map.model';
 
@@ -11,21 +11,21 @@ import * as PIECE_MAP_SVC from '../models/mocks/stage-piece-map-service';
 
 const MAPS_NAME_STAGE_COMPARATOR: string = 'stageComparator';
 
-describe('StagePieceMapService', () => {
+describe('StagePieceMapConstService', () => {
 
-  let service: StagePieceMapService;
+  let service: StagePieceMapConstService;
 
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    service = TestBed.inject(StagePieceMapService);
+    service = TestBed.inject(StagePieceMapConstService);
     expect(service).toBeTruthy();
   });
 
   describe('getMaps()', () => {
 
     beforeEach(() => {
-      service = new StagePieceMapService();
+      service = new StagePieceMapConstService();
     });
 
     it('should produce a StagePieceMap array when given the map name', async(() => {

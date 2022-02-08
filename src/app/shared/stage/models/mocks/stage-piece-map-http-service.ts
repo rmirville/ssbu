@@ -1,4 +1,4 @@
-import { SsbuApiResponse } from '../../../../data/ssbu-api/models';
+import { SsbuApiResponse, SsbuApiStagePieceMapResponse } from '../../../../data/ssbu-api/models';
 import { StagePieceMap } from '../stage-piece-map.model';
 
 export const GETMAPS_OUTPUT_VALUE: StagePieceMap[] = [
@@ -168,9 +168,11 @@ export const GETMAPS_OUTPUT_VALUE: StagePieceMap[] = [
   }
 ];
 
-export const GETMAPS_OUTPUT_HTTP_RESPONSE: SsbuApiResponse = {
-  _links: {},
-  maps: GETMAPS_OUTPUT_VALUE,
+export const GETMAPS_OUTPUT_TYPE: { httpRes: SsbuApiStagePieceMapResponse } = {
+  httpRes: {
+    _links: {},
+    maps: GETMAPS_OUTPUT_VALUE,
+  },
 };
 
 export const GETMAPS_INVALID_UNKNOWN: string = 'avn9 24lnjsf8';

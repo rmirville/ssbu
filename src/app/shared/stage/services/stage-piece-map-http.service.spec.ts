@@ -7,6 +7,7 @@ import { DataNotFoundError } from '../../errors/data-not-found-error.model';
 import { EmptyArgumentError } from '../../errors/empty-argument-error.model';
 import { asyncData } from '../../../testing/async-observable-helpers';
 import { HttpClient } from '@angular/common/http';
+import { SsbuApiResponse } from 'src/app/data/ssbu-api/models';
 
 describe('StagePieceMapHttpService', () => {
 
@@ -59,7 +60,7 @@ describe('StagePieceMapHttpService', () => {
       ///
       // console.groupCollapsed('=== SPEC - getMaps - output value ===')
       const inputMapSetName: string = MAPS_NAME_STAGE_COMPARATOR;
-      const expectedMaps: StagePieceMap[] = PIECE_MAP_SVC.GETMAPS_OUTPUT_VALUE;
+      const expectedMaps: StagePieceMap[] = PIECE_MAP_SVC.GETMAPS_OUTPUT_VALUE.expectedMaps;
 
       httpClientSpy.get.withArgs(API_URL_STAGE_COMPARATOR).and.returnValue(asyncData(PIECE_MAP_SVC.GETMAPS_OUTPUT_TYPE.httpRes));
 
@@ -74,12 +75,16 @@ describe('StagePieceMapHttpService', () => {
       });
     }));
   
-    xdescribe('data validation', () => {
+  describe('data validation', () => {
 
       it('should reject a map set name that is not in the data source', waitForAsync(() => {
         ///
         // console.groupCollapsed('=== SPEC - getMaps - reject unknown map set name');
-        const inputMapSetName: string = PIECE_MAP_SVC.GETMAPS_INVALID_UNKNOWN;
+        const inputMapSetName: string = PIECE_MAP_SVC.GETMAPS_INVALID_UNKNOWN.inputSetMapName;
+        const inputUrl: string = API_URL_BASE + PIECE_MAP_SVC.GETMAPS_INVALID_UNKNOWN.inputId;
+        const httpRes: SsbuApiResponse = PIECE_MAP_SVC.GETMAPS_INVALID_UNKNOWN.httpRes;
+
+        httpClientSpy.get.withArgs(inputUrl).and.returnValue(asyncData(httpRes));
         
         const actualMaps$ = service.getMaps(inputMapSetName);
         actualMaps$.subscribe({

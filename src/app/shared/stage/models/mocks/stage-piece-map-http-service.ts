@@ -1,7 +1,7 @@
 import { SsbuApiResponse, SsbuApiStagePieceMapResponse } from '../../../../data/ssbu-api/models';
 import { StagePieceMap } from '../stage-piece-map.model';
 
-export const GETMAPS_OUTPUT_VALUE: StagePieceMap[] = [
+const PIECE_MAP_VALUE: StagePieceMap[] = [
   {
     lvd: "village2_00",
     pieceName: "COL_00_Floor01"
@@ -168,11 +168,30 @@ export const GETMAPS_OUTPUT_VALUE: StagePieceMap[] = [
   }
 ];
 
+export const GETMAPS_OUTPUT_VALUE: { httpRes: SsbuApiStagePieceMapResponse, expectedMaps: StagePieceMap[] } = {
+  expectedMaps: PIECE_MAP_VALUE,
+  httpRes: {
+    "_links": {},
+  "  maps": PIECE_MAP_VALUE,
+  }
+};
+
 export const GETMAPS_OUTPUT_TYPE: { httpRes: SsbuApiStagePieceMapResponse } = {
   httpRes: {
-    _links: {},
-    maps: GETMAPS_OUTPUT_VALUE,
+    "_links": {},
+    "maps": PIECE_MAP_VALUE,
   },
 };
 
-export const GETMAPS_INVALID_UNKNOWN: string = 'avn9 24lnjsf8';
+export const GETMAPS_INVALID_UNKNOWN: { inputSetMapName: string, inputId: string, httpRes: SsbuApiResponse } = {
+  inputSetMapName: 'avnLnjsf',
+  inputId: 'avn-lnjsf',
+  httpRes: {
+    "_links": {},
+    "_error": {
+      "status": 404,
+      "type": "RESOURCE_NOT_FOUND",
+      "message": "The requested resource could not be found."
+    },
+  }
+};

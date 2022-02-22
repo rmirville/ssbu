@@ -7,7 +7,7 @@ import { StagePieceMap, isStagePieceMap } from '../models/stage-piece-map.model'
 import { DataNotFoundError } from '../../errors/data-not-found-error.model';
 import { EmptyArgumentError } from '../../errors/empty-argument-error.model';
 
-import * as PIECE_MAP_SVC from '../models/mocks/stage-piece-map-service';
+import * as PIECE_MAP_SVC from '../models/mocks/stage-piece-map-const-service';
 
 const MAPS_NAME_STAGE_COMPARATOR: string = 'stageComparator';
 

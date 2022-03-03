@@ -7,7 +7,7 @@ import * as PIECE_MAP_SVC from '../models/mocks/stage-piece-map-service';
 
 import { StagePieceMapService } from './stage-piece-map.service';
 
-fdescribe('StagePieceMapService', () => {
+describe('StagePieceMapService', () => {
   let service: StagePieceMapService;
   let constSpy: { getMaps: jasmine.Spy };
   let httpSpy: { getMaps: jasmine.Spy };

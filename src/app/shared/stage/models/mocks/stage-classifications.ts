@@ -1,4 +1,38 @@
 import { StageClassifications } from '../stage-classifications.model';
+import { SsbuApiStageClassificationsSetResponse } from 'src/app/data/ssbu-api/models';
+import { StageInfo } from '../stage-info.model';
+
+export const INIT: {res: SsbuApiStageClassificationsSetResponse} = {
+  res: {
+    _links: {
+      "self": "https://api.ssbutools.com/v1/stages/classification-sets/all",
+    },
+    id: "all",
+    classifications: {
+      "federal_": {
+        "gameName": "federal_",
+        "name": "Federal Land",
+        "abbr": "FL",
+        "series": "Miscellaneous",
+        "tourneyPresence": -1,
+      },
+      "temporal_": {
+        "gameName": "temporal_",
+        "name": "Temporal Time",
+        "abbr": "TT",
+        "series": "Timewasters",
+        "tourneyPresence": 2,
+      },
+      "corrale_": {
+        "gameName": "corrale_",
+        "name": "Corrale Camp",
+        "abbr": "CC",
+        "series": "Cowfolks",
+        "tourneyPresence": 3,
+      },
+    },
+  },
+}
 
 export const VALID = {
   gameName: "something",
@@ -331,3 +365,190 @@ export const THREE: StageClassifications[] = [
     tourneyPresence: -1
   }
 ];
+
+export const GAME_NAME_ONLY: { input: StageInfo[], res: SsbuApiStageClassificationsSetResponse } = {
+  input: [{
+    gameName: 'federal_',
+    name: 'A Federal Place',
+  }],
+  res: {
+    _links: {
+      "self": "https://api.ssbutools.com/v1/stages/classification-sets/all",
+    },
+    id: "all",
+    classifications: {
+      "federal_": {
+        "gameName": "federal_",
+        "name": "Federal Land",
+        "abbr": "FL",
+        "series": "Miscellaneous",
+        "tourneyPresence": -1,
+      },
+      "temporal_": {
+        "gameName": "temporal_",
+        "name": "Temporal Time",
+        "abbr": "TT",
+        "series": "Timewasters",
+        "tourneyPresence": 2,
+      },
+      "corrale_": {
+        "gameName": "corrale_",
+        "name": "Corrale Camp",
+        "abbr": "CC",
+        "series": "Cowfolks",
+        "tourneyPresence": 3,
+      },
+    },
+  },
+};
+
+export const MATCH_GAME_NAME: { input: StageInfo[], res: SsbuApiStageClassificationsSetResponse, output: StageClassifications[] } = {
+  input: [
+    {
+      name: "Pokémon Stadium",
+      gameName: "xstadium_"
+    },
+    {
+      name: "Plateau Tower",
+      gameName: "zelda_tower"
+    },
+    {
+      name: "Wuhu",
+      gameName: "wufu_"
+    }
+  ],
+  res: {
+    "_links": {},
+    "classifications": {
+      "xstadium_": {
+        "name": "Pokémon Stadium 2",
+        "abbr": "PS2",
+        "gameName": "xstadium_",
+        "series": "Pokémon",
+        "tourneyPresence": 0
+      },
+      "zelda_tower": {
+        "name": "Great Plateau Tower",
+        "abbr": "GPT",
+        "gameName": "zelda_tower",
+        "series": "The Legend of Zelda",
+        "tourneyPresence": -1
+      },
+      "wufu_": {
+        "name": "Wuhu Island",
+        "abbr": "WI",
+        "gameName": "wufu_",
+        "series": "Miscellaneous",
+        "tourneyPresence": -1
+      },
+      "somekindofplace_": {
+        "name": "Some Kind of Place",
+        "abbr": "SKoP",
+        "gameName": "somekindofplace_",
+        "series": "Miscellaneous",
+        "tourneyPresence": 2,
+      }
+    },
+  },
+  output: [
+    {
+      name: "Pokémon Stadium 2",
+      abbr: "PS2",
+      gameName: "xstadium_",
+      series: "Pokémon",
+      tourneyPresence: 0
+    },
+    {
+      name: "Great Plateau Tower",
+      abbr: "GPT",
+      gameName: "zelda_tower",
+      series: "The Legend of Zelda",
+      tourneyPresence: -1
+    },
+    {
+      name: "Wuhu Island",
+      abbr: "WI",
+      gameName: "wufu_",
+      series: "Miscellaneous",
+      tourneyPresence: -1
+    }
+  ],
+};
+
+
+export const UNKNOWN_GAME_NAMES: {input: StageInfo[], res: SsbuApiStageClassificationsSetResponse,  output: StageClassifications[]} = {
+  input: [
+    {
+      name: "What a Noun",
+      gameName: "whatanoun"
+    },
+    {
+      name: "Extraordinary",
+      gameName: "extraordinary"
+    },
+    {
+      name: "Duck Hunt",
+      gameName: "duckhunt_",
+    },
+    {
+      name: "summit",
+      gameName: "xice_",
+    },
+  ],
+  res: {
+    "_links": {},
+    "classifications": {
+      "xice_": {
+        name: "Summit",
+        abbr: "SMT",
+        gameName: "xice_",
+        series: "Ice Climber",
+        tourneyPresence: -1
+      },
+      "sclub_": {
+        name: "Squalid Club",
+        abbr: "SC",
+        gameName: "sclub_",
+        series: "Lively Lettuce",
+        tourneyPresence: 0
+      },
+      "duckhunt_": {
+        name: "Duck Hunt",
+        abbr: "DH",
+        gameName: "duckhunt_",
+        series: "Duck Hunt",
+        tourneyPresence: -1
+      },
+    }
+  },
+  output: [
+    {
+      name: "What a Noun",
+      abbr: null,
+      gameName: "whatanoun",
+      series: null,
+      tourneyPresence: null
+    },
+    {
+      name: "Extraordinary",
+      abbr: null,
+      gameName: "extraordinary",
+      series: null,
+      tourneyPresence: null
+    },
+    {
+      name: "Duck Hunt",
+      abbr: "DH",
+      gameName: "duckhunt_",
+      series: "Duck Hunt",
+      tourneyPresence: -1
+    },
+    {
+      name: "Summit",
+      abbr: "SMT",
+      gameName: "xice_",
+      series: "Ice Climber",
+      tourneyPresence: -1
+    }
+  ]
+};

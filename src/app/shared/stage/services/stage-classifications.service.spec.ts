@@ -2,34 +2,49 @@ import { TestBed, waitForAsync } from '@angular/core/testing';
 
 import { StageClassificationsService } from './stage-classifications.service';
 
-import { isStageClassifications } from '../models/stage-classifications.model';
-import { StageMiscInfo } from '../models/stage-misc-info.model';
+import { asyncData } from '../../../testing/async-observable-helpers';
+import { StageClassifications, isStageClassifications } from '../models/stage-classifications.model';
+import { StageInfo } from '../models/stage-info.model';
 
 import * as STAGE_CLASSES_INPUT from '../models/mocks/stage-classifications-input';
-import * as STAGE_CLASSES_OUTPUT from '../models/mocks/stage-classifications-output';
+import * as STAGE_CLASSES from '../models/mocks/stage-classifications';
+import { HttpClient } from '@angular/common/http';
+import { SsbuApiStageClassificationsSetResponse } from 'src/app/data/ssbu-api/models';
 
 describe('StageClassificationsService', () => {
 
   let service: StageClassificationsService;
+  let httpSpy: { get: jasmine.Spy };
+  const DEFAULT_RES: SsbuApiStageClassificationsSetResponse = STAGE_CLASSES.INIT.res;
 
-  beforeEach(() => TestBed.configureTestingModule({}));
+  beforeEach(() => {
+    httpSpy = jasmine.createSpyObj('HttpClient', ['get']);
+  });
 
   it('should be created', () => {
+    httpSpy.get.and.returnValue(asyncData(DEFAULT_RES));
+    TestBed.configureTestingModule({
+      providers: [
+        StageClassificationsService,
+        {provide: HttpClient, useValue: httpSpy}
+      ]
+    });
     service = TestBed.inject(StageClassificationsService);
     expect(service).toBeTruthy();
   });
 
   describe('classifyStages()', () => {
 
-    beforeEach(() => {
-      service = new StageClassificationsService();
-    });
-
     describe('basic functionality', () => {
 
       it('should produce a StageClassifications array when fed gameName', waitForAsync(() => {
 
-        const input = STAGE_CLASSES_INPUT.GAME_NAME_ONLY;
+        const input: StageInfo[] = STAGE_CLASSES.GAME_NAME_ONLY.input;
+        const res: SsbuApiStageClassificationsSetResponse = STAGE_CLASSES.GAME_NAME_ONLY.res;
+
+        httpSpy.get.and.returnValue(asyncData(res));
+        service = new StageClassificationsService(httpSpy as any);
+
         let actualClassifiedStages$ = service.classifyStages(input);
 
         actualClassifiedStages$.subscribe(actualClassifiedStages => {
@@ -44,28 +59,53 @@ describe('StageClassificationsService', () => {
       }));
 
       it('should match classifications from its database to the objects by gameName', waitForAsync(() => {
+        ///
+        // console.group(`=== SPEC - MATCH GAME NAME ===`);
 
-        const input = STAGE_CLASSES_INPUT.MATCH_GAME_NAME;
-        const expectedClassifiedStages = STAGE_CLASSES_OUTPUT.MATCH_GAME_NAME;
+        const input: StageInfo[] = STAGE_CLASSES.MATCH_GAME_NAME.input;
+        const res: SsbuApiStageClassificationsSetResponse = STAGE_CLASSES.MATCH_GAME_NAME.res;
+        const expectedClassifiedStages: StageClassifications[] = STAGE_CLASSES.MATCH_GAME_NAME.output;
+
+        httpSpy.get.and.returnValue(asyncData(res));
+        service = new StageClassificationsService(httpSpy as any);
+        ///
+        // console.log('res', res);
+        // console.log('input', input);
+        // console.log('expected', expectedClassifiedStages);
+
         let actualClassifiedStages$ = service.classifyStages(input);
 
-        actualClassifiedStages$.subscribe(actualClassifiedStages => {
+        actualClassifiedStages$.subscribe({
+          next: actualClassifiedStages => {
 
-          expect(actualClassifiedStages.length).withContext('The number of items should match the input array length').toEqual(expectedClassifiedStages.length);
+            expect(actualClassifiedStages.length).withContext('The number of items should match the input array length').toEqual(expectedClassifiedStages.length);
 
-          for (let i = 0; i < expectedClassifiedStages.length; i++) {
+            for (let i = 0; i < expectedClassifiedStages.length; i++) {
 
-            expect(actualClassifiedStages[i]).withContext(`actualClassifiedStages[${i}] should match expectedClassifiedStages[${i}]`).toEqual(expectedClassifiedStages[i]);
+              expect(actualClassifiedStages[i]).withContext(`actualClassifiedStages[${i}] should match expectedClassifiedStages[${i}]`).toEqual(expectedClassifiedStages[i]);
 
+            }
+            ///
+            // console.groupEnd();
+          },
+          error: _ => {
+            ///
+            // console.groupEnd();
+            fail();
           }
-
         });
-
       }));
 
       it('should add null values to stages not in the db', waitForAsync(() => {
-        const input = STAGE_CLASSES_INPUT.UNKNOWN_GAME_NAMES;
-        const expectedClassifiedStages = STAGE_CLASSES_OUTPUT.UNKNOWN_GAME_NAMES;
+        ///
+        // console.log(`=== SPEC - ADD NULL PROPERTIES ===`);
+
+        const input: StageInfo[] = STAGE_CLASSES.UNKNOWN_GAME_NAMES.input;
+        const expectedClassifiedStages: StageClassifications[] = STAGE_CLASSES.UNKNOWN_GAME_NAMES.output;
+        const res: SsbuApiStageClassificationsSetResponse = STAGE_CLASSES.UNKNOWN_GAME_NAMES.res;
+
+        httpSpy.get.and.returnValue(asyncData(res));
+        service = new StageClassificationsService(httpSpy as any);
 
         const actualClassifiedStages$ = service.classifyStages(input);
 
@@ -85,11 +125,15 @@ describe('StageClassificationsService', () => {
     });
     
     describe('data validation', () => {
+      beforeEach(() => {
+        httpSpy.get.and.returnValue(asyncData(DEFAULT_RES));
+        service = new StageClassificationsService(httpSpy as any);
+      });
 
       function _testBadData(problem, message) {
         ///
         // console.log(`=== SPEC - CHECK PARAMETER DATA TYPE (${problem}) ===`);
-        const invalidStages: StageMiscInfo[] = STAGE_CLASSES_INPUT.BAD_DATA[problem];
+        const invalidStages: StageInfo[] = STAGE_CLASSES_INPUT.BAD_DATA[problem];
         ///
         // console.log(`  * invalid stages: ${JSON.stringify(invalidStages)}`);
         expect(() => {

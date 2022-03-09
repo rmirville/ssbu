@@ -8,12 +8,13 @@ import { EmptyArgumentError } from '../../errors/empty-argument-error.model';
 import { asyncData } from '../../../testing/async-observable-helpers';
 import { HttpClient } from '@angular/common/http';
 import { SsbuApiResponse } from 'src/app/data/ssbu-api/models';
+import { environment } from 'src/environments/environment';
 
 describe('StagePieceMapHttpService', () => {
 
   const MAPS_NAME_STAGE_COMPARATOR: string = 'stageComparator';
   const MAPS_ID_STAGE_COMPARATOR: string = 'stage-comparator';
-  const API_URL_BASE: string = 'https://api.ssbutools.com/v1/stages/piece-maps/';
+  const API_URL_BASE: string = environment.apiHost + '/stages/piece-maps/';
   const API_URL_STAGE_COMPARATOR: string = API_URL_BASE + MAPS_ID_STAGE_COMPARATOR;
 
   let service: StagePieceMapHttpService;

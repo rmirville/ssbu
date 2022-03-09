@@ -1,4 +1,6 @@
-const IDX = 'https://api.ssbutools.com/v1';
+import { environment } from 'src/environments/environment';
+
+const IDX = environment.apiHost;
 const STAGE_IDX = IDX + '/stages';
 const STAGE_CLASS_SET_IDX = STAGE_IDX + '/classification-sets';
 

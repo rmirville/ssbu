@@ -1,5 +1,5 @@
-import { Observable, of } from 'rxjs';
-import { concatMap, delay, retry, retryWhen, tap } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
+import { concatMap, delay, retryWhen } from 'rxjs/operators';
 
 const DEFAULT_MAX_RETRIES: number = 3;
 const DEFAULT_DELAY: number = 500;
@@ -42,7 +42,7 @@ export function httpRetryBackoff(maxRetries: number = DEFAULT_MAX_RETRIES, backo
             return of(error);
           }
           else {
-            return Observable.throw(error);
+            return throwError(error);
           }
         })
       )

@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "serve": "npm run serve:dev",
+    "serve:dev": "ng serve",
+    "serve:prod": "ng serve --prod",
+    "build": "npm run build:dev",
+    "build:dev": "ng build",
+    "build:prod": "ng build --prod",
     "test": "ng test --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e"

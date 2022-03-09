@@ -73,10 +73,6 @@ export class StageDimensionsService {
    * @memberof StageDimensionsService
    */
   getDimensionsFull(stages: Stage[], pieceMaps?: StagePieceMap[]): Observable<StageDimensionsSet> {
-    /**/
-    // console.log('StageDimensionsService::getDimensionsFull()');
-    // console.log(`  * number of stages: ${stages.length}`);
-    // console.log(`  * pieceMaps: ${JSON.stringify(pieceMaps)}`);
     if (!Array.isArray(stages)) {
       throw new TypeError('The stages argument was not an array');
     }
@@ -112,9 +108,6 @@ export class StageDimensionsService {
 
         if (pieceMaps) {
           pieceMap = pieceMaps.find((map) => map.lvd == phase.lvd);
-          /**/
-          // console.log(`  * pieceMap: ${JSON.stringify(pieceMap)}`);
-          // console.log(`  * phaseLvd: ${phase.lvd}`);
           if (pieceMap) {
             piece = phase.collisions.find((piece) => piece.name == pieceMap.pieceName);
           }
@@ -124,11 +117,6 @@ export class StageDimensionsService {
           piece = phase.collisions[0];
         }
 
-        /**/
-        // console.log(`  * stage: ${name}`);
-        // console.log(`  * gameName: ${gameName}`);
-        // console.log(`  * piece: ${piece.name}`);
-        // console.log(`---`);
         let leftIndex = piece.materials.findIndex((material) => material.leftLedge === true);
         let rightIndex = piece.materials.findIndex((material) => material.rightLedge === true) + 1;
         let leftLedgePosition = piece.vertex[leftIndex];
@@ -137,30 +125,6 @@ export class StageDimensionsService {
         let stageLength = (rightLedgePosition[0] - leftLedgePosition[0]);
         let offStageDistance = (blastzoneWidth - stageLength) / 2;
         let ceilingHeight = blastzones[2] - ((rightLedgePosition[1] + leftLedgePosition[1]) / 2);
-        /**/
-        /*console.log(
-          `name: ${name}\n\n`
-          + `gameName: ${gameName}\n\n`
-          + `phase: ${phase.lvd}\n\n`
-          + `blastzones: ${blastzones}\n\n`
-          + `blastzoneWidth: ${blastzoneWidth}\n\n`
-          + `materials: ${JSON.stringify(piece.materials)}\n\n`
-          + `vertices: ${JSON.stringify(piece.vertex)}\n\n`
-          
-          + `leftIndex: ${leftIndex}\n\n`
-          + `leftLedge: ${JSON.stringify(piece.materials[leftIndex])}\n\n`
-          + `leftVertex: ${JSON.stringify(piece.vertex[leftIndex])}\n\n`
-          + `leftLedgeX: ${leftLedgePosition[0]}\n\n`
-  
-          + `rightIndex: ${rightIndex}\n\n`
-          + `rightLedge: ${JSON.stringify(piece.materials[rightIndex])}\n\n`
-          + `rightVertex: ${JSON.stringify(piece.vertex[rightIndex])}\n\n`
-          + `rightLedgeX: ${rightLedgePosition[0]}\n\n`
-          
-          + `stageLength: ${stageLength}\n\n`
-          + `offStageDistance: ${offStageDistance}\n\n`
-          + `ceilingHeight: ${ceilingHeight}\n\n`
-        );*/
         return {
           name: name,
           gameName: gameName,
@@ -171,8 +135,6 @@ export class StageDimensionsService {
         };
       });
       const stageDimensionsRanges = this._getRanges(stageDimensions);
-    /**/
-    // console.log(`  * ranges: ${stageDimensionsRanges}`);
       this._dimensionsSetFull = { dimensions: stageDimensions, ranges: stageDimensionsRanges };
       observer.next(this._dimensionsSetFull);
       observer.complete();
@@ -193,13 +155,9 @@ export class StageDimensionsService {
    * @memberof StageDimensionsService
    */
   getDimensionsBinned(stages: StageMiscInfo[], round: boolean = false): Observable<BinnedStageDimensionsSet> {
-    ///
-    // console.group('StageDimensionsService::getDimensionsBinned()');
 
     // data validation
     if (!this._dimensionsSetFull.dimensions.length) {
-      ///
-      // console.groupEnd();
       throw new DatasetNotFoundError();
     }
 
@@ -212,16 +170,10 @@ export class StageDimensionsService {
     }
 
     if (stages.length === 0) {
-      ///
-      // console.groupEnd();
       throw new NotFoundError();
     }
 
     const binnedDimensionsSet$: Observable<BinnedStageDimensionsSet> = new Observable<BinnedStageDimensionsSet>(observer => {
-      ///
-      // console.log('stageDimensionsService::getDimensionsBinned().binnedDimensionsSet$');
-      // console.log(`_dimensionsSetFull: ${JSON.stringify(this._dimensionsSetFull)}`);
-      // console.log(`gameNames: ${JSON.stringify(gameNames)}`);
       const numBins: number = 5;
       const gameNames: string[] = stages.map(stage => stage.gameName);
       let refStages: StageDimensions[] = this._dimensionsSetFull.dimensions.filter(refStage => {
@@ -239,8 +191,6 @@ export class StageDimensionsService {
           };
         })
       }
-      ///
-      // console.log(`stages: ${JSON.stringify(stages.map(stage => stage.gameName))}`);
       let binParamsSet: BinningParamsSet = {
         numBins: numBins,
         blastzoneWidth: this._getBinningParams(refStages, 'blastzoneWidth', numBins),
@@ -253,28 +203,17 @@ export class StageDimensionsService {
       const refGameNames: string[] = refStages.map(stage => stage.gameName);
 
       stages = stages.filter(stage => { return refGameNames.includes(stage.gameName); });
-      ///
-      // console.log(`filtered gameNames: ${JSON.stringify(gameNames)}`);
       if(stages.length === 0) {
-        ///
-        // console.groupEnd();
         observer.error(new NotFoundError());
       }
       for (const stage of stages) {
-        ///
-        // console.log(`gameName: ${gameName}`);
         let binnedStage: BinnedStageDimensions;
         const refStage: StageDimensions = refStages.find(   rStage => { return (rStage.gameName === stage.gameName); }   );
         const name: string = stage.hasOwnProperty('name') && typeof stage['name'] === 'string' ? stage.name : refStage.name;
-        ///
-        // console.log(`stage: ${JSON.stringify(stage)}`);
-        ///
-        // console.group('StageDimensionsService::_getBin()');
         const blastzoneWidthParams: StageDimensionsBinParams = this._getBinParams(refStage.blastzoneWidth, binParamsSet.blastzoneWidth, numBins);
         const stageLengthParams: StageDimensionsBinParams = this._getBinParams(refStage.stageLength, binParamsSet.stageLength, numBins);
         const offStageDistanceParams: StageDimensionsBinParams = this._getBinParams(refStage.offStageDistance, binParamsSet.offStageDistance, numBins);
         const ceilingHeightParams: StageDimensionsBinParams = this._getBinParams(refStage.ceilingHeight, binParamsSet.ceilingHeight, numBins);
-        // console.groupEnd();
 
         binnedStage = {
           ...stage,
@@ -285,8 +224,6 @@ export class StageDimensionsService {
           ceilingHeight: ceilingHeightParams
         };
         binnedDimensions.push(binnedStage);
-        ///
-        // console.groupEnd();
       }
       binnedDimensionsSet = {
         bins: 5,
@@ -314,22 +251,14 @@ export class StageDimensionsService {
           }
         }
       };
-      ///
-      // console.groupEnd();
       observer.next(binnedDimensionsSet);
-      observer.complete;
+      observer.complete();
     });
-    ///
-    // console.groupEnd();
     return binnedDimensionsSet$;
   }
 
   _getBinningParams(stages: StageDimensions[], dimension: string, numBins: number = 5): BinningParams {
-    /**/
-    // console.group('StageDimensionsService::_getBinParams()');
     let values: number[] = stages.map(stage => stage[dimension]);
-    /**/
-    // console.log(`values: ${JSON.stringify(values)}`);
     const min: number = Math.min(...values);
     const max: number = Math.max(...values);
     const range: number = max - min;
@@ -341,8 +270,6 @@ export class StageDimensionsService {
       binBounds.push(min + (interval * i));
     }
     binBounds.push(max);
-    /**/
-    // console.groupEnd();
     return {
       values: values,
       range: range,
@@ -387,8 +314,6 @@ export class StageDimensionsService {
   }
 
   _getRanges(dimensionsArr: StageDimensions[]) {
-    /**/
-    // console.log('StageDimensionsService::_getRanges()');
     const blastzoneWidths = dimensionsArr.map((dimensionsArr) => dimensionsArr.blastzoneWidth);
     const stageLengths = dimensionsArr.map((dimensionsArr) => dimensionsArr.stageLength);
     const offStageDistances = dimensionsArr.map((dimensionsArr) => dimensionsArr.offStageDistance);

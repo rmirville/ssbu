@@ -49,6 +49,7 @@ export class StagePieceMapHttpService extends StagePieceMapSubService {
     const response$: Observable<StagePieceMap[]> = this.http.get<SsbuApiStagePieceMapResponse>(url).pipe(
       httpRetryBackoff(),
       catchError(err => {
+        /** */ console.log('StagePieceMap::getMaps() - err:', err);
         return from([new DataNotFoundError()]);
       }),
       map((res: SsbuApiStagePieceMapResponse) => {

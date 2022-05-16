@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { from, Observable, ReplaySubject } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { SsbuApiUrls } from 'src/app/data/ssbu-api/constants/urls';
+import { classificationsSet } from 'src/app/data/constants/stage-classifications';
 import { SsbuApiStageClassificationsSetResponse } from 'src/app/data/ssbu-api/models';
+import { DataNotFoundError } from '../../errors/data-not-found-error.model';
 import { Dictionary } from '../../models';
 import { httpRetryBackoff } from '../../utility/rxjs-operators';
 import { StageClassifications } from '../models/stage-classifications.model';
@@ -26,9 +28,15 @@ export class StageClassificationsService {
     private http: HttpClient,
   ) {
     const set$: Observable<SsbuApiStageClassificationsSetResponse> = this.http.get<SsbuApiStageClassificationsSetResponse>(SsbuApiUrls.stageClassificationSets + '/all');
-    set$.pipe(httpRetryBackoff()).subscribe((resp: SsbuApiStageClassificationsSetResponse) => {
-      this.classificationsSet$.next(resp.classifications);
-    });
+    set$.pipe(httpRetryBackoff()).pipe(
+      catchError(err => {
+        return from([{classifications: classificationsSet}]);
+      }),
+    ).subscribe(
+      (resp: SsbuApiStageClassificationsSetResponse) => {
+        this.classificationsSet$.next(resp.classifications);
+      }
+    );
   }
 
   /**
@@ -83,7 +91,7 @@ export class StageClassificationsService {
     return this.classificationsSet$.pipe(
       map((set: Dictionary<StageClassifications>) => stages.map((stage: StageInfo) => {
         let output: StageClassifications;
-        if (set[stage.gameName]) {
+        if (set && set[stage.gameName]) {
           output = {
             ...stage,
             name: set[stage.gameName].name,

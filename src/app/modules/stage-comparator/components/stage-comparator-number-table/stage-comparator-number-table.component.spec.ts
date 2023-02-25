@@ -65,7 +65,7 @@ describe('NumberTableComponent', () => {
     });
     it('should display each stage\'s name', () => {
       const inputSet: BinnedStageDimensionsSet = NUMBER_TABLE.DISPLAY_NAME.inputSet;
-      const expectedValues: { stage: string, value:string }[] = NUMBER_TABLE.DISPLAY_NAME.expectedValues;
+      const expectedValues: { stage: string, value: string }[] = NUMBER_TABLE.DISPLAY_NAME.expectedValues;
       const dimensions: string[] = ['blastzoneWidth', 'stageLength', 'offStageDistance', 'ceilingHeight'];
 
       hostComp.binnedStageDimensionsSet = inputSet;
@@ -74,14 +74,14 @@ describe('NumberTableComponent', () => {
       for (const dimension of dimensions) {
         hostComp.selectedDimension = dimension;
         hostFixture.detectChanges();
-  
-        const actualValues: { stage: string, value: number }[] = numDElem.queryAll(By.css('.ssbu-table .entry')).map(dElem => {
+
+        const actualValues: { stage: string, value: string }[] = numDElem.queryAll(By.css('.ssbu-table .entry')).map(dElem => {
           return {
             stage: dElem.nativeElement.className.split(' ').find(name => name.startsWith('numtable_')),
             value: dElem.query(By.css('.name')).nativeElement.textContent.trim()
           };
         });
-  
+
         for (const stage in expectedValues) {
           expect(actualValues).withContext(expectedValues[stage].stage).toContain(expectedValues[stage]);
         }
@@ -225,11 +225,11 @@ describe('NumberTableComponent', () => {
       for (let i: number = 0; i < expectedClasses.length; i++) {
         expect(actualClasses[i]).withContext(`position ${i}`).toEqual(expectedClasses[i]);
       }
-      
+
       ///
       // console.groupEnd();
     });
-    
+
     it('should sort stages by blastzone width descending when showing blastzone widths', () => {
       ///
       // console.groupCollapsed('=== SPEC - sort by blastzone');
@@ -247,73 +247,73 @@ describe('NumberTableComponent', () => {
       for (let i: number = 0; i < expectedClasses.length; i++) {
         expect(actualClasses[i]).withContext(`position ${i}`).toEqual(expectedClasses[i]);
       }
-      
+
       ///
       // console.groupEnd();
     });
-    
+
     it('should sort stages by floor length descending when showing floor lengths', () => {
       ///
       // console.groupCollapsed('=== SPEC - sort by floor length');
-  
+
       const inputSet: BinnedStageDimensionsSet = NUMBER_TABLE.DISPLAY_SORT_STAGELENGTH.inputSet;
       const expectedClasses: string[] = NUMBER_TABLE.DISPLAY_SORT_STAGELENGTH.expectedClasses;
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
-  
+
       hostComp.selectedDimension = 'stageLength';
       hostFixture.detectChanges();
-  
+
       const actualClasses: string[] = numDElem.queryAll(By.css('.ssbu-table .entry')).map(dElem => dElem.nativeElement.className.split(' ').find(name => name.startsWith('numtable_')));
-  
+
       for (let i: number = 0; i < expectedClasses.length; i++) {
         expect(actualClasses[i]).withContext(`position ${i}`).toEqual(expectedClasses[i]);
       }
-      
+
       ///
       // console.groupEnd();
     });
-      
+
     it('should sort stages by off-stage distance descending when showing off-stage distances', () => {
       ///
       // console.groupCollapsed('=== SPEC - sort by off-stage distance');
-  
+
       const inputSet: BinnedStageDimensionsSet = NUMBER_TABLE.DISPLAY_SORT_OFFSTAGE.inputSet;
       const expectedClasses: string[] = NUMBER_TABLE.DISPLAY_SORT_OFFSTAGE.expectedClasses;
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
-  
+
       hostComp.selectedDimension = 'offStageDistance';
       hostFixture.detectChanges();
-  
+
       const actualClasses: string[] = numDElem.queryAll(By.css('.ssbu-table .entry')).map(dElem => dElem.nativeElement.className.split(' ').find(name => name.startsWith('numtable_')));
-  
+
       for (let i: number = 0; i < expectedClasses.length; i++) {
         expect(actualClasses[i]).withContext(`position ${i}`).toEqual(expectedClasses[i]);
       }
-      
+
       ///
       // console.groupEnd();
     });
-      
+
     it('should sort stages by ceiling height descending when showing ceiling heights', () => {
       ///
       // console.groupCollapsed('=== SPEC - sort by ceiling height');
-  
+
       const inputSet: BinnedStageDimensionsSet = NUMBER_TABLE.DISPLAY_SORT_CEILING.inputSet;
       const expectedClasses: string[] = NUMBER_TABLE.DISPLAY_SORT_CEILING.expectedClasses;
       hostComp.binnedStageDimensionsSet = inputSet;
       hostFixture.detectChanges();
-  
+
       hostComp.selectedDimension = 'ceilingHeight';
       hostFixture.detectChanges();
-  
+
       const actualClasses: string[] = numDElem.queryAll(By.css('.ssbu-table .entry')).map(dElem => dElem.nativeElement.className.split(' ').find(name => name.startsWith('numtable_')));
-  
+
       for (let i: number = 0; i < expectedClasses.length; i++) {
         expect(actualClasses[i]).withContext(`position ${i}`).toEqual(expectedClasses[i]);
       }
-      
+
       ///
       // console.groupEnd();
     });

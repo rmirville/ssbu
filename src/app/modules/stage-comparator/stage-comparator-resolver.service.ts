@@ -25,11 +25,16 @@ interface StageComparatorRouteData {
 @Injectable({
   providedIn: 'root'
 })
-export class StageComparatorResolverService implements Resolve<StageComparatorRouteData> {
+export class StageComparatorResolverService {
 
-  constructor(private sls: StageLoaderService, private sds: StageDimensionsService, private scs: StageClassificationsService, private spms: StagePieceMapService, private router: Router) { }
+  constructor(
+    private sls: StageLoaderService,
+    private sds: StageDimensionsService,
+    private scs: StageClassificationsService,
+    private spms: StagePieceMapService,
+  ) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<StageComparatorRouteData> {
+  resolve(): Observable<StageComparatorRouteData> {
     const stageData$ = new Observable<StageComparatorRouteData>(observer => {
       let stageData: StageComparatorRouteData = {stages: null, dimensionsFull: null, stageClassifications: null};
 

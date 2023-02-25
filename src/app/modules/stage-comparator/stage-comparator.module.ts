@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { inject, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -13,9 +13,7 @@ import { StageComparatorResolverService } from './stage-comparator-resolver.serv
 const STAGE_COMPARATOR_ROUTES: Routes = [{
   path: '',
   component: StageComparatorComponent,
-  resolve: {
-    stageData: StageComparatorResolverService
-  }
+  resolve: { stageData: () => inject(StageComparatorResolverService).resolve() }
 }];
 
 @NgModule({

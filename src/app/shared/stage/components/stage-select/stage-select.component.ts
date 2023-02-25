@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { compareText } from '../../../utility/compare-functions';
 
@@ -25,7 +25,7 @@ const BLANK_SERIES: string = 'Miscellaneous';
   styleUrls: ['./stage-select.component.css']
 })
 export class StageSelectComponent implements OnChanges, OnInit {
-  selectionForm: FormGroup = this.fb.group({}, { validators: this._checkboxSelected() });
+  selectionForm: UntypedFormGroup = this.fb.group({}, { validators: this._checkboxSelected() });
   separator: string = '_';
 
   @Input() stages: StageClassifications[];
@@ -109,7 +109,7 @@ export class StageSelectComponent implements OnChanges, OnInit {
     sections: []
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: UntypedFormBuilder) {
   }
 
   ngOnInit() {
@@ -305,7 +305,7 @@ export class StageSelectComponent implements OnChanges, OnInit {
   }
 
   _checkboxSelected(): ValidatorFn {
-    const validator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+    const validator: ValidatorFn = (control: UntypedFormGroup): ValidationErrors | null => {
       ///
       // console.group('StageSelectComponent::checkboxSelected()');
       // console.log(`control.value: ${JSON.stringify(control.value)}`);

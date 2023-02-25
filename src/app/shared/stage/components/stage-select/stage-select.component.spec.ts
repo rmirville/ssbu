@@ -1,6 +1,6 @@
 import { DebugElement } from '@angular/core';
 import { waitForAsync, fakeAsync, ComponentFixture, TestBed, tick, flush } from '@angular/core/testing';
-import { FormBuilder, ReactiveFormsModule, } from '@angular/forms';
+import { UntypedFormBuilder, ReactiveFormsModule, } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 import { StageSelectComponent } from './stage-select.component';
@@ -26,7 +26,7 @@ describe('StageSelectComponent', () => {
         ReactiveFormsModule
       ],
       providers: [
-        FormBuilder
+        UntypedFormBuilder
       ]
     })
     .compileComponents();

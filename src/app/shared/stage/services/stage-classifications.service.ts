@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of, ReplaySubject } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 import { SsbuApiUrls } from 'src/app/data/ssbu-api/constants/urls';
 import { SsbuApiStageClassificationsSetResponse } from 'src/app/data/ssbu-api/models';
@@ -9,6 +9,11 @@ import { Dictionary } from '../../models';
 import { httpRetryBackoff } from '../../utility/rxjs-operators';
 import { StageClassifications } from '../models/stage-classifications.model';
 import { StageInfo } from '../models/stage-info.model';
+
+const EMPTY_CLASSIFICATIONS: SsbuApiStageClassificationsSetResponse = {
+  _links: {},
+  classifications: {},
+};
 
 /**
  * Service class providing stage categorical data
@@ -26,7 +31,9 @@ export class StageClassificationsService {
     private http: HttpClient,
   ) {
     const set$: Observable<SsbuApiStageClassificationsSetResponse> = this.http.get<SsbuApiStageClassificationsSetResponse>(SsbuApiUrls.stageClassificationSets + '/all');
-    set$.pipe(httpRetryBackoff()).subscribe((resp: SsbuApiStageClassificationsSetResponse) => {
+    set$.pipe(
+      httpRetryBackoff(),
+      catchError(_ => of(EMPTY_CLASSIFICATIONS))).subscribe((resp: SsbuApiStageClassificationsSetResponse) => {
       this.classificationsSet$.next(resp.classifications);
     });
   }

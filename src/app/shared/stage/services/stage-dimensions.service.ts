@@ -92,7 +92,7 @@ export class StageDimensionsService {
         }
       });
     }
-    
+
     let fullDimensionsSet$: Observable<StageDimensionsSet> = new Observable<StageDimensionsSet>(observer => {
       let stageDimensions: StageDimensions[] = stages.map((stage) => {
         let name = stage.name;

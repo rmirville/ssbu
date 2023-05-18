@@ -198,48 +198,23 @@ describe('StageComparatorComponent', () => {
       expect(comparator.view).toEqual('graph');
     });
 
-    describe('data validation', () => {
+    it(`should not try to change the view property for a null value`, () => {
+      comparator.setView(null);
+      expect(comparator.view).toEqual('graph');
+    });
 
-      it('should reject a null view', () => {
-        ///
-        // console.groupCollapsed('=== SPEC - setView() - validate - reject null view');
+    it(`should not try to change the view property for an undefined value`, () => {
+      comparator.setView(undefined);
+      expect(comparator.view).toEqual('graph');
+    });
 
-        expect(() => {
-          comparator.setView(null);
-        }).toThrow(TypeError('view should be of type string'));
-
-        ///
-        // console.groupEnd();
-      });
-
-      it('should reject an undefined view', () => {
-        ///
-        // console.groupCollapsed('=== SPEC - setView() - validate - reject undefined view');
-
-        expect(() => {
-          comparator.setView(undefined);
-        }).toThrow(TypeError('view should be of type string'));
-
-        ///
-        // console.groupEnd();
-      });
-
-      it('should reject a non-string view', () => {
-        ///
-        // console.groupCollapsed('=== SPEC - setView() - validate - reject non-string view');
-
-        const badValue = {
-          view: { view: 45 }
-        };
-        const propName: string = 'view';
-        expect(() => {
-          comparator.setView(badValue[propName]);
-        }).toThrow(TypeError('view should be of type string'));
-
-        ///
-        // console.groupEnd();
-      });
-
+    it(`should not try to change the view property for a non-string value`, () => {
+      const badValue = {
+        view: { view: 45 }
+      };
+      const propName: string = 'view';
+      comparator.setView(badValue[propName]);
+      expect(comparator.view).toEqual('graph');
     });
 
   });
@@ -573,10 +548,10 @@ describe('StageComparatorComponent', () => {
         const unknownGameNames: string[] = STAGE_COMPARATOR_CMP.GETSTATS_DATANOTFOUND_VIEW.unknownGameNames;
         const expectedData: BinnedStageDimensionsSet = STAGE_COMPARATOR_CMP.GETSTATS_DATANOTFOUND_VIEW.expectedData;
         stageDimensionsSpy.getDimensionsBinned.and.returnValues(asyncData(expectedData), throwError(new DataNotFoundError()));
-        
+
         comparator.getStats(inputGameNames);
         comparator.view = 'graph';
-        
+
         fixture.whenStable().then(() => {
           fixture.detectChanges();
 
@@ -639,103 +614,6 @@ describe('StageComparatorComponent', () => {
           });
         });
       }));
-
-      describe('data validation', () => {
-
-        it('should reject an undefined stages', () => {
-          ///
-          // console.groupCollapsed('=== SPEC - getStats() - validate - reject undefined stages');
-
-          expect(() => {
-            comparator.getStats(undefined);
-          }).toThrow(new TypeError('stages should be of type string[]'));
-
-          ///
-          // console.groupEnd();
-        });
-
-        it('should reject a null stages', () => {
-          ///
-          // console.groupCollapsed('=== SPEC - getStats() - validate - reject null stages');
-
-          expect(() => {
-            comparator.getStats(null);
-          }).toThrow(new TypeError('stages should be of type string[]'));
-          
-          ///
-          // console.groupEnd();
-        });
-
-        it('should reject a non-array stages', () => {
-          ///
-          // console.groupCollapsed('=== SPEC - getStats() - validate - reject non-array stages');
-
-          const badValue = {
-            stages: 'dfTNvfW5HK'
-          };
-          const propName: string = 'stages';
-
-          expect(() => {
-            comparator.getStats(badValue[propName]);
-          }).toThrow(new TypeError('stages should be of type string[]'));
-
-          ///
-          // console.groupEnd();
-        });
-
-        it('should reject a stages array with non-string items', () => {
-          ///
-          // console.groupCollapsed('=== SPEC - getStats() - validate - reject stages w/ non-string items');
-
-          const badValue = {
-            stages: ['wZJsEGXCZa', false, 'ZsJkcRSpAj']
-          };
-          const propName: string = 'stages';
-
-          expect(() => {
-            comparator.getStats(badValue[propName]);
-          }).toThrow(new TypeError('stages should be of type string[]'));
-
-          ///
-          // console.groupEnd();
-        });
-
-        it('should reject a stages array with null items', () => {
-          ///
-          // console.groupCollapsed('=== SPEC - getStats() - validate - reject stages w/ null items');
-
-          const badValue = {
-            stages: [null, 'XrnGRPl02a', 'J6ATJmydlJ']
-          };
-          const propName: string = 'stages';
-
-          expect(() => {
-            comparator.getStats(badValue[propName]);
-          }).toThrow(new TypeError('stages should be of type string[]'));
-
-          ///
-          // console.groupEnd();
-        });
-
-        it('should reject a stages array with undefined items', () => {
-          ///
-          // console.groupCollapsed('=== SPEC - getStats() - validate - reject stages w/ undefined items');
-
-          const badValue = {
-            stages: ['dF4T2VW3Tl', 'WAsJMUPRMR', undefined]
-          };
-          const propName: string = 'stages';
-
-          expect(() => {
-            comparator.getStats(badValue[propName]);
-          }).toThrow(new TypeError('stages should be of type string[]'));
-
-          ///
-          // console.groupEnd();
-        });
-
-      });
-
     });
   });
 
@@ -775,7 +653,7 @@ describe('StageComparatorComponent', () => {
       /**/
       // console.groupEnd();
     });
-    
+
     describe('default view', () => {
 
       it(`should show the graph component by default`, () => {
@@ -950,15 +828,15 @@ describe('StageComparatorComponent', () => {
 
         comparator.view = 'graph';
         fixture.detectChanges();
-        
+
         dimControlDElem.nativeElement.value = 'blastzoneWidth';
         dimControlDElem.nativeElement.dispatchEvent(new Event('change'));
         fixture.detectChanges();
-        
+
         for (const view of views) {
           comparator.view = view;
           fixture.detectChanges();
-          
+
           for (const dim of dimensions) {
             const expectedDimension: string = dim;
             dimControlDElem.nativeElement.value = dim;
@@ -980,10 +858,10 @@ describe('StageComparatorComponent', () => {
         const dimensions: string[] = ['stageLength', 'offStageDistance', 'ceilingHeight', 'blastzoneWidth'];
         const views: string[] = ['text', 'number', 'graph'];
         const dimControlDElem: DebugElement = dElem.query(By.css('.dimension-control'));
-        
+
         comparator.view = 'graph';
         fixture.detectChanges();
-        
+
         dimControlDElem.nativeElement.value = 'blastzoneWidth';
         dimControlDElem.nativeElement.dispatchEvent(new Event('change'));
         fixture.detectChanges();

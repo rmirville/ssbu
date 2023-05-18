@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   Router, Resolve,
   RouterStateSnapshot,
-  ActivatedRouteSnapshot
+  ActivatedRouteSnapshot,
+  ResolveFn
 } from '@angular/router';
 
 import { Observable, zip } from 'rxjs';
@@ -21,6 +22,11 @@ interface StageComparatorRouteData {
   dimensionsFull: StageDimensionsSet,
   stageClassifications: StageClassifications[]
 };
+
+export const stageResolver: ResolveFn<StageComparatorRouteData> =
+    () => {
+      return inject(StageComparatorResolverService).resolve();
+    };
 
 @Injectable({
   providedIn: 'root'

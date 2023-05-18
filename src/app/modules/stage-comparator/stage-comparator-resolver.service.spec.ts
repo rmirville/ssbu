@@ -14,7 +14,7 @@ import { StageDimensionsRange } from '../../shared/stage/models/stage-dimensions
 import { StageDimensionsSet, isStageDimensionsSet } from '../../shared/stage/models/stage-dimensions-set.model';
 import { StageClassifications, isStageClassifications } from '../../shared/stage/models/stage-classifications.model';
 
-import { StageComparatorResolverService } from './stage-comparator-resolver.service';
+import { StageComparatorResolverService, stageResolver } from './stage-comparator-resolver.service';
 import { StagePieceMapService } from '../../shared/stage/services/stage-piece-map.service';
 
 import { STAGES_ONE, STAGES_TWO, STAGES_THREE } from '../../shared/stage/models/mocks/stages';
@@ -40,7 +40,7 @@ describe('StageComparatorResolverService', () => {
             path: '',
             component: EmptyMockComponent,
             resolve: {
-              stages: StageComparatorResolverService
+              stages: stageResolver
             }
           }
         ])
@@ -56,7 +56,7 @@ describe('StageComparatorResolverService', () => {
       getMaps: () => { return asyncData(PIECE_MAPS.STAGE_COMPARATOR); }
     };
     router = TestBed.inject(Router);
-    resolverService = new StageComparatorResolverService(stageLoaderSpy as any, stageDimensionsSpy as any, stageClassificationsSpy as any, stagePieceMapStub as any, router);
+    resolverService = new StageComparatorResolverService(stageLoaderSpy as any, stageDimensionsSpy as any, stageClassificationsSpy as any, stagePieceMapStub as any);
   });
 
   beforeEach(inject([Router, Location], (_router: Router) => {
@@ -89,7 +89,7 @@ describe('StageComparatorResolverService', () => {
       stageDimensionsSpy.getDimensionsFull.and.returnValue(asyncData(expectedDimensionsSet));
       stageClassificationsSpy.classifyStages.and.returnValue(asyncData(expectedClassifications))
 
-      const actualStageData$ = resolverService.resolve(route, state);
+      const actualStageData$ = resolverService.resolve();
       actualStageData$.subscribe((actualStageData) => {
         const actualStages = actualStageData['stages'];
         const actualDimensionsSet = actualStageData['dimensionsFull'];
@@ -130,7 +130,7 @@ describe('StageComparatorResolverService', () => {
       stageDimensionsSpy.getDimensionsFull.and.returnValue(asyncData(STAGE_DIMENSIONS_SETS.TWO_STAGE_SET));
       stageClassificationsSpy.classifyStages.and.returnValue(asyncData(STAGE_CLASSES.ONE));
 
-      let actualStageData$ = resolverService.resolve(route, state);
+      let actualStageData$ = resolverService.resolve();
       actualStageData$.subscribe({
         next: (actualStageData) => {
           /**/

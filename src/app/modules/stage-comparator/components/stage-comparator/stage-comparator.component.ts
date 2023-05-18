@@ -76,9 +76,6 @@ export class StageComparatorComponent implements OnInit {
   }
 
   setView(view: string) {
-    if (typeof view !== 'string') {
-      throw new TypeError('view should be of type string');
-    }
     switch (view) {
       case 'text':
         this.view = 'text';
@@ -93,61 +90,44 @@ export class StageComparatorComponent implements OnInit {
   }
 
   getStats(gameNames: string[]) {
-    ///
-    // console.group('StageComparatorComponent::getStats()');
-    // console.log(`stages: ${stages}`);
-    // validate the provided stage selection
-    if (!Array.isArray(gameNames)) {
-        throw new TypeError('stages should be of type string[]');
-    }
+    if (gameNames && gameNames.length) {
+      const filteredGameNames: string[] = gameNames.filter(gameName => typeof gameName === 'string');
 
-    gameNames.forEach(stage => {
-      if (typeof stage !== 'string') {
-        throw new TypeError('stages should be of type string[]');
-      }
-    });
+      const stages: StageMiscInfo[] = this.stageClassifications.filter( stage => filteredGameNames.includes(stage.gameName));
 
-    if (gameNames.length === 0) {
-      ///
-      // console.log('stage selection invalid, doing nothing');
-      // console.groupEnd();
-      return;
-    }
-
-    const stages: StageMiscInfo[] = this.stageClassifications.filter( stage => gameNames.includes(stage.gameName));
-
-    // get the stats
-    this.sds.getDimensionsBinned(stages, true).subscribe(
-      {
-        next: (binnedData: BinnedStageDimensionsSet) => {
-          this.binnedStageDimensionsSet = binnedData;
-          if (!this.firstLoad) {
-            this.selectSubject$.next('updateSuccess');
-          }
-          else {
-            this.firstLoad = false;
-          }
-        },
-        error: (e: Error) => {
-          this.zone.run(() => {
-            // if StageDimensionsService's dataset isn't created yet, regenerate it and try again
-            if (e instanceof DatasetNotFoundError) {
-              const binnedData$: Observable<BinnedStageDimensionsSet> = this.spms.getMaps('stageComparator')
-                .pipe(
-                  concatMap((pieceMaps: StagePieceMap[]) => this.sds.getDimensionsFull(this.stages, pieceMaps)),
-                  concatMap(() => this.sds.getDimensionsBinned(stages, true))
-              );
-              binnedData$.subscribe((binnedData: BinnedStageDimensionsSet) => {
-                this.binnedStageDimensionsSet = binnedData;
-              });
+      // get the stats
+      this.sds.getDimensionsBinned(stages, true).subscribe(
+        {
+          next: (binnedData: BinnedStageDimensionsSet) => {
+            this.binnedStageDimensionsSet = binnedData;
+            if (!this.firstLoad) {
+              this.selectSubject$.next('updateSuccess');
             }
-            else if (e instanceof DataNotFoundError) {
-              this.selectSubject$.next('fatalError');
+            else {
+              this.firstLoad = false;
             }
-          });
+          },
+          error: (e: Error) => {
+            this.zone.run(() => {
+              // if StageDimensionsService's dataset isn't created yet, regenerate it and try again
+              if (e instanceof DatasetNotFoundError) {
+                const binnedData$: Observable<BinnedStageDimensionsSet> = this.spms.getMaps('stageComparator')
+                  .pipe(
+                    concatMap((pieceMaps: StagePieceMap[]) => this.sds.getDimensionsFull(this.stages, pieceMaps)),
+                    concatMap(() => this.sds.getDimensionsBinned(stages, true))
+                );
+                binnedData$.subscribe((binnedData: BinnedStageDimensionsSet) => {
+                  this.binnedStageDimensionsSet = binnedData;
+                });
+              }
+              else if (e instanceof DataNotFoundError) {
+                this.selectSubject$.next('fatalError');
+              }
+            });
+          }
         }
-      }
-    );
+      );
+    }
     ///
     // console.groupEnd();
   }

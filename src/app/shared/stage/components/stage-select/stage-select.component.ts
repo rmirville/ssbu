@@ -137,7 +137,7 @@ export class StageSelectComponent implements OnChanges, OnInit {
     let legalRareStages: StageClassifications[] = [];
     let legalPotentialStages: StageClassifications[] = [];
     let seriesStages: { [seriesName: string]: StageClassifications[] } = {};
-    
+
     if (this.stages.length === 0) {
       this.errors.noStages.active = true;
       this._updateErrorActive();
